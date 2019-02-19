@@ -7,6 +7,22 @@
 
 #include "headers.h"
 
+/* triangle insertion: */
+/* -1 check if the triangle fits in a subtree, if so try to go as deep as    */
+/* possible (as long as the triangle fits in the node's boundaries)          */
+/* -2 doesn't fit ? then maybe the triangle fits in the current node. try it.*/
+/* -3 the triangle is not in the tree's boundaries, so enlarge the tree      */
+/* till we grab that triangle                                                */
+
+/* NOTE: i'm pretty sure this logic can be applied for quadtrees or */
+/* any dimension tree                                               */
+
+static void check_node_presence(octree **node, octree *root, bounds3 bounds)
+{
+    if ((*node) == NULL)
+        *node = octree_create_node(root, bounds);
+}
+
 static int try_insert_sub(octree **tree, rtx_triangle *triangle)
 {
     bounds3 sub_b;
@@ -14,7 +30,7 @@ static int try_insert_sub(octree **tree, rtx_triangle *triangle)
     for (size_t i = 0; i < 8; i++) {
         sub_b = octree_get_sub_bounds(*tree, i);
         if (is_triangle_in_bounds(triangle->vertex, sub_b)) {
-            (*tree)->sub[i] = octree_create_node(*tree, sub_b);
+            check_node_presence(&((*tree)->sub[i]), *tree, sub_b);
             octree_insert_triangle(&((*tree)->sub[i]), triangle);
             return 1;
         }
@@ -29,36 +45,6 @@ static int try_insert_cur(octree **tree, rtx_triangle *triangle)
         return 1;
     } else
         return 0;
-}
-
-static void enlarge_get_bounds(octree *new_root, bounds3 old_b, size_t ndx)
-{
-    new_root->bounds.size = old_b.size * 2.0f;
-    if (ndx == 0) {
-        new_root->bounds.min = old_b.min;
-        new_root->bounds.max =
-        (vec3){new_root->bounds.min.x + new_root->bounds.size,
-        new_root->bounds.min.y + new_root->bounds.size,
-        new_root->bounds.min.z + new_root->bounds.size};
-    } else {
-        new_root->bounds.max = old_b.max;
-        new_root->bounds.min =
-        (vec3){new_root->bounds.max.x - new_root->bounds.size,
-        new_root->bounds.max.y - new_root->bounds.size,
-        new_root->bounds.max.z - new_root->bounds.size};
-    }
-}
-
-static void octree_enlarge(octree **tree, rtx_triangle *triangle)
-{
-    octree *new_root = octree_create(NULL);
-    size_t ndx;
-
-    ndx = get_triangle_upper_tree(triangle->vertex, (*tree)->bounds);
-    enlarge_get_bounds(new_root, (*tree)->bounds, ndx);
-    (*tree)->root = new_root;
-    new_root->sub[ndx] = *tree;
-    *tree = new_root;
 }
 
 void octree_insert_triangle(octree **tree, rtx_triangle *triangle)

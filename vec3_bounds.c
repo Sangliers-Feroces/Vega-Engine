@@ -7,6 +7,8 @@
 
 #include "headers.h"
 
+/* checks whether a point or a collection of points is included in a cube */
+
 int vec3_is_in_bounds(vec3 p, bounds3 bounds)
 {
     return (

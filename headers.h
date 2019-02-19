@@ -16,7 +16,7 @@
 
 #include "mat.h"
 #include "rtx.h"
-#include "mem.h"
+#include "octree.h"
 #include "misc.h"
 
 #endif

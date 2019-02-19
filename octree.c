@@ -34,3 +34,13 @@ octree* octree_create(octree *root)
     res->bounds = (bounds3){{0.0f, 0.0f, 0.0f}, {1.0f, 1.0f, 1.0f}, 1.0f};
     return res;
 }
+
+void octree_destroy(octree **root)
+{
+    for (size_t i = 0; i < 8; i++)
+        if ((*root)->sub[i] != NULL)
+            octree_destroy(&((*root)->sub[i]));
+    free((*root)->triangles.triangle);
+    free(*root);
+    *root = NULL;
+}

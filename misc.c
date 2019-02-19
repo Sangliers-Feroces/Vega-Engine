@@ -7,6 +7,8 @@
 
 #include "headers.h"
 
+/* full shenanigans */
+
 void exit_full_custom(void)
 {
     __asm__("mov $60, %rax");

@@ -2,10 +2,15 @@
 ** EPITECH PROJECT, 2018
 ** __xd__world
 ** File description:
-** std::vector
+** bitwise stuff
 */
 
 #include "headers.h"
+
+/* some functions to get subtree's boundaries even if those are not  */
+/* allocated.                                                        */
+/* useful to locate a new triangle deeper and deeper in the octree,  */
+/* this result is also used to create subtree's attributes           */
 
 static bounds3 move_sub_adequate(bounds3 res, size_t ndx, float sizeh)
 {
