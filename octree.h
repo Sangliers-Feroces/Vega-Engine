@@ -25,4 +25,6 @@ bounds3 octree_get_sub_bounds(octree *tree, size_t ndx);
 
 size_t get_triangle_upper_tree(vec3 *triangle, bounds3 bounds);
 
+inter_ray3 octree_intersect_ray(octree *tree, ray3 ray);
+
 #endif

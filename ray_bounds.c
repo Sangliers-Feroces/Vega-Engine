@@ -7,14 +7,18 @@
 
 #include "headers.h"
 
+/* this code checks whether a 3D ray will go or not trough a cube.      */
+/* it does use 1D rays to check that, so i guess it could be used for   */
+/* any dimension rays / boundaries                                      */
+
 static int ray1d_bound_inside(ray1 r, float min, float max, vec2 *t)
 {
-    if (r.v > 0.0f) {
-        t->x = MAX(t->x, 0.0f);
-        t->y = MIN(t->y, (max - r.p) / r.v);
+    if (r.v < 0.0f) {
+        t->x = MAX(t->x, (max - r.p) / r.v);
+        t->y = MIN(t->y, (min - r.p) / r.v);
     } else {
         t->x = MAX(t->x, (min - r.p) / r.v);
-        t->y = MIN(t->y, 0.0f);
+        t->y = MIN(t->y, (max - r.p) / r.v);
     }
     return 1;
 }
@@ -24,19 +28,13 @@ static int ray1d_bound(ray1 r, float min, float max, vec2 *t)
     if (r.v == 0.0f)
         return ((r.p >= min) && (r.p < max));
     if (r.p < min) {
-        if (r.v > 0.0f) {
-            t->x = MAX(t->x, (min - r.p) / r.v);
-            t->y = MIN(t->y, (max - r.p) / r.v);
-            return 1;
-        } else
-            return 0;
+        t->x = MAX(t->x, (min - r.p) / r.v);
+        t->y = MIN(t->y, (max - r.p) / r.v);
+        return (r.v > 0.0f);
     } else if (r.p >= max) {
-        if (r.v < 0.0f) {
-            t->x = MAX(t->x, (max - r.p) / r.v);
-            t->y = MIN(t->y, (min - r.p) / r.v);
-            return 1;
-        } else
-            return 0;
+        t->x = MAX(t->x, (max - r.p) / r.v);
+        t->y = MIN(t->y, (min - r.p) / r.v);
+        return (r.v < 0.0f);
     } else
         return ray1d_bound_inside(r, min, max, t);
 }

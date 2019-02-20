@@ -9,11 +9,19 @@
 
 /* a constructor, an std::vector method */
 
+vec3 normal3(vec3 a, vec3 b, vec3 c)
+{
+    return vec3_normalize(vec3_cross(vec3_sub(b, a), vec3_sub(c, a)));
+}
+
 rtx_triangle rtx_triangle_create(vec3 *triangle)
 {
     rtx_triangle res = {{triangle[0], triangle[1], triangle[2]},
     {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}};
 
+    res.normal = normal3(triangle[0], triangle[1], triangle[2]);
+    res.tangent = vec3_sub(triangle[1], triangle[0]);
+    res.bitangent = normal3((vec3){0.0f, 0.0f, 0.0f}, res.tangent, res.normal);
     return (res);
 }
 

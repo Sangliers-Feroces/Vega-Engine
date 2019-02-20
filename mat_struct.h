@@ -61,11 +61,11 @@ struct octree_s {
     bounds3 bounds;
 };
 
+/* buffer for ray intersection (stores closest hit) */
 typedef struct {
     rtx_triangle *triangle;
     vec3 p;
     float min_t;
-    int has_found;
 } inter_ray3;
 
 #endif
