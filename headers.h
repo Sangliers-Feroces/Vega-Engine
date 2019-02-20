@@ -18,5 +18,6 @@
 #include "rtx.h"
 #include "octree.h"
 #include "misc.h"
+#include "macro.h"
 
 #endif

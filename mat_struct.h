@@ -20,6 +20,17 @@ typedef struct {
     float z;
 } vec3;
 
+/* 1D ray */
+typedef struct {
+    float p;
+    float v;
+} ray1;
+
+typedef struct {
+    vec3 p;
+    vec3 v;
+} ray3;
+
 /* type used for raytracing structure */
 typedef struct {
     vec3 vertex[3];
@@ -49,5 +60,12 @@ struct octree_s {
     vec_rtx_triangle triangles;
     bounds3 bounds;
 };
+
+typedef struct {
+    rtx_triangle *triangle;
+    vec3 p;
+    float min_t;
+    int has_found;
+} inter_ray3;
 
 #endif
