@@ -29,16 +29,31 @@ void texture2f_reset(texture2f *texture)
     memset(texture->pixel, 0, texture->w * texture->h * sizeof(vec3));
 }
 
-void texture2f_write_color_bar(texture2f *texture, vec2 *uv, vec3 bar,
-vec3 color)
+static void write_color(texture2f *texture, ssize_t x, ssize_t y, vec3 color)
 {
-    vec2 p = barycentric2_get_point(uv, bar);
-    ssize_t ndx = (ssize_t)(p.y * (float)texture->h) * texture->w +
-    (ssize_t)(p.x * (float)texture->w);
+    ssize_t ndx = y * (ssize_t)texture->w + x;
     vec3 *to_mod;
 
     if (!((ndx >= 0) && (ndx < (ssize_t)texture->max_ndx)))
         return;
     to_mod = &texture->pixel[ndx];
     *to_mod = vec3_add(*to_mod, color);
+}
+
+void texture2f_write_color_bar(texture2f *texture, vec2 *uv, vec3 bar,
+vec3 color)
+{
+    vec2 p = barycentric2_get_point(uv, bar);
+    size_t x = p.x * (float)texture->w;
+    size_t y = p.y * (float)texture->h;
+
+    write_color(texture, x, y, color);
+    write_color(texture, x - 1, y, vec3_muls(color, 0.5f));
+    write_color(texture, x + 1, y, vec3_muls(color, 0.5f));
+    write_color(texture, x, y - 1, vec3_muls(color, 0.5f));
+    write_color(texture, x, y + 1, vec3_muls(color, 0.5f));
+    write_color(texture, x - 1, y - 1, vec3_muls(color, 0.33f));
+    write_color(texture, x + 1, y - 1, vec3_muls(color, 0.33f));
+    write_color(texture, x - 1, y + 1, vec3_muls(color, 0.33f));
+    write_color(texture, x + 1, y + 1, vec3_muls(color, 0.33f));
 }
