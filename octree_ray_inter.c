@@ -22,10 +22,10 @@ static void intersect_ray(rtx_triangle *triangle, ray3 ray, inter_ray3 *inter)
     vec3 p;
     vec3 bar;
 
-    if (dotnv == 0.0f)
+    if (dotnv >= 0.0f)
         return;
     t = intersect_plane(triangle, ray, dotnv);
-    if (t < 0.0f)
+    if (t <= 0.0f)
         return;
     p = ray3_compute(ray, t);
     bar = barycentric3(p, triangle->vertex);

@@ -17,16 +17,10 @@ typedef struct {
 } texture2;
 
 typedef struct {
-    float r;
-    float g;
-    float b;
-} pixelf;
-
-typedef struct {
     uint32_t w;
     uint32_t h;
     size_t max_ndx;
-    pixelf *pixel;
+    vec3 *pixel;
 } texture2f;
 
 #endif

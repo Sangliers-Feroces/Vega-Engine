@@ -16,3 +16,8 @@ vec3 vec3_sub(vec3 a, vec3 b)
 {
     return (vec3){a.x - b.x, a.y - b.y, a.z - b.z};
 }
+
+vec3 vec3_muls(vec3 vec, float value)
+{
+    return (vec3){vec.x * value, vec.y * value, vec.z * value};
+}

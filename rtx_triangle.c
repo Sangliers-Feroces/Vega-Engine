@@ -26,7 +26,7 @@ rtx_triangle rtx_triangle_create(vec3 *triangle)
         res.lightmap.texture->w, res.lightmap.texture->h);
     }
     res.normal = normal3(triangle[0], triangle[1], triangle[2]);
-    res.tangent = vec3_sub(triangle[1], triangle[0]);
+    res.tangent = vec3_normalize(vec3_sub(triangle[1], triangle[0]));
     res.bitangent = normal3((vec3){0.0f, 0.0f, 0.0f}, res.tangent, res.normal);
     return (res);
 }

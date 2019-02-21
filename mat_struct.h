@@ -8,18 +8,6 @@
 #ifndef _MAT_STRUCT_H
 #define _MAT_STRUCT_H
 
-/* GL types */
-typedef struct {
-    float x;
-    float y;
-} vec2;
-
-typedef struct {
-    float x;
-    float y;
-    float z;
-} vec3;
-
 /* 1D ray */
 typedef struct {
     float p;
@@ -30,6 +18,12 @@ typedef struct {
     vec3 p;
     vec3 v;
 } ray3;
+
+typedef struct {
+    ray3 ray;
+    vec3 color;
+    size_t count;
+} ray3_color;
 
 typedef struct {
     vec2 c;

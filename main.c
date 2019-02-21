@@ -21,19 +21,37 @@ rtx_triangle get_random_triangle(void)
     base.y + randf() * 10.0f, base.z + randf() * 10.0f}});
 }
 
+static void add_triangle(octree **tree, vec3 *triangle)
+{
+    rtx_triangle rtx = rtx_triangle_create(triangle);
+
+    octree_insert_triangle(tree, &rtx);
+}
+
+void load_model(octree **tree)
+{
+    //add_triangle(tree, (vec3[]){{0.0f, 0.0f, 0.0f},
+    //{0.0f, 0.0f, 20.0f}, {20.0f, 0.0f, 0.0f}});
+    add_triangle(tree, (vec3[]){{0.0f, 0.0f, 0.0f},
+    {0.0f, 0.0f, 20.0f}, {20.0f, 0.0f, 0.0f}});
+    add_triangle(tree, (vec3[]){{0.0f, 1.0f, 0.0f},
+    {10.0f, 1.0f, 0.0f}, {0.0f, 1.0f, 10.0f}});
+}
+
 int main(void)
 {
-    rtx_triangle triangle;
+    //rtx_triangle triangle;
 
     srand(time(NULL));
     octree *tree = octree_create(NULL);
-    for (size_t i = 0; i < 10000; i++) {
+    /*for (size_t i = 0; i < 10000; i++) {
         triangle = get_random_triangle();
         octree_insert_triangle(&tree, &triangle);
-    }
+    }*/
+    load_model(&tree);
     printf("octree done !\n");
     clock_t start = clock();
-    octree_light_rtx(tree, 1000);
+    octree_light_rtx(tree, 50000000);
     printf("%f seconds\n", (float)(clock() - start) / (float)CLOCKS_PER_SEC);
     octree_destroy(&tree);
     /*octree *tree = octree_create(NULL);

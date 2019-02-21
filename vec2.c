@@ -26,3 +26,8 @@ vec2 vec2_max(vec2 a, vec2 b)
 {
     return (vec2){MAX(a.x, b.x), MAX(a.y, b.y)};
 }
+
+vec2 vec2_muls(vec2 vec, float value)
+{
+    return (vec2){vec.x * value, vec.y * value};
+}

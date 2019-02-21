@@ -1,5 +1,5 @@
 CPPFLAGS = -I.
-CFLAGS = -m64 -Wall -Wextra -g
+CFLAGS = -m64 -Wall -Wextra -O3
 LDLIB = -lm
 
 %.o: %.c

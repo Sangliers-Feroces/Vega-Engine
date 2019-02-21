@@ -13,7 +13,7 @@ float texture2f_get_max_lumel(texture2f *texture)
     float sum;
 
     for (size_t i = 0; i < texture->max_ndx; i++) {
-        sum = texture->pixel[i].r + texture->pixel[i].g + texture->pixel[i].b;
+        sum = texture->pixel[i].x + texture->pixel[i].y + texture->pixel[i].z;
         if (sum > cur)
             cur = sum;
     }
@@ -30,7 +30,8 @@ void texture_update_lightmap(texture2f *src, texture2 *dst, float max_lumel)
     if (!((src->w == dst->w) && (src->h == dst->h)))
         return;
     for (size_t i = 0; i < src->max_ndx; i++)
-        dst->pixel[i] = get_byte(src->pixel[i].r / max_lumel) << 24 |
-        get_byte(src->pixel[i].g / max_lumel) << 16 |
-        get_byte(src->pixel[i].b / max_lumel) << 8 | 0xFF;
+        dst->pixel[i] =
+        (get_byte((src->pixel[i].x / max_lumel) * 255.0f) << 24) |
+        (get_byte((src->pixel[i].y / max_lumel) * 255.0f) << 16) |
+        (get_byte((src->pixel[i].z / max_lumel) * 255.0f) << 8) | 0xFF;
 }

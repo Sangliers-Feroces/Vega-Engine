@@ -8,6 +8,8 @@
 #ifndef _STRUCT_H
 #define _STRUCT_H
 
+#include "matgl_struct.h"
+
 #include "texture_struct.h"
 #include "mat_struct.h"
 
