@@ -11,6 +11,6 @@
 /* custom vector management */
 /* defines how much do we allocate in advance for elements in octree */
 
-#define OCTREE_ALLOC_STEP 65565
+#define OCTREE_ALLOC_STEP 65536
 
 #endif

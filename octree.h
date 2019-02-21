@@ -10,9 +10,6 @@
 
 #include "octree_mem.h"
 
-rtx_triangle rtx_triangle_create(vec3 *triangle);
-void vec_rtx_triangle_add(vec_rtx_triangle *vec, rtx_triangle *to_add);
-
 void octree_insert_triangle(octree **tree, rtx_triangle *triangle);
 
 void octree_enlarge(octree **tree, rtx_triangle *triangle);
@@ -26,5 +23,11 @@ bounds3 octree_get_sub_bounds(octree *tree, size_t ndx);
 size_t get_triangle_upper_tree(vec3 *triangle, bounds3 bounds);
 
 inter_ray3 octree_intersect_ray(octree *tree, ray3 ray);
+
+void octree_light_rtx(octree *tree, size_t rays);
+
+void octree_reset_lumels(octree *tree);
+float octree_get_max_lumel(octree *tree);
+void octree_update_lightmap(octree *tree, float max_lumel);
 
 #endif

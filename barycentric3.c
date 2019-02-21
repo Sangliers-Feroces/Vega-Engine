@@ -43,3 +43,17 @@ int is_point_in_triangle(vec3 p, vec3 *triangle)
     return (is_float_in_0_1(bar.x) && is_float_in_0_1(bar.y) &&
     is_float_in_0_1(bar.z));
 }
+
+int is_barycentric_valid(vec3 bar)
+{
+    return (is_float_in_0_1(bar.x) && is_float_in_0_1(bar.y) &&
+    is_float_in_0_1(bar.z));
+}
+
+int is_point_in_triangle_get_bar(vec3 p, vec3 *triangle, vec3 *bar)
+{
+    *bar = barycentric3(p, triangle);
+
+    return (is_float_in_0_1(bar->x) && is_float_in_0_1(bar->y) &&
+    is_float_in_0_1(bar->z));
+}

@@ -12,12 +12,14 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <math.h>
+#include <string.h>
 
 #include "struct.h"
 
 #include "mat.h"
 #include "rtx.h"
 #include "octree.h"
+#include "texture.h"
 #include "misc.h"
 #include "macro.h"
 

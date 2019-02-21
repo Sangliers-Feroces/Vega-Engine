@@ -9,25 +9,32 @@
 
 /* intersection of a ray and a bunch of triangle using the octree */
 
+static float intersect_plane(rtx_triangle *triangle, ray3 ray, float dotnv)
+{
+    return vec3_dot(triangle->normal, vec3_sub(triangle->vertex[0], ray.p)) /
+    dotnv;
+}
+
 static void intersect_ray(rtx_triangle *triangle, ray3 ray, inter_ray3 *inter)
 {
-    float dotnd = vec3_dot(triangle->normal, ray.v);
+    float dotnv = vec3_dot(triangle->normal, ray.v);
     float t;
     vec3 p;
+    vec3 bar;
 
-    if (dotnd == 0.0f)
+    if (dotnv == 0.0f)
         return;
-    t = vec3_dot(triangle->normal, vec3_sub(triangle->vertex[0], ray.p)) /
-    dotnd;
+    t = intersect_plane(triangle, ray, dotnv);
     if (t < 0.0f)
         return;
     p = ray3_compute(ray, t);
-    if (!is_point_in_triangle(p, triangle->vertex))
+    bar = barycentric3(p, triangle->vertex);
+    if (!is_barycentric_valid(bar))
         return;
-    printf("hit, t: %f\n", t);
     if ((inter->triangle == NULL) || (t < inter->min_t)) {
         inter->triangle = triangle;
         inter->p = p;
+        inter->bar = bar;
         inter->min_t = t;
     }
 }
@@ -46,7 +53,7 @@ static void tree_intersect_ray(octree *tree, ray3 ray, inter_ray3 *inter)
 
 inter_ray3 octree_intersect_ray(octree *tree, ray3 ray)
 {
-    inter_ray3 inter = {NULL, {0.0f, 0.0f, 0.0f}, 0.0f};
+    inter_ray3 inter = {NULL, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, 0.0f};
 
     tree_intersect_ray(tree, ray, &inter);
     return inter;
