@@ -10,8 +10,8 @@
 static vec3 diffuse_ray(rtx_triangle *triangle)
 {
     float n = 1.0f;
-    float x = acosf(powf(randf(), 1.0f / (n + 1.0f)));
-    float y = 2.0f * M_PI * randf();
+    float x = 2.0f * M_PI * randf();
+    float y = acosf(powf(randf(), 1.0f / (n + 1.0f)));
 
     return vec3_add(vec3_add(
     vec3_muls(triangle->tangent, sinf(y) * cosf(x)),
@@ -40,9 +40,9 @@ void octree_light_rtx(octree *tree, size_t rays)
     octree_reset_lumels(tree);
     for (size_t i = 0; i < rays; i++) {
         throw_ray(tree, (ray3_color){
-        {{randf() * 100.0f, randf() * 100.0f, 50.0f}, {-1.0f, -1.0f, -1.0f}},
-        {1.0f, 1.0f, 1.0f}, 16});
+        {{randf() * 100.0f - 50.0f, 50.0f, -randf() * 100.0f},
+        {1.0f, -1.0f, 1.0f}}, {1.0f, 1.0f, 1.0f}, 16});
     }
     octree_update_lightmap(tree,
-    MAX((octree_get_max_lumel(tree) / 3.0f), 1.0f) / 1.1f);
+    MAX((octree_get_max_lumel(tree) / 3.0f), 1.0f) / 5.0f);
 }

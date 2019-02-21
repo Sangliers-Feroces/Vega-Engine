@@ -12,5 +12,6 @@
 
 #include "texture_struct.h"
 #include "mat_struct.h"
+#include "demo_struct.h"
 
 #endif

@@ -69,6 +69,7 @@ void texture2_write(texture2 *texture)
     size_t size = 60 + pitch * texture->h;
     char *data = (char*)malloc_safe(size);
 
+    memset(data, 0, size);
     write_header(texture, data, size, pitch);
     write_data(texture, &data[60], pitch);
     write_file(data, size, texture);

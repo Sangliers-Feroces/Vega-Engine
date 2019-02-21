@@ -10,6 +10,8 @@
 
 texture2* texture2_create(uint32_t w, uint32_t h);
 void texture2_destroy(texture2 *texture);
+uint32_t texture2_sample(texture2 *texture, vec2 uv);
+
 texture2_binding texture2_binding_create(vec3 *triangle);
 void texture2_binding_destroy(texture2_binding binding);
 

@@ -13,6 +13,8 @@
 #include <stdint.h>
 #include <math.h>
 #include <string.h>
+#include <SFML/Window.h>
+#include <SFML/Graphics.h>
 
 #include "struct.h"
 
@@ -21,6 +23,7 @@
 #include "octree.h"
 #include "texture.h"
 #include "misc.h"
+#include "demo.h"
 #include "macro.h"
 
 #endif
