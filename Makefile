@@ -1,6 +1,6 @@
 CPPFLAGS = -I.
 CFLAGS = -m64 -Wall -Wextra -fPIC -O3
-LDLIB = -lm -lcsfml-window -lcsfml-graphics
+LDLIB = -lm -lpthread -lcsfml-window -lcsfml-graphics
 
 %.o: %.c
 	gcc $(CFLAGS) $(CPPFLAGS) -c $< -o $@
@@ -26,7 +26,7 @@ $(LIBXD): $(OBJ)
 	gcc -shared $(LDLIB) -Wl,-soname,$(LIBXD) -o $(LIBXD) $(OBJ)
 
 $(OUTPUT): $(LIBXD)
-	gcc $(CPPFLAGS) $(MAINSRC) ./$(LIBXD) -o $(OUTPUT)
+	gcc $(CFLAGS) $(CPPFLAGS) $(MAINSRC) ./$(LIBXD) -o $(OUTPUT)
 
 criterion:
 	#$(call compile_test, ./criterion/ls_dir_rec_wow.c)

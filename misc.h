@@ -12,6 +12,7 @@ void exit_full_custom(void);
 void* malloc_safe(size_t size);
 float randf(void);
 uint32_t swap32(uint32_t base);
+char* get_file_data(const char *path);
 
 int game(void);
 

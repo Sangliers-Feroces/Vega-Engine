@@ -13,6 +13,12 @@
 #include <stdint.h>
 #include <math.h>
 #include <string.h>
+#include <time.h>
+#include <unistd.h>
+#include <pthread.h>
+#include <signal.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <SFML/Window.h>
 #include <SFML/Graphics.h>
 
@@ -22,8 +28,10 @@
 #include "rtx.h"
 #include "octree.h"
 #include "texture.h"
+#include "thread.h"
 #include "misc.h"
 #include "demo.h"
 #include "macro.h"
+#include "thread_global.h"
 
 #endif

@@ -35,14 +35,22 @@ static void throw_ray(octree *tree, ray3_color ray)
         vec3_muls(ray.color, 0.75f), ray.count});
 }
 
-void octree_light_rtx(octree *tree, size_t rays)
+void octree_light_rtx_thread(octree *tree, size_t rays)
 {
-    octree_reset_lumels(tree);
     for (size_t i = 0; i < rays; i++) {
         throw_ray(tree, (ray3_color){
         {{randf() * 100.0f - 50.0f, 50.0f, -randf() * 100.0f},
         {1.0f, -1.0f, 1.0f}}, {1.0f, 1.0f, 1.0f}, 16});
     }
+}
+
+void octree_light_rtx(octree *tree, size_t rays)
+{
+    octree_reset_lumels(tree);
+    thread_send_each(THREAD_TASK_RAY_TRACING,
+    (uint64_t[]){(uint64_t)tree, rays / _thread.count}, 2);
+    thread_wait();
+    //octree_light_rtx_thread(tree, rays);
     octree_update_lightmap(tree,
-    MAX((octree_get_max_lumel(tree) / 3.0f), 1.0f) / 5.0f);
+    MAX((octree_get_max_lumel(tree) / 3.0f), 1.0f) / 8.0f);
 }

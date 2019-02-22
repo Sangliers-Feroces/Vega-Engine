@@ -7,8 +7,6 @@
 
 #include "headers.h"
 
-#include <time.h>
-
 rtx_triangle get_random_triangle(void)
 {
     float limit = 100.0f;
@@ -82,13 +80,23 @@ void load_model(octree **tree)
 
 int game(void)
 {
+    thread_init();
+    srand(time(NULL));
+
     octree *tree = octree_create(NULL);
     load_model(&tree);
     printf("octree done !\n");
-    clock_t start = clock();
+    struct timespec start, finish;
+    double elapsed;
+    clock_gettime(CLOCK_MONOTONIC, &start);
     octree_light_rtx(tree, 1000000000 / 100);
-    printf("%f seconds\n", (float)(clock() - start) / (float)CLOCKS_PER_SEC);
-    demo_loop(tree);
+    clock_gettime(CLOCK_MONOTONIC, &finish);
+    elapsed = (finish.tv_sec - start.tv_sec);
+    elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
+    printf("%f seconds\n", elapsed);
+    //demo_loop(tree);
     octree_destroy(&tree);
+
+    thread_quit();
     return (EXIT_SUCCESS);
 }

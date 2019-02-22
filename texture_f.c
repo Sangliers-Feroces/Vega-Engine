@@ -43,10 +43,12 @@ static void write_color(texture2f *texture, ssize_t x, ssize_t y, vec3 color)
 void texture2f_write_color_bar(texture2f *texture, vec2 *uv, vec3 bar,
 vec3 color)
 {
+    static pthread_mutex_t mutex_stock = PTHREAD_MUTEX_INITIALIZER;
     vec2 p = barycentric2_get_point(uv, bar);
     size_t x = p.x * (float)texture->w;
     size_t y = p.y * (float)texture->h;
 
+    pthread_mutex_lock(&mutex_stock);
     write_color(texture, x, y, color);
     write_color(texture, x - 1, y, vec3_muls(color, 0.5f));
     write_color(texture, x + 1, y, vec3_muls(color, 0.5f));
@@ -56,4 +58,5 @@ vec3 color)
     write_color(texture, x + 1, y - 1, vec3_muls(color, 0.33f));
     write_color(texture, x - 1, y + 1, vec3_muls(color, 0.33f));
     write_color(texture, x + 1, y + 1, vec3_muls(color, 0.33f));
+    pthread_mutex_unlock(&mutex_stock);
 }
