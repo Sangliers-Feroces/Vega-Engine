@@ -1,5 +1,5 @@
 CPPFLAGS = -I.
-CFLAGS = -m64 -Wall -Wextra -O3
+CFLAGS = -m64 -Wall -Wextra -fPIC -O3
 LDLIB = -lm -lcsfml-window -lcsfml-graphics
 
 %.o: %.c
@@ -18,11 +18,15 @@ MAINOBJ = $(MAINSRC:.c=.o)
 TESTSRC = $(wildcard ./criterion/*.c)
 
 OUTPUT = my_world
+LIBXD = libxdworld.so
 
 all: $(OUTPUT) #tests_run
 
-$(OUTPUT): $(OBJ) $(MAINOBJ)
-	gcc $(CFLAGS) $(CPPFLAGS) $(OBJ) $(MAINOBJ) $(LDLIB) -o $(OUTPUT)
+$(LIBXD): $(OBJ)
+	gcc -shared $(LDLIB) -Wl,-soname,$(LIBXD) -o $(LIBXD) $(OBJ)
+
+$(OUTPUT): $(LIBXD)
+	gcc $(CPPFLAGS) $(MAINSRC) ./$(LIBXD) -o $(OUTPUT)
 
 criterion:
 	#$(call compile_test, ./criterion/ls_dir_rec_wow.c)
@@ -33,7 +37,7 @@ clean:
 	rm -f $(MAINOBJ) $(OBJ)
 
 fclean: clean
-	rm -f $(OUTPUT)
+	rm -f $(OUTPUT) $(LIBXD)
 
 re: fclean all
 

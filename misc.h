@@ -13,4 +13,6 @@ void* malloc_safe(size_t size);
 float randf(void);
 uint32_t swap32(uint32_t base);
 
+int game(void);
+
 #endif
