@@ -10,6 +10,7 @@
 
 texture2* texture2_create(uint32_t w, uint32_t h);
 void texture2_destroy(texture2 *texture);
+void texture2_get_nearest(vec2 p, vec2 size, size_t *x, size_t *y);
 uint32_t texture2_sample(texture2 *texture, vec2 uv);
 
 texture2_binding texture2_binding_create(vec3 *triangle);

@@ -51,7 +51,7 @@ static void* thread_loop(void *data)
 void thread_init(void)
 {
     _thread.count = MAX(get_thread_count(), 1);
-    //_thread.count = 6;
+    _thread.count = 1;
     _thread.bus = (thread_bus*)malloc_safe(
     _thread.count * sizeof(thread_bus));
     for (size_t i = 0; i < _thread.count; i++)

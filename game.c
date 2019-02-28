@@ -89,12 +89,12 @@ int game(void)
     struct timespec start, finish;
     double elapsed;
     clock_gettime(CLOCK_MONOTONIC, &start);
-    octree_light_rtx(tree, 1000000000 / 100);
+    octree_light_rtx(tree, 1000000000 / 1000);
     clock_gettime(CLOCK_MONOTONIC, &finish);
     elapsed = (finish.tv_sec - start.tv_sec);
     elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
     printf("%f seconds\n", elapsed);
-    //demo_loop(tree);
+    demo_loop(tree);
     octree_destroy(&tree);
 
     thread_quit();
