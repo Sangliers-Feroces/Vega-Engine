@@ -20,7 +20,7 @@ debug: all
 release: CFLAGS += -O3
 release: all
 
-all: $(OUTPUT) #tests_run
+all: $(OUTPUT)
 
 $(LIBXD): $(OBJ)
 	gcc -shared $(LDLIB) -Wl,-soname,$(LIBXD) -o $(LIBXD) $(OBJ)
