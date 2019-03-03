@@ -19,6 +19,13 @@ rtx_triangle get_random_triangle(void)
     base.y + randf() * 10.0f, base.z + randf() * 10.0f}});
 }
 
+static void add_random_triangle(octree **tree)
+{
+    rtx_triangle rtx = get_random_triangle();
+
+    octree_insert_triangle(tree, &rtx);
+}
+
 static void add_triangle(octree **tree, vec3 *triangle)
 {
     rtx_triangle rtx = rtx_triangle_create(triangle);
@@ -85,11 +92,15 @@ int game(void)
 
     octree *tree = octree_create(NULL);
     load_model(&tree);
+    gpu_serial_t serial = octree_serialize(tree);
+    FILE *file = fopen("serial.txt", "wb+");
+    fwrite(serial.data, 1, serial.size, file);
+    fclose(file);
     printf("octree done !\n");
     struct timespec start, finish;
     double elapsed;
     clock_gettime(CLOCK_MONOTONIC, &start);
-    octree_light_rtx(tree, 1000000000 / 1000);
+    octree_light_rtx(tree, 1000000000 / 100);
     clock_gettime(CLOCK_MONOTONIC, &finish);
     elapsed = (finish.tv_sec - start.tv_sec);
     elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;

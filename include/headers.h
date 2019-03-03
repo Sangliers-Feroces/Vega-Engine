@@ -25,6 +25,7 @@
 
 #include "struct.h"
 
+#include "gpu_serial.h"
 #include "mat.h"
 #include "rtx.h"
 #include "octree.h"

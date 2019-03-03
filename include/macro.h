@@ -15,4 +15,7 @@
 
 #define FLT_INF (*((float*)(uint32_t[]){0x7F800000}))
 
+#define INT_BITS_TO_FLOAT(value) (*((float*)(int32_t[]){value}))
+#define FLOAT_BITS_TO_INT(value) (*((int32_t*)(float[]){value}))
+
 #endif
