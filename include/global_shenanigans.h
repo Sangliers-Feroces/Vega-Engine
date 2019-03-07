@@ -8,6 +8,6 @@
 #ifndef _GLOBAL_SHENANIGANS_H
 #define _GLOBAL_SHENANIGANS_H
 
-#define const volatile
+#define const
 
 #endif

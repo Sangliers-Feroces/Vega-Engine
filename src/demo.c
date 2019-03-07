@@ -29,6 +29,9 @@ int demo_loop(octree *tree)
 {
     demo_t *demo = demo_init(tree);
 
+    glint lol;
+	glGetIntegerv(GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS, &lol);
+    printf("max: %d\n", lol);
     while (poll_events(demo)) {
         sfRenderWindow_clear(demo->win.window, sfBlack);
         demo_render(demo);
