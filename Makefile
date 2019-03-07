@@ -26,7 +26,7 @@ $(LIBXD): $(OBJ)
 	gcc -shared $(LDLIB) -Wl,-soname,$(LIBXD) -o $(LIBXD) $(OBJ)
 
 $(OUTPUT): $(LIBXD)
-	gcc $(CFLAGS) $(CPPFLAGS) $(MAINSRC) ./$(LIBXD) -o $(OUTPUT)
+	gcc $(CFLAGS) $(CPPFLAGS) $(MAINSRC) $(LIBXD) -Wl,-rpath,. -o $(OUTPUT)
 
 clean:
 	rm -f $(MAINOBJ) $(OBJ)
