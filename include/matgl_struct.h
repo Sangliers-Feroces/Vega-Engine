@@ -20,4 +20,6 @@ typedef struct {
     float z;
 } vec3;
 
+typedef float mat4[4][4];
+
 #endif

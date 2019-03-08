@@ -33,6 +33,15 @@ vec3 vec3_muls(vec3 vec, float value);
 
 vec3 ray3_compute(ray3 ray, float t);
 
+void mat4_identity(mat4 dst);
+void mat4_copy(mat4 src, mat4 dst);
+void mat4_mul(mat4 a, mat4 b, mat4 res);
+
+void mat4_trans_scale(vec3 pos, vec3 scale, mat4 res);
+void mat4_rot(vec3 rot, mat4 res);
+void mat4_model(vec3 pos, vec3 scale, vec3 rot, mat4 res);
+void mat4_view(vec3 pos, vec3 rot, mat4 res);
+
 vec2 barycentric2_get_point(vec2 *triangle, vec3 bar);
 
 vec3 barycentric3(vec3 p, vec3 *triangle);
