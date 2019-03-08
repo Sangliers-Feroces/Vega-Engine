@@ -49,6 +49,10 @@ void mat4_rot(vec3 rot, mat4 res)
     mat4_identity(rot_z);
     cos = cosf(rot.z);
     sin = sinf(rot.z);
+    rot_z[0][0] = cos;
+    rot_z[0][1] = -sin;
+    rot_z[1][0] = sin;
+    rot_z[1][1] = cos;
     mat4_mul(rot_z, res, res);
 }
 

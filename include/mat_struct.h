@@ -30,4 +30,11 @@ typedef struct {
     float r;
 } circle;
 
+typedef struct {
+    float near_plane;
+    float far_plane;
+    float fov_w;
+    float ratio_wh;
+} proj_t;
+
 #endif
