@@ -52,3 +52,17 @@ void mat4_mul(mat4 a, mat4 b, mat4 res)
         for (size_t j = 0; j < 4; j++)
             res[i][j] = resbuf[i][j];
 }
+
+vec4 mat4_mul_vec(mat4 a, vec4 b)
+{
+    vec4 res;
+    float sum;
+
+    for (size_t i = 0; i < 4; i++) {
+        sum = 0.0f;
+        for (size_t k = 0; k < 4; k++)
+            sum += a[k][i] * ((float*)&b.x)[k];
+        ((float*)&res.x)[i] = sum;
+    }
+    return res;
+}

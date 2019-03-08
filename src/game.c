@@ -85,12 +85,26 @@ void load_model(octree **tree)
     {10.0f, 0.0f, 0.0f}});
 }
 
+void mat_test(void)
+{
+    vec4 p = {0.0f, 0.0, 1.0f, 1.0f};
+    vec3 pos = {0.0f, 0.0f, 0.0f};
+    vec3 scale = {1.0f, 1.0f, 1.0f};
+    vec3 rot = {M_PI / 2.0f, M_PI / 2.0f, M_PI};
+    mat4 model;
+    vec4 fin;
+
+    mat4_model(pos, scale, rot, model);
+    fin = mat4_mul_vec(model, p);
+}
+
 int game(void)
 {
     thread_init();
     srand(time(NULL));
 
     load_gl_fun();
+    mat_test();
     octree *tree = octree_create(NULL);
     load_model(&tree);
     gpu_serial_t serial = octree_serialize(tree);
