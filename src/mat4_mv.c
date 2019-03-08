@@ -67,12 +67,12 @@ void mat4_model(vec3 pos, vec3 scale, vec3 rot, mat4 res)
 
 void mat4_view(vec3 pos, vec3 rot, mat4 res)
 {
-    mat4 trans;
+    mat4 rot_mat;
 
-    mat4_rot((vec3){-rot.x, -rot.y, -rot.z}, res);
-    mat4_identity(trans);
+    mat4_identity(res);
     res[3][0] = -pos.x;
     res[3][1] = -pos.y;
     res[3][2] = -pos.z;
-    mat4_mul(trans, res, res);
+    mat4_rot((vec3){-rot.x, -rot.y, -rot.z}, rot_mat);
+    mat4_mul(rot_mat, res, res);
 }
