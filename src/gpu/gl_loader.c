@@ -41,6 +41,8 @@ const void (*p_glcompileshader)(gluint shader);
 const void (*p_glgetshaderiv)(gluint shader, glenum pname, glint *params);
 const void (*p_glgetshaderinfolog)(gluint shader, glsizei max_length,
 glsizei *length, glchar *info_log);
+const void (*p_glgetprograminfolog)(gluint shader, glsizei max_length,
+glsizei *length, glchar *info_log);
 const gluint (*p_glcreateprogram)(void);
 const void (*p_glattachshader)(gluint program, gluint shader);
 const void (*p_gllinkprogram)(gluint program);
@@ -84,6 +86,7 @@ static void load_3(void)
     p_glcompileshader = glXGetProcAddressARB("glCompileShader");
     p_glgetshaderiv = glXGetProcAddressARB("glGetShaderiv");
     p_glgetshaderinfolog = glXGetProcAddressARB("glGetShaderInfoLog");
+    p_glgetprograminfolog = glXGetProcAddressARB("glGetProgramInfoLog");
     p_glcreateprogram = glXGetProcAddressARB("glCreateProgram");
     p_glattachshader = glXGetProcAddressARB("glAttachShader");
     p_gllinkprogram = glXGetProcAddressARB("glLinkProgram");
@@ -92,11 +95,17 @@ static void load_3(void)
     p_gldeleteshader = glXGetProcAddressARB("glDeleteShader");
 }
 
+static void load_4(void)
+{
+
+}
+
 void load_gl_fun(void)
 {
     load_1();
     load_2();
     load_3();
+    load_4();
     p_glgetintegerv = glXGetProcAddressARB("glGetIntegerv");
     p_glgetintegeri_v = glXGetProcAddressARB("glGetIntegeri_v");
 }

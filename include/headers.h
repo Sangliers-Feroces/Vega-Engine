@@ -32,6 +32,7 @@
 #include "octree.h"
 #include "texture.h"
 #include "thread.h"
+#include "shader.h"
 #include "misc.h"
 #include "demo.h"
 #include "macro.h"

@@ -48,6 +48,8 @@ extern void (*p_glcompileshader)(gluint shader);
 extern void (*p_glgetshaderiv)(gluint shader, glenum pname, glint *params);
 extern void (*p_glgetshaderinfolog)(gluint shader, glsizei max_length,
 glsizei *length, glchar *info_log);
+extern void (*p_glgetprograminfolog)(gluint shader, glsizei max_length,
+glsizei *length, glchar *info_log);
 extern gluint (*p_glcreateprogram)(void);
 extern void (*p_glattachshader)(gluint program, gluint shader);
 extern void (*p_gllinkprogram)(gluint program);
@@ -82,6 +84,7 @@ extern void (*p_glgetintegeri_v)(glenum pname, gluint index, glint *params);
 #define glCompileShader p_glcompileshader
 #define glGetShaderiv p_glgetshaderiv
 #define glGetShaderInfoLog p_glgetshaderinfolog
+#define glGetProgramInfoLog p_glgetprograminfolog
 #define glCreateProgram p_glcreateprogram
 #define glAttachShader p_glattachshader
 #define glLinkProgram p_gllinkprogram

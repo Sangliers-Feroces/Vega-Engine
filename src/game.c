@@ -104,7 +104,6 @@ int game(void)
     srand(time(NULL));
 
     load_gl_fun();
-    mat_test();
     octree *tree = octree_create(NULL);
     load_model(&tree);
     gpu_serial_t serial = octree_serialize(tree);
