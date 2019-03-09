@@ -12,8 +12,10 @@
 #include "global_shenanigans.h"
 
 const void (*p_glgenvertexarrays)(glsizei n, gluint *arrays);
+const void (*p_gldeletevertexarrays)(glsizei n, const gluint *arrays);
 const void (*p_glbindvertexarray)(gluint array);
 const void (*p_glgenbuffers)(glsizei n, gluint *buffers);
+const void (*p_gldeletebuffers)(glsizei n, const gluint *buffers);
 const void (*p_glbindbuffer)(glenum target, gluint buffer);
 const void (*p_glbufferdata)(glenum target, glsizeiptr size,
 const glvoid *data, glenum usage);
@@ -50,14 +52,31 @@ const void (*p_glgetprogramiv)(gluint program, glenum pname, glint *params);
 const void (*p_gldetachshader)(gluint program, gluint shader);
 const void (*p_gldeleteshader)(gluint shader);
 
+const void (*p_glgentextures)(glsizei n, gluint *textures);
+const void (*p_gldeletetextures)(glsizei n, const gluint *textures);
+const void (*p_glbindtexture)(glenum target, gluint texture);
+const void (*p_gltexparameteri)(glenum target, glenum pname, glint param);
+const void (*p_glteximage2d)(glenum target, glint level, glint internalformat,
+glsizei width, glsizei height, glint border, glenum format, glenum type,
+const glvoid *data);
+const void (*p_glbindimagetexture)(gluint unit, gluint texture, glint level,
+glboolean layered, glint layer, glenum access, glenum format);
+const void (*p_gldispatchcompute)(gluint num_groups_x, gluint num_groups_y,
+gluint num_groups_z);
+const void (*p_glmemorybarrier)(glbitfield barriers);
+const void (*p_glgetteximage)(glenum target, glint level, glenum format,
+glenum type, glvoid *pixels);
+
 const void (*p_glgetintegerv)(glenum pname, glint *params);
 const void (*p_glgetintegeri_v)(glenum pname, gluint index, glint *params);
 
 static void load_1(void)
 {
     p_glgenvertexarrays = glXGetProcAddressARB("glGenVertexArrays");
+    p_gldeletevertexarrays = glXGetProcAddressARB("glDeleteVertexArrays");
     p_glbindvertexarray = glXGetProcAddressARB("glBindVertexArray");
     p_glgenbuffers = glXGetProcAddressARB("glGenBuffers");
+    p_gldeletebuffers = glXGetProcAddressARB("glDeleteBuffers");
     p_glbindbuffer = glXGetProcAddressARB("glBindBuffer");
     p_glbufferdata = glXGetProcAddressARB("glBufferData");
     p_glclearcolor = glXGetProcAddressARB("glClearColor");
@@ -97,7 +116,15 @@ static void load_3(void)
 
 static void load_4(void)
 {
-
+    p_glgentextures = glXGetProcAddressARB("glGenTextures");
+    p_gldeletetextures = glXGetProcAddressARB("glDeleteTextures");
+    p_glbindtexture = glXGetProcAddressARB("glBindTexture");
+    p_gltexparameteri = glXGetProcAddressARB("glTexParameteri");
+    p_glteximage2d = glXGetProcAddressARB("glTexImage2D");
+    p_glbindimagetexture = glXGetProcAddressARB("glBindImageTexture");
+    p_gldispatchcompute = glXGetProcAddressARB("glDispatchCompute");
+    p_glmemorybarrier = glXGetProcAddressARB("glMemoryBarrier");
+    p_glgetteximage = glXGetProcAddressARB("glGetTexImage");
 }
 
 void load_gl_fun(void)

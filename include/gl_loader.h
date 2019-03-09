@@ -19,8 +19,10 @@ void load_gl_fun(void);
 #ifndef GL_LOADER_IMPLEMENTATION
 
 extern void (*p_glgenvertexarrays)(glsizei n, gluint *arrays);
+extern void (*p_gldeletevertexarrays)(glsizei n, const gluint *arrays);
 extern void (*p_glbindvertexarray)(gluint array);
 extern void (*p_glgenbuffers)(glsizei n, gluint *buffers);
+extern void (*p_gldeletebuffers)(glsizei n, const gluint *buffers);
 extern void (*p_glbindbuffer)(glenum target, gluint buffer);
 extern void (*p_glbufferdata)(glenum target, glsizeiptr size,
 glvoid *data, glenum usage);
@@ -57,12 +59,29 @@ extern void (*p_glgetprogramiv)(gluint program, glenum pname, glint *params);
 extern void (*p_gldetachshader)(gluint program, gluint shader);
 extern void (*p_gldeleteshader)(gluint shader);
 
+extern void (*p_glgentextures)(glsizei n, gluint *textures);
+extern void (*p_gldeletetextures)(glsizei n, const gluint *textures);
+extern void (*p_glbindtexture)(glenum target, gluint texture);
+extern void (*p_gltexparameteri)(glenum target, glenum pname, glint param);
+extern void (*p_glteximage2d)(glenum target, glint level, glint internalformat,
+glsizei width, glsizei height, glint border, glenum format, glenum type,
+glvoid *data);
+extern void (*p_glbindimagetexture)(gluint unit, gluint texture, glint level,
+glboolean layered, glint layer, glenum access, glenum format);
+extern void (*p_gldispatchcompute)(gluint num_groups_x, gluint num_groups_y,
+gluint num_groups_z);
+extern void (*p_glmemorybarrier)(glbitfield barriers);
+extern void (*p_glgetteximage)(glenum target, glint level, glenum format,
+glenum type, glvoid *pixels);
+
 extern void (*p_glgetintegerv)(glenum pname, glint *params);
 extern void (*p_glgetintegeri_v)(glenum pname, gluint index, glint *params);
 
 #define glGenVertexArrays p_glgenvertexarrays
+#define glDeleteVertexArrays p_gldeletevertexarrays
 #define glBindVertexArray p_glbindvertexarray
 #define glGenBuffers p_glgenbuffers
+#define glDeleteBuffers p_gldeletebuffers
 #define glBindBuffer p_glbindbuffer
 #define glBufferData p_glbufferdata
 #define glClearColor p_glclearcolor
@@ -91,6 +110,16 @@ extern void (*p_glgetintegeri_v)(glenum pname, gluint index, glint *params);
 #define glGetProgramiv p_glgetprogramiv
 #define glDetachShader p_gldetachshader
 #define glDeleteShader p_gldeleteshader
+
+#define glGenTextures p_glgentextures
+#define glDeleteTextures p_gldeletetextures
+#define glBindTexture p_glbindtexture
+#define glTexParameteri p_gltexparameteri
+#define glTexImage2D p_glteximage2d
+#define glBindImageTexture p_glbindimagetexture
+#define glDispatchCompute p_gldispatchcompute
+#define glMemoryBarrier p_glmemorybarrier
+#define glGetTexImage p_glgetteximage
 
 #define glGetIntegerv p_glgetintegerv
 #define glGetIntegeri_v p_glgetintegeri_v
