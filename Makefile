@@ -5,10 +5,11 @@ LDLIB = -lm -lpthread -lcsfml-window -lcsfml-graphics
 %.o: %.c
 	gcc $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
-SRC = $(filter-out ./src/main.c, $(wildcard ./src/*.c))
+SRC = $(filter-out ./src/wrapper/main.c, \
+$(wildcard -r ./src/*.c $(wildcard -r ./src/*/*.c)))
 OBJ = $(SRC:.c=.o)
 
-MAINSRC = $(wildcard ./src/main.c)
+MAINSRC = $(wildcard ./src/wrapper/main.c)
 MAINOBJ = $(MAINSRC:.c=.o)
 
 OUTPUT = my_world
