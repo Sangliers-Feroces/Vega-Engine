@@ -8,9 +8,8 @@
 #ifndef _GL_ENUMS_H
 #define _GL_ENUMS_H
 
-/*
- * Datatypes
- */
+// Datatypes
+
 typedef unsigned int    glenum;
 typedef unsigned char   glboolean;
 typedef unsigned int    glbitfield;
@@ -23,17 +22,15 @@ typedef unsigned short  glushort;   /* 2-byte unsigned */
 typedef unsigned int    gluint;     /* 4-byte unsigned */
 typedef int     glsizei;    /* 4-byte signed */
 typedef float       glfloat;    /* single precision float */
-typedef float       glclampf;   /* single precision float in [0,1] */
+typedef float       glclampf;   /* single precision float in [0, 1] */
 typedef double      gldouble;   /* double precision float */
-typedef double      glclampd;   /* double precision float in [0,1] */
+typedef double      glclampd;   /* double precision float in [0, 1] */
 
 typedef ssize_t glsizeiptr;
 
 typedef char glchar;
 
-/*
- * Constants
- */
+// Constants
 
 /* Boolean values */
 #define GL_FALSE                0

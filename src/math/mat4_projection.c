@@ -18,6 +18,7 @@ void mat4_perspective(proj_t proj, mat4 res)
     res[1][1] = -1.0f / tan_half_fov_w;
     res[2][2] = proj.far_plane / (proj.far_plane - proj.near_plane);
     res[2][3] = 1.0f;
-    res[3][2] = - (proj.near_plane * proj.far_plane) / (proj.far_plane - proj.near_plane);
-	return;
+    res[3][2] = - (proj.near_plane * proj.far_plane) /
+    (proj.far_plane - proj.near_plane);
+    return;
 }

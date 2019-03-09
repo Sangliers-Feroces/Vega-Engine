@@ -39,8 +39,8 @@ typedef struct {
 } bounds3;
 
 struct octree_s {
-    struct octree_s *root;    /* -> might be useful to reposition moving objects */
-    struct octree_s *sub[8];
+    struct octree_s *root;    /* -> might be useful to reposition */
+    struct octree_s *sub[8];  /* moving objects                   */
     vec_rtx_triangle triangles;
     bounds3 bounds;
 };

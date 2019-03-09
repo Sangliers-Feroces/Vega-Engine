@@ -30,7 +30,7 @@ int demo_loop(octree *tree)
     demo_t *demo = demo_init(tree);
 
     glint lol;
-	glGetIntegerv(GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS, &lol);
+    glGetIntegerv(GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS, &lol);
     printf("max: %d\n", lol);
     gluint shader = shader_load_compute("src/gpu/shader/compute.glsl");
     while (poll_events(demo)) {
