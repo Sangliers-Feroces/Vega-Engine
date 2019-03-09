@@ -87,14 +87,14 @@ void load_model(octree **tree)
 
 void mat_test(void)
 {
-    vec4 p = {0.0f, 0.0, 0.0f, 1.0f};
-    vec3 pos = {10.0f, 0.0f, 0.0f};
-    vec3 scale = {1.0f, 1.0f, 1.0f};
-    vec3 rot = {0.0f, M_PI / 2.0f, 0.0f};
+    vec4 p = {1.0f, 1.0, 1.0f, 1.0f};
+    vec3 pos = {10.0f, -5.0f, 0.0f};
+    vec3 scale = {2.0f, 2.0f, 2.0f};
+    vec3 rot = {0.0f, 0.0f, 0.0f};
     mat4 model;
     vec4 fin;
 
-    mat4_view(pos, rot, model);
+    mat4_model(pos, scale, rot, model);
     fin = mat4_mul_vec(model, p);
 }
 

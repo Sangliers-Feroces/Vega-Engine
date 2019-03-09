@@ -7,15 +7,19 @@
 
 #include "headers.h"
 
-void mat4_trans_scale(vec3 pos, vec3 scale, mat4 res)
+void mat4_scale_trans(vec3 pos, vec3 scale, mat4 res)
 {
+    mat4 trans;
+
     mat4_identity(res);
     res[0][0] = scale.x;
     res[1][1] = scale.y;
     res[2][2] = scale.z;
-    res[3][0] = pos.x;
-    res[3][1] = pos.y;
-    res[3][2] = pos.z;
+    mat4_identity(trans);
+    trans[3][0] = pos.x;
+    trans[3][1] = pos.y;
+    trans[3][2] = pos.z;
+    mat4_mul(trans, res, res);
 }
 
 static void rot_xy(float x, float y, mat4 res)
@@ -58,11 +62,11 @@ void mat4_rot(vec3 rot, mat4 res)
 
 void mat4_model(vec3 pos, vec3 scale, vec3 rot, mat4 res)
 {
-    mat4 trans_scale;
+    mat4 scale_trans;
 
     mat4_rot(rot, res);
-    mat4_trans_scale(pos, scale, trans_scale);
-    mat4_mul(trans_scale, res, res);
+    mat4_scale_trans(pos, scale, scale_trans);
+    mat4_mul(scale_trans, res, res);
 }
 
 void mat4_view(vec3 pos, vec3 rot, mat4 res)
