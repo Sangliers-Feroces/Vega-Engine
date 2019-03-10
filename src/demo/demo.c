@@ -44,7 +44,8 @@ int demo_loop(void)
     while (poll_events(demo)) {
         sfRenderWindow_clear(demo->win.window, sfBlack);
         demo_render(demo);
-        sfTexture_updateFromPixels(demo->win._texture, (uint8_t*)demo->win.data,
+        sfTexture_updateFromPixels(
+        demo->win._texture, (uint8_t*)demo->win.data,
         demo->win.w, demo->win.h, 0, 0);
         sfRenderWindow_drawSprite(demo->win.window,
         demo->win._sprite, NULL);
