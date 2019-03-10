@@ -15,7 +15,7 @@ texture2f* texture2f_create(uint32_t w, uint32_t h)
     res->w = w;
     res->h = h;
     res->max_ndx = res->w * res->h;
-    res->pixel = (vec3*)malloc_safe(w * h * sizeof(vec3));
+    res->pixel = (vec4*)malloc_safe(w * h * sizeof(vec4));
     res->id = 0;
     return res;
 }
@@ -36,12 +36,13 @@ void texture2f_reset(texture2f *texture)
 static void write_color(texture2f *texture, ssize_t x, ssize_t y, vec3 color)
 {
     ssize_t ndx = y * (ssize_t)texture->w + x;
-    vec3 *to_mod;
+    vec4 *to_mod;
+    vec4 actual_color = {color.x, color.y, color.z, 0.0f};
 
     if (!((ndx >= 0) && (ndx < (ssize_t)texture->max_ndx)))
         return;
     to_mod = &texture->pixel[ndx];
-    *to_mod = vec3_add(*to_mod, color);
+    *to_mod = vec4_add(*to_mod, actual_color);
 }
 
 void texture2f_write_color_bar(texture2f *texture, vec2 *uv, vec3 bar,

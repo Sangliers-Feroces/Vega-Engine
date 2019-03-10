@@ -47,9 +47,10 @@ void octree_light_rtx_thread(octree *tree, size_t rays)
 float octree_light_rtx(octree *tree, size_t rays)
 {
     octree_reset_lumels(tree);
-    thread_send_each(THREAD_TASK_RAY_TRACING,
+    /*thread_send_each(THREAD_TASK_RAY_TRACING,
     (uint64_t[]){(uint64_t)tree, rays / _thread.count}, 2);
-    thread_wait();
+    thread_wait();*/
     //octree_light_rtx_thread(tree, rays);
+    gpu_compute_lightmap(tree, rays);
     return (octree_get_max_lumel(tree) / 3.0f) / 2.0f;
 }

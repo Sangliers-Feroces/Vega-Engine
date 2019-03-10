@@ -7,7 +7,7 @@
 
 #include "headers.h"
 
-static void set_texture_parameters(void)
+void gl_set_texture_parameters(void)
 {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -18,7 +18,7 @@ static void set_texture_parameters(void)
 static int allocate_texture(ivec2 *size)
 {
     while (size->y > 0) {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB32F, size->x, size->y,
+        glTexImage2D(GL_PROXY_TEXTURE_2D, 0, GL_RGBA32F, size->x, size->y,
         0, GL_RGB, GL_FLOAT, NULL);
         if (glGetError() == GL_NO_ERROR)
             break;
@@ -27,7 +27,7 @@ static int allocate_texture(ivec2 *size)
     size->y /= 2;
     size->x = MIN(size->x, 4096);
     size->y = MIN(size->y, 4096);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB32F, size->x, size->y,
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, size->x, size->y,
     0, GL_RGB, GL_FLOAT, NULL);
     if (size->y == 0) {
         printf("Can't create texture cluster. (no suitable size found)\n");
@@ -47,8 +47,7 @@ static texture2f* texture2f_create_cluster(int32_t w, int32_t h)
         return NULL;
     }
     glBindTexture(GL_TEXTURE_2D, res->id);
-    set_texture_parameters();
-    size.x /= 4;
+    gl_set_texture_parameters();
     if (!allocate_texture(&size))
         return NULL;
     glBindTexture(GL_TEXTURE_2D, 0);
@@ -56,7 +55,7 @@ static texture2f* texture2f_create_cluster(int32_t w, int32_t h)
     res->w = size.x;
     res->h = size.y;
     res->max_ndx = res->w * res->h;
-    res->pixel = (vec3*)malloc_safe(size.x * size.y * sizeof(vec3));
+    res->pixel = (vec4*)malloc_safe(size.x * size.y * sizeof(vec4));
     return res;
 }
 

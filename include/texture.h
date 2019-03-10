@@ -30,10 +30,12 @@ void texture_update_lightmap(texture2f *src, texture2 *dst, float max_lumel);
 void texture2f_write_color_bar(texture2f *texture, vec2 *uv, vec3 bar,
 vec3 color);
 
-vec3 texture2f_sample(texture2f *texture, vec2 uv);
+vec4 texture2f_sample(texture2f *texture, vec2 uv);
 
 texture2f_binding texture2f_binding_create(vec3 *triangle);
 void texture2f_binding_destroy(texture2f_binding binding);
+
+void gl_set_texture_parameters(void);
 
 texture_cluster texture_cluster_create(void);
 void texture_cluster_destroy(texture_cluster cluster);

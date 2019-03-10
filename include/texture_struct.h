@@ -21,7 +21,7 @@ typedef struct {
     int32_t w;
     int32_t h;
     size_t max_ndx;
-    vec3 *pixel;
+    vec4 *pixel;
     gluint id;
 } texture2f;
 

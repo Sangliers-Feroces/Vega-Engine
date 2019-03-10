@@ -35,6 +35,10 @@ vec3 vec3_muls(vec3 vec, float value);
 
 vec3 ray3_compute(ray3 ray, float t);
 
+vec4 vec4_add(vec4 a, vec4 b);
+vec4 vec4_sub(vec4 a, vec4 b);
+vec4 vec4_muls(vec4 vec, float value);
+
 void mat4_identity(mat4 dst);
 void mat4_copy(mat4 src, mat4 dst);
 void mat4_mul(mat4 a, mat4 b, mat4 res);

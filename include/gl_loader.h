@@ -59,6 +59,8 @@ extern void (*p_gllinkprogram)(gluint program);
 extern void (*p_glgetprogramiv)(gluint program, glenum pname, glint *params);
 extern void (*p_gldetachshader)(gluint program, gluint shader);
 extern void (*p_gldeleteshader)(gluint shader);
+extern void (*p_gldeleteprogram)(gluint program);
+extern void (*p_glfinish)(void);
 
 extern void (*p_glgentextures)(glsizei n, gluint *textures);
 extern void (*p_gldeletetextures)(glsizei n, const gluint *textures);
@@ -112,6 +114,8 @@ extern void (*p_glgetintegeri_v)(glenum pname, gluint index, glint *params);
 #define glGetProgramiv p_glgetprogramiv
 #define glDetachShader p_gldetachshader
 #define glDeleteShader p_gldeleteshader
+#define glDeleteProgram p_gldeleteprogram
+#define glFinish p_glfinish
 
 #define glGenTextures p_glgentextures
 #define glDeleteTextures p_gldeletetextures

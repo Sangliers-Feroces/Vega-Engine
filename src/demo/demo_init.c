@@ -31,8 +31,8 @@ static int init_framebuffer(demo_t *demo)
 
 static void init_win(demo_t *demo)
 {
-    demo->win.w = 854 / 2;
-    demo->win.h = 480 / 2;
+    demo->win.w = 854 / 4;
+    demo->win.h = 480 / 4;
     //demo->win.w = 1920;
     //demo->win.h = 1080;
     demo->win.window = sfRenderWindow_create((sfVideoMode){demo->win.w,

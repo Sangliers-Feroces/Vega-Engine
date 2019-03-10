@@ -7,7 +7,7 @@
 
 #include "headers.h"
 
-static uint32_t rbaf32_to_uint32(vec3 rgb, float aperture)
+static uint32_t rgbaf32_to_uint32(vec4 rgb, float aperture)
 {
     uint32_t r = MIN(rgb.x / aperture * 255.0f, 255.0f);
     uint32_t g = MIN(rgb.y / aperture * 255.0f, 255.0f);
@@ -24,7 +24,7 @@ static uint32_t rtx(demo_t *demo, vec3 ray)
 
     if (inter.triangle != NULL) {
         uv = barycentric2_get_point(inter.triangle->lightmap.uv, inter.bar);
-        return rbaf32_to_uint32(texture2f_sample(
+        return rgbaf32_to_uint32(texture2f_sample(
         inter.triangle->lightmap.texture, uv), demo->cam.aperture);
     }
     else

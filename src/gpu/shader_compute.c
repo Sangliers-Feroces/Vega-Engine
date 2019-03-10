@@ -10,11 +10,11 @@
 static char* get_program_err(gluint program, int is_program)
 {
     glint res = GL_FALSE;
-    int log_len;
+    int log_len = 0;
     char *msg = NULL;
 
     if (is_program) {
-        glGetProgramiv(program, GL_COMPILE_STATUS, &res);
+        glGetProgramiv(program, GL_LINK_STATUS, &res);
         glGetProgramiv(program, GL_INFO_LOG_LENGTH, &log_len);
         if (log_len > 0) {
             msg = malloc_safe(log_len + 1);
@@ -55,7 +55,7 @@ gluint shader_load_compute(const char *path)
         return 0;
     program = glCreateProgram();
     glAttachShader(program, compute_shader);
-    glLinkProgram(compute_shader);
+    glLinkProgram(program);
     if (!check_shader(program, 1))
         return 0;
     glDetachShader(program, compute_shader);

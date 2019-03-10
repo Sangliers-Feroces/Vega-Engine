@@ -52,6 +52,8 @@ const void (*p_gllinkprogram)(gluint program);
 const void (*p_glgetprogramiv)(gluint program, glenum pname, glint *params);
 const void (*p_gldetachshader)(gluint program, gluint shader);
 const void (*p_gldeleteshader)(gluint shader);
+const void (*p_gldeleteprogram)(gluint program);
+const void (*p_glfinish)(void);
 
 const void (*p_glgentextures)(glsizei n, gluint *textures);
 const void (*p_gldeletetextures)(glsizei n, const gluint *textures);
@@ -114,6 +116,8 @@ static void load_3(void)
     p_glgetprogramiv = glXGetProcAddressARB("glGetProgramiv");
     p_gldetachshader = glXGetProcAddressARB("glDetachShader");
     p_gldeleteshader = glXGetProcAddressARB("glDeleteShader");
+    p_gldeleteprogram = glXGetProcAddressARB("glDeleteProgram");
+    p_glfinish = glXGetProcAddressARB("glFinish");
 }
 
 static void load_4(void)
