@@ -17,7 +17,7 @@ static size_t align_up(size_t addr, size_t align)
         return addr + align - extra;
 }
 
-static void write_header(texture2 *texture, char *data, size_t size,
+static void write_header(texture2f *texture, char *data, size_t size,
 size_t pitch)
 {
     data[0x00] = 'B';
@@ -37,17 +37,28 @@ size_t pitch)
     *((uint32_t*)(data + 0x32)) = 0;
 }
 
-static void write_data(texture2 *texture, char *dst, size_t pitch)
+static void write_data(texture2f *texture, char *dst, size_t pitch)
 {
-    for (size_t i = 0; i < (size_t)texture->h; i++)
+    uint32_t r;
+    uint32_t g;
+    uint32_t b;
+    size_t i;
+    float aperture = 50.0f;
+
+    for (size_t i_a = 0; i_a < (size_t)texture->h; i_a++) {
+        i = texture->h - 1 - i_a;
         for (size_t j = 0; j < (size_t)texture->w; j++) {
-            dst[i * pitch + j * 3] =
-            (texture->pixel[i * texture->w + j] >> 8) & 0xFF;
-            dst[i * pitch + j * 3 + 1] =
-            (texture->pixel[i * texture->w + j] >> 16) & 0xFF;
-            dst[i * pitch + j * 3 + 2] =
-            (texture->pixel[i * texture->w + j] >> 24) & 0xFF;
+            r = MIN((uint32_t)texture->pixel[i_a * texture->w + j].x
+            / aperture * 255.0f, 0xFF);
+            g = MIN((uint32_t)texture->pixel[i_a * texture->w + j].y
+            / aperture * 255.0f, 0xFF);
+            b = MIN((uint32_t)texture->pixel[i_a * texture->w + j].z
+            / aperture * 255.0f, 0xFF);
+            dst[i * pitch + j * 3] = b;
+            dst[i * pitch + j * 3 + 1] = g;
+            dst[i * pitch + j * 3 + 2] = r;
         }
+    }
 }
 
 static void write_file(const char *data, size_t size, void *ptr)
@@ -63,7 +74,7 @@ static void write_file(const char *data, size_t size, void *ptr)
     fclose(file);
 }
 
-void texture2_write(texture2 *texture)
+void texture2f_write(texture2f *texture)
 {
     size_t pitch = align_up(texture->w * 3, 4);
     size_t size = 60 + pitch * texture->h;

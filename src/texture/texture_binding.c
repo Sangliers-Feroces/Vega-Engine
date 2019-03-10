@@ -37,7 +37,7 @@ texture2_binding texture2_binding_create(vec3 *triangle)
 void texture2_binding_destroy(texture2_binding binding)
 {
     if (binding.is_linked) {
-        //texture2_write(binding.texture);
+        printf("%u, %u\n", binding.texture->w, binding.texture->h);
         texture2_destroy(binding.texture);
     }
 }

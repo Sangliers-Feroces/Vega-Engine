@@ -31,8 +31,8 @@ static int init_framebuffer(demo_t *demo)
 
 static void init_win(demo_t *demo)
 {
-    demo->win.w = 854 / 4;
-    demo->win.h = 480 / 4;
+    demo->win.w = 854 / 2;
+    demo->win.h = 480 / 2;
     //demo->win.w = 1920;
     //demo->win.h = 1080;
     demo->win.window = sfRenderWindow_create((sfVideoMode){demo->win.w,
@@ -44,7 +44,7 @@ static void init_win(demo_t *demo)
         exit_full_custom();
 }
 
-demo_t* demo_init(octree *tree)
+demo_t* demo_init(void)
 {
     demo_t *res;
 
@@ -52,15 +52,18 @@ demo_t* demo_init(octree *tree)
     init_win(res);
     init_cam(res);
     demo_init_input(res);
-    res->tree = tree;
+    res->tree = octree_create(NULL);
+    init();
     return (res);
 }
 
 void demo_quit(demo_t *demo)
 {
+    quit();
     free(demo->win.data);
     sfSprite_destroy(demo->win._sprite);
     sfTexture_destroy(demo->win._texture);
     sfRenderWindow_destroy(demo->win.window);
+    octree_destroy(&demo->tree);
     free(demo);
 }

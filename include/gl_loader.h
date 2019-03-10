@@ -18,6 +18,7 @@ void load_gl_fun(void);
 
 #ifndef GL_LOADER_IMPLEMENTATION
 
+extern glenum (*p_glgeterror)(void);
 extern void (*p_glgenvertexarrays)(glsizei n, gluint *arrays);
 extern void (*p_gldeletevertexarrays)(glsizei n, const gluint *arrays);
 extern void (*p_glbindvertexarray)(gluint array);
@@ -77,6 +78,7 @@ glenum type, glvoid *pixels);
 extern void (*p_glgetintegerv)(glenum pname, glint *params);
 extern void (*p_glgetintegeri_v)(glenum pname, gluint index, glint *params);
 
+#define glGetError p_glgeterror
 #define glGenVertexArrays p_glgenvertexarrays
 #define glDeleteVertexArrays p_gldeletevertexarrays
 #define glBindVertexArray p_glbindvertexarray

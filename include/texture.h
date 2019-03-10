@@ -8,15 +8,18 @@
 #ifndef _TEXTURE_H
 #define _TEXTURE_H
 
+#define TEXTURE_CLUSTER_ROW_ALLOC_STEP 32
+
 texture2* texture2_create(uint32_t w, uint32_t h);
 void texture2_destroy(texture2 *texture);
-void texture2_get_nearest(vec2 p, vec2 size, size_t *x, size_t *y);
+ivec2 texture2_get_nearest(vec2 p, vec2 size);
 uint32_t texture2_sample(texture2 *texture, vec2 uv);
 
 texture2_binding texture2_binding_create(vec3 *triangle);
 void texture2_binding_destroy(texture2_binding binding);
 
 void texture2_write(texture2 *texture);
+void texture2f_write(texture2f *texture);
 
 texture2f* texture2f_create(uint32_t w, uint32_t h);
 void texture2f_destroy(texture2f *texture);
@@ -26,5 +29,20 @@ float texture2f_get_max_lumel(texture2f *texture);
 void texture_update_lightmap(texture2f *src, texture2 *dst, float max_lumel);
 void texture2f_write_color_bar(texture2f *texture, vec2 *uv, vec3 bar,
 vec3 color);
+
+vec3 texture2f_sample(texture2f *texture, vec2 uv);
+
+texture2f_binding texture2f_binding_create(vec3 *triangle);
+void texture2f_binding_destroy(texture2f_binding binding);
+
+texture_cluster texture_cluster_create(void);
+void texture_cluster_destroy(texture_cluster cluster);
+int texture_cluster_add_row(texture_cluster *cluster, int32_t power);
+int texture_cluster_allocate(texture_cluster *cluster, ivec2 size,
+rect_t *pres);
+
+void lightmap_init(void);
+void lightmap_quit(void);
+int lightmap_allocate(ivec2 size, rect_t *pres);
 
 #endif

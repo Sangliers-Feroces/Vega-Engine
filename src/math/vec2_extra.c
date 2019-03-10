@@ -11,3 +11,13 @@ vec2 vec2_mul(vec2 a, vec2 b)
 {
     return (vec2){a.x * b.x, a.y * b.y};
 }
+
+vec2 vec2_div(vec2 a, vec2 b)
+{
+    return (vec2){a.x / b.x, a.y / b.y};
+}
+
+vec2 vec2_divs(vec2 vec, float value)
+{
+    return (vec2){vec.x / value, vec.y / value};
+}

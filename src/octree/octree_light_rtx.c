@@ -25,7 +25,7 @@ static void throw_ray(octree *tree, ray3_color ray)
 
     if (inter.triangle == NULL)
         return;
-    texture2f_write_color_bar(inter.triangle->lumels,
+    texture2f_write_color_bar(inter.triangle->lightmap.texture,
     inter.triangle->lightmap.uv, inter.bar, ray.color);
     if ((--ray.count) == 0)
         return;
@@ -44,13 +44,12 @@ void octree_light_rtx_thread(octree *tree, size_t rays)
     }
 }
 
-void octree_light_rtx(octree *tree, size_t rays)
+float octree_light_rtx(octree *tree, size_t rays)
 {
     octree_reset_lumels(tree);
     thread_send_each(THREAD_TASK_RAY_TRACING,
     (uint64_t[]){(uint64_t)tree, rays / _thread.count}, 2);
     thread_wait();
     //octree_light_rtx_thread(tree, rays);
-    octree_update_lightmap(tree,
-    MAX((octree_get_max_lumel(tree) / 3.0f), 1.0f) / 8.0f);
+    return (octree_get_max_lumel(tree) / 3.0f) / 2.0f;
 }

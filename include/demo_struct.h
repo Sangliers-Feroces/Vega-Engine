@@ -38,6 +38,7 @@ typedef struct {
     long double fovw;
     long double ratiowh;
     long double near;
+    float aperture;
 } cam_t;
 
 typedef struct {

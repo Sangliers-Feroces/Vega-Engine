@@ -11,6 +11,7 @@
 
 #include "global_shenanigans.h"
 
+const glenum (*p_glgeterror)(void);
 const void (*p_glgenvertexarrays)(glsizei n, gluint *arrays);
 const void (*p_gldeletevertexarrays)(glsizei n, const gluint *arrays);
 const void (*p_glbindvertexarray)(gluint array);
@@ -72,6 +73,7 @@ const void (*p_glgetintegeri_v)(glenum pname, gluint index, glint *params);
 
 static void load_1(void)
 {
+    p_glgeterror = glXGetProcAddressARB("glGetError");
     p_glgenvertexarrays = glXGetProcAddressARB("glGenVertexArrays");
     p_gldeletevertexarrays = glXGetProcAddressARB("glDeleteVertexArrays");
     p_glbindvertexarray = glXGetProcAddressARB("glBindVertexArray");

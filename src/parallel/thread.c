@@ -5,12 +5,7 @@
 ** because CPUs and GPUs are slowly merging
 */
 
-#include "thread_implementation.h"
 #include "headers.h"
-
-#include "global_shenanigans_vol.h"
-
-const threads _thread;
 
 static size_t get_thread_count(void)
 {
@@ -51,7 +46,7 @@ static void* thread_loop(void *data)
 void thread_init(void)
 {
     _thread.count = MAX(get_thread_count(), 1);
-    //_thread.count = 1;
+    _thread.count = 1;
     _thread.bus = (thread_bus*)malloc_safe(
     _thread.count * sizeof(thread_bus));
     for (size_t i = 0; i < _thread.count; i++)
@@ -64,6 +59,8 @@ void thread_quit(void)
     thread_wait();
     thread_send_each(THREAD_TASK_KILL, NULL, 0);
     thread_wait();
+    for (size_t i = 0; i < _thread.count; i++)
+        pthread_join(_thread.bus[i].id, NULL);
     free(_thread.bus);
 }
 

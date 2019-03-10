@@ -27,6 +27,11 @@ typedef struct {
     float w;
 } vec4;
 
+typedef struct {
+    int32_t x;
+    int32_t y;
+} ivec2;
+
 typedef float mat4[4][4];
 
 #endif

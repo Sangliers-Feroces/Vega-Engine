@@ -36,6 +36,6 @@
 #include "misc.h"
 #include "demo.h"
 #include "macro.h"
-#include "thread_global.h"
+#include "global.h"
 
 #endif

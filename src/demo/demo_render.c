@@ -7,6 +7,15 @@
 
 #include "headers.h"
 
+static uint32_t rbaf32_to_uint32(vec3 rgb, float aperture)
+{
+    uint32_t r = MIN(rgb.x / aperture * 255.0f, 255.0f);
+    uint32_t g = MIN(rgb.y / aperture * 255.0f, 255.0f);
+    uint32_t b = MIN(rgb.z / aperture * 255.0f, 255.0f);
+
+    return 0xFF000000 | (b << 16) | (g << 8) | r;
+}
+
 static uint32_t rtx(demo_t *demo, vec3 ray)
 {
     inter_ray3 inter = octree_intersect_ray(demo->tree, (ray3){demo->cam.pos,
@@ -15,10 +24,11 @@ static uint32_t rtx(demo_t *demo, vec3 ray)
 
     if (inter.triangle != NULL) {
         uv = barycentric2_get_point(inter.triangle->lightmap.uv, inter.bar);
-        return texture2_sample(inter.triangle->lightmap.texture, uv);
+        return rbaf32_to_uint32(
+        texture2f_sample(inter.triangle->lightmap.texture, uv), demo->cam.aperture);
     }
     else
-        return 0x000000FF;
+        return 0xFF000000;
 }
 
 vec3 get_plane(demo_t *demo, vec3 *top_left, vec3 *top_right,

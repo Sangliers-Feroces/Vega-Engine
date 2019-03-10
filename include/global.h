@@ -5,11 +5,14 @@
 ** headers
 */
 
-#ifndef _THREAD_GLOBAL_H
-#define _THREAD_GLOBAL_H
+#ifndef _GLOBAL_H
+#define _GLOBAL_H
 
-#ifndef THREAD_IMPLEMENTATION
+#ifndef GLOBAL_IMPLEMENTATION
+
 extern threads _thread;
+extern texture_cluster _lightmaps;
+
 #endif
 
 #endif

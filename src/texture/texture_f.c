@@ -11,15 +11,19 @@ texture2f* texture2f_create(uint32_t w, uint32_t h)
 {
     texture2f *res = (texture2f*)malloc_safe(sizeof(texture2f));
 
+    res->size = (vec2){(float)w, (float)h};
     res->w = w;
     res->h = h;
     res->max_ndx = res->w * res->h;
     res->pixel = (vec3*)malloc_safe(w * h * sizeof(vec3));
+    res->id = 0;
     return res;
 }
 
 void texture2f_destroy(texture2f *texture)
 {
+    if (texture->id != 0)
+        glDeleteTextures(1, &texture->id);
     free(texture->pixel);
     free(texture);
 }
@@ -44,18 +48,16 @@ void texture2f_write_color_bar(texture2f *texture, vec2 *uv, vec3 bar,
 vec3 color)
 {
     vec2 p = barycentric2_get_point(uv, bar);
-    size_t x;
-    size_t y;
+    ivec2 pos;
 
-    texture2_get_nearest(p, (vec2){(float)texture->w, (float)texture->h},
-    &x, &y);
-    write_color(texture, x, y, color);
-    write_color(texture, x - 1, y, vec3_muls(color, 0.5f));
-    write_color(texture, x + 1, y, vec3_muls(color, 0.5f));
-    write_color(texture, x, y - 1, vec3_muls(color, 0.5f));
-    write_color(texture, x, y + 1, vec3_muls(color, 0.5f));
-    write_color(texture, x - 1, y - 1, vec3_muls(color, 0.33f));
-    write_color(texture, x + 1, y - 1, vec3_muls(color, 0.33f));
-    write_color(texture, x - 1, y + 1, vec3_muls(color, 0.33f));
-    write_color(texture, x + 1, y + 1, vec3_muls(color, 0.33f));
+    pos = texture2_get_nearest(p, (vec2){(float)texture->w, (float)texture->h});
+    write_color(texture, pos.x, pos.y, color);
+    write_color(texture, pos.x - 1, pos.y, vec3_muls(color, 0.5f));
+    write_color(texture, pos.x + 1, pos.y, vec3_muls(color, 0.5f));
+    write_color(texture, pos.x, pos.y - 1, vec3_muls(color, 0.5f));
+    write_color(texture, pos.x, pos.y + 1, vec3_muls(color, 0.5f));
+    write_color(texture, pos.x - 1, pos.y - 1, vec3_muls(color, 0.33f));
+    write_color(texture, pos.x + 1, pos.y - 1, vec3_muls(color, 0.33f));
+    write_color(texture, pos.x - 1, pos.y + 1, vec3_muls(color, 0.33f));
+    write_color(texture, pos.x + 1, pos.y + 1, vec3_muls(color, 0.33f));
 }

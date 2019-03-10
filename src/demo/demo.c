@@ -25,14 +25,22 @@ static int poll_events(demo_t *demo)
     return (1);
 }
 
-int demo_loop(octree *tree)
-{
-    demo_t *demo = demo_init(tree);
+void load_model(octree **tree);
 
-    glint lol;
-    glGetIntegerv(GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS, &lol);
-    printf("max: %d\n", lol);
-    gluint shader = shader_load_compute("src/gpu/shader/compute.glsl");
+int demo_loop(void)
+{
+    demo_t *demo = demo_init();
+
+    load_model(&demo->tree);
+    printf("octree done !\n");
+    struct timespec start, finish;
+    double elapsed;
+    clock_gettime(CLOCK_MONOTONIC, &start);
+    demo->cam.aperture = octree_light_rtx(demo->tree, 1000000000 / 1);
+    clock_gettime(CLOCK_MONOTONIC, &finish);
+    elapsed = (finish.tv_sec - start.tv_sec);
+    elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
+    printf("%f seconds\n", elapsed);
     while (poll_events(demo)) {
         sfRenderWindow_clear(demo->win.window, sfBlack);
         demo_render(demo);

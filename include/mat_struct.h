@@ -37,4 +37,9 @@ typedef struct {
     float ratio_wh;
 } proj_t;
 
+typedef struct {
+    vec2 p;
+    vec2 s;
+} rect_t;
+
 #endif

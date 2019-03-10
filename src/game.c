@@ -85,43 +85,8 @@ void load_model(octree **tree)
     {10.0f, 0.0f, 0.0f}});
 }
 
-void mat_test(void)
-{
-    vec4 p = {1.0f, 1.0, 1.0f, 1.0f};
-    vec3 pos = {10.0f, -5.0f, 0.0f};
-    vec3 scale = {2.0f, 2.0f, 2.0f};
-    vec3 rot = {0.0f, 0.0f, 0.0f};
-    mat4 model;
-    vec4 fin;
-
-    mat4_model(pos, scale, rot, model);
-    fin = mat4_mul_vec(model, p);
-}
-
 int game(void)
 {
-    thread_init();
-    srand(time(NULL));
-
-    load_gl_fun();
-    octree *tree = octree_create(NULL);
-    load_model(&tree);
-    gpu_serial_t serial = octree_serialize(tree);
-    FILE *file = fopen("serial.txt", "wb+");
-    fwrite(serial.data, 1, serial.size, file);
-    fclose(file);
-    printf("octree done !\n");
-    struct timespec start, finish;
-    double elapsed;
-    clock_gettime(CLOCK_MONOTONIC, &start);
-    octree_light_rtx(tree, 1000000000 / 1000);
-    clock_gettime(CLOCK_MONOTONIC, &finish);
-    elapsed = (finish.tv_sec - start.tv_sec);
-    elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
-    printf("%f seconds\n", elapsed);
-    demo_loop(tree);
-    octree_destroy(&tree);
-
-    thread_quit();
+    demo_loop();
     return (EXIT_SUCCESS);
 }

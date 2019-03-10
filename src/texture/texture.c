@@ -24,23 +24,33 @@ void texture2_destroy(texture2 *texture)
     free(texture);
 }
 
-void texture2_get_nearest(vec2 p, vec2 size, size_t *x, size_t *y)
+ivec2 texture2_get_nearest(vec2 p, vec2 size)
 {
     p = vec2_add(vec2_mul(p, size), (vec2){0.5f, 0.5f});
-    *x = p.x;
-    *y = p.y;
+    return (ivec2){p.x, p.y};
 }
 
 uint32_t texture2_sample(texture2 *texture, vec2 uv)
 {
-    size_t x;
-    size_t y;
+    ivec2 pos;
     ssize_t ndx;
 
-    texture2_get_nearest(uv, (vec2){(float)texture->w, (float)texture->h},
-    &x, &y);
-    ndx = y * (ssize_t)texture->w + x;
+    pos = texture2_get_nearest(
+    uv, (vec2){(float)texture->w, (float)texture->h});
+    ndx = pos.y * (ssize_t)texture->w + pos.x;
     if (!((ndx >= 0) && (ndx < (ssize_t)texture->max_ndx)))
         return 0x000000FF;
     return swap32(texture->pixel[ndx]);
+}
+
+vec3 texture2f_sample(texture2f *texture, vec2 uv)
+{
+    ivec2 pos;
+    ssize_t ndx;
+
+    pos = texture2_get_nearest(uv, texture->size);
+    ndx = pos.y * (ssize_t)texture->w + pos.x;
+    if (!((ndx >= 0) && (ndx < (ssize_t)texture->max_ndx)))
+        return (vec3){0.0f, 0.0f, 0.0f};
+    return texture->pixel[ndx];
 }

@@ -8,17 +8,10 @@
 #ifndef _OCTREE_STRUCT_H
 #define _OCTREE_STRUCT_H
 
-typedef struct {
-    texture2 *texture;
-    vec2 uv[3];
-    int is_linked;     /* set to one if the texture should be free'd with */
-} texture2_binding;    /* the object linked                               */
-
 /* type used for raytracing structure */
 typedef struct {
     vec3 vertex[3];
-    texture2_binding lightmap;
-    texture2f *lumels;
+    texture2f_binding lightmap;
     vec3 normal;               /* normal + tangent + bitangent         */
     vec3 tangent;              /* are very key to create tangent space */
     vec3 bitangent;            /* and then to make lights rays bounce  */

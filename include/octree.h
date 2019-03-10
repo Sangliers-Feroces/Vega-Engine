@@ -24,7 +24,7 @@ size_t get_triangle_upper_tree(vec3 *triangle, bounds3 bounds);
 
 inter_ray3 octree_intersect_ray(octree *tree, ray3 ray);
 
-void octree_light_rtx(octree *tree, size_t rays);
+float octree_light_rtx(octree *tree, size_t rays);
 void octree_light_rtx_thread(octree *tree, size_t rays);
 
 void octree_reset_lumels(octree *tree);
