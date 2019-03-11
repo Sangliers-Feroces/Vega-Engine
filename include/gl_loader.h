@@ -43,6 +43,8 @@ extern void (*p_gldisablevertexattribarray)(gluint index);
 extern void (*p_glvertexattribpointer)(gluint index, glint size, glenum type,
 glboolean normalized, glsizei stride, const glvoid *pointer);
 extern void (*p_gldrawarrays)(glenum mode, glint first, glsizei count);
+extern void (*p_gluniform2fv)(glint location, glsizei count, const glfloat *value);
+extern void (*p_glactivetexture)(glenum texture);
 
 extern gluint (*p_glcreateshader)(glenum shader_type);
 extern void (*p_glshadersource)(gluint shader, glsizei count,
@@ -96,11 +98,13 @@ extern void (*p_glgetintegeri_v)(glenum pname, gluint index, glint *params);
 #define glUseProgram p_gluseprogram
 #define glGetUniformLocation p_glgetuniformlocation
 #define glUniformMatrix4fv p_gluniformmatrix4fv
+#define glActiveTexture p_glactivetexture
 
 #define glEnableVertexAttribArray p_glenablevertexattribarray
 #define glDisableVertexAttribArray p_gldisablevertexattribarray
 #define glVertexAttribPointer p_glvertexattribpointer
 #define glDrawArrays p_gldrawarrays
+#define glUniform2fv p_gluniform2fv
 
 #define glCreateShader p_glcreateshader
 #define glShaderSource p_glshadersource
