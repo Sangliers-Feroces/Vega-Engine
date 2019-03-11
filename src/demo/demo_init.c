@@ -17,7 +17,7 @@ static void init_cam(demo_t *demo)
 
 static int init_framebuffer(demo_t *demo)
 {
-    demo->win.data = (uint32_t*)malloc_safe(sizeof(uint32_t) *
+    /*demo->win.data = (uint32_t*)malloc_safe(sizeof(uint32_t) *
     demo->win.w * demo->win.h);
     demo->win._texture = sfTexture_create(demo->win.w, demo->win.h);
     if (demo->win._texture == NULL)
@@ -25,7 +25,7 @@ static int init_framebuffer(demo_t *demo)
     demo->win._sprite = sfSprite_create();
     if (demo->win._sprite == NULL)
         return (0);
-    sfSprite_setTexture(demo->win._sprite, demo->win._texture, sfTrue);
+    sfSprite_setTexture(demo->win._sprite, demo->win._texture, sfTrue);*/
     return (1);
 }
 
@@ -37,7 +37,7 @@ static void init_win(demo_t *demo)
     //demo->win.h = 1080;
     demo->win.window = sfRenderWindow_create((sfVideoMode){demo->win.w,
     demo->win.h, 32}, "rtx on !", sfResize | sfClose,
-    &(sfContextSettings){32, 32, 4, 4, 6, 0, 1});
+    &(sfContextSettings){32, 32, 4, 4, 5, 0, 1});
     if (demo->win.window == NULL)
         exit_full_custom();
     sfWindow_setVerticalSyncEnabled((sfWindow*)demo->win.window, sfTrue);
@@ -61,9 +61,6 @@ demo_t* demo_init(void)
 void demo_quit(demo_t *demo)
 {
     quit();
-    free(demo->win.data);
-    sfSprite_destroy(demo->win._sprite);
-    sfTexture_destroy(demo->win._texture);
     sfRenderWindow_destroy(demo->win.window);
     octree_destroy(&demo->tree);
     free(demo);

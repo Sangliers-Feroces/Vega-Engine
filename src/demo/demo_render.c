@@ -16,7 +16,7 @@ static uint32_t rgbaf32_to_uint32(vec4 rgb, float aperture)
     return 0xFF000000 | (b << 16) | (g << 8) | r;
 }
 
-static uint32_t rtx(demo_t *demo, vec3 ray)
+uint32_t rtx(demo_t *demo, vec3 ray)
 {
     inter_ray3 inter = octree_intersect_ray(demo->tree, (ray3){demo->cam.pos,
     ray});
@@ -56,20 +56,5 @@ vec3 interpolate_vec3(vec3 a, vec3 b, long double ratio)
 
 void demo_render(demo_t *demo)
 {
-    vec3 tl;
-    vec3 tr;
-    vec3 bl;
-    vec3 br;
-    long double ratiox;
-    long double ratioy;
-
-    br = get_plane(demo, &tl, &tr, &bl);
-    for (int64_t i = 0; i < demo->win.h; i++)
-        for (int64_t j = 0; j < demo->win.w; j++) {
-            ratiox = (long double)j / (long double)(demo->win.w - 1);
-            ratioy = (long double)i / (long double)(demo->win.h - 1);
-            demo->win.data[i * demo->win.w + j] =
-            rtx(demo, interpolate_vec3(interpolate_vec3(tl, tr, ratiox),
-            interpolate_vec3(bl, br, ratiox), ratioy));
-        }
+    (void)demo;
 }

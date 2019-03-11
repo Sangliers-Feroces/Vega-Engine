@@ -27,9 +27,6 @@ typedef struct {
     uint32_t w;
     uint32_t h;
     sfRenderWindow *window;
-    uint32_t *data;
-    sfTexture *_texture;
-    sfSprite *_sprite;
 } win_t;
 
 typedef struct {
