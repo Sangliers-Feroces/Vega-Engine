@@ -17,15 +17,7 @@ static void init_cam(demo_t *demo)
 
 static int init_framebuffer(demo_t *demo)
 {
-    /*demo->win.data = (uint32_t*)malloc_safe(sizeof(uint32_t) *
-    demo->win.w * demo->win.h);
-    demo->win._texture = sfTexture_create(demo->win.w, demo->win.h);
-    if (demo->win._texture == NULL)
-        return (0);
-    demo->win._sprite = sfSprite_create();
-    if (demo->win._sprite == NULL)
-        return (0);
-    sfSprite_setTexture(demo->win._sprite, demo->win._texture, sfTrue);*/
+    (void)demo;
     return (1);
 }
 
