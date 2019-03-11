@@ -9,11 +9,18 @@
 
 static void gen_2d_texture_from_mem(gpu_serial_t serial)
 {
-    glint max;
+    int32_t *buf;
+    int w;
+    int h;
 
-    glGetIntegerv(GL_MAX_TEXTURE_SIZE, &max);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_R32I, max, serial.size / max + 1,
-    0, GL_RED_INTEGER, GL_INT, NULL);
+    glGetIntegerv(GL_MAX_TEXTURE_SIZE, &w);
+    h = serial.size / w + 1;
+    buf = malloc_safe(w * h * sizeof(int32_t));
+    for (size_t i = 0; i < serial.size; i++)
+        buf[i] = serial.data[i];
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_R32I, w, h,
+    0, GL_RED_INTEGER, GL_INT, buf);
+    free(buf);
 }
 
 static void set_params_for_compute(gpu_serial_t serial, gluint mem)
@@ -21,7 +28,7 @@ static void set_params_for_compute(gpu_serial_t serial, gluint mem)
     gen_2d_texture_from_mem(serial);
     glBindImageTexture(0, mem, 0, GL_FALSE, 0, GL_READ_ONLY, GL_R32I);
     glBindTexture(GL_TEXTURE_2D, _lightmaps.base->id);
-    glBindImageTexture(0, _lightmaps.base->id, 0, GL_FALSE, 0, GL_READ_WRITE, GL_RGBA32F);
+    glBindImageTexture(1, _lightmaps.base->id, 0, GL_FALSE, 0, GL_READ_WRITE, GL_RGBA32F);
 }
 
 void gpu_compute_lightmap(octree *tree, size_t rays)
@@ -30,6 +37,27 @@ void gpu_compute_lightmap(octree *tree, size_t rays)
     gluint mem;
     gpu_serial_t serial = octree_serialize(tree);
 
+	/*int workgroup_count[3];
+	int workgroup_size[3];
+	int workgroup_invocations;
+
+	glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_COUNT, 0, &workgroup_count[0]);
+	glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_COUNT, 1, &workgroup_count[1]);
+	glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_COUNT, 2, &workgroup_count[2]);
+
+	printf ("Taille maximale des workgroups:\n\tx:%u\n\ty:%u\n\tz:%u\n",
+	workgroup_count[0], workgroup_count[1], workgroup_count[2]);
+
+	glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_SIZE, 0, &workgroup_size[0]);
+	glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_SIZE, 1, &workgroup_size[1]);
+	glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_SIZE, 2, &workgroup_size[2]);
+
+	printf ("Nombre maximal d'invocation locale:\n\tx:%u\n\ty:%u\n\tz:%u\n",
+	workgroup_size[0], workgroup_size[1], workgroup_size[2]);
+
+	glGetIntegerv (GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS, &workgroup_invocations);
+	printf ("Nombre maximum d'invocation de workgroups:\n\t%u\n", workgroup_invocations);*/
+
     glUseProgram(shader);
     glGenTextures(1, &mem);
     glBindTexture(GL_TEXTURE_2D, mem);
@@ -37,7 +65,7 @@ void gpu_compute_lightmap(octree *tree, size_t rays)
     set_params_for_compute(serial, mem);
     glDispatchCompute(1, 1, 1);
     glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
-    glBindImageTexture(0, 0, 0, GL_FALSE, 0, GL_READ_WRITE, GL_RGBA32F);
+    glBindImageTexture(1, 0, 0, GL_FALSE, 0, GL_READ_WRITE, GL_RGBA32F);
     glBindTexture(GL_TEXTURE_2D, 0);
     glUseProgram(0);
     glDeleteProgram(shader);
