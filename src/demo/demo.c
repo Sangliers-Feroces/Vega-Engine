@@ -99,7 +99,7 @@ int demo_loop(void)
 	gluint texture = get_texture(400, 200, 0xFF0000FF);
 	gluint texture2 = get_texture(400, 200, 0xFF00FFFF);
 
-    gluint programID = 0;//LoadShaders("vertex.shader", "fragment.shader");
+    gluint programID = load_shader("src/gpu/shader/vertex.shader", "src/gpu/shader/fragment.shader");
 	glUseProgram(programID);
 	glEnableVertexAttribArray(0);
     /*load_model(&demo->tree);
