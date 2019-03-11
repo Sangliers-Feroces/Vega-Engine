@@ -7,7 +7,7 @@
 
 #include "headers.h"
 
-static int poll_events(demo_t *demo)
+int poll_events(demo_t *demo)
 {
     sfEvent event;
 
@@ -73,37 +73,11 @@ void load_model(octree **tree);
 int demo_loop(void)
 {
     demo_t *demo = demo_init();
+	vertex_array_t vertex_struct;
 
     glEnable(GL_MULTISAMPLE);
-
-	gluint VertexArrayID;
-	glGenVertexArrays(1, &VertexArrayID);
-	glBindVertexArray(VertexArrayID);
-
-	static const vec2 vertex_data[6] = {
-		{0.0f,  0.0f},
-		{1.0f, 1.0f},
-		{0.0f, 1.0f},
-
-		{0.0f,  0.0f},
-		{1.0f, 0.0f},
-		{1.0f, 1.0f}
-	};
-
-    gluint vertexbuffer;
-
-	glGenBuffers(1, &vertexbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_data), (void*)vertex_data, GL_STATIC_DRAW);
-
-	gluint texture = get_texture(400, 200, 0xFF0000FF);
-	gluint texture2 = get_texture(400, 200, 0xFF00FFFF);
-
-    gluint programID = shader_load_vert_frag("src/gpu/shader/vertex.shader", "src/gpu/shader/fragment.shader");
-	glUseProgram(programID);
-	glEnableVertexAttribArray(0);
-    /*load_model(&demo->tree);
-    printf("octree done !\n");
+    load_model(&demo->tree);
+    /*printf("octree done !\n");
     struct timespec start, finish;
     double elapsed;
     clock_gettime(CLOCK_MONOTONIC, &start);
@@ -112,14 +86,13 @@ int demo_loop(void)
     elapsed = (finish.tv_sec - start.tv_sec);
     elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
     printf("%f seconds\n", elapsed);*/
-    while (poll_events(demo)) {
+    /*while (poll_events(demo)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		draw_quad(vertexbuffer, programID, (vec2){0.0f, 0.0f}, (vec2){1.0f, 1.0f}, texture);
-		draw_quad(vertexbuffer, programID, (vec2){-1.0f, -1.0f}, (vec2){.5f, .5f}, texture2);
-
         sfRenderWindow_display(demo->win.window);
-    }
+    }*/
+    vertex_struct = get_vertex_array_from_octree(demo);
+	display_vertex_array(demo, vertex_struct);
+	free(vertex_struct.vertex_array);
     demo_quit(demo);
     return (0);
 }

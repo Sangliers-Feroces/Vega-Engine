@@ -53,4 +53,9 @@ typedef struct {
     int32_t *data;
 } gpu_serial_t;
 
+typedef struct {
+    size_t count;
+    size_t offset;
+    vec3 *vertex_array;
+} vertex_array_t;
 #endif
