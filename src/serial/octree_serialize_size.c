@@ -25,5 +25,5 @@ static size_t get_size_actual(octree *tree, size_t size)
 
 size_t octree_serialize_get_size(octree *tree)
 {
-    return get_size_actual(tree, 1);
+    return get_size_actual(tree, 16);
 }
