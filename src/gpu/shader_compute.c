@@ -31,7 +31,7 @@ static char* get_program_err(gluint program, int is_program)
     return msg;
 }
 
-static int check_shader(gluint program, int is_program)
+int shader_check(gluint program, int is_program)
 {
     char *msg = get_program_err(program, is_program);
 
@@ -51,12 +51,12 @@ gluint shader_load_compute(const char *path)
         printf("Can't open '%s'.\n", path);
     glShaderSource(compute_shader, 1, (const char **)&src , NULL);
     glCompileShader(compute_shader);
-    if (!check_shader(compute_shader, 0))
+    if (!shader_check(compute_shader, 0))
         return 0;
     program = glCreateProgram();
     glAttachShader(program, compute_shader);
     glLinkProgram(program);
-    if (!check_shader(program, 1))
+    if (!shader_check(program, 1))
         return 0;
     glDetachShader(program, compute_shader);
     glDeleteShader(compute_shader);

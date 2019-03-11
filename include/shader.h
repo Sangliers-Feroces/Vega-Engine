@@ -9,5 +9,6 @@
 #define _SHADER_H
 
 gluint shader_load_compute(const char *path);
+int shader_check(gluint program, int is_program);
 
 #endif
