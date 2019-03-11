@@ -43,7 +43,7 @@ static void write_data(texture2f *texture, char *dst, size_t pitch)
     uint32_t g;
     uint32_t b;
     size_t i;
-    float aperture = 50.0f;
+    float aperture = 1.0f;
 
     for (size_t i_a = 0; i_a < (size_t)texture->h; i_a++) {
         i = texture->h - 1 - i_a;

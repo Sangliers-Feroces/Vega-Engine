@@ -24,7 +24,8 @@ static int allocate_texture(ivec2 *size)
             break;
         size->y /= 2;
     }
-    size->y /= 2;
+    size->y /= 4;
+    size->x /= 2;
     size->x = MIN(size->x, 4096);
     size->y = MIN(size->y, 4096);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, size->x, size->y,
