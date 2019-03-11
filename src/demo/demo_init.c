@@ -36,7 +36,8 @@ static void init_win(demo_t *demo)
     //demo->win.w = 1920;
     //demo->win.h = 1080;
     demo->win.window = sfRenderWindow_create((sfVideoMode){demo->win.w,
-    demo->win.h, 32}, "rtx on !", sfResize | sfClose, NULL);
+    demo->win.h, 32}, "rtx on !", sfResize | sfClose,
+    &(sfContextSettings){32, 32, 4, 4, 6, 0, 1});
     if (demo->win.window == NULL)
         exit_full_custom();
     sfWindow_setVerticalSyncEnabled((sfWindow*)demo->win.window, sfTrue);
