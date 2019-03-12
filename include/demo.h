@@ -25,6 +25,7 @@ int poll_events(demo_t *demo);
 void init(void);
 void quit(void);
 
+void set_matrix_vp(demo_t *demo, gluint program);
 void send_aperture(demo_t *demo, gluint program);
 void display_vertex_array(demo_t *demo, vertex_struct_t v_struct);
 #endif
