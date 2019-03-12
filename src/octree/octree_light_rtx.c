@@ -50,7 +50,10 @@ float octree_light_rtx(octree *tree, size_t rays)
     /*thread_send_each(THREAD_TASK_RAY_TRACING,
     (uint64_t[]){(uint64_t)tree, rays / _thread.count}, 2);
     thread_wait();*/
-    //octree_light_rtx_thread(tree, rays);
-    gpu_compute_lightmap(tree, rays);
+    octree_light_rtx_thread(tree, rays);
+    glBindTexture(GL_TEXTURE_2D, _lightmaps.base->id);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, _lightmaps.base->w, _lightmaps.base->h,
+    0, GL_RGBA, GL_FLOAT, _lightmaps.base->pixel);
+    //gpu_compute_lightmap(tree, rays);
     return (octree_get_max_lumel(tree) / 3.0f) / 2.0f;
 }

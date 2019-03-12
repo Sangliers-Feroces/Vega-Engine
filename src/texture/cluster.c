@@ -19,7 +19,7 @@ static int allocate_texture(ivec2 *size)
 {
     while (size->y > 0) {
         glTexImage2D(GL_PROXY_TEXTURE_2D, 0, GL_RGBA32F, size->x, size->y,
-        0, GL_RGB, GL_FLOAT, NULL);
+        0, GL_RGBA, GL_FLOAT, NULL);
         if (glGetError() == GL_NO_ERROR)
             break;
         size->y /= 2;
@@ -29,7 +29,7 @@ static int allocate_texture(ivec2 *size)
     size->x = MIN(size->x, 4096);
     size->y = MIN(size->y, 4096);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, size->x, size->y,
-    0, GL_RGB, GL_FLOAT, NULL);
+    0, GL_RGBA, GL_FLOAT, NULL);
     if (size->y == 0) {
         printf("Can't create texture cluster. (no suitable size found)\n");
         return 0;

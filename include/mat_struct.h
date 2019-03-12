@@ -42,4 +42,10 @@ typedef struct {
     vec2 s;
 } rect_t;
 
+typedef struct {
+    mat4 model;
+    mat4 view;
+    mat4 proj;
+    mat4 vp;
+} mvp_t;
 #endif

@@ -54,8 +54,13 @@ typedef struct {
 } gpu_serial_t;
 
 typedef struct {
+    vec3 point;
+    vec2 uv;
+} vertext_array_t;
+
+typedef struct {
     size_t count;
     size_t offset;
-    vec3 *vertex_array;
-} vertex_array_t;
+    vertext_array_t *v_array;
+} vertex_struct_t;
 #endif

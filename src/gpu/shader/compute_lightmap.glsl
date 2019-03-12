@@ -355,7 +355,7 @@ void write_value_lightmap(float value)
 	ivec2 size = imageSize(lightmap);
 	for (int i = 0; i < size.y; i++) {
 		int j = 0;
-		//for (int j = 0; j < size.x; j++)
+		for (int j = 0; j < size.x; j++)
 			imageStore(lightmap, ivec2(j, i), vec4(value));
 	}
 }
@@ -383,11 +383,11 @@ void main(void)
 	//write_value_lightmap(inter_buf.min_t);
 	//write_value_lightmap(inter_buf.min_t);
 	/*for (int i = 0; i < size.y; i++)
+
 		for (int j = 0; j < size.x; j++) {
 			if (((i & 1) ^ (j & 1)) != 0)
 				imageStore(lightmap, ivec2(j, i), vec4(1.0f, 0.0f, 0.0f, 0.0f));
 			else
 				imageStore(lightmap, ivec2(j, i), vec4(1.0f, 0.0f, 1.0f, 0.0f));
 			}*/
-	
 }

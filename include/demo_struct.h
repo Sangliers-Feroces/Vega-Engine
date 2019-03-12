@@ -8,6 +8,8 @@
 #ifndef _DEMO_STRUCT_H
 #define _DEMO_STRUCT_H
 
+#include "headers.h"
+
 typedef enum {
     KEY_UP = 0,
     KEY_DOWN = 1,
@@ -39,10 +41,17 @@ typedef struct {
 } cam_t;
 
 typedef struct {
+    int first_click;
+    sfVector2i mouse_pos;
+} mouse_t;
+
+typedef struct {
     win_t win;
     cam_t cam;
     input_t input;
     octree *tree;
+    mouse_t mouse;
+    mvp_t mvp;
 } demo_t;
 
 #endif
