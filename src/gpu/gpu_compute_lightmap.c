@@ -64,8 +64,6 @@ void gpu_compute_lightmap(octree *tree, size_t rays)
     gl_set_texture_parameters();
     set_params_for_compute(serial, mem);
     glDispatchCompute(1, 1, 1);
-        printf("err: %d\n", glGetError());
-
     glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
     glBindImageTexture(1, 0, 0, GL_FALSE, 0, GL_READ_WRITE, GL_RGBA32F);
     glBindTexture(GL_TEXTURE_2D, 0);
@@ -75,6 +73,5 @@ void gpu_compute_lightmap(octree *tree, size_t rays)
     free(serial.data);
     glBindTexture(GL_TEXTURE_2D, _lightmaps.base->id);
     glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_FLOAT, _lightmaps.base->pixel);
-    printf("err: %d\n", glGetError());
     glFinish();
 }

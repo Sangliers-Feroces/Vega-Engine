@@ -14,14 +14,16 @@ void check_mouse_move(demo_t *demo)
     if (!demo->mouse.first_click)
         return;
     new_pos = sfMouse_getPositionRenderWindow(demo->win.window);
-    if (new_pos.x - demo->mouse.mouse_pos.x > 0)
+    demo->cam.rot.y += (float)(new_pos.x - demo->mouse.mouse_pos.x) * 0.002f;
+    demo->cam.rot.x += (float)(new_pos.y - demo->mouse.mouse_pos.y) * 0.002f;
+    /*if (new_pos.x - demo->mouse.mouse_pos.x > 0)
         demo->cam.rot.y += 0.0174533f;
     else if (new_pos.x - demo->mouse.mouse_pos.x < 0)
         demo->cam.rot.y -= 0.0174533f;
     if (new_pos.y - demo->mouse.mouse_pos.y > 0)
         demo->cam.rot.x += 0.0174533f;
     else if (new_pos.y - demo->mouse.mouse_pos.y < 0)
-        demo->cam.rot.x -= 0.0174533f;
+        demo->cam.rot.x -= 0.0174533f;*/
     demo->mouse.mouse_pos = new_pos;
 }
 
