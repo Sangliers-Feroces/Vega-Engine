@@ -14,7 +14,8 @@ static int do_stuff_event(demo_t *demo, sfEvent event)
         sfRenderWindow_close(demo->win.window);
         return (0);
     case sfEvtMouseButtonPressed:
-        demo->mouse.mouse_pos = sfMouse_getPositionRenderWindow(demo->win.window);
+        demo->mouse.mouse_pos =
+        sfMouse_getPositionRenderWindow(demo->win.window);
         demo->mouse.first_click = 1;
         break;
     case sfEvtMouseButtonReleased:
@@ -51,7 +52,7 @@ int demo_loop(void)
     struct timespec start, finish;
     double elapsed;
     clock_gettime(CLOCK_MONOTONIC, &start);
-    demo->cam.aperture = octree_light_rtx(demo->tree, 1000000000 / 500);
+    demo->cam.aperture = octree_light_rtx(demo->tree, 1000000000 / 5000);
     printf("%f\n", demo->cam.aperture);
     clock_gettime(CLOCK_MONOTONIC, &finish);
     elapsed = (finish.tv_sec - start.tv_sec);

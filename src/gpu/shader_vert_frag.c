@@ -14,7 +14,7 @@ const char *vertex_filepath, const char *fragment_filepath)
     char *fragment_shader_pointer = get_file_data(fragment_filepath);
     int returned = 1;
 
-    glShaderSource(*vertex_shader_id, 1, 
+    glShaderSource(*vertex_shader_id, 1,
     (const char **)&vertex_shader_pointer, NULL);
     glCompileShader(*vertex_shader_id);
     if (!shader_check(*vertex_shader_id, 0))

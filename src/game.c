@@ -19,13 +19,6 @@ rtx_triangle get_random_triangle(void)
     base.y + randf() * 10.0f, base.z + randf() * 10.0f}});
 }
 
-/*static void add_random_triangle(octree **tree)
-{
-    rtx_triangle rtx = get_random_triangle();
-
-    octree_insert_triangle(tree, &rtx);
-}*/
-
 static void add_triangle(octree **tree, vec3 *triangle)
 {
     rtx_triangle rtx = rtx_triangle_create(triangle);
@@ -35,13 +28,6 @@ static void add_triangle(octree **tree, vec3 *triangle)
 
 void load_model(octree **tree)
 {
-    /*add_triangle(tree, (vec3[]){{0.0f, 3.5f, 0.0f},
-    {1.0f, 3.5f, 20.0f}, {10.0f, 3.5f, 0.0f}});
-    add_triangle(tree, (vec3[]){{0.0f, 0.0f, 0.0f},
-    {0.0f, 0.0f, 20.0f}, {20.0f, 0.0f, 0.0f}});
-    add_triangle(tree, (vec3[]){{0.0f, 3.0f, 0.0f},
-    {10.0f, 3.0f, 0.0f}, {0.0f, 3.0f, 10.0f}});*/
-
     add_triangle(tree, (vec3[]){{0.0f, 0.0f, 5.0f},
     {0.0f, 3.0f, 5.0f}, {10.0f, 0.0f, 5.0f}});
     add_triangle(tree, (vec3[]){{0.0f, 3.0f, 5.0f}, {10.0f, 3.0f, 5.0f},

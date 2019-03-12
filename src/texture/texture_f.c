@@ -30,7 +30,7 @@ void texture2f_destroy(texture2f *texture)
 
 void texture2f_reset(texture2f *texture)
 {
-    memset(texture->pixel, 0, texture->w * texture->h * sizeof(vec3));
+    memset(texture->pixel, 0, texture->w * texture->h * sizeof(vec4));
 }
 
 static void write_color(texture2f *texture, ssize_t x, ssize_t y, vec3 color)

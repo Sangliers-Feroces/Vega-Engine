@@ -32,6 +32,9 @@ vec3 color);
 
 vec4 texture2f_sample(texture2f *texture, vec2 uv);
 
+void texture2f_refresh_gpu(texture2f *texture);
+void texture2f_refresh_cpu(texture2f *texture);
+
 texture2f_binding texture2f_binding_create(vec3 *triangle);
 void texture2f_binding_destroy(texture2f_binding binding);
 

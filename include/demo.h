@@ -26,7 +26,7 @@ int poll_events(demo_t *demo);
 void init(void);
 void quit(void);
 
-void reset_matrix(demo_t *demo);void reset_matrix(demo_t *demo);
+void reset_matrix(demo_t *demo);
 void refresh_vp(demo_t *demo, gluint program);
 void set_matrix_vp(demo_t *demo, gluint program);
 void send_aperture(demo_t *demo, gluint program);

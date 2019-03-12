@@ -26,13 +26,16 @@ static void fill_array(vertex_struct_t *v_struct, vec_rtx_triangle vec)
 {
     for (size_t i = 0; i < vec.count; i++)
         for (int j = 0; j < 3; j++) {
-            v_struct->v_array[v_struct->offset].point = vec.triangle[i].vertex[j];
-            v_struct->v_array[v_struct->offset].uv = vec.triangle[i].lightmap.uv[j];
+            v_struct->v_array[v_struct->offset].point =
+            vec.triangle[i].vertex[j];
+            v_struct->v_array[v_struct->offset].uv =
+            vec.triangle[i].lightmap.uv[j];
             v_struct->offset++;
         }
 }
 
-static void octree_fill_vertex_array(octree *tree, vertex_struct_t *vertex_struct)
+static void octree_fill_vertex_array(octree *tree,
+vertex_struct_t *vertex_struct)
 {
     if (tree == NULL)
         return;
@@ -45,13 +48,11 @@ static void octree_fill_vertex_array(octree *tree, vertex_struct_t *vertex_struc
 vertex_struct_t get_vertex_array_from_octree(demo_t *demo)
 {
     vertex_struct_t vertex_struct;
-    
-    vertex_struct.offset = 0;
-    vertex_struct.count = octree_get_triangle_nbr(demo->tree, 0); 
-    vertex_struct.v_array = malloc_safe(sizeof(vertext_array_t) * (vertex_struct.count * 3));
-    octree_fill_vertex_array(demo->tree, &vertex_struct);
 
-    //for (int i = 0; i < 54; i++)
-        //printf("x : %f, y : %f z : %f \n uv : %f    %f \n", vertex_struct.v_array[i].point.x, vertex_struct.v_array[i].point.y,vertex_struct.v_array[i].point.z, vertex_struct.v_array[i].uv.x , vertex_struct.v_array[i].uv.y);
+    vertex_struct.offset = 0;
+    vertex_struct.count = octree_get_triangle_nbr(demo->tree, 0);
+    vertex_struct.v_array = malloc_safe(
+    sizeof(vertext_array_t) * (vertex_struct.count * 3));
+    octree_fill_vertex_array(demo->tree, &vertex_struct);
     return vertex_struct;
 }
