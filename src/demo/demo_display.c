@@ -21,9 +21,8 @@ size_t array_size, demo_t *demo)
 	glDepthFunc(GL_LESS);
     do {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glUseProgram(program_id);
         send_aperture(demo, program_id);
-        set_matrix_vp(demo, program_id);
+        refresh_vp(demo, program_id);
         glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
         glEnableVertexAttribArray(0);
 	    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vertext_array_t), BUFFER_OFFSET(0));
@@ -53,6 +52,7 @@ void display_vertex_array(demo_t *demo, vertex_struct_t v_struct)
     v_struct.v_array, GL_STATIC_DRAW);
     program_id = shader_load_vert_frag("src/gpu/shader/simplevertexshader.glsl",
     "src/gpu/shader/simplefragmentshader.glsl");
-    
+    glUseProgram(program_id);
+    set_matrix_vp(demo, program_id);
     display_loop(vertex_buffer, program_id, v_struct.count * 3, demo);
 }

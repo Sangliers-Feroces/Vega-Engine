@@ -18,9 +18,17 @@ int poll_events(demo_t *demo)
             case sfEvtClosed:
             sfRenderWindow_close(demo->win.window);
             return (0);
+            case sfEvtMouseButtonPressed:
+            demo->mouse.mouse_pos = sfMouse_getPositionRenderWindow(demo->win.window);
+            demo->mouse.first_click = 1;
+            break;
+            case sfEvtMouseButtonReleased:
+            demo->mouse.first_click = 0;
+            break;
             default:
             break;
         }
+    check_mouse_move(demo);
     demo_poll_input(demo);
     return (1);
 }
