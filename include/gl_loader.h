@@ -44,7 +44,8 @@ extern void (*p_glvertexattribpointer)(gluint index, glint size, glenum type,
 glboolean normalized, glsizei stride, const glvoid *pointer);
 extern void (*p_gldrawarrays)(glenum mode, glint first, glsizei count);
 extern void (*p_gluniform1f)(glint location, float value);
-extern void (*p_gluniform2fv)(glint location, glsizei count, const glfloat *value);
+extern void (*p_gluniform2fv)(glint location, glsizei count,
+const glfloat *value);
 extern void (*p_glactivetexture)(glenum texture);
 
 extern gluint (*p_glcreateshader)(glenum shader_type);

@@ -37,7 +37,8 @@ const void (*p_glvertexattribpointer)(gluint index, glint size, glenum type,
 glboolean normalized, glsizei stride, const glvoid *pointer);
 const void (*p_gldrawarrays)(glenum mode, glint first, glsizei count);
 const void (*p_gluniform1f)(glint location, float value);
-const void (*p_gluniform2fv)(glint location, glsizei count, const glfloat *value);
+const void (*p_gluniform2fv)(glint location, glsizei count,
+const glfloat *value);
 const void (*p_glactivetexture)(glenum texture);
 
 const gluint (*p_glcreateshader)(glenum shader_type);

@@ -63,4 +63,5 @@ typedef struct {
     size_t offset;
     vertext_array_t *v_array;
 } vertex_struct_t;
+
 #endif

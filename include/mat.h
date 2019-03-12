@@ -60,4 +60,7 @@ int is_point_in_triangle_get_bar(vec3 p, vec3 *triangle, vec3 *bar);
 
 vec2 circle_intersect(circle a, circle b);
 
+vec3 spherical_to_cartesian_z(vec3 spherical);
+vec3 spherical_to_cartesian_z_to_x(vec3 spherical);
+
 #endif

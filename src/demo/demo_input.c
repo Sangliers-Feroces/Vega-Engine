@@ -19,14 +19,8 @@ void demo_init_input(demo_t *demo)
 
 static void get_cam_x_z(demo_t *demo, vec3 *x, vec3 *z)
 {
-    mat4 rot;
-    vec4 res;
-
-    mat4_rot(demo->cam.rot, rot);
-    res = mat4_mul_vec(rot, (vec4){0.0, 0.0, 1.0, 1.0});
-    *z = (vec3){res.x, res.y, res.z};
-    res = mat4_mul_vec(rot, (vec4){1.0, 0.0, 0.0, 1.0});
-    *x = (vec3){res.x, res.y, res.z};
+    *z = spherical_to_cartesian_z(demo->cam.rot);
+    *x = spherical_to_cartesian_z_to_x(demo->cam.rot);
     return ;
 }
 
