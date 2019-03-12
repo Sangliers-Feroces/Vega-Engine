@@ -5,7 +5,7 @@ layout(local_size_x = 1, local_size_y = 1) in;
 layout(r32i, binding = 0) uniform iimage2D mem;
 layout(rgba32f, binding = 1) uniform image2D lightmap;
 
-struct frame {
+/*struct frame {
 	int ptr;	// octree pointer
 	int iter;	// iteration, from 0 to 7 (complete at 8)
 };
@@ -182,27 +182,29 @@ void write_value_lightmap(int value)
 	ivec2 size = imageSize(lightmap);
 	for (int i = 0; i < size.y; i++) {
 		int j = 0;
-		//for (int j = 0; j < size.x; j++)
+		for (int j = 0; j < size.x; j++)
 			imageStore(lightmap, ivec2(j, i), vec4(value));
 	}
 }
 
-int count;
+int count;*/
 
 void main(void)
 {
-	init();
-	int to_write = 5;
+	//init();
+	/*int to_write = 5;
 	count = 53;
 
 	octree_intersect_ray(ray3(vec3(1.0), vec3(1.0)));
-	write_value_lightmap(count);
-	/*for (int i = 0; i < size.y; i++)
+	write_value_lightmap(count);*/
+		ivec2 size = imageSize(lightmap);
+
+	for (int i = 0; i < size.y; i++)
 		for (int j = 0; j < size.x; j++) {
 			if (((i & 1) ^ (j & 1)) != 0)
 				imageStore(lightmap, ivec2(j, i), vec4(1.0f, 0.0f, 0.0f, 0.0f));
 			else
 				imageStore(lightmap, ivec2(j, i), vec4(1.0f, 0.0f, 1.0f, 0.0f));
-			}*/
+			}
 	
 }

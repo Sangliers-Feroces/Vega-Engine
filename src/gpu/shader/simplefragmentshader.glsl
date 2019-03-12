@@ -1,8 +1,15 @@
-#version 330 core
+#version 430 core
 
-out vec3 color;
+layout (location = 0) in vec3 pos;
+layout (location = 1) in vec2 uv;
+
+layout (binding = 0) uniform sampler2D tex;
+out vec4 color;
+
+uniform float aperture;
 
 void main()
 {
-    color = vec3(1,0,0);
+    color = vec4(texture(tex, uv).xyz / aperture, 1);
+    //color = vec4(uv * 1, 0, 1);
 }
