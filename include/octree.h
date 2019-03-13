@@ -32,4 +32,5 @@ float octree_get_max_lumel(octree *tree);
 void octree_update_lightmap(octree *tree, float max_lumel);
 
 vertex_struct_t get_vertex_array_from_octree(demo_t *demo);
+
 #endif

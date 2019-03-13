@@ -48,4 +48,5 @@ typedef struct {
     mat4 proj;
     mat4 vp;
 } mvp_t;
+
 #endif

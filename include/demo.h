@@ -8,7 +8,6 @@
 #ifndef _DEMO_H
 #define _DEMO_H
 
-#include "octree.h"
 #define CAM_MOVE 0.2f
 
 void demo_init_input(demo_t *demo);

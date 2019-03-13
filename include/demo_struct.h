@@ -8,8 +8,6 @@
 #ifndef _DEMO_STRUCT_H
 #define _DEMO_STRUCT_H
 
-#include "headers.h"
-
 typedef enum {
     KEY_UP = 0,
     KEY_DOWN = 1,
