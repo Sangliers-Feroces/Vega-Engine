@@ -16,12 +16,12 @@ void send_aperture(demo_t *demo, gluint program)
 
 static void set_vertex_attrib(void)
 {
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
-        sizeof(vertext_array_t), BUFFER_OFFSET(0));
-        glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE,
-        sizeof(vertext_array_t), BUFFER_OFFSET(offsetof(vertext_array_t, uv)));
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
+    sizeof(vertext_array_t), BUFFER_OFFSET(0));
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE,
+    sizeof(vertext_array_t), BUFFER_OFFSET(offsetof(vertext_array_t, uv)));
 }
 
 static void display_loop(gluint vertex_buffer, gluint program_id,
