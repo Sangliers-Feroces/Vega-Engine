@@ -37,7 +37,7 @@ fclean: clean
 
 re: fclean all
 
-run:
+run: all
 	./$(OUTPUT)
 
 .PHONY: all clean fclean re debug release run
