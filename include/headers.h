@@ -38,5 +38,7 @@
 #include "demo.h"
 #include "macro.h"
 #include "global.h"
+#include "ui.h"
+#include "ui_struct.h"
 
 #endif

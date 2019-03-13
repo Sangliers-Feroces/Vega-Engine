@@ -15,5 +15,6 @@
 #include "octree_struct.h"
 #include "thread_struct.h"
 #include "demo_struct.h"
+#include "ui_struct.h"
 
 #endif

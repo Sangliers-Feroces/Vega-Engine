@@ -12,6 +12,7 @@
 
 extern threads _thread;
 extern texture_cluster _lightmaps;
+extern ui_struct _ui;
 
 #endif
 

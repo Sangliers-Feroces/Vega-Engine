@@ -20,9 +20,10 @@ texture2* texture2_load(const char *path)
     size = sfImage_getSize(image);
     res = texture2_create(size.x, size.y);
     glGenTextures(1, &res->id);
+    glBindTexture(GL_TEXTURE_2D, res->id);
     gl_set_texture_parameters();
-    glTexImage2D(GL_PROXY_TEXTURE_2D, 0, GL_RGBA8, res->w, res->h,
-    0, GL_RGBA, GL_BYTE, (uint8_t*)pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, res->w, res->h,
+    0, GL_RGBA, GL_UNSIGNED_BYTE, (uint8_t*)pixels);
     sfImage_destroy(image);
     return res;
 }
