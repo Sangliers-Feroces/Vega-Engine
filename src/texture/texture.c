@@ -11,10 +11,12 @@ texture2* texture2_create(uint32_t w, uint32_t h)
 {
     texture2 *res = (texture2*)malloc_safe(sizeof(texture2));
 
+    res->size = (vec2){(float)w, (float)h};
     res->w = w;
     res->h = h;
     res->max_ndx = res->w * res->h;
     res->pixel = (uint32_t*)malloc_safe(w * h * sizeof(uint32_t));
+    res->id = 0;
     return res;
 }
 

@@ -9,11 +9,12 @@
 #define _TEXTURE_STRUCT_H
 
 typedef struct {
+    vec2 size;
     int32_t w;
     int32_t h;
     size_t max_ndx;
     uint32_t *pixel;
-    float *lumel;
+    gluint id;
 } texture2;
 
 typedef struct {

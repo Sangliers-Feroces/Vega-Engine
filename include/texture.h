@@ -15,6 +15,8 @@ void texture2_destroy(texture2 *texture);
 ivec2 texture2_get_nearest(vec2 p, vec2 size);
 uint32_t texture2_sample(texture2 *texture, vec2 uv);
 
+texture2* texture2_load(const char *path);
+
 texture2_binding texture2_binding_create(vec3 *triangle);
 void texture2_binding_destroy(texture2_binding binding);
 
