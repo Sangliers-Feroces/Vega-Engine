@@ -81,14 +81,14 @@ int texture_cluster_add_row(texture_cluster *cluster, int32_t power)
         cluster->rows.allocated += TEXTURE_CLUSTER_ROW_ALLOC_STEP;
         new_row = (texture_cluster_row*)malloc_safe(
         cluster->rows.allocated * sizeof(texture_cluster_row));
-        for (size_t i = 0;
-        i < cluster->rows.allocated - TEXTURE_CLUSTER_ROW_ALLOC_STEP; i++)
+        for (size_t i = 0; i < cur; i++)
             new_row[i] = cluster->rows.cluster_row[i];
         free(cluster->rows.cluster_row);
         cluster->rows.cluster_row = new_row;
     }
     cluster->rows.cluster_row[cur] =
-    (texture_cluster_row){power, 1 << power, 0};
-    cluster->to_fill_y += 1 << power;
+    (texture_cluster_row){power, 1 << power, {0, 0, NULL}};
+    vec_texture_cluster_row_alloc_init(
+    &cluster->rows.cluster_row[cur].row_allocs, cluster->base->w);
     return 1;
 }

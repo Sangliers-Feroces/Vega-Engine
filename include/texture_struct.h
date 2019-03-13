@@ -27,9 +27,23 @@ typedef struct {
 } texture2f;
 
 typedef struct {
+    size_t row;
+    int32_t start;
+    int32_t size;
+    size_t shared_count;
+    rect_t rect;
+} texture_cluster_row_alloc;
+
+typedef struct {
+    size_t count;
+    size_t allocated;
+    texture_cluster_row_alloc **cluster_row;    // to keep references safe
+} vec_texture_cluster_row_alloc;                // still a normal 1D-array
+
+typedef struct {
     int32_t power;
     int32_t h;
-    int32_t to_fill_x;
+    vec_texture_cluster_row_alloc row_allocs;
 } texture_cluster_row;
 
 typedef struct {
@@ -59,6 +73,7 @@ typedef struct {
 typedef struct {
     texture2f *texture;
     vec2 uv[3];
+    texture_cluster_row_alloc *alloc;
 } texture2f_binding;
 
 #endif

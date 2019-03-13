@@ -17,7 +17,7 @@ vec3 normal3(vec3 a, vec3 b, vec3 c)
 rtx_triangle rtx_triangle_create(vec3 *triangle)
 {
     rtx_triangle res = {{triangle[0], triangle[1], triangle[2]}, {NULL,
-    {{0.0f, 0.0f}, {0.0f, 0.0f}}},
+    {{0.0f, 0.0f}, {0.0f, 0.0f}}, NULL},
     {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}};
 
     res.lightmap = texture2f_binding_create(triangle);

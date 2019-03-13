@@ -9,6 +9,7 @@
 #define _TEXTURE_H
 
 #define TEXTURE_CLUSTER_ROW_ALLOC_STEP 32
+#define TEXTURE_ALLOC_MARGIN 2
 
 texture2* texture2_create(uint32_t w, uint32_t h);
 void texture2_destroy(texture2 *texture);
@@ -46,10 +47,17 @@ texture_cluster texture_cluster_create(void);
 void texture_cluster_destroy(texture_cluster cluster);
 int texture_cluster_add_row(texture_cluster *cluster, int32_t power);
 int texture_cluster_allocate(texture_cluster *cluster, ivec2 size,
-rect_t *pres);
+texture_cluster_row_alloc **pres);
+
+void vec_texture_cluster_row_alloc_init(vec_texture_cluster_row_alloc *vec,
+int32_t w);
+texture_cluster_row_alloc* vec_texture_cluster_row_alloc_insert(
+vec_texture_cluster_row_alloc *vec, size_t pos, int32_t start, int32_t size);
+int texture_cluster_row_search(texture_cluster_row *row, ivec2 size,
+int32_t *pres, int32_t *start);
 
 void lightmap_init(void);
 void lightmap_quit(void);
-int lightmap_allocate(ivec2 size, rect_t *pres);
+int lightmap_allocate(ivec2 size, texture_cluster_row_alloc **pres);
 
 #endif

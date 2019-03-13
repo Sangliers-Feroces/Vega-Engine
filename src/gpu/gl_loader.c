@@ -31,6 +31,7 @@ const void (*p_gluniformmatrix4fv)(glint location, glsizei count,
 glboolean transform, const glfloat *value);
 const void (*p_glcullface)(glenum mode);
 const void (*p_glfrontface)(glenum mode);
+const void (*p_glpolygonmode)(glenum face, glenum mode);
 
 const void (*p_glenablevertexattribarray)(gluint index);
 const void (*p_gldisablevertexattribarray)(gluint index);
@@ -97,6 +98,7 @@ static void load_1(void)
     p_gluniformmatrix4fv = glXGetProcAddressARB("glUniformMatrix4fv");
     p_glcullface = glXGetProcAddressARB("glCullFace");
     p_glfrontface = glXGetProcAddressARB("glFrontFace");
+    p_glpolygonmode = glXGetProcAddressARB("glPolygonMode");
 }
 
 static void load_2(void)

@@ -10,19 +10,26 @@
 /* the texture is subdivided into rows of height 2^n */
 
 static int try_allocate_on_row(texture_cluster *cluster,
-texture_cluster_alloc_info info, rect_t *pres)
+texture_cluster_alloc_info info, texture_cluster_row_alloc **pres)
 {
+    int32_t pos;
+    int32_t start;
+    texture_cluster_row_alloc *res;
+
     if (cluster->rows.cluster_row[info.row].power != info.power)
         return 0;
-    if (cluster->rows.cluster_row[info.row].to_fill_x + info.size.x >
-    cluster->base->w)
+    if (!texture_cluster_row_search(&cluster->rows.cluster_row[info.row],
+    info.size, &pos, &start))
         return 0;
-    pres->p = (vec2){(float)cluster->rows.cluster_row[info.row].to_fill_x /
-    (float)cluster->base->w,
+    res = vec_texture_cluster_row_alloc_insert(
+    &cluster->rows.cluster_row[info.row].row_allocs, pos,
+    start, info.size.x + TEXTURE_ALLOC_MARGIN);
+    res->row = info.row;
+    res->rect.p = (vec2){(float)start / (float)cluster->base->w,
     (float)cluster->rows.cluster_row[info.row].h / (float)cluster->base->h};
-    pres->s = (vec2){(float)info.size.x / (float)cluster->base->w,
+    res->rect.s = (vec2){(float)info.size.x / (float)cluster->base->w,
     (float)info.size.y / (float)cluster->base->h};
-    cluster->rows.cluster_row[info.row].to_fill_x += info.size.x;
+    *pres = res;
     return 1;
 }
 
@@ -38,7 +45,8 @@ static int32_t get_power(int32_t x)
     return res;
 }
 
-int texture_cluster_allocate(texture_cluster *cluster, ivec2 size, rect_t *pres)
+int texture_cluster_allocate(texture_cluster *cluster, ivec2 size,
+texture_cluster_row_alloc **pres)
 {
     int32_t power = get_power(size.y);
 
@@ -54,8 +62,18 @@ int texture_cluster_allocate(texture_cluster *cluster, ivec2 size, rect_t *pres)
     (texture_cluster_alloc_info){cluster->rows.count - 1, power, size}, pres);
 }
 
+static void free_vec_texture_cluster_row(vec_texture_cluster_row *vec)
+{
+    for (size_t i = 0; i < vec->count; i++) {
+        for (size_t j = 0; j < vec->cluster_row[i].row_allocs.count; j++)
+            free(vec->cluster_row[i].row_allocs.cluster_row[j]);
+        free(vec->cluster_row[i].row_allocs.cluster_row);
+    }
+    free(vec->cluster_row);
+}
+
 void texture_cluster_destroy(texture_cluster cluster)
 {
     texture2f_destroy(cluster.base);
-    free(cluster.rows.cluster_row);
+    free_vec_texture_cluster_row(&cluster.rows);;
 }

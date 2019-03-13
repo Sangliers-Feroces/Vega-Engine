@@ -46,8 +46,9 @@ static void draw_quad(vec2 pos, vec2 size)
 
 void display_ui(int task, demo_t *demo)
 {
+    (void)task;
+    (void)demo;
     glUseProgram(_ui.ui_program);
-
     draw_quad((vec2){-1.0f, 1.0f}, (vec2){0.15f, 0.25f});
     draw_quad((vec2){-0.85f, 1.0f}, (vec2){0.05f, 0.25f});
     draw_quad((vec2){-0.90f, 0.975f}, (vec2){0.75f, 0.20f});

@@ -20,7 +20,7 @@ void lightmap_quit(void)
     texture_cluster_destroy(_lightmaps);
 }
 
-int lightmap_allocate(ivec2 size, rect_t *pres)
+int lightmap_allocate(ivec2 size, texture_cluster_row_alloc **pres)
 {
     return texture_cluster_allocate(&_lightmaps, size, pres);
 }
