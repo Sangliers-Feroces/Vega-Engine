@@ -75,5 +75,5 @@ static void free_vec_texture_cluster_row(vec_texture_cluster_row *vec)
 void texture_cluster_destroy(texture_cluster cluster)
 {
     texture2f_destroy(cluster.base);
-    free_vec_texture_cluster_row(&cluster.rows);;
+    free_vec_texture_cluster_row(&cluster.rows);
 }

@@ -12,8 +12,7 @@ static void gen_2d_texture_from_mem(gpu_serial_t serial)
     int32_t *buf;
     int w;
     int h;
-    int rays = 4000000;
-    //int rays = 500000;
+    int rays = 5000000;
 
     glGetIntegerv(GL_MAX_TEXTURE_SIZE, &w);
     h = serial.size / w + 1;

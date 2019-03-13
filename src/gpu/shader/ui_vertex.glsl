@@ -11,7 +11,6 @@ void main()
 {
     vec2 pos2 = pos;
 
-    pos2.y -= size.y;
     gl_Position = vec4(pos2 + (vertex_array * size), 0, 1);
     uv_out = vertex_array;
 }

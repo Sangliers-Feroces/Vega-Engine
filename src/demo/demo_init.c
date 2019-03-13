@@ -46,11 +46,13 @@ demo_t* demo_init(void)
     demo_init_input(res);
     res->tree = octree_create(NULL);
     init();
+    ui_init(res);
     return (res);
 }
 
 void demo_quit(demo_t *demo)
 {
+    ui_quit();
     quit();
     sfRenderWindow_destroy(demo->win.window);
     octree_destroy(&demo->tree);

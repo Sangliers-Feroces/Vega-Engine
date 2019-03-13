@@ -6,11 +6,16 @@
 */
 
 #ifndef UI_H_
-    #define UI_H_
+#define UI_H_
 
 #include "headers.h"
 
-void set_ui();
-void display_ui(int task, demo_t *demo);
+void ui_init(demo_t *demo);
+void ui_quit(void);
+
+void ui_draw_full_rel(texture2 *texture, vec2 pos, vec2 size);
+void ui_draw_x(texture2 *texture, vec2 pos, float size);
+void ui_draw_y(texture2 *texture, vec2 pos, float size);
+void ui_display(int task, demo_t *demo);
 
 #endif /* !UI_H_ */

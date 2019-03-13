@@ -22,6 +22,8 @@ texture2* texture2_create(uint32_t w, uint32_t h)
 
 void texture2_destroy(texture2 *texture)
 {
+    if (texture->id != 0)
+        glDeleteTextures(1, &texture->id);
     free(texture->pixel);
     free(texture);
 }

@@ -41,7 +41,7 @@ size_t array_size, demo_t *demo)
         glDrawArrays(GL_TRIANGLES, 0, array_size);
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
-        display_ui(1, demo);
+        ui_display(1, demo);
         sfRenderWindow_display(demo->win.window);
     } while (poll_events(demo));
 }
@@ -63,6 +63,8 @@ void display_vertex_array(demo_t *demo, vertex_struct_t v_struct)
     "src/gpu/shader/lightmap_vertex.glsl",
     "src/gpu/shader/lightmap_fragment.glsl");
     set_matrix_vp(demo, program_id);
-    set_ui();
     display_loop(vertex_buffer, program_id, v_struct.count * 3, demo);
+    glDeleteBuffers(1, &vertex_buffer);
+    glDeleteProgram(program_id);
+    glDeleteVertexArrays(1, &vertex_array_id);
 }
