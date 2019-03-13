@@ -22,7 +22,6 @@ const void (*p_glbufferdata)(glenum target, glsizeiptr size,
 const glvoid *data, glenum usage);
 const void (*p_glclearcolor)(glfloat red, glfloat green,
 glfloat blue, glfloat alpha);
-
 const void (*p_glenable)(glenum cap);
 const void (*p_gldepthfunc)(glenum cap);
 const void (*p_glclear)(glbitfield mask);
@@ -30,6 +29,8 @@ const void (*p_gluseprogram)(gluint program);
 const glint (*p_glgetuniformlocation)(gluint program, const glchar *name);
 const void (*p_gluniformmatrix4fv)(glint location, glsizei count,
 glboolean transform, const glfloat *value);
+const void (*p_glcullface)(glenum mode);
+const void (*p_glfrontface)(glenum mode);
 
 const void (*p_glenablevertexattribarray)(gluint index);
 const void (*p_gldisablevertexattribarray)(gluint index);
@@ -94,6 +95,8 @@ static void load_1(void)
     p_gluseprogram = glXGetProcAddressARB("glUseProgram");
     p_glgetuniformlocation = glXGetProcAddressARB("glGetUniformLocation");
     p_gluniformmatrix4fv = glXGetProcAddressARB("glUniformMatrix4fv");
+    p_glcullface = glXGetProcAddressARB("glCullFace");
+    p_glfrontface = glXGetProcAddressARB("glFrontFace");
 }
 
 static void load_2(void)

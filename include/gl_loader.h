@@ -29,7 +29,6 @@ extern void (*p_glbufferdata)(glenum target, glsizeiptr size,
 glvoid *data, glenum usage);
 extern void (*p_glclearcolor)(glfloat red, glfloat green,
 glfloat blue, glfloat alpha);
-
 extern void (*p_glenable)(glenum cap);
 extern void (*p_gldepthfunc)(glenum cap);
 extern void (*p_glclear)(glbitfield mask);
@@ -37,6 +36,8 @@ extern void (*p_gluseprogram)(gluint program);
 extern glint (*p_glgetuniformlocation)(gluint program, const glchar *name);
 extern void (*p_gluniformmatrix4fv)(glint location, glsizei count,
 glboolean transform, const glfloat *value);
+extern void (*p_glcullface)(glenum mode);
+extern void (*p_glfrontface)(glenum mode);
 
 extern void (*p_glenablevertexattribarray)(gluint index);
 extern void (*p_gldisablevertexattribarray)(gluint index);
@@ -93,7 +94,6 @@ extern void (*p_glgetintegeri_v)(glenum pname, gluint index, glint *params);
 #define glBindBuffer p_glbindbuffer
 #define glBufferData p_glbufferdata
 #define glClearColor p_glclearcolor
-
 #define glEnable p_glenable
 #define glDepthFunc p_gldepthfunc
 #define glClear p_glclear
@@ -101,6 +101,8 @@ extern void (*p_glgetintegeri_v)(glenum pname, gluint index, glint *params);
 #define glGetUniformLocation p_glgetuniformlocation
 #define glUniformMatrix4fv p_gluniformmatrix4fv
 #define glActiveTexture p_glactivetexture
+#define glCullFace p_glcullface
+#define glFrontFace p_glfrontface
 
 #define glEnableVertexAttribArray p_glenablevertexattribarray
 #define glDisableVertexAttribArray p_gldisablevertexattribarray

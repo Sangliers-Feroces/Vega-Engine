@@ -12,6 +12,9 @@ void init(void)
     thread_init();
     srand(time(NULL));
     load_gl_fun();
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CW);
     lightmap_init();
 }
 
