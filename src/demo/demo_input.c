@@ -21,7 +21,6 @@ static void get_cam_x_z(demo_t *demo, vec3 *x, vec3 *z)
 {
     *z = spherical_to_cartesian_z(demo->cam.rot);
     *x = spherical_to_cartesian_z_to_x(demo->cam.rot);
-    return ;
 }
 
 void demo_poll_input(demo_t *demo)
