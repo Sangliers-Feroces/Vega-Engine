@@ -52,8 +52,8 @@ int demo_loop(void)
     struct timespec start, finish;
     double elapsed;
     clock_gettime(CLOCK_MONOTONIC, &start);
-    demo->cam.aperture = octree_light_rtx(demo->tree, 1000000000 / 5000);
-    printf("%f\n", demo->cam.aperture);
+    demo->cam.aperture = octree_light_rtx(demo->tree, 1000000000 / 50);
+    printf("aperture: %f\n", demo->cam.aperture);
     clock_gettime(CLOCK_MONOTONIC, &finish);
     elapsed = (finish.tv_sec - start.tv_sec);
     elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
