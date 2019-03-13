@@ -12,12 +12,16 @@ static void gen_2d_texture_from_mem(gpu_serial_t serial)
     int32_t *buf;
     int w;
     int h;
+    int rays = 4000000;
+    //int rays = 500000;
 
     glGetIntegerv(GL_MAX_TEXTURE_SIZE, &w);
     h = serial.size / w + 1;
     buf = malloc_safe(w * h * sizeof(int32_t));
     for (size_t i = 0; i < serial.size; i++)
         buf[i] = serial.data[i];
+    buf[0] = time(NULL);
+    buf[1] = rays / 2000;
     glTexImage2D(GL_TEXTURE_2D, 0, GL_R32I, w, h,
     0, GL_RED_INTEGER, GL_INT, buf);
     free(buf);
@@ -56,7 +60,7 @@ static void print_group_size(void)
 
 static void dispatch_work(void)
 {
-    glDispatchCompute(1, 1, 1);
+    glDispatchCompute(2000, 1, 1);
     glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
     glBindImageTexture(1, 0, 0, GL_FALSE, 0, GL_READ_WRITE, GL_RGBA32F);
     glBindTexture(GL_TEXTURE_2D, 0);
