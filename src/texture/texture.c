@@ -30,7 +30,7 @@ void texture2_destroy(texture2 *texture)
 
 ivec2 texture2_get_nearest(vec2 p, vec2 size)
 {
-    p = vec2_add(vec2_mul(p, size), (vec2){0.5f, 0.5f});
+    p = vec2_mul(p, size);
     return (ivec2){p.x, p.y};
 }
 

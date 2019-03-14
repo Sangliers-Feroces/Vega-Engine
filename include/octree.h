@@ -24,13 +24,15 @@ size_t get_triangle_upper_tree(vec3 *triangle, bounds3 bounds);
 
 inter_ray3 octree_intersect_ray(octree *tree, ray3 ray);
 
-float octree_light_rtx(octree *tree, size_t rays);
-void octree_light_rtx_thread(octree *tree, size_t rays);
+float octree_light_rtx(octree *tree, size_t density);
+void octree_light_rtx_thread(octree *tree, size_t density);
 
 void octree_reset_lumels(octree *tree);
 float octree_get_max_lumel(octree *tree);
 void octree_update_lightmap(octree *tree, float max_lumel);
 
 vertex_struct_t get_vertex_array_from_octree(demo_t *demo);
+
+void octree_ray_bound(octree *tree, vec3 ray, vec2 *ppos, vec2 *psize);
 
 #endif

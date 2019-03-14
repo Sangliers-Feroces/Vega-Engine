@@ -52,6 +52,7 @@ void mat4_view(vec3 pos, vec3 rot, mat4 res);
 vec4 mat4_mul_vec(mat4 a, vec4 b);
 
 void mat4_perspective(proj_t proj, mat4 res);
+void mat4_ortho(proj_t proj, mat4 res);
 
 vec2 barycentric2_get_point(vec2 *triangle, vec3 bar);
 

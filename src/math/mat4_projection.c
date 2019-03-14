@@ -22,3 +22,16 @@ void mat4_perspective(proj_t proj, mat4 res)
     (proj.far_plane - proj.near_plane);
     return;
 }
+
+void mat4_ortho(proj_t proj, mat4 res)
+{
+    float w = proj.fov_w * proj.ratio_wh;
+    float h = proj.fov_w;
+
+    mat4_identity(res);
+    res[0][0] = 2.0f / (w);
+    res[1][1] = 2.0f / (h);
+    res[2][2] = 2.0f / (proj.far_plane - proj.near_plane);
+    res[3][2] = -(proj.far_plane + proj.near_plane) /
+    (proj.far_plane - proj.near_plane);
+}

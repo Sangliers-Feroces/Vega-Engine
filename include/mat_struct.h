@@ -30,6 +30,11 @@ typedef struct {
     float r;
 } circle;
 
+typedef enum {
+    PROJ_TYPE_PERSPECTIVE,
+    PROJ_TYPE_ORTHOGRAPHIC
+} proj_type_t;
+
 typedef struct {
     float near_plane;
     float far_plane;

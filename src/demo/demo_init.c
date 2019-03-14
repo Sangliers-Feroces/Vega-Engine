@@ -14,6 +14,7 @@ static void init_cam(demo_t *demo)
     demo->cam.ratiowh = (long double)demo->win.w / (long double)demo->win.h;
     demo->cam.fovw = M_PI / 2.0f;
     demo->cam.near = 1.0L;
+    demo->cam.proj = PROJ_TYPE_PERSPECTIVE;
 }
 
 static int init_mouse(demo_t *demo)

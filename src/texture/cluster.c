@@ -87,8 +87,9 @@ int texture_cluster_add_row(texture_cluster *cluster, int32_t power)
         cluster->rows.cluster_row = new_row;
     }
     cluster->rows.cluster_row[cur] =
-    (texture_cluster_row){power, 1 << power, {0, 0, NULL}};
+    (texture_cluster_row){power, cluster->to_fill_y, {0, 0, NULL}};
     vec_texture_cluster_row_alloc_init(
     &cluster->rows.cluster_row[cur].row_allocs, cluster->base->w);
+    cluster->to_fill_y += (1 << power) + 2;
     return 1;
 }
