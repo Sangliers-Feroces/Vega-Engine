@@ -40,10 +40,16 @@ typedef struct {
     char *path;
 }  ui_texture_descriptor_t;
 
+typedef enum {
+    BUTTON_REL_X,
+    BUTTON_REL_Y
+} button_rel_type_t;
+
 typedef struct {
     uires_t texture_index;
     vec2 pos;
     float size;
+    button_rel_type_t rel;
 } button_t;
 
 typedef struct {
