@@ -12,8 +12,7 @@ void init(void)
     thread_init();
     srand(time(NULL));
     load_gl_fun();
-    glFrontFace(GL_CW);
-    glPolygonMode(GL_BACK, GL_LINE);
+    glEnable(GL_CULL_FACE);
     lightmap_init();
 }
 

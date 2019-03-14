@@ -24,6 +24,20 @@ static void set_vertex_attrib(void)
     sizeof(vertext_array_t), BUFFER_OFFSET(offsetof(vertext_array_t, uv)));
 }
 
+static void draw_geom(size_t size, int do_backwire)
+{
+    glFrontFace(GL_CW);
+    glPolygonMode(GL_FRONT, GL_FILL);
+    glDrawArrays(GL_TRIANGLES, 0, size);
+    if (do_backwire) {
+        glFrontFace(GL_CCW);
+        glPolygonMode(GL_FRONT, GL_LINE);
+        glDrawArrays(GL_TRIANGLES, 0, size);
+    }
+    glFrontFace(GL_CW);
+    glPolygonMode(GL_FRONT, GL_FILL);
+}
+
 static void display_loop(gluint vertex_buffer, gluint program_id,
 size_t array_size, demo_t *demo)
 {
@@ -38,7 +52,7 @@ size_t array_size, demo_t *demo)
         set_vertex_attrib();
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, _lightmaps.base->id);
-        glDrawArrays(GL_TRIANGLES, 0, array_size);
+        draw_geom(array_size, 1);
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
         ui_display(1, demo);
