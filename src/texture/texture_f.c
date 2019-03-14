@@ -11,7 +11,7 @@ texture2f* texture2f_create(uint32_t w, uint32_t h)
 {
     texture2f *res = (texture2f*)malloc_safe(sizeof(texture2f));
 
-    res->size = (vec2){(float)w, (float)h};
+    res->size = (vec2){(float)(w - 1), (float)(h - 1)};
     res->w = w;
     res->h = h;
     res->max_ndx = res->w * res->h;
@@ -51,7 +51,7 @@ vec3 color)
     vec2 p = barycentric2_get_point(uv, bar);
     ivec2 pos;
 
-    pos = texture2_get_nearest(p, (vec2){(float)texture->w, (float)texture->h});
+    pos = texture2_get_nearest(p, texture->size);
     write_color(texture, pos.x, pos.y, color);
     write_color(texture, pos.x - 1, pos.y, vec3_muls(color, 0.5f));
     write_color(texture, pos.x + 1, pos.y, vec3_muls(color, 0.5f));
