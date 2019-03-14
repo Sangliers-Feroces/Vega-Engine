@@ -70,6 +70,6 @@ void load_model(octree **tree)
 
 int game(void)
 {
-    demo_loop();
+    demo();
     return (EXIT_SUCCESS);
 }

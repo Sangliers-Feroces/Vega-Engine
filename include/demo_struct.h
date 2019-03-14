@@ -45,12 +45,20 @@ typedef struct {
 } mouse_t;
 
 typedef struct {
+    vertex_struct_t vertex_struct;
+    gluint vertex_array_id;
+    gluint vertex_buffer;
+    gluint lightmap_shader;
+} buf_t;
+
+typedef struct {
     win_t win;
     cam_t cam;
     input_t input;
     octree *tree;
     mouse_t mouse;
     mvp_t mvp;
+    buf_t buf;
 } demo_t;
 
 #endif

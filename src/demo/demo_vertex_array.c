@@ -45,7 +45,7 @@ vertex_struct_t *vertex_struct)
         octree_fill_vertex_array(tree->sub[i], vertex_struct);
 }
 
-vertex_struct_t get_vertex_array_from_octree(demo_t *demo)
+void refresh_vertex_buffer(demo_t *demo)
 {
     vertex_struct_t vertex_struct;
 
@@ -54,5 +54,6 @@ vertex_struct_t get_vertex_array_from_octree(demo_t *demo)
     vertex_struct.v_array = malloc_safe(
     sizeof(vertext_array_t) * (vertex_struct.count * 3));
     octree_fill_vertex_array(demo->tree, &vertex_struct);
-    return vertex_struct;
+    free(demo->buf.vertex_struct.v_array);
+    demo->buf.vertex_struct = vertex_struct;
 }

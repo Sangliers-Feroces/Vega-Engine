@@ -31,7 +31,7 @@ void octree_reset_lumels(octree *tree);
 float octree_get_max_lumel(octree *tree);
 void octree_update_lightmap(octree *tree, float max_lumel);
 
-vertex_struct_t get_vertex_array_from_octree(demo_t *demo);
+void refresh_vertex_buffer(demo_t *demo);
 
 void octree_ray_bound(octree *tree, vec3 ray, vec2 *ppos, vec2 *psize);
 

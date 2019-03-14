@@ -41,10 +41,9 @@ int poll_events(demo_t *demo)
     return (1);
 }
 
-int demo_loop(void)
+int demo(void)
 {
     demo_t *demo = demo_init();
-    vertex_struct_t v_struct;
 
     glEnable(GL_MULTISAMPLE);
     load_model(&demo->tree);
@@ -58,9 +57,7 @@ int demo_loop(void)
     elapsed = (finish.tv_sec - start.tv_sec);
     elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
     printf("%f seconds\n", elapsed);
-    v_struct = get_vertex_array_from_octree(demo);
-    display_vertex_array(demo, v_struct);
-    free(v_struct.v_array);
+    demo_loop(demo);
     demo_quit(demo);
     return (0);
 }
