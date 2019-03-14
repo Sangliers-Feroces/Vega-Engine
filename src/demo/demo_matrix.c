@@ -41,8 +41,10 @@ void set_matrix_vp(demo_t *demo, gluint program)
     proj_t ortho_struct = proj_struct;
 
     ortho_struct.fov_w = 10.0f;
-    (void)ortho_struct;
-    mat4_perspective(proj_struct, demo->mvp.proj);
+    if (demo->cam.proj == PROJ_TYPE_PERSPECTIVE)
+        mat4_perspective(proj_struct, demo->mvp.proj);
+    else
+        mat4_ortho(ortho_struct, demo->mvp.proj);
     mat4_view(pos, rot, demo->mvp.view);
     mat4_mul(demo->mvp.proj, demo->mvp.view, demo->mvp.vp);
     send_matrix(program, demo->mvp.vp);

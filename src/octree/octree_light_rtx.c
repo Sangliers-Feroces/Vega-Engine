@@ -35,21 +35,28 @@ static void throw_ray(octree *tree, ray3_color ray)
         vec3_muls(ray.color, 0.75f), ray.count});
 }
 
-void octree_light_rtx_thread(octree *tree, size_t rays)
+void octree_light_rtx_thread(octree *tree, size_t density)
 {
-    for (size_t i = 0; i < rays; i++) {
+    vec2 pos;
+    vec2 size;
+    vec3 ray = {1.0f, -1.0f, 1.0f};
+    size_t count;
+
+    octree_ray_bound(tree, ray, &pos, &size);
+    count = (double)(density * density) * (double)size.x * (double)size.y;
+    for (size_t i = 0; i < count; i++) {
         throw_ray(tree, (ray3_color){
-        {{randf() * 100.0f - 50.0f, 50.0f, -randf() * 100.0f},
-        {1.0f, -1.0f, 1.0f}}, {1.0f, 1.0f, 1.0f}, 16});
+        {{pos.x + randf() * size.x, tree->bounds.max.y,
+        pos.y + randf() * size.y}, ray}, {1.0f, 1.0f, 1.0f}, 16});
     }
 }
 
-float octree_light_rtx(octree *tree, size_t rays)
+float octree_light_rtx(octree *tree, size_t density)
 {
     octree_reset_lumels(tree);
     thread_send_each(THREAD_TASK_RAY_TRACING,
-    (uint64_t[]){(uint64_t)tree, rays / _thread.count}, 2);
+    (uint64_t[]){(uint64_t)tree, density / _thread.count}, 2);
     thread_wait();
     texture2f_refresh_gpu(_lightmaps.base);
-    return (octree_get_max_lumel(tree) / 3.0f) / 2.0f;
+    return (octree_get_max_lumel(tree) / 3.0f) / 1.4f;
 }

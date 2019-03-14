@@ -12,7 +12,7 @@ ivec2 get_texture_dim(vec2 *uv)
     vec2 min;
     vec2 max;
     vec2 dim;
-    float scale = 8.0f;
+    float scale = 2.0f;
 
     min = vec2_min(vec2_min(uv[0], uv[1]), uv[2]);
     max = vec2_max(vec2_max(uv[0], uv[1]), uv[2]);

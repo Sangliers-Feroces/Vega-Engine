@@ -28,42 +28,44 @@ static void add_triangle(octree **tree, vec3 *triangle)
 
 void load_model(octree **tree)
 {
+    float h = 0.0f;
+
     add_triangle(tree, (vec3[]){{0.0f, 0.0f, 5.0f},
-    {0.0f, 3.0f, 5.0f}, {10.0f, 0.0f, 5.0f}});
-    add_triangle(tree, (vec3[]){{0.0f, 3.0f, 5.0f}, {10.0f, 3.0f, 5.0f},
+    {0.0f, 3.0f - h, 5.0f}, {10.0f, 0.0f, 5.0f}});
+    add_triangle(tree, (vec3[]){{0.0f, 3.0f - h, 5.0f}, {10.0f, 3.0f - h, 5.0f},
     {10.0f, 0.0f, 5.0f}});
     add_triangle(tree, (vec3[]){{0.0f, 0.0f, 0.0f},
     {0.0f, 1.0f, 0.0f}, {10.0f, 0.0f, 0.0f}});
     add_triangle(tree, (vec3[]){{0.0f, 1.0f, 0.0f}, {10.0f, 1.0f, 0.0f},
     {10.0f, 0.0f, 0.0f}});
     add_triangle(tree, (vec3[]){{0.0f, 2.0f, 0.0f},
-    {0.0f, 3.0f, 0.0f}, {10.0f, 2.0f, 0.0f}});
-    add_triangle(tree, (vec3[]){{0.0f, 3.0f, 0.0f}, {10.0f, 3.0f, 0.0f},
+    {0.0f, 3.0f - h, 0.0f}, {10.0f, 2.0f, 0.0f}});
+    add_triangle(tree, (vec3[]){{0.0f, 3.0f - h, 0.0f}, {10.0f, 3.0f - h, 0.0f},
     {10.0f, 2.0f, 0.0f}});
-    add_triangle(tree, (vec3[]){{0.0f, 3.0f, 0.0f}, {0.0f, 3.0f, 5.0f},
-    {10.0f, 3.0f, 0.0f}});
-    add_triangle(tree, (vec3[]){{0.0f, 3.0f, 5.0f}, {10.0f, 3.0f, 5.0f},
-    {10.0f, 3.0f, 0.0f}});
-    add_triangle(tree, (vec3[]){{0.0f, 3.0f, 0.0f},
-    {10.0f, 3.0f, 0.0f}, {0.0f, 3.0f, 5.0f}});
-    add_triangle(tree, (vec3[]){{0.0f, 3.0f, 5.0f},
-    {10.0f, 3.0f, 0.0f}, {10.0f, 3.0f, 5.0f}});
+    add_triangle(tree, (vec3[]){{0.0f, 3.0f - h, 0.0f}, {0.0f, 3.0f - h, 5.0f},
+    {10.0f, 3.0f - h, 0.0f}});
+    add_triangle(tree, (vec3[]){{0.0f, 3.0f - h, 5.0f}, {10.0f, 3.0f - h, 5.0f},
+    {10.0f, 3.0f - h, 0.0f}});
+    add_triangle(tree, (vec3[]){{0.0f, 3.0f - h, 0.0f},
+    {10.0f, 3.0f - h, 0.0f}, {0.0f, 3.0f - h, 5.0f}});
+    add_triangle(tree, (vec3[]){{0.0f, 3.0f - h, 5.0f},
+    {10.0f, 3.0f - h, 0.0f}, {10.0f, 3.0f - h, 5.0f}});
     add_triangle(tree, (vec3[]){{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 5.0f},
     {10.0f, 0.0f, 0.0f}});
     add_triangle(tree, (vec3[]){{0.0f, 0.0f, 5.0f}, {10.0f, 0.0f, 5.0f},
     {10.0f, 0.0f, 0.0f}});
     add_triangle(tree, (vec3[]){{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 5.0f},
-    {0.0f, 3.0f, 5.0f}});
-    add_triangle(tree, (vec3[]){{0.0f, 3.0f, 5.0f}, {0.0f, 3.0f, 0.0f},
+    {0.0f, 3.0f - h, 5.0f}});
+    add_triangle(tree, (vec3[]){{0.0f, 3.0f - h, 5.0f}, {0.0f, 3.0f - h, 0.0f},
     {0.0f, 0.0f, 0.0f}});
     add_triangle(tree, (vec3[]){{0.0f, 0.0f, 0.0f},
-    {0.0f, 3.0f, 5.0f}, {0.0f, 0.0f, 5.0f}});
-    add_triangle(tree, (vec3[]){{0.0f, 3.0f, 5.0f},
-    {0.0f, 0.0f, 0.0f}, {0.0f, 3.0f, 0.0f}});
+    {0.0f, 3.0f - h, 5.0f}, {0.0f, 0.0f, 5.0f}});
+    add_triangle(tree, (vec3[]){{0.0f, 3.0f - h, 5.0f},
+    {0.0f, 0.0f, 0.0f}, {0.0f, 3.0f - h, 0.0f}});
     add_triangle(tree, (vec3[]){{10.0f, 0.0f, 0.0f}, {10.0f, 0.0f, 5.0f},
-    {10.0f, 3.0f, 5.0f}});
-    add_triangle(tree, (vec3[]){{10.0f, 3.0f, 5.0f}, {10.0f, 3.0f, 0.0f},
-    {10.0f, 0.0f, 0.0f}});
+    {10.0f, 3.0f - h, 5.0f}});
+    add_triangle(tree, (vec3[]){{10.0f, 3.0f - h, 5.0f},
+    {10.0f, 3.0f - h, 0.0f}, {10.0f, 0.0f, 0.0f}});
 }
 
 int game(void)
