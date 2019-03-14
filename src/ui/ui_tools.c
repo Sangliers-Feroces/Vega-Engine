@@ -7,32 +7,20 @@
 
 #include "headers.h"
 
-static void ui_set_textures_buttons(void)
-{
-    _ui.buttons[UIBUTTON_MOVE].texture_index = UIRES_CROSS;
-    _ui.buttons[UIBUTTON_PAINT].texture_index = UIRES_PAINT;
-    _ui.buttons[UIBUTTON_TEXTURE].texture_index = UIRES_TEXTURE;
-    _ui.buttons[UIBUTTON_LIGHTMAPS].texture_index = UIRES_LIGHTMAPS;
-    _ui.buttons[UIBUTTON_PLAY].texture_index = UIRES_PLAY;
-    _ui.buttons[UIBUTTON_ISO].texture_index = UIRES_ISO;
-}
-
 void ui_set_buttons(void)
 {
     _ui.buttons[UIBUTTON_MOVE] =
     (button_t){UIRES_CROSS, (vec2){-0.95f, 0.70f}, 0.1f, BUTTON_REL_X};
     _ui.buttons[UIBUTTON_PAINT] =
     (button_t){UIRES_PAINT, (vec2){-0.70f, 0.70f}, 0.1f, BUTTON_REL_X};
-    _ui.buttons[UIBUTTON_PAINT].size = 0.1f;
-    _ui.buttons[UIBUTTON_TEXTURE].pos = (vec2){-0.45f, 0.70f};
-    _ui.buttons[UIBUTTON_TEXTURE].size = 0.1f;
-    _ui.buttons[UIBUTTON_LIGHTMAPS].pos = (vec2){0.30f, 0.70f};
-    _ui.buttons[UIBUTTON_LIGHTMAPS].size = 0.1f;
-    _ui.buttons[UIBUTTON_PLAY].pos = (vec2){0.55f, 0.70f};
-    _ui.buttons[UIBUTTON_PLAY].size = 0.1f;
-    _ui.buttons[UIBUTTON_ISO].pos = (vec2){0.80f, 0.70f};
-    _ui.buttons[UIBUTTON_ISO].size = 0.1f;
-    ui_set_textures_buttons();
+    _ui.buttons[UIBUTTON_TEXTURE] =
+    (button_t){UIRES_TEXTURE, (vec2){-0.45f, 0.70f}, 0.1f, BUTTON_REL_X};
+    _ui.buttons[UIBUTTON_LIGHTMAPS]=
+    (button_t){UIRES_LIGHTMAPS, (vec2){0.30f, 0.70f}, 0.1f, BUTTON_REL_X};
+    _ui.buttons[UIBUTTON_PLAY]=
+    (button_t){UIRES_PLAY, (vec2){0.55f, 0.70f}, 0.1f, BUTTON_REL_X};
+    _ui.buttons[UIBUTTON_ISO] =
+    (button_t){UIRES_ISO, (vec2){0.80f, 0.70f}, 0.1f, BUTTON_REL_X};
 }
 
 void ui_load_texture(const ui_texture_descriptor_t descriptors_array[])
