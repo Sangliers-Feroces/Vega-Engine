@@ -15,9 +15,9 @@ void ui_set_buttons(void)
     (button_t){UIRES_PAINT, (vec2){-0.70f, 0.70f}, 0.1f, BUTTON_REL_X};
     _ui.buttons[UIBUTTON_TEXTURE] =
     (button_t){UIRES_TEXTURE, (vec2){-0.45f, 0.70f}, 0.1f, BUTTON_REL_X};
-    _ui.buttons[UIBUTTON_LIGHTMAPS]=
+    _ui.buttons[UIBUTTON_LIGHTMAPS] =
     (button_t){UIRES_LIGHTMAPS, (vec2){0.30f, 0.70f}, 0.1f, BUTTON_REL_X};
-    _ui.buttons[UIBUTTON_PLAY]=
+    _ui.buttons[UIBUTTON_PLAY] =
     (button_t){UIRES_PLAY, (vec2){0.55f, 0.70f}, 0.1f, BUTTON_REL_X};
     _ui.buttons[UIBUTTON_ISO] =
     (button_t){UIRES_ISO, (vec2){0.80f, 0.70f}, 0.1f, BUTTON_REL_X};

@@ -45,6 +45,7 @@ demo_t* demo_init(void)
     res = malloc_safe(sizeof(demo_t));
     init_win(res);
     init_cam(res);
+    _ui.button_clicked = UINOBUTTON;
     demo_init_input(res);
     res->tree = octree_create(NULL);
     init();

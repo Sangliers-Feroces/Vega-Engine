@@ -21,6 +21,8 @@ void ui_set_textures_to_null(void);
 void ui_load_texture(const ui_texture_descriptor_t descriptors_array[]);
 void ui_set_buttons(void);
 
+void ui_swicth_button_action(void);
+void ui_check_click_button(demo_t *demo);
 rect_t button_get_size(button_t button);
 
 #endif /* !UI_H_ */
