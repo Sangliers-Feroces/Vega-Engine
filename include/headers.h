@@ -26,6 +26,8 @@
 
 #include "struct.h"
 
+#include "nbr_tools.h"
+#include "str.h"
 #include "gpu.h"
 #include "gpu_serial.h"
 #include "mat.h"

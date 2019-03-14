@@ -7,6 +7,30 @@
 
 #include "headers.h"
 
+static const ui_texture_descriptor_t texture_desc_array[] = {
+    {UIRES_ELON, "res/ui/elon.jpg"},
+    {UIRES_CROSS, "res/ui/ui_move_button.png"},
+    {UIRES_PAINT, "res/ui/ui_paint_button.png"},
+    {UIRES_TEXTURE, "res/ui/ui_texture_button.png"},
+    {UIRES_LIGHTMAPS, "res/ui/ui_lightmap_button.png"},
+    {UIRES_PLAY, "res/ui/ui_play_button.png"},
+    {UIRES_ISO, "res/ui/ui_iso_button.png"},
+    {0, NULL}
+};
+
+static int ui_check_texture_array(void)
+{
+    for (int i = 0; i < UIRES_MAX; i++) {
+        if (_ui.textures[i] == NULL) {
+            my_fd_putstr("Can't open textures ", 2);
+            putnbr(i, 10, 0);
+            my_fd_putchar('\n', 2);
+            return 0;
+        }
+    }
+    return 1;
+}
+
 void ui_init(demo_t *demo)
 {
     const vec2 vertex_array_base[] =
@@ -20,7 +44,11 @@ void ui_init(demo_t *demo)
     _ui.ratiowh = demo->cam.ratiowh;
     _ui.ui_program = shader_load_vert_frag("src/gpu/shader/ui_vertex.glsl",
     "src/gpu/shader/ui_fragment.glsl");
-    _ui.tex = texture2_load("res/ui/elon.jpg");
+    ui_set_textures_to_null();
+    ui_load_texture(texture_desc_array);
+    if (!ui_check_texture_array())
+        exit(84);
+    ui_set_buttons();
     glGenBuffers(1, &_ui.vertex_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, _ui.vertex_buffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vec2) * 6,
@@ -29,7 +57,8 @@ void ui_init(demo_t *demo)
 
 void ui_quit(void)
 {
-    texture2_destroy(_ui.tex);
+    for (int i = 0; i < UIRES_MAX; i++)
+        texture2_destroy(_ui.textures[i]);
     glDeleteBuffers(1, &_ui.vertex_buffer);
     glDeleteProgram(_ui.ui_program);
 }

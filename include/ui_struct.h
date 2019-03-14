@@ -15,15 +15,44 @@ typedef struct {
 
 typedef enum {
     UIRES_ELON,
+    UIRES_CROSS,
+    UIRES_PAINT,
+    UIRES_TEXTURE,
+    UIRES_LIGHTMAPS,
+    UIRES_PLAY,
+    UIRES_ISO,
     UIRES_MAX
 } uires_t;
 
+typedef enum {
+    UIBUTTON_MOVE,
+    UIBUTTON_PAINT,
+    UIBUTTON_TEXTURE,
+    UIBUTTON_LIGHTMAPS,
+    UIBUTTON_PLAY,
+    UIBUTTON_ISO,
+    UIBUTTON_MAX,
+    UINOBUTTON,
+} uibutton_t;
+
 typedef struct {
+    uires_t index;
+    char *path;
+}  ui_texture_descriptor_t;
+
+typedef struct {
+    uires_t texture_index;
+    vec2 pos;
+    float size;
+} button_t;
+
+typedef struct {
+    uibutton_t button_clicked;
     gluint ui_program;
     gluint vertex_buffer;
-    texture2 *tex;
+    texture2 *textures[UIRES_MAX];
+    button_t buttons[UIBUTTON_MAX];
     float ratiowh;
-    texture2 *res[UIRES_MAX];
 } ui_struct;
 
 #endif /* !UI_STRUCT_H_ */
