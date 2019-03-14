@@ -11,17 +11,17 @@ void ui_swicth_button_action(void)
 {
     switch (_ui.button_clicked) {
     case UIBUTTON_MOVE:
-        return printf("Move\n");
+        return (void)printf("Move\n");
     case UIBUTTON_PAINT:
-        return printf("Paint\n");
+        return (void)printf("Paint\n");
     case UIBUTTON_TEXTURE:
-        return printf("Texture\n");
+        return (void)printf("Texture\n");
     case UIBUTTON_LIGHTMAPS:
-        return printf("Lightmap\n");
+        return (void)printf("Lightmap\n");
     case UIBUTTON_PLAY:
-        return printf("Play\n");
+        return (void)printf("Play\n");
     case UIBUTTON_ISO:
-        return printf("Iso\n");
+        return (void)printf("Iso\n");
     default:
         return;
     }
