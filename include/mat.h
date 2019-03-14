@@ -67,4 +67,6 @@ vec2 circle_intersect(circle a, circle b);
 vec3 spherical_to_cartesian_z(vec3 spherical);
 vec3 spherical_to_cartesian_z_to_x(vec3 spherical);
 
+int is_vec2_inside_rect(vec2 mouse_pos, rect_t button_rect);
+
 #endif
