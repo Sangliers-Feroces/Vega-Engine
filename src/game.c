@@ -32,7 +32,6 @@ void load_model(octree **tree)
     {0.0f, 3.0f, 5.0f}, {10.0f, 0.0f, 5.0f}});
     add_triangle(tree, (vec3[]){{0.0f, 3.0f, 5.0f}, {10.0f, 3.0f, 5.0f},
     {10.0f, 0.0f, 5.0f}});
-
     add_triangle(tree, (vec3[]){{0.0f, 0.0f, 0.0f},
     {0.0f, 1.0f, 0.0f}, {10.0f, 0.0f, 0.0f}});
     add_triangle(tree, (vec3[]){{0.0f, 1.0f, 0.0f}, {10.0f, 1.0f, 0.0f},
@@ -41,24 +40,20 @@ void load_model(octree **tree)
     {0.0f, 3.0f, 0.0f}, {10.0f, 2.0f, 0.0f}});
     add_triangle(tree, (vec3[]){{0.0f, 3.0f, 0.0f}, {10.0f, 3.0f, 0.0f},
     {10.0f, 2.0f, 0.0f}});
-
     add_triangle(tree, (vec3[]){{0.0f, 3.0f, 0.0f}, {0.0f, 3.0f, 5.0f},
-    {10.0f, 3.0f, 0.0f}});  //ceil
+    {10.0f, 3.0f, 0.0f}});
     add_triangle(tree, (vec3[]){{0.0f, 3.0f, 5.0f}, {10.0f, 3.0f, 5.0f},
     {10.0f, 3.0f, 0.0f}});
     add_triangle(tree, (vec3[]){{0.0f, 3.0f, 0.0f},
     {10.0f, 3.0f, 0.0f}, {0.0f, 3.0f, 5.0f}});
     add_triangle(tree, (vec3[]){{0.0f, 3.0f, 5.0f},
     {10.0f, 3.0f, 0.0f}, {10.0f, 3.0f, 5.0f}});
-
-
     add_triangle(tree, (vec3[]){{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 5.0f},
     {10.0f, 0.0f, 0.0f}});
     add_triangle(tree, (vec3[]){{0.0f, 0.0f, 5.0f}, {10.0f, 0.0f, 5.0f},
     {10.0f, 0.0f, 0.0f}});
-
     add_triangle(tree, (vec3[]){{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 5.0f},
-    {0.0f, 3.0f, 5.0f}}); //left
+    {0.0f, 3.0f, 5.0f}});
     add_triangle(tree, (vec3[]){{0.0f, 3.0f, 5.0f}, {0.0f, 3.0f, 0.0f},
     {0.0f, 0.0f, 0.0f}});
     add_triangle(tree, (vec3[]){{0.0f, 0.0f, 0.0f},
@@ -66,7 +61,7 @@ void load_model(octree **tree)
     add_triangle(tree, (vec3[]){{0.0f, 3.0f, 5.0f},
     {0.0f, 0.0f, 0.0f}, {0.0f, 3.0f, 0.0f}});
     add_triangle(tree, (vec3[]){{10.0f, 0.0f, 0.0f}, {10.0f, 0.0f, 5.0f},
-    {10.0f, 3.0f, 5.0f}}); //right
+    {10.0f, 3.0f, 5.0f}});
     add_triangle(tree, (vec3[]){{10.0f, 3.0f, 5.0f}, {10.0f, 3.0f, 0.0f},
     {10.0f, 0.0f, 0.0f}});
 }
