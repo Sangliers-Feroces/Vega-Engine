@@ -15,6 +15,9 @@ static void init_cam(demo_t *demo)
     demo->cam.fovw = M_PI / 2.0f;
     demo->cam.near = 1.0L;
     demo->cam.proj = PROJ_TYPE_PERSPECTIVE;
+    demo->player.state = GAME_PLAYING;
+    demo->player.pos = (vec3){1.0f, 1.0f, 1.0f};
+    demo->player.speed = (vec3){0.0f, 0.0f, 0.0f};
 }
 
 static int init_mouse(demo_t *demo)
@@ -33,6 +36,10 @@ static void init_win(demo_t *demo)
     &(sfContextSettings){24, 8, 4, 4, 3, 0, 1});
     if (demo->win.window == NULL)
         exit_full_custom();
+    demo->win.frametime = sfClock_create();
+    if (demo->win.frametime == NULL)
+        exit_full_custom();
+    demo->win.framelen = 1.0f / 60.0f;
     sfWindow_setVerticalSyncEnabled((sfWindow*)demo->win.window, sfTrue);
     if (!init_mouse(demo))
         exit_full_custom();
