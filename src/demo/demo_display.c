@@ -27,15 +27,15 @@ static void set_vertex_attrib(void)
 static void draw_geom(size_t size, int do_backwire)
 {
     glFrontFace(GL_CW);
-    glPolygonMode(GL_FRONT, GL_FILL);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glDrawArrays(GL_TRIANGLES, 0, size);
     if (do_backwire) {
         glFrontFace(GL_CCW);
-        glPolygonMode(GL_FRONT, GL_LINE);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         glDrawArrays(GL_TRIANGLES, 0, size);
     }
     glFrontFace(GL_CW);
-    glPolygonMode(GL_FRONT, GL_FILL);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
 static void display_loop(gluint vertex_buffer, gluint program_id,
