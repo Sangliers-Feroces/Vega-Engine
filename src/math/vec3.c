@@ -21,3 +21,8 @@ vec3 vec3_muls(vec3 vec, float value)
 {
     return (vec3){vec.x * value, vec.y * value, vec.z * value};
 }
+
+vec3 vec3_divs(vec3 vec, float value)
+{
+    return (vec3){vec.x / value, vec.y / value, vec.z / value};
+}

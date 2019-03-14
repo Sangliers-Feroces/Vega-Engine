@@ -33,10 +33,10 @@ void refresh_vp(demo_t *demo, gluint program)
 
     ortho_struct.fov_w = 10.0f;
     if (demo->cam.proj == PROJ_TYPE_PERSPECTIVE)
-        mat4_perspective(proj_struct, demo->mvp.proj);
+        mat4_perspective(proj_struct, demo->cam.mvp.proj);
     else
-        mat4_ortho(ortho_struct, demo->mvp.proj);
-    mat4_view(demo->cam.pos, demo->cam.rot, demo->mvp.view);
-    mat4_mul(demo->mvp.proj, demo->mvp.view, demo->mvp.vp);
-    send_matrix(program, demo->mvp.vp);
+        mat4_ortho(ortho_struct, demo->cam.mvp.proj);
+    mat4_view(demo->cam.pos, demo->cam.rot, demo->cam.mvp.view);
+    mat4_mul(demo->cam.mvp.proj, demo->cam.mvp.view, demo->cam.mvp.vp);
+    send_matrix(program, demo->cam.mvp.vp);
 }

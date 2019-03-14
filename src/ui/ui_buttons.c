@@ -9,53 +9,59 @@
 
 void ui_swicth_button_action(void)
 {
-    switch (_ui.button_clicked)
-    {
-        case UIBUTTON_MOVE:
-            printf("Move\n");
-            break;
-        case UIBUTTON_PAINT:
-            printf("Paint\n");
-            break;
-        case UIBUTTON_TEXTURE:
-            printf("Texture\n");
-            break;
-        case UIBUTTON_LIGHTMAPS:
-            printf("Lightmap\n");
-            break;
-        case UIBUTTON_PLAY:
-            printf("Play\n");
-            break;
-        case UIBUTTON_ISO:
-            printf("Iso\n");
-            break;
-        default:
-            break;
+    switch (_ui.button_clicked) {
+    case UIBUTTON_MOVE:
+        return printf("Move\n");
+    case UIBUTTON_PAINT:
+        return printf("Paint\n");
+    case UIBUTTON_TEXTURE:
+        return printf("Texture\n");
+    case UIBUTTON_LIGHTMAPS:
+        return printf("Lightmap\n");
+    case UIBUTTON_PLAY:
+        return printf("Play\n");
+    case UIBUTTON_ISO:
+        return printf("Iso\n");
+    default:
+        return;
     }
-    _ui.button_clicked = UINOBUTTON;
 }
 
-static int check_click_pos(sfVector2i mouse_pos, button_t button, float width_screen, float height)
+static int check_click_pos(sfVector2i mouse_pos, button_t button,
+float width_screen, float height)
 {
     vec2 screen = {width_screen, height};
     vec2 mouse_posf = {mouse_pos.x, mouse_pos.y};
     vec2 relative_mouse_pos;
-    
 
-    relative_mouse_pos = vec2_muls(vec2_subs(vec2_div(mouse_posf, screen), 0.5f), 2.0f);
-    if (is_vec2_inside_rect(relative_mouse_pos, button_get_size(button))) {
-        return 1;
+    relative_mouse_pos = vec2_muls(vec2_subs(vec2_div(mouse_posf, screen),
+    0.5f), 2.0f);
+    relative_mouse_pos.y *= -1.0;
+    return rect_is_vec2_inside(button_get_size(button), relative_mouse_pos);
+}
+
+static void button_effect(demo_t *demo)
+{
+    if (_ui.button_clicked == UIBUTTON_PLAY) {
+        demo->player.state = !demo->player.state;
+        if (demo->player.state == GAME_PLAYING) {
+            demo->player.pos = vec3_sub(demo->cam.pos,
+            (vec3){0.0f, 1.75f, 0.0f});
+            demo->player.speed = (vec3){0.0f, 0.0f, 0.0f};
+        }
     }
-    return 0;
+    if (_ui.button_clicked == UIBUTTON_ISO)
+        demo->cam.proj = !demo->cam.proj;
 }
 
 void ui_check_click_button(demo_t *demo)
 {
+    _ui.button_clicked = UINOBUTTON;
     for (int i = 0; i < UIBUTTON_MAX; i++) {
-        if (check_click_pos(demo->mouse.mouse_pos, _ui.buttons[i], demo->win.w, demo->win.h)) {
+        if (check_click_pos(demo->mouse.mouse_pos, _ui.buttons[i],
+        demo->win.w, demo->win.h)) {
             _ui.button_clicked = UIBUTTON_MOVE + i;
-            return;
         }
     }
-    _ui.button_clicked = UINOBUTTON;
+    button_effect(demo);
 }

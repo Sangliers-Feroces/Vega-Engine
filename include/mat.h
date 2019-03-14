@@ -21,6 +21,8 @@ vec2 vec2_muls(vec2 vec, float value);
 vec2 vec2_mul(vec2 a, vec2 b);
 vec2 vec2_div(vec2 a, vec2 b);
 vec2 vec2_divs(vec2 vec, float value);
+float vec2_norm(vec2 vec);
+float vec2_dist(vec2 a, vec2 b);
 
 int vec3_is_in_bounds(vec3 p, bounds3 bounds);
 int is_triangle_in_bounds(vec3 *triangle, bounds3 bounds);
@@ -67,6 +69,6 @@ vec2 circle_intersect(circle a, circle b);
 vec3 spherical_to_cartesian_z(vec3 spherical);
 vec3 spherical_to_cartesian_z_to_x(vec3 spherical);
 
-int is_vec2_inside_rect(vec2 mouse_pos, rect_t button_rect);
+int rect_is_vec2_inside(rect_t rect, vec2 vec);
 
 #endif

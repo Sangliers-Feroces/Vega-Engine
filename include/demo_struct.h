@@ -27,6 +27,8 @@ typedef struct {
     uint32_t w;
     uint32_t h;
     sfRenderWindow *window;
+    float framelen;
+    sfClock *frametime;
 } win_t;
 
 typedef struct {
@@ -37,6 +39,7 @@ typedef struct {
     long double near;
     float aperture;
     proj_type_t proj;
+    mvp_t mvp;
 } cam_t;
 
 typedef struct {
@@ -51,13 +54,25 @@ typedef struct {
     gluint lightmap_shader;
 } buf_t;
 
+typedef enum {
+    GAME_EDITOR,
+    GAME_PLAYING
+} game_state_t;
+
+typedef struct {
+    game_state_t state;
+    vec3 pos;
+    vec3 speed;
+    int is_grounded;
+} player_t;
+
 typedef struct {
     win_t win;
     cam_t cam;
     input_t input;
     octree *tree;
     mouse_t mouse;
-    mvp_t mvp;
+    player_t player;
     buf_t buf;
 } demo_t;
 

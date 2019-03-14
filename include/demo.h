@@ -8,7 +8,9 @@
 #ifndef _DEMO_H
 #define _DEMO_H
 
-#define CAM_MOVE 0.2f
+#define CAM_MOVE 15.0f
+#define PLAYER_MOVE 20.0f
+#define PLAYER_MAX_SPEED 10.0f
 
 void demo_init_input(demo_t *demo);
 void demo_poll_input(demo_t *demo);
@@ -34,5 +36,9 @@ void refresh_vp(demo_t *demo, gluint program);
 void send_aperture(demo_t *demo, gluint program);
 
 void load_model(octree **tree);
+
+void player_physics(demo_t *demo);
+
+void demo_update_framerate(demo_t *demo);
 
 #endif

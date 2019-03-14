@@ -55,11 +55,11 @@ void demo_loop(demo_t *demo)
         set_vertex_attrib(demo);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, _lightmaps.base->id);
-        draw_geom(demo->buf.vertex_struct.count * 3, 1);
+        draw_geom(demo->buf.vertex_struct.count * 3,
+        demo->player.state == GAME_EDITOR);
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
         ui_display(1, demo);
-        ui_swicth_button_action();
         sfRenderWindow_display(demo->win.window);
     } while (poll_events(demo));
 }
