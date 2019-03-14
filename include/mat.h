@@ -11,7 +11,9 @@
 /* math-related prototypes */
 
 vec2 vec2_add(vec2 a, vec2 b);
+vec2 vec2_adds(vec2 vec, float value);
 vec2 vec2_sub(vec2 a, vec2 b);
+vec2 vec2_subs(vec2 vec, float value);
 vec2 vec2_min(vec2 a, vec2 b);
 vec2 vec2_max(vec2 a, vec2 b);
 vec2 vec2_muls(vec2 vec, float value);
