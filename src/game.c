@@ -7,7 +7,7 @@
 
 #include "headers.h"
 
-rtx_triangle get_random_triangle(void)
+rtx_triangle* get_random_triangle(void)
 {
     float limit = 100.0f;
     vec3 base = {(randf() - 0.5f) * limit, (randf() - 0.5f) * limit,
@@ -21,9 +21,9 @@ rtx_triangle get_random_triangle(void)
 
 static void add_triangle(octree **tree, vec3 *triangle)
 {
-    rtx_triangle rtx = rtx_triangle_create(triangle);
+    rtx_triangle *rtx = rtx_triangle_create(triangle);
 
-    octree_insert_triangle(tree, &rtx);
+    octree_insert_triangle(tree, rtx);
 }
 
 void load_model(octree **tree)

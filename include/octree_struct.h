@@ -21,7 +21,7 @@ typedef struct {
 typedef struct {
     size_t count;
     size_t allocated;
-    rtx_triangle *triangle;
+    rtx_triangle **triangle;
 } vec_rtx_triangle;
 
 /* used to define an octree node space */

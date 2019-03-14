@@ -25,6 +25,6 @@ int32_t vec_rtx_triangle_serialize(vec_rtx_triangle *vec, gpu_serial_t *serial)
 
     gpu_serial_write(serial, vec->count);
     for (size_t i = 0; i < vec->count; i++)
-        serialize_triangle(&vec->triangle[i], serial);
+        serialize_triangle(vec->triangle[i], serial);
     return res;
 }

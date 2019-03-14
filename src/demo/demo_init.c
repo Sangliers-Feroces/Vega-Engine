@@ -16,9 +16,10 @@ static void init_cam(demo_t *demo)
     demo->cam.near = 1.0L;
 }
 
-static int init_framebuffer(demo_t *demo)
+static int init_mouse(demo_t *demo)
 {
-    (void)demo;
+    demo->mouse.first_click = 0;
+    demo->mouse.mouse_pos = (sfVector2i){0, 0};
     return (1);
 }
 
@@ -32,7 +33,7 @@ static void init_win(demo_t *demo)
     if (demo->win.window == NULL)
         exit_full_custom();
     sfWindow_setVerticalSyncEnabled((sfWindow*)demo->win.window, sfTrue);
-    if (!init_framebuffer(demo))
+    if (!init_mouse(demo))
         exit_full_custom();
 }
 
