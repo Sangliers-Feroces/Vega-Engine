@@ -34,16 +34,16 @@ static int ui_check_texture_array(void)
 void ui_init(demo_t *demo)
 {
     const vec2 vertex_array_base[] =
-    {{0.0f, 0.0f},
-    {0.0f, 1.0f},
-    {1.0f, 0.0f},
-    {0.0f, 1.0f},
-    {1.0f, 1.0f},
-    {1.0f, 0.0f}};
+    {{0.0f, 0.0f}, {0.0f, 1.0f}, {1.0f, 0.0f},
+    {0.0f, 1.0f}, 1.0f, 1.0f}, 1.0f, 0.0f}};
 
     _ui.ratiowh = demo->cam.ratiowh;
     _ui.ui_program = shader_load_vert_frag("src/gpu/shader/ui_vertex.glsl",
     "src/gpu/shader/ui_fragment.glsl");
+    if (_ui.ui_program == 0) {
+        printf("Can't load ui shader.\n");
+        exit(84);
+    }
     ui_set_textures_to_null();
     ui_load_texture(texture_desc_array);
     if (!ui_check_texture_array())
