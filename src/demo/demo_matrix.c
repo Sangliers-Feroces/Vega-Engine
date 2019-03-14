@@ -37,8 +37,11 @@ void set_matrix_vp(demo_t *demo, gluint program)
 {
     vec3 pos = {0.0f, 0.0f, -5.0f};
     vec3 rot = {0.0f, 0.0f, 0.0f};
-    proj_t proj_struct = {0.1f, 1000.0f, 90.0f, 16.0f/9.0f};
+    proj_t proj_struct = {0.1f, 1000.0f, 90.0f, 16.0f / 9.0f};
+    proj_t ortho_struct = proj_struct;
 
+    ortho_struct.fov_w = 10.0f;
+    (void)ortho_struct;
     mat4_perspective(proj_struct, demo->mvp.proj);
     mat4_view(pos, rot, demo->mvp.view);
     mat4_mul(demo->mvp.proj, demo->mvp.view, demo->mvp.vp);
