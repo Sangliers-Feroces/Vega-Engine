@@ -10,12 +10,13 @@
 void check_mouse_move(demo_t *demo)
 {
     sfVector2i new_pos;
+    float sensi = 0.0015f;
 
     if (!demo->mouse.first_click)
         return;
     new_pos = sfMouse_getPositionRenderWindow(demo->win.window);
-    demo->cam.rot.y += (float)(new_pos.x - demo->mouse.mouse_pos.x) * 0.002f;
-    demo->cam.rot.x += (float)(new_pos.y - demo->mouse.mouse_pos.y) * 0.002f;
+    demo->cam.rot.y -= (float)(new_pos.x - demo->mouse.mouse_pos.x) * sensi;
+    demo->cam.rot.x -= (float)(new_pos.y - demo->mouse.mouse_pos.y) * sensi;
     demo->mouse.mouse_pos = new_pos;
 }
 

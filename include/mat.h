@@ -64,6 +64,9 @@ int is_point_in_triangle(vec3 p, vec3 *triangle);
 int is_barycentric_valid(vec3 bar);
 int is_point_in_triangle_get_bar(vec3 p, vec3 *triangle, vec3 *bar);
 
+int is_barycentric_valid_laxist(vec3 bar);
+int is_point_in_triangle_laxist(vec3 p, vec3 *triangle);
+
 vec2 circle_intersect(circle a, circle b);
 
 vec3 spherical_to_cartesian_z(vec3 spherical);

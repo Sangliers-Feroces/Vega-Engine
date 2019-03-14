@@ -9,7 +9,8 @@
 
 static void check_col(demo_t *demo, vec3 pos, vec3 *speed)
 {
-    inter_ray3 inter = octree_intersect_ray(demo->tree, (ray3){pos, *speed});
+    inter_ray3 inter = octree_intersect_ray_laxist(
+    demo->tree, (ray3){pos, *speed});
     vec3 p_in;
 
     if (inter.triangle == NULL)
@@ -21,7 +22,7 @@ static void check_col(demo_t *demo, vec3 pos, vec3 *speed)
     (ray3){p_in, inter.triangle->normal});
     if (inter.triangle == NULL)
         return;
-    *speed = vec3_add(*speed, vec3_muls(vec3_sub(inter.p, p_in), 1.05f));
+    *speed = vec3_add(*speed, vec3_muls(vec3_sub(inter.p, p_in), 1.1f));
 }
 
 static void slow_player_down(demo_t *demo)
