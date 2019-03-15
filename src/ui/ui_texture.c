@@ -21,7 +21,8 @@ void display_selected_texture(demo_t *demo, float depth)
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE,
     sizeof(vec2), BUFFER_OFFSET(0));
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, demo->texture_panel.texture[_ui.selected_texture]->id);
+    glBindTexture(GL_TEXTURE_2D,
+    demo->texture_panel.texture[_ui.selected_texture]->id);
     glDrawArrays(GL_TRIANGLES, 0, 6);
     glDisableVertexAttribArray(0);
 }

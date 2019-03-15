@@ -107,6 +107,7 @@ extern void (*p_glgetintegeri_v)(glenum pname, gluint index, glint *params);
 #define glActiveTexture p_glactivetexture
 #define glCullFace p_glcullface
 #define glFrontFace p_glfrontface
+#define glPolygonMode p_glpolygonmode
 #define glBlendEquationSeparate p_glblendequationseparate
 #define glBlendFuncSeparate p_glblendfuncseparate
 

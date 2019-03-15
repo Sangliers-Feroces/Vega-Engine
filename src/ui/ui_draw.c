@@ -28,7 +28,7 @@ void ui_draw_full_rel(uires_t index, rect_t rect, float depth)
 
 void button_draw(button_t button)
 {
-    ui_draw_full_rel(button.texture_index, button_get_size(button), -0.9f);
+    ui_draw_full_rel(button.texture_index, button_get_size(button), -0.999f);
 }
 
 void ui_display(int task, demo_t *demo)
@@ -39,5 +39,5 @@ void ui_display(int task, demo_t *demo)
     for (int i = 0; i < UIBUTTON_MAX; i++) {
         button_draw(_ui.buttons[i]);
     }
-    display_selected_texture(demo, -1);
+    display_selected_texture(demo, -1.0f);
 }
