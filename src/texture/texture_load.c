@@ -62,8 +62,8 @@ demo_t *demo_get_texture_pannel(demo_t *demo)
         path = get_texture_path(read->d_name);
         demo->texture_panel.texture[i] =
         texture2_load(path);
+        free(path);
     }
-    free(path);
     closedir(rep);
     return demo;
 }
