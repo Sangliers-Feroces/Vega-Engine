@@ -67,7 +67,6 @@ typedef struct {
 typedef struct {
     texture2 *texture;
     vec2 uv[3];
-    int is_linked;     /* set to one if the texture should be free'd with */
 } texture2_binding;    /* the object linked                               */
 
 typedef struct {

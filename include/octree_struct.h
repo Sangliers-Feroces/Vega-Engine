@@ -12,6 +12,7 @@
 typedef struct {
     vec3 vertex[3];
     texture2f_binding lightmap;
+    texture2_binding albelo;
     vec3 normal;               /* normal + tangent + bitangent         */
     vec3 tangent;              /* are very key to create tangent space */
     vec3 bitangent;            /* and then to make lights rays bounce  */

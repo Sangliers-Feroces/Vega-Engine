@@ -43,7 +43,9 @@ typedef struct {
 } cam_t;
 
 typedef struct {
-    int first_click;
+    sfMouseButton button_last;
+    sfMouseButton button_state;
+    sfMouseButton button_click;
     sfVector2i mouse_pos;
 } mouse_t;
 

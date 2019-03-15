@@ -23,7 +23,8 @@ static void init_cam(demo_t *demo)
 
 static int init_mouse(demo_t *demo)
 {
-    demo->mouse.first_click = 0;
+    demo->mouse.button_state = 0;
+    demo->mouse.button_click = 0;
     demo->mouse.mouse_pos = (sfVector2i){0, 0};
     return (1);
 }
@@ -72,5 +73,6 @@ void demo_quit(demo_t *demo)
     quit();
     sfRenderWindow_destroy(demo->win.window);
     octree_destroy(&demo->tree);
+    sfClock_destroy(demo->win.frametime);
     free(demo);
 }
