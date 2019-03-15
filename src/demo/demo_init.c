@@ -18,6 +18,7 @@ static void init_cam(demo_t *demo)
     demo->player.state = GAME_EDITOR;
     demo->player.pos = (vec3){0.0f, 0.0f, 0.0f};
     demo->player.speed = (vec3){0.0f, 0.0f, 0.0f};
+    demo_set_cam_to_origin(demo);
 }
 
 static int init_mouse(demo_t *demo)

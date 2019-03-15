@@ -42,20 +42,6 @@ float width_screen, float height)
     return rect_is_vec2_inside(button_get_size(button), relative_mouse_pos);
 }
 
-static void button_effect(demo_t *demo)
-{
-    if (_ui.button_clicked == UIBUTTON_PLAY) {
-        demo->player.state = !demo->player.state;
-        if (demo->player.state == GAME_PLAYING) {
-            demo->player.pos = vec3_sub(demo->cam.pos,
-            (vec3){0.0f, 1.75f, 0.0f});
-            demo->player.speed = (vec3){0.0f, 0.0f, 0.0f};
-        }
-    }
-    if (_ui.button_clicked == UIBUTTON_ISO)
-        demo->cam.proj = !demo->cam.proj;
-}
-
 void ui_check_click_button(demo_t *demo)
 {
     _ui.button_clicked = UINOBUTTON;
@@ -65,5 +51,5 @@ void ui_check_click_button(demo_t *demo)
             _ui.button_clicked = UIBUTTON_MOVE + i;
         }
     }
-    button_effect(demo);
+    ui_button_effect(demo);
 }
