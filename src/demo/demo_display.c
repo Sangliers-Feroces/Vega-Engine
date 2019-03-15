@@ -59,7 +59,6 @@ void demo_loop(demo_t *demo)
         demo->player.state == GAME_EDITOR);
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
-        ui_swicth_button_action(demo);
         ui_display(1, demo);
         sfRenderWindow_display(demo->win.window);
     } while (poll_events(demo));

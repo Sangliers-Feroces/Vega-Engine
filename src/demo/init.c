@@ -13,6 +13,9 @@ void init(void)
     srand(time(NULL));
     load_gl_fun();
     glEnable(GL_CULL_FACE);
+    glEnable(GL_BLEND);
+    glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
+    glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
     lightmap_init();
 }
 

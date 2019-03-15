@@ -30,4 +30,9 @@ void ui_button_effect(demo_t *demo)
         demo->cam.proj = !demo->cam.proj;
     if (_ui.button_clicked == UIBUTTON_CAM)
         demo_set_cam_to_origin(demo);
+    if (_ui.button_clicked == UIBUTTON_TEXTURE) {
+        _ui.selected_texture++;
+        if (_ui.selected_texture == demo->texture_panel.count)
+            _ui.selected_texture = 0;
+    }
 }

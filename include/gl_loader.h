@@ -39,6 +39,9 @@ glboolean transform, const glfloat *value);
 extern void (*p_glcullface)(glenum mode);
 extern void (*p_glfrontface)(glenum mode);
 extern void (*p_glpolygonmode)(glenum face, glenum mode);
+extern void (*p_glblendequationseparate)(glenum mode_rgb, glenum mode_alpha);
+extern void (*p_glblendfuncseparate)(glenum src_rgb, glenum dst_rgb,
+glenum src_alpha, glenum dst_alpha);
 
 extern void (*p_glenablevertexattribarray)(gluint index);
 extern void (*p_gldisablevertexattribarray)(gluint index);
@@ -104,7 +107,8 @@ extern void (*p_glgetintegeri_v)(glenum pname, gluint index, glint *params);
 #define glActiveTexture p_glactivetexture
 #define glCullFace p_glcullface
 #define glFrontFace p_glfrontface
-#define glPolygonMode p_glpolygonmode
+#define glBlendEquationSeparate p_glblendequationseparate
+#define glBlendFuncSeparate p_glblendfuncseparate
 
 #define glEnableVertexAttribArray p_glenablevertexattribarray
 #define glDisableVertexAttribArray p_gldisablevertexattribarray

@@ -32,6 +32,9 @@ glboolean transform, const glfloat *value);
 const void (*p_glcullface)(glenum mode);
 const void (*p_glfrontface)(glenum mode);
 const void (*p_glpolygonmode)(glenum face, glenum mode);
+const void (*p_glblendequationseparate)(glenum mode_rgb, glenum mode_alpha);
+const void (*p_glblendfuncseparate)(glenum src_rgb, glenum dst_rgb,
+glenum src_alpha, glenum dst_alpha);
 
 const void (*p_glenablevertexattribarray)(gluint index);
 const void (*p_gldisablevertexattribarray)(gluint index);
@@ -99,6 +102,8 @@ static void load_1(void)
     p_glcullface = glXGetProcAddressARB("glCullFace");
     p_glfrontface = glXGetProcAddressARB("glFrontFace");
     p_glpolygonmode = glXGetProcAddressARB("glPolygonMode");
+    p_glblendequationseparate = glXGetProcAddressARB("glBlendEquationSeparate");
+    p_glblendfuncseparate = glXGetProcAddressARB("glBlendFuncSeparate");
 }
 
 static void load_2(void)
