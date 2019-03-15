@@ -50,7 +50,8 @@ demo_t *demo_get_texture_pannel(demo_t *demo)
     DIR *rep = opendir("res/textures");
 
     demo->texture_panel.count = get_pannel_count();
-    demo->texture_panel.texture = malloc_safe(demo->texture_panel.count);
+    demo->texture_panel.texture =
+    malloc_safe((sizeof(texture2*) * demo->texture_panel.count));
     for (int i = 0; i < demo->texture_panel.count; i++) {
         read = readdir(rep);
         if (read->d_name[0] == '.') {
