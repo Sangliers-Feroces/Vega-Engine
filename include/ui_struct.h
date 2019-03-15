@@ -22,6 +22,7 @@ typedef enum {
     UIRES_PLAY,
     UIRES_ISO,
     UIRES_CAM,
+    UIRES_CADRE,
     UIRES_MAX
 } uires_t;
 
@@ -33,8 +34,9 @@ typedef enum {
     UIBUTTON_PLAY,
     UIBUTTON_ISO,
     UIBUTTON_CAM,
+    UIBUTTON_CADRE,
     UIBUTTON_MAX,
-    UINOBUTTON,
+    UINOBUTTON
 } uibutton_t;
 
 typedef struct {
@@ -51,6 +53,7 @@ typedef struct {
     uires_t texture_index;
     vec2 pos;
     float size;
+    float depth;
     button_rel_type_t rel;
 } button_t;
 

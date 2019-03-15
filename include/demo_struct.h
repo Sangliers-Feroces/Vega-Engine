@@ -9,6 +9,11 @@
 #define _DEMO_STRUCT_H
 
 typedef enum {
+    ACTION_PAINT,
+    ACTION_MOVE
+} action_t;
+
+typedef enum {
     KEY_UP = 0,
     KEY_DOWN = 1,
     KEY_LEFT = 2,
@@ -69,6 +74,7 @@ typedef struct {
 } player_t;
 
 typedef struct {
+    action_t action;
     win_t win;
     cam_t cam;
     input_t input;

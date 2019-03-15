@@ -62,6 +62,7 @@ demo_t* demo_init(void)
     gl_gen(res);
     demo_get_texture_pannel(res);
     _ui.selected_texture = 0;
+    res->action = ACTION_MOVE;
     return (res);
 }
 
