@@ -7,6 +7,16 @@
 
 #include "headers.h"
 
+void set_cadre(demo_t *demo)
+{
+    if (demo->action == ACTION_MOVE)
+        _ui.buttons[UIBUTTON_MAX - 1].pos = (vec2){-0.95f, 0.70f};
+    else if (demo->action == ACTION_PAINT)
+        _ui.buttons[UIBUTTON_MAX - 1].pos = (vec2){-0.70f, 0.70f};
+    else
+        return;
+}
+
 static int check_click_pos(sfVector2i mouse_pos, button_t button,
 float width_screen, float height)
 {
@@ -29,5 +39,10 @@ void ui_check_click_button(demo_t *demo)
             _ui.button_clicked = UIBUTTON_MOVE + i;
         }
     }
+    if (_ui.button_clicked == UIBUTTON_MOVE)
+        demo->action = ACTION_MOVE;
+    else if (_ui.button_clicked == UIBUTTON_PAINT)
+        demo->action = ACTION_PAINT;
+    set_cadre(demo);
     ui_button_effect(demo);
 }
