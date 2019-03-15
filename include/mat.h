@@ -74,4 +74,6 @@ vec3 spherical_to_cartesian_z_to_x(vec3 spherical);
 
 int rect_is_vec2_inside(rect_t rect, vec2 vec);
 
+vec3 vec3_interpolate(vec3 a, vec3 b, long double ratio);
+
 #endif

@@ -48,6 +48,9 @@ void demo_loop(demo_t *demo)
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     while (poll_events(demo)) {
+        demo_refresh_viewport(demo);
+        ray3 ray = demo_get_ray(demo, (ivec2){1600 / 2, 900 / 2});
+        printf("%f, %f, %f\n", ray.v.x, ray.v.y, ray.v.z);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUseProgram(demo->buf.lightmap_shader);
         send_aperture(demo, demo->buf.lightmap_shader);

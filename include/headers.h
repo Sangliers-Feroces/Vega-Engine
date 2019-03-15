@@ -22,7 +22,6 @@
 #include <sys/types.h>
 #include <dirent.h>
 
-
 #include <SFML/Window.h>
 #include <SFML/Graphics.h>
 #include "gl_loader.h"

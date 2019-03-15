@@ -31,19 +31,7 @@ uint32_t rtx(demo_t *demo, vec3 ray)
         return 0xFF000000;
 }
 
-vec3 get_plane(demo_t *demo, vec3 *top_left, vec3 *top_right,
-vec3 *bottom_left)
-{
-    vec3 res = {-demo->cam.near,
-    demo->cam.near / (long double)demo->cam.ratiowh, demo->cam.near};
-
-    *top_left = res;
-    *top_right = (vec3){-res.x, res.y, res.z};
-    *bottom_left = (vec3){res.x, -res.y, res.z};
-    return (vec3){-res.x, -res.y, res.z};
-}
-
-vec3 interpolate_vec3(vec3 a, vec3 b, long double ratio)
+vec3 vec3_interpolate(vec3 a, vec3 b, long double ratio)
 {
     vec3 res;
     long double ratio_inv = 1.0L - ratio;
@@ -52,9 +40,4 @@ vec3 interpolate_vec3(vec3 a, vec3 b, long double ratio)
     res.y = a.y * ratio_inv + b.y * ratio;
     res.z = a.z * ratio_inv + b.z * ratio;
     return (res);
-}
-
-void demo_render(demo_t *demo)
-{
-    (void)demo;
 }
