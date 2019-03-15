@@ -48,6 +48,7 @@ demo_t *demo_get_texture_pannel(demo_t *demo)
 {
     struct dirent *read;
     DIR *rep = opendir("res/textures");
+    char *path;
 
     demo->texture_panel.count = get_pannel_count();
     demo->texture_panel.texture =
@@ -58,9 +59,11 @@ demo_t *demo_get_texture_pannel(demo_t *demo)
             i--;
             continue;
         }
+        path = get_texture_path(read->d_name);
         demo->texture_panel.texture[i] =
-        texture2_load(get_texture_path(read->d_name));
+        texture2_load(path);
     }
+    free(path);
     closedir(rep);
     return demo;
 }
