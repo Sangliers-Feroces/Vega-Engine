@@ -66,6 +66,7 @@ demo_t* demo_init(void)
 
 void demo_quit(demo_t *demo)
 {
+    demo_texture_destroy(demo);
     gl_delete(demo);
     ui_quit();
     quit();

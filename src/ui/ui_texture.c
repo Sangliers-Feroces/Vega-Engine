@@ -7,6 +7,13 @@
 
 #include "headers.h"
 
+void demo_texture_destroy(demo_t *demo)
+{
+    for (int i = 0; i < demo->texture_panel.count; i++)
+        texture2_destroy(demo->texture_panel.texture[i]);
+    free(demo->texture_panel.texture);
+}
+
 void display_selected_texture(demo_t *demo, float depth)
 {
     gluint pos_id = glGetUniformLocation(_ui.ui_program, "pos");
