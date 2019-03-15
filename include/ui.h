@@ -13,7 +13,7 @@
 void ui_init(demo_t *demo);
 void ui_quit(void);
 
-void ui_draw_full_rel(uires_t index, rect_t rect);
+void ui_draw_full_rel(uires_t index, rect_t rect, float depth);
 void button_draw(button_t button);
 void ui_display(int task, demo_t *demo);
 
@@ -28,6 +28,6 @@ rect_t button_get_size(button_t button);
 void demo_set_cam_to_origin(demo_t *demo);
 void ui_button_effect(demo_t *demo);
 
-void display_selected_texture(demo_t *demo);
+void display_selected_texture(demo_t *demo, float depth);
 
 #endif /* !UI_H_ */

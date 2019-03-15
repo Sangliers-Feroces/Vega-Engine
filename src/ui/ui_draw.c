@@ -7,11 +7,13 @@
 
 #include "headers.h"
 
-void ui_draw_full_rel(uires_t index, rect_t rect)
+void ui_draw_full_rel(uires_t index, rect_t rect, float depth)
 {
     gluint pos_id = glGetUniformLocation(_ui.ui_program, "pos");
     gluint size_id = glGetUniformLocation(_ui.ui_program, "size");
+    gluint depth_id = glGetUniformLocation(_ui.ui_program, "depth");
 
+    glUniform1f(depth_id, depth);
     glUniform2fv(pos_id, 1, (glfloat *)&rect.p);
     glUniform2fv(size_id, 1, (glfloat *)&rect.s);
     glBindBuffer(GL_ARRAY_BUFFER, _ui.vertex_buffer);
@@ -26,7 +28,7 @@ void ui_draw_full_rel(uires_t index, rect_t rect)
 
 void button_draw(button_t button)
 {
-    ui_draw_full_rel(button.texture_index, button_get_size(button));
+    ui_draw_full_rel(button.texture_index, button_get_size(button), -0.9f);
 }
 
 void ui_display(int task, demo_t *demo)
@@ -37,5 +39,5 @@ void ui_display(int task, demo_t *demo)
     for (int i = 0; i < UIBUTTON_MAX; i++) {
         button_draw(_ui.buttons[i]);
     }
-    display_selected_texture(demo);
+    display_selected_texture(demo, -1);
 }
