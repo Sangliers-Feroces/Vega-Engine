@@ -76,4 +76,9 @@ typedef struct {
     texture_cluster_row_alloc *alloc;
 } texture2f_binding;
 
+typedef struct {
+    int count;
+    texture2 **texture;
+} texture_pannel_t;
+
 #endif

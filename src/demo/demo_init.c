@@ -59,6 +59,8 @@ demo_t* demo_init(void)
     init();
     ui_init(res);
     gl_gen(res);
+    demo_get_texture_pannel(res);
+    _ui.selected_texture = 0;
     return (res);
 }
 

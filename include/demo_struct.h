@@ -74,6 +74,7 @@ typedef struct {
     mouse_t mouse;
     player_t player;
     buf_t buf;
+    texture_pannel_t texture_panel;
 } demo_t;
 
 #endif

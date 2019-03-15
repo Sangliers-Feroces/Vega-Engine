@@ -55,6 +55,7 @@ typedef struct {
 } button_t;
 
 typedef struct {
+    int selected_texture;
     uibutton_t button_clicked;
     gluint ui_program;
     gluint vertex_buffer;

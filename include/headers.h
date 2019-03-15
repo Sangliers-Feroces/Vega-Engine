@@ -19,6 +19,9 @@
 #include <signal.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/types.h>
+#include <dirent.h>
+
 
 #include <SFML/Window.h>
 #include <SFML/Graphics.h>

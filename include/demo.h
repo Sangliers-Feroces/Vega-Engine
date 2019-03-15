@@ -41,4 +41,6 @@ void player_physics(demo_t *demo);
 
 void demo_update_framerate(demo_t *demo);
 
+demo_t *demo_get_texture_pannel(demo_t *demo);
+
 #endif

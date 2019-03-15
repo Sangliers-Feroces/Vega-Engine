@@ -37,4 +37,5 @@ void ui_display(int task, demo_t *demo)
     for (int i = 0; i < UIBUTTON_MAX; i++) {
         button_draw(_ui.buttons[i]);
     }
+    display_selected_texture(demo);
 }

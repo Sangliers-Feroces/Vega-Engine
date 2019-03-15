@@ -7,26 +7,36 @@
 
 #include "headers.h"
 
-void ui_swicth_button_action(void)
+void ui_swicth_button_action(demo_t *demo)
 {
     switch (_ui.button_clicked) {
     case UIBUTTON_MOVE:
-        return (void)printf("Move\n");
+        printf("Move\n");
+        break;
     case UIBUTTON_PAINT:
-        return (void)printf("Paint\n");
-    case UIBUTTON_TEXTURE:
-        return (void)printf("Texture\n");
+        printf("Paint\n");
+        break;
+    case UIBUTTON_TEXTURE: // a separer dans une fonction a part
+        _ui.selected_texture++;
+        if (_ui.selected_texture == demo->texture_panel.count)
+            _ui.selected_texture = 0;
+        break;
     case UIBUTTON_LIGHTMAPS:
-        return (void)printf("Lightmap\n");
+        printf("Lightmap\n");
+        break;
     case UIBUTTON_PLAY:
-        return (void)printf("Play\n");
+        printf("Play\n");
+        break;
     case UIBUTTON_ISO:
-        return (void)printf("Iso\n");
+        printf("Iso\n");
+        break;
     case UIBUTTON_CAM:
-        return (void)printf("Cam\n");
+        printf("Cam\n");
+        break;
     default:
         return;
     }
+    _ui.button_clicked = UINOBUTTON;
 }
 
 static int check_click_pos(sfVector2i mouse_pos, button_t button,

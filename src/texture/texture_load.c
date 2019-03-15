@@ -7,6 +7,63 @@
 
 #include "headers.h"
 
+static int get_pannel_count(void)
+{
+    int count = 0;
+    struct dirent *read;
+    DIR *rep = opendir("res/textures");
+
+    if (rep == NULL)
+        return 0;
+    while ((read = readdir(rep)) != NULL) {
+        if (read->d_name[0] == '.')
+            continue;
+        count++;
+    }
+    closedir(rep);
+    return count;
+}
+
+char *get_texture_path(char *name)
+{
+    int j = 0;
+    int name_size = my_strlen(name);
+    char path_front[] = "res/textures/";
+    char *res;
+
+    res = malloc_safe(14 + name_size);
+    for (int i = 0; i < 13; i++) {
+        res[j] = path_front[i];
+        j++;
+    }
+    for (int i = 0; i < name_size; i++) {
+        res[j] = name[i];
+        j++;
+    }
+    res[j] = '\0';
+    return res;
+}
+
+demo_t *demo_get_texture_pannel(demo_t *demo)
+{
+    struct dirent *read;
+    DIR *rep = opendir("res/textures");
+
+    demo->texture_panel.count = get_pannel_count();
+    demo->texture_panel.texture = malloc_safe(demo->texture_panel.count);
+    for (int i = 0; i < demo->texture_panel.count; i++) {
+        read = readdir(rep);
+        if (read->d_name[0] == '.') {
+            i--;
+            continue;
+        }
+        demo->texture_panel.texture[i] =
+        texture2_load(get_texture_path(read->d_name));
+    }
+    closedir(rep);
+    return demo;
+}
+
 texture2* texture2_load(const char *path)
 {
     sfImage *image = sfImage_createFromFile(path);
