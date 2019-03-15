@@ -22,6 +22,8 @@ void ui_swicth_button_action(void)
         return (void)printf("Play\n");
     case UIBUTTON_ISO:
         return (void)printf("Iso\n");
+    case UIBUTTON_CAM:
+        return (void)printf("Cam\n");
     default:
         return;
     }
