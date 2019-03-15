@@ -42,6 +42,7 @@ int poll_events(demo_t *demo)
     sfEvent event;
 
     demo->mouse.button_last = demo->mouse.button_state;
+    poll_click(demo);
     if (!sfRenderWindow_isOpen(demo->win.window))
         return (0);
     while (sfRenderWindow_pollEvent(demo->win.window, &event))
