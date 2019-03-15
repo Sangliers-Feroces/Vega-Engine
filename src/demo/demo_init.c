@@ -15,6 +15,7 @@ static void init_cam(demo_t *demo)
     demo->cam.fovw = M_PI / 2.0f;
     demo->cam.near = 1.0L;
     demo->cam.proj = PROJ_TYPE_PERSPECTIVE;
+    demo->player.is_grounded = 0;
     demo->player.state = GAME_EDITOR;
     demo->player.pos = (vec3){0.0f, 0.0f, 0.0f};
     demo->player.speed = (vec3){0.0f, 0.0f, 0.0f};
