@@ -15,6 +15,7 @@ static const ui_texture_descriptor_t texture_desc_array[] = {
     {UIRES_LIGHTMAPS, "res/ui/ui_lightmap_button.png"},
     {UIRES_PLAY, "res/ui/ui_play_button.png"},
     {UIRES_ISO, "res/ui/ui_iso_button.png"},
+    {UIRES_CAM, "res/ui/ui_reset_button.png"},
     {0, NULL}
 };
 

@@ -21,6 +21,8 @@ void ui_set_buttons(void)
     (button_t){UIRES_PLAY, (vec2){0.55f, 0.70f}, 0.1f, BUTTON_REL_X};
     _ui.buttons[UIBUTTON_ISO] =
     (button_t){UIRES_ISO, (vec2){0.80f, 0.70f}, 0.1f, BUTTON_REL_X};
+    _ui.buttons[UIBUTTON_CAM] =
+    (button_t){UIRES_CAM, (vec2){-0.05f, 0.70f}, 0.1f, BUTTON_REL_X};
 }
 
 void ui_load_texture(const ui_texture_descriptor_t descriptors_array[])

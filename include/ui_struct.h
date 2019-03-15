@@ -21,6 +21,7 @@ typedef enum {
     UIRES_LIGHTMAPS,
     UIRES_PLAY,
     UIRES_ISO,
+    UIRES_CAM,
     UIRES_MAX
 } uires_t;
 
@@ -31,6 +32,7 @@ typedef enum {
     UIBUTTON_LIGHTMAPS,
     UIBUTTON_PLAY,
     UIBUTTON_ISO,
+    UIBUTTON_CAM,
     UIBUTTON_MAX,
     UINOBUTTON,
 } uibutton_t;
