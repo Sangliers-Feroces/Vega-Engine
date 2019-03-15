@@ -35,7 +35,7 @@ void ui_init(demo_t *demo)
 {
     const vec2 vertex_array_base[] =
     {{0.0f, 0.0f}, {0.0f, 1.0f}, {1.0f, 0.0f},
-    {0.0f, 1.0f}, 1.0f, 1.0f}, 1.0f, 0.0f}};
+    {0.0f, 1.0f}, {1.0f, 1.0f}, {1.0f, 0.0f}};
 
     _ui.ratiowh = demo->cam.ratiowh;
     _ui.ui_program = shader_load_vert_frag("src/gpu/shader/ui_vertex.glsl",

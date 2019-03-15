@@ -32,6 +32,6 @@ void mat4_ortho(proj_t proj, mat4 res)
     res[0][0] = 2.0f / (w);
     res[1][1] = 2.0f / (h);
     res[2][2] = 2.0f / (proj.far_plane - proj.near_plane);
-    res[3][2] = -(proj.far_plane + proj.near_plane) /
+    res[3][2] = - (proj.far_plane + proj.near_plane) /
     (proj.far_plane - proj.near_plane);
 }

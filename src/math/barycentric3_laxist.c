@@ -10,7 +10,8 @@
 static int is_float_in_0_1(float value)
 {
     float laxistness = 0.1f;
-    return (value >= (- laxistness)) && (value <= 1.0f + (laxistness));
+
+    return (value >= -laxistness) && (value <= 1.0f + (laxistness));
 }
 
 int is_point_in_triangle_laxist(vec3 p, vec3 *triangle)
