@@ -11,7 +11,7 @@ void editor_paint(demo_t *demo, inter_ray3 inter)
 {
     if (inter.triangle == NULL)
         return;
-    printf("got: %p\n", inter.triangle->albelo.texture);
+    printf("textured: %p\n", inter.triangle);
     inter.triangle->albelo.texture =
     demo->texture_panel.texture[_ui.selected_texture];
 }

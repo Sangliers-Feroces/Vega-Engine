@@ -76,4 +76,7 @@ int rect_is_vec2_inside(rect_t rect, vec2 vec);
 
 vec3 vec3_interpolate(vec3 a, vec3 b, long double ratio);
 
+void mat4_rot_xy(vec3 rot, mat4 res);
+vec3 mat4_mul_vec3(mat4 mat, vec3 vec);
+
 #endif

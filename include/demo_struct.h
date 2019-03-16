@@ -52,6 +52,7 @@ typedef struct {
     sfMouseButton button_last;
     sfMouseButton button_state;
     sfMouseButton button_click;
+    sfVector2i last_pos;
     sfVector2i mouse_pos;
 } mouse_t;
 

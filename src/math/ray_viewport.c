@@ -24,15 +24,15 @@ ray3 demo_get_ray(demo_t *demo)
 void demo_refresh_viewport(demo_t *demo)
 {
     ray_viewport_t fin;
-    vec3 res = {M_PI / 4.0f,
-    M_PI / 4.0f * ((2.0f * sqrt(3.0f)) / 3.0f), 0.0f};
+    vec3 res = {-demo->cam.ratiowh, 1.0f, 1.0f};
+    mat4 rot;
 
     fin.tl = res;
-    fin.tr = (vec3){res.x, -res.y, res.z};
-    fin.bl = (vec3){-res.x, res.y, res.z};
+    fin.tr = (vec3){-res.x, res.y, res.z};
+    fin.bl = (vec3){res.x, -res.y, res.z};
     fin.br = (vec3){-res.x, -res.y, res.z};
+    mat4_rot_xy(demo->cam.rot, rot);
     for (size_t i = 0; i < 4; i++)
-        (&fin.tl)[i] = spherical_to_cartesian_z(vec3_add((&fin.tl)[i],
-        demo->cam.rot));
+        (&fin.tl)[i] = mat4_mul_vec3(rot, (&fin.tl)[i]);
     demo->cam.viewport = fin;
 }

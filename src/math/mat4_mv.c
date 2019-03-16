@@ -22,7 +22,7 @@ void mat4_scale_trans(vec3 pos, vec3 scale, mat4 res)
     mat4_mul(trans, res, res);
 }
 
-static void rot_xy(float x, float y, mat4 res)
+static void rot_yx(float x, float y, mat4 res)
 {
     float cos, sin;
     mat4 rot_x;
@@ -49,7 +49,7 @@ void mat4_rot(vec3 rot, mat4 res)
     float cos, sin;
     mat4 rot_z;
 
-    rot_xy(rot.x, rot.y, res);
+    rot_yx(rot.x, rot.y, res);
     mat4_identity(rot_z);
     cos = cosf(rot.z);
     sin = sinf(rot.z);

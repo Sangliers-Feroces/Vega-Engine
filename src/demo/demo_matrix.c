@@ -9,15 +9,14 @@
 
 void check_mouse_move(demo_t *demo)
 {
-    sfVector2i new_pos;
     float sensi = 0.0015f;
 
     if (!(demo->mouse.button_state & (1 << sfMouseRight)))
         return;
-    new_pos = sfMouse_getPositionRenderWindow(demo->win.window);
-    demo->cam.rot.y -= (float)(new_pos.x - demo->mouse.mouse_pos.x) * sensi;
-    demo->cam.rot.x -= (float)(new_pos.y - demo->mouse.mouse_pos.y) * sensi;
-    demo->mouse.mouse_pos = new_pos;
+    demo->cam.rot.y -=
+    (float)(demo->mouse.mouse_pos.x - demo->mouse.last_pos.x) * sensi;
+    demo->cam.rot.x -=
+    (float)(demo->mouse.mouse_pos.y - demo->mouse.last_pos.y) * sensi;
 }
 
 static void send_matrix(gluint program, mat4 vp)

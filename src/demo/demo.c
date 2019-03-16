@@ -14,8 +14,6 @@ static int do_stuff_event(demo_t *demo, sfEvent event)
         sfRenderWindow_close(demo->win.window);
         return (0);
     case sfEvtMouseButtonPressed:
-        demo->mouse.mouse_pos =
-        sfMouse_getPositionRenderWindow(demo->win.window);
         demo->mouse.button_state |= (1 << event.mouseButton.button);
         break;
     case sfEvtMouseButtonReleased:
@@ -41,6 +39,8 @@ int poll_events(demo_t *demo)
     sfEvent event;
 
     demo->mouse.button_last = demo->mouse.button_state;
+    demo->mouse.last_pos = demo->mouse.mouse_pos;
+    demo->mouse.mouse_pos = sfMouse_getPositionRenderWindow(demo->win.window);
     if (!sfRenderWindow_isOpen(demo->win.window))
         return (0);
     while (sfRenderWindow_pollEvent(demo->win.window, &event))

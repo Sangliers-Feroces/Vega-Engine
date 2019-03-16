@@ -33,11 +33,11 @@ static void draw_geom(size_t size, int do_backwire)
 {
     glFrontFace(GL_CW);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    glDrawArrays(GL_TRIANGLES, 0, size);
+    glDrawArrays(GL_TRIANGLES, 0, size * 3);
     if (do_backwire) {
         glFrontFace(GL_CCW);
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        glDrawArrays(GL_TRIANGLES, 0, size);
+        glDrawArrays(GL_TRIANGLES, 0, size * 3);
     }
     glFrontFace(GL_CW);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -54,7 +54,7 @@ void demo_loop(demo_t *demo)
         set_vertex_attrib(demo);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, _lightmaps.base->id);
-        draw_geom(demo->buf.vertex_struct.count * 3,
+        draw_geom(demo->buf.vertex_struct.count,
         demo->player.state == GAME_EDITOR);
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
