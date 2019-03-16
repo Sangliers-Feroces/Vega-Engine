@@ -27,17 +27,22 @@ static void set_vertex_attrib(demo_t *demo)
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE,
     sizeof(vertext_array_t), BUFFER_OFFSET(offsetof(vertext_array_t, uv)));
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
+    sizeof(vertext_array_t), BUFFER_OFFSET(offsetof(vertext_array_t, uv_albedo)));
 }
 
 static void draw_geom(size_t size, int do_backwire)
 {
     glFrontFace(GL_CW);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    glDrawArrays(GL_TRIANGLES, 0, size * 3);
-    if (do_backwire) {
-        glFrontFace(GL_CCW);
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        glDrawArrays(GL_TRIANGLES, 0, size * 3);
+    for (size_t i = 0; i < size; i++) {
+        glDrawArrays(GL_TRIANGLES, 0 + (i * 3), 3);
+        /*if (do_backwire) {
+            glFrontFace(GL_CCW);
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+            glDrawArrays(GL_TRIANGLES, 0 + (i * 3), 3);
+        }*/
     }
     glFrontFace(GL_CW);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -58,6 +63,7 @@ void demo_loop(demo_t *demo)
         demo->player.state == GAME_EDITOR);
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
+        glDisableVertexAttribArray(2);
         ui_display(1, demo);
         sfRenderWindow_display(demo->win.window);
     }

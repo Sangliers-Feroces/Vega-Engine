@@ -57,6 +57,7 @@ typedef struct {
 typedef struct {
     vec3 point;
     vec2 uv;
+    vec2 uv_albedo;
 } vertext_array_t;
 
 typedef struct {

@@ -30,6 +30,8 @@ static void fill_array(vertex_struct_t *v_struct, vec_rtx_triangle vec)
             vec.triangle[i]->vertex[j];
             v_struct->v_array[v_struct->offset].uv =
             vec.triangle[i]->lightmap.uv[j];
+            v_struct->v_array[v_struct->offset].uv_albedo =
+            vec.triangle[i]->albelo.uv[j];
             v_struct->offset++;
         }
 }
