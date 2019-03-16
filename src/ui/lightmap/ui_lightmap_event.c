@@ -9,17 +9,27 @@
 
 static void ui_lm_button_effect(demo_t *demo)
 {
-    if (_ui.ui_lightmap_struct.button_clicked == UILMBUTTON_PLUS)
-        demo->temp_ray_density += 10;
-    if (_ui.ui_lightmap_struct.button_clicked == UILMBUTTON_MINUS
-    && demo->temp_ray_density > 10)
-        demo->temp_ray_density -= 10;
-    if (_ui.ui_lightmap_struct.button_clicked == UILMBUTTON_BACK
-    || _ui.ui_lightmap_struct.button_clicked == UILMBUTTON_ABORT)
-        _ui.ui_lightmap_struct.back = 1;
-    if (_ui.ui_lightmap_struct.button_clicked == UILMBUTTON_START)
-        compute_lightmap(demo);
-
+    switch (_ui.ui_lightmap_struct.button_clicked) {
+        case UILMBUTTON_PLUS:
+            demo->temp_ray_density += 10;
+            break;
+        case UILMBUTTON_MINUS:
+            if (demo->temp_ray_density > 10)
+                return;
+            demo->temp_ray_density -= 10;
+            break;
+        case UILMBUTTON_BACK:
+            _ui.ui_lightmap_struct.back = 1;
+            break;
+        case UILMBUTTON_ABORT:
+            thread_abort_task();
+            break;
+        case UILMBUTTON_START:
+            compute_lightmap(demo);
+            break;
+        default:
+            break;
+    }
 }
 
 void ui_lm_check_click_button(demo_t *demo)
