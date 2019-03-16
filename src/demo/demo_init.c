@@ -60,7 +60,7 @@ demo_t* demo_init(void)
     res->tree = octree_create(NULL);
     init();
     ui_init(res);
-    _ui.ui_lightmap_struct = ui_lm_init(res);
+    ui_lightmap_set_buttons();
     gl_gen(res);
     demo_get_texture_pannel(res);
     _ui.selected_texture = 0;

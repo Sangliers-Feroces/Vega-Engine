@@ -23,6 +23,11 @@ typedef enum {
     UIRES_ISO,
     UIRES_CAM,
     UIRES_CADRE,
+    UIRES_LM_TITLE,
+    UIRES_LM_LEGEND,
+    UIRES_LM_PLUS,
+    UIRES_LM_MINUS,
+    UIRES_LM_START,
     UIRES_MAX
 } uires_t;
 
@@ -38,6 +43,15 @@ typedef enum {
     UIBUTTON_MAX,
     UINOBUTTON
 } uibutton_t;
+
+typedef enum {
+    UILMBUTTON_TITLE,
+    UILMBUTTON_PLUS,
+    UILMBUTTON_MINUS,
+    UILMBUTTON_LEGEND,
+    UILMBUTTON_START,
+    UILMBUTTON_END
+} uilmbutton_t;
 
 typedef struct {
     uires_t index;
@@ -58,8 +72,7 @@ typedef struct {
 } button_t;
 
 typedef struct {
-    texture2 *textures[UILIGHTMAP_END];
-    button_t object;
+    button_t object[UILMBUTTON_END];
 } ui_lm_struct_t;
 
 typedef struct {

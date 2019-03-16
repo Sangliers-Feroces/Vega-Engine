@@ -17,6 +17,11 @@ static const ui_texture_descriptor_t texture_desc_array[] = {
     {UIRES_ISO, "res/ui/ui_iso_button.png"},
     {UIRES_CAM, "res/ui/ui_reset_button.png"},
     {UIRES_CADRE, "res/ui/ui_cadre_button.png"},
+    {UIRES_LM_TITLE, "res/ui/ui_lightmap_tiltle.png"},
+    {UIRES_LM_PLUS, "res/ui/ui_lightmap_plus_button.png"},
+    {UIRES_LM_MINUS, "res/ui/ui_lightmap_minus_button.png"},
+    {UIRES_LM_LEGEND, "res/ui/ui_lightmap_legend.png"},
+    {UIRES_LM_START, "res/ui/ui_lightmap_start_button.png"},
     {0, NULL}
 };
 
