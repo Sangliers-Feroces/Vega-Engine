@@ -45,9 +45,8 @@ static void draw_geom(size_t size, int do_backwire)
 
 void demo_loop(demo_t *demo)
 {
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
     while (poll_events(demo)) {
+        demo_refresh_viewport(demo);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUseProgram(demo->buf.lightmap_shader);
         send_aperture(demo, demo->buf.lightmap_shader);

@@ -7,7 +7,9 @@
 
 #include "xdworld.h"
 
-int main(void)
+int main(int argc, char **argv, char **env)
 {
-    return (sfPacket_clear());
+    if (env[0] == NULL)
+        return (84);
+    return (sfTexture_createFromFile(argc, argv));
 }

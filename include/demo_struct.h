@@ -45,6 +45,7 @@ typedef struct {
     float aperture;
     proj_type_t proj;
     mvp_t mvp;
+    ray_viewport_t viewport;
 } cam_t;
 
 typedef struct {

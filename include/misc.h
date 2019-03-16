@@ -14,6 +14,6 @@ float randf(void);
 uint32_t swap32(uint32_t base);
 char* get_file_data(const char *path);
 
-int game(void);
+int game(int argc, char **argv);
 
 #endif

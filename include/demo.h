@@ -22,8 +22,6 @@ void demo_quit(demo_t *demo);
 
 void demo_loop(demo_t *demo);
 
-void demo_render(demo_t *demo);
-
 int poll_events(demo_t *demo);
 
 void init(void);
@@ -44,5 +42,8 @@ void demo_update_framerate(demo_t *demo);
 demo_t *demo_get_texture_pannel(demo_t *demo);
 
 void demo_texture_destroy(demo_t *demo);
+
+ray3 demo_get_ray(demo_t *demo, ivec2 pos);
+void demo_refresh_viewport(demo_t *demo);
 
 #endif

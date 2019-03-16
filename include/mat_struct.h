@@ -54,4 +54,11 @@ typedef struct {
     mat4 vp;
 } mvp_t;
 
+typedef struct {
+    vec3 tl;
+    vec3 tr;
+    vec3 bl;
+    vec3 br;
+} ray_viewport_t;
+
 #endif

@@ -35,7 +35,7 @@ static void init_win(demo_t *demo)
     demo->win.w = 1600;
     demo->win.h = 900;
     demo->win.window = sfRenderWindow_create((sfVideoMode){demo->win.w,
-    demo->win.h, 32}, "rtx on !", sfResize | sfClose,
+    demo->win.h, 32}, "rtx on !", sfClose,
     &(sfContextSettings){24, 8, 4, 4, 3, 0, 1});
     if (demo->win.window == NULL)
         exit_full_custom();

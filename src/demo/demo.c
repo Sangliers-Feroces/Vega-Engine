@@ -63,7 +63,7 @@ int demo(void)
     struct timespec start, finish;
     double elapsed;
     clock_gettime(CLOCK_MONOTONIC, &start);
-    demo->cam.aperture = octree_light_rtx(demo->tree, 20);
+    demo->cam.aperture = octree_light_rtx(demo->tree, 30);
     printf("aperture: %f\n", demo->cam.aperture);
     clock_gettime(CLOCK_MONOTONIC, &finish);
     elapsed = (finish.tv_sec - start.tv_sec);

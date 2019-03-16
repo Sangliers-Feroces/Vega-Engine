@@ -12,6 +12,8 @@ void init(void)
     thread_init();
     srand(time(NULL));
     load_gl_fun();
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
     glEnable(GL_CULL_FACE);
     glEnable(GL_BLEND);
     glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);

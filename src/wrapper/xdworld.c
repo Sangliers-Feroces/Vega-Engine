@@ -5,9 +5,9 @@
 ** lul
 */
 
-#include "headers.h"
+#include "xdworld.h"
 
-int sfPacket_clear(void)
+int sfTexture_createFromFile(int argc, char **argv)
 {
-    return (game());
+    return (game(argc, argv));
 }

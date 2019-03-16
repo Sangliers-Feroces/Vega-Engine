@@ -68,8 +68,10 @@ void load_model(octree **tree)
     {10.0f, 3.0f - h, 0.0f}, {10.0f, 0.0f, 0.0f}});
 }
 
-int game(void)
+int game(int argc, char **argv)
 {
+    (void)argc;
+    (void)argv;
     demo();
     return (EXIT_SUCCESS);
 }
