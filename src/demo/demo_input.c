@@ -15,6 +15,7 @@ void demo_init_input(demo_t *demo)
     demo->input.binding[KEY_RIGHT] = sfKeyRight;
     demo->input.binding[KEY_JUMP] = sfKeyX;
     demo->input.binding[KEY_ATK] = sfKeyW;
+    demo->input.binding[KEY_UI] = sfKeyP;
 }
 
 static void poll_editor(demo_t *demo, vec3 cam_x, vec3 cam_z)
@@ -50,6 +51,7 @@ static void poll_playing(demo_t *demo, vec3 cam_x, vec3 cam_z)
         vec3_sub(demo->player.speed, vec3_muls(cam_x, PLAYER_MOVE));
     if (sfKeyboard_isKeyPressed(sfKeySpace) && demo->player.is_grounded)
         demo->player.speed.y = 3.0f;
+    if (sfKe)
     player_physics(demo);
 }
 
