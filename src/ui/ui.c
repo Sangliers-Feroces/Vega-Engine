@@ -48,28 +48,36 @@ static int ui_check_texture_array(void)
     return 1;
 }
 
-void ui_init(demo_t *demo)
+static void load_gl_stuff(void)
 {
     const vec2 vertex_array_base[] =
     {{0.0f, 0.0f}, {0.0f, 1.0f}, {1.0f, 0.0f},
     {0.0f, 1.0f}, {1.0f, 1.0f}, {1.0f, 0.0f}};
 
-    _ui.ratiowh = demo->cam.ratiowh;
     _ui.ui_program = shader_load_vert_frag("src/gpu/shader/ui_vertex.glsl",
     "src/gpu/shader/ui_fragment.glsl");
     if (_ui.ui_program == 0) {
         printf("Can't load ui shader.\n");
         exit(84);
     }
+    glGenBuffers(1, &_ui.vertex_buffer);
+    glBindBuffer(GL_ARRAY_BUFFER, _ui.vertex_buffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vec2) * 6,
+    (glvoid*)vertex_array_base, GL_STATIC_DRAW);
+}
+
+void ui_init(demo_t *demo)
+{
+    _ui.ratiowh = demo->cam.ratiowh;
     ui_set_textures_to_null();
     ui_load_texture(texture_desc_array);
     if (!ui_check_texture_array())
         exit(84);
     ui_set_buttons();
-    glGenBuffers(1, &_ui.vertex_buffer);
-    glBindBuffer(GL_ARRAY_BUFFER, _ui.vertex_buffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vec2) * 6,
-    (glvoid*)vertex_array_base, GL_STATIC_DRAW);
+    ui_lightmap_set_buttons();
+    _ui.selected_texture = 0;
+    demo->action = ACTION_MOVE;
+    load_gl_stuff();
 }
 
 void ui_quit(void)

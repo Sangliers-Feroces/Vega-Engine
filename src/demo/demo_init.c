@@ -55,16 +55,14 @@ demo_t* demo_init(void)
     res = malloc_safe(sizeof(demo_t));
     init_win(res);
     init_cam(res);
-    _ui.button_clicked = UINOBUTTON;
+    _ui.button_clicked = UIBUTTON_NONE;
     demo_init_input(res);
     res->tree = octree_create(NULL);
     init();
     ui_init(res);
-    ui_lightmap_set_buttons();
+    editor_init(res);
     gl_gen(res);
     demo_get_texture_pannel(res);
-    _ui.selected_texture = 0;
-    res->action = ACTION_MOVE;
     return (res);
 }
 
@@ -72,6 +70,7 @@ void demo_quit(demo_t *demo)
 {
     demo_texture_destroy(demo);
     gl_delete(demo);
+    editor_quit(demo);
     ui_quit();
     quit();
     sfRenderWindow_destroy(demo->win.window);

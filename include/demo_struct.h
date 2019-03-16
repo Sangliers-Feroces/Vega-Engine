@@ -76,7 +76,13 @@ typedef struct {
 } player_t;
 
 typedef struct {
+    size_t count;
+    size_t allocated;
+    vec3 *selection;
+} vec_selection_t;
 
+typedef struct {
+    vec_selection_t selections;
 } editor_t;
 
 typedef struct {

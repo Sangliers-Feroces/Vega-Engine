@@ -32,7 +32,7 @@ float width_screen, float height)
 
 void ui_check_click_button(demo_t *demo)
 {
-    _ui.button_clicked = UINOBUTTON;
+    _ui.button_clicked = UIBUTTON_NONE;
     for (int i = 0; i < UIBUTTON_MAX; i++) {
         if (check_click_pos(demo->mouse.mouse_pos, _ui.buttons[i],
         demo->win.w, demo->win.h)) {

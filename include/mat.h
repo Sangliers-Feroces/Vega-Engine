@@ -37,6 +37,7 @@ vec3 vec3_add(vec3 a, vec3 b);
 vec3 vec3_sub(vec3 a, vec3 b);
 vec3 vec3_muls(vec3 vec, float value);
 vec3 vec3_divs(vec3 vec, float value);
+int vec3_eq(vec3 a, vec3 b);
 
 vec3 ray3_compute(ray3 ray, float t);
 

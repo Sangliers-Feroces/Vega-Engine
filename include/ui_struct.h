@@ -51,7 +51,7 @@ typedef enum {
     UIBUTTON_CAM,
     UIBUTTON_CADRE,
     UIBUTTON_MAX,
-    UINOBUTTON
+    UIBUTTON_NONE
 } uibutton_t;
 
 typedef enum {
