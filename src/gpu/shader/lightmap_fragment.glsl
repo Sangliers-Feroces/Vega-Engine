@@ -13,5 +13,7 @@ uniform float aperture;
 
 void main()
 {
-    color = vec4((texture(tex, uv).xyz / aperture) * texture(text_albedo, uv_albedo).xyz , 1);
+	vec4 blue = vec4(15.0, 135.0, 255.0, 0.0) / 255.0;
+	color = vec4((texture(tex, uv).xyz / aperture) * texture(text_albedo, uv_albedo).xyz, 1.0);
+	color += blue * 0.01;
 }
