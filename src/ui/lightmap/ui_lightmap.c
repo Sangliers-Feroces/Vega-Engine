@@ -64,7 +64,6 @@ void compute_lightmap(demo_t *demo)
         }
         compute_display_pourcent(_ui.loading_pourcent, (size_t)(wololo * 100));
         sfRenderWindow_display(demo->win.window);
-        wololo += 0.1f;
     }
     _ui.ui_lightmap_struct.back = 0;
     texture2f_refresh_gpu(_lightmaps.base);
