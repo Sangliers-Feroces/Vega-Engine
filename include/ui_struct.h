@@ -43,6 +43,7 @@ typedef enum {
     UIRES_DIGIT_8,
     UIRES_DIGIT_9,
     UIRES_EDITOR_SELECT,
+    UIRES_EDITOR_GRAB,
     UIRES_MAX
 } uires_t;
 
