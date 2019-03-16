@@ -51,6 +51,10 @@ demo_t *demo_get_texture_pannel(demo_t *demo)
     char *path;
 
     demo->texture_panel.count = get_pannel_count();
+    if (demo->texture_panel.count == 0) {
+        my_fd_putstr("Error no texture\n", 2);
+        exit(0);
+    }
     demo->texture_panel.texture =
     malloc_safe((sizeof(texture2*) * demo->texture_panel.count));
     for (int i = 0; i < demo->texture_panel.count; i++) {
