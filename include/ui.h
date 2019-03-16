@@ -13,6 +13,8 @@
 void ui_init(demo_t *demo);
 void ui_quit(void);
 
+display_nbr_array_t ui_fill_display_nbr_array(int max_value, vec2 pos, float size, float offset_nbr);
+
 void ui_draw_full_rel(uires_t index, rect_t rect, float depth);
 void button_draw(button_t button);
 void ui_display(int task, demo_t *demo);

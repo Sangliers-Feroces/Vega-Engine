@@ -23,10 +23,15 @@ void ui_lightmap_set_buttons(void)
 
 void ui_lightmap_display(demo_t *demo)
 {
+    display_nbr_array_t nbr_array =
+    ui_fill_display_nbr_array(100, (vec2){0.0f, -0.50f}, 0.1f, 0.15f);
+
     while (poll_events(demo)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUseProgram(_ui.ui_program);
-        ui_lightmap_draw();
+        ui_lightmap_draw(nbr_array);
         sfRenderWindow_display(demo->win.window);
     }
+    for (int i = 0; i < nbr_array.nb_digit; i++)
+        free(nbr_array.digits);
 }

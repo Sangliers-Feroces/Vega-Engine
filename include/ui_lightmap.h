@@ -12,6 +12,6 @@ void ui_lightmap_set_buttons(void);
 
 void ui_lightmap_display(demo_t *demo);
 
-void ui_lightmap_draw(void);
+void ui_lightmap_draw(display_nbr_array_t nbr_array);
 
 #endif /* !UI_LIGHTMAP_H_ */

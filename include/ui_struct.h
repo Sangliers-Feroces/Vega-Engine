@@ -28,6 +28,16 @@ typedef enum {
     UIRES_LM_PLUS,
     UIRES_LM_MINUS,
     UIRES_LM_START,
+    UIRES_DIGIT_0,
+    UIRES_DIGIT_1,
+    UIRES_DIGIT_2,
+    UIRES_DIGIT_3,
+    UIRES_DIGIT_4,
+    UIRES_DIGIT_5,
+    UIRES_DIGIT_6,
+    UIRES_DIGIT_7,
+    UIRES_DIGIT_8,
+    UIRES_DIGIT_9,
     UIRES_MAX
 } uires_t;
 
@@ -74,6 +84,16 @@ typedef struct {
 typedef struct {
     button_t object[UILMBUTTON_END];
 } ui_lm_struct_t;
+
+typedef struct {
+    int value;
+    button_t digit;
+} digit_array_t;
+
+typedef struct {
+    int nb_digit;
+    digit_array_t *digits;
+} display_nbr_array_t;
 
 typedef struct {
     int selected_texture;
