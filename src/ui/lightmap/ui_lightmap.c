@@ -51,7 +51,7 @@ void compute_lightmap(demo_t *demo)
         for (int i = UILMBUTTON_ABORT; i < UILMBUTTON_END; i++) {
             tmp_rect = button_get_size(_ui.ui_lightmap_struct.object[i]);
             if (i == UILMBUTTON_LOADING) {
-                tmp_rect.s.x = wololo / 117000;
+                tmp_rect.s.x = wololo / 117;
                 tmp_rect.s.y = 0.135f;
             }
             else if (i == UILMBUTTON_CADRE) {
