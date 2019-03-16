@@ -16,7 +16,6 @@ void lightmap_init(void)
 
 void lightmap_quit(void)
 {
-    texture2f_write(_lightmaps.base);
     texture_cluster_destroy(_lightmaps);
 }
 

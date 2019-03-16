@@ -18,10 +18,6 @@ static void send_uniform(demo_t *demo, gluint program)
 static void set_vertex_attrib(demo_t *demo)
 {
     refresh_vertex_buffer(demo);
-    glBindBuffer(GL_ARRAY_BUFFER, demo->buf.vertex_buffer);
-    glBufferData(GL_ARRAY_BUFFER,
-    sizeof(vertext_array_t) * (demo->buf.vertex_struct.count * 3),
-    demo->buf.vertex_struct.v_array, GL_STATIC_DRAW);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
     sizeof(vertext_array_t), BUFFER_OFFSET(0));

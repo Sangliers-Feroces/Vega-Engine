@@ -74,6 +74,7 @@ void demo_quit(demo_t *demo)
     gl_delete(demo);
     editor_quit(demo);
     ui_quit();
+    texture2f_write(_lightmaps.base, demo->cam.aperture);
     quit();
     sfRenderWindow_destroy(demo->win.window);
     sfClock_destroy(demo->win.frametime);

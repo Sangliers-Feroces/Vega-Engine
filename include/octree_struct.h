@@ -74,6 +74,7 @@ typedef struct {
 typedef struct {
     size_t vertex_count;
     vertex_t *vertex;
+    gluint buffer;
     texture2 *texture;
 } model_t;
 
@@ -82,6 +83,7 @@ typedef struct {
     vec3 scale;
     vec3 rot;
     model_t *model;
+    vertex_t *vertex;
 } entity_t;
 
 #endif
