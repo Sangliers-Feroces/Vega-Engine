@@ -10,6 +10,8 @@
 
 /* math-related prototypes */
 
+vec3 normal3(vec3 a, vec3 b, vec3 c);
+
 vec2 vec2_add(vec2 a, vec2 b);
 vec2 vec2_adds(vec2 vec, float value);
 vec2 vec2_sub(vec2 a, vec2 b);

@@ -38,6 +38,7 @@ int poll_events(demo_t *demo)
 {
     sfEvent event;
 
+    _ui.button_clicked = UIBUTTON_NONE;
     demo->mouse.button_last = demo->mouse.button_state;
     demo->mouse.last_pos = demo->mouse.mouse_pos;
     demo->mouse.mouse_pos = sfMouse_getPositionRenderWindow(demo->win.window);
