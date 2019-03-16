@@ -45,10 +45,20 @@ const vertex_t model_select[] =
 {{1.0f, 0.0f, 0.0f}, {1.0f, 1.0f}},
 {{1.0f, 0.0f, 1.0f}, {1.0f, 0.0f}}};
 
+const vertex_t model_x[] = {
+{{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f}},
+{{1.0f, 0.0f, 0.0f}, {0.0f, 0.0f}},
+{{0.0f, 0.0f, -0.1f}, {0.0f, 0.0f}},
+{{0.0f, 0.0f, -0.1f}, {0.0f, 0.0f}},
+{{1.0f, 0.0f, 0.0f}, {0.0f, 0.0f}},
+{{1.0f, 0.0f, -0.1f}, {0.0f, 0.0f}}};
+
 void editor_load_models(demo_t *demo)
 {
     demo->editor.model[MODEL_EDITOR_SELECT] =
     model_create(model_select, 36, _ui.textures[UIRES_EDITOR_SELECT]);
+    demo->editor.model[MODEL_EDITOR_X] =
+    model_create(model_select, 6, _ui.textures[UIRES_EDITOR_GRAB]);
 }
 
 void editor_free_models(demo_t *demo)

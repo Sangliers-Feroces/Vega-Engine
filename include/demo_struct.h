@@ -86,6 +86,7 @@ typedef struct {
     model_t *model[MODEL_EDITOR_MAX];
     gluint shader;
     glint mvp;
+    vec3 grab;
 } editor_t;
 
 typedef struct {
