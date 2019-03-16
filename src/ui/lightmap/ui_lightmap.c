@@ -44,14 +44,16 @@ void compute_lightmap(demo_t *demo)
     rect_t tmp_rect;
     float wololo = 0.0f;
 
-    while (wololo < 100 && !_ui.ui_lightmap_struct.back
+    octree_light_rtx_noblock(demo->tree, demo->temp_ray_density);
+    while (!thread_is_complete () && !_ui.ui_lightmap_struct.back
     && ui_lm_poll_events(demo)) {
-        //wololo = thread_get_progress();
+        wololo = thread_get_progress();
+        printf("%f\n", wololo);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         for (int i = UILMBUTTON_ABORT; i < UILMBUTTON_END; i++) {
             tmp_rect = button_get_size(_ui.ui_lightmap_struct.object[i]);
             if (i == UILMBUTTON_LOADING) {
-                tmp_rect.s.x = wololo / 117;
+                tmp_rect.s.x = wololo / 1.17;
                 tmp_rect.s.y = 0.135f;
             }
             else if (i == UILMBUTTON_CADRE) {
@@ -61,7 +63,7 @@ void compute_lightmap(demo_t *demo)
             ui_draw_full_rel(_ui.ui_lightmap_struct.object[i].texture_index,
             tmp_rect, _ui.ui_lightmap_struct.object[i].depth);
         }
-        compute_display_pourcent(_ui.loading_pourcent, (size_t)wololo);
+        compute_display_pourcent(_ui.loading_pourcent, (size_t)(wololo * 100));
         sfRenderWindow_display(demo->win.window);
         wololo += 0.1f;
     }
