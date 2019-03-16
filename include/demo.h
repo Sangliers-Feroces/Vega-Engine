@@ -43,7 +43,7 @@ demo_t *demo_get_texture_pannel(demo_t *demo);
 
 void demo_texture_destroy(demo_t *demo);
 
-ray3 demo_get_ray(demo_t *demo, ivec2 pos);
+ray3 demo_get_ray(demo_t *demo);
 void demo_refresh_viewport(demo_t *demo);
 
 #endif

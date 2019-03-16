@@ -75,6 +75,10 @@ typedef struct {
 } player_t;
 
 typedef struct {
+
+} editor_t;
+
+typedef struct {
     action_t action;
     win_t win;
     cam_t cam;
@@ -84,6 +88,7 @@ typedef struct {
     player_t player;
     buf_t buf;
     texture_pannel_t texture_panel;
+    editor_t editor;
 } demo_t;
 
 #endif

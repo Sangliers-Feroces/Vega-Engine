@@ -44,5 +44,6 @@
 #include "global.h"
 #include "ui.h"
 #include "ui_lightmap.h"
+#include "editor.h"
 
 #endif

@@ -28,7 +28,8 @@ void ui_draw_full_rel(uires_t index, rect_t rect, float depth)
 
 void button_draw(button_t button)
 {
-    ui_draw_full_rel(button.texture_index, button_get_size(button), button.depth);
+    ui_draw_full_rel(button.texture_index, button_get_size(button),
+    button.depth);
 }
 
 void ui_display(int task, demo_t *demo)

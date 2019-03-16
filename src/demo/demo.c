@@ -16,11 +16,10 @@ static int do_stuff_event(demo_t *demo, sfEvent event)
     case sfEvtMouseButtonPressed:
         demo->mouse.mouse_pos =
         sfMouse_getPositionRenderWindow(demo->win.window);
-        demo->mouse.button_state |= event.mouseButton.button;
+        demo->mouse.button_state |= (1 << event.mouseButton.button);
         break;
     case sfEvtMouseButtonReleased:
-        ui_check_click_button(demo);
-        demo->mouse.button_state &= ~event.mouseButton.button;
+        demo->mouse.button_state &= ~(1 << event.mouseButton.button);
         break;
     default:
         break;
@@ -33,8 +32,8 @@ static void poll_click(demo_t *demo)
     demo->mouse.button_click = 0;
     for (size_t i = 0; i < 16; i++)
         demo->mouse.button_click |=
-        (((demo->mouse.button_state >> i) & 1) == 0) &&
-        (((demo->mouse.button_last >> i) & 1) == 1);
+        ((((demo->mouse.button_state >> i) & 1) == 0) &&
+        (((demo->mouse.button_last >> i) & 1) == 1)) << i;
 }
 
 int poll_events(demo_t *demo)
@@ -42,14 +41,16 @@ int poll_events(demo_t *demo)
     sfEvent event;
 
     demo->mouse.button_last = demo->mouse.button_state;
-    poll_click(demo);
     if (!sfRenderWindow_isOpen(demo->win.window))
         return (0);
     while (sfRenderWindow_pollEvent(demo->win.window, &event))
         if (!do_stuff_event(demo, event))
             return (0);
+    poll_click(demo);
     check_mouse_move(demo);
     demo_poll_input(demo);
+    if (demo->mouse.button_click & (1 << sfMouseLeft))
+        ui_check_click_button(demo);
     return (1);
 }
 

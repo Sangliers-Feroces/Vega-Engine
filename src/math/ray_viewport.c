@@ -7,9 +7,10 @@
 
 #include "headers.h"
 
-ray3 demo_get_ray(demo_t *demo, ivec2 pos)
+ray3 demo_get_ray(demo_t *demo)
 {
     ray_viewport_t port = demo->cam.viewport;
+    ivec2 pos = {demo->mouse.mouse_pos.x, demo->mouse.mouse_pos.y};
     long double ratiox;
     long double ratioy;
 
