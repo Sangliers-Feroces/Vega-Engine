@@ -30,6 +30,7 @@ void ui_lm_check_click_button(demo_t *demo)
         _ui.ui_lightmap_struct.object[i],
         demo->win.w, demo->win.h)) {
             _ui.ui_lightmap_struct.button_clicked = UILMBUTTON_TITLE + i;
+            break;
         }
     }
     ui_lm_button_effect(demo);
