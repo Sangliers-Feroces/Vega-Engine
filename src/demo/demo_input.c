@@ -56,6 +56,7 @@ static void poll_playing(demo_t *demo, vec3 cam_x, vec3 cam_z)
 
 static void poll_general(demo_t *demo)
 {
+    (void)demo;
     if (sfKeyboard_isKeyPressed(sfKeyP)) {
         if (_ui.display_ui == 0)
             _ui.display_ui = 1;
