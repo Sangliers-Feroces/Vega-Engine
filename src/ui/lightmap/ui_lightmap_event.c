@@ -14,7 +14,7 @@ static void ui_lm_button_effect(demo_t *demo)
             demo->temp_ray_density += 10;
             break;
         case UILMBUTTON_MINUS:
-            if (demo->temp_ray_density > 10)
+            if (demo->temp_ray_density == 10)
                 return;
             demo->temp_ray_density -= 10;
             break;
