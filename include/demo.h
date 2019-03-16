@@ -20,6 +20,8 @@ int demo(void);
 demo_t* demo_init(void);
 void demo_quit(demo_t *demo);
 
+void demo_render_geom(demo_t *demo);
+
 void demo_loop(demo_t *demo);
 
 int poll_events(demo_t *demo);

@@ -7,11 +7,12 @@
 
 #include "headers.h"
 
-void send_aperture(demo_t *demo, gluint program)
+static void send_uniform(demo_t *demo, gluint program)
 {
     glint aperture = glGetUniformLocation(program, "aperture");
 
     glUniform1f(aperture, demo->cam.aperture);
+    refresh_vp(demo, demo->buf.lightmap_shader);
 }
 
 static void set_vertex_attrib(demo_t *demo)
@@ -34,9 +35,6 @@ static void set_vertex_attrib(demo_t *demo)
 
 static void draw_geom(octree *tree, size_t *i)
 {
-    glFrontFace(GL_CW);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    
     if (tree == NULL)
         return;
     if (tree->triangles.count > 0) {
@@ -50,29 +48,29 @@ static void draw_geom(octree *tree, size_t *i)
     }
     for (int j = 0; j < 8; j++)
         draw_geom(tree->sub[j], i);
+}
+
+static void reset_gl_pipeline(void)
+{
+    glDisableVertexAttribArray(0);
+    glDisableVertexAttribArray(1);
+    glDisableVertexAttribArray(2);
     glFrontFace(GL_CW);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
-void demo_loop(demo_t *demo)
+void demo_render_geom(demo_t *demo)
 {
     size_t index = 0;
 
-    while (poll_events(demo)) {
-        editor(demo);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glUseProgram(demo->buf.lightmap_shader);
-        send_aperture(demo, demo->buf.lightmap_shader);
-        refresh_vp(demo, demo->buf.lightmap_shader);
-        set_vertex_attrib(demo);
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, _lightmaps.base->id);
-        draw_geom(demo->tree, &index);
-        index = 0;
-        glDisableVertexAttribArray(0);
-        glDisableVertexAttribArray(1);
-        glDisableVertexAttribArray(2);
-        ui_display(1, demo);
-        sfRenderWindow_display(demo->win.window);
-    }
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glUseProgram(demo->buf.lightmap_shader);
+    send_uniform(demo, demo->buf.lightmap_shader);
+    set_vertex_attrib(demo);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, _lightmaps.base->id);
+    glFrontFace(GL_CW);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    draw_geom(demo->tree, &index);
+    reset_gl_pipeline();
 }

@@ -20,6 +20,7 @@ texture2* texture2_load(const char *path);
 
 texture2_binding texture2_binding_create(vec3 *triangle);
 void texture2_binding_destroy(texture2_binding binding);
+void texture2f_binding_free(texture2f_binding binding);
 
 void texture2_write(texture2 *texture);
 void texture2f_write(texture2f *texture);

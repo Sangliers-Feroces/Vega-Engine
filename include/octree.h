@@ -16,6 +16,7 @@ void octree_enlarge(octree **tree, rtx_triangle *triangle);
 
 octree* octree_create(octree *root);
 octree* octree_create_node(octree *root, bounds3 bounds);
+void octree_rtx_triangle_free(octree *tree, rtx_triangle *triangle);
 void octree_destroy(octree **root);
 
 bounds3 octree_get_sub_bounds(octree *tree, size_t ndx);
