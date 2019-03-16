@@ -48,7 +48,6 @@ void compute_lightmap(demo_t *demo)
     while (!thread_is_complete () && !_ui.ui_lightmap_struct.back
     && ui_lm_poll_events(demo)) {
         wololo = thread_get_progress();
-        printf("%f\n", wololo);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         for (int i = UILMBUTTON_ABORT; i < UILMBUTTON_END; i++) {
             tmp_rect = button_get_size(_ui.ui_lightmap_struct.object[i]);
@@ -68,6 +67,8 @@ void compute_lightmap(demo_t *demo)
         wololo += 0.1f;
     }
     _ui.ui_lightmap_struct.back = 0;
+    texture2f_refresh_gpu(_lightmaps.base);
+    demo->cam.aperture = (octree_get_max_lumel(demo->tree) / 3.0f) / 2.0f;
 }
 
 void ui_lightmap_display(demo_t *demo)
