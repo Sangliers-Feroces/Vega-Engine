@@ -6,6 +6,7 @@ layout(location = 2) in vec2 uv_albedo;
 
 layout(location = 0) out vec3 pos_out;
 layout(location = 1) out vec2 uv_out;
+layout(location = 2) out vec2 uv_albedo_out;
 
 uniform mat4 vp;
 
@@ -17,6 +18,7 @@ void main() {
     gl_Position = vp * vec4(pos, 1.0);
     pos_out = pos.xyz;
     uv_out = uv;
+    uv_albedo_out = uv_albedo;
     /*gl_Position.xyz = vertexPosition_modelspace;
     gl_Position.w = 1.0;*/
 }

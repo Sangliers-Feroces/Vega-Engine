@@ -41,9 +41,9 @@ static void draw_geom(octree *tree, size_t *i)
         return;
     if (tree->triangles.count > 0) {
         for (size_t j = 0; j < tree->triangles.count; j++) {
-            /*glActiveTexture(GL_TEXTURE1);
+            glActiveTexture(GL_TEXTURE1);
             glBindTexture(GL_TEXTURE_2D,
-            tree->triangles.triangle[j]->albelo.texture->id);*/
+            tree->triangles.triangle[j]->albelo.texture->id);
             glDrawArrays(GL_TRIANGLES, 0 + (*i * 3), 3);
             (*i)++;
         }
