@@ -31,46 +31,6 @@ void ui_lightmap_set_buttons(void)
     (button_t){UIRES_POURCENT, (vec2){0.12f, 0.20f}, 0.1f, -1.0f, BUTTON_REL_X};
 }
 
-static void compute_display_pourcent(display_nbr_array_t nbr_array,
-size_t new_value)
-{
-    refresh_display_nbr_array(nbr_array, new_value);
-    for (int i = 0; i < nbr_array.nb_digit; i++)
-        button_draw(nbr_array.digits[i].digit);
-    button_draw(_ui.ui_lightmap_struct.object[UILMBUTTON_POURCENT]);
-}
-void compute_lightmap(demo_t *demo)
-{
-    rect_t tmp_rect;
-    float wololo = 0.0f;
-
-    octree_light_rtx_noblock(demo->tree, demo->temp_ray_density);
-    while (!thread_is_complete () && !_ui.ui_lightmap_struct.back
-    && ui_lm_poll_events(demo)) {
-        wololo = thread_get_progress();
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        for (int i = UILMBUTTON_ABORT; i < UILMBUTTON_END; i++) {
-            tmp_rect = button_get_size(_ui.ui_lightmap_struct.object[i]);
-            if (i == UILMBUTTON_LOADING) {
-                tmp_rect.s.x = wololo / 1.17;
-                tmp_rect.s.y = 0.135f;
-            }
-            else if (i == UILMBUTTON_CADRE) {
-                tmp_rect.s.x = 1.0f;
-                tmp_rect.s.y = 0.135f;
-            }
-            ui_draw_full_rel(_ui.ui_lightmap_struct.object[i].texture_index,
-            tmp_rect, _ui.ui_lightmap_struct.object[i].depth);
-        }
-        compute_display_pourcent(_ui.loading_pourcent, (size_t)(wololo * 100));
-        sfRenderWindow_display(demo->win.window);
-    }
-    thread_wait();
-    _ui.ui_lightmap_struct.back = 0;
-    texture2f_refresh_gpu(_lightmaps.base);
-    demo->cam.aperture = (octree_get_max_lumel(demo->tree) / 3.0f) / 2.0f;
-}
-
 void ui_lightmap_display(demo_t *demo)
 {
     _ui.ui_lightmap_struct.back = 0;
