@@ -36,6 +36,7 @@ static const ui_texture_descriptor_t texture_desc_array[] = {
     {UIRES_DIGIT_7, "res/ui/digits/7.png"},
     {UIRES_DIGIT_8, "res/ui/digits/8.png"},
     {UIRES_DIGIT_9, "res/ui/digits/9.png"},
+    {UIRES_EDITOR_SELECT, "res/model/editor/select.png"},
     {0, NULL}
 };
 

@@ -20,4 +20,9 @@ void editor_select(demo_t *demo, inter_ray3 inter);
 
 void editor_paint(demo_t *demo, inter_ray3 inter);
 
+void editor_load_models(demo_t *demo);
+void editor_free_models(demo_t *demo);
+
+void editor_draw(demo_t *demo);
+
 #endif

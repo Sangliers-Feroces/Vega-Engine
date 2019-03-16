@@ -7,7 +7,8 @@
 
 #include "headers.h"
 
-model_t* model_create(vertex_t *vertex, size_t vertex_count, texture2 *texture)
+model_t* model_create(const vertex_t *vertex, size_t vertex_count,
+texture2 *texture)
 {
     model_t *res = (model_t*)malloc_safe(sizeof(model_t));
 
@@ -15,6 +16,7 @@ model_t* model_create(vertex_t *vertex, size_t vertex_count, texture2 *texture)
     res->vertex = (vertex_t*)malloc_safe(vertex_count * sizeof(vertex_t));
     for (size_t i = 0; i < vertex_count; i++)
         res->vertex[i] = vertex[i];
+    res->vertex_count = vertex_count;
     glGenBuffers(1, &res->buffer);
     glBindBuffer(GL_ARRAY_BUFFER, res->buffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_t) * res->vertex_count,

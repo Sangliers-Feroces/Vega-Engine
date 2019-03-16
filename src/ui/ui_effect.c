@@ -37,5 +37,4 @@ void ui_button_effect(demo_t *demo)
     }
     if (_ui.button_clicked == UIBUTTON_LIGHTMAPS)
         ui_lightmap_display(demo);
-    _ui.button_clicked = UIBUTTON_NONE;
 }

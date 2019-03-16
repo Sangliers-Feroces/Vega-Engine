@@ -59,6 +59,7 @@ void demo_loop(demo_t *demo)
     while (poll_events(demo)) {
         editor(demo);
         demo_render_geom(demo);
+        editor_draw(demo);
         ui_display(1, demo);
         sfRenderWindow_display(demo->win.window);
     }
