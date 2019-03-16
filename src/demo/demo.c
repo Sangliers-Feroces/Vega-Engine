@@ -38,6 +38,7 @@ int poll_events(demo_t *demo)
 {
     sfEvent event;
 
+    _ui.button_clicked = UIBUTTON_NONE;
     demo->mouse.button_last = demo->mouse.button_state;
     demo->mouse.last_pos = demo->mouse.mouse_pos;
     demo->mouse.mouse_pos = sfMouse_getPositionRenderWindow(demo->win.window);
@@ -59,6 +60,7 @@ void demo_loop(demo_t *demo)
     while (poll_events(demo)) {
         editor(demo);
         demo_render_geom(demo);
+        editor_draw(demo);
         ui_display(1, demo);
         sfRenderWindow_display(demo->win.window);
     }

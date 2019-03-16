@@ -61,18 +61,18 @@ demo_t* demo_init(void)
     init();
     ui_init(res);
     res->temp_ray_density = 10; //temp
+    demo_get_texture_pannel(res);
     editor_init(res);
     gl_gen(res);
-    demo_get_texture_pannel(res);
     return (res);
 }
 
 void demo_quit(demo_t *demo)
 {
+    editor_quit(demo);
     octree_destroy(&demo->tree);
     demo_texture_destroy(demo);
     gl_delete(demo);
-    editor_quit(demo);
     ui_quit();
     texture2f_write(_lightmaps.base, demo->cam.aperture);
     quit();

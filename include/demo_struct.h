@@ -84,6 +84,9 @@ typedef struct {
 
 typedef struct {
     vec_selection_t selections;
+    model_t *model[MODEL_EDITOR_MAX];
+    gluint shader;
+    glint mvp;
 } editor_t;
 
 typedef struct {
