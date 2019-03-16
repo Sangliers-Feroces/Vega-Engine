@@ -66,10 +66,6 @@ void thread_quit(void)
 
 void thread_wait(void)
 {
-    int do_wait;
-
-    do {
+    while (!thread_is_complete())
         usleep(1);
-
-    } while (do_wait);
 }

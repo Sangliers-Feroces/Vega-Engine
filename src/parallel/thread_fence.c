@@ -22,7 +22,7 @@ float thread_get_progress(void)
 
     for (size_t i = 0; i < _thread.count; i++)
         if (_thread.bus[i].is_busy) {
-            progress += _thread.bus[i].
+            progress += _thread.bus[i].progress;
             busy_count++;
         }
     return (progress / (float)busy_count);

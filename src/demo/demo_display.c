@@ -30,7 +30,8 @@ static void set_vertex_attrib(demo_t *demo)
     sizeof(vertext_array_t), BUFFER_OFFSET(offsetof(vertext_array_t, uv)));
     glEnableVertexAttribArray(2);
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
-    sizeof(vertext_array_t), BUFFER_OFFSET(offsetof(vertext_array_t, uv_albedo)));
+    sizeof(vertext_array_t), BUFFER_OFFSET(offsetof(vertext_array_t,
+    uv_albedo)));
 }
 
 static void draw_geom(octree *tree, size_t *i)

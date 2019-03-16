@@ -28,6 +28,7 @@ inter_ray3 rtx_triangle_intersect_ray_no_cull(rtx_triangle *triangle,
 ray3 ray);
 inter_ray3 octree_intersect_ray_laxist(octree *tree, ray3 ray);
 
+void octree_throw_ray(octree *tree, ray3_color ray);
 float octree_light_rtx(octree *tree, size_t density);
 void octree_light_rtx_thread(thread_bus *bus, octree *tree, size_t density);
 void octree_light_rtx_noblock(octree *tree, size_t density);

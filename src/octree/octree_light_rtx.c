@@ -19,7 +19,7 @@ static vec3 diffuse_ray(rtx_triangle *triangle)
     vec3_muls(triangle->normal, cosf(y)));
 }
 
-static void throw_ray(octree *tree, ray3_color ray)
+void octree_throw_ray(octree *tree, ray3_color ray)
 {
     inter_ray3 inter = octree_intersect_ray(tree, ray.ray);
 
@@ -30,28 +30,9 @@ static void throw_ray(octree *tree, ray3_color ray)
     if ((--ray.count) == 0)
         return;
     else
-        throw_ray(tree,
+        octree_throw_ray(tree,
         (ray3_color){(ray3){inter.p, diffuse_ray(inter.triangle)},
         vec3_muls(ray.color, 0.75f), ray.count});
-}
-
-void octree_light_rtx_thread(octree *tree, size_t density)
-{
-    vec2 pos;
-    vec2 size;
-    vec3 ray = {1.0f, -1.0f, 1.0f};
-    size_t count;
-
-    octree_ray_bound(tree, ray, &pos, &size);
-    count = (double)(density * density) * (double)size.x * (double)size.y;
-    for (size_t i = 0; i < count; i++) {
-        throw_ray(tree, (ray3_color){
-        {{pos.x + randf() * size.x, tree->bounds.max.y,
-        pos.y + randf() * size.y}, ray}, {1.0f, 1.0f, 1.0f}, 16});
-        if (count % 1024) {
-            
-        }
-    }
 }
 
 float octree_light_rtx(octree *tree, size_t density)
@@ -60,15 +41,6 @@ float octree_light_rtx(octree *tree, size_t density)
     thread_send_each(THREAD_TASK_RAY_TRACING,
     (uint64_t[]){(uint64_t)tree, density / _thread.count}, 2);
     thread_wait();
-    texture2f_refresh_gpu(_lightmaps.base);
-    return (octree_get_max_lumel(tree) / 3.0f) / 2.0f;
-}
-
-float octree_light_rtx_noblock(octree *tree, size_t density)
-{
-    octree_reset_lumels(tree);
-    thread_send_each(THREAD_TASK_RAY_TRACING,
-    (uint64_t[]){(uint64_t)tree, density / _thread.count}, 2);
     texture2f_refresh_gpu(_lightmaps.base);
     return (octree_get_max_lumel(tree) / 3.0f) / 2.0f;
 }
