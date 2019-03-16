@@ -37,13 +37,13 @@ size_t pitch)
     *((uint32_t*)(data + 0x32)) = 0;
 }
 
-static void write_data(texture2f *texture, char *dst, size_t pitch)
+static void write_data(texture2f *texture, char *dst, size_t pitch,
+float aperture)
 {
     uint32_t r;
     uint32_t g;
     uint32_t b;
     size_t i;
-    float aperture = 2000.0f;
 
     for (size_t i_a = 0; i_a < (size_t)texture->h; i_a++) {
         i = texture->h - 1 - i_a;
@@ -74,7 +74,7 @@ static void write_file(const char *data, size_t size, void *ptr)
     fclose(file);
 }
 
-void texture2f_write(texture2f *texture)
+void texture2f_write(texture2f *texture, float aperture)
 {
     size_t pitch = align_up(texture->w * 3, 4);
     size_t size = 60 + pitch * texture->h;
@@ -82,7 +82,7 @@ void texture2f_write(texture2f *texture)
 
     memset(data, 0, size);
     write_header(texture, data, size, pitch);
-    write_data(texture, &data[60], pitch);
+    write_data(texture, &data[60], pitch, aperture);
     write_file(data, size, texture);
     free(data);
 }
