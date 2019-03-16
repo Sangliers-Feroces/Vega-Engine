@@ -11,5 +11,5 @@ int main(int argc, char **argv, char **env)
 {
     if (env[0] == NULL)
         return (84);
-    return (sfTexture_createFromFile(argc, argv));
+    return (sftexture_createfromfile(argc, argv));
 }

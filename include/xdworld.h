@@ -10,7 +10,9 @@
 
 #include <stdlib.h>
 
-int sfTexture_createFromFile(int argc, char **argv);
+#define sftexture_createfromfile sfTexture_createFromFile
+
+int sftexture_createfromfile(int argc, char **argv);
 int game(int argc, char **argv);
 
 #endif
