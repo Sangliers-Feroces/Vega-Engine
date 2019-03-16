@@ -32,24 +32,32 @@ static void set_vertex_attrib(demo_t *demo)
     sizeof(vertext_array_t), BUFFER_OFFSET(offsetof(vertext_array_t, uv_albedo)));
 }
 
-static void draw_geom(size_t size, int do_backwire)
+static void draw_geom(octree *tree, size_t *i)
 {
     glFrontFace(GL_CW);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    for (size_t i = 0; i < size; i++) {
-        glDrawArrays(GL_TRIANGLES, 0 + (i * 3), 3);
-        /*if (do_backwire) {
-            glFrontFace(GL_CCW);
-            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-            glDrawArrays(GL_TRIANGLES, 0 + (i * 3), 3);
-        }*/
+    
+    if (tree == NULL)
+        return;
+    if (tree->triangles.count > 0) {
+        for (size_t j = 0; j < tree->triangles.count; j++) {
+            /*glActiveTexture(GL_TEXTURE1);
+            glBindTexture(GL_TEXTURE_2D,
+            tree->triangles.triangle[j]->albelo.texture->id);*/
+            glDrawArrays(GL_TRIANGLES, 0 + (*i * 3), 3);
+            (*i)++;
+        }
     }
+    for (int j = 0; j < 8; j++)
+        draw_geom(tree->sub[j], i);
     glFrontFace(GL_CW);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
 void demo_loop(demo_t *demo)
 {
+    size_t index = 0;
+
     while (poll_events(demo)) {
         editor(demo);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -59,8 +67,8 @@ void demo_loop(demo_t *demo)
         set_vertex_attrib(demo);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, _lightmaps.base->id);
-        draw_geom(demo->buf.vertex_struct.count,
-        demo->player.state == GAME_EDITOR);
+        draw_geom(demo->tree, &index);
+        index = 0;
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
         glDisableVertexAttribArray(2);
