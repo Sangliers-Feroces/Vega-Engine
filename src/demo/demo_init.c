@@ -60,6 +60,7 @@ demo_t* demo_init(void)
     res->tree = octree_create(NULL);
     init();
     ui_init(res);
+    res->temp_ray_density = 10; //temp
     editor_init(res);
     gl_gen(res);
     demo_get_texture_pannel(res);

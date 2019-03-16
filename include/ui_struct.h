@@ -60,7 +60,8 @@ typedef enum {
     UILMBUTTON_MINUS,
     UILMBUTTON_LEGEND,
     UILMBUTTON_START,
-    UILMBUTTON_END
+    UILMBUTTON_END,
+    UILMBUTTON_NONE
 } uilmbutton_t;
 
 typedef struct {
@@ -82,6 +83,7 @@ typedef struct {
 } button_t;
 
 typedef struct {
+    uilmbutton_t button_clicked;
     button_t object[UILMBUTTON_END];
 } ui_lm_struct_t;
 
@@ -104,6 +106,7 @@ typedef struct {
     button_t buttons[UIBUTTON_MAX];
     float ratiowh;
     ui_lm_struct_t ui_lightmap_struct;
+    display_nbr_array_t display_nbr_array;
 } ui_struct;
 
 #endif /* !UI_STRUCT_H_ */

@@ -86,6 +86,7 @@ typedef struct {
 } editor_t;
 
 typedef struct {
+    size_t temp_ray_density;
     action_t action;
     win_t win;
     cam_t cam;

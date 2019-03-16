@@ -46,4 +46,7 @@ void demo_texture_destroy(demo_t *demo);
 ray3 demo_get_ray(demo_t *demo);
 void demo_refresh_viewport(demo_t *demo);
 
+int check_click_pos(sfVector2i mouse_pos, button_t button,
+float width_screen, float height);
+
 #endif

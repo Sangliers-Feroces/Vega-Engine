@@ -77,11 +77,14 @@ void ui_init(demo_t *demo)
     ui_lightmap_set_buttons();
     _ui.selected_texture = 0;
     demo->action = ACTION_MOVE;
+    _ui.display_nbr_array =
+    ui_fill_display_nbr_array(100000, (vec2){-0.3f, 0.0f}, 0.1f, 0.1f);
     load_gl_stuff();
 }
 
 void ui_quit(void)
 {
+    free(_ui.display_nbr_array.digits);
     for (int i = 0; i < UIRES_MAX; i++)
         texture2_destroy(_ui.textures[i]);
     glDeleteBuffers(1, &_ui.vertex_buffer);

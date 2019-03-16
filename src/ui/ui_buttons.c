@@ -17,7 +17,7 @@ void set_cadre(demo_t *demo)
         return;
 }
 
-static int check_click_pos(sfVector2i mouse_pos, button_t button,
+int check_click_pos(sfVector2i mouse_pos, button_t button,
 float width_screen, float height)
 {
     vec2 screen = {width_screen, height};
