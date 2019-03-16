@@ -17,6 +17,8 @@ static const ui_texture_descriptor_t texture_desc_array[] = {
     {UIRES_ISO, "res/ui/ui_iso_button.png"},
     {UIRES_CAM, "res/ui/ui_reset_button.png"},
     {UIRES_CADRE, "res/ui/ui_cadre_button.png"},
+    {UIRES_POURCENT, "res/ui/ui_pourcent.png"},
+    {UIRES_RED, "res/ui/ui_red.png"},
     {UIRES_LM_TITLE, "res/ui/ui_lightmap_tiltle.png"},
     {UIRES_LM_PLUS, "res/ui/ui_lightmap_plus_button.png"},
     {UIRES_LM_MINUS, "res/ui/ui_lightmap_minus_button.png"},
@@ -81,6 +83,8 @@ void ui_init(demo_t *demo)
     demo->action = ACTION_MOVE;
     _ui.display_nbr_array =
     ui_fill_display_nbr_array(100000, (vec2){-0.3f, 0.0f}, 0.1f, 0.1f);
+    _ui.loading_pourcent =
+    ui_fill_display_nbr_array(100, (vec2){-0.18f, 0.20f}, 0.1f, 0.1f);
     load_gl_stuff();
 }
 

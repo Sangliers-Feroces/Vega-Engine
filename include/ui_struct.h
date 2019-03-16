@@ -23,6 +23,8 @@ typedef enum {
     UIRES_ISO,
     UIRES_CAM,
     UIRES_CADRE,
+    UIRES_POURCENT,
+    UIRES_RED,
     UIRES_LM_TITLE,
     UIRES_LM_LEGEND,
     UIRES_LM_PLUS,
@@ -66,6 +68,7 @@ typedef enum {
     UILMBUTTON_ABORT,
     UILMBUTTON_LOADING,
     UILMBUTTON_CADRE,
+    UILMBUTTON_POURCENT,
     UILMBUTTON_END,
     UILMBUTTON_NONE
 } uilmbutton_t;
@@ -114,6 +117,7 @@ typedef struct {
     float ratiowh;
     ui_lm_struct_t ui_lightmap_struct;
     display_nbr_array_t display_nbr_array;
+    display_nbr_array_t loading_pourcent;
 } ui_struct;
 
 #endif /* !UI_STRUCT_H_ */

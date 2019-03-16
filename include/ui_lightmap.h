@@ -18,5 +18,6 @@ void ui_lightmap_draw(void);
 
 void compute_lightmap(demo_t *demo);
 
-void refresh_display_nbr_array(size_t new_value);
+void refresh_display_nbr_array(display_nbr_array_t nbr_array,
+size_t new_value);
 #endif /* !UI_LIGHTMAP_H_ */
