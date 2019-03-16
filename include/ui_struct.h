@@ -109,6 +109,7 @@ typedef struct {
 } display_nbr_array_t;
 
 typedef struct {
+    int display_ui;
     int selected_texture;
     uibutton_t button_clicked;
     gluint ui_program;

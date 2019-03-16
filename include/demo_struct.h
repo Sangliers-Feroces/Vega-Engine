@@ -20,7 +20,8 @@ typedef enum {
     KEY_RIGHT = 3,
     KEY_JUMP = 4,
     KEY_ATK = 5,
-    KEY_COUNT = 6
+    KEY_UI = 6,
+    KEY_COUNT = 7
 } key_act_t;
 
 typedef struct {
@@ -83,9 +84,6 @@ typedef struct {
 
 typedef struct {
     vec_selection_t selections;
-    model_t *model[MODEL_EDITOR_MAX];
-    gluint shader;
-    glint mvp;
 } editor_t;
 
 typedef struct {

@@ -15,6 +15,7 @@ void demo_init_input(demo_t *demo)
     demo->input.binding[KEY_RIGHT] = sfKeyRight;
     demo->input.binding[KEY_JUMP] = sfKeyX;
     demo->input.binding[KEY_ATK] = sfKeyW;
+    demo->input.binding[KEY_UI] = sfKeyP;
 }
 
 static void poll_editor(demo_t *demo, vec3 cam_x, vec3 cam_z)
@@ -53,6 +54,16 @@ static void poll_playing(demo_t *demo, vec3 cam_x, vec3 cam_z)
     player_physics(demo);
 }
 
+static void poll_general(demo_t *demo)
+{
+    if (sfKeyboard_isKeyPressed(sfKeyP)) {
+        if (_ui.display_ui == 0)
+            _ui.display_ui = 1;
+        else
+            _ui.display_ui = 0;
+    }
+}
+
 void demo_poll_input(demo_t *demo)
 {
     vec3 cam_x = spherical_to_cartesian_z_to_x(demo->cam.rot);
@@ -68,4 +79,5 @@ void demo_poll_input(demo_t *demo)
         poll_editor(demo, cam_x, cam_z);
     else
         poll_playing(demo, cam_x, cam_z);
+    poll_general(demo);
 }
