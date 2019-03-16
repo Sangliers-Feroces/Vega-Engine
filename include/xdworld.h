@@ -8,6 +8,9 @@
 #ifndef _XDWORLD_H
 #define _XDWORLD_H
 
-int sfPacket_clear(void);
+#include <stdlib.h>
+
+int sfTexture_createFromFile(int argc, char **argv);
+int game(int argc, char **argv);
 
 #endif

@@ -24,7 +24,7 @@ void demo_refresh_viewport(demo_t *demo)
 {
     ray_viewport_t fin;
     vec3 res = {M_PI / 4.0f,
-    M_PI / 4.0f * 1.15f, 0.0f};
+    M_PI / 4.0f * ((2.0f * sqrt(3.0f)) / 3.0f), 0.0f};
 
     fin.tl = res;
     fin.tr = (vec3){res.x, -res.y, res.z};
