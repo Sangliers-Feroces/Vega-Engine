@@ -29,7 +29,8 @@ ray3 ray);
 inter_ray3 octree_intersect_ray_laxist(octree *tree, ray3 ray);
 
 float octree_light_rtx(octree *tree, size_t density);
-void octree_light_rtx_thread(octree *tree, size_t density);
+void octree_light_rtx_thread(thread_bus *bus, octree *tree, size_t density);
+void octree_light_rtx_noblock(octree *tree, size_t density);
 
 void octree_reset_lumels(octree *tree);
 float octree_get_max_lumel(octree *tree);

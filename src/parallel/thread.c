@@ -70,8 +70,6 @@ void thread_wait(void)
 
     do {
         usleep(1);
-        do_wait = 0;
-        for (size_t i = 0; i < _thread.count; i++)
-            do_wait |= _thread.bus[i].is_busy;
+
     } while (do_wait);
 }

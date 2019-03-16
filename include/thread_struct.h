@@ -12,6 +12,7 @@
 
 typedef enum {
     THREAD_TASK_IDLE,
+    THREAD_TASK_ABORT,
     THREAD_TASK_KILL,
     THREAD_TASK_RAY_TRACING
 } thread_task;
@@ -21,6 +22,7 @@ typedef struct {
     thread_task task;
     uint64_t data[THREAD_DATA_SIZE];
     int is_busy;
+    float progress;
 } thread_bus;
 
 typedef struct {

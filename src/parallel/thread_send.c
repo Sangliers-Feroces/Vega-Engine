@@ -25,7 +25,7 @@ void thread_do_task(thread_bus *bus)
 {
     switch (bus->task) {
     case THREAD_TASK_RAY_TRACING:
-        octree_light_rtx_thread((void*)bus->data[0], bus->data[1]);
+        octree_light_rtx_thread(bus, (void*)bus->data[0], bus->data[1]);
         break;
     default:
         break;
