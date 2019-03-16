@@ -58,6 +58,11 @@ typedef struct {
 } button_t;
 
 typedef struct {
+    texture2 *textures[UILIGHTMAP_END];
+    button_t object;
+} ui_lm_struct_t;
+
+typedef struct {
     int selected_texture;
     uibutton_t button_clicked;
     gluint ui_program;
@@ -65,6 +70,7 @@ typedef struct {
     texture2 *textures[UIRES_MAX];
     button_t buttons[UIBUTTON_MAX];
     float ratiowh;
+    ui_lm_struct_t ui_lightmap_struct;
 } ui_struct;
 
 #endif /* !UI_STRUCT_H_ */

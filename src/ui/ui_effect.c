@@ -35,4 +35,6 @@ void ui_button_effect(demo_t *demo)
         if (_ui.selected_texture == demo->texture_panel.count)
             _ui.selected_texture = 0;
     }
+    if (_ui.button_clicked == UIBUTTON_LIGHTMAPS)
+        ui_lightmap_display(demo);
 }

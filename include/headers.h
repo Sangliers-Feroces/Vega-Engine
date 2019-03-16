@@ -44,6 +44,6 @@
 #include "macro.h"
 #include "global.h"
 #include "ui.h"
-#include "ui_struct.h"
+#include "ui_lightmap.h"
 
 #endif

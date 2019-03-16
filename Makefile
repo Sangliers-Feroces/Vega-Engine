@@ -6,7 +6,7 @@ LDLIB = -lm -lpthread -lcsfml-window -lcsfml-graphics -lcsfml-system
 	gcc $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 SRC = $(filter-out ./src/wrapper/main.c, \
-$(wildcard -r ./src/*.c $(wildcard -r ./src/*/*.c)))
+$(wildcard -r ./src/*.c $(wildcard -r ./src/*/*.c) $(wildcard -r ./src/*/*/*.c)))
 OBJ = $(SRC:.c=.o)
 
 MAINSRC = $(wildcard ./src/wrapper/main.c)
