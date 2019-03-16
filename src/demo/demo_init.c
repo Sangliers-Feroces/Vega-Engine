@@ -69,13 +69,13 @@ demo_t* demo_init(void)
 
 void demo_quit(demo_t *demo)
 {
+    octree_destroy(&demo->tree);
     demo_texture_destroy(demo);
     gl_delete(demo);
     editor_quit(demo);
     ui_quit();
     quit();
     sfRenderWindow_destroy(demo->win.window);
-    octree_destroy(&demo->tree);
     sfClock_destroy(demo->win.frametime);
     free(demo);
 }

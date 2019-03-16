@@ -52,6 +52,7 @@ extern void (*p_gluniform1f)(glint location, float value);
 extern void (*p_gluniform2fv)(glint location, glsizei count,
 const glfloat *value);
 extern void (*p_glactivetexture)(glenum texture);
+extern void (*p_glgeneratemipmap)(glenum target);
 
 extern gluint (*p_glcreateshader)(glenum shader_type);
 extern void (*p_glshadersource)(gluint shader, glsizei count,
@@ -117,6 +118,7 @@ extern void (*p_glgetintegeri_v)(glenum pname, gluint index, glint *params);
 #define glDrawArrays p_gldrawarrays
 #define glUniform2fv p_gluniform2fv
 #define glUniform1f p_gluniform1f
+#define glGenerateMipmap p_glgeneratemipmap
 
 #define glCreateShader p_glcreateshader
 #define glShaderSource p_glshadersource

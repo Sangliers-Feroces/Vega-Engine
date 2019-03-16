@@ -31,7 +31,7 @@ rtx_triangle* rtx_triangle_create(vec3 *triangle)
 
 void rtx_triangle_destroy(rtx_triangle *triangle)
 {
-    texture2f_binding_destroy(triangle->lightmap);
+    texture2f_binding_free(triangle->lightmap);
     free(triangle);
 }
 
