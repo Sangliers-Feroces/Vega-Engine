@@ -14,7 +14,7 @@ void ui_lightmap_display(demo_t *demo);
 
 int ui_lm_poll_events(demo_t *demo);
 
-void ui_lightmap_draw();
+void ui_lightmap_draw(void);
 
 void compute_lightmap(demo_t *demo);
 

@@ -7,7 +7,7 @@
 
 #include "headers.h"
 
-void ui_lightmap_draw()
+void ui_lightmap_draw(void)
 {
     for (int i = 0; i < UILMBUTTON_ABORT; i++) {
         button_draw(_ui.ui_lightmap_struct.object[i]);
