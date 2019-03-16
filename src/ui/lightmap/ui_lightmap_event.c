@@ -41,6 +41,12 @@ static void ui_lm_button_effect(demo_t *demo)
     if (_ui.ui_lightmap_struct.button_clicked == UILMBUTTON_MINUS
     && demo->temp_ray_density > 10)
         demo->temp_ray_density -= 10;
+    if (_ui.ui_lightmap_struct.button_clicked == UILMBUTTON_BACK
+    || _ui.ui_lightmap_struct.button_clicked == UILMBUTTON_ABORT)
+        _ui.ui_lightmap_struct.back = 1;
+    if (_ui.ui_lightmap_struct.button_clicked == UILMBUTTON_START)
+        compute_lightmap(demo);
+
 }
 
 void ui_lm_check_click_button(demo_t *demo)

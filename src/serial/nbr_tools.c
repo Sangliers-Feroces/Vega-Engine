@@ -23,7 +23,7 @@ int nbr_len(size_t c, int accept_0)
 
     if (c == 0 && accept_0 == 1)
         return 1;
-    for (res; c > 0; res++)
+    for (; c > 0; res++)
         c /= 10;
     return res;
 }
@@ -32,7 +32,7 @@ int my_pow(size_t a, size_t b)
 {
     size_t res = 1;
 
-    for (b; b > 0; b--)
+    for (; b > 0; b--)
         res *= a;
     return res;
 }

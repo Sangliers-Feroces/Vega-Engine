@@ -28,6 +28,8 @@ typedef enum {
     UIRES_LM_PLUS,
     UIRES_LM_MINUS,
     UIRES_LM_START,
+    UIRES_LM_BACK,
+    UIRES_LM_ABORT,
     UIRES_DIGIT_0,
     UIRES_DIGIT_1,
     UIRES_DIGIT_2,
@@ -60,6 +62,10 @@ typedef enum {
     UILMBUTTON_MINUS,
     UILMBUTTON_LEGEND,
     UILMBUTTON_START,
+    UILMBUTTON_BACK,
+    UILMBUTTON_ABORT,
+    UILMBUTTON_LOADING,
+    UILMBUTTON_CADRE,
     UILMBUTTON_END,
     UILMBUTTON_NONE
 } uilmbutton_t;
@@ -83,6 +89,7 @@ typedef struct {
 } button_t;
 
 typedef struct {
+    int back;
     uilmbutton_t button_clicked;
     button_t object[UILMBUTTON_END];
 } ui_lm_struct_t;

@@ -22,6 +22,8 @@ static const ui_texture_descriptor_t texture_desc_array[] = {
     {UIRES_LM_MINUS, "res/ui/ui_lightmap_minus_button.png"},
     {UIRES_LM_LEGEND, "res/ui/ui_lightmap_legend.png"},
     {UIRES_LM_START, "res/ui/ui_lightmap_start_button.png"},
+    {UIRES_LM_BACK, "res/ui/ui_back_button.png"},
+    {UIRES_LM_ABORT, "res/ui/ui_lightmap_abort_button.png"},
     {UIRES_DIGIT_0, "res/ui/digits/0.png"},
     {UIRES_DIGIT_1, "res/ui/digits/1.png"},
     {UIRES_DIGIT_2, "res/ui/digits/2.png"},
