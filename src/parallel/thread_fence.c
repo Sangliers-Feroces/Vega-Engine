@@ -25,6 +25,8 @@ float thread_get_progress(void)
             progress += _thread.bus[i].progress;
             busy_count++;
         }
+    if (busy_count == 0)
+        return (0.0f);
     return (progress / (float)busy_count);
 }
 
