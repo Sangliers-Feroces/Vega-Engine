@@ -58,5 +58,5 @@ float octree_light_rtx(octree *tree, size_t density)
     (uint64_t[]){(uint64_t)tree, density / _thread.count}, 2);
     thread_wait();
     texture2f_refresh_gpu(_lightmaps.base);
-    return (octree_get_max_lumel(tree) / 3.0f) / 1.4f;
+    return (octree_get_max_lumel(tree) / 3.0f) / 2.0f;
 }

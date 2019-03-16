@@ -66,4 +66,22 @@ typedef struct {
     vertext_array_t *v_array;
 } vertex_struct_t;
 
+typedef struct {
+    vec3 pos;
+    vec2 uv;
+} vertex_t;
+
+typedef struct {
+    size_t vertex_count;
+    vertex_t *vertex;
+    texture2 *texture;
+} model_t;
+
+typedef struct {
+    vec3 pos;
+    vec3 scale;
+    vec3 rot;
+    model_t *model;
+} entity_t;
+
 #endif
