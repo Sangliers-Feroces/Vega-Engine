@@ -32,6 +32,5 @@ void ui_lightmap_display(demo_t *demo)
         ui_lightmap_draw(nbr_array);
         sfRenderWindow_display(demo->win.window);
     }
-    for (int i = 0; i < nbr_array.nb_digit; i++)
-        free(nbr_array.digits);
+    free(nbr_array.digits);
 }
