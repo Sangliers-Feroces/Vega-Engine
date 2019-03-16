@@ -20,8 +20,7 @@ typedef enum {
     KEY_RIGHT = 3,
     KEY_JUMP = 4,
     KEY_ATK = 5,
-    KEY_UI = 6,
-    KEY_COUNT = 7
+    KEY_COUNT = 6
 } key_act_t;
 
 typedef struct {
