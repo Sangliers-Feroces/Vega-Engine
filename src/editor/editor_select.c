@@ -61,14 +61,10 @@ static void select_geom(demo_t *demo, inter_ray3 inter)
 void editor_select(demo_t *demo, inter_ray3 inter)
 {
     if (demo->mouse.button_release & (1 << sfMouseLeft)) {
-        if (demo->editor.grabbed != MODEL_EDITOR_MAX) {
-            demo->editor.grabbed = MODEL_EDITOR_MAX;
-            demo->editor.grab =
-            vec3_add(demo->editor.grab, demo->editor.grab_delta);
-            demo->editor.grab_delta = (vec3){0.0f, 0.0f, 0.0f};
-        } else {
+        if (demo->editor.grabbed != MODEL_EDITOR_MAX)
+            editor_grab_apply(demo);
+        else
             select_geom(demo, inter);
-        }
     }
     if (demo->mouse.button_click & (1 << sfMouseLeft))
         editor_grab(demo);

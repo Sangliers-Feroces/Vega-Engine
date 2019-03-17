@@ -43,5 +43,5 @@ texture2f_binding texture2f_binding_create(vec3 *triangle)
 
 void texture2f_binding_destroy(texture2f_binding binding)
 {
-    (void)binding;
+    texture2f_binding_free(binding);
 }
