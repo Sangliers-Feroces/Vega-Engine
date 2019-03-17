@@ -15,7 +15,7 @@
 void demo_poll_input(demo_t *demo);
 void check_mouse_move(demo_t *demo);
 
-int demo(void);
+int demo(float strenght);
 demo_t* demo_init(void);
 void demo_quit(demo_t *demo);
 

@@ -63,12 +63,18 @@ void load_model(octree **tree)
 
 int game(int argc, char **argv)
 {
-    if (argc > 1)
+    float strenght = 0.28f;
+
+    if (argc > 1) {
         if (strcmp(argv[1], "-h") == 0) {
             display_helper();
             return 0;
         }
-    demo();
+        else if (my_char_isnum(argv[1])) {
+            strenght = atof(argv[1]);
+        }
+    }
+    demo(strenght);
     return (EXIT_SUCCESS);
 }
 

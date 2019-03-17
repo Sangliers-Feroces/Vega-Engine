@@ -86,7 +86,7 @@ void demo_loop(demo_t *demo)
     sfMusic_destroy(music);
 }
 
-int demo(void)
+int demo(float strenght)
 {
     demo_t *demo = demo_init();
 
@@ -94,7 +94,7 @@ int demo(void)
         demo_quit(demo);
         return 0;
     }
-    terrain_gen(demo, 32.0f, 8, 0.28f);
+    terrain_gen(demo, 32.0f, 8, strenght);
     demo_loop(demo);
     demo_quit(demo);
     return (0);
