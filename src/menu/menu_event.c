@@ -11,12 +11,12 @@ static void poll_arrow_pos(menu_t *menu)
 {
     if (sfKeyboard_isKeyPressed(sfKeyDown)) {
         sfSound_play(menu->move);
-        menu->object[MENUOBJECT_CURSOR].pos = (vec2){-0.40f, -0.67f};
+        menu->object[MENUOBJECT_CURSOR].pos = (vec2){-0.30f, -0.47f};
         menu->menu_state = 0;
     }
     else if (sfKeyboard_isKeyPressed(sfKeyUp)) {
         sfSound_play(menu->move);
-        menu->object[MENUOBJECT_CURSOR].pos = (vec2){-0.40f, -0.37f};
+        menu->object[MENUOBJECT_CURSOR].pos = (vec2){-0.30f, -0.22f};
         menu->menu_state = 1;
     }
 }
