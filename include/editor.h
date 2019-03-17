@@ -38,8 +38,13 @@ void editor_grab_replace(demo_t *demo);
 int editor_is_point_selected(demo_t *demo, vec3 p);
 void editor_del(demo_t *demo);
 
+int rtx_triangle_is_selected(demo_t *demo, rtx_triangle *triangle);
 void editor_flip(demo_t *demo);
 
 void editor_extrude(demo_t *demo);
+
+void editor_rot(demo_t *demo);
+
+void editor_uv(demo_t *demo);
 
 #endif

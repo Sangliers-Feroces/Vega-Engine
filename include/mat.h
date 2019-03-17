@@ -23,8 +23,10 @@ vec2 vec2_muls(vec2 vec, float value);
 vec2 vec2_mul(vec2 a, vec2 b);
 vec2 vec2_div(vec2 a, vec2 b);
 vec2 vec2_divs(vec2 vec, float value);
+
 float vec2_norm(vec2 vec);
 float vec2_dist(vec2 a, vec2 b);
+int vec2_eq(vec2 a, vec2 b);
 
 int vec3_is_in_bounds(vec3 p, bounds3 bounds);
 int is_triangle_in_bounds(vec3 *triangle, bounds3 bounds);

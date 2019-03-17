@@ -41,6 +41,10 @@ static void editor_shortcut(demo_t *demo)
         create_geom(demo);
     if (demo->input.key_press['W'])
         demo->editor.is_wireframe = !demo->editor.is_wireframe;
+    if (demo->input.key_press['R'])
+        editor_rot(demo);
+    if (demo->input.key_press['U'])
+        editor_uv(demo);
 }
 
 void editor(demo_t *demo)

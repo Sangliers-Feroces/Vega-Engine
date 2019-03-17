@@ -19,12 +19,11 @@ static int rtx_triangle_try_delete(demo_t *demo, octree *tree,
 rtx_triangle *triangle)
 {
     for (size_t i = 0; i < 3; i++)
-        if (editor_is_point_selected(demo, triangle->vertex[i])) {
-            octree_rtx_triangle_detach(tree, triangle);
-            rtx_triangle_destroy(triangle);
-            return 1;
-        }
-    return 0;
+        if (!editor_is_point_selected(demo, triangle->vertex[i]))
+            return 0;
+    octree_rtx_triangle_detach(tree, triangle);
+    rtx_triangle_destroy(triangle);
+    return 1;
 }
 
 static void del_rec(demo_t *demo, octree *tree)

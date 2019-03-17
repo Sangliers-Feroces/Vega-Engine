@@ -7,7 +7,7 @@
 
 #include "headers.h"
 
-static int rtx_triangle_should_flip(demo_t *demo, rtx_triangle *triangle)
+int rtx_triangle_is_selected(demo_t *demo, rtx_triangle *triangle)
 {
     for (size_t i = 0; i < 3; i++)
         if (!editor_is_point_selected(demo, triangle->vertex[i]))
@@ -40,7 +40,7 @@ static void flip_rec(demo_t *demo, octree *tree)
     for (size_t i = 0; i < 8; i++)
         flip_rec(demo, tree->sub[i]);
     for (size_t i = 0; i < tree->triangles.count; i++)
-        if (rtx_triangle_should_flip(demo, tree->triangles.triangle[i]))
+        if (rtx_triangle_is_selected(demo, tree->triangles.triangle[i]))
             rtx_triangle_flip(tree->triangles.triangle[i]);
 }
 
