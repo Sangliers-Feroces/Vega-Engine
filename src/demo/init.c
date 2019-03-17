@@ -15,8 +15,10 @@ void init(void)
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     glEnable(GL_CULL_FACE);
-    glEnable(GL_BLEND);
+    glFrontFace(GL_CW);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glEnable(GL_MULTISAMPLE);
+    glEnable(GL_BLEND);
     glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
     glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
     lightmap_init();

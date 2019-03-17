@@ -41,4 +41,5 @@ static void del_rec(demo_t *demo, octree *tree)
 void editor_del(demo_t *demo)
 {
     del_rec(demo, demo->tree);
+    demo->editor.selections.count = 0;
 }
