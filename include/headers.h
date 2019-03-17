@@ -49,5 +49,6 @@
 #include "editor.h"
 #include "model.h"
 #include "menu.h"
+#include "terrain.h"
 
 #endif
