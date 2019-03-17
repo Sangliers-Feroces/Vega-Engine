@@ -25,6 +25,7 @@
 
 #include <SFML/Window.h>
 #include <SFML/Graphics.h>
+#include <SFML/Audio.h>
 #include "gl_loader.h"
 
 #include "struct.h"

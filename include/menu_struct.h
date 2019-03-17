@@ -11,6 +11,8 @@
 typedef enum {
     MENUOBJECT_ELON,
     MENUOBJECT_INTRO,
+    MENUOBJECT_DEV,
+    MENUOBJECT_ENGINE,
     MENUOBJECT_MENU,
     MENUOBJECT_PLAY,
     MENUOBJECT_QUIT,
@@ -20,6 +22,8 @@ typedef enum {
 } menuobject_t;
 
 typedef struct {
+    sfSound *move;
+    sfSound *select;
     int intro_state;
     int menu_state;
     menuobject_t button_clicked;

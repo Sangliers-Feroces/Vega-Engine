@@ -22,7 +22,9 @@ This tool change the perspective of the world
 
 
 Here are some usefull binding : 
+In menu : arrow_up and arrow_down to select menu and enter to comfirm
 In edition mode : ZQSD to move the caméra
 In both mode : hold right click to rotate the caméra
+In both mode : P to activate/desactivate UI
 
 But most important Have fun !!
