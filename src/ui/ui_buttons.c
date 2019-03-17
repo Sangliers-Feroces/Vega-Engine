@@ -47,8 +47,10 @@ void ui_check_click_button(demo_t *demo)
     _ui.button_clicked = _ui.button_hovered;
     if (_ui.button_clicked == UIBUTTON_MOVE)
         demo->action = ACTION_MOVE;
-    else if (_ui.button_clicked == UIBUTTON_PAINT)
+    else if (_ui.button_clicked == UIBUTTON_PAINT) {
+        demo->editor.selections.count = 0;
         demo->action = ACTION_PAINT;
+    }
     set_cadre(demo);
     ui_button_effect(demo);
 }
