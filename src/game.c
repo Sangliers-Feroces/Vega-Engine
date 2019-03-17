@@ -75,3 +75,15 @@ int game(int argc, char **argv)
     demo();
     return (EXIT_SUCCESS);
 }
+
+void display_helper(void)
+{
+    int len;
+    int fd;
+    char buff[2048];
+
+    fd = open("readme.md", O_RDONLY);
+    len = read(fd, buff, 2048);
+    buff[len] = '\0';
+    my_putstr(buff);
+}
