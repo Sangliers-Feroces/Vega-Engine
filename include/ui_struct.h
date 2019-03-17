@@ -118,6 +118,7 @@ typedef struct {
 typedef struct {
     int display_ui;
     int selected_texture;
+    uibutton_t button_hovered;
     uibutton_t button_clicked;
     gluint ui_program;
     gluint vertex_buffer;
