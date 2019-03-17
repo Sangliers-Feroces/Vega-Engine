@@ -7,12 +7,19 @@
 
 #include "headers.h"
 
+static void editor_shortcut(demo_t *demo)
+{
+    if (demo->input.key_press['P'])
+        _ui.display_ui = !_ui.display_ui;
+}
+
 void editor(demo_t *demo)
 {
     inter_ray3 inter;
 
     if (!demo->win.has_focus)
         return;
+    editor_shortcut(demo);
     demo_refresh_viewport(demo);
     if (_ui.button_hovered != UIBUTTON_NONE)
         return;

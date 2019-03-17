@@ -56,14 +56,13 @@ static void poll_playing(demo_t *demo, vec3 cam_x, vec3 cam_z)
 
 static void poll_general(demo_t *demo)
 {
-    (void)demo;
-    if (sfKeyboard_isKeyPressed(sfKeyP)) {
-        if (_ui.display_ui == 0)
-            _ui.display_ui = 1;
-        else
-            _ui.display_ui = 0;
-    }
-    while (sfKeyboard_isKeyPressed(sfKeyP));
+    for (size_t i = 0; i < 256; i++)
+        demo->input.key_last[i] = demo->input.key_state[i];
+    for (size_t i = 0; i < 26; i++)
+        demo->input.key_state['A' + i] = sfKeyboard_isKeyPressed(sfKeyA + i);
+    for (size_t i = 0; i < 256; i++)
+        demo->input.key_press[i] =
+        (!demo->input.key_last[i]) && demo->input.key_state[i];
 }
 
 void demo_poll_input(demo_t *demo)
