@@ -26,7 +26,7 @@ void set_sound(menu_t *menu)
 {
     sfSoundBuffer *select = sfSoundBuffer_createFromFile("res/musics/move.ogg");
     sfSoundBuffer *move = sfSoundBuffer_createFromFile("res/musics/move.ogg");
-    
+
     menu->move = sfSound_create();
     menu->select = sfSound_create();
     sfSound_setBuffer(menu->move, move);

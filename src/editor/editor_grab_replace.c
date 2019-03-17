@@ -18,7 +18,7 @@ static int is_point_selected(demo_t *demo, vec3 p)
 static int is_triangle_selected(demo_t *demo, rtx_triangle *triangle)
 {
     for (size_t i = 0; i < 3; i++)
-        if (is_point_selected(demo, triangle->vertex[i])) 
+        if (is_point_selected(demo, triangle->vertex[i]))
             return 1;
     return 0;
 }

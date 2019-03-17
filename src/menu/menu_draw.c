@@ -17,7 +17,6 @@ static void draw_option_menu(menu_t *menu)
         button_draw(menu->object[i]);
 }
 
-
 void draw_intro(demo_t *demo, button_t object)
 {
     rect_t rect = {{-1.0f, -1.0f}, {2.0f, 2.0f}};
