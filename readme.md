@@ -32,7 +32,7 @@ In edition mode : ZQSD to move the caméra
                   With 3 points selected :
                         F allow you to flip the triangle selected
                         T allow you to create a triangle with the 3 selected vertex.
-                  E active the extruder mode with allow you to dig in the world
+                  E active the extruder mode with allow you to dig or extrude large amount of points in the world
 In both mode : hold right click to rotate the caméra
 In both mode : P to activate/desactivate UI
 But most important Have fun !!
