@@ -70,8 +70,10 @@ int game(int argc, char **argv)
             display_helper();
             return 0;
         }
-        else if (my_char_isnum(argv[1]))
+        else if (my_char_isnum(argv[1])) {
             strenght = atof(argv[1]);
+        }
+    }
     demo(strenght);
     return (EXIT_SUCCESS);
 }

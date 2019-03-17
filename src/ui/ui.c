@@ -42,7 +42,6 @@ static const ui_texture_descriptor_t texture_desc_array[] = {
     {UIRES_MENU_ENGINE, "res/ui/menu/menu_intro_moteur.png"},
     {UIRES_MENU_MENU, "res/ui/menu/menu2.png"},
     {UIRES_MENU_PLAY, "res/ui/menu/menu_play.png"},
-    {UIRES_MENU_SETTING, "res/ui/menu/menu_setting.png"},
     {UIRES_MENU_QUIT, "res/ui/menu/menu_quit.png"},
     {UIRES_MENU_CURSOR, "res/ui/menu/cursor.png"},
     {UIRES_EDITOR_SELECT, "res/model/editor/select.png"},
