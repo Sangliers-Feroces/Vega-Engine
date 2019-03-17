@@ -7,18 +7,20 @@
 
 #include "headers.h"
 
-void octree_add_triangle(octree **tree, vec3 *triangle)
+rtx_triangle* octree_add_triangle(octree **tree, vec3 *triangle)
 {
     rtx_triangle *rtx = rtx_triangle_create(triangle);
 
     octree_insert_triangle(tree, rtx);
+    return rtx;
 }
 
-void octree_add_triangle_no_lightmap(octree **tree, vec3 *triangle)
+rtx_triangle* octree_add_triangle_no_lightmap(octree **tree, vec3 *triangle)
 {
     rtx_triangle *rtx = rtx_triangle_create_no_lightmap(triangle);
 
     octree_insert_triangle(tree, rtx);
+    return rtx;
 }
 
 void terrain_sub_triangle(rtx_triangle *triangle, octree **dst)

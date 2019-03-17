@@ -22,7 +22,7 @@ static void uv_vec2(vec2 *to_flip)
     }
 }
 
-static void rtx_triangle_uv(rtx_triangle *triangle)
+void rtx_triangle_uv(rtx_triangle *triangle)
 {
     uv_vec2(triangle->albelo.uv);
 }

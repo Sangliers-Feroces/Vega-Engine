@@ -45,6 +45,7 @@ void editor_extrude(demo_t *demo);
 
 void editor_rot(demo_t *demo);
 
+void rtx_triangle_uv(rtx_triangle *triangle);
 void editor_uv(demo_t *demo);
 
 #endif
