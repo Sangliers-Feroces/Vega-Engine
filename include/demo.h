@@ -12,7 +12,6 @@
 #define PLAYER_MOVE 20.0f
 #define PLAYER_MAX_SPEED 10.0f
 
-void demo_init_input(demo_t *demo);
 void demo_poll_input(demo_t *demo);
 void check_mouse_move(demo_t *demo);
 

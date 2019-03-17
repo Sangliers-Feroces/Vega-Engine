@@ -63,7 +63,6 @@ demo_t* demo_init(void)
     init_win(res);
     init_cam(res);
     _ui.button_clicked = UIBUTTON_NONE;
-    demo_init_input(res);
     res->tree = octree_create(NULL);
     init();
     ui_init(res);

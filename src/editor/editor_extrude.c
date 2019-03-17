@@ -7,3 +7,6 @@
 
 #include "headers.h"
 
+void editor_extrude(demo_t *demo)
+{
+}

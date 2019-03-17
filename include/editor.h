@@ -33,4 +33,11 @@ void editor_grab_apply(demo_t *demo);
 
 void editor_grab_replace(demo_t *demo);
 
+int editor_is_point_selected(demo_t *demo, vec3 p);
+void editor_del(demo_t *demo);
+
+void editor_flip(demo_t *demo);
+
+void editor_extrude(demo_t *demo);
+
 #endif
