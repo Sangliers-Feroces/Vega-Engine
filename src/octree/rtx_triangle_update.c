@@ -33,3 +33,9 @@ void rtx_triangle_update(demo_t *demo, rtx_triangle *triangle)
     triangle->bitangent = normal3((vec3){0.0f, 0.0f, 0.0f},
     triangle->tangent, triangle->normal);
 }
+
+void rtx_triangle_replace(demo_t *demo, octree *node, rtx_triangle *triangle)
+{
+    octree_rtx_triangle_detach(node, triangle);
+    octree_insert_triangle(&demo->tree, triangle);
+}

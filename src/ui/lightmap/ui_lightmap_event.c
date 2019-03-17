@@ -22,12 +22,18 @@ static void ui_lm_button_effect(demo_t *demo)
 {
     switch (_ui.ui_lightmap_struct.button_clicked) {
     case UILMBUTTON_PLUS:
-        _ui.ray_density += 10;
+        if (_ui.ray_density >= 1 && _ui.ray_density < 10)
+            _ui.ray_density ++;
+        else
+            _ui.ray_density += 10;
         break;
     case UILMBUTTON_MINUS:
-        _ui.ray_density -= 10;
-        if (_ui.ray_density < 10)
-            _ui.ray_density = 10;
+        if (_ui.ray_density >= 1 && _ui.ray_density <= 10)
+            _ui.ray_density--;
+        else
+            _ui.ray_density -= 10;
+        if (_ui.ray_density < 1)
+            _ui.ray_density = 1;
         break;
     case UILMBUTTON_BACK:
         _ui.ui_lightmap_struct.back = 1;

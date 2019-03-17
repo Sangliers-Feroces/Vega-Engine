@@ -49,8 +49,9 @@ static void selection_add_delta(demo_t *demo)
 void editor_grab_apply(demo_t *demo)
 {
     octree_apply_delta(demo, demo->tree);
+    selection_add_delta(demo);
+    editor_grab_replace(demo);
     texture2f_refresh_gpu(_lightmaps.base);
     demo->editor.grabbed = MODEL_EDITOR_MAX;
-    selection_add_delta(demo);
     demo->editor.grab_delta = (vec3){0.0f, 0.0f, 0.0f};
 }

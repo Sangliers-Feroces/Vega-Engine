@@ -35,7 +35,7 @@ octree* octree_create(octree *root)
     return res;
 }
 
-void octree_rtx_triangle_free(octree *tree, rtx_triangle *triangle)
+void octree_rtx_triangle_detach(octree *tree, rtx_triangle *triangle)
 {
     size_t ndx = ~0ULL;
 
@@ -46,7 +46,6 @@ void octree_rtx_triangle_free(octree *tree, rtx_triangle *triangle)
         }
     if (ndx == ~0ULL)
         return;
-    rtx_triangle_destroy(triangle);
     tree->triangles.count--;
     for (size_t i = ndx; i < tree->triangles.count; i++)
         tree->triangles.triangle[i] = tree->triangles.triangle[i + 1];

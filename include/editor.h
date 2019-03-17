@@ -31,4 +31,6 @@ void editor_grab_update_delta(demo_t *demo);
 
 void editor_grab_apply(demo_t *demo);
 
+void editor_grab_replace(demo_t *demo);
+
 #endif
