@@ -31,6 +31,7 @@ void editor_init(demo_t *demo)
     for (size_t i = 0; i < 3; i++)
         demo->editor.grabber_ent[i] =
         entity_create(demo->editor.model[MODEL_EDITOR_X + i]);
+    demo->editor.is_wireframe = 0;
 }
 
 void editor_quit(demo_t *demo)

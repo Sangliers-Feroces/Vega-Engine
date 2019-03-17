@@ -12,18 +12,35 @@ static void merge_points(demo_t *demo)
     octree_add_triangle(&demo->tree, demo->editor.selections.selection);
 }
 
+static void create_geom(demo_t *demo)
+{
+    vec3 pos = vec3_adds(
+    vec3_add(demo->cam.pos, spherical_to_cartesian_z(demo->cam.rot)), -0.5f);
+
+    octree_add_triangle(&demo->tree,
+    (vec3[]){{pos.x, pos.y, pos.z}, {pos.x, pos.y, pos.z + 1.0f},
+    {pos.x + 1.0f, pos.y, pos.z}});
+    octree_add_triangle(&demo->tree,
+    (vec3[]){{pos.x + 1.0f, pos.y, pos.z}, {pos.x, pos.y, pos.z + 1.0f},
+    {pos.x + 1.0f, pos.y, pos.z + 1.0f}});
+}
+
 static void editor_shortcut(demo_t *demo)
 {
     if (demo->input.key_press['P'])
         _ui.display_ui = !_ui.display_ui;
     if (demo->input.key_press['T'] && (demo->editor.selections.count == 3))
         merge_points(demo);
-    if (demo->input.key_press['F'] && (demo->editor.selections.count == 3))
+    if (demo->input.key_press['F'])
         editor_flip(demo);
     if (demo->input.key_press[KEY_DEL])
         editor_del(demo);
     if (demo->input.key_press['E'])
         editor_extrude(demo);
+    if (demo->input.key_press['C'])
+        create_geom(demo);
+    if (demo->input.key_press['W'])
+        demo->editor.is_wireframe = !demo->editor.is_wireframe;
 }
 
 void editor(demo_t *demo)

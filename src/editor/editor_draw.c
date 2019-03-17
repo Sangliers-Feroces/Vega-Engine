@@ -38,7 +38,7 @@ static void draw_grab(demo_t *demo)
 void editor_draw(demo_t *demo)
 {
     entity_t entity;
-    float scale = 0.5f;
+    float scale = 0.25f;
     float scaleh = scale / 2.0f;
 
     glDisable(GL_CULL_FACE);

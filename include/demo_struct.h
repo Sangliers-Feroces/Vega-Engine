@@ -89,6 +89,7 @@ typedef struct {
     vec3 grab_delta;
     model_editor_t grabbed;
     entity_t *grabber_ent[3];
+    int is_wireframe;
 } editor_t;
 
 typedef struct {

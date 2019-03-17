@@ -8,6 +8,8 @@
 #ifndef _EDITOR_H
 #define _EDITOR_H
 
+#define EDITOR_EXTRUSION_OFF 0.1f
+
 void editor(demo_t *demo);
 
 void editor_init(demo_t *demo);

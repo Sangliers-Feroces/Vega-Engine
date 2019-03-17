@@ -52,6 +52,7 @@ static void reset_gl_pipeline(void)
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
     glDisableVertexAttribArray(2);
+    glEnable(GL_CULL_FACE);
     glFrontFace(GL_CW);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
@@ -66,8 +67,11 @@ void demo_render_geom(demo_t *demo)
     set_vertex_attrib(demo);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, _lightmaps.base->id);
-    glFrontFace(GL_CW);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    if (demo->editor.is_wireframe) {
+        glDisable(GL_CULL_FACE);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    } else
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     draw_geom(demo->tree, &index);
     reset_gl_pipeline();
 }
