@@ -28,6 +28,11 @@ static int init_mouse(demo_t *demo)
     demo->mouse.button_release = 0;
     demo->mouse.button_click = 0;
     demo->mouse.mouse_pos = (sfVector2i){0, 0};
+    for (size_t i = 0; i < 256; i++) {
+        demo->input.key_state[i] = 0;
+        demo->input.key_last[i] = 0;
+        demo->input.key_press[i] = 0;
+    }
     return (1);
 }
 
@@ -44,6 +49,7 @@ static void init_win(demo_t *demo)
     if (demo->win.frametime == NULL)
         exit_full_custom();
     demo->win.framelen = 1.0f / 60.0f;
+    demo->win.has_focus = 1;
     sfWindow_setVerticalSyncEnabled((sfWindow*)demo->win.window, sfTrue);
     if (!init_mouse(demo))
         exit_full_custom();
@@ -57,7 +63,6 @@ demo_t* demo_init(void)
     init_win(res);
     init_cam(res);
     _ui.button_clicked = UIBUTTON_NONE;
-    demo_init_input(res);
     res->tree = octree_create(NULL);
     init();
     ui_init(res);

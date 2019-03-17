@@ -9,6 +9,13 @@
 
 void octree_add_triangle(octree **tree, vec3 *triangle)
 {
+    rtx_triangle *rtx = rtx_triangle_create(triangle);
+
+    octree_insert_triangle(tree, rtx);
+}
+
+void octree_add_triangle_no_lightmap(octree **tree, vec3 *triangle)
+{
     rtx_triangle *rtx = rtx_triangle_create_no_lightmap(triangle);
 
     octree_insert_triangle(tree, rtx);
@@ -24,11 +31,11 @@ void terrain_sub_triangle(rtx_triangle *triangle, octree **dst)
     mid = vec3_divs(mid, 3.0f);
     mid = vec3_add(mid, vec3_muls(triangle->normal,
     (randf() - 0.5f) * dist * 0.2f));
-    octree_add_triangle(dst,
+    octree_add_triangle_no_lightmap(dst,
     (vec3[]){triangle->vertex[0], triangle->vertex[1], mid});
-    octree_add_triangle(dst,
+    octree_add_triangle_no_lightmap(dst,
     (vec3[]){triangle->vertex[1], triangle->vertex[2], mid});
-    octree_add_triangle(dst,
+    octree_add_triangle_no_lightmap(dst,
     (vec3[]){triangle->vertex[2], triangle->vertex[0], mid});
 }
 

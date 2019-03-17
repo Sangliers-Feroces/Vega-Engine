@@ -19,6 +19,12 @@ static int do_stuff_event(demo_t *demo, sfEvent event)
     case sfEvtMouseButtonReleased:
         demo->mouse.button_state &= ~(1 << event.mouseButton.button);
         break;
+    case sfEvtGainedFocus:
+        demo->win.has_focus = 1;
+        break;
+    case sfEvtLostFocus:
+        demo->win.has_focus = 0;
+        break;
     default:
         break;
     }
@@ -52,6 +58,8 @@ int poll_events(demo_t *demo)
         if (!do_stuff_event(demo, event))
             return (0);
     poll_click(demo);
+    if (!demo->win.has_focus)
+        return (1);
     check_mouse_move(demo);
     demo_poll_input(demo);
     ui_refresh_hover(demo);

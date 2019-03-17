@@ -7,17 +7,6 @@
 
 #include "headers.h"
 
-void demo_init_input(demo_t *demo)
-{
-    demo->input.binding[KEY_UP] = sfKeyUp;
-    demo->input.binding[KEY_DOWN] = sfKeyDown;
-    demo->input.binding[KEY_LEFT] = sfKeyLeft;
-    demo->input.binding[KEY_RIGHT] = sfKeyRight;
-    demo->input.binding[KEY_JUMP] = sfKeyX;
-    demo->input.binding[KEY_ATK] = sfKeyW;
-    demo->input.binding[KEY_UI] = sfKeyP;
-}
-
 static void poll_editor(demo_t *demo, vec3 cam_x, vec3 cam_z)
 {
     if (sfKeyboard_isKeyPressed(sfKeyZ))
@@ -56,14 +45,14 @@ static void poll_playing(demo_t *demo, vec3 cam_x, vec3 cam_z)
 
 static void poll_general(demo_t *demo)
 {
-    (void)demo;
-    if (sfKeyboard_isKeyPressed(sfKeyP)) {
-        if (_ui.display_ui == 0)
-            _ui.display_ui = 1;
-        else
-            _ui.display_ui = 0;
-    }
-    while (sfKeyboard_isKeyPressed(sfKeyP));
+    for (size_t i = 0; i < 256; i++)
+        demo->input.key_last[i] = demo->input.key_state[i];
+    for (size_t i = 0; i < 26; i++)
+        demo->input.key_state['A' + i] = sfKeyboard_isKeyPressed(sfKeyA + i);
+    demo->input.key_state[KEY_DEL] = sfKeyboard_isKeyPressed(sfKeyDelete);
+    for (size_t i = 0; i < 256; i++)
+        demo->input.key_press[i] =
+        (!demo->input.key_last[i]) && demo->input.key_state[i];
 }
 
 void demo_poll_input(demo_t *demo)
@@ -74,9 +63,6 @@ void demo_poll_input(demo_t *demo)
     demo_update_framerate(demo);
     cam_x = vec3_muls(cam_x, demo->win.framelen);
     cam_z = vec3_muls(cam_z, demo->win.framelen);
-    for (size_t i = 0; i < KEY_COUNT; i++)
-        demo->input.keystate[i] =
-        sfKeyboard_isKeyPressed(demo->input.binding[i]);
     if (demo->player.state == GAME_EDITOR)
         poll_editor(demo, cam_x, cam_z);
     else

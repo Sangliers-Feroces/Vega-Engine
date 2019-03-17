@@ -14,19 +14,13 @@ typedef enum {
 } action_t;
 
 typedef enum {
-    KEY_UP = 0,
-    KEY_DOWN = 1,
-    KEY_LEFT = 2,
-    KEY_RIGHT = 3,
-    KEY_JUMP = 4,
-    KEY_ATK = 5,
-    KEY_UI = 6,
-    KEY_COUNT = 7
-} key_act_t;
+    KEY_DEL = 127
+} keycode_t;
 
 typedef struct {
-    sfKeyCode binding[KEY_COUNT];
-    char keystate[KEY_COUNT];
+    int key_last[256];
+    int key_state[256];
+    int key_press[256];
 } input_t;
 
 typedef struct {
@@ -35,6 +29,7 @@ typedef struct {
     sfRenderWindow *window;
     float framelen;
     sfClock *frametime;
+    int has_focus;
 } win_t;
 
 typedef struct {

@@ -27,9 +27,9 @@ terrain_search_t search)
     if (!(vec3_eq(candidate->vertex[1], search.vertex[2]) &&
     vec3_eq(candidate->vertex[2], search.vertex[1])))
         return;
-    octree_add_triangle(dst,
+    octree_add_triangle_no_lightmap(dst,
     (vec3[]){search.mid, candidate->vertex[0], candidate->vertex[1]});
-    octree_add_triangle(dst,
+    octree_add_triangle_no_lightmap(dst,
     (vec3[]){search.mid, candidate->vertex[2], candidate->vertex[0]});
     candidate->data = 1;
 }
@@ -58,9 +58,9 @@ float strengh)
     dist = vec3_dist(triangle->vertex[1], triangle->vertex[2]);
     mid = vec3_add(mid, vec3_muls(triangle->normal,
     (randf() - 0.5f) * dist * strengh));
-    octree_add_triangle(dst,
+    octree_add_triangle_no_lightmap(dst,
     (vec3[]){mid, triangle->vertex[0], triangle->vertex[1]});
-    octree_add_triangle(dst,
+    octree_add_triangle_no_lightmap(dst,
     (vec3[]){mid, triangle->vertex[2], triangle->vertex[0]});
     triangle->data = 1;
     terrain_search_other(root, dst,
