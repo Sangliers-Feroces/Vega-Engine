@@ -45,6 +45,8 @@ inter_ray3_ent *inter, int authorize_oob)
     if (dotnv == 0.0f)
         return;
     t = intersect_plane(vertex, ray, dotnv);
+    if (t < 0.0f)
+        return;
     p = ray3_compute(ray, t);
     bar = vertex_barycentric3(p, vertex);
     if ((!authorize_oob) && (!is_barycentric_valid(bar)))

@@ -47,6 +47,11 @@ const glfloat *value);
 const void (*p_glactivetexture)(glenum texture);
 const void (*p_glgeneratemipmap)(glenum target);
 const void (*p_gldisable)(glenum cap);
+const void (*p_gltexstorage2d)(glenum target, glsizei levels,
+glenum internal_format, glsizei w, glsizei h);
+const void (*p_gltexsubimage2d)(glenum target, glint level,
+glint offx, glint offy, glsizei w, glsizei h, glenum format,
+glenum type, const glvoid *pixels);
 
 const gluint (*p_glcreateshader)(glenum shader_type);
 const void (*p_glshadersource)(gluint shader, glsizei count,
@@ -121,6 +126,8 @@ static void load_2(void)
     p_glactivetexture = glXGetProcAddressARB("glActiveTexture");
     p_glgeneratemipmap = glXGetProcAddressARB("glGenerateMipmap");
     p_gldisable = glXGetProcAddressARB("glDisable");
+    p_gltexstorage2d = glXGetProcAddressARB("glTexStorage2D");
+    p_gltexsubimage2d = glXGetProcAddressARB("glTexSubImage2D");
 }
 
 static void load_3(void)

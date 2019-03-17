@@ -15,7 +15,6 @@ static void init_cam(demo_t *demo)
     demo->cam.fovw = M_PI / 2.0f;
     demo->cam.near = 1.0L;
     demo->cam.proj = PROJ_TYPE_PERSPECTIVE;
-    demo->cam.aperture = 1.0f;
     demo->player.is_grounded = 0;
     demo->player.state = GAME_EDITOR;
     demo->player.pos = (vec3){0.0f, 0.0f, 0.0f};
@@ -75,7 +74,7 @@ void demo_quit(demo_t *demo)
     demo_texture_destroy(demo);
     gl_delete(demo);
     ui_quit();
-    texture2f_write(_lightmaps.base, demo->cam.aperture);
+    texture2f_write(_lightmaps.base, _lightmaps.aperture);
     quit();
     sfRenderWindow_destroy(demo->win.window);
     sfClock_destroy(demo->win.frametime);

@@ -43,7 +43,6 @@ typedef struct {
     long double fovw;
     long double ratiowh;
     long double near;
-    float aperture;
     proj_type_t proj;
     mvp_t mvp;
     ray_viewport_t viewport;

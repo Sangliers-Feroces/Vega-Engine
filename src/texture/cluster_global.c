@@ -12,6 +12,8 @@
 void lightmap_init(void)
 {
     _lightmaps = texture_cluster_create();
+    lightmap_fill((rect_t){{0.0f, 0.0f}, {1.0f, 1.0f}}, _lightmaps.aperture);
+    texture2f_refresh_gpu(_lightmaps.base);
 }
 
 void lightmap_quit(void)

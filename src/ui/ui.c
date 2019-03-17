@@ -46,6 +46,7 @@ static const ui_texture_descriptor_t texture_desc_array[] = {
     {UIRES_MENU_CURSOR, "res/ui/menu/cursor.png"},
     {UIRES_EDITOR_SELECT, "res/model/editor/select.png"},
     {UIRES_EDITOR_GRAB, "res/model/editor/grab.png"},
+    {UIRES_TERRAIN, "res/textures/grass.png"},
     {0, NULL}
 };
 

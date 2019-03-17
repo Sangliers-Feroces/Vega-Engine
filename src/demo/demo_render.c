@@ -25,7 +25,7 @@ uint32_t rtx(demo_t *demo, vec3 ray)
     if (inter.triangle != NULL) {
         uv = barycentric2_get_point(inter.triangle->lightmap.uv, inter.bar);
         return rgbaf32_to_uint32(texture2f_sample(
-        inter.triangle->lightmap.texture, uv), demo->cam.aperture);
+        inter.triangle->lightmap.texture, uv), _lightmaps.aperture);
     }
     else
         return 0xFF000000;

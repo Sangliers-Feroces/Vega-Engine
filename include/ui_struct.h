@@ -52,6 +52,7 @@ typedef enum {
     UIRES_MENU_CURSOR,
     UIRES_EDITOR_SELECT,
     UIRES_EDITOR_GRAB,
+    UIRES_TERRAIN,
     UIRES_MAX
 } uires_t;
 

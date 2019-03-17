@@ -21,7 +21,9 @@ void rtx_triangle_replace(demo_t *demo, octree *node, rtx_triangle *triangle);
 
 void octree_destroy(octree **root);
 
-void rtx_triangle_update(demo_t *demo, rtx_triangle *triangle);
+void rtx_triangle_update(rtx_triangle *triangle);
+void rtx_triangle_update_tangent(rtx_triangle *triangle);
+rtx_triangle* rtx_triangle_create_no_lightmap(vec3 *triangle);
 
 bounds3 octree_get_sub_bounds(octree *tree, size_t ndx);
 

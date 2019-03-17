@@ -36,7 +36,7 @@ static void octree_apply_delta(demo_t *demo, octree *tree)
         octree_apply_delta(demo, tree->sub[i]);
     for (size_t i = 0; i < tree->triangles.count; i++)
         if (rtx_triangle_apply_delta(demo, tree->triangles.triangle[i]))
-            rtx_triangle_update(demo, tree->triangles.triangle[i]);
+            rtx_triangle_update(tree->triangles.triangle[i]);
 }
 
 static void selection_add_delta(demo_t *demo)

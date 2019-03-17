@@ -62,7 +62,7 @@ static texture2f* texture2f_create_cluster(int32_t w, int32_t h)
 
 texture_cluster texture_cluster_create(void)
 {
-    texture_cluster res = {NULL, 0, {0, 0, NULL}};
+    texture_cluster res = {NULL, 0, 1.0f, {0, 0, NULL}};
     glint max;
 
     glGetIntegerv(GL_MAX_TEXTURE_SIZE, &max);

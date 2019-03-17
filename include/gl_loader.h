@@ -54,6 +54,11 @@ const glfloat *value);
 extern void (*p_glactivetexture)(glenum texture);
 extern void (*p_glgeneratemipmap)(glenum target);
 extern void (*p_gldisable)(glenum cap);
+extern void (*p_gltexstorage2d)(glenum target, glsizei levels,
+glenum internal_format, glsizei w, glsizei h);
+extern void (*p_gltexsubimage2d)(glenum target, glint level,
+glint offx, glint offy, glsizei w, glsizei h, glenum format,
+glenum type, const glvoid *pixels);
 
 extern gluint (*p_glcreateshader)(glenum shader_type);
 extern void (*p_glshadersource)(gluint shader, glsizei count,
@@ -145,6 +150,8 @@ extern void (*p_glgetintegeri_v)(glenum pname, gluint index, glint *params);
 #define glDispatchCompute p_gldispatchcompute
 #define glMemoryBarrier p_glmemorybarrier
 #define glGetTexImage p_glgetteximage
+#define glTexStorage2D p_gltexstorage2d
+#define glTexSubImage2D p_gltexsubimage2d
 
 #define glGetIntegerv p_glgetintegerv
 #define glGetIntegeri_v p_glgetintegeri_v

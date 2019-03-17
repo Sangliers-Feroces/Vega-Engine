@@ -11,7 +11,7 @@ static void send_uniform(demo_t *demo, gluint program)
 {
     glint aperture = glGetUniformLocation(program, "aperture");
 
-    glUniform1f(aperture, demo->cam.aperture);
+    glUniform1f(aperture, _lightmaps.aperture);
     refresh_vp(demo, demo->buf.lightmap_shader);
 }
 

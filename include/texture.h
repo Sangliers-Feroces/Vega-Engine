@@ -60,5 +60,6 @@ int32_t *pres, int32_t *start);
 void lightmap_init(void);
 void lightmap_quit(void);
 int lightmap_allocate(ivec2 size, texture_cluster_row_alloc **pres);
+void lightmap_fill(rect_t rect, float value);
 
 #endif

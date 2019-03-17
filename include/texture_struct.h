@@ -55,6 +55,7 @@ typedef struct {
 typedef struct {
     texture2f *base;
     int32_t to_fill_y;
+    float aperture;
     vec_texture_cluster_row rows;
 } texture_cluster;
 

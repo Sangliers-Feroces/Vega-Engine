@@ -37,7 +37,8 @@ static void texture_cluster_free_alloc(texture_cluster_row_alloc *alloc)
 
 void texture2f_binding_free(texture2f_binding binding)
 {
-    if ((binding.alloc == NULL) || (binding.alloc->shared_count == 0))
+    if ((binding.texture == NULL) || (binding.alloc == NULL) ||
+    (binding.alloc->shared_count == 0))
         return;
     binding.alloc->shared_count--;
     if (binding.alloc->shared_count == 0)

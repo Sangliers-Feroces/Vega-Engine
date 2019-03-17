@@ -33,26 +33,37 @@ void editor_grab(demo_t *demo)
     demo->editor.grab_now =  demo->editor.grab_first;
 }
 
+static vec3 editor_grab_get_proj_ext(demo_t *demo, inter_ray3_ent *inter)
+{
+    switch (demo->editor.grabbed) {
+    case MODEL_EDITOR_Y:
+        vertex_intersect_ray_no_cull(demo->editor.grabber_ent[1]->vertex,
+        demo->mouse.ray, inter, 1);
+        return (vec3){0.0f, inter->p.y, 0.0f};
+    case MODEL_EDITOR_Z:
+        vertex_intersect_ray_no_cull(demo->editor.grabber_ent[2]->vertex,
+        demo->mouse.ray, inter, 1);
+        return (vec3){0.0f, 0.0f, inter->p.z};
+    default:
+        return demo->editor.grab_first;
+    }
+}
+
 vec3 editor_grab_get_proj(demo_t *demo)
 {
     inter_ray3_ent inter = {NULL, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, 0.0f};
+    vec3 res;
 
     switch (demo->editor.grabbed) {
     case MODEL_EDITOR_X:
         vertex_intersect_ray_no_cull(demo->editor.grabber_ent[0]->vertex,
         demo->mouse.ray, &inter, 1);
-        return (vec3){inter.p.x, 0.0f, 0.0f};
-    case MODEL_EDITOR_Y:
-        vertex_intersect_ray_no_cull(demo->editor.grabber_ent[1]->vertex,
-        demo->mouse.ray, &inter, 1);
-        return (vec3){0.0f, inter.p.y, 0.0f};
-    case MODEL_EDITOR_Z:
-        vertex_intersect_ray_no_cull(demo->editor.grabber_ent[2]->vertex,
-        demo->mouse.ray, &inter, 1);
-        return (vec3){0.0f, 0.0f, inter.p.z};
+        res = (vec3){inter.p.x, 0.0f, 0.0f};
+        break;
     default:
-        return (vec3){0.0f, 0.0f, 0.0f};
+        res = editor_grab_get_proj_ext(demo, &inter);
     }
+    return inter.vertex == NULL ? demo->editor.grab_first : res;
 }
 
 void editor_grab_update_delta(demo_t *demo)

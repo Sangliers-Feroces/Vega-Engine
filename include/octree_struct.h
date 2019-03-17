@@ -16,6 +16,7 @@ typedef struct {
     vec3 normal;               /* normal + tangent + bitangent         */
     vec3 tangent;              /* are very key to create tangent space */
     vec3 bitangent;            /* and then to make lights rays bounce  */
+    int data;
 } rtx_triangle;
 
 /* another std::vector */
@@ -101,5 +102,10 @@ typedef struct {
     vec3 bar;
     float min_t;
 } inter_ray3_ent;
+
+typedef struct {
+    vec3 *vertex;
+    vec3 mid;
+} terrain_search_t;
 
 #endif

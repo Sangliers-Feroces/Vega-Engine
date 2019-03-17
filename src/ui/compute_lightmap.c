@@ -52,5 +52,5 @@ void compute_lightmap(demo_t *demo)
     thread_wait();
     _ui.ui_lightmap_struct.back = 0;
     texture2f_refresh_gpu(_lightmaps.base);
-    demo->cam.aperture = (octree_get_max_lumel(demo->tree) / 3.0f) / 2.0f;
+    _lightmaps.aperture = (octree_get_max_lumel(demo->tree) / 3.0f) / 2.0f;
 }
