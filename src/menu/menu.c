@@ -24,7 +24,7 @@ static void menu_set_object(menu_t *menu)
     menu->object[MENUOBJECT_QUIT] =
     (button_t){UIRES_MENU_QUIT, (vec2){-0.85f, -0.45f}, 0.20f, -0.9f, REL_X};
     menu->object[MENUOBJECT_CURSOR] =
-    (button_t){UIRES_MENU_CURSOR, (vec2){-0.40f, -0.37f}, 0.3f, -0.9f, REL_X};
+    (button_t){UIRES_MENU_CURSOR, (vec2){-0.30f, -0.22f}, 0.1f, -0.9f, REL_X};
 }
 
 int menu_intro(demo_t *demo, menu_t *menu)
