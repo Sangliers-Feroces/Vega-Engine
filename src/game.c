@@ -7,18 +7,6 @@
 
 #include "headers.h"
 
-rtx_triangle* get_random_triangle(void)
-{
-    float limit = 100.0f;
-    vec3 base = {(randf() - 0.5f) * limit, (randf() - 0.5f) * limit,
-    (randf() - 0.5f) * limit};
-
-    return rtx_triangle_create((vec3[]){{base.x, base.y, base.z},
-    {base.x + randf() * 10.0f, base.y + randf() * 10.0f,
-    base.z + randf() * 10.0f}, {base.x + randf() * 10.0f,
-    base.y + randf() * 10.0f, base.z + randf() * 10.0f}});
-}
-
 static void add_triangle(octree **tree, vec3 *triangle)
 {
     rtx_triangle *rtx = rtx_triangle_create(triangle);
@@ -26,26 +14,8 @@ static void add_triangle(octree **tree, vec3 *triangle)
     octree_insert_triangle(tree, rtx);
 }
 
-void load_model(octree **tree)
+static void load_model_ext(octree **tree, float h)
 {
-    float h = 0.0f;
-
-    add_triangle(tree, (vec3[]){{0.0f, 0.0f, 5.0f},
-    {0.0f, 3.0f - h, 5.0f}, {10.0f, 0.0f, 5.0f}});
-    add_triangle(tree, (vec3[]){{0.0f, 3.0f - h, 5.0f}, {10.0f, 3.0f - h, 5.0f},
-    {10.0f, 0.0f, 5.0f}});
-    add_triangle(tree, (vec3[]){{0.0f, 0.0f, 0.0f},
-    {0.0f, 1.0f, 0.0f}, {10.0f, 0.0f, 0.0f}});
-    add_triangle(tree, (vec3[]){{0.0f, 1.0f, 0.0f}, {10.0f, 1.0f, 0.0f},
-    {10.0f, 0.0f, 0.0f}});
-    add_triangle(tree, (vec3[]){{0.0f, 2.0f, 0.0f},
-    {0.0f, 3.0f - h, 0.0f}, {10.0f, 2.0f, 0.0f}});
-    add_triangle(tree, (vec3[]){{0.0f, 3.0f - h, 0.0f}, {10.0f, 3.0f - h, 0.0f},
-    {10.0f, 2.0f, 0.0f}});
-    add_triangle(tree, (vec3[]){{0.0f, 3.0f - h, 0.0f}, {0.0f, 3.0f - h, 5.0f},
-    {10.0f, 3.0f - h, 0.0f}});
-    add_triangle(tree, (vec3[]){{0.0f, 3.0f - h, 5.0f}, {10.0f, 3.0f - h, 5.0f},
-    {10.0f, 3.0f - h, 0.0f}});
     add_triangle(tree, (vec3[]){{0.0f, 3.0f - h, 0.0f},
     {10.0f, 3.0f - h, 0.0f}, {0.0f, 3.0f - h, 5.0f}});
     add_triangle(tree, (vec3[]){{0.0f, 3.0f - h, 5.0f},
@@ -68,10 +38,36 @@ void load_model(octree **tree)
     {10.0f, 3.0f - h, 0.0f}, {10.0f, 0.0f, 0.0f}});
 }
 
+void load_model(octree **tree)
+{
+    float h = 0.0f;
+
+    add_triangle(tree, (vec3[]){{0.0f, 0.0f, 5.0f},
+    {0.0f, 3.0f - h, 5.0f}, {10.0f, 0.0f, 5.0f}});
+    add_triangle(tree, (vec3[]){{0.0f, 3.0f - h, 5.0f}, {10.0f, 3.0f - h, 5.0f},
+    {10.0f, 0.0f, 5.0f}});
+    add_triangle(tree, (vec3[]){{0.0f, 0.0f, 0.0f},
+    {0.0f, 1.0f, 0.0f}, {10.0f, 0.0f, 0.0f}});
+    add_triangle(tree, (vec3[]){{0.0f, 1.0f, 0.0f}, {10.0f, 1.0f, 0.0f},
+    {10.0f, 0.0f, 0.0f}});
+    add_triangle(tree, (vec3[]){{0.0f, 2.0f, 0.0f},
+    {0.0f, 3.0f - h, 0.0f}, {10.0f, 2.0f, 0.0f}});
+    add_triangle(tree, (vec3[]){{0.0f, 3.0f - h, 0.0f}, {10.0f, 3.0f - h, 0.0f},
+    {10.0f, 2.0f, 0.0f}});
+    add_triangle(tree, (vec3[]){{0.0f, 3.0f - h, 0.0f}, {0.0f, 3.0f - h, 5.0f},
+    {10.0f, 3.0f - h, 0.0f}});
+    add_triangle(tree, (vec3[]){{0.0f, 3.0f - h, 5.0f}, {10.0f, 3.0f - h, 5.0f},
+    {10.0f, 3.0f - h, 0.0f}});
+    load_model_ext(tree, h);
+}
+
 int game(int argc, char **argv)
 {
-    (void)argc;
-    (void)argv;
+    if (argc > 1)
+        if (strcmp(argv[1], "-h") == 0) {
+            display_helper();
+            return 0;
+        }
     demo();
     return (EXIT_SUCCESS);
 }

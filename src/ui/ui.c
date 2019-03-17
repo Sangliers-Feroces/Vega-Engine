@@ -36,6 +36,12 @@ static const ui_texture_descriptor_t texture_desc_array[] = {
     {UIRES_DIGIT_7, "res/ui/digits/7.png"},
     {UIRES_DIGIT_8, "res/ui/digits/8.png"},
     {UIRES_DIGIT_9, "res/ui/digits/9.png"},
+    {UIRES_MENU_ELON, "res/ui/menu/elon.jpg"},
+    {UIRES_MENU_INTRO, "res/ui/menu/menu_intro.png"},
+    {UIRES_MENU_MENU, "res/ui/menu/menu.png"},
+    {UIRES_MENU_PLAY, "res/ui/menu/menu_play.png"},
+    {UIRES_MENU_QUIT, "res/ui/menu/menu_quit.png"},
+    {UIRES_MENU_CURSOR, "res/ui/menu/cursor.png"},
     {UIRES_EDITOR_SELECT, "res/model/editor/select.png"},
     {UIRES_EDITOR_GRAB, "res/model/editor/grab.png"},
     {0, NULL}
@@ -76,6 +82,7 @@ void ui_init(demo_t *demo)
 {
     _ui.display_ui = 1;
     _ui.ratiowh = demo->cam.ratiowh;
+    _ui.ray_density = 10;
     ui_set_textures_to_null();
     ui_load_texture(texture_desc_array);
     if (!ui_check_texture_array())

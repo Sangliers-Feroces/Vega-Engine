@@ -42,6 +42,12 @@ typedef enum {
     UIRES_DIGIT_7,
     UIRES_DIGIT_8,
     UIRES_DIGIT_9,
+    UIRES_MENU_ELON,
+    UIRES_MENU_INTRO,
+    UIRES_MENU_MENU,
+    UIRES_MENU_PLAY,
+    UIRES_MENU_QUIT,
+    UIRES_MENU_CURSOR,
     UIRES_EDITOR_SELECT,
     UIRES_EDITOR_GRAB,
     UIRES_MAX
@@ -121,6 +127,7 @@ typedef struct {
     ui_lm_struct_t ui_lightmap_struct;
     display_nbr_array_t display_nbr_array;
     display_nbr_array_t loading_pourcent;
+    size_t ray_density;
 } ui_struct;
 
 #endif /* !UI_STRUCT_H_ */

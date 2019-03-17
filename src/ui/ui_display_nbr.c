@@ -25,8 +25,8 @@ size_t new_value)
 display_nbr_array_t ui_fill_display_nbr_array(int max_value, vec2 pos,
 float size, float offset_nbr)
 {
-    display_nbr_array_t res; 
-    
+    display_nbr_array_t res;
+
     res.nb_digit = nbr_len((size_t)max_value, 0);
     res.digits = malloc_safe(sizeof(digit_array_t) * res.nb_digit);
 

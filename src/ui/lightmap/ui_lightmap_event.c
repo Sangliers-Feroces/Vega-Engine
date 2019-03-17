@@ -7,28 +7,37 @@
 
 #include "headers.h"
 
+static void ui_lm_button_effect_ext(demo_t *demo)
+{
+    switch (_ui.ui_lightmap_struct.button_clicked) {
+    case UILMBUTTON_START:
+        compute_lightmap(demo);
+        break;
+    default:
+        break;
+    }
+}
+
 static void ui_lm_button_effect(demo_t *demo)
 {
     switch (_ui.ui_lightmap_struct.button_clicked) {
-        case UILMBUTTON_PLUS:
-            demo->temp_ray_density += 10;
-            break;
-        case UILMBUTTON_MINUS:
-            if (demo->temp_ray_density == 10)
-                return;
-            demo->temp_ray_density -= 10;
-            break;
-        case UILMBUTTON_BACK:
-            _ui.ui_lightmap_struct.back = 1;
-            break;
-        case UILMBUTTON_ABORT:
-            thread_abort_task();
-            break;
-        case UILMBUTTON_START:
-            compute_lightmap(demo);
-            break;
-        default:
-            break;
+    case UILMBUTTON_PLUS:
+        _ui.ray_density += 10;
+        break;
+    case UILMBUTTON_MINUS:
+        _ui.ray_density -= 10;
+        if (_ui.ray_density < 10)
+            _ui.ray_density = 10;
+        break;
+    case UILMBUTTON_BACK:
+        _ui.ui_lightmap_struct.back = 1;
+        break;
+    case UILMBUTTON_ABORT:
+        thread_abort_task();
+        break;
+    default:
+        return ui_lm_button_effect_ext(demo);
+        break;
     }
 }
 

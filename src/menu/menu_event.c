@@ -7,10 +7,8 @@
 
 #include "headers.h"
 
-int menu_poll_events(demo_t *demo, menu_t *menu)
+static void poll_arrow_pos(menu_t *menu)
 {
-    if (sfKeyboard_isKeyPressed(sfKeyEnter))
-        return 0;
     if (sfKeyboard_isKeyPressed(sfKeyDown)) {
         menu->object[MENUOBJECT_CURSOR].pos = (vec2){-0.40f, -0.67f};
         menu->menu_state = 0;
@@ -19,12 +17,23 @@ int menu_poll_events(demo_t *demo, menu_t *menu)
         menu->object[MENUOBJECT_CURSOR].pos = (vec2){-0.40f, -0.37f};
         menu->menu_state = 1;
     }
-    if (sfKeyboard_isKeyPressed(sfKeySpace))
-        menu->intro_state = 1;
-    else if (sfKeyboard_isKeyPressed(sfKeyEscape)) {
+}
+
+int menu_poll_events(demo_t *demo, menu_t *menu)
+{
+    menu->last_return = menu->cur_return;
+    menu->cur_return = sfKeyboard_isKeyPressed(sfKeyEnter);
+    if (menu->last_return && (!menu->cur_return)) {
+        if (!menu->intro_state)
+            menu->intro_state = 1;
+        else
+            return 0;
+    }
+    poll_arrow_pos(menu);
+    if (!poll_events(demo)) {
+        menu->intro_state = 0;
+        menu->menu_state = 0;
         return 0;
     }
-    if (!poll_events(demo))
-        return (0);
-    return (1);
+    return 1;
 }

@@ -38,7 +38,7 @@ void ui_lightmap_display(demo_t *demo)
     while (ui_lm_poll_events(demo) && !_ui.ui_lightmap_struct.back) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUseProgram(_ui.ui_program);
-        refresh_display_nbr_array(_ui.display_nbr_array, demo->temp_ray_density);
+        refresh_display_nbr_array(_ui.display_nbr_array, _ui.ray_density);
         ui_lightmap_draw();
         sfRenderWindow_display(demo->win.window);
     }

@@ -71,7 +71,6 @@ int demo(void)
 {
     demo_t *demo = demo_init();
 
-    glEnable(GL_MULTISAMPLE);
     if (!menu(demo)) {
         demo_quit(demo);
         return 0;

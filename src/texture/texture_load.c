@@ -44,6 +44,14 @@ char *get_texture_path(char *name)
     return res;
 }
 
+static void ensure_textures(demo_t *demo)
+{
+    if (demo->texture_panel.count == 0) {
+        my_fd_putstr("Error no texture\n", 2);
+        exit(84);
+    }
+}
+
 demo_t *demo_get_texture_pannel(demo_t *demo)
 {
     struct dirent *read;
@@ -51,10 +59,7 @@ demo_t *demo_get_texture_pannel(demo_t *demo)
     char *path;
 
     demo->texture_panel.count = get_pannel_count();
-    if (demo->texture_panel.count == 0) {
-        my_fd_putstr("Error no texture\n", 2);
-        exit(0);
-    }
+    ensure_textures(demo);
     demo->texture_panel.texture =
     malloc_safe((sizeof(texture2*) * demo->texture_panel.count));
     for (int i = 0; i < demo->texture_panel.count; i++) {
@@ -64,8 +69,7 @@ demo_t *demo_get_texture_pannel(demo_t *demo)
             continue;
         }
         path = get_texture_path(read->d_name);
-        demo->texture_panel.texture[i] =
-        texture2_load(path);
+        demo->texture_panel.texture[i] = texture2_load(path);
         free(path);
     }
     closedir(rep);

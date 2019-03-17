@@ -15,6 +15,7 @@ static void init_cam(demo_t *demo)
     demo->cam.fovw = M_PI / 2.0f;
     demo->cam.near = 1.0L;
     demo->cam.proj = PROJ_TYPE_PERSPECTIVE;
+    demo->cam.aperture = 1.0f;
     demo->player.is_grounded = 0;
     demo->player.state = GAME_EDITOR;
     demo->player.pos = (vec3){0.0f, 0.0f, 0.0f};
@@ -60,7 +61,6 @@ demo_t* demo_init(void)
     res->tree = octree_create(NULL);
     init();
     ui_init(res);
-    res->temp_ray_density = 10; //temp
     demo_get_texture_pannel(res);
     editor_init(res);
     gl_gen(res);

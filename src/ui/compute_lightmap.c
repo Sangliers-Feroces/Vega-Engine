@@ -39,7 +39,7 @@ void compute_lightmap(demo_t *demo)
 {
     float thread_progress;
 
-    octree_light_rtx_noblock(demo->tree, demo->temp_ray_density);
+    octree_light_rtx_noblock(demo->tree, _ui.ray_density);
     while (!thread_is_complete () && !_ui.ui_lightmap_struct.back
     && ui_lm_poll_events(demo)) {
         thread_progress = thread_get_progress();

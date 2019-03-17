@@ -19,7 +19,7 @@ static void update_grab_pos(demo_t *demo)
 static void draw_grab(demo_t *demo)
 {
     entity_t entity;
-    float scale = 1.0f;
+    float scale = 2.0f;
 
     if (demo->editor.selections.count == 0)
         return;
