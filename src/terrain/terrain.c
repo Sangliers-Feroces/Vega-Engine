@@ -23,13 +23,29 @@ static void sub_triangle(rtx_triangle *triangle, octree **dst)
         mid = vec3_add(mid, triangle->vertex[i]);
     mid = vec3_divs(mid, 3.0f);
     mid = vec3_add(mid, vec3_muls(triangle->normal,
-    (randf() - 0.5f) * dist * 0.3f));
+    (randf() - 0.5f) * dist * 0.2f));
     octree_add_triangle(dst,
     (vec3[]){triangle->vertex[0], triangle->vertex[1], mid});
     octree_add_triangle(dst,
     (vec3[]){triangle->vertex[1], triangle->vertex[2], mid});
     octree_add_triangle(dst,
     (vec3[]){triangle->vertex[2], triangle->vertex[0], mid});
+}
+
+static void sub_triangle2(rtx_triangle *triangle, octree **dst)
+{
+    vec3 mid;
+    float dist;
+
+    mid = vec3_add(triangle->vertex[1], triangle->vertex[2]);
+    mid = vec3_divs(mid, 2.0f);
+    dist = vec3_dist(triangle->vertex[1], triangle->vertex[2]);
+    mid = vec3_add(mid, vec3_muls(triangle->normal,
+    (randf() - 0.5f) * dist * 0.3f));
+    octree_add_triangle(dst,
+    (vec3[]){mid, triangle->vertex[0], triangle->vertex[1]});
+    octree_add_triangle(dst,
+    (vec3[]){mid, triangle->vertex[2], triangle->vertex[0]});
 }
 
 static void sub_terrain(demo_t *demo, octree *tree, octree **dst)

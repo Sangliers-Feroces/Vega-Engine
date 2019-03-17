@@ -86,9 +86,9 @@ int demo(void)
         demo_quit(demo);
         return 0;
     }
-    //load_model(&demo->tree);
-    terrain_gen(demo, 100.0f, 5);
-    printf("octree done !\n");
+    load_model(&demo->tree);
+    //terrain_gen(demo, 100.0f, 6);
+    /*printf("octree done !\n");
     struct timespec start, finish;
     double elapsed;
     clock_gettime(CLOCK_MONOTONIC, &start);
@@ -97,7 +97,7 @@ int demo(void)
     clock_gettime(CLOCK_MONOTONIC, &finish);
     elapsed = (finish.tv_sec - start.tv_sec);
     elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
-    printf("%f seconds\n", elapsed);
+    printf("%f seconds\n", elapsed);*/
     demo_loop(demo);
     demo_quit(demo);
     return (0);
