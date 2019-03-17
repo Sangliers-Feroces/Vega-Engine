@@ -32,9 +32,10 @@ int menu_intro(demo_t *demo, menu_t *menu)
     sfMusic *music = sfMusic_createFromFile("res/musics/music_intro.ogg");
     menuobject_t index = MENUOBJECT_INTRO;
 
+    menu->skip_intro = 0;
     sfMusic_play(music);
     while (!check_music_match_time((sfTime){16000000}, music)
-    && menu_poll_events(demo, menu)) {
+    && menu_poll_events(demo, menu) && !menu->skip_intro) {
         if (check_music_match_time((sfTime){6000000}, music))
             index = MENUOBJECT_DEV;
         if (check_music_match_time((sfTime){10000000}, music))

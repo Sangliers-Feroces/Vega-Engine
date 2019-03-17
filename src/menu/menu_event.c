@@ -27,8 +27,10 @@ int menu_poll_events(demo_t *demo, menu_t *menu)
     menu->cur_return = sfKeyboard_isKeyPressed(sfKeyEnter);
     if (menu->last_return && (!menu->cur_return)) {
         sfSound_play(menu->select);
-        if (!menu->intro_state)
+        if (!menu->intro_state) {
+            menu->skip_intro = 1;
             menu->intro_state = 1;
+        }
         else
             return 0;
     }

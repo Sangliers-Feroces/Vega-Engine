@@ -24,6 +24,7 @@ typedef enum {
 typedef struct {
     sfSound *move;
     sfSound *select;
+    int skip_intro;
     int intro_state;
     int menu_state;
     menuobject_t button_clicked;
