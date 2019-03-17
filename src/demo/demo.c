@@ -57,6 +57,10 @@ int poll_events(demo_t *demo)
 
 void demo_loop(demo_t *demo)
 {
+    sfMusic *music = sfMusic_createFromFile("res/musics/main_music.ogg");
+
+    sfMusic_play(music);
+    sfMusic_setLoop(music, sfTrue);
     while (poll_events(demo)) {
         editor(demo);
         demo_render_geom(demo);
@@ -65,6 +69,8 @@ void demo_loop(demo_t *demo)
             ui_display(1, demo);
         sfRenderWindow_display(demo->win.window);
     }
+    sfMusic_stop(music);
+    sfMusic_destroy(music);
 }
 
 int demo(void)
