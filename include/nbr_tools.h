@@ -15,6 +15,7 @@
 #define CTI(x) ((x) - '0')
 #define ITC(x) ((x) + '0')
 
+int my_char_isnum(char *str);
 int my_isnum(char c, int sign);
 int my_pow(size_t a, size_t b);
 int nbr_len(size_t c, int accept_0);
