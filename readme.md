@@ -1,4 +1,6 @@
 Welcome in the Gl Map Editor !!
+First of all the only argument the programm need is the strenght of the map
+it will define the relief on the map. By default it's set at 0.28f but you can enter any number between 0.0f and inf. But avoid value bigger than 0.75f
 Here is a short description of the six tools we gave you :
                     ->MOVE<-
 With the Move tool you'll be able to select one or few vertices
