@@ -46,6 +46,7 @@ const void (*p_gluniform2fv)(glint location, glsizei count,
 const glfloat *value);
 const void (*p_glactivetexture)(glenum texture);
 const void (*p_glgeneratemipmap)(glenum target);
+const void (*p_gldisable)(glenum cap);
 
 const gluint (*p_glcreateshader)(glenum shader_type);
 const void (*p_glshadersource)(gluint shader, glsizei count,
@@ -119,6 +120,7 @@ static void load_2(void)
     p_gluniform2fv = glXGetProcAddressARB("glUniform2fv");
     p_glactivetexture = glXGetProcAddressARB("glActiveTexture");
     p_glgeneratemipmap = glXGetProcAddressARB("glGenerateMipmap");
+    p_gldisable = glXGetProcAddressARB("glDisable");
 }
 
 static void load_3(void)

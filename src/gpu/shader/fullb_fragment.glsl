@@ -9,4 +9,6 @@ out vec4 color;
 void main()
 {
 	color = texture(tex, uv);
+	if (color.w == 0.0)
+		discard;
 }

@@ -47,12 +47,48 @@ const vertex_t model_select[] = {
 };
 
 const vertex_t model_x[] = {
-    {{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f}},
-    {{1.0f, 0.0f, 0.0f}, {0.0f, 0.0f}},
-    {{0.0f, 0.0f, -0.1f}, {0.0f, 0.0f}},
-    {{0.0f, 0.0f, -0.1f}, {0.0f, 0.0f}},
-    {{1.0f, 0.0f, 0.0f}, {0.0f, 0.0f}},
-    {{1.0f, 0.0f, -0.1f}, {0.0f, 0.0f}}
+    {{0.0f, 0.0f, 0.05f}, {0.0f, 0.0f}},
+    {{1.0f, 0.0f, 0.05f}, {1.0f, 0.0f}},
+    {{0.0f, 0.0f, 0.05f - 0.1f}, {0.0f, 1.0f / 3.0f}},
+    {{0.0f, 0.0f, 0.05f - 0.1f}, {0.0f, 1.0f / 3.0f}},
+    {{1.0f, 0.0f, 0.05f}, {1.0f, 0.0f}},
+    {{1.0f, 0.0f, 0.05f - 0.1f}, {1.0f, 1.0f / 3.0f}},
+    {{0.0f, 0.05f, 0.0f}, {0.0f, 0.0f}},
+    {{1.0f, 0.05f, 0.0f}, {1.0f, 0.0f}},
+    {{0.0f, 0.05f - 0.1f, 0.0f}, {0.0f, 1.0f / 3.0f}},
+    {{0.0f, 0.05f - 0.1f, 0.0f}, {0.0f, 1.0f / 3.0f}},
+    {{1.0f, 0.05f, 0.0f}, {1.0f, 0.0f}},
+    {{1.0f, 0.05f - 0.1f, 0.0f}, {1.0f, 1.0f / 3.0f}}
+};
+
+const vertex_t model_y[] = {
+    {{0.0f, 0.0f, 0.05f}, {0.0f, 1.0f / 3.0f}},
+    {{0.0f, 1.0f, 0.05f}, {1.0f, 1.0f / 3.0f}},
+    {{0.0f, 0.0f, 0.05f - 0.1f}, {0.0f, 2.0f / 3.0f}},
+    {{0.0f, 0.0f, 0.05f - 0.1f}, {0.0f, 2.0f / 3.0f}},
+    {{0.0f, 1.0f, 0.05f}, {1.0f, 1.0f / 3.0f}},
+    {{0.0f, 1.0f, 0.05f - 0.1f}, {1.0f, 2.0f / 3.0f}},
+    {{0.05f, 0.0f, 0.0f}, {0.0f, 1.0f / 3.0f}},
+    {{0.05f, 1.0f, 0.0f}, {1.0f, 1.0f / 3.0f}},
+    {{0.05f - 0.1f, 0.0f, 0.0f}, {0.0f, 2.0f / 3.0f}},
+    {{0.05f - 0.1f, 0.0f, 0.0f}, {0.0f, 2.0f / 3.0f}},
+    {{0.05f, 1.0f, 0.0f}, {1.0f, 1.0f / 3.0f}},
+    {{0.05f - 0.1f, 1.0f, 0.0f}, {1.0f, 2.0f / 3.0f}}
+};
+
+const vertex_t model_z[] = {
+    {{0.0f, 0.05f, 0.0f}, {0.0f, 2.0f / 3.0f}},
+    {{0.0f, 0.05f, 1.0f}, {1.0f, 2.0f / 3.0f}},
+    {{0.0f, 0.05f - 0.1f, 0.0f}, {0.0f, 3.0f / 3.0f}},
+    {{0.0f, 0.05f - 0.1f, 0.0f}, {0.0f, 3.0f / 3.0f}},
+    {{0.0f, 0.05f, 1.0f}, {1.0f, 2.0f / 3.0f}},
+    {{0.0f, 0.05f - 0.1f, 1.0f}, {1.0f, 3.0f / 3.0f}},
+    {{0.05f, 0.0f, 0.0f}, {0.0f, 2.0f / 3.0f}},
+    {{0.05f, 0.0f, 1.0f}, {1.0f, 2.0f / 3.0f}},
+    {{0.05f - 0.1f, 0.0f, 0.0f}, {0.0f, 3.0f / 3.0f}},
+    {{0.05f - 0.1f, 0.0f, 0.0f}, {0.0f, 3.0f / 3.0f}},
+    {{0.05f, 0.0f, 1.0f}, {1.0f, 2.0f / 3.0f}},
+    {{0.05f - 0.1f, 0.0f, 1.0f}, {1.0f, 3.0f / 3.0f}}
 };
 
 void editor_load_models(demo_t *demo)
@@ -60,11 +96,11 @@ void editor_load_models(demo_t *demo)
     demo->editor.model[MODEL_EDITOR_SELECT] =
     model_create(model_select, 36, _ui.textures[UIRES_EDITOR_SELECT]);
     demo->editor.model[MODEL_EDITOR_X] =
-    model_create(model_x, 6, _ui.textures[UIRES_EDITOR_GRAB]);
+    model_create(model_x, 12, _ui.textures[UIRES_EDITOR_GRAB]);
     demo->editor.model[MODEL_EDITOR_Y] =
-    model_create(model_x, 6, _ui.textures[UIRES_EDITOR_GRAB]);
+    model_create(model_y, 12, _ui.textures[UIRES_EDITOR_GRAB]);
     demo->editor.model[MODEL_EDITOR_Z] =
-    model_create(model_x, 6, _ui.textures[UIRES_EDITOR_GRAB]);
+    model_create(model_z, 12, _ui.textures[UIRES_EDITOR_GRAB]);
 }
 
 void editor_free_models(demo_t *demo)
