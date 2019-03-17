@@ -31,7 +31,6 @@ static void poll_arrow_pos(menu_t *menu)
         sfSound_play(menu->move);
         if (menu->menu_state >= 0 && menu->menu_state < 1)
             menu->menu_state++;
-        
     }
     while (sfKeyboard_isKeyPressed(sfKeyDown));
     set_cursor(menu);
