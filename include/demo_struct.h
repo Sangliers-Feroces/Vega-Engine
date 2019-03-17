@@ -52,9 +52,11 @@ typedef struct {
 typedef struct {
     sfMouseButton button_last;
     sfMouseButton button_state;
+    sfMouseButton button_release;
     sfMouseButton button_click;
     sfVector2i last_pos;
     sfVector2i mouse_pos;
+    ray3 ray;
 } mouse_t;
 
 typedef struct {
@@ -88,6 +90,11 @@ typedef struct {
     gluint shader;
     glint mvp;
     vec3 grab;
+    vec3 grab_first;
+    vec3 grab_now;
+    vec3 grab_delta;
+    model_editor_t grabbed;
+    entity_t *grabber_ent[3];
 } editor_t;
 
 typedef struct {

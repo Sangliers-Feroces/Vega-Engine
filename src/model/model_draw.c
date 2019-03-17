@@ -7,13 +7,24 @@
 
 #include "headers.h"
 
+void entity_refresh(entity_t * entity)
+{
+    for (size_t i = 0; i < entity->model->vertex_count; i++) {
+        entity->vertex[i].pos = mat4_mul_vec3(entity->trans,
+        entity->model->vertex[i].pos);
+        entity->vertex[i].normal = mat4_mul_vec3(entity->rot_mat,
+        entity->model->vertex[i].normal);
+    }
+}
+
 static void send_mvp(demo_t *demo, entity_t *entity)
 {
-    mat4 model;
     mat4 mvp;
 
-    mat4_model(entity->pos, entity->scale, entity->rot, model);
-    mat4_mul(demo->cam.mvp.vp, model, mvp);
+    mat4_rot(entity->rot, entity->rot_mat);
+    mat4_scale_trans(entity->pos, entity->scale, mvp);
+    mat4_mul(mvp, entity->rot_mat, entity->trans);
+    mat4_mul(demo->cam.mvp.vp, entity->trans, mvp);
     glUniformMatrix4fv(demo->editor.mvp, 1, GL_FALSE, &mvp[0][0]);
 }
 

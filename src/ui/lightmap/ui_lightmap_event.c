@@ -59,7 +59,7 @@ int ui_lm_poll_events(demo_t *demo)
 {
     if (!poll_events(demo))
         return (0);
-    if (demo->mouse.button_click & (1 << sfMouseLeft))
+    if (demo->mouse.button_release & (1 << sfMouseLeft))
         ui_lm_check_click_button(demo);
     return (1);
 }

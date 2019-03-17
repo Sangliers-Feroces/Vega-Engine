@@ -26,6 +26,7 @@ static void init_cam(demo_t *demo)
 static int init_mouse(demo_t *demo)
 {
     demo->mouse.button_state = 0;
+    demo->mouse.button_release = 0;
     demo->mouse.button_click = 0;
     demo->mouse.mouse_pos = (sfVector2i){0, 0};
     return (1);

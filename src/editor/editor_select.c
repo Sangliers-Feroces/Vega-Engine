@@ -44,7 +44,7 @@ static void select_triangle(demo_t *demo, inter_ray3 inter)
         select_point(demo, inter.triangle->vertex[i], 0);
 }
 
-void editor_select(demo_t *demo, inter_ray3 inter)
+static void select_geom(demo_t *demo, inter_ray3 inter)
 {
     int is_shift = sfKeyboard_isKeyPressed(sfKeyLShift);
 
@@ -56,4 +56,24 @@ void editor_select(demo_t *demo, inter_ray3 inter)
         select_triangle(demo, inter);
     else
         select_point_triangle(demo, inter);
+}
+
+void editor_select(demo_t *demo, inter_ray3 inter)
+{
+    if (demo->mouse.button_release & (1 << sfMouseLeft)) {
+        if (demo->editor.grabbed != MODEL_EDITOR_MAX) {
+            demo->editor.grabbed = MODEL_EDITOR_MAX;
+            demo->editor.grab =
+            vec3_add(demo->editor.grab, demo->editor.grab_delta);
+            demo->editor.grab_delta = (vec3){0.0f, 0.0f, 0.0f};
+        } else {
+            select_geom(demo, inter);
+        }
+    }
+    if (demo->mouse.button_click & (1 << sfMouseLeft))
+        editor_grab(demo);
+    if (demo->mouse.button_state & (1 << sfMouseLeft)) {
+        if (demo->editor.grabbed != MODEL_EDITOR_MAX)
+            editor_grab_update_delta(demo);
+    }
 }

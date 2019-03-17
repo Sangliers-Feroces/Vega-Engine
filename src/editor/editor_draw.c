@@ -14,23 +14,24 @@ static void update_grab_pos(demo_t *demo)
     for (size_t i = 0; i < demo->editor.selections.count; i++)
         acc = vec3_add(acc, demo->editor.selections.selection[i]);
     demo->editor.grab = vec3_divs(acc, (float)demo->editor.selections.count);
-    demo->editor.grab.y += 0.05;
+    demo->editor.grab =
+    vec3_add(vec3_adds(demo->editor.grab, 0.02f), demo->editor.grab_delta);
 }
 
 static void draw_grab(demo_t *demo)
 {
-    entity_t entity;
+    entity_t *entity;
     float scale = 3.0f;
 
     if (demo->editor.selections.count == 0)
         return;
     update_grab_pos(demo);
-    entity.scale = (vec3){scale, scale, scale};
-    entity.rot = (vec3){0.0f, 0.0f, 0.0f};
-    entity.pos = demo->editor.grab;
-    for (size_t i = MODEL_EDITOR_X; i <= MODEL_EDITOR_Z; i++) {
-        entity.model = demo->editor.model[i];
-        entity_draw(demo, &entity);
+    for (size_t i = 0; i < 3; i++) {
+        entity_refresh(demo->editor.grabber_ent[i]);
+        entity = demo->editor.grabber_ent[i];
+        entity->scale = (vec3){scale, scale, scale};
+        entity->pos = demo->editor.grab;
+        entity_draw(demo, entity);
     }
 }
 

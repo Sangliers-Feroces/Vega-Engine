@@ -30,15 +30,21 @@ float width_screen, float height)
     return rect_is_vec2_inside(button_get_size(button), relative_mouse_pos);
 }
 
-void ui_check_click_button(demo_t *demo)
+void ui_refresh_hover(demo_t *demo)
 {
+    _ui.button_hovered = UIBUTTON_NONE;
     _ui.button_clicked = UIBUTTON_NONE;
     for (int i = 0; i < UIBUTTON_MAX; i++) {
         if (check_click_pos(demo->mouse.mouse_pos, _ui.buttons[i],
         demo->win.w, demo->win.h)) {
-            _ui.button_clicked = UIBUTTON_MOVE + i;
+            _ui.button_hovered = UIBUTTON_MOVE + i;
         }
     }
+}
+
+void ui_check_click_button(demo_t *demo)
+{
+    _ui.button_clicked = _ui.button_hovered;
     if (_ui.button_clicked == UIBUTTON_MOVE)
         demo->action = ACTION_MOVE;
     else if (_ui.button_clicked == UIBUTTON_PAINT)

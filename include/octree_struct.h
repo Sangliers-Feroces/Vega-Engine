@@ -41,6 +41,7 @@ struct octree_s {
 typedef struct octree_s octree;
 
 /* buffer for ray intersection (stores closest hit) */
+
 typedef struct {
     rtx_triangle *triangle;
     vec3 p;
@@ -69,6 +70,12 @@ typedef struct {
 typedef struct {
     vec3 pos;
     vec2 uv;
+} vertex_serial_t;
+
+typedef struct {
+    vec3 pos;
+    vec3 normal;
+    vec2 uv;
 } vertex_t;
 
 typedef struct {
@@ -82,8 +89,17 @@ typedef struct {
     vec3 pos;
     vec3 scale;
     vec3 rot;
+    mat4 trans;
+    mat4 rot_mat;
     model_t *model;
     vertex_t *vertex;
 } entity_t;
+
+typedef struct {
+    vertex_t *vertex;
+    vec3 p;
+    vec3 bar;
+    float min_t;
+} inter_ray3_ent;
 
 #endif

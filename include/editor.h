@@ -25,4 +25,8 @@ void editor_free_models(demo_t *demo);
 
 void editor_draw(demo_t *demo);
 
+void editor_grab(demo_t *demo);
+vec3 editor_grab_get_proj(demo_t *demo);
+void editor_grab_update_delta(demo_t *demo);
+
 #endif

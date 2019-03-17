@@ -12,13 +12,13 @@ void editor(demo_t *demo)
     inter_ray3 inter;
 
     demo_refresh_viewport(demo);
-    if (_ui.button_clicked != UIBUTTON_NONE)
+    if (_ui.button_hovered != UIBUTTON_NONE)
         return;
-    inter = octree_intersect_ray(demo->tree, demo_get_ray(demo));
+    demo->mouse.ray = demo_get_ray(demo);
+    inter = octree_intersect_ray(demo->tree, demo->mouse.ray);
     switch (demo->action) {
     case ACTION_MOVE:
-        if (demo->mouse.button_click & (1 << sfMouseLeft))
-            editor_select(demo, inter);
+        editor_select(demo, inter);
         break;
     case ACTION_PAINT:
         if (demo->mouse.button_state & (1 << sfMouseLeft))

@@ -7,7 +7,7 @@
 
 #include "headers.h"
 
-const vertex_t model_select[] = {
+const vertex_serial_t model_select[] = {
     {{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f}},
     {{0.0f, 1.0f, 0.0f}, {0.0f, 1.0f}},
     {{1.0f, 0.0f, 0.0f}, {1.0f, 0.0f}},
@@ -46,7 +46,7 @@ const vertex_t model_select[] = {
     {{1.0f, 0.0f, 1.0f}, {1.0f, 0.0f}}
 };
 
-const vertex_t model_x[] = {
+const vertex_serial_t model_x[] = {
     {{0.0f, 0.0f, 0.05f}, {0.0f, 0.0f}},
     {{1.0f, 0.0f, 0.05f}, {1.0f, 0.0f}},
     {{0.0f, 0.0f, 0.05f - 0.1f}, {0.0f, 1.0f / 3.0f}},
@@ -61,7 +61,7 @@ const vertex_t model_x[] = {
     {{1.0f, 0.05f - 0.1f, 0.0f}, {1.0f, 1.0f / 3.0f}}
 };
 
-const vertex_t model_y[] = {
+const vertex_serial_t model_y[] = {
     {{0.0f, 0.0f, 0.05f}, {0.0f, 1.0f / 3.0f}},
     {{0.0f, 1.0f, 0.05f}, {1.0f, 1.0f / 3.0f}},
     {{0.0f, 0.0f, 0.05f - 0.1f}, {0.0f, 2.0f / 3.0f}},
@@ -76,7 +76,7 @@ const vertex_t model_y[] = {
     {{0.05f - 0.1f, 1.0f, 0.0f}, {1.0f, 2.0f / 3.0f}}
 };
 
-const vertex_t model_z[] = {
+const vertex_serial_t model_z[] = {
     {{0.0f, 0.05f, 0.0f}, {0.0f, 2.0f / 3.0f}},
     {{0.0f, 0.05f, 1.0f}, {1.0f, 2.0f / 3.0f}},
     {{0.0f, 0.05f - 0.1f, 0.0f}, {0.0f, 3.0f / 3.0f}},

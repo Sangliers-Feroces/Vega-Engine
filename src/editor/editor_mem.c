@@ -24,11 +24,20 @@ void editor_init(demo_t *demo)
         exit(84);
     demo->editor.mvp = glGetUniformLocation(demo->editor.shader, "mvp");
     set_texture_nearest(_ui.textures[UIRES_EDITOR_GRAB]->id);
+    demo->editor.grabbed = MODEL_EDITOR_MAX;
+    demo->editor.grab_delta = (vec3){0.0f, 0.0f, 0.0f};
+    demo->editor.grab_first = (vec3){0.0f, 0.0f, 0.0f};
+    demo->editor.grab_now = (vec3){0.0f, 0.0f, 0.0f};
+    for (size_t i = 0; i < 3; i++)
+        demo->editor.grabber_ent[i] =
+        entity_create(demo->editor.model[MODEL_EDITOR_X + i]);
 }
 
 void editor_quit(demo_t *demo)
 {
     glDeleteProgram(demo->editor.shader);
+    for (size_t i = 0; i < 3; i++)
+        entity_destroy(demo->editor.grabber_ent[i]);
     editor_free_models(demo);
     free(demo->editor.selections.selection);
 }
