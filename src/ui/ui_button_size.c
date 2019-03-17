@@ -30,7 +30,7 @@ static rect_t get_y_size(button_t button)
 
 rect_t button_get_size(button_t button)
 {
-    if (button.rel == BUTTON_REL_X)
+    if (button.rel == REL_X)
         return get_x_size(button);
     else
         return get_y_size(button);

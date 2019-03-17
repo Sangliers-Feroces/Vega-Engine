@@ -32,7 +32,8 @@ float size, float offset_nbr)
 
     for (int i = 0; i < res.nb_digit; i++) {
         res.digits[i].value = 0;
-        res.digits[i].digit = (button_t){UIRES_DIGIT_0, pos, size, -1.0f, BUTTON_REL_X};
+        res.digits[i].digit =
+        (button_t){UIRES_DIGIT_0, pos, size, -1.0f, REL_X};
         pos.x += offset_nbr;
     }
     return res;
