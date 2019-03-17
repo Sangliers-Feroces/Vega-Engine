@@ -11,6 +11,8 @@ void editor(demo_t *demo)
 {
     inter_ray3 inter;
 
+    if (!demo->win.has_focus)
+        return;
     demo_refresh_viewport(demo);
     if (_ui.button_hovered != UIBUTTON_NONE)
         return;
