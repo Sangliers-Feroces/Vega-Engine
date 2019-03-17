@@ -18,20 +18,21 @@ static void ui_lm_button_effect_ext(demo_t *demo)
     }
 }
 
+size_t get_step(int is_minus)
+{
+    if (_ui.ray_density >= 1 && _ui.ray_density < (10 + (size_t)is_minus))
+        return 1;
+    else
+        return 10;
+}
 static void ui_lm_button_effect(demo_t *demo)
 {
     switch (_ui.ui_lightmap_struct.button_clicked) {
     case UILMBUTTON_PLUS:
-        if (_ui.ray_density >= 1 && _ui.ray_density < 10)
-            _ui.ray_density ++;
-        else
-            _ui.ray_density += 10;
+        _ui.ray_density += get_step(0);
         break;
     case UILMBUTTON_MINUS:
-        if (_ui.ray_density >= 1 && _ui.ray_density <= 10)
-            _ui.ray_density--;
-        else
-            _ui.ray_density -= 10;
+        _ui.ray_density -= get_step(1);
         if (_ui.ray_density < 1)
             _ui.ray_density = 1;
         break;

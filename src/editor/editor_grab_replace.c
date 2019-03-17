@@ -30,8 +30,10 @@ static void octree_replace_triangles(demo_t *demo, octree *tree)
     for (size_t i = 0; i < 8; i++)
         octree_replace_triangles(demo, tree->sub[i]);
     for (size_t i = 0; i < tree->triangles.count; i++)
-        if (is_triangle_selected(demo, tree->triangles.triangle[i]))
+        if (is_triangle_selected(demo, tree->triangles.triangle[i])) {
             rtx_triangle_replace(demo, tree, tree->triangles.triangle[i]);
+            i--;
+        }
 }
 
 void editor_grab_replace(demo_t *demo)
