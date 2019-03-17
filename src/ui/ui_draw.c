@@ -7,7 +7,7 @@
 
 #include "headers.h"
 
-void ui_draw_full_rel(uires_t index, rect_t rect, float depth)
+void ui_draw_full_rel(int index, rect_t rect, float depth)
 {
     gluint pos_id = glGetUniformLocation(_ui.ui_program, "pos");
     gluint size_id = glGetUniformLocation(_ui.ui_program, "size");

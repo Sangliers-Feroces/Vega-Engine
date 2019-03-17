@@ -63,6 +63,7 @@ static void poll_general(demo_t *demo)
         else
             _ui.display_ui = 0;
     }
+    while (sfKeyboard_isKeyPressed(sfKeyP));
 }
 
 void demo_poll_input(demo_t *demo)

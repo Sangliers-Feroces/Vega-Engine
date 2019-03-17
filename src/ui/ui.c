@@ -74,6 +74,7 @@ static void load_gl_stuff(void)
 
 void ui_init(demo_t *demo)
 {
+    _ui.display_ui = 1;
     _ui.ratiowh = demo->cam.ratiowh;
     ui_set_textures_to_null();
     ui_load_texture(texture_desc_array);

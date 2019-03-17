@@ -76,7 +76,7 @@ typedef enum {
 } uilmbutton_t;
 
 typedef struct {
-    uires_t index;
+    int index;
     char *path;
 }  ui_texture_descriptor_t;
 

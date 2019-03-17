@@ -61,7 +61,8 @@ void demo_loop(demo_t *demo)
         editor(demo);
         demo_render_geom(demo);
         editor_draw(demo);
-        ui_display(1, demo);
+        if (_ui.display_ui)
+            ui_display(1, demo);
         sfRenderWindow_display(demo->win.window);
     }
 }
@@ -71,6 +72,10 @@ int demo(void)
     demo_t *demo = demo_init();
 
     glEnable(GL_MULTISAMPLE);
+    if (!menu(demo)) {
+        demo_quit(demo);
+        return 0;
+    }
     load_model(&demo->tree);
     printf("octree done !\n");
     struct timespec start, finish;

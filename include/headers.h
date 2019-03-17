@@ -46,5 +46,6 @@
 #include "ui_lightmap.h"
 #include "editor.h"
 #include "model.h"
+#include "menu.h"
 
 #endif
