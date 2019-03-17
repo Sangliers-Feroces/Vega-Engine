@@ -1,6 +1,8 @@
-Welcome in the Gl Map Editor !!
+Welcome in the Gl Map Editor by Adrien Lenglet and Corentin Renard
 First of all the only argument the programm need is the strenght of the map
-it will define the relief on the map. By default it's set at 0.28f but you can enter any number between 0.0f and inf. But avoid value bigger than 0.75f
+it will define the reliefs on the map. By default it's set at 0.28f but
+you can enter any number between 0.0f and inf. But avoid value bigger than 0.75f.
+
 Here is a short description of the six tools we gave you :
                     ->MOVE<-
 With the Move tool you'll be able to select one or few vertices
@@ -11,7 +13,7 @@ with the Binded texture.
                    ->TEXTURE<-
 With the texture tools you'll be able to select the texture you want to
 apply. All the textures are located in "./res/textures/". You are free
-to add any texture the programm will take in parametter.
+to add any texture in the folder, the programm will take it in parametter.
                 ->Lightmap Computer<-
 With this tool you will acces the "lightmap compute" menu where you'll be able
 to generate lightmap with a ray's density from 10 to 100000. CARE big density
@@ -26,7 +28,11 @@ This tool change the perspective of the world
 Here are some usefull binding : 
 In menu : arrow_up and arrow_down to select menu and enter to comfirm
 In edition mode : ZQSD to move the caméra
+                  Hold shift allow you to select few points
+                  With 3 points selected :
+                        F allow you to flip the triangle selected
+                        T allow you to create a triangle with the 3 selected vertex.
+                  E active the extruder mode with allow you to dig in the world
 In both mode : hold right click to rotate the caméra
 In both mode : P to activate/desactivate UI
-
 But most important Have fun !!
