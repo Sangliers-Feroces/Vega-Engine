@@ -1,7 +1,12 @@
 Welcome in the Gl Map Editor by Adrien Lenglet and Corentin Renard
-First of all the only argument the programm need is the strenght of the map
-it will define the reliefs on the map. By default it's set at 0.28f but
-you can enter any number between 0.0f and inf. But avoid value bigger than 0.75f.
+
+ARGS : The program can be launch with and without arguments
+The three arguments are : 
+        -size -> This one will define the size of the map (default value : 32.0);
+        -iter -> This one will define the generator iterrations (default value : 8);
+        -Strengh -> This one will define the reliefs of the map [0.1 -> INF]. For an optimal experience choose between 0.1 and 0.75.(default value : 0.28);
+
+Without arguments the programm will be set with default values;
 
 Here is a short description of the six tools we gave you :
                     ->MOVE<-

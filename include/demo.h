@@ -15,11 +15,13 @@
 void demo_poll_input(demo_t *demo);
 void check_mouse_move(demo_t *demo);
 
-int demo(float strenght);
+int demo(arg_t);
 demo_t* demo_init(void);
 void demo_quit(demo_t *demo);
 
 void demo_render_geom(demo_t *demo);
+
+arg_t get_data_from_arg(int ac, char **av);
 
 void demo_loop(demo_t *demo);
 

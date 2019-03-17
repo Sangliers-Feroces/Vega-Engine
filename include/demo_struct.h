@@ -18,6 +18,12 @@ typedef enum {
 } keycode_t;
 
 typedef struct {
+    float size;
+    int iter;
+    float strenght;
+} arg_t;
+
+typedef struct {
     int key_last[256];
     int key_state[256];
     int key_press[256];

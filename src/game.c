@@ -63,18 +63,17 @@ void load_model(octree **tree)
 
 int game(int argc, char **argv)
 {
-    float strenght = 0.28f;
+    arg_t args = {32.0f, 8, 0.28f};
 
     if (argc > 1) {
         if (strcmp(argv[1], "-h") == 0) {
             display_helper();
             return 0;
         }
-        else if (my_char_isnum(argv[1])) {
-            strenght = atof(argv[1]);
-        }
+        else
+            args = get_data_from_arg(argc, argv);
     }
-    demo(strenght);
+    demo(args);
     return (EXIT_SUCCESS);
 }
 
@@ -82,10 +81,10 @@ void display_helper(void)
 {
     int len;
     int fd;
-    char buff[2048];
+    char buff[10000];
 
     fd = open("readme.md", O_RDONLY);
-    len = read(fd, buff, 2048);
+    len = read(fd, buff, 4000);
     buff[len] = '\0';
     my_putstr(buff);
 }
