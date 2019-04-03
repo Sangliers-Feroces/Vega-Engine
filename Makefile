@@ -12,7 +12,7 @@ OBJ = $(SRC:.c=.o)
 MAINSRC = $(wildcard ./src/wrapper/main.c)
 MAINOBJ = $(MAINSRC:.c=.o)
 
-OUTPUT = my_world
+OUTPUT = my_rpg
 LIBXD = libxdworld.so
 
 debug: CFLAGS += -g

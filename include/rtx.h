@@ -15,4 +15,9 @@ void rtx_triangle_destroy(rtx_triangle *triangle);
 void vec_rtx_triangle_add(vec_rtx_triangle *vec, rtx_triangle *to_add);
 void vec_rtx_triangle_destroy(vec_rtx_triangle vec);
 
+vec_rtx_triangle vec_rtx_triangle_create(void);
+void vec_rtx_triangle_add(vec_rtx_triangle *vec, rtx_triangle *to_add);
+void vec_rtx_triangle_destroy(vec_rtx_triangle vec);
+void vec_rtx_triangle_free(vec_rtx_triangle vec);
+
 #endif
