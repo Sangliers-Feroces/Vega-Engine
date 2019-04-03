@@ -1,36 +1,40 @@
 /*
 ** EPITECH PROJECT, 2019
-** my_world
+** MUL_my_world_2018
 ** File description:
 ** menu_struct
 */
 
 #ifndef MENU_STRUCT_H_
-#define MENU_STRUCT_H_
+    #define MENU_STRUCT_H_
 
 typedef enum {
-    MENUOBJECT_ELON,
-    MENUOBJECT_INTRO,
-    MENUOBJECT_DEV,
-    MENUOBJECT_ENGINE,
-    MENUOBJECT_MENU,
-    MENUOBJECT_PLAY,
-    MENUOBJECT_QUIT,
-    MENUOBJECT_CURSOR,
-    MENUOBJECT_END,
-    MENUOBJECT_NOOBJ
-} menuobject_t;
+    MENU_BG_MAIN,
+    MENU_BG_END
+} menu_bg_t;
+
+typedef enum {
+    MENU_LINK_CONTINUE,
+    MENU_LINK_NEW,
+    MENU_LINK_LOAD,
+    MENU_LINK_SETTING,
+    MENU_LINK_CREDITS,
+    MENU_LINK_QUIT,
+    MENU_LINK_CURSOR,
+    MENU_LINK_END
+} menu_link_t;
+
+typedef enum {
+    MENU_BRANCH_ROOT,
+    MENU_BRANCH_END
+} menu_branch_t;
 
 typedef struct {
-    sfSound *move;
-    sfSound *select;
-    int skip_intro;
-    int intro_state;
-    int menu_state;
-    menuobject_t button_clicked;
-    button_t object[MENUOBJECT_END];
-    int last_return;
-    int cur_return;
+    int first_save;
+    int state;
+    int menu_choice;
+    menu_branch_t branch;
+    entity2_t background[MENU_BG_END];
+    entity2_t link[MENU_LINK_END];
 } menu_t;
-
 #endif /* !MENU_STRUCT_H_ */

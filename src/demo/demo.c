@@ -62,9 +62,6 @@ int poll_events(demo_t *demo)
         return (1);
     check_mouse_move(demo);
     demo_poll_input(demo);
-    ui_refresh_hover(demo);
-    if (demo->mouse.button_release & (1 << sfMouseLeft))
-        ui_check_click_button(demo);
     return (1);
 }
 
@@ -75,11 +72,13 @@ void demo_loop(demo_t *demo)
     sfMusic_play(music);
     sfMusic_setLoop(music, sfTrue);
     while (poll_events(demo)) {
-        editor(demo);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        /*editor(demo);
         demo_render_geom(demo);
         editor_draw(demo);
         if (_ui.display_ui)
-            ui_display(1, demo);
+            ui_display(1, demo);*/
+        
         sfRenderWindow_display(demo->win.window);
     }
     sfMusic_stop(music);
@@ -90,7 +89,7 @@ int demo(arg_t args)
 {
     demo_t *demo = demo_init();
 
-    if (!menu(demo)) {
+    if (!start(demo)) {
         demo_quit(demo);
         return 0;
     }

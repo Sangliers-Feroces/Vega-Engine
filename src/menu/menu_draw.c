@@ -1,45 +1,37 @@
 /*
 ** EPITECH PROJECT, 2019
-** my_world
+** MUL_my_world_2018
 ** File description:
 ** menu_draw
 */
 
 #include "headers.h"
 
-static void draw_option_menu(menu_t *menu)
+static void reset_cursor(menu_t *menu)
 {
-    rect_t rect = {{-1.0f, -1.0f}, {2.0f, 2.0f}};
-
-    ui_draw_full_rel(menu->object[MENUOBJECT_MENU].texture_index,
-    rect, menu->object[MENUOBJECT_MENU].depth);
-    for (size_t i  = MENUOBJECT_PLAY; i <= MENUOBJECT_CURSOR; i++)
-        button_draw(menu->object[i]);
+    menu->link[MENU_LINK_CURSOR].rect.p.y =
+    (-0.30f + (menu->menu_choice * -0.1f));
 }
 
-void draw_intro(demo_t *demo, button_t object)
+static void menu_draw(menu_t *menu)
 {
-    rect_t rect = {{-1.0f, -1.0f}, {2.0f, 2.0f}};
-
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glUseProgram(_ui.ui_program);
-    glFrontFace(GL_CW);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    ui_draw_full_rel(object.texture_index, rect, object.depth);
-    sfRenderWindow_display(demo->win.window);
+    iu_entity_draw(menu->background[MENU_BG_MAIN]);
+    for (int i = menu->first_save; i < MENU_LINK_END; i++)
+        iu_entity_draw(menu->link[i]);
 }
 
-int menu_draw(demo_t *demo, menu_t *menu)
+int menu_loop(demo_t *demo, menu_t *menu)
 {
-    while (menu_poll_events(demo, menu)) {
+    if (menu->first_save == 1)
+        menu->link[MENU_LINK_LOAD].index = IUTEX_MENU_LOAD_FADE;
+    /*else
+        menu->link[MENU_LINK_LOAD].index = IUTEX_MENU_LOAD;*/
+    do {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glUseProgram(_ui.ui_program);
-        glFrontFace(GL_CW);
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-        draw_option_menu(menu);
+        glUseProgram(_iu.data.iu_program);
+        menu_draw(menu);
         sfRenderWindow_display(demo->win.window);
-    }
-    return menu->menu_state;
+        reset_cursor(menu);
+    } while (menu_poll_events(demo, menu));
+    return menu->state;
 }
-
-

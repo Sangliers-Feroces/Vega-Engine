@@ -62,10 +62,10 @@ demo_t* demo_init(void)
     res = malloc_safe(sizeof(demo_t));
     init_win(res);
     init_cam(res);
-    _ui.button_clicked = UIBUTTON_NONE;
     res->tree = octree_create(NULL);
     init();
-    ui_init(res);
+    //ui_init(res);
+    iu_init(res);
     demo_get_texture_pannel(res);
     editor_init(res);
     gl_gen(res);
@@ -78,7 +78,7 @@ void demo_quit(demo_t *demo)
     octree_destroy(&demo->tree);
     demo_texture_destroy(demo);
     gl_delete(demo);
-    ui_quit();
+    iu_quit();
     texture2f_write(_lightmaps.base, _lightmaps.aperture);
     quit();
     sfRenderWindow_destroy(demo->win.window);

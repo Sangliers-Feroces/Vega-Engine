@@ -46,6 +46,7 @@
 #include "global.h"
 #include "ui.h"
 #include "ui_lightmap.h"
+#include "iu.h"
 #include "editor.h"
 #include "model.h"
 #include "menu.h"

@@ -26,9 +26,7 @@ static void create_geom(demo_t *demo)
 }
 
 static void editor_shortcut(demo_t *demo)
-{
-    if (demo->input.key_press['P'])
-        _ui.display_ui = !_ui.display_ui;
+{   
     if (demo->input.key_press['T'] && (demo->editor.selections.count == 3))
         merge_points(demo);
     if (demo->input.key_press['F'])
@@ -55,8 +53,6 @@ void editor(demo_t *demo)
         return;
     editor_shortcut(demo);
     demo_refresh_viewport(demo);
-    if (_ui.button_hovered != UIBUTTON_NONE)
-        return;
     demo->mouse.ray = demo_get_ray(demo);
     inter = octree_intersect_ray(demo->tree, demo->mouse.ray);
     switch (demo->action) {

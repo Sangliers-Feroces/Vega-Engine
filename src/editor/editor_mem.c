@@ -23,7 +23,7 @@ void editor_init(demo_t *demo)
     if (demo->editor.shader == 0)
         exit(84);
     demo->editor.mvp = glGetUniformLocation(demo->editor.shader, "mvp");
-    set_texture_nearest(_ui.textures[UIRES_EDITOR_GRAB]->id);
+    set_texture_nearest(_iu.textures[IUTEX_EDITOR_GRAB]->id);
     demo->editor.grabbed = MODEL_EDITOR_MAX;
     demo->editor.grab_delta = (vec3){0.0f, 0.0f, 0.0f};
     demo->editor.grab_first = (vec3){0.0f, 0.0f, 0.0f};

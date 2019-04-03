@@ -13,4 +13,5 @@
 
 const threads _thread;
 const texture_cluster _lightmaps;
-const ui_struct _ui;
+//const ui_struct _ui;
+const iu_t _iu;

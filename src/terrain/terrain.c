@@ -67,5 +67,5 @@ void terrain_gen(demo_t *demo, float size, size_t iter, float strengh)
         octree_destroy(&demo->tree);
         demo->tree = new_tree;
     }
-    terrain_apply_texture(demo->tree, _ui.textures[UIRES_TERRAIN]);
+    terrain_apply_texture(demo->tree, _iu.textures[IUTEX_TERRAIN]);
 }
