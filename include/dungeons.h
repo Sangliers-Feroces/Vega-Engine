@@ -12,5 +12,5 @@
 void dungeons_gen_init(demo_t *demo);
 
 void dungeons_render(demo_t *demo);
-vec_rtx_triangle *dungeons_gen_all(size_t rooms_limit);
+void dungeons_gen_all(demo_t *demo, size_t rooms_limit);
 #endif /* !DUNGEONS_H_ */

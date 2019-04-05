@@ -71,14 +71,12 @@ void demo_loop(demo_t *demo)
 
     sfMusic_play(music);
     sfMusic_setLoop(music, sfTrue);
+    dungeons_gen_all(demo, 2);
     while (poll_events(demo)) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        /*editor(demo);
+        editor(demo);
         demo_render_geom(demo);
         editor_draw(demo);
-        if (_ui.display_ui)
-            ui_display(1, demo);*/
-        
         sfRenderWindow_display(demo->win.window);
     }
     sfMusic_stop(music);
