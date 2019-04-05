@@ -14,6 +14,7 @@ extern threads _thread;
 extern texture_cluster _lightmaps;
 //extern ui_struct _ui;
 extern iu_t _iu;
+extern dungeons_t _dungeons;
 
 #endif
 

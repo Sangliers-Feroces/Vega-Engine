@@ -19,5 +19,6 @@
 #include "ui_struct.h"
 #include "iu_struct.h"
 #include "menu_struct.h"
+#include "dungeons_struct.h"
 
 #endif
