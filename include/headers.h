@@ -44,12 +44,13 @@
 #include "demo.h"
 #include "macro.h"
 #include "global.h"
+#include "iu.h"
 #include "ui.h"
 #include "ui_lightmap.h"
-#include "iu.h"
 #include "editor.h"
 #include "model.h"
-#include "menu.h"
 #include "terrain.h"
+#include "menu.h"
+#include "dungeons.h"
 
 #endif
