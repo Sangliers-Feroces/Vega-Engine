@@ -32,6 +32,7 @@ int menu_loop(demo_t *demo, menu_t *menu)
         menu_draw(menu);
         sfRenderWindow_display(demo->win.window);
         reset_cursor(menu);
-    } while (menu_poll_events(demo, menu));
+    } while (menu_poll_events(demo, menu) && !menu->state);
+    //printf("%d\n", menu->state);
     return menu->state;
 }

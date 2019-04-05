@@ -18,5 +18,5 @@ int start(demo_t *demo)
     printf("attend quoi\n");
     if (!menu_loop(demo, &menu))
         return 0;
-    return 0;
+    return 1;
 }

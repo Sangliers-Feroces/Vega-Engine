@@ -29,6 +29,8 @@ void analyse_move_menu(menu_t *menu)
 
 int menu_poll_events(demo_t *demo, menu_t *menu)
 {
+    if (sfKeyboard_isKeyPressed(sfKeyEnter))
+        menu->state = menu->menu_choice;
     if (menu->branch == MENU_BRANCH_ROOT)
         analyse_move_menu(menu);
     if (!poll_events(demo))
