@@ -51,5 +51,6 @@
 #include "model.h"
 #include "menu.h"
 #include "terrain.h"
+#include "world.h"
 
 #endif
