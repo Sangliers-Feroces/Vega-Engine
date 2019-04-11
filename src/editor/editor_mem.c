@@ -16,6 +16,7 @@ static void set_texture_nearest(gluint texture)
 
 void editor_init(demo_t *demo)
 {
+    demo->action = ACTION_MOVE;
     demo->editor.selections = (vec_selection_t){0, 0, NULL};
     editor_load_models(demo);
     demo->editor.shader = shader_load_vert_frag(

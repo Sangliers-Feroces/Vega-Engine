@@ -93,5 +93,8 @@ void dungeons_gen_all(demo_t *demo, size_t rooms_limit)
     for (int i = 0; i < generated_rooms; i++)
         rooms[i] = dungeons_gen_room();
     dungeon_insert_in_world(demo, rooms, generated_rooms);
+    for (int i = 0; i < generated_rooms; i++)
+        vec_rtx_triangle_free(rooms[i]);
+    free(rooms);
     return;
 }

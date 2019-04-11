@@ -22,4 +22,5 @@ void world_quit(demo_t *demo)
     for (size_t i = 0; i < demo->world.chunk_count; i++)
         chunk_destroy(demo->world.chunk[i]);
     free(demo->world.chunk);
+    free(demo->world.chunk2d);
 }

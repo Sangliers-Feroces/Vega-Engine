@@ -76,6 +76,7 @@ demo_t* demo_init(void)
 
 void demo_quit(demo_t *demo)
 {
+    world_quit(demo);
     editor_quit(demo);
     octree_destroy(&demo->tree);
     demo_texture_destroy(demo);

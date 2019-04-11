@@ -7,6 +7,24 @@
 
 #include "headers.h"
 
+void world_chunk_add(demo_t *demo, chunk_t *chunk)
+{
+    size_t cur = demo->world.chunk_count++;
+    chunk_t **new_chunk;
+
+    if (demo->world.chunk_count > demo->world.chunk_allocated) {
+        demo->world.chunk_allocated += 16;
+        new_chunk =
+        (chunk_t**)malloc_safe(demo->world.chunk_allocated * sizeof(chunk_t*));
+        for (size_t i = 0; i < cur; i++)
+            new_chunk[i] = demo->world.chunk[i];
+        free(demo->world.chunk);
+        demo->world.chunk = new_chunk;
+    }
+    demo->world.chunk[cur] = chunk;
+    chunk->world_ndx = cur;
+}
+
 chunk_t** world_chunk2d_get(demo_t *demo, ssize2 pos)
 {
     ssize2 ndx = ssize2_sub(pos, demo->world.chunk2d_area.p);
@@ -16,103 +34,6 @@ chunk_t** world_chunk2d_get(demo_t *demo, ssize2 pos)
         return NULL;
     else
         return &demo->world.chunk2d[ndx.y * demo->world.chunk2d_area.s.x + ndx.x];
-}
-
-static void world_chunk2d_realloc_x_neg(demo_t *demo, size_t offset)
-{
-    size_t new_w = demo->world.chunk2d_area.s.x + offset;
-    chunk_t** new_chunk2d = (chunk_t**)malloc_safe(
-    new_w * demo->world.chunk2d_area.p.y * sizeof(chunk_t**));
-
-    for (ssize_t i = 0; i < demo->world.chunk2d_area.s.y; i++) {
-        for (size_t j = 0; j < offset; j++)
-            new_chunk2d[i * new_w + j] = NULL;
-        for (ssize_t j = 0; j < demo->world.chunk2d_area.s.x ; j++)
-            new_chunk2d[i * new_w + offset + j] =
-            demo->world.chunk2d[i * demo->world.chunk2d_area.s.x + j];
-    }
-    demo->world.chunk2d_area.p.x -= offset;
-    demo->world.chunk2d_area.s.x = new_w;
-    free(demo->world.chunk2d);
-    demo->world.chunk2d = new_chunk2d;
-}
-
-static void world_chunk2d_realloc_x_pos(demo_t *demo, size_t offset)
-{
-    size_t new_w = demo->world.chunk2d_area.s.x + offset;
-    chunk_t** new_chunk2d = (chunk_t**)malloc_safe(
-    new_w * demo->world.chunk2d_area.p.y * sizeof(chunk_t**));
-
-    for (ssize_t i = 0; i < demo->world.chunk2d_area.s.y; i++) {
-        for (size_t j = 0; j < offset; j++)
-            new_chunk2d[i * new_w + demo->world.chunk2d_area.s.x + j] = NULL;
-        for (ssize_t j = 0; j < demo->world.chunk2d_area.s.x ; j++)
-            new_chunk2d[i * new_w + j] =
-            demo->world.chunk2d[i * demo->world.chunk2d_area.s.x + j];
-    }
-    demo->world.chunk2d_area.p.x -= offset;
-    demo->world.chunk2d_area.s.x = new_w;
-    free(demo->world.chunk2d);
-    demo->world.chunk2d = new_chunk2d;
-}
-
-static void world_chunk2d_realloc_y_neg(demo_t *demo, size_t offset)
-{
-    size_t new_w = demo->world.chunk2d_area.s.x;
-    size_t new_h = demo->world.chunk2d_area.s.y + offset;
-    chunk_t** new_chunk2d = (chunk_t**)malloc_safe(
-    new_w * new_h * sizeof(chunk_t**));
-
-    for (size_t i = 0; i < offset; i++)
-        for (ssize_t j = 0; j < demo->world.chunk2d_area.s.x; j++)
-            new_chunk2d[i * new_w + j] = NULL;
-    for (ssize_t i = 0; i < demo->world.chunk2d_area.s.y; i++)
-        for (ssize_t j = 0; j < demo->world.chunk2d_area.s.x; j++)
-            new_chunk2d[(offset + i) * new_w + j] =
-            demo->world.chunk2d[i * demo->world.chunk2d_area.s.x + j];
-    demo->world.chunk2d_area.p.y -= offset;
-    demo->world.chunk2d_area.s.y = new_h;
-    free(demo->world.chunk2d);
-    demo->world.chunk2d = new_chunk2d;
-}
-
-static void world_chunk2d_realloc_y_pos(demo_t *demo, size_t offset)
-{
-    size_t new_w = demo->world.chunk2d_area.s.x;
-    size_t new_h = demo->world.chunk2d_area.s.y + offset;
-    chunk_t** new_chunk2d = (chunk_t**)malloc_safe(
-    new_w * new_h * sizeof(chunk_t**));
-
-    for (size_t i = 0; i < offset; i++)
-        for (ssize_t j = 0; j < demo->world.chunk2d_area.s.x; j++)
-            new_chunk2d[i * new_w + demo->world.chunk2d_area.s.x + j] = NULL;
-    for (ssize_t i = 0; i < demo->world.chunk2d_area.s.y; i++)
-        for (ssize_t j = 0; j < demo->world.chunk2d_area.s.x; j++)
-            new_chunk2d[i * new_w + j] =
-            demo->world.chunk2d[i * demo->world.chunk2d_area.s.x + j];
-    demo->world.chunk2d_area.p.y -= offset;
-    demo->world.chunk2d_area.s.y = new_h;
-    free(demo->world.chunk2d);
-    demo->world.chunk2d = new_chunk2d;
-}
-
-void world_chunk2d_insert(demo_t *demo, chunk_t *chunk)
-{
-    ssize_t border;
-
-    border = demo->world.chunk2d_area.p.x;
-    if (chunk->pos.x < border)
-        world_chunk2d_realloc_x_neg(demo, border - chunk->pos.x);
-    border = demo->world.chunk2d_area.p.x + demo->world.chunk2d_area.s.x;
-    if (chunk->pos.x >= border)
-        world_chunk2d_realloc_x_pos(demo, chunk->pos.x - (border - 1));
-    border = demo->world.chunk2d_area.p.y;
-    if (chunk->pos.y < border)
-        world_chunk2d_realloc_y_neg(demo, border - chunk->pos.y);
-    border = demo->world.chunk2d_area.p.y + demo->world.chunk2d_area.s.y;
-    if (chunk->pos.y >= border)
-        world_chunk2d_realloc_y_pos(demo, chunk->pos.y - (border - 1));
-    *world_chunk2d_get(demo, chunk->pos) = chunk;
 }
 
 chunk_t* chunk_create(ssize2 pos)
@@ -127,7 +48,9 @@ chunk_t* chunk_create(ssize2 pos)
     res = (chunk_t*)malloc_safe(sizeof(chunk_t));
     res->pos = pos;
     res->tree = octree_create(NULL);
+    res->world_ndx = ~0ULL;
     world_chunk2d_insert(_demo, res);
+    world_chunk_add(_demo, res);
     return res;
 }
 
@@ -140,6 +63,11 @@ void chunk_destroy(chunk_t *chunk)
     lookup = world_chunk2d_get(_demo, chunk->pos);
     if (lookup != NULL)
         *lookup = NULL;
+    if (chunk->world_ndx != ~0ULL) {
+        _demo->world.chunk[chunk->world_ndx] =
+        _demo->world.chunk[--_demo->world.chunk_count];
+        _demo->world.chunk[chunk->world_ndx]->world_ndx = chunk->world_ndx;
+    }
     octree_destroy(&chunk->tree);
     free(chunk);
 }

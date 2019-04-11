@@ -10,6 +10,7 @@
 typedef struct {
     ssize2 pos;
     octree *tree;
+    size_t world_ndx;
 } chunk_t;
 
 typedef struct {
