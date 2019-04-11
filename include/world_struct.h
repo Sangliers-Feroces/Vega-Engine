@@ -7,9 +7,18 @@
 
 #pragma once
 
+#define WORLD_LOD_COUNT 1
+
+typedef struct {
+    octree *tree;
+    gluint vertex_buffer;
+    int do_reupload_buf;
+} chunk_lod_t;
+
 typedef struct {
     ssize2 pos;
-    octree *tree;
+    size_t lod_count;
+    chunk_lod_t lod[WORLD_LOD_COUNT];
     size_t world_ndx;
 } chunk_t;
 

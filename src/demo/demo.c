@@ -76,6 +76,7 @@ void demo_loop(demo_t *demo)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         editor(demo);
         demo_render_geom(demo);
+        world_render(demo);
         editor_draw(demo);
         sfRenderWindow_display(demo->win.window);
     }
