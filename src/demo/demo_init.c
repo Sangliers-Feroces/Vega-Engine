@@ -60,6 +60,7 @@ demo_t* demo_init(void)
     demo_t *res;
 
     res = malloc_safe(sizeof(demo_t));
+    _demo = res;
     init_win(res);
     init_cam(res);
     res->tree = octree_create(NULL);

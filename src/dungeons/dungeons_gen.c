@@ -64,7 +64,7 @@ static void dungeon_insert_in_world(demo_t *demo, vec_rtx_triangle *rooms, int n
     for (int i = 0; i < nb_rooms; i++) {
         world_insert_vec_rtx_triangle(demo, rooms[i]);
     }
-    _lightmaps.aperture = octree_light_rtx(demo->tree, 5);
+    _lightmaps.aperture = octree_light_rtx(demo->tree, 2);
 }
 
 static vec_rtx_triangle dungeons_gen_room(void)

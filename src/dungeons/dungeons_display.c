@@ -9,6 +9,7 @@
 
 void dungeons_render(demo_t *demo)
 {
+    (void)demo;
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glUseProgram(_dungeons.program);
     glBindBuffer(GL_ARRAY_BUFFER, _dungeons.vertex_buffer);

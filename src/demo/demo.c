@@ -91,7 +91,7 @@ int demo(arg_t args)
         demo_quit(demo);
         return 0;
     }
-    //terrain_gen(demo, args.size, args.iter, args.strenght);
+    terrain_gen(demo, args.size, args.iter, args.strenght);
     demo_loop(demo);
     demo_quit(demo);
     return (0);

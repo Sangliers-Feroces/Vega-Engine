@@ -12,6 +12,9 @@ void world_init(demo_t *demo)
     demo->world.chunk_count = 0;
     demo->world.chunk_allocated = 0;
     demo->world.chunk = NULL;
+    demo->world.chunk2d_area = (srect){{0, 0}, {1, 1}};
+    demo->world.chunk2d = (chunk_t**)malloc_safe(sizeof(chunk_t*));
+    demo->world.chunk2d[0] = NULL;
 }
 
 void world_quit(demo_t *demo)
