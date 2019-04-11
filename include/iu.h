@@ -16,5 +16,7 @@ void iu_display(void);
 
 void iu_entity_draw(entity2_t entity);
 
+void entity_constructor(entity2_t *entity, entity2_param_t params);
+
 void iu_quit(void);
 #endif /* !IU_H_ */

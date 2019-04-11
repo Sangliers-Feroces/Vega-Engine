@@ -21,6 +21,7 @@ static const iutex_path_t iutex_path [] = {
     {IUTEX_TERRAIN, "res/textures/grass.png"},
     {IUTEX_EDITOR_GRAB, "res/model/editor/grab.png"},
     {IUTEX_EDITOR_SELECT, "res/model/editor/select.png"},
+    {IUTEX_SETTING_BG, "res/ui/menu/new/setting_bg.png"},
     {0, NULL}
 };
 

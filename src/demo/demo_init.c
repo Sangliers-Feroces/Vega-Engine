@@ -64,6 +64,7 @@ demo_t* demo_init(void)
     init_cam(res);
     res->tree = octree_create(NULL);
     init();
+    _dungeons.cur_origin = (vec3){0, 0, 0};
     //ui_init(res);
     iu_init(res);
     demo_get_texture_pannel(res);
