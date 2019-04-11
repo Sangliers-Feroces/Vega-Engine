@@ -64,11 +64,11 @@ demo_t* demo_init(void)
     init_cam(res);
     res->tree = octree_create(NULL);
     init();
-    //ui_init(res);
     iu_init(res);
     demo_get_texture_pannel(res);
     editor_init(res);
     gl_gen(res);
+    world_init(res);
     return (res);
 }
 
