@@ -29,11 +29,14 @@ void analyse_move_menu(menu_t *menu)
 
 int menu_poll_events(demo_t *demo, menu_t *menu)
 {
+    if (!poll_events(demo))
+        return 0;
     if (sfKeyboard_isKeyPressed(sfKeyEnter))
         menu->state = menu->menu_choice;
     if (menu->branch == MENU_BRANCH_ROOT)
         analyse_move_menu(menu);
-    if (!poll_events(demo))
+    if (sfKeyboard_isKeyPressed(sfKeyEscape) &&
+    menu->branch == MENU_BRANCH_SETTING)
         return 0;
     return 1;
 }

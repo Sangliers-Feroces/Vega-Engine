@@ -52,5 +52,6 @@
 #include "terrain.h"
 #include "menu.h"
 #include "dungeons.h"
+#include "world.h"
 
 #endif

@@ -86,4 +86,7 @@ vec3 vec3_interpolate(vec3 a, vec3 b, long double ratio);
 void mat4_rot_xy(vec3 rot, mat4 res);
 vec3 mat4_mul_vec3(mat4 mat, vec3 vec);
 
+ssize2 ssize2_add(ssize2 a, ssize2 b);
+ssize2 ssize2_sub(ssize2 a, ssize2 b);
+
 #endif

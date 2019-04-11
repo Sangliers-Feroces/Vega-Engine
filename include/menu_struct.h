@@ -8,8 +8,11 @@
 #ifndef MENU_STRUCT_H_
     #define MENU_STRUCT_H_
 
+#include "menu_setting_struct.h"
+
 typedef enum {
     MENU_BG_MAIN,
+    MENU_BG_SETTING,
     MENU_BG_END
 } menu_bg_t;
 
@@ -26,6 +29,7 @@ typedef enum {
 
 typedef enum {
     MENU_BRANCH_ROOT,
+    MENU_BRANCH_SETTING,
     MENU_BRANCH_END
 } menu_branch_t;
 

@@ -32,6 +32,16 @@ typedef struct {
     int32_t y;
 } ivec2;
 
+typedef struct {
+    ssize_t x;
+    ssize_t y;
+} ssize2;
+
+typedef struct {
+    ssize2 p;
+    ssize2 s;
+} srect;
+
 typedef float mat4[4][4];
 
 #endif

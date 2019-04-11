@@ -104,6 +104,7 @@ typedef struct {
     cam_t cam;
     input_t input;
     octree *tree;
+    world_t world;
     mouse_t mouse;
     player_t player;
     buf_t buf;

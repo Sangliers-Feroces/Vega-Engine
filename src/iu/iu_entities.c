@@ -9,7 +9,7 @@
 
 void set_entities(void)
 {
-    _iu.buttons[IUBUTTON_ELON] =
+    /*_iu.buttons[IUBUTTON_ELON] =
     (entity2_t){IUTEX_ELON, (rect_t){{-0.30f, 0.0f}, {0.1f, 0.1f}},
-    -1.0f, IUREL_FULL};
+    -1.0f, IUREL_FULL};*/
 }

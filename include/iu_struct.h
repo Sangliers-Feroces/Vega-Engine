@@ -19,6 +19,7 @@ typedef enum {
     IUTEX_MENU_CREDITS,
     IUTEX_MENU_QUIT,
     IUTEX_MENU_CURSOR,
+    IUTEX_SETTING_BG,
     IUTEX_TERRAIN,
     IUTEX_EDITOR_GRAB,
     IUTEX_EDITOR_SELECT,
@@ -36,6 +37,14 @@ typedef enum {
     IUREL_FULL
 } rel_t;
 
+typedef enum {
+    PATTERN_CLICK_BUTTON,
+    PATTERN_SLIDE_BUTTON,
+    PATTERN_DRAG_AND_DROP,
+    PATTERN_CLASSIC,
+    PATTERN_END
+} pattern_t;
+
 typedef struct {
     iutex_t index;
     char *path;
@@ -45,7 +54,14 @@ typedef struct {
     iutex_t index;
     rect_t rect;
     float depth;
+} entity2_param_t;
+
+typedef struct {
+    iutex_t index;
+    rect_t rect;
+    float depth;
     rel_t rel;
+    pattern_t pattern;
 } entity2_t;
 
 typedef struct {
