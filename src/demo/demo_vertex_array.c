@@ -58,6 +58,7 @@ void refresh_vertex_buffer(demo_t *demo)
     octree_fill_vertex_array(demo->tree, &vertex_struct);
     free(demo->buf.vertex_struct.v_array);
     demo->buf.vertex_struct = vertex_struct;
+    glBindVertexArray(demo->buf.vertex_array_id);
     glBindBuffer(GL_ARRAY_BUFFER, demo->buf.vertex_buffer);
     glBufferData(GL_ARRAY_BUFFER,
     sizeof(vertext_array_t) * (demo->buf.vertex_struct.count * 3),

@@ -62,8 +62,10 @@ typedef struct {
 typedef struct {
     vertex_struct_t vertex_struct;
     gluint vertex_array_id;
+    gluint world_vertex_array;
     gluint vertex_buffer;
     gluint lightmap_shader;
+    gluint world_shader;
 } buf_t;
 
 typedef enum {

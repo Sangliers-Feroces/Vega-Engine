@@ -85,6 +85,7 @@ gluint num_groups_z);
 const void (*p_glmemorybarrier)(glbitfield barriers);
 const void (*p_glgetteximage)(glenum target, glint level, glenum format,
 glenum type, glvoid *pixels);
+const void (*p_glenablevertexarrayattrib)(gluint vaobj, gluint index);
 
 const void (*p_glgetintegerv)(glenum pname, glint *params);
 const void (*p_glgetintegeri_v)(glenum pname, gluint index, glint *params);
@@ -159,6 +160,8 @@ static void load_4(void)
     p_gldispatchcompute = glXGetProcAddressARB("glDispatchCompute");
     p_glmemorybarrier = glXGetProcAddressARB("glMemoryBarrier");
     p_glgetteximage = glXGetProcAddressARB("glGetTexImage");
+    p_glenablevertexarrayattrib =
+    glXGetProcAddressARB("glEnableVertexArrayAttrib");
 }
 
 void load_gl_fun(void)

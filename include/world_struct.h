@@ -29,3 +29,15 @@ typedef struct {
     srect chunk2d_area;
     chunk_t **chunk2d;      // 2d array for fast lookup
 } world_t;
+
+typedef struct {
+    vec3 pos;
+    vec3 normal;
+    vec2 uv_albedo;
+    vec2 uv_lightmap;
+} chunk_vertex_t;
+
+typedef struct {
+    size_t count;
+    chunk_vertex_t *vertex;
+} vec_chunk_vertex_t;

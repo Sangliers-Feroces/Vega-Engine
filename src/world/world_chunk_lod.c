@@ -7,12 +7,31 @@
 
 #include "headers.h"
 
+static void set_buffer_attrib(void)
+{
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
+    sizeof(chunk_vertex_t), BUFFER_OFFSET(0));
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE,
+    sizeof(chunk_vertex_t), BUFFER_OFFSET(offsetof(chunk_vertex_t, normal)));
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
+    sizeof(chunk_vertex_t), BUFFER_OFFSET(offsetof(chunk_vertex_t, uv_albedo)));
+    glEnableVertexAttribArray(3);
+    glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE,
+    sizeof(chunk_vertex_t), BUFFER_OFFSET(offsetof(chunk_vertex_t, uv_lightmap)));
+}
+
 chunk_lod_t chunk_lod_create(void)
 {
     chunk_lod_t res;
 
     res.tree = octree_create(NULL);
-    res.vertex_buffer = 0;
+    glGenBuffers(1, &res.vertex_buffer);
+    glBindVertexArray(_demo->buf.world_vertex_array);
+    glBindBuffer(GL_ARRAY_BUFFER, res.vertex_buffer);
+    set_buffer_attrib();
     res.do_reupload_buf = 1;
     return res;
 }

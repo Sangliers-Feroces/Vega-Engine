@@ -39,16 +39,22 @@ void gl_gen(demo_t *demo)
     demo->buf.lightmap_shader = shader_load_vert_frag(
     "src/gpu/shader/lightmap_vertex.glsl",
     "src/gpu/shader/lightmap_fragment.glsl");
-    if (demo->buf.lightmap_shader == 0) {
+    demo->buf.world_shader = shader_load_vert_frag(
+    "src/gpu/shader/world_vertex.glsl",
+    "src/gpu/shader/world_fragment.glsl");
+    if ((demo->buf.lightmap_shader == 0) || (demo->buf.world_shader == 0)) {
         printf("Can't open lightmap shader.\n");
         exit(84);
     }
+    glGenVertexArrays(1, &demo->buf.world_vertex_array);
 }
 
 void gl_delete(demo_t *demo)
 {
     glDeleteBuffers(1, &demo->buf.vertex_buffer);
     glDeleteProgram(demo->buf.lightmap_shader);
+    glDeleteProgram(demo->buf.world_shader);
     glDeleteVertexArrays(1, &demo->buf.vertex_array_id);
+    glDeleteVertexArrays(1, &demo->buf.world_vertex_array);
     free(demo->buf.vertex_struct.v_array);
 }

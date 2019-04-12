@@ -28,3 +28,7 @@ void chunk_lod_destroy(chunk_lod_t lod);
 void chunk_load_insert_rtx_triangle(chunk_lod_t *lod, rtx_triangle *triangle);
 
 void world_render(demo_t *demo);
+
+vec_chunk_vertex_t vec_chunk_vertex_create(size_t count);
+void vec_chunk_vertex_destroy(vec_chunk_vertex_t vec);
+void chunk_lod_reupload_buf(chunk_lod_t *lod);

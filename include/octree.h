@@ -47,4 +47,6 @@ void refresh_vertex_buffer(demo_t *demo);
 
 void octree_ray_bound(octree *tree, vec3 ray, vec2 *ppos, vec2 *psize);
 
+size_t octree_get_rtx_triangle_count(octree *tree);
+
 #endif

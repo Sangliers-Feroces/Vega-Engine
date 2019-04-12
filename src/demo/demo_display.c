@@ -61,7 +61,6 @@ void demo_render_geom(demo_t *demo)
 {
     size_t index = 0;
 
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glUseProgram(demo->buf.lightmap_shader);
     send_uniform(demo, demo->buf.lightmap_shader);
     set_vertex_attrib(demo);

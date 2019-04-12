@@ -92,6 +92,7 @@ gluint num_groups_z);
 extern void (*p_glmemorybarrier)(glbitfield barriers);
 extern void (*p_glgetteximage)(glenum target, glint level, glenum format,
 glenum type, glvoid *pixels);
+extern void (*p_glenablevertexarrayattrib)(gluint vaobj, gluint index);
 
 extern void (*p_glgetintegerv)(glenum pname, glint *params);
 extern void (*p_glgetintegeri_v)(glenum pname, gluint index, glint *params);
@@ -152,6 +153,7 @@ extern void (*p_glgetintegeri_v)(glenum pname, gluint index, glint *params);
 #define glGetTexImage p_glgetteximage
 #define glTexStorage2D p_gltexstorage2d
 #define glTexSubImage2D p_gltexsubimage2d
+#define glEnableVertexArrayAttrib p_glenablevertexarrayattrib
 
 #define glGetIntegerv p_glgetintegerv
 #define glGetIntegeri_v p_glgetintegeri_v
