@@ -46,13 +46,14 @@ static void chunk_lod_render_actual(octree *tree, size_t *ndx)
 
 static void chunk_lod_render(chunk_lod_t *lod)
 {
-    size_t ndx = 0;
-
     if (lod->do_reupload_buf)
         chunk_lod_reupload_buf(lod);
+    if (lod->vertex_count < 3)
+        return;
     glBindBuffer(GL_ARRAY_BUFFER, lod->vertex_buffer);
     glActiveTexture(GL_TEXTURE1);
-    chunk_lod_render_actual(lod->tree, &ndx);
+    glBindTexture(GL_TEXTURE_2D, _iu.textures[IUTEX_TERRAIN]->id);
+    glDrawArrays(GL_TRIANGLES, 0, lod->vertex_count);
 }
 
 static void chunk_render(chunk_t *chunk)

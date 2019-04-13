@@ -28,6 +28,7 @@ chunk_lod_t chunk_lod_create(void)
     chunk_lod_t res;
 
     res.tree = octree_create(NULL);
+    res.vertex_count = 0;
     glGenBuffers(1, &res.vertex_buffer);
     glBindVertexArray(_demo->buf.world_vertex_array);
     glBindBuffer(GL_ARRAY_BUFFER, res.vertex_buffer);

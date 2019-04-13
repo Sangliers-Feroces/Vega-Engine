@@ -11,6 +11,7 @@
 
 typedef struct {
     octree *tree;
+    size_t vertex_count;
     gluint vertex_buffer;
     int do_reupload_buf;
 } chunk_lod_t;

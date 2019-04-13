@@ -52,10 +52,18 @@ texture_cluster_row_alloc **pres);
 
 void vec_texture_cluster_row_alloc_init(vec_texture_cluster_row_alloc *vec,
 int32_t w);
+texture_cluster_row texture_cluster_row_init(texture_cluster *cluster,
+int32_t power);
 texture_cluster_row_alloc* vec_texture_cluster_row_alloc_insert(
 vec_texture_cluster_row_alloc *vec, size_t pos, int32_t start, int32_t size);
 int texture_cluster_row_search(texture_cluster_row *row, ivec2 size,
 int32_t *pres, int32_t *start);
+
+texture_cluster_row_alloc* texture_cluster_insert_alloc(
+texture_cluster *cluster, texture_cluster_alloc_info info,
+int32_t pos, int32_t start);
+int texture_cluster_alloc_try_fast_lookup(texture_cluster *cluster,
+ivec2 size, int32_t power, texture_cluster_row_alloc **pres);
 
 void lightmap_init(void);
 void lightmap_quit(void);

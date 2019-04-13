@@ -7,8 +7,8 @@
 
 #pragma once
 
-#define CHUNK_SIZE 32.0f
-#define CHUNK_GEN_ITER 7
+#define CHUNK_SIZE 256.0f
+#define CHUNK_GEN_ITER 9
 
 void world_insert_vec_rtx_triangle(demo_t *demo, vec_rtx_triangle vec);
 

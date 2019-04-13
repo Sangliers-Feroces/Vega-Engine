@@ -53,6 +53,7 @@ void chunk_lod_reupload_buf(chunk_lod_t *lod)
     glBindBuffer(GL_ARRAY_BUFFER, lod->vertex_buffer);
     glBufferData(GL_ARRAY_BUFFER,
     buf.count * sizeof(chunk_vertex_t), buf.vertex, GL_STATIC_DRAW);
+    lod->vertex_count = buf.count;
     vec_chunk_vertex_destroy(buf);
     lod->do_reupload_buf = 0;
 }

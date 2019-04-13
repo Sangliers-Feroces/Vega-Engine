@@ -43,6 +43,7 @@ typedef struct {
 typedef struct {
     int32_t power;
     int32_t h;
+    size_t to_lookup;
     vec_texture_cluster_row_alloc row_allocs;
 } texture_cluster_row;
 

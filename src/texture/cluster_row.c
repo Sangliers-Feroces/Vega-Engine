@@ -20,6 +20,14 @@ static texture_cluster_row_alloc get_alloc_struct(int32_t start, int32_t size)
     {{0.0f, 0.0f}, {0.0f, 0.0f}}};
 }
 
+texture_cluster_row texture_cluster_row_init(texture_cluster *cluster,
+int32_t power)
+{
+    texture_cluster_row res = {power, cluster->to_fill_y, 0, {0, 0, NULL}};
+
+    return res;
+}
+
 texture_cluster_row_alloc* vec_texture_cluster_row_alloc_insert(
 vec_texture_cluster_row_alloc *vec, size_t pos, int32_t start, int32_t size)
 {
@@ -56,6 +64,7 @@ int32_t *pres, int32_t *start)
         size.x + TEXTURE_ALLOC_MARGIN) {
             *pres = i + 1;
             *start = cur_end;
+            row->to_lookup = *pres;
             return 1;
         }
     }

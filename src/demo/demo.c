@@ -88,6 +88,7 @@ int demo(arg_t args)
 {
     demo_t *demo = demo_init();
 
+    (void)args;
     if (!start(demo)) {
         demo_quit(demo);
         return 0;
