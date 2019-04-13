@@ -53,6 +53,7 @@ chunk_t* chunk_create(ssize2 pos)
     res->world_ndx = ~0ULL;
     world_chunk2d_insert(_demo, res);
     world_chunk_add(_demo, res);
+    chunk_gen_terrain(res);
     return res;
 }
 

@@ -44,4 +44,10 @@ typedef struct {
 
 typedef float mat4[4][4];
 
+typedef struct {
+    size_t w;
+    size_t h;
+    vec3 *vec3;
+} arr2d_vec3_t;
+
 #endif

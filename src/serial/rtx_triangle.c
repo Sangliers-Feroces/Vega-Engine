@@ -26,6 +26,13 @@ rtx_triangle* rtx_triangle_create(vec3 *triangle)
     return (res);
 }
 
+rtx_triangle* rtx_triangle_create_discrete(vec3 a, vec3 b, vec3 c)
+{
+    vec3 data[3] = {a, b, c};
+
+    return rtx_triangle_create(data);
+}
+
 void rtx_triangle_destroy(rtx_triangle *triangle)
 {
     texture2f_binding_free(triangle->lightmap);

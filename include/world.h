@@ -8,6 +8,7 @@
 #pragma once
 
 #define CHUNK_SIZE 32.0f
+#define CHUNK_GEN_ITER 7
 
 void world_insert_vec_rtx_triangle(demo_t *demo, vec_rtx_triangle vec);
 
@@ -32,3 +33,5 @@ void world_render(demo_t *demo);
 vec_chunk_vertex_t vec_chunk_vertex_create(size_t count);
 void vec_chunk_vertex_destroy(vec_chunk_vertex_t vec);
 void chunk_lod_reupload_buf(chunk_lod_t *lod);
+
+void chunk_gen_terrain(chunk_t *chunk);
