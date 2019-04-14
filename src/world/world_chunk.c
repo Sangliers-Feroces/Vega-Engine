@@ -71,6 +71,7 @@ void chunk_destroy(chunk_t *chunk)
         _demo->world.chunk[--_demo->world.chunk_count];
         _demo->world.chunk[chunk->world_ndx]->world_ndx = chunk->world_ndx;
     }
+    chunk_border_destroy(chunk->border);
     for (size_t i = 0; i < chunk->lod_count; i++)
         chunk_lod_destroy(chunk->lod[i]);
     free(chunk);
@@ -94,5 +95,12 @@ chunk_t* world_chunk_get_by_pos(demo_t *demo, vec3 pos)
 
 void chunk_insert_rtx_triangle(chunk_t *chunk, rtx_triangle *triangle)
 {
-    chunk_load_insert_rtx_triangle(&chunk->lod[0], triangle);
+    chunk_lod_insert_rtx_triangle(&chunk->lod[0], triangle);
 }
+
+void chunk_insert_rtx_triangle_lod(chunk_t *chunk, size_t lod,
+rtx_triangle *triangle)
+{
+    chunk_lod_insert_rtx_triangle(&chunk->lod[lod], triangle);
+}
+

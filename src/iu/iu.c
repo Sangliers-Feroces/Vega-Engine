@@ -21,6 +21,7 @@ static const iutex_path_t iutex_path [] = {
     {IUTEX_MENU_QUIT, "res/ui/menu/new/menu_quit.png"},
     {IUTEX_MENU_CURSOR, "res/ui/menu/new/cursor.png"},
     {IUTEX_TERRAIN, "res/textures/grass.png"},
+    {IUTEX_WATER, "res/textures/water.jpg"},
     {IUTEX_EDITOR_GRAB, "res/model/editor/grab.png"},
     {IUTEX_EDITOR_SELECT, "res/model/editor/select.png"},
     {IUTEX_SETTING_BG, "res/ui/menu/new/setting_bg.png"},

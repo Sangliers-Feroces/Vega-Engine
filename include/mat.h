@@ -88,8 +88,13 @@ vec3 mat4_mul_vec3(mat4 mat, vec3 vec);
 
 ssize2 ssize2_add(ssize2 a, ssize2 b);
 ssize2 ssize2_sub(ssize2 a, ssize2 b);
+ssize2 ssize2_abs(ssize2 value);
+ssize_t ssize2_dist_sq_man(ssize2 a, ssize2 b);
 
 arr2d_vec3_t arr2d_vec3_create(size_t w, size_t h);
 void arr2d_vec3_destroy(arr2d_vec3_t arr);
+arr_vec3_t arr_vec3_create(size_t count);
+void arr_vec3_destroy(arr_vec3_t arr);
+void chunk_border_destroy(chunk_border_t border);
 
 #endif

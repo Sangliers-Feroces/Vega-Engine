@@ -26,11 +26,29 @@ rtx_triangle* rtx_triangle_create(vec3 *triangle)
     return (res);
 }
 
+rtx_triangle* rtx_triangle_create_param(vec3 *triangle, int alloc_lightmap)
+{
+    rtx_triangle *res = (rtx_triangle*)malloc_safe(sizeof(rtx_triangle));
+
+    for (size_t i = 0; i < 3; i++)
+        res->vertex[i] = triangle[i];
+    if (alloc_lightmap)
+        res->lightmap = texture2f_binding_create(triangle);
+    else {
+        res->lightmap.alloc = NULL;
+        res->lightmap.texture = NULL;
+    }
+    res->albelo = texture2_binding_create(triangle);
+    rtx_triangle_update_tangent(res);
+    return (res);
+}
+
+
 rtx_triangle* rtx_triangle_create_discrete(vec3 a, vec3 b, vec3 c)
 {
     vec3 data[3] = {a, b, c};
 
-    return rtx_triangle_create(data);
+    return rtx_triangle_create_param(data, 0);
 }
 
 void rtx_triangle_destroy(rtx_triangle *triangle)
