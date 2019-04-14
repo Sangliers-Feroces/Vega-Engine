@@ -95,5 +95,12 @@ chunk_t* world_chunk_get_by_pos(demo_t *demo, vec3 pos)
 
 void chunk_insert_rtx_triangle(chunk_t *chunk, rtx_triangle *triangle)
 {
-    chunk_load_insert_rtx_triangle(&chunk->lod[0], triangle);
+    chunk_lod_insert_rtx_triangle(&chunk->lod[0], triangle);
 }
+
+void chunk_insert_rtx_triangle_lod(chunk_t *chunk, size_t lod,
+rtx_triangle *triangle)
+{
+    chunk_lod_insert_rtx_triangle(&chunk->lod[lod], triangle);
+}
+

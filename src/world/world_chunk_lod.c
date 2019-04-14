@@ -47,7 +47,7 @@ void chunk_lod_destroy(chunk_lod_t lod)
         glDeleteBuffers(1, &lod.vertex_buffer);
 }
 
-void chunk_load_insert_rtx_triangle(chunk_lod_t *lod, rtx_triangle *triangle)
+void chunk_lod_insert_rtx_triangle(chunk_lod_t *lod, rtx_triangle *triangle)
 {
     octree_insert_triangle(&lod->tree, triangle);
     lod->do_reupload_buf = 1;

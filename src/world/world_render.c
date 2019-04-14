@@ -44,7 +44,17 @@ static void chunk_lod_render(chunk_lod_t *lod)
 
 static void chunk_render(chunk_t *chunk)
 {
-    chunk_lod_render(&chunk->lod[0]);
+    float dist = vec2_dist(
+    (vec2){chunk->pos.x * CHUNK_SIZE + CHUNK_SIZE / 2.0f,
+    chunk->pos.y * CHUNK_SIZE + CHUNK_SIZE / 2.0f},
+    (vec2){_demo->cam.pos.x, _demo->cam.pos.z});
+
+    if (dist < 400.0f)
+        chunk_lod_render(&chunk->lod[2]);
+    else if (dist < 1200.0f)
+        chunk_lod_render(&chunk->lod[1]);
+    else
+        chunk_lod_render(&chunk->lod[0]);
 }
 
 void world_render(demo_t *demo)
