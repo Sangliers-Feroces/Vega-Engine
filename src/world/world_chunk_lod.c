@@ -29,8 +29,9 @@ chunk_lod_t chunk_lod_create(void)
 
     res.tree = octree_create(NULL);
     res.vertex_count = 0;
+    glGenVertexArrays(1, &res.vertex_array);
+    glBindVertexArray(res.vertex_array);
     glGenBuffers(1, &res.vertex_buffer);
-    glBindVertexArray(_demo->buf.world_vertex_array);
     glBindBuffer(GL_ARRAY_BUFFER, res.vertex_buffer);
     set_buffer_attrib();
     res.do_reupload_buf = 1;
@@ -40,6 +41,8 @@ chunk_lod_t chunk_lod_create(void)
 void chunk_lod_destroy(chunk_lod_t lod)
 {
     octree_destroy(&lod.tree);
+    if (lod.vertex_array != 0)
+        glDeleteVertexArrays(1, &lod.vertex_array);
     if (lod.vertex_buffer != 0)
         glDeleteBuffers(1, &lod.vertex_buffer);
 }

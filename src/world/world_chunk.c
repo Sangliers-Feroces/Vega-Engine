@@ -71,6 +71,7 @@ void chunk_destroy(chunk_t *chunk)
         _demo->world.chunk[--_demo->world.chunk_count];
         _demo->world.chunk[chunk->world_ndx]->world_ndx = chunk->world_ndx;
     }
+    chunk_border_destroy(chunk->border);
     for (size_t i = 0; i < chunk->lod_count; i++)
         chunk_lod_destroy(chunk->lod[i]);
     free(chunk);

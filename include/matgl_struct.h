@@ -50,4 +50,9 @@ typedef struct {
     vec3 *vec3;
 } arr2d_vec3_t;
 
+typedef struct {
+    size_t count;
+    vec3 *vec3;
+} arr_vec3_t;
+
 #endif
