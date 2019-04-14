@@ -54,7 +54,7 @@ static void split_ter(arr2d_vec3_t *arr, float stren)
 
 static void send_ter_to_chunk_lod(chunk_t *chunk, size_t lod, arr2d_vec3_t arr)
 {
-    vec3 base = {chunk->pos.x * CHUNK_SIZE, -48.0f, chunk->pos.y * CHUNK_SIZE};
+    vec3 base = {chunk->pos.x * CHUNK_SIZE, -42.0f, chunk->pos.y * CHUNK_SIZE};
     vec3 sq[4];
     rtx_triangle *got;
 
