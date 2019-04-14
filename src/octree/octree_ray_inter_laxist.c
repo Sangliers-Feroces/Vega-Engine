@@ -40,14 +40,14 @@ static void intersect_ray(rtx_triangle *triangle, ray3 ray, inter_ray3 *inter)
     }
 }
 
-static void tree_intersect_ray(octree *tree, ray3 ray, inter_ray3 *inter)
+void octree_intersect_ray_laxist_iter(octree *tree, ray3 ray, inter_ray3 *inter)
 {
     if (tree == NULL)
         return;
     if (!is_ray_in_bounds(ray, tree->bounds))
         return;
     for (size_t i = 0; i < 8; i++)
-        tree_intersect_ray(tree->sub[i], ray, inter);
+        octree_intersect_ray_laxist_iter(tree->sub[i], ray, inter);
     for (size_t i = 0; i < tree->triangles.count; i++)
         intersect_ray(tree->triangles.triangle[i], ray, inter);
 }
@@ -56,6 +56,6 @@ inter_ray3 octree_intersect_ray_laxist(octree *tree, ray3 ray)
 {
     inter_ray3 inter = {NULL, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, 0.0f};
 
-    tree_intersect_ray(tree, ray, &inter);
+    octree_intersect_ray_laxist_iter(tree, ray, &inter);
     return inter;
 }

@@ -43,6 +43,10 @@ static void editor_shortcut(demo_t *demo)
         editor_rot(demo);
     if (demo->input.key_press['U'])
         editor_uv(demo);
+    if (demo->input.key_press['N']) {
+        demo->player.state = !demo->player.state;
+        demo->player.pos = demo->cam.pos;
+    }
 }
 
 void editor(demo_t *demo)

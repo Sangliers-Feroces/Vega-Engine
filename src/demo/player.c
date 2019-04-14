@@ -7,11 +7,21 @@
 
 #include "headers.h"
 
+static inter_ray3 world_make_col(demo_t *demo, ray3 ray)
+{
+    inter_ray3 inter = {NULL, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, 0.0f};
+
+    for (size_t i = 0; i < demo->world.chunk_count; i++)
+        octree_intersect_ray_laxist_iter(
+        demo->world.chunk[i]->lod[WORLD_LOD_MAX].tree, ray, &inter);
+    return inter;
+}
+
 static void check_col(demo_t *demo, vec3 pos, vec3 *speed)
 {
-    inter_ray3 inter = octree_intersect_ray_laxist(
-    demo->tree, (ray3){pos, *speed});
+    inter_ray3 inter = world_make_col(demo, (ray3){pos, *speed});
     vec3 p_in;
+    vec3 up = {0.0f, 1.0f, 0.0f};;
 
     if (inter.triangle == NULL)
         return;
@@ -19,7 +29,8 @@ static void check_col(demo_t *demo, vec3 pos, vec3 *speed)
         return;
     p_in = vec3_add(pos, *speed);
     inter = rtx_triangle_intersect_ray_no_cull(inter.triangle,
-    (ray3){p_in, inter.triangle->normal});
+    (ray3){p_in, vec3_dot(inter.triangle->normal, up) > 0.5f ?
+    up : inter.triangle->normal});
     if (inter.triangle == NULL)
         return;
     *speed = vec3_add(*speed, vec3_muls(vec3_sub(inter.p, p_in), 1.1f));
@@ -27,8 +38,8 @@ static void check_col(demo_t *demo, vec3 pos, vec3 *speed)
 
 static void slow_player_down(demo_t *demo)
 {
-    demo->player.speed.x *= 1.0f - demo->win.framelen * 6.0f;
-    demo->player.speed.z *= 1.0f - demo->win.framelen * 6.0f;
+    demo->player.speed.x *= 1.0f - demo->win.framelen * 4.0f;
+    demo->player.speed.z *= 1.0f - demo->win.framelen * 4.0f;
 }
 
 static void cap_player_speed(vec3 *speed)
@@ -54,7 +65,7 @@ void player_physics(demo_t *demo)
     cap_player_speed(&demo->player.speed);
     speed_frame = vec3_muls(demo->player.speed, demo->win.framelen);
     old_speed = speed_frame;
-    for (size_t i = 0; i < 16; i++)
+    for (size_t i = 0; i < 4; i++)
         check_col(demo, demo->player.pos, &speed_frame);
     demo->player.pos = vec3_add(demo->player.pos, speed_frame);
     demo->player.is_grounded = old_speed.y < speed_frame.y;
