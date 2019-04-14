@@ -20,4 +20,6 @@ void menu_draw(menu_t *menu);
 void menu_setting_loop(demo_t *demo, menu_t *menu);
 
 int menu_poll_events(demo_t *demo, menu_t *menu);
+
+int analyse_setting_input(demo_t *demo, menu_t *menu);
 #endif /* !MENU_H_ */

@@ -19,4 +19,7 @@ void iu_entity_draw(entity2_t entity);
 void entity_constructor(entity2_t *entity, entity2_param_t params);
 
 void iu_quit(void);
+
+int check_click_pos(sfVector2i mouse_pos, entity2_t button,
+float width_screen, float height);
 #endif /* !IU_H_ */

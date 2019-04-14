@@ -9,6 +9,8 @@
 
 static const iutex_path_t iutex_path [] = {
     {IUTEX_ELON, "res/ui/elon.jpg"},
+    {IUTEX_PLUS, "res/ui/plus.png"},
+    {IUTEX_MINUS, "res/ui/minus.png"},
     {IUTEX_MENU_MAIN, "res/ui/menu/new/menu.png"},
     {IUTEX_MENU_CONTINUE, "res/ui/menu/new/menu_continue.png"},
     {IUTEX_MENU_LOAD, "res/ui/menu/new/menu_load.png"},
@@ -22,6 +24,11 @@ static const iutex_path_t iutex_path [] = {
     {IUTEX_EDITOR_GRAB, "res/model/editor/grab.png"},
     {IUTEX_EDITOR_SELECT, "res/model/editor/select.png"},
     {IUTEX_SETTING_BG, "res/ui/menu/new/setting_bg.png"},
+    {IUTEX_SETTING_RES, "res/ui/menu/new/settings/setting_resolution.png"},
+    {IUTEX_SETTING_RES_1920_1080,
+    "res/ui/menu/new/settings/setting_res_1920x1080.png"},
+    {IUTEX_SETTING_RES_1600_900,
+    "res/ui/menu/new/settings/setting_res_1600x900.png"},
     {0, NULL}
 };
 
