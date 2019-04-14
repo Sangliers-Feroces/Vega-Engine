@@ -9,6 +9,7 @@
 
 void menu_init(menu_t *menu)
 {
+    menu->edited_setting = 0;
     menu->first_save = 0;
     menu->state = -1;
     menu->branch = MENU_BRANCH_ROOT;

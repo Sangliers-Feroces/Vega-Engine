@@ -28,17 +28,27 @@ typedef enum {
 } menu_link_t;
 
 typedef enum {
+    SETTING_RES,
+    SETTING_RES_CHOICE,
+    SETTING_RES_PLUS,
+    SETTING_RES_MINUS,
+    SETTING_END
+} setting_entity_t;
+
+typedef enum {
     MENU_BRANCH_ROOT,
     MENU_BRANCH_SETTING,
     MENU_BRANCH_END
 } menu_branch_t;
 
 typedef struct {
+    int edited_setting;
     int first_save;
     int state;
     int menu_choice;
     menu_branch_t branch;
     entity2_t background[MENU_BG_END];
     entity2_t link[MENU_LINK_END];
+    entity2_t setting[SETTING_END];
 } menu_t;
 #endif /* !MENU_STRUCT_H_ */

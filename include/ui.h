@@ -27,7 +27,7 @@ void ui_set_buttons(void);
 void ui_swicth_button_action(demo_t *demo);
 void ui_refresh_hover(demo_t *demo);
 void ui_check_click_button(demo_t *demo);
-rect_t button_get_size(button_t button);
+rect_t button_get_size(entity2_t button);
 
 void demo_set_cam_to_origin(demo_t *demo);
 void ui_button_effect(demo_t *demo);

@@ -15,7 +15,6 @@ int start(demo_t *demo)
     /*if (demo->skip_intro)
         if (!intro(demo))
             return 0;*/
-    printf("attend quoi\n");
     if (!menu_loop(demo, &menu))
         return 0;
     return 1;

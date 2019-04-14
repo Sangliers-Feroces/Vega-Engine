@@ -10,6 +10,8 @@
 void setting_draw(menu_t *menu)
 {
     iu_entity_draw(menu->background[MENU_BG_SETTING]);
+    for (int i = 0; i < SETTING_END; i++)
+            iu_entity_draw(menu->setting[i]);
 }
 
 void menu_setting_loop(demo_t *demo, menu_t *menu)

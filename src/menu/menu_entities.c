@@ -7,6 +7,18 @@
 
 #include "headers.h"
 
+static void setting_set_entities(menu_t *menu)
+{
+    entity_constructor(&menu->setting[SETTING_RES], (entity2_param_t){
+    IUTEX_SETTING_RES, (rect_t){{-0.80f, 0.50f},{0.15f, 0.1f}}, -0.999});
+    entity_constructor(&menu->setting[SETTING_RES_CHOICE], (entity2_param_t){
+    IUTEX_SETTING_RES_1600_900, (rect_t){{-0.50f, 0.50f},{0.15f, 0.1f}}, -0.9});
+    entity_constructor(&menu->setting[SETTING_RES_PLUS], (entity2_param_t){
+    IUTEX_PLUS, (rect_t){{-0.35f, 0.50f},{0.08f, 0.08f}}, -0.9});
+    entity_constructor(&menu->setting[SETTING_RES_MINUS], (entity2_param_t){
+    IUTEX_MINUS, (rect_t){{-0.58f, 0.50f},{0.08f, 0.08f}}, -0.9});
+}
+
 static void menu_set_link_entities(menu_t *menu)
 {
     entity_constructor(&menu->link[MENU_LINK_CONTINUE], (entity2_param_t){
@@ -23,6 +35,7 @@ static void menu_set_link_entities(menu_t *menu)
     IUTEX_MENU_QUIT, (rect_t){{0.75f, -0.80f}, {0.1f, 0.1f}}, -0.999f});
     entity_constructor(&menu->link[MENU_LINK_CURSOR], (entity2_param_t){
     IUTEX_MENU_CURSOR, (rect_t){{0.65f, -0.40f}, {0.1f, 0.1f}}, -0.999f});
+    setting_set_entities(menu);
 }
 
 void menu_set_entities(menu_t *menu)
