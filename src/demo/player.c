@@ -34,6 +34,7 @@ static void check_col(demo_t *demo, vec3 pos, vec3 *speed)
     if (inter.triangle == NULL)
         return;
     *speed = vec3_add(*speed, vec3_muls(vec3_sub(inter.p, p_in), 1.0f));
+    *speed = vec3_add(*speed, vec3_muls(vec3_normalize(vec3_sub(inter.p, p_in)), 0.005f));
 }
 
 static void slow_player_down(demo_t *demo)
@@ -70,7 +71,5 @@ void player_physics(demo_t *demo)
     demo->player.pos = vec3_add(demo->player.pos, speed_frame);
     demo->player.is_grounded = old_speed.y < speed_frame.y;
     demo->player.speed = vec3_divs(speed_frame, demo->win.framelen);
-    demo->player.pos = vec3_add(demo->player.pos,
-    vec3_muls(vec3_normalize(vec3_sub(speed_frame, old_speed)), 0.01f));
     demo->cam.pos = vec3_add(demo->player.pos, (vec3){0.0f, 1.75f, 0.0f});
 }
