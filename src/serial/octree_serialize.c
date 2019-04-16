@@ -15,8 +15,8 @@ static int32_t serialize_rec(octree *tree, gpu_serial_t *serial)
     if (tree == NULL)
         return 0;
     serial->size += 8;
-    gpu_serial_write_vec3(serial, tree->bounds.min);
-    gpu_serial_write_vec3(serial, tree->bounds.max);
+    gpu_serial_write_dvec3(serial, tree->bounds.min);
+    gpu_serial_write_dvec3(serial, tree->bounds.max);
     tri_pos = serial->size++;
     serial->data[tri_pos] =
     vec_rtx_triangle_serialize(&tree->triangles, serial);

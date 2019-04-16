@@ -12,16 +12,16 @@
 
 static float intersect_plane(rtx_triangle *triangle, ray3 ray, float dotnv)
 {
-    return vec3_dot(triangle->normal, vec3_sub(triangle->vertex[0], ray.p)) /
+    return dvec3_dot(triangle->normal, dvec3_sub(triangle->vertex[0], ray.p)) /
     dotnv;
 }
 
 static void intersect_ray(rtx_triangle *triangle, ray3 ray, inter_ray3 *inter)
 {
-    float dotnv = vec3_dot(triangle->normal, ray.v);
+    float dotnv = dvec3_dot(triangle->normal, ray.v);
     float t;
-    vec3 p;
-    vec3 bar;
+    dvec3 p;
+    dvec3 bar;
 
     if (dotnv >= 0.0f)
         return;

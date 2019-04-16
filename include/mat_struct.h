@@ -10,18 +10,18 @@
 
 /* 1D ray */
 typedef struct {
-    float p;
-    float v;
+    double p;
+    double v;
 } ray1;
 
 typedef struct {
-    vec3 p;
-    vec3 v;
+    dvec3 p;
+    dvec3 v;
 } ray3;
 
 typedef struct {
     ray3 ray;
-    vec3 color;
+    dvec3 color;
     size_t count;
 } ray3_color;
 
@@ -55,10 +55,10 @@ typedef struct {
 } mvp_t;
 
 typedef struct {
-    vec3 tl;
-    vec3 tr;
-    vec3 bl;
-    vec3 br;
+    dvec3 tl;
+    dvec3 tr;
+    dvec3 bl;
+    dvec3 br;
 } ray_viewport_t;
 
 #endif

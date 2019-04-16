@@ -2,12 +2,12 @@
 ** EPITECH PROJECT, 2018
 ** __xd__world
 ** File description:
-** swaggy demo
+** gllol
 */
 
 #include "headers.h"
 
-void editor_rot(demo_t *demo)
+vec3 dvec3_vec3(dvec3 value)
 {
-    (void)demo;
+    return (vec3){value.x, value.y, value.z};
 }

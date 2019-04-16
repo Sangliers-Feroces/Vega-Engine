@@ -9,20 +9,13 @@
 
 static void merge_points(demo_t *demo)
 {
-    octree_add_triangle(&demo->tree, demo->editor.selections.selection);
+    (void)demo;
+    //octree_add_triangle(&demo->tree, demo->editor.selections.selection);
 }
 
 static void create_geom(demo_t *demo)
 {
-    vec3 pos = vec3_adds(
-    vec3_add(demo->cam.pos, spherical_to_cartesian_z(demo->cam.rot)), -0.5f);
-
-    octree_add_triangle(&demo->tree,
-    (vec3[]){{pos.x, pos.y, pos.z}, {pos.x, pos.y, pos.z + 1.0f},
-    {pos.x + 1.0f, pos.y, pos.z}});
-    octree_add_triangle(&demo->tree,
-    (vec3[]){{pos.x + 1.0f, pos.y, pos.z}, {pos.x, pos.y, pos.z + 1.0f},
-    {pos.x + 1.0f, pos.y, pos.z + 1.0f}});
+    (void)demo;
 }
 
 static void editor_shortcut(demo_t *demo)
@@ -58,7 +51,7 @@ void editor(demo_t *demo)
     editor_shortcut(demo);
     demo_refresh_viewport(demo);
     demo->mouse.ray = demo_get_ray(demo);
-    inter = octree_intersect_ray(demo->tree, demo->mouse.ray);
+    //inter = octree_intersect_ray(demo->tree, demo->mouse.ray);
     switch (demo->action) {
     case ACTION_MOVE:
         editor_select(demo, inter);

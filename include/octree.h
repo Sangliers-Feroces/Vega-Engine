@@ -23,11 +23,11 @@ void octree_destroy(octree **root);
 
 void rtx_triangle_update(rtx_triangle *triangle);
 void rtx_triangle_update_tangent(rtx_triangle *triangle);
-rtx_triangle* rtx_triangle_create_no_lightmap(vec3 *triangle);
+rtx_triangle* rtx_triangle_create_no_lightmap(dvec3 *triangle);
 
 bounds3 octree_get_sub_bounds(octree *tree, size_t ndx);
 
-size_t get_triangle_upper_tree(vec3 *triangle, bounds3 bounds);
+size_t get_triangle_upper_tree(dvec3 *triangle, bounds3 bounds);
 
 inter_ray3 octree_intersect_ray(octree *tree, ray3 ray);
 inter_ray3 rtx_triangle_intersect_ray_no_cull(rtx_triangle *triangle,
@@ -47,7 +47,7 @@ void octree_update_lightmap(octree *tree, float max_lumel);
 
 void refresh_vertex_buffer(demo_t *demo);
 
-void octree_ray_bound(octree *tree, vec3 ray, vec2 *ppos, vec2 *psize);
+void octree_ray_bound(octree *tree, dvec3 ray, vec2 *ppos, vec2 *psize);
 
 size_t octree_get_rtx_triangle_count(octree *tree);
 

@@ -26,9 +26,9 @@ void editor_init(demo_t *demo)
     demo->editor.mvp = glGetUniformLocation(demo->editor.shader, "mvp");
     set_texture_nearest(_iu.textures[IUTEX_EDITOR_GRAB]->id);
     demo->editor.grabbed = MODEL_EDITOR_MAX;
-    demo->editor.grab_delta = (vec3){0.0f, 0.0f, 0.0f};
-    demo->editor.grab_first = (vec3){0.0f, 0.0f, 0.0f};
-    demo->editor.grab_now = (vec3){0.0f, 0.0f, 0.0f};
+    demo->editor.grab_delta = (dvec3){0.0f, 0.0f, 0.0f};
+    demo->editor.grab_first = (dvec3){0.0f, 0.0f, 0.0f};
+    demo->editor.grab_now = (dvec3){0.0f, 0.0f, 0.0f};
     for (size_t i = 0; i < 3; i++)
         demo->editor.grabber_ent[i] =
         entity_create(demo->editor.model[MODEL_EDITOR_X + i]);

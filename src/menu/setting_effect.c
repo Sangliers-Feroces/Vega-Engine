@@ -9,6 +9,7 @@
 
 void setting_buttons_effects(demo_t *demo, menu_t *menu, setting_entity_t choice)
 {
+    (void)demo;
     switch (choice) {
         case SETTING_RES_MINUS:
             if (menu->setting[SETTING_RES_CHOICE].index > IUTEX_SETTING_RES_1600_900) {

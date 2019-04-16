@@ -7,18 +7,9 @@
 
 #include "headers.h"
 
-static uint32_t rgbaf32_to_uint32(vec4 rgb, float aperture)
+uint32_t rtx(demo_t *demo, dvec3 ray)
 {
-    uint32_t r = MIN(rgb.x / aperture * 255.0f, 255.0f);
-    uint32_t g = MIN(rgb.y / aperture * 255.0f, 255.0f);
-    uint32_t b = MIN(rgb.z / aperture * 255.0f, 255.0f);
-
-    return 0xFF000000 | (b << 16) | (g << 8) | r;
-}
-
-uint32_t rtx(demo_t *demo, vec3 ray)
-{
-    inter_ray3 inter = octree_intersect_ray(demo->tree, (ray3){demo->cam.pos,
+    /*inter_ray3 inter = octree_intersect_ray(demo->tree, (ray3){demo->cam.pos,
     ray});
     vec2 uv;
 
@@ -28,12 +19,15 @@ uint32_t rtx(demo_t *demo, vec3 ray)
         inter.triangle->lightmap.texture, uv), _lightmaps.aperture);
     }
     else
-        return 0xFF000000;
+        return 0xFF000000;*/
+    (void)demo;
+    (void)ray;
+    return 0;
 }
 
-vec3 vec3_interpolate(vec3 a, vec3 b, long double ratio)
+dvec3 dvec3_interpolate(dvec3 a, dvec3 b, long double ratio)
 {
-    vec3 res;
+    dvec3 res;
     long double ratio_inv = 1.0L - ratio;
 
     res.x = a.x * ratio_inv + b.x * ratio;

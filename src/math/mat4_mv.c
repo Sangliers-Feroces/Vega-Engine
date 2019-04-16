@@ -7,7 +7,7 @@
 
 #include "headers.h"
 
-void mat4_scale_trans(vec3 pos, vec3 scale, mat4 res)
+void mat4_scale_trans(dvec3 pos, dvec3 scale, mat4 res)
 {
     mat4 trans;
 
@@ -44,7 +44,7 @@ static void rot_yx(float x, float y, mat4 res)
     mat4_mul(rot_x, res, res);
 }
 
-void mat4_rot(vec3 rot, mat4 res)
+void mat4_rot(dvec3 rot, mat4 res)
 {
     float cos, sin;
     mat4 rot_z;
@@ -60,7 +60,7 @@ void mat4_rot(vec3 rot, mat4 res)
     mat4_mul(rot_z, res, res);
 }
 
-void mat4_model(vec3 pos, vec3 scale, vec3 rot, mat4 res)
+void mat4_model(dvec3 pos, dvec3 scale, dvec3 rot, mat4 res)
 {
     mat4 scale_trans;
 
@@ -69,7 +69,7 @@ void mat4_model(vec3 pos, vec3 scale, vec3 rot, mat4 res)
     mat4_mul(scale_trans, res, res);
 }
 
-void mat4_view(vec3 pos, vec3 rot, mat4 res)
+void mat4_view(dvec3 pos, dvec3 rot, mat4 res)
 {
     mat4 rot_mat;
 
@@ -77,6 +77,6 @@ void mat4_view(vec3 pos, vec3 rot, mat4 res)
     res[3][0] = -pos.x;
     res[3][1] = -pos.y;
     res[3][2] = -pos.z;
-    mat4_rot((vec3){-rot.x, -rot.y, -rot.z}, rot_mat);
+    mat4_rot((dvec3){-rot.x, -rot.y, -rot.z}, rot_mat);
     mat4_mul(rot_mat, res, res);
 }

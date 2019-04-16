@@ -7,16 +7,16 @@
 
 #include "headers.h"
 
-static vec3 diffuse_ray(rtx_triangle *triangle)
+static dvec3 diffuse_ray(rtx_triangle *triangle)
 {
     float n = 1.0f;
     float x = 2.0f * M_PI * randf();
     float y = acosf(powf(randf(), 1.0f / (n + 1.0f)));
 
-    return vec3_add(vec3_add(
-    vec3_muls(triangle->tangent, sinf(y) * cosf(x)),
-    vec3_muls(triangle->bitangent, sinf(y) * sinf(x))),
-    vec3_muls(triangle->normal, cosf(y)));
+    return dvec3_add(dvec3_add(
+    dvec3_muls(triangle->tangent, sinf(y) * cosf(x)),
+    dvec3_muls(triangle->bitangent, sinf(y) * sinf(x))),
+    dvec3_muls(triangle->normal, cosf(y)));
 }
 
 void octree_throw_ray(octree *tree, ray3_color ray)
@@ -32,7 +32,7 @@ void octree_throw_ray(octree *tree, ray3_color ray)
     else
         octree_throw_ray(tree,
         (ray3_color){(ray3){inter.p, diffuse_ray(inter.triangle)},
-        vec3_muls(ray.color, 0.75f), ray.count});
+        dvec3_muls(ray.color, 0.75f), ray.count});
 }
 
 float octree_light_rtx(octree *tree, size_t density)

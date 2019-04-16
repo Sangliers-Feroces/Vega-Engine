@@ -22,6 +22,21 @@ void vec_chunk_vertex_destroy(vec_chunk_vertex_t vec)
     free(vec.vertex);
 }
 
+vec_chunk_dvertex_t vec_chunk_dvertex_create(size_t count)
+{
+    vec_chunk_dvertex_t res;
+
+    res.count = count;
+    res.dvertex =
+    (chunk_dvertex_t*)malloc_safe(count * sizeof(chunk_dvertex_t));
+    return res;
+}
+
+void vec_chunk_dvertex_destroy(vec_chunk_dvertex_t vec)
+{
+    free(vec.dvertex);
+}
+
 static void fill_buf_actual(octree *tree, vec_chunk_vertex_t *buf, size_t *ndx)
 {
     if (tree == NULL)
@@ -30,9 +45,9 @@ static void fill_buf_actual(octree *tree, vec_chunk_vertex_t *buf, size_t *ndx)
         fill_buf_actual(tree->sub[i], buf, ndx);
     for (size_t i = 0; i < tree->triangles.count; i++)
         for (size_t j = 0; j < 3; j++)
-            buf->vertex[(*ndx)++] =
-            (chunk_vertex_t){tree->triangles.triangle[i]->vertex[j],
-            tree->triangles.triangle[i]->normal,
+            buf->vertex[(*ndx)++] = (chunk_vertex_t){
+            dvec3_vec3(tree->triangles.triangle[i]->vertex[j]),
+            dvec3_vec3(tree->triangles.triangle[i]->normal),
             tree->triangles.triangle[i]->albelo.uv[j],
             tree->triangles.triangle[i]->lightmap.uv[j]};
 }

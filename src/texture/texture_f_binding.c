@@ -22,15 +22,15 @@ ivec2 get_texture_dim(vec2 *uv)
     return (ivec2){dim.x * scale, dim.y * scale};
 }
 
-texture2f_binding texture2f_binding_create(vec3 *triangle)
+texture2f_binding texture2f_binding_create(dvec3 *triangle)
 {
     texture2f_binding res = {.texture = _lightmaps.base, .alloc = NULL};
 
     res.uv[0] = (vec2){0.0f, 0.0f};
-    res.uv[1] = (vec2){vec3_dist(triangle[0], triangle[1]), 0.0f};
+    res.uv[1] = (vec2){dvec3_dist(triangle[0], triangle[1]), 0.0f};
     res.uv[2] = circle_intersect(
-    (circle){res.uv[0], vec3_dist(triangle[0], triangle[2])},
-    (circle){res.uv[1], vec3_dist(triangle[1], triangle[2])});
+    (circle){res.uv[0], dvec3_dist(triangle[0], triangle[2])},
+    (circle){res.uv[1], dvec3_dist(triangle[1], triangle[2])});
     if (!lightmap_allocate(get_texture_dim(res.uv), &res.alloc)) {
         printf("Can't allocate this lightmap. (out of GPU memory)\n");
         exit(84);

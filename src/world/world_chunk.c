@@ -47,12 +47,6 @@ chunk_t* chunk_create(ssize2 pos)
             return *pexist;
     res = (chunk_t*)malloc_safe(sizeof(chunk_t));
     res->pos = pos;
-    res->bounds.min =
-    (vec3){res->pos.x * CHUNK_SIZE, -FLT_INF, res->pos.y * CHUNK_SIZE};
-    res->bounds.max =
-    (vec3){res->pos.x * CHUNK_SIZE + CHUNK_SIZE, FLT_INF,
-    res->pos.y * CHUNK_SIZE + CHUNK_SIZE};
-    res->bounds.size = CHUNK_SIZE;
     res->lod_count = WORLD_LOD_COUNT;
     for (size_t i = 0; i < res->lod_count; i++)
         res->lod[i] = chunk_lod_create(res);
@@ -93,7 +87,7 @@ chunk_t* world_chunk_get(demo_t *demo, ssize2 pos)
     return chunk_create(pos);
 }
 
-chunk_t* world_chunk_get_by_pos(demo_t *demo, vec3 pos)
+chunk_t* world_chunk_get_by_pos(demo_t *demo, dvec3 pos)
 {
     return world_chunk_get(demo,
     (ssize2){pos.x / CHUNK_SIZE, pos.z / CHUNK_SIZE});

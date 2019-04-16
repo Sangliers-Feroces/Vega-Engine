@@ -19,7 +19,7 @@ void octree_light_rtx_thread(thread_bus *bus, octree *tree, size_t density)
 {
     vec2 pos;
     vec2 size;
-    vec3 ray = {1.0f, -1.0f, 1.0f};
+    dvec3 ray = {1.0f, -1.0f, 1.0f};
     size_t count;
 
     octree_ray_bound(tree, ray, &pos, &size);

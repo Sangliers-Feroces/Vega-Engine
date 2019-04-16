@@ -7,7 +7,7 @@
 
 #include "headers.h"
 
-vec3 vec3_adds(vec3 vec, float value)
+dvec3 dvec3_adds(dvec3 vec, float value)
 {
-    return (vec3){vec.x + value, vec.y + value, vec.z + value};
+    return (dvec3){vec.x + value, vec.y + value, vec.z + value};
 }

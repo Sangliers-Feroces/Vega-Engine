@@ -19,13 +19,13 @@ static void enlarge_get_bounds(octree *new_root, bounds3 old_b, size_t ndx)
     if (ndx == 0) {
         new_root->bounds.min = old_b.min;
         new_root->bounds.max =
-        (vec3){new_root->bounds.min.x + new_root->bounds.size,
+        (dvec3){new_root->bounds.min.x + new_root->bounds.size,
         new_root->bounds.min.y + new_root->bounds.size,
         new_root->bounds.min.z + new_root->bounds.size};
     } else {
         new_root->bounds.max = old_b.max;
         new_root->bounds.min =
-        (vec3){new_root->bounds.max.x - new_root->bounds.size,
+        (dvec3){new_root->bounds.max.x - new_root->bounds.size,
         new_root->bounds.max.y - new_root->bounds.size,
         new_root->bounds.max.z - new_root->bounds.size};
     }

@@ -9,19 +9,19 @@
 
 static void update_grab_pos(demo_t *demo)
 {
-    vec3 acc = (vec3){0.0f, 0.0f, 0.0f};
+    dvec3 acc = (dvec3){0.0, 0.0, 0.0};
 
     for (size_t i = 0; i < demo->editor.selections.count; i++)
-        acc = vec3_add(acc, demo->editor.selections.selection[i]);
-    demo->editor.grab = vec3_divs(acc, (float)demo->editor.selections.count);
+        acc = dvec3_add(acc, demo->editor.selections.selection[i]);
+    demo->editor.grab = dvec3_divs(acc, (float)demo->editor.selections.count);
     demo->editor.grab =
-    vec3_add(vec3_adds(demo->editor.grab, 0.02f), demo->editor.grab_delta);
+    dvec3_add(dvec3_adds(demo->editor.grab, 0.02), demo->editor.grab_delta);
 }
 
 static void draw_grab(demo_t *demo)
 {
     entity_t *entity;
-    float scale = 3.0f;
+    double scale = 3.0;
 
     if (demo->editor.selections.count == 0)
         return;
@@ -29,7 +29,7 @@ static void draw_grab(demo_t *demo)
     for (size_t i = 0; i < 3; i++) {
         entity_refresh(demo->editor.grabber_ent[i]);
         entity = demo->editor.grabber_ent[i];
-        entity->scale = (vec3){scale, scale, scale};
+        entity->scale = (dvec3){scale, scale, scale};
         entity->pos = demo->editor.grab;
         entity_draw(demo, entity);
     }
@@ -38,16 +38,16 @@ static void draw_grab(demo_t *demo)
 void editor_draw(demo_t *demo)
 {
     entity_t entity;
-    float scale = 0.25f;
-    float scaleh = scale / 2.0f;
+    double scale = 0.25;
+    double scaleh = scale / 2.0;
 
     glDisable(GL_CULL_FACE);
     entity.model = demo->editor.model[MODEL_EDITOR_SELECT];
-    entity.scale = (vec3){scale, scale, scale};
-    entity.rot = (vec3){0.0f, 0.0f, 0.0f};
+    entity.scale = (dvec3){scale, scale, scale};
+    entity.rot = (dvec3){0.0, 0.0, 0.0};
     for (size_t i = 0; i < demo->editor.selections.count; i++) {
         entity.pos = demo->editor.selections.selection[i];
-        entity.pos = vec3_sub(entity.pos, (vec3){scaleh, scaleh, scaleh});
+        entity.pos = dvec3_sub(entity.pos, (dvec3){scaleh, scaleh, scaleh});
         entity_draw(demo, &entity);
     }
     draw_grab(demo);

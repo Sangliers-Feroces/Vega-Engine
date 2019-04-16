@@ -7,8 +7,8 @@
 
 #include "headers.h"
 
-vec3 ray3_compute(ray3 ray, float t)
+dvec3 ray3_compute(ray3 ray, float t)
 {
-    return (vec3){ray.p.x + ray.v.x * t, ray.p.y + ray.v.y * t,
+    return (dvec3){ray.p.x + ray.v.x * t, ray.p.y + ray.v.y * t,
     ray.p.z + ray.v.z * t};
 }
