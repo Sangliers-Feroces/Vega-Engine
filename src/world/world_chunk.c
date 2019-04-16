@@ -47,13 +47,19 @@ chunk_t* chunk_create(ssize2 pos)
             return *pexist;
     res = (chunk_t*)malloc_safe(sizeof(chunk_t));
     res->pos = pos;
+    res->bounds.min =
+    (vec3){res->pos.x * CHUNK_SIZE, -FLT_INF, res->pos.y * CHUNK_SIZE};
+    res->bounds.max =
+    (vec3){res->pos.x * CHUNK_SIZE + CHUNK_SIZE, FLT_INF,
+    res->pos.y * CHUNK_SIZE + CHUNK_SIZE};
+    res->bounds.size = CHUNK_SIZE;
     res->lod_count = WORLD_LOD_COUNT;
     for (size_t i = 0; i < res->lod_count; i++)
-        res->lod[i] = chunk_lod_create();
+        res->lod[i] = chunk_lod_create(res);
     res->world_ndx = ~0ULL;
+    chunk_gen_terrain(res);
     world_chunk2d_insert(_demo, res);
     world_chunk_add(_demo, res);
-    chunk_gen_terrain(res);
     return res;
 }
 

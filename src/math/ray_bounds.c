@@ -50,3 +50,16 @@ int is_ray_in_bounds(ray3 ray, bounds3 bounds)
     }
     return (t.x <= t.y);
 }
+
+
+int is_ray_in_bounds_seg(ray3 ray, bounds3 bounds)
+{
+    vec2 t = {-FLT_INF, FLT_INF};
+
+    for (size_t i = 0; i < 3; i++) {
+        if (!ray1d_bound((ray1){((float*)&ray.p)[i], ((float*)&ray.v)[i]},
+        ((float*)&bounds.min)[i], ((float*)&bounds.max)[i], &t))
+            return 0;
+    }
+    return ((t.x <= t.y) && (t.y >= 0.0f) && (t.x <= 1.0f));
+}

@@ -7,7 +7,7 @@
 
 #include "headers.h"
 
-static inter_ray3 world_make_col(demo_t *demo, ray3 ray)
+static inter_ray3 world_inter(demo_t *demo, ray3 ray)
 {
     inter_ray3 inter = {NULL, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, 0.0f};
 
@@ -19,9 +19,9 @@ static inter_ray3 world_make_col(demo_t *demo, ray3 ray)
 
 static void check_col(demo_t *demo, vec3 pos, vec3 *speed)
 {
-    inter_ray3 inter = world_make_col(demo, (ray3){pos, *speed});
+    inter_ray3 inter = world_inter(demo, (ray3){pos, *speed});
     vec3 p_in;
-    vec3 up = {0.0f, 1.0f, 0.0f};;
+    vec3 up = {0.0f, 1.0f, 0.0f};
 
     if (inter.triangle == NULL)
         return;
@@ -33,13 +33,13 @@ static void check_col(demo_t *demo, vec3 pos, vec3 *speed)
     up : inter.triangle->normal});
     if (inter.triangle == NULL)
         return;
-    *speed = vec3_add(*speed, vec3_muls(vec3_sub(inter.p, p_in), 1.1f));
+    *speed = vec3_add(*speed, vec3_muls(vec3_sub(inter.p, p_in), 1.0f));
 }
 
 static void slow_player_down(demo_t *demo)
 {
-    demo->player.speed.x *= 1.0f - demo->win.framelen * 4.0f;
-    demo->player.speed.z *= 1.0f - demo->win.framelen * 4.0f;
+    demo->player.speed.x *= 1.0f - demo->win.framelen * 6.0f;
+    demo->player.speed.z *= 1.0f - demo->win.framelen * 6.0f;
 }
 
 static void cap_player_speed(vec3 *speed)
@@ -70,5 +70,7 @@ void player_physics(demo_t *demo)
     demo->player.pos = vec3_add(demo->player.pos, speed_frame);
     demo->player.is_grounded = old_speed.y < speed_frame.y;
     demo->player.speed = vec3_divs(speed_frame, demo->win.framelen);
+    demo->player.pos = vec3_add(demo->player.pos,
+    vec3_muls(vec3_normalize(vec3_sub(speed_frame, old_speed)), 0.01f));
     demo->cam.pos = vec3_add(demo->player.pos, (vec3){0.0f, 1.75f, 0.0f});
 }

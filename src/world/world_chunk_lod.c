@@ -23,11 +23,14 @@ static void set_buffer_attrib(void)
     sizeof(chunk_vertex_t), BUFFER_OFFSET(offsetof(chunk_vertex_t, uv_lightmap)));
 }
 
-chunk_lod_t chunk_lod_create(void)
+chunk_lod_t chunk_lod_create(chunk_t *par)
 {
     chunk_lod_t res;
 
     res.tree = octree_create(NULL);
+    /*res.tree->bounds = par->bounds;
+    res.tree->bounds.min.y = 0.0f;
+    res.tree->bounds.max.y = CHUNK_SIZE;*/
     res.vertex_count = 0;
     glGenVertexArrays(1, &res.vertex_array);
     glBindVertexArray(res.vertex_array);

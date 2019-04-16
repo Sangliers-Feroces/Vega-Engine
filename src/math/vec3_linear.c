@@ -32,5 +32,7 @@ vec3 vec3_normalize(vec3 vec)
 {
     float dist = vec3_norm(vec);
 
+    if (dist == 0.0)
+        return (vec3){0.0, 0.0, 0.0};
     return (vec3){vec.x / dist, vec.y / dist, vec.z / dist};
 }

@@ -23,7 +23,7 @@ void chunk_insert_rtx_triangle(chunk_t *chunk, rtx_triangle *triangle);
 void chunk_insert_rtx_triangle_lod(chunk_t *chunk, size_t lod,
 rtx_triangle *triangle);
 
-chunk_lod_t chunk_lod_create(void);
+chunk_lod_t chunk_lod_create(chunk_t *par);
 void chunk_lod_destroy(chunk_lod_t lod);
 void chunk_lod_insert_rtx_triangle(chunk_lod_t *lod, rtx_triangle *triangle);
 

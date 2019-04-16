@@ -9,7 +9,7 @@
 
 static int is_float_in_0_1(float value)
 {
-    float laxistness = 0.1f;
+    float laxistness = 0.01f;
 
     return (value >= -laxistness) && (value <= 1.0f + (laxistness));
 }

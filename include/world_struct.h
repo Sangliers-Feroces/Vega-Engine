@@ -11,7 +11,7 @@
 #define WORLD_LOD_MAX (WORLD_LOD_COUNT - 1)
 #define CHUNK_SIZE 128.0f
 #define CHUNK_GEN_ITER 6
-#define CHUNK_LOAD_DISTANCE 4
+#define CHUNK_LOAD_DISTANCE 16
 
 typedef struct {
     octree *tree;
@@ -32,6 +32,7 @@ typedef struct {
     chunk_lod_t lod[WORLD_LOD_COUNT];
     size_t world_ndx;
     chunk_border_t border;
+    bounds3 bounds;
 } chunk_t;
 
 typedef struct {

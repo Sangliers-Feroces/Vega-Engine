@@ -9,6 +9,7 @@
 #define _RTX_H
 
 int is_ray_in_bounds(ray3 ray, bounds3 bounds);
+int is_ray_in_bounds_seg(ray3 ray, bounds3 bounds);
 
 rtx_triangle* rtx_triangle_create(vec3 *triangle);
 rtx_triangle* rtx_triangle_create_param(vec3 *triangle, int alloc_lightmap);
