@@ -17,24 +17,27 @@ static inter_ray3 world_inter(demo_t *demo, ray3 ray)
     return inter;
 }
 
-static void check_col(demo_t *demo, vec3 pos, vec3 *speed)
+static int check_col(demo_t *demo, vec3 pos, vec3 *speed, vec3 *avg_norm)
 {
     inter_ray3 inter = world_inter(demo, (ray3){pos, *speed});
     vec3 p_in;
     vec3 up = {0.0f, 1.0f, 0.0f};
+    vec3 normal;
 
     if (inter.triangle == NULL)
-        return;
+        return 0;
     if (inter.min_t > 1.0f)
-        return;
+        return 0;
     p_in = vec3_add(pos, *speed);
+    normal = vec3_dot(inter.triangle->normal, up) > 0.75f ?
+    up : inter.triangle->normal;
     inter = rtx_triangle_intersect_ray_no_cull(inter.triangle,
-    (ray3){p_in, vec3_dot(inter.triangle->normal, up) > 0.5f ?
-    up : inter.triangle->normal});
+    (ray3){p_in, normal});
     if (inter.triangle == NULL)
-        return;
+        return 0;
     *speed = vec3_add(*speed, vec3_muls(vec3_sub(inter.p, p_in), 1.0f));
-    *speed = vec3_add(*speed, vec3_muls(vec3_normalize(vec3_sub(inter.p, p_in)), 0.005f));
+    *avg_norm = normal;
+    return 1;
 }
 
 static void slow_player_down(demo_t *demo)
@@ -54,10 +57,22 @@ static void cap_player_speed(vec3 *speed)
     }
 }
 
+static void apply_disp(demo_t *demo, vec3 disp)
+{
+    inter_ray3 inter = world_inter(demo, (ray3){demo->player.pos, disp});
+
+    if ((inter.triangle == NULL) || (inter.min_t > 1.0f)) {
+        demo->player.pos = vec3_add(demo->player.pos, disp);
+        return;
+    }
+    demo->player.pos = vec3_add(inter.p, vec3_muls(vec3_normalize(disp), -0.02f));
+}
+
 void player_physics(demo_t *demo)
 {
     vec3 speed_frame;
     vec3 old_speed;
+    vec3 norm = {0.0, 0.0, 0.0};
 
     if (demo->player.is_grounded)
         slow_player_down(demo);
@@ -67,8 +82,10 @@ void player_physics(demo_t *demo)
     speed_frame = vec3_muls(demo->player.speed, demo->win.framelen);
     old_speed = speed_frame;
     for (size_t i = 0; i < 4; i++)
-        check_col(demo, demo->player.pos, &speed_frame);
-    demo->player.pos = vec3_add(demo->player.pos, speed_frame);
+        if (!check_col(demo, demo->player.pos, &speed_frame, &norm))
+            break;
+    vec3 disp = vec3_add(speed_frame, vec3_muls(vec3_normalize(norm), 0.02f));
+    apply_disp(demo, disp);
     demo->player.is_grounded = old_speed.y < speed_frame.y;
     demo->player.speed = vec3_divs(speed_frame, demo->win.framelen);
     demo->cam.pos = vec3_add(demo->player.pos, (vec3){0.0f, 1.75f, 0.0f});

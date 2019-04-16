@@ -49,9 +49,9 @@ static void chunk_render(chunk_t *chunk)
     chunk->pos.y * CHUNK_SIZE + CHUNK_SIZE / 2.0f},
     (vec2){_demo->cam.pos.x, _demo->cam.pos.z});
 
-    if (dist < 400.0f)
+    if (dist < 1500.0f)
         chunk_lod_render(&chunk->lod[2]);
-    else if (dist < 1200.0f)
+    else if (dist < 3000.0f)
         chunk_lod_render(&chunk->lod[1]);
     else
         chunk_lod_render(&chunk->lod[0]);

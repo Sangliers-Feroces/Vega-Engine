@@ -9,7 +9,7 @@
 
 #define WORLD_LOD_COUNT 3
 #define WORLD_LOD_MAX (WORLD_LOD_COUNT - 1)
-#define CHUNK_SIZE 128.0f
+#define CHUNK_SIZE 1024.0f
 #define CHUNK_GEN_ITER 6
 #define CHUNK_LOAD_DISTANCE 8
 
