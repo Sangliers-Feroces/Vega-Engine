@@ -56,7 +56,7 @@ void octree_destroy(octree **root)
     for (size_t i = 0; i < 8; i++)
         if ((*root)->sub[i] != NULL)
             octree_destroy(&((*root)->sub[i]));
-    vec_rtx_triangle_destroy((*root)->triangles);
+    vec_rtx_triangle_destroy(&(*root)->triangles);
     free(*root);
     *root = NULL;
 }

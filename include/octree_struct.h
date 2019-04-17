@@ -8,6 +8,12 @@
 #ifndef _OCTREE_STRUCT_H
 #define _OCTREE_STRUCT_H
 
+typedef struct vec_rtx_triangle vec_rtx_triangle;
+typedef struct {
+    struct vec_rtx_triangle *vec;
+    size_t ndx;
+} vec_rtx_triangle_ref;
+
 /* type used for raytracing structure */
 typedef struct {
     dvec3 vertex[3];
@@ -17,15 +23,16 @@ typedef struct {
     dvec3 tangent;              /* are very key to create tangent space */
     dvec3 bitangent;            /* and then to make lights rays bounce  */
     material_t material;
+    vec_rtx_triangle_ref ref;
     int data;
 } rtx_triangle;
 
 /* another std::vector */
-typedef struct {
+struct vec_rtx_triangle {
     size_t count;
     size_t allocated;
     rtx_triangle **triangle;
-} vec_rtx_triangle;
+};
 
 /* used to define an octree node space */
 typedef struct {

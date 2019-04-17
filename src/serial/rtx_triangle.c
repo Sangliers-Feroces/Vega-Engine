@@ -23,6 +23,7 @@ rtx_triangle* rtx_triangle_create(dvec3 *triangle)
     res->lightmap = texture2f_binding_create(triangle);
     res->albelo = texture2_binding_create(triangle);
     res->material = MATERIAL_GRASS;
+    res->ref = vec_rtx_triangle_ref_null();
     rtx_triangle_update_tangent(res);
     return (res);
 }
@@ -41,6 +42,7 @@ rtx_triangle* rtx_triangle_create_param(dvec3 *triangle, int alloc_lightmap)
     }
     res->albelo = texture2_binding_create(triangle);
     res->material = MATERIAL_GRASS;
+    res->ref = vec_rtx_triangle_ref_null();
     rtx_triangle_update_tangent(res);
     return (res);
 }
@@ -55,6 +57,16 @@ rtx_triangle* rtx_triangle_create_discrete(dvec3 a, dvec3 b, dvec3 c)
 
 void rtx_triangle_destroy(rtx_triangle *triangle)
 {
+    vec_rtx_triangle *ref_vec;
+
+    if (triangle->ref.vec != NULL) {
+        ref_vec = triangle->ref.vec;
+        ref_vec->triangle[triangle->ref.ndx] =
+        ref_vec->triangle[--ref_vec->count];
+        if ((ref_vec->count > 0) &&
+        (ref_vec->triangle[triangle->ref.ndx]->ref.vec == ref_vec))
+            ref_vec->triangle[triangle->ref.ndx]->ref.ndx = triangle->ref.ndx;
+    }
     texture2f_binding_free(triangle->lightmap);
     free(triangle);
 }
