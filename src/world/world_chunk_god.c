@@ -30,7 +30,7 @@ static void try_load_chunk(demo_t *demo, ssize2 pos)
         world_chunk_get(demo, pos);
 }
 
-static ssize2 get_chunk_cam(vec3 pos)
+static ssize2 get_chunk_cam(dvec3 pos)
 {
     ssize2 res;
 

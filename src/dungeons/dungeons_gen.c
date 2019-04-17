@@ -7,7 +7,7 @@
 
 #include "headers.h"
 
-static vec3 g_vertex_buffer_data[][3] = {
+static dvec3 g_vertex_buffer_data[][3] = {
     {{-1.0f,-1.0f,-1.0f},
     {-1.0f,-1.0f, 1.0f},
     {-1.0f, 1.0f, 1.0f}},
@@ -46,9 +46,9 @@ static vec3 g_vertex_buffer_data[][3] = {
     {1.0f,-1.0f, 1.0f}}
 };
 
-static vec3 dungeon_point_scaling(vec3 point, int scaling_x, int scaling_y, int scaling_z)
+static dvec3 dungeon_point_scaling(dvec3 point, int scaling_x, int scaling_y, int scaling_z)
 {
-    vec3 res = (vec3){point.x, point.y, point.z};
+    dvec3 res = (dvec3){point.x, point.y, point.z};
 
     if (res.x > _dungeons.cur_origin.x)
         res.x += scaling_x;
@@ -64,13 +64,12 @@ static void dungeon_insert_in_world(demo_t *demo, vec_rtx_triangle *rooms, int n
     for (int i = 0; i < nb_rooms; i++) {
         world_insert_vec_rtx_triangle(demo, rooms[i]);
     }
-    _lightmaps.aperture = octree_light_rtx(demo->tree, 2);
 }
 
 static vec_rtx_triangle dungeons_gen_room(void)
 {
     vec_rtx_triangle room = vec_rtx_triangle_create();
-    vec3 cur_triangle[3];
+    dvec3 cur_triangle[3];
 
     dungeons_set_next_origin();
     for (int i = 0; i < 12; i++) {

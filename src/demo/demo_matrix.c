@@ -28,7 +28,7 @@ static void send_matrix(gluint program, mat4 vp)
 
 void refresh_vp(demo_t *demo, gluint program)
 {
-    proj_t proj_struct = {0.1f, 4094.0f, 90.0f, 16.0f / 9.0f};
+    proj_t proj_struct = {0.1f, 4094.0f * 4.0f, 90.0f, 16.0f / 9.0f};
     proj_t ortho_struct = proj_struct;
 
     ortho_struct.fov_w = 10.0f;

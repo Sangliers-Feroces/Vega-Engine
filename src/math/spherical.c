@@ -7,22 +7,22 @@
 
 #include "headers.h"
 
-vec3 spherical_to_cartesian_z(vec3 spherical)
+dvec3 spherical_to_cartesian_z(dvec3 spherical)
 {
-    vec3 res;
+    dvec3 res;
 
-    res.x = -sinf(spherical.y) * cosf(spherical.x);
-    res.z = cosf(spherical.y) * cosf(spherical.x);
-    res.y = sinf(spherical.x);
+    res.x = -sin(spherical.y) * cos(spherical.x);
+    res.z = cos(spherical.y) * cos(spherical.x);
+    res.y = sin(spherical.x);
     return res;
 }
 
-vec3 spherical_to_cartesian_z_to_x(vec3 spherical)
+dvec3 spherical_to_cartesian_z_to_x(dvec3 spherical)
 {
-    vec3 res;
+    dvec3 res;
 
-    res.x = -sinf(spherical.y - M_PI_2);
-    res.z = cosf(spherical.y - M_PI_2);
+    res.x = -sin(spherical.y - M_PI_2);
+    res.z = cos(spherical.y - M_PI_2);
     res.y = 0.0;
     return res;
 }

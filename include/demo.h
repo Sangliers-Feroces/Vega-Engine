@@ -8,7 +8,7 @@
 #ifndef _DEMO_H
 #define _DEMO_H
 
-#define CAM_MOVE 64.0f
+#define CAM_MOVE 256.0f
 #define PLAYER_MOVE 7.0f
 #define PLAYER_MAX_SPEED 10.0f
 

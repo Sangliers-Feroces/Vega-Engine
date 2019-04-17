@@ -7,12 +7,12 @@
 
 #include "headers.h"
 
-static void select_point(demo_t *demo, vec3 p, int do_xor)
+static void select_point(demo_t *demo, dvec3 p, int do_xor)
 {
     int has_found = 0;
 
     for (size_t i = 0; i < demo->editor.selections.count; i++)
-        if (vec3_eq(demo->editor.selections.selection[i], p))
+        if (dvec3_eq(demo->editor.selections.selection[i], p))
             has_found = 1;
     if (has_found) {
         if (do_xor)
@@ -24,12 +24,12 @@ static void select_point(demo_t *demo, vec3 p, int do_xor)
 
 static void select_point_triangle(demo_t *demo, inter_ray3 inter)
 {
-    vec3 nearest;
-    float dist = FLT_INF;
-    float dist_cur;
+    dvec3 nearest;
+    double dist = FLT64_INF;
+    double dist_cur;
 
     for (size_t i = 0; i < 3; i++) {
-        dist_cur = vec3_dist(inter.p, inter.triangle->vertex[i]);
+        dist_cur = dvec3_dist(inter.p, inter.triangle->vertex[i]);
         if (dist_cur < dist) {
             nearest = inter.triangle->vertex[i];
             dist = dist_cur;

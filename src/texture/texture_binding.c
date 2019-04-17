@@ -7,7 +7,7 @@
 
 #include "headers.h"
 
-texture2_binding texture2_binding_create(vec3 *triangle)
+texture2_binding texture2_binding_create(dvec3 *triangle)
 {
     texture2_binding res = {_iu.textures[IUTEX_TERRAIN],
     {{0.0f, 0.0f}, {1.0f, 0.0f}, {0.0f, 1.0f}}};

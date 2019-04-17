@@ -27,18 +27,7 @@ void rtx_triangle_uv(rtx_triangle *triangle)
     uv_vec2(triangle->albelo.uv);
 }
 
-static void uv_rec(demo_t *demo, octree *tree)
-{
-    if (tree == NULL)
-        return;
-    for (size_t i = 0; i < 8; i++)
-        uv_rec(demo, tree->sub[i]);
-    for (size_t i = 0; i < tree->triangles.count; i++)
-        if (rtx_triangle_is_selected(demo, tree->triangles.triangle[i]))
-            rtx_triangle_uv(tree->triangles.triangle[i]);
-}
-
 void editor_uv(demo_t *demo)
 {
-    uv_rec(demo, demo->tree);
+    (void)demo;
 }

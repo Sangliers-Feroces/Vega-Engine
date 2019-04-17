@@ -10,10 +10,10 @@
 void entity_refresh(entity_t * entity)
 {
     for (size_t i = 0; i < entity->model->vertex_count; i++) {
-        entity->vertex[i].pos = mat4_mul_vec3(entity->trans,
+        /*entity->vertex[i].pos = mat4_mul_dvec3(entity->trans,
         entity->model->vertex[i].pos);
-        entity->vertex[i].normal = mat4_mul_vec3(entity->rot_mat,
-        entity->model->vertex[i].normal);
+        entity->vertex[i].normal = mat4_mul_dvec3(entity->rot_mat,
+        entity->model->vertex[i].normal);*/
     }
 }
 

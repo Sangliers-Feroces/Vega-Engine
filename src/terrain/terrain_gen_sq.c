@@ -24,13 +24,13 @@ terrain_search_t search)
 {
     if (candidate->data)
         return;
-    if (!(vec3_eq(candidate->vertex[1], search.vertex[2]) &&
-    vec3_eq(candidate->vertex[2], search.vertex[1])))
+    if (!(dvec3_eq(candidate->vertex[1], search.vertex[2]) &&
+    dvec3_eq(candidate->vertex[2], search.vertex[1])))
         return;
     octree_add_triangle_no_lightmap(dst,
-    (vec3[]){search.mid, candidate->vertex[0], candidate->vertex[1]});
+    (dvec3[]){search.mid, candidate->vertex[0], candidate->vertex[1]});
     octree_add_triangle_no_lightmap(dst,
-    (vec3[]){search.mid, candidate->vertex[2], candidate->vertex[0]});
+    (dvec3[]){search.mid, candidate->vertex[2], candidate->vertex[0]});
     candidate->data = 1;
 }
 
@@ -48,20 +48,20 @@ terrain_search_t search)
 void terrain_sub_triangle2(rtx_triangle *triangle, octree *root, octree **dst,
 float strengh)
 {
-    vec3 mid;
+    dvec3 mid;
     float dist;
 
     if (triangle->data)
         return;
-    mid = vec3_add(triangle->vertex[1], triangle->vertex[2]);
-    mid = vec3_divs(mid, 2.0f);
-    dist = vec3_dist(triangle->vertex[1], triangle->vertex[2]);
-    mid = vec3_add(mid, vec3_muls(triangle->normal,
+    mid = dvec3_add(triangle->vertex[1], triangle->vertex[2]);
+    mid = dvec3_divs(mid, 2.0f);
+    dist = dvec3_dist(triangle->vertex[1], triangle->vertex[2]);
+    mid = dvec3_add(mid, dvec3_muls(triangle->normal,
     (randf() - 0.5f) * dist * strengh));
     octree_add_triangle_no_lightmap(dst,
-    (vec3[]){mid, triangle->vertex[0], triangle->vertex[1]});
+    (dvec3[]){mid, triangle->vertex[0], triangle->vertex[1]});
     octree_add_triangle_no_lightmap(dst,
-    (vec3[]){mid, triangle->vertex[2], triangle->vertex[0]});
+    (dvec3[]){mid, triangle->vertex[2], triangle->vertex[0]});
     triangle->data = 1;
     terrain_search_other(root, dst,
     (terrain_search_t){triangle->vertex, mid});

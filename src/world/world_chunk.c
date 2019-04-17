@@ -49,11 +49,11 @@ chunk_t* chunk_create(ssize2 pos)
     res->pos = pos;
     res->lod_count = WORLD_LOD_COUNT;
     for (size_t i = 0; i < res->lod_count; i++)
-        res->lod[i] = chunk_lod_create();
+        res->lod[i] = chunk_lod_create(res);
     res->world_ndx = ~0ULL;
+    chunk_gen_terrain(res);
     world_chunk2d_insert(_demo, res);
     world_chunk_add(_demo, res);
-    chunk_gen_terrain(res);
     return res;
 }
 
@@ -87,7 +87,7 @@ chunk_t* world_chunk_get(demo_t *demo, ssize2 pos)
     return chunk_create(pos);
 }
 
-chunk_t* world_chunk_get_by_pos(demo_t *demo, vec3 pos)
+chunk_t* world_chunk_get_by_pos(demo_t *demo, dvec3 pos)
 {
     return world_chunk_get(demo,
     (ssize2){pos.x / CHUNK_SIZE, pos.z / CHUNK_SIZE});

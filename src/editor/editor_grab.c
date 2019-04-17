@@ -11,7 +11,7 @@ static model_editor_t get_grabber_hover(demo_t *demo)
 {
     inter_ray3_ent inter;
     model_editor_t res = MODEL_EDITOR_MAX;
-    float min_t = FLT_INF;
+    double min_t = FLT64_INF;
 
     for (size_t i = 0; i < 3; i++) {
         inter = entity_intersect(demo->editor.grabber_ent[i], demo->mouse.ray);
@@ -28,37 +28,37 @@ static model_editor_t get_grabber_hover(demo_t *demo)
 void editor_grab(demo_t *demo)
 {
     demo->editor.grabbed = get_grabber_hover(demo);
-    demo->editor.grab_delta = (vec3){0.0f, 0.0f, 0.0f};
+    demo->editor.grab_delta = (dvec3){0.0f, 0.0f, 0.0f};
     demo->editor.grab_first = editor_grab_get_proj(demo);
     demo->editor.grab_now =  demo->editor.grab_first;
 }
 
-static vec3 editor_grab_get_proj_ext(demo_t *demo, inter_ray3_ent *inter)
+static dvec3 editor_grab_get_proj_ext(demo_t *demo, inter_ray3_ent *inter)
 {
     switch (demo->editor.grabbed) {
     case MODEL_EDITOR_Y:
         vertex_intersect_ray_no_cull(demo->editor.grabber_ent[1]->vertex,
         demo->mouse.ray, inter, 1);
-        return (vec3){0.0f, inter->p.y, 0.0f};
+        return (dvec3){0.0f, inter->p.y, 0.0f};
     case MODEL_EDITOR_Z:
         vertex_intersect_ray_no_cull(demo->editor.grabber_ent[2]->vertex,
         demo->mouse.ray, inter, 1);
-        return (vec3){0.0f, 0.0f, inter->p.z};
+        return (dvec3){0.0f, 0.0f, inter->p.z};
     default:
         return demo->editor.grab_first;
     }
 }
 
-vec3 editor_grab_get_proj(demo_t *demo)
+dvec3 editor_grab_get_proj(demo_t *demo)
 {
     inter_ray3_ent inter = {NULL, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, 0.0f};
-    vec3 res;
+    dvec3 res;
 
     switch (demo->editor.grabbed) {
     case MODEL_EDITOR_X:
         vertex_intersect_ray_no_cull(demo->editor.grabber_ent[0]->vertex,
         demo->mouse.ray, &inter, 1);
-        res = (vec3){inter.p.x, 0.0f, 0.0f};
+        res = (dvec3){inter.p.x, 0.0f, 0.0f};
         break;
     default:
         res = editor_grab_get_proj_ext(demo, &inter);
@@ -70,5 +70,5 @@ void editor_grab_update_delta(demo_t *demo)
 {
     demo->editor.grab_now = editor_grab_get_proj(demo);
     demo->editor.grab_delta =
-    vec3_sub(demo->editor.grab_now, demo->editor.grab_first);
+    dvec3_sub(demo->editor.grab_now, demo->editor.grab_first);
 }

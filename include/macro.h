@@ -13,10 +13,17 @@
 
 #define CLAMP(value, min, max) (MIN(MAX((value), (min)), (max)))
 
-#define FLT_INF (*((float*)(uint32_t[]){0x7F800000}))
+#define FLT32_INF (*((float*)(uint32_t[]){0x7F800000}))
 
-#define INT_BITS_TO_FLOAT(value) (*((float*)(int32_t[]){value}))
-#define FLOAT_BITS_TO_INT(value) (*((int32_t*)(float[]){value}))
+#define INT_BITS_TO_FLOAT32(value) (*((float*)(int32_t[]){value}))
+#define FLOAT32_BITS_TO_INT(value) (*((int32_t*)(float[]){value}))
+
+
+#define FLT64_INF (*((double*)(uint64_t[]){0x7FF0000000000000}))
+
+#define INT_BITS_TO_FLOAT64(value) (*((double*)(int64_t[]){value}))
+#define FLOAT64_BITS_TO_INT(value) (*((int64_t*)(double[]){value}))
+
 
 #define BUFFER_OFFSET(i) ((void*)i)
 #endif

@@ -9,16 +9,16 @@
 
 static void init_cam(demo_t *demo)
 {
-    demo->cam.pos = (vec3){0.0f, 0.0f, -5.0f};
-    demo->cam.rot = (vec3){0.0f, 0.0f, 0.0f};
+    demo->cam.pos = (dvec3){0.0f, 0.0f, -5.0f};
+    demo->cam.rot = (dvec3){0.0f, 0.0f, 0.0f};
     demo->cam.ratiowh = (long double)demo->win.w / (long double)demo->win.h;
     demo->cam.fovw = M_PI / 2.0f;
     demo->cam.near = 1.0L;
     demo->cam.proj = PROJ_TYPE_PERSPECTIVE;
     demo->player.is_grounded = 0;
     demo->player.state = GAME_EDITOR;
-    demo->player.pos = (vec3){0.0f, 0.0f, 0.0f};
-    demo->player.speed = (vec3){0.0f, 0.0f, 0.0f};
+    demo->player.pos = (dvec3){0.0f, 0.0f, 0.0f};
+    demo->player.speed = (dvec3){0.0f, 0.0f, 0.0f};
     demo_set_cam_to_origin(demo);
 }
 
@@ -63,9 +63,8 @@ demo_t* demo_init(void)
     _demo = res;
     init_win(res);
     init_cam(res);
-    res->tree = octree_create(NULL);
     init();
-    _dungeons.cur_origin = (vec3){0, 0, 0};
+    _dungeons.cur_origin = (dvec3){0, 0, 0};
     iu_init(res);
     demo_get_texture_pannel(res);
     editor_init(res);
@@ -78,7 +77,6 @@ void demo_quit(demo_t *demo)
 {
     world_quit(demo);
     editor_quit(demo);
-    octree_destroy(&demo->tree);
     demo_texture_destroy(demo);
     gl_delete(demo);
     iu_quit();

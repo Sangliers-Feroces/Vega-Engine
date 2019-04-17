@@ -16,23 +16,23 @@ ray3 demo_get_ray(demo_t *demo)
 
     ratiox = (long double)pos.x / (long double)(demo->win.w - 1);
     ratioy = (long double)pos.y / (long double)(demo->win.h - 1);
-    return (ray3){demo->cam.pos, vec3_normalize(
-    vec3_interpolate(vec3_interpolate(port.tl, port.tr, ratiox),
-    vec3_interpolate(port.bl, port.br, ratiox), ratioy))};
+    return (ray3){demo->cam.pos, dvec3_normalize(
+    dvec3_interpolate(dvec3_interpolate(port.tl, port.tr, ratiox),
+    dvec3_interpolate(port.bl, port.br, ratiox), ratioy))};
 }
 
 void demo_refresh_viewport(demo_t *demo)
 {
     ray_viewport_t fin;
-    vec3 res = {-demo->cam.ratiowh, 1.0f, 1.0f};
+    dvec3 res = {-demo->cam.ratiowh, 1.0f, 1.0f};
     mat4 rot;
 
     fin.tl = res;
-    fin.tr = (vec3){-res.x, res.y, res.z};
-    fin.bl = (vec3){res.x, -res.y, res.z};
-    fin.br = (vec3){-res.x, -res.y, res.z};
+    fin.tr = (dvec3){-res.x, res.y, res.z};
+    fin.bl = (dvec3){res.x, -res.y, res.z};
+    fin.br = (dvec3){-res.x, -res.y, res.z};
     mat4_rot_xy(demo->cam.rot, rot);
     for (size_t i = 0; i < 4; i++)
-        (&fin.tl)[i] = mat4_mul_vec3(rot, (&fin.tl)[i]);
+        (&fin.tl)[i] = mat4_mul_dvec3(rot, (&fin.tl)[i]);
     demo->cam.viewport = fin;
 }

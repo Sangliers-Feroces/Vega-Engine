@@ -31,8 +31,9 @@ void rtx_triangle_update(rtx_triangle *triangle)
 
 void rtx_triangle_replace(demo_t *demo, octree *node, rtx_triangle *triangle)
 {
+    (void)demo;
     octree_rtx_triangle_detach(node, triangle);
-    octree_insert_triangle(&demo->tree, triangle);
+    //octree_insert_triangle(&demo->tree, triangle);
 }
 
 void rtx_triangle_update_tangent(rtx_triangle *triangle)
@@ -40,13 +41,13 @@ void rtx_triangle_update_tangent(rtx_triangle *triangle)
     triangle->normal =
     normal3(triangle->vertex[0], triangle->vertex[1], triangle->vertex[2]);
     triangle->tangent =
-    vec3_normalize(vec3_sub(triangle->vertex[1], triangle->vertex[0]));
-    triangle->bitangent = normal3((vec3){0.0f, 0.0f, 0.0f},
+    dvec3_normalize(dvec3_sub(triangle->vertex[1], triangle->vertex[0]));
+    triangle->bitangent = normal3((dvec3){0.0f, 0.0f, 0.0f},
     triangle->tangent, triangle->normal);
     triangle->data = 0;
 }
 
-rtx_triangle* rtx_triangle_create_no_lightmap(vec3 *triangle)
+rtx_triangle* rtx_triangle_create_no_lightmap(dvec3 *triangle)
 {
     rtx_triangle *res = (rtx_triangle*)malloc_safe(sizeof(rtx_triangle));
 

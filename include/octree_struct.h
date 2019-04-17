@@ -10,12 +10,12 @@
 
 /* type used for raytracing structure */
 typedef struct {
-    vec3 vertex[3];
+    dvec3 vertex[3];
     texture2f_binding lightmap;
     texture2_binding albelo;
-    vec3 normal;               /* normal + tangent + bitangent         */
-    vec3 tangent;              /* are very key to create tangent space */
-    vec3 bitangent;            /* and then to make lights rays bounce  */
+    dvec3 normal;               /* normal + tangent + bitangent         */
+    dvec3 tangent;              /* are very key to create tangent space */
+    dvec3 bitangent;            /* and then to make lights rays bounce  */
     int data;
 } rtx_triangle;
 
@@ -28,9 +28,9 @@ typedef struct {
 
 /* used to define an octree node space */
 typedef struct {
-    vec3 min;       /* these two vectors actually describe */
-    vec3 max;       /* a cube in 3D space                  */
-    float size;     /* -> cube size */
+    dvec3 min;       /* these two vectors actually describe */
+    dvec3 max;       /* a cube in 3D space                  */
+    double size;     /* -> cube size */
 } bounds3;
 
 struct octree_s {
@@ -45,9 +45,9 @@ typedef struct octree_s octree;
 
 typedef struct {
     rtx_triangle *triangle;
-    vec3 p;
-    vec3 bar;
-    float min_t;
+    dvec3 p;
+    dvec3 bar;
+    double min_t;
 } inter_ray3;
 
 typedef struct {
@@ -57,7 +57,7 @@ typedef struct {
 } gpu_serial_t;
 
 typedef struct {
-    vec3 point;
+    dvec3 point;
     vec2 uv;
     vec2 uv_albedo;
 } vertext_array_t;
@@ -87,9 +87,9 @@ typedef struct {
 } model_t;
 
 typedef struct {
-    vec3 pos;
-    vec3 scale;
-    vec3 rot;
+    dvec3 pos;
+    dvec3 scale;
+    dvec3 rot;
     mat4 trans;
     mat4 rot_mat;
     model_t *model;
@@ -98,14 +98,14 @@ typedef struct {
 
 typedef struct {
     vertex_t *vertex;
-    vec3 p;
-    vec3 bar;
-    float min_t;
+    dvec3 p;
+    dvec3 bar;
+    double min_t;
 } inter_ray3_ent;
 
 typedef struct {
-    vec3 *vertex;
-    vec3 mid;
+    dvec3 *vertex;
+    dvec3 mid;
 } terrain_search_t;
 
 #endif

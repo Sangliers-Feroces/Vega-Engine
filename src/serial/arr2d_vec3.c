@@ -7,40 +7,40 @@
 
 #include "headers.h"
 
-arr2d_vec3_t arr2d_vec3_create(size_t w, size_t h)
+arr2d_dvec3_t arr2d_dvec3_create(size_t w, size_t h)
 {
-    arr2d_vec3_t res;
+    arr2d_dvec3_t res;
 
     res.w = w;
     res.h = h;
-    res.vec3 = (vec3*)malloc_safe(res.w * res.h * sizeof(vec3));
+    res.dvec3 = (dvec3*)malloc_safe(res.w * res.h * sizeof(dvec3));
     return res;
 }
 
-void arr2d_vec3_destroy(arr2d_vec3_t arr)
+void arr2d_dvec3_destroy(arr2d_dvec3_t arr)
 {
-    free(arr.vec3);
+    free(arr.dvec3);
 }
 
-arr_vec3_t arr_vec3_create(size_t count)
+arr_dvec3_t arr_dvec3_create(size_t count)
 {
-    arr_vec3_t res;
+    arr_dvec3_t res;
 
     res.count = count;
-    res.vec3 = (vec3*)malloc_safe(res.count * sizeof(vec3));
+    res.dvec3 = (dvec3*)malloc_safe(res.count * sizeof(dvec3));
     return res;
 }
 
-void arr_vec3_destroy(arr_vec3_t arr)
+void arr_dvec3_destroy(arr_dvec3_t arr)
 {
-    free(arr.vec3);
+    free(arr.dvec3);
 }
 
 void chunk_border_destroy(chunk_border_t border)
 {
     for (size_t i = 0; i < CHUNK_GEN_ITER; i++)
         for (size_t j = 0; j < 2; j++) {
-            arr_vec3_destroy(border.hor[i][j]);
-            arr_vec3_destroy(border.ver[i][j]);
+            arr_dvec3_destroy(border.hor[i][j]);
+            arr_dvec3_destroy(border.ver[i][j]);
         }
 }

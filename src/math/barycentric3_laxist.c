@@ -9,20 +9,20 @@
 
 static int is_float_in_0_1(float value)
 {
-    float laxistness = 0.1f;
+    float laxistness = 0.01f;
 
     return (value >= -laxistness) && (value <= 1.0f + (laxistness));
 }
 
-int is_point_in_triangle_laxist(vec3 p, vec3 *triangle)
+int is_point_in_triangle_laxist(dvec3 p, dvec3 *triangle)
 {
-    vec3 bar = barycentric3(p, triangle);
+    dvec3 bar = barycentric3(p, triangle);
 
     return (is_float_in_0_1(bar.x) && is_float_in_0_1(bar.y) &&
     is_float_in_0_1(bar.z));
 }
 
-int is_barycentric_valid_laxist(vec3 bar)
+int is_barycentric_valid_laxist(dvec3 bar)
 {
     return (is_float_in_0_1(bar.x) && is_float_in_0_1(bar.y) &&
     is_float_in_0_1(bar.z));

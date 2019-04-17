@@ -8,8 +8,8 @@
 #ifndef _TERRAIN_H
 #define _TERRAIN_H
 
-rtx_triangle* octree_add_triangle(octree **tree, vec3 *triangle);
-rtx_triangle* octree_add_triangle_no_lightmap(octree **tree, vec3 *triangle);
+rtx_triangle* octree_add_triangle(octree **tree, dvec3 *triangle);
+rtx_triangle* octree_add_triangle_no_lightmap(octree **tree, dvec3 *triangle);
 void terrain_gen(demo_t *demo, float size, size_t iter, float strengh);
 
 

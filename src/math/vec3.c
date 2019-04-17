@@ -7,27 +7,27 @@
 
 #include "headers.h"
 
-vec3 vec3_add(vec3 a, vec3 b)
+dvec3 dvec3_add(dvec3 a, dvec3 b)
 {
-    return (vec3){a.x + b.x, a.y + b.y, a.z + b.z};
+    return (dvec3){a.x + b.x, a.y + b.y, a.z + b.z};
 }
 
-vec3 vec3_sub(vec3 a, vec3 b)
+dvec3 dvec3_sub(dvec3 a, dvec3 b)
 {
-    return (vec3){a.x - b.x, a.y - b.y, a.z - b.z};
+    return (dvec3){a.x - b.x, a.y - b.y, a.z - b.z};
 }
 
-vec3 vec3_muls(vec3 vec, float value)
+dvec3 dvec3_muls(dvec3 vec, float value)
 {
-    return (vec3){vec.x * value, vec.y * value, vec.z * value};
+    return (dvec3){vec.x * value, vec.y * value, vec.z * value};
 }
 
-vec3 vec3_divs(vec3 vec, float value)
+dvec3 dvec3_divs(dvec3 vec, float value)
 {
-    return (vec3){vec.x / value, vec.y / value, vec.z / value};
+    return (dvec3){vec.x / value, vec.y / value, vec.z / value};
 }
 
-int vec3_eq(vec3 a, vec3 b)
+int dvec3_eq(dvec3 a, dvec3 b)
 {
     return (a.x == b.x) && (a.y == b.y) && (a.z == b.z);
 }

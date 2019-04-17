@@ -39,8 +39,8 @@ typedef struct {
 } win_t;
 
 typedef struct {
-    vec3 pos;
-    vec3 rot;
+    dvec3 pos;
+    dvec3 rot;
     long double fovw;
     long double ratiowh;
     long double near;
@@ -75,15 +75,15 @@ typedef enum {
 
 typedef struct {
     game_state_t state;
-    vec3 pos;
-    vec3 speed;
+    dvec3 pos;
+    dvec3 speed;
     int is_grounded;
 } player_t;
 
 typedef struct {
     size_t count;
     size_t allocated;
-    vec3 *selection;
+    dvec3 *selection;
 } vec_selection_t;
 
 typedef struct {
@@ -91,10 +91,10 @@ typedef struct {
     model_t *model[MODEL_EDITOR_MAX];
     gluint shader;
     glint mvp;
-    vec3 grab;
-    vec3 grab_first;
-    vec3 grab_now;
-    vec3 grab_delta;
+    dvec3 grab;
+    dvec3 grab_first;
+    dvec3 grab_now;
+    dvec3 grab_delta;
     model_editor_t grabbed;
     entity_t *grabber_ent[3];
     int is_wireframe;
@@ -109,7 +109,6 @@ typedef struct {
     win_t win;
     cam_t cam;
     input_t input;
-    octree *tree;
     world_t world;
     mouse_t mouse;
     player_t player;

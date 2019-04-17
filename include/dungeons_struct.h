@@ -19,7 +19,7 @@ typedef struct {
     float offset_rooms;
     gluint program;
     gluint vertex_buffer;
-    vec3 cur_origin;
+    dvec3 cur_origin;
     dungeons_next_pos_t next_pos;
 
 } dungeons_t;

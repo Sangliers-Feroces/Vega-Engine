@@ -15,10 +15,21 @@ typedef struct {
 } vec2;
 
 typedef struct {
+    double x;
+    double y;
+} dvec2;
+
+typedef struct {
     float x;
     float y;
     float z;
 } vec3;
+
+typedef struct {
+    double x;
+    double y;
+    double z;
+} dvec3;
 
 typedef struct {
     float x;
@@ -47,12 +58,12 @@ typedef float mat4[4][4];
 typedef struct {
     size_t w;
     size_t h;
-    vec3 *vec3;
-} arr2d_vec3_t;
+    dvec3 *dvec3;
+} arr2d_dvec3_t;
 
 typedef struct {
     size_t count;
-    vec3 *vec3;
-} arr_vec3_t;
+    dvec3 *dvec3;
+} arr_dvec3_t;
 
 #endif
