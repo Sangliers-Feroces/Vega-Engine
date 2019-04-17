@@ -20,5 +20,6 @@ void main(void)
 	vec3 light = texture(tex_lightmap, uv_lightmap).xyz + blue;
 
     light = vec3(max(0.0, dot(normal, l_dir)));
-	color = vec4(light * texture(tex_albedo, uv_albedo).xyz, 1.0);
+    float ff = pos.y < -42.0 ? (1.0 - min(1.0, (-pos.y - 42.0) / 40.0)) * 0.6 + 0.1 : 1.0;
+	color = vec4(light * texture(tex_albedo, uv_albedo).xyz * vec3(ff, ff, 1.0), 1.0);
 }
