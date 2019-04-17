@@ -9,6 +9,7 @@
 
 void menu_init(menu_t *menu)
 {
+    menu->choosen_res = LIST_RES_1600_900;
     menu->edited_setting = 0;
     menu->first_save = 0;
     menu->state = -1;

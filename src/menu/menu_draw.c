@@ -28,8 +28,11 @@ static int state_ananlyse(demo_t *demo, menu_t *menu)
         case 5:
             return 0;
         case 3:
+            menu->edited_setting = 0;
             menu->branch = MENU_BRANCH_SETTING;
             menu_setting_loop(demo, menu);
+            if (menu->edited_setting == 1)
+                setting_apply_changes(demo, menu);
             menu->branch = MENU_BRANCH_ROOT;
             menu->state = -1;
             return (menu_loop(demo, menu));
@@ -42,8 +45,8 @@ int menu_loop(demo_t *demo, menu_t *menu)
 {
     if (menu->first_save == 1)
         menu->link[MENU_LINK_LOAD].index = IUTEX_MENU_LOAD_FADE;
-    /*else
-        menu->link[MENU_LINK_LOAD].index = IUTEX_MENU_LOAD;*/
+    else
+        menu->link[MENU_LINK_LOAD].index = IUTEX_MENU_LOAD;
     do {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUseProgram(_iu.data.iu_program);
@@ -51,6 +54,5 @@ int menu_loop(demo_t *demo, menu_t *menu)
         sfRenderWindow_display(demo->win.window);
         reset_cursor(menu);
     } while (menu_poll_events(demo, menu) && menu->state == -1);
-    //printf("%d\n", menu->state);
     return (state_ananlyse(demo, menu));
 }

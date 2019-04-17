@@ -34,7 +34,7 @@ int analyse_input(demo_t *demo, menu_t *menu)
             analyse_move_menu(menu);
             break;
         case MENU_BRANCH_SETTING:
-            if (demo->mouse.button_click)
+            if (demo->mouse.button_state)
                 analyse_setting_input(demo, menu);
             break;
         default:
@@ -43,15 +43,45 @@ int analyse_input(demo_t *demo, menu_t *menu)
     return 1;
 }
 
+int wait_confirmation(demo_t *demo, menu_t *menu)
+{
+    int check_input = 0;
+    int state = 0;
+
+    do {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glUseProgram(_iu.data.iu_program);
+        menu_draw(menu);
+        setting_draw(menu);
+        iu_entity_draw(menu->confirmation);
+        sfRenderWindow_display(demo->win.window);
+        if (sfKeyboard_isKeyPressed(sfKeySpace)) {
+            state = 0;
+            check_input++;
+            menu->edited_setting = 0;
+        }
+        else if (sfKeyboard_isKeyPressed(sfKeyEnter)) {
+            state = 1;
+            check_input++;
+        }
+    } while (poll_events(demo) && !check_input);
+    return state;
+}
+
 int menu_poll_events(demo_t *demo, menu_t *menu)
 {
-    if (!poll_events(demo))
+    if (!poll_events(demo)) {
+        menu->edited_setting = 0;
         return 0;
+    }
     if (sfKeyboard_isKeyPressed(sfKeyEnter))
         menu->state = menu->menu_choice;
     if (sfKeyboard_isKeyPressed(sfKeyEscape) &&
-    menu->branch == MENU_BRANCH_SETTING)
+    menu->branch == MENU_BRANCH_SETTING) {
+        if (menu->edited_setting == 1)
+            return wait_confirmation(demo, menu);
         return 0;
+    }
     analyse_input(demo, menu);
     return 1;
 }

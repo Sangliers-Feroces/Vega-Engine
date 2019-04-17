@@ -12,6 +12,7 @@ typedef enum {
     IUTEX_ELON,
     IUTEX_PLUS,
     IUTEX_MINUS,
+    IUTEX_SLIDER,
     IUTEX_MENU_MAIN,
     IUTEX_MENU_CONTINUE,
     IUTEX_MENU_LOAD,
@@ -27,8 +28,10 @@ typedef enum {
     IUTEX_EDITOR_GRAB,
     IUTEX_EDITOR_SELECT,
     IUTEX_SETTING_RES,
+    IUTEX_SETTING_CONFIRM,
     IUTEX_SETTING_RES_1600_900,
     IUTEX_SETTING_RES_1920_1080,
+    IUTEX_SETTING_VOL_BACK,
     IUTEX_END
 } iutex_t;
 
@@ -62,13 +65,18 @@ typedef struct {
     float depth;
 } entity2_param_t;
 
-typedef struct {
+struct entity2 {
     iutex_t index;
     rect_t rect;
     float depth;
     rel_t rel;
     pattern_t pattern;
-} entity2_t;
+    //slide
+    struct entity2 *slider;
+    float x_min;
+    float x_max;
+};
+typedef struct entity2 entity2_t;
 
 typedef struct {
     int ratiowh;

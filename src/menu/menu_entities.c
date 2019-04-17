@@ -7,6 +7,15 @@
 
 #include "headers.h"
 
+static void setting_set_extern(menu_t *menu)
+{
+    menu->setting[SETTING_VOL_MASTER].slider = malloc(sizeof(struct entity2));
+    entity_constructor(menu->setting[SETTING_VOL_MASTER].slider, (entity2_param_t){
+    IUTEX_SLIDER, (rect_t){{-0.736f, 0.362f},{0.05f, 0.05f}}, -0.999});
+    menu->setting[SETTING_VOL_MASTER].x_min = -0.738750;
+    menu->setting[SETTING_VOL_MASTER].x_max = -0.166250;
+}
+
 static void setting_set_entities(menu_t *menu)
 {
     entity_constructor(&menu->setting[SETTING_RES], (entity2_param_t){
@@ -17,6 +26,11 @@ static void setting_set_entities(menu_t *menu)
     IUTEX_PLUS, (rect_t){{-0.35f, 0.50f},{0.08f, 0.08f}}, -0.9});
     entity_constructor(&menu->setting[SETTING_RES_MINUS], (entity2_param_t){
     IUTEX_MINUS, (rect_t){{-0.58f, 0.50f},{0.08f, 0.08f}}, -0.9});
+    entity_constructor(&menu->confirmation, (entity2_param_t){
+    IUTEX_SETTING_CONFIRM, (rect_t){{0.0f, 0.0f},{0.6f, 0.6f}}, -0.9});
+    entity_constructor(&menu->setting[SETTING_VOL_MASTER], (entity2_param_t){
+    IUTEX_SETTING_VOL_BACK, (rect_t){{-0.80f, 0.20f},{0.7f, 0.4f}}, -0.888});
+    menu->setting[SETTING_VOL_MASTER].pattern = PATTERN_SLIDE_BUTTON;
 }
 
 static void menu_set_link_entities(menu_t *menu)
@@ -41,8 +55,9 @@ static void menu_set_link_entities(menu_t *menu)
 void menu_set_entities(menu_t *menu)
 {
     entity_constructor(&menu->background[MENU_BG_MAIN], (entity2_param_t){
-    IUTEX_MENU_MAIN, (rect_t){{-1.0f, -1.0f}, {2.0f, 2.0f}}, -0.888f});
+    IUTEX_MENU_MAIN, (rect_t){{-1.0f, -1.0f}, {2.0f, 2.0f}}, 0.0f});
     entity_constructor(&menu->background[MENU_BG_SETTING], (entity2_param_t){
-    IUTEX_SETTING_BG, (rect_t){{-1.0f, -1.0f}, {2.0f, 2.0f}}, -0.889f});
+    IUTEX_SETTING_BG, (rect_t){{-1.0f, -1.0f}, {2.0f, 2.0f}}, -0.689f});
     menu_set_link_entities(menu);
+    setting_set_extern(menu);
 }
