@@ -9,12 +9,7 @@
 
 static inter_ray3 world_inter(demo_t *demo, ray3 ray)
 {
-    inter_ray3 inter = {NULL, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, 0.0};
-
-    for (size_t i = 0; i < demo->world.chunk_count; i++)
-        octree_intersect_ray_laxist_iter(
-        demo->world.chunk[i]->lod[WORLD_LOD_MAX].tree, ray, &inter);
-    return inter;
+    return octree_intersect_ray_laxist(demo->world.tree, ray);
 }
 
 static int check_col(demo_t *demo, dvec3 pos, dvec3 *speed, dvec3 *avg_norm)

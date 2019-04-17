@@ -28,10 +28,12 @@ typedef struct {
 } rtx_triangle;
 
 /* another std::vector */
+typedef struct octree octree;
 struct vec_rtx_triangle {
     size_t count;
     size_t allocated;
     rtx_triangle **triangle;
+    octree *node;
 };
 
 /* used to define an octree node space */
@@ -41,13 +43,12 @@ typedef struct {
     double size;     /* -> cube size */
 } bounds3;
 
-struct octree_s {
-    struct octree_s *root;    /* -> might be useful to reposition */
-    struct octree_s *sub[8];  /* moving objects                   */
-    vec_rtx_triangle triangles;
+struct octree {
+    struct octree *root;    /* -> might be useful to reposition */
+    struct octree *sub[8];  /* moving objects                   */
+    vec_rtx_triangle *triangles;
     bounds3 bounds;
 };
-typedef struct octree_s octree;
 
 /* buffer for ray intersection (stores closest hit) */
 

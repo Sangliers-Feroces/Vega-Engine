@@ -13,7 +13,7 @@ static void get_triangle_count_actual(octree *tree, size_t *res)
         return;
     for (size_t i = 0; i < 8; i++)
         get_triangle_count_actual(tree->sub[i], res);
-    *res += tree->triangles.count;
+    *res += tree->triangles->count;
 }
 
 size_t octree_get_rtx_triangle_count(octree *tree)

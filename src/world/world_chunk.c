@@ -49,7 +49,7 @@ chunk_t* chunk_create(ssize2 pos)
     res->pos = pos;
     res->lod_count = WORLD_LOD_COUNT;
     for (size_t i = 0; i < res->lod_count; i++)
-        res->lod[i] = chunk_lod_create(res);
+        res->lod[i] = chunk_lod_create(i);
     res->world_ndx = ~0ULL;
     chunk_gen_terrain(res);
     world_chunk2d_insert(_demo, res);
@@ -73,7 +73,7 @@ void chunk_destroy(chunk_t *chunk)
     }
     chunk_border_destroy(chunk->border);
     for (size_t i = 0; i < chunk->lod_count; i++)
-        chunk_lod_destroy(chunk->lod[i]);
+        chunk_lod_destroy(&chunk->lod[i]);
     free(chunk);
 }
 

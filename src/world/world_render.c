@@ -29,47 +29,33 @@ static void gl_reset_stuff(void)
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
-static void chunk_lod_render_actual(octree *tree, size_t *ndx, size_t *first, material_t *material)
+static void render_geom(material_t material, size_t first, size_t i)
 {
-    material_t cur;
-
-    if (tree == NULL)
-        return;
-    for (size_t i = 0; i < 8; i++)
-        chunk_lod_render_actual(tree->sub[i], ndx, first, material);
-    for (size_t i = 0; i < tree->triangles.count; i++) {
-        cur = tree->triangles.triangle[i]->material;
-        if (cur != (*material)) {
-            if ((*material) != ~0U) {
-                _demo->material[*material].world();
-                glDrawArrays(GL_TRIANGLES, (*first) * 3, ((*ndx) - (*first)) * 3);
-            }
-            *material = cur;
-            *first = *ndx;
-        }
-        (*ndx)++;
+    if (material != ~0U) {
+        _demo->material[material].world();
+        glDrawArrays(GL_TRIANGLES, first * 3, (i - first) * 3);
     }
 }
 
 static void chunk_lod_render(chunk_lod_t *lod)
 {
-    size_t ndx = 0;
     material_t material = ~0U;
+    material_t cur;
     size_t first = 0;
 
     if (lod->do_reupload_buf)
         chunk_lod_reupload_buf(lod);
-    if (lod->vertex_count < 3)
-        return;
     glBindVertexArray(lod->vertex_array);
     glBindBuffer(GL_ARRAY_BUFFER, lod->vertex_buffer);
-    chunk_lod_render_actual(lod->tree, &ndx, &first, &material);
-    if (material != ~0U) {
-        _demo->material[material].world();
-        glDrawArrays(GL_TRIANGLES, first * 3, (ndx - first) * 3);
+    for (size_t i = 0; i < lod->geom->count; i++) {
+        cur = lod->geom->triangle[i]->material;
+        if (cur != material) {
+            render_geom(material, first, i);
+            material = cur;
+            first = i;
+        }
     }
-    //glBindTexture(GL_TEXTURE_2D, _iu.textures[IUTEX_TERRAIN]->id);
-    //glDrawArrays(GL_TRIANGLES, 0, lod->vertex_count);
+    render_geom(material, first, lod->geom->count);
 }
 
 static void chunk_render(chunk_t *chunk)

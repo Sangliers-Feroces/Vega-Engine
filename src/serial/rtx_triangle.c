@@ -66,6 +66,7 @@ void rtx_triangle_destroy(rtx_triangle *triangle)
         if ((ref_vec->count > 0) &&
         (ref_vec->triangle[triangle->ref.ndx]->ref.vec == ref_vec))
             ref_vec->triangle[triangle->ref.ndx]->ref.ndx = triangle->ref.ndx;
+        octree_flush_vec_rtx_triangle(ref_vec->node);
     }
     texture2f_binding_free(triangle->lightmap);
     free(triangle);

@@ -24,12 +24,12 @@ static void set_buffer_attrib(void)
     uv_lightmap)));
 }
 
-chunk_lod_t chunk_lod_create(chunk_t *par)
+chunk_lod_t chunk_lod_create(size_t lod)
 {
     chunk_lod_t res;
 
-    (void)par;
-    res.tree = octree_create(NULL);
+    res.lod = lod;
+    res.geom = vec_rtx_triangle_create();
     res.vertex_count = 0;
     glGenVertexArrays(1, &res.vertex_array);
     glBindVertexArray(res.vertex_array);
@@ -40,17 +40,19 @@ chunk_lod_t chunk_lod_create(chunk_t *par)
     return res;
 }
 
-void chunk_lod_destroy(chunk_lod_t lod)
+void chunk_lod_destroy(chunk_lod_t *lod)
 {
-    octree_destroy(&lod.tree);
-    if (lod.vertex_array != 0)
-        glDeleteVertexArrays(1, &lod.vertex_array);
-    if (lod.vertex_buffer != 0)
-        glDeleteBuffers(1, &lod.vertex_buffer);
+    vec_rtx_triangle_destroy(lod->geom);
+    if (lod->vertex_array != 0)
+        glDeleteVertexArrays(1, &lod->vertex_array);
+    if (lod->vertex_buffer != 0)
+        glDeleteBuffers(1, &lod->vertex_buffer);
 }
 
 void chunk_lod_insert_rtx_triangle(chunk_lod_t *lod, rtx_triangle *triangle)
 {
-    octree_insert_triangle(&lod->tree, triangle);
+    if (lod->lod == WORLD_LOD_MAX)
+        octree_insert_triangle(&_demo->world.tree, triangle);
+    vec_rtx_triangle_add_detached(lod->geom, triangle);
     lod->do_reupload_buf = 1;
 }

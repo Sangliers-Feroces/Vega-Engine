@@ -41,7 +41,7 @@ static int try_insert_sub(octree **tree, rtx_triangle *triangle)
 static int try_insert_cur(octree **tree, rtx_triangle *triangle)
 {
     if (is_triangle_in_bounds(triangle->vertex, (*tree)->bounds)) {
-        vec_rtx_triangle_add(&((*tree)->triangles), triangle);
+        vec_rtx_triangle_add((*tree)->triangles, triangle);
         return 1;
     } else
         return 0;

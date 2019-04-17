@@ -7,7 +7,7 @@
 
 #pragma once
 
-void world_insert_vec_rtx_triangle(demo_t *demo, vec_rtx_triangle vec);
+void world_insert_vec_rtx_triangle(demo_t *demo, vec_rtx_triangle *vec);
 
 void world_init(demo_t *demo);
 void world_quit(demo_t *demo);
@@ -23,8 +23,8 @@ void chunk_insert_rtx_triangle(chunk_t *chunk, rtx_triangle *triangle);
 void chunk_insert_rtx_triangle_lod(chunk_t *chunk, size_t lod,
 rtx_triangle *triangle);
 
-chunk_lod_t chunk_lod_create(chunk_t *par);
-void chunk_lod_destroy(chunk_lod_t lod);
+chunk_lod_t chunk_lod_create(size_t lod);
+void chunk_lod_destroy(chunk_lod_t *lod);
 void chunk_lod_insert_rtx_triangle(chunk_lod_t *lod, rtx_triangle *triangle);
 
 void world_render(demo_t *demo);

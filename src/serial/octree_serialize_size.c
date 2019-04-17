@@ -17,7 +17,7 @@ static size_t get_size_actual(octree *tree, size_t size)
     if (tree == NULL)
         return size;
     size += SERIAL_OCTREE_SIZE;
-    size += get_vec_rtx_triangle_size(&tree->triangles);
+    size += get_vec_rtx_triangle_size(tree->triangles);
     for (size_t i = 0; i < 8; i++)
         size = get_size_actual(tree->sub[i], size);
     return size;

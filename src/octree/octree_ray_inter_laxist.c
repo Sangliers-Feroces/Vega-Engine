@@ -48,8 +48,8 @@ void octree_intersect_ray_laxist_iter(octree *tree, ray3 ray, inter_ray3 *inter)
         return;
     for (size_t i = 0; i < 8; i++)
         octree_intersect_ray_laxist_iter(tree->sub[i], ray, inter);
-    for (size_t i = 0; i < tree->triangles.count; i++)
-        intersect_ray(tree->triangles.triangle[i], ray, inter);
+    for (size_t i = 0; i < tree->triangles->count; i++)
+        intersect_ray(tree->triangles->triangle[i], ray, inter);
 }
 
 inter_ray3 octree_intersect_ray_laxist(octree *tree, ray3 ray)

@@ -51,4 +51,6 @@ void octree_ray_bound(octree *tree, dvec3 ray, vec2 *ppos, vec2 *psize);
 
 size_t octree_get_rtx_triangle_count(octree *tree);
 
+void octree_flush_vec_rtx_triangle(octree *tree);
+
 #endif

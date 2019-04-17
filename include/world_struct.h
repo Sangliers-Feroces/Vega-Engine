@@ -14,7 +14,8 @@
 #define CHUNK_LOAD_DISTANCE 1
 
 typedef struct {
-    octree *tree;
+    size_t lod;
+    vec_rtx_triangle *geom;
     size_t vertex_count;
     gluint vertex_buffer;
     gluint vertex_array;
@@ -40,6 +41,7 @@ typedef struct {
     chunk_t **chunk;        // used for rendering / world intersection
     srect chunk2d_area;
     chunk_t **chunk2d;      // 2d array for fast lookup
+    octree *tree;           // collision data is exclusively stored here
 } world_t;
 
 typedef struct {

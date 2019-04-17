@@ -13,9 +13,9 @@ void terrain_apply_texture(octree *tree, texture2 *texture)
         return;
     for (size_t i = 0; i < 8; i++)
         terrain_apply_texture(tree->sub[i], texture);
-    for (size_t i = 0; i < tree->triangles.count; i++) {
-        tree->triangles.triangle[i]->albelo.texture = texture;
-        rtx_triangle_update(tree->triangles.triangle[i]);
+    for (size_t i = 0; i < tree->triangles->count; i++) {
+        tree->triangles->triangle[i]->albelo.texture = texture;
+        rtx_triangle_update(tree->triangles->triangle[i]);
     }
 }
 
@@ -41,8 +41,8 @@ terrain_search_t search)
         return;
     for (size_t i = 0; i < 8; i++)
         terrain_search_other(tree->sub[i], dst, search);
-    for (size_t i = 0; i < tree->triangles.count; i++)
-        sub_other(tree->triangles.triangle[i], dst, search);
+    for (size_t i = 0; i < tree->triangles->count; i++)
+        sub_other(tree->triangles->triangle[i], dst, search);
 }
 
 void terrain_sub_triangle2(rtx_triangle *triangle, octree *root, octree **dst,

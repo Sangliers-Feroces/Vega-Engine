@@ -7,9 +7,13 @@
 
 #include "headers.h"
 
-vec_rtx_triangle vec_rtx_triangle_create(void)
+vec_rtx_triangle* vec_rtx_triangle_create(void)
 {
-    return (vec_rtx_triangle){0, 0, NULL};
+    vec_rtx_triangle *res =
+    (vec_rtx_triangle*)malloc_safe(sizeof(vec_rtx_triangle));
+
+    *res = (vec_rtx_triangle){0, 0, NULL, NULL};
+    return res;
 }
 
 void vec_rtx_triangle_add(vec_rtx_triangle *vec, rtx_triangle *to_add)
@@ -41,9 +45,16 @@ void vec_rtx_triangle_add_detached(vec_rtx_triangle *vec, rtx_triangle *to_add)
 
 void vec_rtx_triangle_destroy(vec_rtx_triangle *vec)
 {
-    while (vec->count > 0)
-        rtx_triangle_destroy(vec->triangle[0]);
+    int is_linked;
+
+    while (vec->count > 0) {
+        is_linked = vec->triangle[vec->count - 1]->ref.vec == vec;
+        rtx_triangle_destroy(vec->triangle[vec->count - 1]);
+        if (!is_linked)
+            vec->count--;
+    }
     free(vec->triangle);
+    free(vec);
 }
 
 void vec_rtx_triangle_free(vec_rtx_triangle *vec)
@@ -52,6 +63,16 @@ void vec_rtx_triangle_free(vec_rtx_triangle *vec)
         if (vec->triangle[i]->ref.vec == vec)
             vec->triangle[i]->ref = vec_rtx_triangle_ref_null();
     free(vec->triangle);
+    free(vec);
+}
+
+void vec_rtx_triangle_flush(vec_rtx_triangle *vec)
+{
+    if (vec->count > 0)
+        return;
+    free(vec->triangle);
+    vec->triangle = NULL;
+    vec->allocated = 0;
 }
 
 vec_rtx_triangle_ref vec_rtx_triangle_ref_null(void)
