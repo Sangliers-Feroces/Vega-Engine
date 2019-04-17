@@ -77,7 +77,7 @@ void player_physics(demo_t *demo)
     cap_player_speed(&demo->player.speed);
     speed_frame = dvec3_muls(demo->player.speed, demo->win.framelen);
     old_speed = speed_frame;
-    for (size_t i = 0; i < 40000; i++)
+    for (size_t i = 0; i < 4; i++)
         if (!check_col(demo, i > 0, demo->player.pos, &speed_frame, &norm))
             break;
     dvec3 disp = dvec3_add(speed_frame, dvec3_muls(dvec3_normalize(norm), 0.005));
