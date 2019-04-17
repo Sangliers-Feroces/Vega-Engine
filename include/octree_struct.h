@@ -16,6 +16,7 @@ typedef struct {
     dvec3 normal;               /* normal + tangent + bitangent         */
     dvec3 tangent;              /* are very key to create tangent space */
     dvec3 bitangent;            /* and then to make lights rays bounce  */
+    material_t material;
     int data;
 } rtx_triangle;
 

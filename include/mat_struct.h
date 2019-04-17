@@ -51,6 +51,7 @@ typedef struct {
     mat4 model;
     mat4 view;
     mat4 proj;
+    mat4 rot;
     mat4 vp;
 } mvp_t;
 

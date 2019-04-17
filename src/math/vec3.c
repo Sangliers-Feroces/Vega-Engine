@@ -17,12 +17,12 @@ dvec3 dvec3_sub(dvec3 a, dvec3 b)
     return (dvec3){a.x - b.x, a.y - b.y, a.z - b.z};
 }
 
-dvec3 dvec3_muls(dvec3 vec, float value)
+dvec3 dvec3_muls(dvec3 vec, double value)
 {
     return (dvec3){vec.x * value, vec.y * value, vec.z * value};
 }
 
-dvec3 dvec3_divs(dvec3 vec, float value)
+dvec3 dvec3_divs(dvec3 vec, double value)
 {
     return (dvec3){vec.x / value, vec.y / value, vec.z / value};
 }

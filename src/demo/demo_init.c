@@ -69,6 +69,8 @@ demo_t* demo_init(void)
     demo_get_texture_pannel(res);
     editor_init(res);
     gl_gen(res);
+    shader_init(res);
+    material_init(res);
     world_init(res);
     return (res);
 }
@@ -78,6 +80,7 @@ void demo_quit(demo_t *demo)
     world_quit(demo);
     editor_quit(demo);
     demo_texture_destroy(demo);
+    shader_quit(demo);
     gl_delete(demo);
     iu_quit();
     texture2f_write(_lightmaps.base, _lightmaps.aperture);

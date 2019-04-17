@@ -22,6 +22,7 @@ rtx_triangle* rtx_triangle_create(dvec3 *triangle)
         res->vertex[i] = triangle[i];
     res->lightmap = texture2f_binding_create(triangle);
     res->albelo = texture2_binding_create(triangle);
+    res->material = MATERIAL_GRASS;
     rtx_triangle_update_tangent(res);
     return (res);
 }
@@ -39,6 +40,7 @@ rtx_triangle* rtx_triangle_create_param(dvec3 *triangle, int alloc_lightmap)
         res->lightmap.texture = NULL;
     }
     res->albelo = texture2_binding_create(triangle);
+    res->material = MATERIAL_GRASS;
     rtx_triangle_update_tangent(res);
     return (res);
 }

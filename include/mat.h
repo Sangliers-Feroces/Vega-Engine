@@ -31,25 +31,25 @@ int vec2_eq(vec2 a, vec2 b);
 int dvec3_is_in_bounds(dvec3 p, bounds3 bounds);
 int is_triangle_in_bounds(dvec3 *triangle, bounds3 bounds);
 
-float dvec3_dot(dvec3 a, dvec3 b);
-float dvec3_norm(dvec3 vec);
-float dvec3_dist(dvec3 a, dvec3 b);
+double dvec3_dot(dvec3 a, dvec3 b);
+double dvec3_norm(dvec3 vec);
+double dvec3_dist(dvec3 a, dvec3 b);
 dvec3 dvec3_cross(dvec3 a, dvec3 b);
 dvec3 dvec3_normalize(dvec3 vec);
 
 dvec3 dvec3_add(dvec3 a, dvec3 b);
 dvec3 dvec3_sub(dvec3 a, dvec3 b);
-dvec3 dvec3_muls(dvec3 vec, float value);
-dvec3 dvec3_divs(dvec3 vec, float value);
+dvec3 dvec3_muls(dvec3 vec, double value);
+dvec3 dvec3_divs(dvec3 vec, double value);
 int dvec3_eq(dvec3 a, dvec3 b);
 
-dvec3 dvec3_adds(dvec3 vec, float value);
+dvec3 dvec3_adds(dvec3 vec, double value);
 
-dvec3 ray3_compute(ray3 ray, float t);
+dvec3 ray3_compute(ray3 ray, double t);
 
 vec4 vec4_add(vec4 a, vec4 b);
 vec4 vec4_sub(vec4 a, vec4 b);
-vec4 vec4_muls(vec4 vec, float value);
+vec4 vec4_muls(vec4 vec, double value);
 
 void mat4_identity(mat4 dst);
 void mat4_copy(mat4 src, mat4 dst);
@@ -98,5 +98,6 @@ void arr_dvec3_destroy(arr_dvec3_t arr);
 void chunk_border_destroy(chunk_border_t border);
 
 vec3 dvec3_vec3(dvec3 value);
+dvec3 dvec3_init(double x, double y, double z);
 
 #endif

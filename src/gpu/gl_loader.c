@@ -44,6 +44,8 @@ const void (*p_gldrawarrays)(glenum mode, glint first, glsizei count);
 const void (*p_gluniform1f)(glint location, float value);
 const void (*p_gluniform2fv)(glint location, glsizei count,
 const glfloat *value);
+const void (*p_gluniform3fv)(glint location, glsizei count,
+const glfloat *value);
 const void (*p_glactivetexture)(glenum texture);
 const void (*p_glgeneratemipmap)(glenum target);
 const void (*p_gldisable)(glenum cap);
@@ -124,6 +126,7 @@ static void load_2(void)
     p_gldrawarrays = glXGetProcAddressARB("glDrawArrays");
     p_gluniform1f = glXGetProcAddressARB("glUniform1f");
     p_gluniform2fv = glXGetProcAddressARB("glUniform2fv");
+    p_gluniform3fv = glXGetProcAddressARB("glUniform3fv");
     p_glactivetexture = glXGetProcAddressARB("glActiveTexture");
     p_glgeneratemipmap = glXGetProcAddressARB("glGenerateMipmap");
     p_gldisable = glXGetProcAddressARB("glDisable");

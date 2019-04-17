@@ -66,6 +66,7 @@ typedef struct {
     gluint vertex_buffer;
     gluint lightmap_shader;
     gluint world_shader;
+    dvec3 l;
 } buf_t;
 
 typedef enum {
@@ -116,6 +117,8 @@ typedef struct {
     texture_pannel_t texture_panel;
     editor_t editor;
     setting_t setting;
+    gluint shader[SHADER_MAX];
+    material_full_t material[MATERIAL_MAX];
 } demo_t;
 
 #endif

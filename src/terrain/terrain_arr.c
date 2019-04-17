@@ -63,10 +63,10 @@ static void send_ter_to_chunk_lod(chunk_t *chunk, size_t lod, arr2d_dvec3_t arr)
     sq[2] = dvec3_add(base, (dvec3){0.0, 0.0, CHUNK_SIZE});
     sq[3] = dvec3_add(base, (dvec3){CHUNK_SIZE, 0.0, CHUNK_SIZE});
     got = rtx_triangle_create_discrete(sq[0], sq[2], sq[1]);
-    got->albelo.texture = _iu.textures[IUTEX_WATER];
+    got->material = MATERIAL_WATER;
     chunk_insert_rtx_triangle_lod(chunk, lod, got);
     got = rtx_triangle_create_discrete(sq[3], sq[1], sq[2]);
-    got->albelo.texture = _iu.textures[IUTEX_WATER];
+    got->material = MATERIAL_WATER;
     chunk_insert_rtx_triangle_lod(chunk, lod, got);
     for (size_t i = 0; i < arr.h - 1; i++)
         for (size_t j = 0; j < arr.w - 1; j++) {

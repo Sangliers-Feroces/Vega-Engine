@@ -12,6 +12,7 @@
 #include "mat_struct.h"
 
 #include "texture_struct.h"
+#include "gpu_struct.h"
 #include "octree_struct.h"
 #include "thread_struct.h"
 #include "model_struct.h"
