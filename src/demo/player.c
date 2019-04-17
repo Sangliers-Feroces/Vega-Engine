@@ -12,7 +12,8 @@ static inter_ray3 world_inter(demo_t *demo, ray3 ray)
     return octree_intersect_ray_laxist(demo->world.tree, ray);
 }
 
-static int check_col(demo_t *demo, dvec3 pos, dvec3 *speed, dvec3 *avg_norm)
+static int check_col(demo_t *demo, int do_laxist,
+dvec3 pos, dvec3 *speed, dvec3 *avg_norm)
 {
     inter_ray3 inter = world_inter(demo, (ray3){pos, *speed});
     dvec3 p_in;
@@ -21,7 +22,7 @@ static int check_col(demo_t *demo, dvec3 pos, dvec3 *speed, dvec3 *avg_norm)
 
     if (inter.triangle == NULL)
         return 0;
-    if (inter.min_t > 1.0f)
+    if (inter.min_t > (do_laxist ? 0.999 : 1.0))
         return 0;
     p_in = dvec3_add(pos, *speed);
     normal = dvec3_dot(inter.triangle->normal, up) > 0.8 ?
@@ -76,8 +77,8 @@ void player_physics(demo_t *demo)
     cap_player_speed(&demo->player.speed);
     speed_frame = dvec3_muls(demo->player.speed, demo->win.framelen);
     old_speed = speed_frame;
-    for (size_t i = 0; i < 4; i++)
-        if (!check_col(demo, demo->player.pos, &speed_frame, &norm))
+    for (size_t i = 0; i < 40000; i++)
+        if (!check_col(demo, i > 0, demo->player.pos, &speed_frame, &norm))
             break;
     dvec3 disp = dvec3_add(speed_frame, dvec3_muls(dvec3_normalize(norm), 0.005));
     apply_disp(demo, disp);

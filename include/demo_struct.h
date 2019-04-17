@@ -33,7 +33,7 @@ typedef struct {
     uint32_t w;
     uint32_t h;
     sfRenderWindow *window;
-    float framelen;
+    double framelen;
     sfClock *frametime;
     int has_focus;
 } win_t;
