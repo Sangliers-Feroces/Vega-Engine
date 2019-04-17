@@ -11,13 +11,14 @@ layout (binding = 1) uniform sampler2D tex_albedo;
 out vec4 color;
 
 uniform float aperture;
-uniform vec3 l;
+uniform vec3 l_dir;
+uniform vec3 p_cam;
 
 void main(void)
 {
 	vec3 blue = (vec3(94.0, 155.0, 255.0) / 255.0) * 0.001;
 	vec3 light = texture(tex_lightmap, uv_lightmap).xyz + blue;
 
-    light = vec3(max(0.0, dot(normal, normalize(vec3(1.0) - vec3(0.0, 0.0, -0.5)))));
+    light = vec3(max(0.0, dot(normal, l_dir)));
 	color = vec4(light * texture(tex_albedo, uv_albedo).xyz, 1.0);
 }

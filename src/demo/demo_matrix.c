@@ -22,20 +22,23 @@ void check_mouse_move(demo_t *demo)
 static void send_uniform(void)
 {
     gluint u;
-    vec3 l = dvec3_vec3(_demo->buf.l);
+    vec3 l = dvec3_vec3(dvec3_muls(_demo->buf.l, -1.0));
+    vec3 p = dvec3_vec3(_demo->cam.pos);
 
     for (size_t i = 0; i < SHADER_MAX; i++) {
         glUseProgram(_demo->shader[i]);
         u = glGetUniformLocation(_demo->shader[i], "vp");
         glUniformMatrix4fv(u, 1, GL_FALSE, (void*)_demo->cam.mvp.vp);
-        u = glGetUniformLocation(_demo->shader[i], "l");
+        u = glGetUniformLocation(_demo->shader[i], "l_dir");
         glUniform3fv(u, 1, (void*)&l);
+        u = glGetUniformLocation(_demo->shader[i], "p_cam");
+        glUniform3fv(u, 1, (void*)&p);
     }
 }
 
 void refresh_vp(demo_t *demo)
 {
-    proj_t proj_struct = {0.3f, 4094.0f, 90.0f, 16.0f / 9.0f};
+    proj_t proj_struct = {0.3f, 4094.0f * 4, 90.0f, 16.0f / 9.0f};
     proj_t ortho_struct = proj_struct;
 
     ortho_struct.fov_w = 10.0f;
