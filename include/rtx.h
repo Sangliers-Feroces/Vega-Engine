@@ -5,8 +5,7 @@
 ** std::vector
 */
 
-#ifndef _RTX_H
-#define _RTX_H
+#pragma once
 
 int is_ray_in_bounds(ray3 ray, bounds3 bounds);
 int is_ray_in_bounds_seg(ray3 ray, bounds3 bounds);
@@ -23,5 +22,3 @@ void vec_rtx_triangle_destroy(vec_rtx_triangle *vec);
 void vec_rtx_triangle_free(vec_rtx_triangle *vec);
 void vec_rtx_triangle_flush(vec_rtx_triangle *vec);
 vec_rtx_triangle_ref vec_rtx_triangle_ref_null(void);
-
-#endif

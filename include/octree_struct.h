@@ -5,8 +5,7 @@
 ** headers
 */
 
-#ifndef _OCTREE_STRUCT_H
-#define _OCTREE_STRUCT_H
+#pragma once
 
 typedef struct vec_rtx_triangle vec_rtx_triangle;
 typedef struct {
@@ -116,5 +115,3 @@ typedef struct {
     dvec3 *vertex;
     dvec3 mid;
 } terrain_search_t;
-
-#endif

@@ -5,8 +5,7 @@
 ** swaggy demo
 */
 
-#ifndef _DEMO_STRUCT_H
-#define _DEMO_STRUCT_H
+#pragma once
 
 typedef enum {
     ACTION_PAINT,
@@ -120,5 +119,3 @@ typedef struct {
     material_full_t material[MATERIAL_MAX];
     texture2 *tex[TEX_MAX];
 } demo_t;
-
-#endif

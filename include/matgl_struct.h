@@ -5,8 +5,7 @@
 ** headers
 */
 
-#ifndef _MATGL_STRUCT_H
-#define _MATGL_STRUCT_H
+#pragma once
 
 /* GL types */
 typedef struct {
@@ -65,5 +64,3 @@ typedef struct {
     size_t count;
     dvec3 *dvec3;
 } arr_dvec3_t;
-
-#endif

@@ -5,8 +5,7 @@
 ** iu_struct
 */
 
-#ifndef IU_STRUCT_H_
-    #define IU_STRUCT_H_
+#pragma once
 
 typedef enum {
     IUTEX_ELON,
@@ -69,7 +68,6 @@ struct entity2 {
     float depth;
     rel_t rel;
     pattern_t pattern;
-    //slide
     struct entity2 *slider;
     float x_min;
     float x_max;
@@ -87,5 +85,3 @@ typedef struct {
     texture2 *textures[IUTEX_END];
     entity2_t buttons[IUBUTTON_END];
 } iu_t;
-
-#endif /* !IU_STRUCT_H_ */

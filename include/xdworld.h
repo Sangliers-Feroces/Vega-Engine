@@ -5,8 +5,7 @@
 ** lul
 */
 
-#ifndef _XDWORLD_H
-#define _XDWORLD_H
+#pragma once
 
 #include <stdlib.h>
 
@@ -14,5 +13,3 @@
 
 int sftexture_createfromfile(int argc, char **argv);
 int game(int argc, char **argv);
-
-#endif

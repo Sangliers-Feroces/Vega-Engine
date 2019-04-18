@@ -5,8 +5,7 @@
 ** headers
 */
 
-#ifndef _TEXTURE_STRUCT_H
-#define _TEXTURE_STRUCT_H
+#pragma once
 
 typedef enum {
     TEX_GRASS,
@@ -86,5 +85,3 @@ typedef struct {
     tex_t tex;
     const char *path;
 } tex_desc_t;
-
-#endif

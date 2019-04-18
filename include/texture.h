@@ -5,8 +5,7 @@
 ** nvidia fanboyisme
 */
 
-#ifndef _TEXTURE_H
-#define _TEXTURE_H
+#pragma once
 
 #define TEXTURE_CLUSTER_ROW_ALLOC_STEP 32
 #define TEXTURE_ALLOC_MARGIN 2
@@ -69,5 +68,3 @@ void lightmap_fill(rect_t rect, float value);
 
 void tex_init(demo_t *demo);
 void tex_quit(demo_t *demo);
-
-#endif

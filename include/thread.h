@@ -5,8 +5,7 @@
 ** headers
 */
 
-#ifndef _THREAD_H
-#define _THREAD_H
+#pragma once
 
 void thread_init(void);
 void thread_quit(void);
@@ -19,5 +18,3 @@ void thread_do_task(thread_bus *bus);
 int thread_is_complete(void);
 float thread_get_progress(void);
 void thread_abort_task(void);
-
-#endif

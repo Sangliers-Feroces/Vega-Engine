@@ -5,8 +5,7 @@
 ** swaggy demo
 */
 
-#ifndef _TERRAIN_H
-#define _TERRAIN_H
+#pragma once
 
 rtx_triangle* octree_add_triangle(octree **tree, dvec3 *triangle);
 rtx_triangle* octree_add_triangle_no_lightmap(octree **tree, dvec3 *triangle);
@@ -18,5 +17,3 @@ void terrain_sub_triangle2(rtx_triangle *triangle, octree *root, octree **dst,
 float strengh);
 
 void terrain_apply_texture(octree *tree, texture2 *texture);
-
-#endif

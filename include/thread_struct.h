@@ -5,8 +5,7 @@
 ** headers
 */
 
-#ifndef _THREAD_STRUCT_H
-#define _THREAD_STRUCT_H
+#pragma once
 
 #define THREAD_DATA_SIZE 128
 
@@ -29,5 +28,3 @@ typedef struct {
     size_t count;
     thread_bus *bus;
 } threads;
-
-#endif

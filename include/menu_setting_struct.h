@@ -5,8 +5,4 @@
 ** menu_setting_struct
 */
 
-#ifndef MENU_SETTING_STRUCT_H_
-    #define MENU_SETTING_STRUCT_H_
-
-
-#endif /* !MENU_SETTING_STRUCT_H_ */
+#pragma once
