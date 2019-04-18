@@ -5,8 +5,7 @@
 ** nbr_tools
 */
 
-#ifndef NBR_TOOLS_H_
-    #define NBR_TOOLS_H_
+#pragma once
 
 #include <stdlib.h>
 
@@ -25,4 +24,3 @@ int my_getnbr(const char *src);
 
 //putnbr
 void putnbr(size_t value, int base, int caps);
-#endif /* !NBR_TOOLS_H_ */

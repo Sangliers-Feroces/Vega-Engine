@@ -5,8 +5,7 @@
 ** swaggy demo
 */
 
-#ifndef _EDITOR_H
-#define _EDITOR_H
+#pragma once
 
 #define EDITOR_EXTRUSION_OFF 0.1f
 
@@ -47,5 +46,3 @@ void editor_rot(demo_t *demo);
 
 void rtx_triangle_uv(rtx_triangle *triangle);
 void editor_uv(demo_t *demo);
-
-#endif

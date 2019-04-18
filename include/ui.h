@@ -5,10 +5,7 @@
 ** ui
 */
 
-#ifndef UI_H_
-#define UI_H_
-
-#include "headers.h"
+#pragma once
 
 void ui_init(demo_t *demo);
 void ui_quit(void);
@@ -33,5 +30,3 @@ void demo_set_cam_to_origin(demo_t *demo);
 void ui_button_effect(demo_t *demo);
 
 void display_selected_texture(demo_t *demo, float depth);
-
-#endif /* !UI_H_ */

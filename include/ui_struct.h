@@ -5,8 +5,7 @@
 ** ui_struct
 */
 
-#ifndef UI_STRUCT_H_
-#define UI_STRUCT_H_
+#pragma once
 
 typedef struct {
     float width;
@@ -133,5 +132,3 @@ typedef struct {
     display_nbr_array_t loading_pourcent;
     size_t ray_density;
 } ui_struct;
-
-#endif /* !UI_STRUCT_H_ */

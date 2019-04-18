@@ -5,8 +5,7 @@
 ** menu
 */
 
-#ifndef MENU_H_
-    #define MENU_H_
+#pragma once
 
 int start(demo_t *demo);
 
@@ -28,4 +27,3 @@ void setting_buttons_effects(demo_t *demo, menu_t *menu, setting_entity_t choice
 void setting_apply_changes(demo_t *demo,menu_t *menu);
 
 float menu_slider_move(demo_t *demo, menu_t *menu);
-#endif /* !MENU_H_ */

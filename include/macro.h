@@ -5,8 +5,7 @@
 ** macros stuff !
 */
 
-#ifndef _MACRO_H
-#define _MACRO_H
+#pragma once
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
@@ -26,4 +25,3 @@
 
 
 #define BUFFER_OFFSET(i) ((void*)i)
-#endif

@@ -5,8 +5,7 @@
 ** dungeons_struct
 */
 
-#ifndef DUNGEONS_STRUCT_H_
-    #define DUNGEONS_STRUCT_H_
+#pragma once
 
 typedef enum {
     DUNGEONS_NEXT_POS_NORTH,
@@ -23,5 +22,3 @@ typedef struct {
     dungeons_next_pos_t next_pos;
 
 } dungeons_t;
-
-#endif /* !DUNGEONS_STRUCT_H_ */

@@ -5,8 +5,7 @@
 ** iu_struct
 */
 
-#ifndef IU_STRUCT_H_
-    #define IU_STRUCT_H_
+#pragma once
 
 typedef enum {
     IUTEX_ELON,
@@ -23,8 +22,6 @@ typedef enum {
     IUTEX_MENU_QUIT,
     IUTEX_MENU_CURSOR,
     IUTEX_SETTING_BG,
-    IUTEX_TERRAIN,
-    IUTEX_WATER,
     IUTEX_EDITOR_GRAB,
     IUTEX_EDITOR_SELECT,
     IUTEX_SETTING_RES,
@@ -77,7 +74,6 @@ struct entity2 {
     float depth;
     rel_t rel;
     pattern_t pattern;
-    //slide
     struct entity2 *slider;
     float x_min;
     float x_max;
@@ -96,5 +92,3 @@ typedef struct {
     entity2_t buttons[IUBUTTON_END];
     entity2_t invent[IUINVENT_END];
 } iu_t;
-
-#endif /* !IU_STRUCT_H_ */

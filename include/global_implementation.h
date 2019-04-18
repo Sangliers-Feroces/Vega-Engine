@@ -5,9 +5,6 @@
 ** headers
 */
 
-#ifndef _GLOBAL_IMPLEMENTATION_H
-#define _GLOBAL_IMPLEMENTATION_H
+#pragma once
 
 #define GLOBAL_IMPLEMENTATION
-
-#endif

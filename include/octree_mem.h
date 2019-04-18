@@ -5,8 +5,7 @@
 ** headers
 */
 
-#ifndef _OCTREE_MEM_H
-#define _OCTREE_MEM_H
+#pragma once
 
 /* custom vector management */
 /* defines how much do we allocate in advance for elements in octree */
@@ -21,5 +20,3 @@ size_t octree_serialize_get_size(octree *tree);
 gpu_serial_t octree_serialize(octree *tree);
 
 int32_t vec_rtx_triangle_serialize(vec_rtx_triangle *vec, gpu_serial_t *serial);
-
-#endif

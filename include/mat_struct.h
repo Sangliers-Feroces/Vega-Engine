@@ -5,8 +5,7 @@
 ** headers
 */
 
-#ifndef _MAT_STRUCT_H
-#define _MAT_STRUCT_H
+#pragma once
 
 /* 1D ray */
 typedef struct {
@@ -61,5 +60,3 @@ typedef struct {
     dvec3 bl;
     dvec3 br;
 } ray_viewport_t;
-
-#endif
