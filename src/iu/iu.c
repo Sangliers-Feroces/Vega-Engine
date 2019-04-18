@@ -83,6 +83,8 @@ void iu_init(demo_t *demo)
     if (!iu_check_texture_array())
         exit(84);
     set_entities();
+    iu_text_init();
+    printf("%s\n", _iu.text[TEXT_TEST]);
     iu_set_gl();
 }
 

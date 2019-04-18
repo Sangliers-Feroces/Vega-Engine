@@ -28,14 +28,19 @@ static int check_slider_side(entity2_t slider)
     return 0;
 }
 
-float menu_slider_move(demo_t *demo, menu_t *menu)
+float menu_slider_move(demo_t *demo, entity2_t *slider)
 {
     float save_x;
+    float segment_len;
+    float segment_len2;
 
-    save_x = menu->setting[SETTING_VOL_MASTER].slider->rect.p.x;
-    move_slider(demo, menu->setting[SETTING_VOL_MASTER].slider);
-    if (check_slider_side(menu->setting[SETTING_VOL_MASTER]))
-        menu->setting[SETTING_VOL_MASTER].slider->rect.p.x = save_x;
-    
-    return 1;
+    save_x = slider->slider->rect.p.x;
+    move_slider(demo, slider->slider);
+    if (check_slider_side((*slider)))
+        slider->slider->rect.p.x = save_x;
+    segment_len = (slider->x_max - slider->x_min);
+    segment_len2 = (slider->slider->rect.p.x - slider->x_min);
+    segment_len *= 100;
+    segment_len2 *= 100;
+    return (segment_len2 / segment_len) - 0.05;
 }
