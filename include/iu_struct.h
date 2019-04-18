@@ -62,7 +62,7 @@ typedef enum {
 typedef enum {
     FONT_MINECRAFT,
     FONT_END
-}font_list_t;
+} font_list_t;
 
 typedef struct {
     iutex_t index;
@@ -97,6 +97,7 @@ typedef struct {
     int expect_dialogue_input;
     int ratiowh;
     gluint iu_program;
+    gluint vertex_array;
     gluint vertex_buffer;
     int is_invent;
 } iu_data_t;

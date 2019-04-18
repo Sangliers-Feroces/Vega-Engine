@@ -49,8 +49,13 @@ static void iu_set_gl(void)
         printf("Can't load ui shader.\n");
         exit(84);
     }
+    glGenVertexArrays(1, &_iu.data.vertex_array);
+    glBindVertexArray(_iu.data.vertex_array);
     glGenBuffers(1, &_iu.data.vertex_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, _iu.data.vertex_buffer);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE,
+    sizeof(vec2), BUFFER_OFFSET(0));
     glBufferData(GL_ARRAY_BUFFER, sizeof(vec2) * 6,
     (glvoid*)vertex_array_base, GL_STATIC_DRAW);
     _iu.data.is_invent = 0;
@@ -94,6 +99,7 @@ void iu_quit(void)
 {
     for (int i = 0; i < IUTEX_END; i++)
         texture2_destroy(_iu.textures[i]);
+    glDeleteVertexArrays(1, &_iu.data.vertex_array);
     glDeleteBuffers(1, &_iu.data.vertex_buffer);
     glDeleteProgram(_iu.data.iu_program);
 }
