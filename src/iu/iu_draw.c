@@ -47,6 +47,6 @@ void iu_display(void)
     if (_iu.data.is_invent)
         for (int i = 0; i < IUINVENT_END; i++)
             iu_entity_draw(_iu.invent[i]);
-    iu_display_str("test", (rect_t){{0.0f, 0.0f}, {0.2f, 0.2f}}, FONT_MINECRAFT);
+    iu_display_str("test", (rect_t){{0.0f, 0.0f}, {0.5f, 0.5f}}, FONT_MINECRAFT);
     //display_dialogues();
 }
