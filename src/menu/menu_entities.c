@@ -9,11 +9,11 @@
 
 static void setting_set_extern(menu_t *menu)
 {
-    menu->setting[SETTING_VOL_MASTER].slider = malloc(sizeof(struct entity2));
+    menu->setting[SETTING_VOL_MASTER].slider = malloc_safe(sizeof(entity2_t));
     entity_constructor(menu->setting[SETTING_VOL_MASTER].slider, (entity2_param_t){
-    IUTEX_SLIDER, (rect_t){{-0.736f, 0.362f},{0.05f, 0.05f}}, -0.999});
-    menu->setting[SETTING_VOL_MASTER].x_min = -0.738750;
-    menu->setting[SETTING_VOL_MASTER].x_max = -0.166250;
+    IUTEX_SLIDER, (rect_t){{-0.278750f, 0.262f},{0.05f, 0.05f}}, -0.999});
+    menu->setting[SETTING_VOL_MASTER].x_min = -0.742500;
+    menu->setting[SETTING_VOL_MASTER].x_max = -0.228750f;
 }
 
 static void setting_set_entities(menu_t *menu)
@@ -29,7 +29,7 @@ static void setting_set_entities(menu_t *menu)
     entity_constructor(&menu->confirmation, (entity2_param_t){
     IUTEX_SETTING_CONFIRM, (rect_t){{0.0f, 0.0f},{0.6f, 0.6f}}, -0.9});
     entity_constructor(&menu->setting[SETTING_VOL_MASTER], (entity2_param_t){
-    IUTEX_SETTING_VOL_BACK, (rect_t){{-0.80f, 0.20f},{0.7f, 0.4f}}, -0.888});
+    IUTEX_SETTING_VOL_BACK, (rect_t){{-0.80f, 0.20f},{0.63f, 0.2f}}, -0.888});
     menu->setting[SETTING_VOL_MASTER].pattern = PATTERN_SLIDE_BUTTON;
 }
 

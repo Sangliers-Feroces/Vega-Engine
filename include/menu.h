@@ -26,4 +26,5 @@ void setting_buttons_effects(demo_t *demo, menu_t *menu, setting_entity_t choice
 
 void setting_apply_changes(demo_t *demo,menu_t *menu);
 
-float menu_slider_move(demo_t *demo, menu_t *menu);
+float menu_slider_move(demo_t *demo, entity2_t *slider);
+#endif /* !MENU_H_ */

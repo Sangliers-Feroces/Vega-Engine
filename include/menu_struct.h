@@ -74,4 +74,6 @@ typedef struct {
     entity2_t link[MENU_LINK_END];
     entity2_t setting[SETTING_END];
     entity2_t confirmation;
+    //music
+    sfMusic *music;
 } menu_t;

@@ -9,6 +9,8 @@
 
 void menu_init(menu_t *menu)
 {
+    menu->music = sfMusic_createFromFile("res/musics/main_music.ogg");
+    sfMusic_play(menu->music);
     menu->choosen_res = LIST_RES_1600_900;
     menu->edited_setting = 0;
     menu->first_save = 0;
