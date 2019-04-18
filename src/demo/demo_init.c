@@ -53,6 +53,7 @@ static void init_win(demo_t *demo)
     sfWindow_setVerticalSyncEnabled((sfWindow*)demo->win.window, sfTrue);
     if (!init_mouse(demo))
         exit_full_custom();
+    demo_update_cursor_visibility(demo);
 }
 
 demo_t* demo_init(void)
@@ -73,6 +74,7 @@ demo_t* demo_init(void)
     shader_init(res);
     material_init(res);
     world_init(res);
+    demo_update_cursor_visibility(res);
     return (res);
 }
 

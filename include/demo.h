@@ -51,4 +51,7 @@ void demo_refresh_viewport(demo_t *demo);
 float get_random_float(float borne_min, float borne_max);
 int get_random_int(int borne_min, int borne_max);
 
+void demo_update_cursor_visibility(demo_t *demo);
+void demo_center_cursor(demo_t *demo);
+
 float get_eleapsed_time_second(sfClock *clock_);

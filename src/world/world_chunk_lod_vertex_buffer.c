@@ -56,6 +56,7 @@ void chunk_lod_reupload_buf(chunk_lod_t *lod)
     vec_chunk_vertex_create(lod->geom->count * 3);
 
     fill_buf(lod->geom, &buf);
+    glBindVertexArray(lod->vertex_array);
     glBindBuffer(GL_ARRAY_BUFFER, lod->vertex_buffer);
     glBufferData(GL_ARRAY_BUFFER,
     buf.count * sizeof(chunk_vertex_t), buf.vertex, GL_STATIC_DRAW);

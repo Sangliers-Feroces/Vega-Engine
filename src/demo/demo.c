@@ -45,13 +45,45 @@ static void poll_click(demo_t *demo)
         (((demo->mouse.button_last >> i) & 1) == 1)) << i;
 }
 
+static void poll_mouse_pos(demo_t *demo)
+{
+    int do_tp = 0;
+
+    demo->mouse.last_pos = demo->mouse.mouse_pos;
+    demo->mouse.mouse_pos = sfMouse_getPositionRenderWindow(demo->win.window);
+    if (_iu.data.is_invent)
+        return;
+    if ((ssize_t)demo->mouse.mouse_pos.x < (ssize_t)(demo->win.w / 4)) {
+        demo->mouse.mouse_pos.x += demo->win.w / 2;
+        demo->mouse.last_pos.x += demo->win.w / 2;
+        do_tp = 1;
+    }
+    if ((ssize_t)demo->mouse.mouse_pos.x > (ssize_t)(demo->win.w * 3 / 4)) {
+        demo->mouse.mouse_pos.x -= demo->win.w / 2;
+        demo->mouse.last_pos.x -= demo->win.w / 2;
+        do_tp = 1;
+    }
+    if ((ssize_t)demo->mouse.mouse_pos.y < (ssize_t)(demo->win.h / 4)) {
+        demo->mouse.mouse_pos.y += demo->win.h / 2;
+        demo->mouse.last_pos.y += demo->win.h / 2;
+        do_tp = 1;
+    }
+    if ((ssize_t)demo->mouse.mouse_pos.y > (ssize_t)(demo->win.h * 3 / 4)) {
+        demo->mouse.mouse_pos.y -= demo->win.h / 2;
+        demo->mouse.last_pos.y -= demo->win.h / 2;
+        do_tp = 1;
+    }
+    if (do_tp)
+        sfMouse_setPosition((sfVector2i){demo->mouse.mouse_pos.x,
+        demo->mouse.mouse_pos.y}, (sfWindow*)demo->win.window);
+}
+
 int poll_events(demo_t *demo)
 {
     sfEvent event;
 
     demo->mouse.button_last = demo->mouse.button_state;
-    demo->mouse.last_pos = demo->mouse.mouse_pos;
-    demo->mouse.mouse_pos = sfMouse_getPositionRenderWindow(demo->win.window);
+    poll_mouse_pos(demo);
     if (!sfRenderWindow_isOpen(demo->win.window))
         return (0);
     while (sfRenderWindow_pollEvent(demo->win.window, &event))
@@ -94,7 +126,6 @@ int demo(arg_t args)
         demo_quit(demo);
         return 0;
     }
-    //terrain_gen(demo, args.size, args.iter, args.strenght);
     demo_loop(demo);
     demo_quit(demo);
     return (0);
