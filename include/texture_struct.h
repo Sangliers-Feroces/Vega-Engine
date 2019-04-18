@@ -8,12 +8,17 @@
 #ifndef _TEXTURE_STRUCT_H
 #define _TEXTURE_STRUCT_H
 
+typedef enum {
+    TEX_GRASS,
+    TEX_WATER,
+    TEX_MAX
+} tex_t;
+
 typedef struct {
     vec2 size;
     int32_t w;
     int32_t h;
     size_t max_ndx;
-    uint32_t *pixel;
     gluint id;
 } texture2;
 
@@ -78,8 +83,8 @@ typedef struct {
 } texture2f_binding;
 
 typedef struct {
-    int count;
-    texture2 **texture;
-} texture_pannel_t;
+    tex_t tex;
+    const char *path;
+} tex_desc_t;
 
 #endif

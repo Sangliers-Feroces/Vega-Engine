@@ -5,8 +5,7 @@
 ** swaggy demo
 */
 
-#ifndef _DEMO_H
-#define _DEMO_H
+#pragma once
 
 #define CAM_MOVE 256.0f
 #define PLAYER_MOVE 7.0f
@@ -42,8 +41,6 @@ void player_physics(demo_t *demo);
 
 void demo_update_framerate(demo_t *demo);
 
-demo_t *demo_get_texture_pannel(demo_t *demo);
-
 void demo_texture_destroy(demo_t *demo);
 
 ray3 demo_get_ray(demo_t *demo);
@@ -51,4 +48,3 @@ void demo_refresh_viewport(demo_t *demo);
 
 float get_random_float(float borne_min, float borne_max);
 int get_random_int(int borne_min, int borne_max);
-#endif

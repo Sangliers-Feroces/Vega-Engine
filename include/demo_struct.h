@@ -114,11 +114,11 @@ typedef struct {
     mouse_t mouse;
     player_t player;
     buf_t buf;
-    texture_pannel_t texture_panel;
     editor_t editor;
     setting_t setting;
     gluint shader[SHADER_MAX];
     material_full_t material[MATERIAL_MAX];
+    texture2 *tex[TEX_MAX];
 } demo_t;
 
 #endif

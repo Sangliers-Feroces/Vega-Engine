@@ -15,7 +15,6 @@ texture2* texture2_create(uint32_t w, uint32_t h)
     res->w = w;
     res->h = h;
     res->max_ndx = res->w * res->h;
-    res->pixel = (uint32_t*)malloc_safe(w * h * sizeof(uint32_t));
     res->id = 0;
     return res;
 }
@@ -24,7 +23,6 @@ void texture2_destroy(texture2 *texture)
 {
     if (texture->id != 0)
         glDeleteTextures(1, &texture->id);
-    free(texture->pixel);
     free(texture);
 }
 
@@ -32,19 +30,6 @@ ivec2 texture2_get_nearest(vec2 p, vec2 size)
 {
     p = vec2_mul(p, size);
     return (ivec2){p.x, p.y};
-}
-
-uint32_t texture2_sample(texture2 *texture, vec2 uv)
-{
-    ivec2 pos;
-    ssize_t ndx;
-
-    pos = texture2_get_nearest(
-    uv, (vec2){(float)texture->w, (float)texture->h});
-    ndx = pos.y * (ssize_t)texture->w + pos.x;
-    if (!((ndx >= 0) && (ndx < (ssize_t)texture->max_ndx)))
-        return 0x000000FF;
-    return swap32(texture->pixel[ndx]);
 }
 
 vec4 texture2f_sample(texture2f *texture, vec2 uv)

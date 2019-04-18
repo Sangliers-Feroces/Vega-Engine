@@ -11,12 +11,12 @@ void material_fun_grass_world(void)
 {
     glUseProgram(_demo->shader[SHADER_WORLD]);
     glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, _iu.textures[IUTEX_TERRAIN]->id);
+    glBindTexture(GL_TEXTURE_2D, _demo->tex[TEX_GRASS]->id);
 }
 
 void material_fun_grass_entity(void)
 {
     glUseProgram(_demo->shader[SHADER_WORLD]);
     glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, _iu.textures[IUTEX_TERRAIN]->id);
+    glBindTexture(GL_TEXTURE_2D, _demo->tex[TEX_GRASS]->id);
 }
