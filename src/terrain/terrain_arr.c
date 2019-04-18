@@ -7,9 +7,9 @@
 
 #include "headers.h"
 
-static dvec3 mid_triangle(dvec3 a, dvec3 b, dvec3 c, float stren)
+static dvec3 mid_triangle(dvec3 a, dvec3 b, dvec3 c, double stren)
 {
-    float dist = dvec3_dist(b, c);
+    double dist = dvec3_dist(b, c);
     dvec3 normal = normal3(a, b, c);
     dvec3 mid = dvec3_add(
     dvec3_divs(dvec3_add(b, c), 2.0),
@@ -18,7 +18,7 @@ static dvec3 mid_triangle(dvec3 a, dvec3 b, dvec3 c, float stren)
     return mid;
 }
 
-static void split_ter(arr2d_dvec3_t *arr, float stren)
+static void split_ter(arr2d_dvec3_t *arr, double stren)
 {
     arr2d_dvec3_t new_arr = arr2d_dvec3_create(arr->w * 2 - 1, arr->h * 2 - 1);
 

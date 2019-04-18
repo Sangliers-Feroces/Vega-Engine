@@ -7,11 +7,11 @@
 
 #include "headers.h"
 
-static int is_float_in_0_1(float value)
+static int is_float_in_0_1(double value)
 {
-    float laxistness = 0.01f;
+    double laxistness = 0.01;
 
-    return (value >= -laxistness) && (value <= 1.0f + (laxistness));
+    return (value >= -laxistness) && (value <= 1.0 + (laxistness));
 }
 
 int is_point_in_triangle_laxist(dvec3 p, dvec3 *triangle)

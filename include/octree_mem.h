@@ -11,7 +11,7 @@
 /* custom vector management */
 /* defines how much do we allocate in advance for elements in octree */
 
-#define OCTREE_ALLOC_STEP 8
+#define OCTREE_ALLOC_STEP 64
 
 #define SERIAL_OCTREE_SIZE (15)
 // vertices + (uvs + texture ndx) + tangent space coords
