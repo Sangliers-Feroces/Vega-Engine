@@ -33,6 +33,7 @@ static const iutex_path_t iutex_path [] = {
     {IUTEX_SETTING_CONFIRM, "res/ui/menu/new/settings/confirmation.png"},
     {IUTEX_SETTING_VOL_BACK, "res/ui/menu/new/settings/volume.png"},
     {IUTEX_SLIDER, "res/ui/menu/new/settings/slider.png"},
+    {IUTEX_INVENT_BG, "res/ui/invent/invent.png"},
     {0, NULL}
 };
 

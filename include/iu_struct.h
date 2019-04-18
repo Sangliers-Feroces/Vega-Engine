@@ -32,6 +32,7 @@ typedef enum {
     IUTEX_SETTING_RES_1600_900,
     IUTEX_SETTING_RES_1920_1080,
     IUTEX_SETTING_VOL_BACK,
+    IUTEX_INVENT_BG,
     IUTEX_END
 } iutex_t;
 
@@ -39,6 +40,11 @@ typedef enum {
     IUBUTTON_ELON,
     IUBUTTON_END
 } iubutton_t;
+
+typedef enum {
+    IUINVENT_BG,
+    IUINVENT_END
+} iuinvent_t;
 
 typedef enum {
     IUREL_X,
@@ -88,6 +94,7 @@ typedef struct {
     iu_data_t data;
     texture2 *textures[IUTEX_END];
     entity2_t buttons[IUBUTTON_END];
+    entity2_t invent[IUINVENT_END];
 } iu_t;
 
 #endif /* !IU_STRUCT_H_ */
