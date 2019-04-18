@@ -88,6 +88,7 @@ typedef struct {
     iu_data_t data;
     texture2 *textures[IUTEX_END];
     entity2_t buttons[IUBUTTON_END];
+    char *text[TEXT_END];
 } iu_t;
 
 #endif /* !IU_STRUCT_H_ */
