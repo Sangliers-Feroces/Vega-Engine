@@ -30,6 +30,8 @@ typedef enum {
     IUTEX_SETTING_RES_1920_1080,
     IUTEX_SETTING_VOL_BACK,
     IUTEX_INVENT_BG,
+    IUTEX_TEXT_CADRE,
+    IUTEX_FONT_MINECRAFT,
     IUTEX_END
 } iutex_t;
 
@@ -57,6 +59,17 @@ typedef enum {
     PATTERN_END
 } pattern_t;
 
+typedef enum {
+    FONT_MINECRAFT,
+    FONT_END
+}font_list_t;
+
+typedef struct {
+    iutex_t index;
+    int cols;
+    int lines;
+} font_t;
+
 typedef struct {
     iutex_t index;
     char *path;
@@ -81,6 +94,7 @@ struct entity2 {
 typedef struct entity2 entity2_t;
 
 typedef struct {
+    int expect_dialogue_input;
     int ratiowh;
     gluint iu_program;
     gluint vertex_buffer;
@@ -92,5 +106,8 @@ typedef struct {
     texture2 *textures[IUTEX_END];
     entity2_t buttons[IUBUTTON_END];
     entity2_t invent[IUINVENT_END];
+    //texts
+    font_t fonts[FONT_END];
     char *text[TEXT_END];
+    text_grp_t text_grp[TEXT_IND_END];
 } iu_t;

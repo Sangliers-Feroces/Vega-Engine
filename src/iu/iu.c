@@ -32,6 +32,8 @@ static const iutex_path_t iutex_path [] = {
     {IUTEX_SETTING_VOL_BACK, "res/ui/menu/new/settings/volume.png"},
     {IUTEX_SLIDER, "res/ui/menu/new/settings/slider.png"},
     {IUTEX_INVENT_BG, "res/ui/invent/invent.png"},
+    {IUTEX_TEXT_CADRE, "res/ui/dialogue_cadre.png"},
+    {IUTEX_FONT_MINECRAFT, "res/ui/font/minecraft.png"},
     {0, NULL}
 };
 
@@ -84,8 +86,8 @@ void iu_init(demo_t *demo)
         exit(84);
     set_entities();
     iu_text_init();
-    printf("%s\n", _iu.text[TEXT_TEST]);
     iu_set_gl();
+    iu_set_font();
 }
 
 void iu_quit(void)

@@ -32,6 +32,13 @@ void iu_entity_draw(entity2_t entity)
     iu_draw_full_rel(entity.index, entity_get_size(entity), entity.depth);
 }
 
+void display_dialogues(void)
+{
+    printf("time elpased : %f\n", _demo->game_time);
+    if (_demo->game_time >= 1.0f && _demo->game_time <= 3.0f)
+        iu_display_grp(TEXT_GRP_IND_WELCOME);
+}
+
 void iu_display(void)
 {
     glUseProgram(_iu.data.iu_program);
@@ -40,4 +47,6 @@ void iu_display(void)
     if (_iu.data.is_invent)
         for (int i = 0; i < IUINVENT_END; i++)
             iu_entity_draw(_iu.invent[i]);
+    iu_display_str("test", (rect_t){{0.0f, 0.0f}, {0.2f, 0.2f}}, FONT_MINECRAFT);
+    //display_dialogues();
 }

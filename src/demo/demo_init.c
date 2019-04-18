@@ -64,6 +64,7 @@ demo_t* demo_init(void)
     init_win(res);
     init_cam(res);
     init();
+    clocks_init(res);
     _dungeons.cur_origin = (dvec3){0, 0, 0};
     tex_init(res);
     iu_init(res);
