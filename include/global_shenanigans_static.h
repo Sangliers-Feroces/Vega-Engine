@@ -5,9 +5,6 @@
 ** hEhE
 */
 
-#ifndef _GLOBAL_SHENANIGANS_STATIC_H
-#define _GLOBAL_SHENANIGANS_STATIC_H
+#pragma once
 
 #define const static
-
-#endif

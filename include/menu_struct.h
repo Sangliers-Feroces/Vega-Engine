@@ -5,8 +5,7 @@
 ** menu_struct
 */
 
-#ifndef MENU_STRUCT_H_
-    #define MENU_STRUCT_H_
+#pragma once
 
 #include "menu_setting_struct.h"
 
@@ -78,4 +77,3 @@ typedef struct {
     //music
     sfMusic *music;
 } menu_t;
-#endif /* !MENU_STRUCT_H_ */

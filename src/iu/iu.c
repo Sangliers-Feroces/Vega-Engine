@@ -20,8 +20,6 @@ static const iutex_path_t iutex_path [] = {
     {IUTEX_MENU_CREDITS, "res/ui/menu/new/menu_credits.png"},
     {IUTEX_MENU_QUIT, "res/ui/menu/new/menu_quit.png"},
     {IUTEX_MENU_CURSOR, "res/ui/menu/new/cursor.png"},
-    {IUTEX_TERRAIN, "res/textures/grass.png"},
-    {IUTEX_WATER, "res/textures/water.jpg"},
     {IUTEX_EDITOR_GRAB, "res/model/editor/grab.png"},
     {IUTEX_EDITOR_SELECT, "res/model/editor/select.png"},
     {IUTEX_SETTING_BG, "res/ui/menu/new/setting_bg.png"},
@@ -33,6 +31,7 @@ static const iutex_path_t iutex_path [] = {
     {IUTEX_SETTING_CONFIRM, "res/ui/menu/new/settings/confirmation.png"},
     {IUTEX_SETTING_VOL_BACK, "res/ui/menu/new/settings/volume.png"},
     {IUTEX_SLIDER, "res/ui/menu/new/settings/slider.png"},
+    {IUTEX_INVENT_BG, "res/ui/invent/invent.png"},
     {0, NULL}
 };
 

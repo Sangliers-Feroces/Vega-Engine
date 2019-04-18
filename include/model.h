@@ -5,8 +5,7 @@
 ** swaggy demo
 */
 
-#ifndef _MODEL_H
-#define _MODEL_H
+#pragma once
 
 model_t* model_create(const vertex_serial_t *vertex, size_t vertex_count,
 texture2 *texture);
@@ -20,5 +19,3 @@ void entity_draw(demo_t *demo, entity_t *entity);
 void vertex_intersect_ray_no_cull(vertex_t *vertex, ray3 ray,
 inter_ray3_ent *inter, int authorize_oob);
 inter_ray3_ent entity_intersect(entity_t *entity, ray3 ray);
-
-#endif

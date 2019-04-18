@@ -5,8 +5,7 @@
 ** headers
 */
 
-#ifndef _STRUCT_H
-#define _STRUCT_H
+#pragma once
 
 #include "matgl_struct.h"
 #include "mat_struct.h"
@@ -23,5 +22,3 @@
 #include "iu_struct.h"
 #include "menu_struct.h"
 #include "dungeons_struct.h"
-
-#endif

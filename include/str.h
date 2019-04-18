@@ -5,8 +5,7 @@
 ** str
 */
 
-#ifndef STR_H_
-    #define STR_H_
+#pragma once
 
 #include <stdio.h>
 #include <unistd.h>
@@ -22,4 +21,3 @@ void my_putchar(char c);
 /* ---> Advanced <--- */
 int my_strcpy(const char *src, char **pres, size_t n);
 int my_strcmp(const char *s1, const char *s2, size_t n);
-#endif /* !STR_H_ */

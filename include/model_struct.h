@@ -5,8 +5,7 @@
 ** swaggy demo
 */
 
-#ifndef _MODEL_STRUCT_H
-#define _MODEL_STRUCT_H
+#pragma once
 
 typedef enum {
     MODEL_EDITOR_SELECT,
@@ -15,5 +14,3 @@ typedef enum {
     MODEL_EDITOR_Z,
     MODEL_EDITOR_MAX
 } model_editor_t;
-
-#endif

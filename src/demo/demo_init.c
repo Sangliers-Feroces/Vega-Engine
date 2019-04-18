@@ -65,8 +65,8 @@ demo_t* demo_init(void)
     init_cam(res);
     init();
     _dungeons.cur_origin = (dvec3){0, 0, 0};
+    tex_init(res);
     iu_init(res);
-    demo_get_texture_pannel(res);
     editor_init(res);
     gl_gen(res);
     shader_init(res);
@@ -79,10 +79,10 @@ void demo_quit(demo_t *demo)
 {
     world_quit(demo);
     editor_quit(demo);
-    demo_texture_destroy(demo);
     shader_quit(demo);
     gl_delete(demo);
     iu_quit();
+    tex_quit(demo);
     texture2f_write(_lightmaps.base, _lightmaps.aperture);
     quit();
     sfRenderWindow_destroy(demo->win.window);

@@ -5,8 +5,7 @@
 ** iu_struct
 */
 
-#ifndef IU_STRUCT_H_
-    #define IU_STRUCT_H_
+#pragma once
 
 typedef enum {
     IUTEX_ELON,
@@ -23,8 +22,6 @@ typedef enum {
     IUTEX_MENU_QUIT,
     IUTEX_MENU_CURSOR,
     IUTEX_SETTING_BG,
-    IUTEX_TERRAIN,
-    IUTEX_WATER,
     IUTEX_EDITOR_GRAB,
     IUTEX_EDITOR_SELECT,
     IUTEX_SETTING_RES,
@@ -32,6 +29,7 @@ typedef enum {
     IUTEX_SETTING_RES_1600_900,
     IUTEX_SETTING_RES_1920_1080,
     IUTEX_SETTING_VOL_BACK,
+    IUTEX_INVENT_BG,
     IUTEX_END
 } iutex_t;
 
@@ -39,6 +37,11 @@ typedef enum {
     IUBUTTON_ELON,
     IUBUTTON_END
 } iubutton_t;
+
+typedef enum {
+    IUINVENT_BG,
+    IUINVENT_END
+} iuinvent_t;
 
 typedef enum {
     IUREL_X,
@@ -71,7 +74,6 @@ struct entity2 {
     float depth;
     rel_t rel;
     pattern_t pattern;
-    //slide
     struct entity2 *slider;
     float x_min;
     float x_max;
@@ -90,5 +92,3 @@ typedef struct {
     entity2_t buttons[IUBUTTON_END];
     char *text[TEXT_END];
 } iu_t;
-
-#endif /* !IU_STRUCT_H_ */

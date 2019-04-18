@@ -11,12 +11,12 @@ void material_fun_water_world(void)
 {
     glUseProgram(_demo->shader[SHADER_WATER]);
     glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, _iu.textures[IUTEX_WATER]->id);
+    glBindTexture(GL_TEXTURE_2D, _demo->tex[TEX_WATER]->id);
 }
 
 void material_fun_water_entity(void)
 {
     glUseProgram(_demo->shader[SHADER_WATER]);
     glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, _iu.textures[IUTEX_WATER]->id);
+    glBindTexture(GL_TEXTURE_2D, _demo->tex[TEX_WATER]->id);
 }

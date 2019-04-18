@@ -5,4 +5,6 @@
 ** hEhE
 */
 
+#pragma once
+
 #define GL_LOADER_IMPLEMENTATION

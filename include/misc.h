@@ -5,8 +5,7 @@
 ** hidden stuff. don't look !
 */
 
-#ifndef _MISC_H
-#define _MISC_H
+#pragma once
 
 void exit_full_custom(void);
 void* malloc_safe(size_t size);
@@ -16,5 +15,3 @@ char* get_file_data(const char *path);
 
 void display_helper(void);
 int game(int argc, char **argv);
-
-#endif

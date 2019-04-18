@@ -5,8 +5,7 @@
 ** menu
 */
 
-#ifndef MENU_H_
-    #define MENU_H_
+#pragma once
 
 int start(demo_t *demo);
 

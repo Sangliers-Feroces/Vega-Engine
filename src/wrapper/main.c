@@ -5,10 +5,7 @@
 ** innocent main
 */
 
-
 #include "xdworld.h"
-
-void display_helper(void);
 
 int main(int argc, char **argv, char **env)
 {

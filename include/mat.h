@@ -5,8 +5,7 @@
 ** headers
 */
 
-#ifndef _MAT_H
-#define _MAT_H
+#pragma once
 
 /* math-related prototypes */
 
@@ -99,5 +98,3 @@ void chunk_border_destroy(chunk_border_t border);
 
 vec3 dvec3_vec3(dvec3 value);
 dvec3 dvec3_init(double x, double y, double z);
-
-#endif

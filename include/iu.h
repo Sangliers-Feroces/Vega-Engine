@@ -5,8 +5,7 @@
 ** iu
 */
 
-#ifndef IU_H_
-    #define IU_H_
+#pragma once
 
 void iu_init(demo_t *demo);
 void set_entities(void);
@@ -23,4 +22,3 @@ void iu_quit(void);
 
 int check_click_pos(sfVector2i mouse_pos, entity2_t button,
 float width_screen, float height);
-#endif /* !IU_H_ */

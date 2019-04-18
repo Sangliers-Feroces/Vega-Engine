@@ -5,8 +5,7 @@
 ** vulkan ftw
 */
 
-#ifndef _GL_ENUMS_H
-#define _GL_ENUMS_H
+#pragma once
 
 // Datatypes
 
@@ -1516,5 +1515,3 @@ typedef unsigned short GLhalf;
 #define GL_WRAP_BORDER 0x8152
 #define GL_REPLICATE_BORDER 0x8153
 #define GL_CONVOLUTION_BORDER_COLOR 0x8154
-
-#endif

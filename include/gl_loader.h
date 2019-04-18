@@ -5,8 +5,7 @@
 ** vulkan ftw
 */
 
-#ifndef _GLLOADER_H
-#define _GLLOADER_H
+#pragma once
 
 #include "gl_enums.h"
 
@@ -160,7 +159,5 @@ extern void (*p_glgetintegeri_v)(glenum pname, gluint index, glint *params);
 
 #define glGetIntegerv p_glgetintegerv
 #define glGetIntegeri_v p_glgetintegeri_v
-
-#endif
 
 #endif

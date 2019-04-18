@@ -5,8 +5,7 @@
 ** headers
 */
 
-#ifndef _HEADERS_H
-#define _HEADERS_H
+#pragma once
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -54,5 +53,3 @@
 #include "dungeons.h"
 #include "world.h"
 #include "material.h"
-
-#endif
