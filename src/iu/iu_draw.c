@@ -17,14 +17,11 @@ void iu_draw_full_rel(iutex_t index, rect_t rect, float depth)
     glUniform1f(depth_id, depth);
     glUniform2fv(pos_id, 1, (glfloat *)&rect.p);
     glUniform2fv(size_id, 1, (glfloat *)&rect.s);
+    glBindVertexArray(_iu.data.vertex_array);
     glBindBuffer(GL_ARRAY_BUFFER, _iu.data.vertex_buffer);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE,
-    sizeof(vec2), BUFFER_OFFSET(0));
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, _iu.textures[index]->id);
     glDrawArrays(GL_TRIANGLES, 0, 6);
-    glDisableVertexAttribArray(0);
 }
 
 void iu_entity_draw(entity2_t entity)
