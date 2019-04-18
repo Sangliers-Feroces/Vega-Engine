@@ -77,6 +77,7 @@ void demo_loop(demo_t *demo)
         editor(demo);
         world_render(demo);
         editor_draw(demo);
+        iu_display();
         sfRenderWindow_display(demo->win.window);
     }
     sfMusic_stop(music);

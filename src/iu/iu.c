@@ -51,6 +51,7 @@ static void iu_set_gl(void)
     glBindBuffer(GL_ARRAY_BUFFER, _iu.data.vertex_buffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vec2) * 6,
     (glvoid*)vertex_array_base, GL_STATIC_DRAW);
+    _iu.data.is_invent = 0;
 }
 
 static int iu_check_texture_array(void)

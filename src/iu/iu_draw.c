@@ -37,4 +37,7 @@ void iu_display(void)
     glUseProgram(_iu.data.iu_program);
     for (int i = 0; i < IUBUTTON_END; i++)
         iu_entity_draw(_iu.buttons[i]);
+    if (_iu.data.is_invent)
+        for (int i = 0; i < IUINVENT_END; i++)
+            iu_entity_draw(_iu.invent[i]);
 }

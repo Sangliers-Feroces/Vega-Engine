@@ -84,6 +84,7 @@ typedef struct {
     int ratiowh;
     gluint iu_program;
     gluint vertex_buffer;
+    int is_invent;
 } iu_data_t;
 
 typedef struct {
