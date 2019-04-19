@@ -36,6 +36,17 @@ chunk_t** world_chunk2d_get(demo_t *demo, ssize2 pos)
         return &demo->world.chunk2d[ndx.y * demo->world.chunk2d_area.s.x + ndx.x];
 }
 
+static void chunk_set_terrain(chunk_t *chunk)
+{
+    chunk->terrain = chunk_entity_add(chunk);
+    chunk_gen_terrain(chunk);
+    entity_set_col(chunk->terrain, chunk->mesh_lod[WORLD_LOD_MAX]->mesh);
+    for (size_t i = 0; i < 3; i++) {
+        chunk->terrain->render[i].mesh = chunk->mesh_lod[i];
+        chunk->terrain->render[i].material = MATERIAL_GRASS;
+    }
+}
+
 chunk_t* chunk_create(ssize2 pos)
 {
     chunk_t *res;
@@ -51,7 +62,10 @@ chunk_t* chunk_create(ssize2 pos)
     for (size_t i = 0; i < res->lod_count; i++)
         res->lod[i] = chunk_lod_create(i);
     res->world_ndx = ~0ULL;
-    chunk_gen_terrain(res);
+    res->ents = entity3_create(NULL);
+    for (size_t i = 0; i < WORLD_LOD_COUNT + 1; i++)
+        res->mesh_lod[i] = mesh_full_create(0, 1, 0);
+    chunk_set_terrain(res);
     world_chunk2d_insert(_demo, res);
     world_chunk_add(_demo, res);
     return res;
@@ -74,6 +88,9 @@ void chunk_destroy(chunk_t *chunk)
     chunk_border_destroy(chunk->border);
     for (size_t i = 0; i < chunk->lod_count; i++)
         chunk_lod_destroy(&chunk->lod[i]);
+    entity3_destroy(chunk->ents);
+    for (size_t i = 0; i < WORLD_LOD_COUNT + 1; i++)
+        mesh_full_destroy(chunk->mesh_lod[i]);
     free(chunk);
 }
 

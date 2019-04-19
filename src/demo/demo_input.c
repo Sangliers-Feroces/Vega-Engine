@@ -7,6 +7,19 @@
 
 #include "headers.h"
 
+void check_mouse_move(demo_t *demo)
+{
+    float sensi = 0.0015f;
+
+    if (_iu.data.is_invent)
+        return;
+    demo->cam.rot.y -=
+    (float)(demo->mouse.mouse_pos.x - demo->mouse.last_pos.x) * sensi;
+    demo->cam.rot.x -=
+    (float)(demo->mouse.mouse_pos.y - demo->mouse.last_pos.y) * sensi;
+    demo->cam.rot.x = CLAMP(demo->cam.rot.x, -M_PI / 2.0, M_PI / 2.0);
+}
+
 static void poll_editor(demo_t *demo, dvec3 cam_x, dvec3 cam_z)
 {
     if (sfKeyboard_isKeyPressed(sfKeyZ))

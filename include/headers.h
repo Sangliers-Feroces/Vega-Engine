@@ -53,3 +53,4 @@
 #include "dungeons.h"
 #include "world.h"
 #include "material.h"
+#include "mesh.h"

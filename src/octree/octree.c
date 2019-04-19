@@ -33,22 +33,6 @@ octree* octree_create(octree *root)
     return res;
 }
 
-void octree_rtx_triangle_detach(octree *tree, rtx_triangle *triangle)
-{
-    size_t ndx = ~0ULL;
-
-    for (size_t i = 0; i < tree->triangles->count; i++)
-        if (tree->triangles->triangle[i] == triangle) {
-            ndx = i;
-            break;
-        }
-    if (ndx == ~0ULL)
-        return;
-    tree->triangles->count--;
-    for (size_t i = ndx; i < tree->triangles->count; i++)
-        tree->triangles->triangle[i] = tree->triangles->triangle[i + 1];
-}
-
 void octree_destroy(octree **root)
 {
     for (size_t i = 0; i < 8; i++)

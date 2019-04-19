@@ -7,18 +7,6 @@
 
 #include "headers.h"
 
-void check_mouse_move(demo_t *demo)
-{
-    float sensi = 0.0015f;
-
-    if (_iu.data.is_invent)
-        return;
-    demo->cam.rot.y -=
-    (float)(demo->mouse.mouse_pos.x - demo->mouse.last_pos.x) * sensi;
-    demo->cam.rot.x -=
-    (float)(demo->mouse.mouse_pos.y - demo->mouse.last_pos.y) * sensi;
-}
-
 static void send_uniform(void)
 {
     gluint u;

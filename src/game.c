@@ -9,7 +9,7 @@
 
 static void add_triangle(octree **tree, dvec3 *triangle)
 {
-    rtx_triangle *rtx = rtx_triangle_create(triangle);
+    rtx_triangle rtx = rtx_triangle_create(triangle);
 
     octree_insert_triangle(tree, rtx);
 }

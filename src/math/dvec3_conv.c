@@ -12,6 +12,11 @@ vec3 dvec3_vec3(dvec3 value)
     return (vec3){value.x, value.y, value.z};
 }
 
+dvec3 vec3_dvec3(vec3 value)
+{
+    return (dvec3){value.x, value.y, value.z};
+}
+
 dvec3 dvec3_init(double x, double y, double z)
 {
     return (dvec3){x, y, z};

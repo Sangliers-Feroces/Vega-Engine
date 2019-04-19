@@ -10,7 +10,7 @@
 static dvec3 mid_triangle(dvec3 a, dvec3 b, dvec3 c, double stren)
 {
     double dist = dvec3_dist(b, c);
-    dvec3 normal = normal3(a, b, c);
+    dvec3 normal = dnormal3(a, b, c);
     dvec3 mid = dvec3_add(
     dvec3_divs(dvec3_add(b, c), 2.0),
     dvec3_muls(normal, (randf() - 0.5) * dist * stren));
@@ -54,29 +54,33 @@ static void split_ter(arr2d_dvec3_t *arr, double stren)
 
 static void send_ter_to_chunk_lod(chunk_t *chunk, size_t lod, arr2d_dvec3_t arr)
 {
-    dvec3 base = {chunk->pos.x * CHUNK_SIZE, -42.0, chunk->pos.y * CHUNK_SIZE};
-    dvec3 sq[4];
-    rtx_triangle *got;
+    //vec3 base = {chunk->pos.x * CHUNK_SIZE, -42.0f, chunk->pos.y * CHUNK_SIZE};
+    //vec3 sq[4];
+    //rtx_triangle *got;
+    vec3 pos[3];
+    vec2 uv[3] = {{0.0f, 0.0f}, {1.0f, 0.0f}, {0.0f, 1.0f}};
 
-    sq[0] = base;
-    sq[1] = dvec3_add(base, (dvec3){CHUNK_SIZE, 0.0, 0.0});
-    sq[2] = dvec3_add(base, (dvec3){0.0, 0.0, CHUNK_SIZE});
-    sq[3] = dvec3_add(base, (dvec3){CHUNK_SIZE, 0.0, CHUNK_SIZE});
+    /*sq[0] = base;
+    sq[1] = vec3_add(base, (vec3){CHUNK_SIZE, 0.0f, 0.0f});
+    sq[2] = vec3_add(base, (vec3){0.0f, 0.0f, CHUNK_SIZE});
+    sq[3] = vec3_add(base, (vec3){CHUNK_SIZE, 0.0f, CHUNK_SIZE});*/
     for (size_t i = 0; i < arr.h - 1; i++)
         for (size_t j = 0; j < arr.w - 1; j++) {
-            chunk_insert_rtx_triangle_lod(chunk, lod,
-            rtx_triangle_create_discrete(arr.dvec3[i * arr.w + j],
-            arr.dvec3[(i + 1) * arr.w + j], arr.dvec3[i * arr.w + j + 1]));
-            chunk_insert_rtx_triangle_lod(chunk, lod,
-            rtx_triangle_create_discrete(arr.dvec3[(i + 1) * arr.w + (j + 1)],
-            arr.dvec3[i * arr.w + j + 1], arr.dvec3[(i + 1) * arr.w + j]));
+            pos[0] = dvec3_vec3(arr.dvec3[i * arr.w + j]);
+            pos[1] = dvec3_vec3(arr.dvec3[(i + 1) * arr.w + j]);
+            pos[2] = dvec3_vec3(arr.dvec3[i * arr.w + j + 1]);
+            mesh_add_triangle_pos_uv(chunk->mesh_lod[lod]->mesh, pos, uv);
+            pos[0] = dvec3_vec3(arr.dvec3[(i + 1) * arr.w + (j + 1)]);
+            pos[1] = dvec3_vec3(arr.dvec3[i * arr.w + j + 1]);
+            pos[2] = dvec3_vec3(arr.dvec3[(i + 1) * arr.w + j]);
+            mesh_add_triangle_pos_uv(chunk->mesh_lod[lod]->mesh, pos, uv);
         }
-    got = rtx_triangle_create_discrete(sq[0], sq[2], sq[1]);
+    /*got = rtx_triangle_create_discrete(sq[0], sq[2], sq[1]);
     got->material = MATERIAL_WATER;
     chunk_insert_rtx_triangle_lod(chunk, lod, got);
     got = rtx_triangle_create_discrete(sq[3], sq[1], sq[2]);
     got->material = MATERIAL_WATER;
-    chunk_insert_rtx_triangle_lod(chunk, lod, got);
+    chunk_insert_rtx_triangle_lod(chunk, lod, got);*/
 }
 
 static void send_iter_to_border(chunk_t *chunk, arr2d_dvec3_t arr, size_t ndx)

@@ -26,48 +26,59 @@ static void gl_reset_stuff(void)
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
-static void render_geom(material_t material, size_t first, size_t i)
+static void mesh_full_refresh(mesh_full_t *mesh)
 {
-    if (material != ~0U) {
-        _demo->material[material].world();
-        glDrawArrays(GL_TRIANGLES, first * 3, (i - first) * 3);
+    if (mesh->has_ext) {
+        if (mesh->gpu.do_reupload) {
+            glBindBuffer(GL_ARRAY_BUFFER, mesh->gpu.vertex_buffer);
+            glBufferData(GL_ARRAY_BUFFER,
+            mesh->ext_count * sizeof(vertex_ext_t), mesh->ext, GL_STATIC_DRAW);
+            mesh->gpu.do_reupload = 0;
+        }
+    }
+    if (mesh->mesh->gpu.do_reupload) {
+        glBindBuffer(GL_ARRAY_BUFFER, mesh->mesh->gpu.vertex_buffer);
+        glBufferData(GL_ARRAY_BUFFER,
+        mesh->mesh->vertex_count * sizeof(vertex_t),
+        mesh->mesh->vertex, GL_STATIC_DRAW);
+        mesh->mesh->gpu.do_reupload = 0;
     }
 }
 
-static void chunk_lod_render(chunk_lod_t *lod)
+static void render_obj_draw(render_obj_t render)
 {
-    material_t material = ~0U;
-    material_t cur;
-    size_t first = 0;
-
-    if (lod->do_reupload_buf)
-        chunk_lod_reupload_buf(lod);
-    glBindVertexArray(lod->vertex_array);
-    glBindBuffer(GL_ARRAY_BUFFER, lod->vertex_buffer);
-    for (size_t i = 0; i < lod->geom->count; i++) {
-        cur = lod->geom->triangle[i]->material;
-        if (cur != material) {
-            render_geom(material, first, i);
-            material = cur;
-            first = i;
-        }
+    mesh_full_refresh(render.mesh);
+    if (render.mesh->has_ext) {
+        _demo->material[render.material].world();
+        glBindVertexArray(render.mesh->gpu.vertex_array);
+        glDrawArrays(GL_TRIANGLES, 0, render.mesh->ext_count);
+    } else {
+        _demo->material[render.material].entity();
+        glBindVertexArray(render.mesh->mesh->gpu.vertex_array);
+        glDrawArrays(GL_TRIANGLES, 0, render.mesh->mesh->vertex_count);
     }
-    render_geom(material, first, lod->geom->count);
+}
+
+static void entity3_render(entity3 *ent)
+{
+    size_t chosen;
+    int do_draw = 0;
+
+    for (size_t i = 0; i < ent->sub.count; i++)
+        entity3_render(ent->sub.ent[i]);
+    for (size_t i = 0; i < 3; i++) {
+        do_draw |= ent->render[i].mesh != NULL;
+        if (ent->render[i].mesh != NULL)
+            chosen = i;
+    }
+    if (!do_draw)
+        return;
+    render_obj_draw(ent->render[chosen]);
 }
 
 static void chunk_render(chunk_t *chunk)
 {
-    double dist = vec2_dist(
-    (vec2){chunk->pos.x * CHUNK_SIZE + CHUNK_SIZE / 2.0,
-    chunk->pos.y * CHUNK_SIZE + CHUNK_SIZE / 2.0},
-    (vec2){_demo->cam.pos.x, _demo->cam.pos.z});
-
-    if (dist < 1500.0)
-        chunk_lod_render(&chunk->lod[2]);
-    else if (dist < 3000.0)
-        chunk_lod_render(&chunk->lod[1]);
-    else
-        chunk_lod_render(&chunk->lod[0]);
+    entity3_render(chunk->ents);
 }
 
 void world_render(demo_t *demo)
