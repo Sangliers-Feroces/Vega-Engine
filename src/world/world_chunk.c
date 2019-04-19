@@ -33,7 +33,8 @@ chunk_t** world_chunk2d_get(demo_t *demo, ssize2 pos)
     (ndx.y >= 0) && (ndx.y < demo->world.chunk2d_area.s.y)))
         return NULL;
     else
-        return &demo->world.chunk2d[ndx.y * demo->world.chunk2d_area.s.x + ndx.x];
+        return
+        &demo->world.chunk2d[ndx.y * demo->world.chunk2d_area.s.x + ndx.x];
 }
 
 static void chunk_set_terrain(chunk_t *chunk)
