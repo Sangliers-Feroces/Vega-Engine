@@ -19,13 +19,15 @@ void entity_refresh(entity_t * entity)
 
 static void send_mvp(demo_t *demo, entity_t *entity)
 {
-    mat4 mvp;
+    (void)demo;
+    (void)entity;
+    /*dmat4 mvp;
 
-    mat4_rot(entity->rot, entity->rot_mat);
-    mat4_scale_trans(entity->pos, entity->scale, mvp);
-    mat4_mul(mvp, entity->rot_mat, entity->trans);
-    mat4_mul(demo->cam.mvp.vp, entity->trans, mvp);
-    glUniformMatrix4fv(demo->editor.mvp, 1, GL_FALSE, &mvp[0][0]);
+    dmat4_rot(entity->rot, entity->rot_mat);
+    dmat4_scale_trans(entity->pos, entity->scale, mvp);
+    dmat4_mul(mvp, entity->rot_mat, entity->trans);
+    dmat4_mul(demo->cam.mvp.vp, entity->trans, mvp);
+    glUniformMatrix4fv(demo->editor.mvp, 1, GL_FALSE, &mvp[0][0]);*/
 }
 
 void entity_draw(demo_t *demo, entity_t *entity)

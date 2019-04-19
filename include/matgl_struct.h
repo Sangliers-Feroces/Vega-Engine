@@ -38,6 +38,13 @@ typedef struct {
 } vec4;
 
 typedef struct {
+    double x;
+    double y;
+    double z;
+    double w;
+} dvec4;
+
+typedef struct {
     int32_t x;
     int32_t y;
 } ivec2;
@@ -53,6 +60,7 @@ typedef struct {
 } srect;
 
 typedef float mat4[4][4];
+typedef double dmat4[4][4];
 
 typedef struct {
     size_t w;

@@ -76,6 +76,21 @@ vec4 mat4_mul_vec(mat4 a, vec4 b);
 void mat4_perspective(proj_t proj, mat4 res);
 void mat4_ortho(proj_t proj, mat4 res);
 
+void dmat4_identity(dmat4 dst);
+void dmat4_copy(dmat4 src, dmat4 dst);
+void dmat4_mul(dmat4 a, dmat4 b, dmat4 res);
+
+void dmat4_scale_trans(dvec3 pos, dvec3 scale, dmat4 res);
+void dmat4_rot(dvec3 rot, dmat4 res);
+void dmat4_model(dvec3 pos, dvec3 scale, dvec3 rot, dmat4 res);
+void dmat4_view(dvec3 pos, dvec3 rot, dmat4 res);
+dvec4 dmat4_mul_vec4(dmat4 a, dvec4 b);
+
+void dmat4_perspective(proj_t proj, dmat4 res);
+void dmat4_ortho(proj_t proj, dmat4 res);
+
+void dmat4_mat4(dmat4 src, mat4 dst);
+
 vec2 barycentric2_get_point(vec2 *triangle, dvec3 bar);
 
 dvec3 barycentric3(dvec3 p, dvec3 *triangle);
@@ -95,8 +110,8 @@ int rect_is_vec2_inside(rect_t rect, vec2 vec);
 
 dvec3 dvec3_interpolate(dvec3 a, dvec3 b, long double ratio);
 
-void mat4_rot_xy(dvec3 rot, mat4 res);
-dvec3 mat4_mul_dvec3(mat4 mat, dvec3 vec);
+void dmat4_rot_xy(dvec3 rot, dmat4 res);
+dvec3 dmat4_mul_dvec3(dmat4 mat, dvec3 vec);
 
 ssize2 ssize2_add(ssize2 a, ssize2 b);
 ssize2 ssize2_sub(ssize2 a, ssize2 b);

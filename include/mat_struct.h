@@ -47,11 +47,11 @@ typedef struct {
 } rect_t;
 
 typedef struct {
-    mat4 model;
-    mat4 view;
-    mat4 proj;
-    mat4 rot;
-    mat4 vp;
+    dmat4 model;
+    dmat4 view;
+    dmat4 proj;
+    dmat4 rot;
+    dmat4 vp;
 } mvp_t;
 
 typedef struct {
