@@ -27,6 +27,8 @@ void demo_loop(demo_t *demo);
 int poll_events(demo_t *demo);
 
 void init(void);
+void clocks_init(demo_t *demo);
+
 void quit(void);
 void gl_gen(demo_t *demo);
 void gl_delete(demo_t *demo);
@@ -51,3 +53,5 @@ int get_random_int(int borne_min, int borne_max);
 
 void demo_update_cursor_visibility(demo_t *demo);
 void demo_center_cursor(demo_t *demo);
+
+float get_eleapsed_time_second(sfClock *clock_);

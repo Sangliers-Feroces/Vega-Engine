@@ -13,7 +13,8 @@ typedef enum {
 } action_t;
 
 typedef enum {
-    KEY_DEL = 127
+    KEY_DEL = 127,
+    KEY_ENTER = 10
 } keycode_t;
 
 typedef struct {
@@ -101,10 +102,11 @@ typedef struct {
 } editor_t;
 
 typedef struct {
-    sfVideoMode *resolution;
-} setting_t;
+    sfClock *game_clock;
+} clocks_t;
 
 typedef struct {
+    clocks_t clocks;
     action_t action;
     win_t win;
     cam_t cam;
@@ -114,8 +116,8 @@ typedef struct {
     player_t player;
     buf_t buf;
     editor_t editor;
-    setting_t setting;
     gluint shader[SHADER_MAX];
     material_full_t material[MATERIAL_MAX];
     texture2 *tex[TEX_MAX];
+    float game_time;
 } demo_t;

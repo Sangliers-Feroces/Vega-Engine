@@ -22,3 +22,9 @@ void iu_quit(void);
 
 int check_click_pos(sfVector2i mouse_pos, entity2_t button,
 float width_screen, float height);
+
+void iu_display_grp(text_grp_ind_t index);
+
+void iu_set_font(void);
+
+void iu_display_str(char *str_to_display, rect_t pos, font_list_t index);

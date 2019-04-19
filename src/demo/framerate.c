@@ -19,6 +19,6 @@ void demo_update_framerate(demo_t *demo)
         (float)stride;
         sfClock_restart(demo->win.frametime);
         frame = 0;
-        printf("%f FPS\n", 1.0 / demo->win.framelen);
+        //printf("%f FPS\n", 1.0 / demo->win.framelen);
     }
 }

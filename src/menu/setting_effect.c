@@ -16,7 +16,7 @@ void display_x(demo_t *demo)//c'est pour le debug
     relative_mouse_pos = vec2_muls(
     vec2_subs(vec2_div(mouse_posf, screen), 0.5f), 2.0f);
     relative_mouse_pos.y *= -1.0;
-    printf("x : %f || y : %f\n", relative_mouse_pos.x, relative_mouse_pos.y);
+    //printf("x : %f || y : %f\n", relative_mouse_pos.x, relative_mouse_pos.y);
 }
 
 void setting_buttons_effects(demo_t *demo, menu_t *menu,

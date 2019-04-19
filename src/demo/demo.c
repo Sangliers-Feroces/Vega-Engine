@@ -105,6 +105,7 @@ void demo_loop(demo_t *demo)
     sfMusic_setLoop(music, sfTrue);
     dungeons_gen_all(demo, 2);
     while (poll_events(demo)) {
+        demo->game_time = get_eleapsed_time_second(demo->clocks.game_clock);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         editor(demo);
         world_render(demo);

@@ -32,6 +32,8 @@ static const iutex_path_t iutex_path [] = {
     {IUTEX_SETTING_VOL_BACK, "res/ui/menu/new/settings/volume.png"},
     {IUTEX_SLIDER, "res/ui/menu/new/settings/slider.png"},
     {IUTEX_INVENT_BG, "res/ui/invent/invent.png"},
+    {IUTEX_TEXT_CADRE, "res/ui/dialogue_cadre.png"},
+    {IUTEX_FONT_MINECRAFT, "res/ui/font/minecraft.png"},
     {0, NULL}
 };
 
@@ -47,8 +49,13 @@ static void iu_set_gl(void)
         printf("Can't load ui shader.\n");
         exit(84);
     }
+    glGenVertexArrays(1, &_iu.data.vertex_array);
+    glBindVertexArray(_iu.data.vertex_array);
     glGenBuffers(1, &_iu.data.vertex_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, _iu.data.vertex_buffer);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE,
+    sizeof(vec2), BUFFER_OFFSET(0));
     glBufferData(GL_ARRAY_BUFFER, sizeof(vec2) * 6,
     (glvoid*)vertex_array_base, GL_STATIC_DRAW);
     _iu.data.is_invent = 0;
@@ -84,14 +91,15 @@ void iu_init(demo_t *demo)
         exit(84);
     set_entities();
     iu_text_init();
-    printf("%s\n", _iu.text[TEXT_TEST]);
     iu_set_gl();
+    iu_set_font();
 }
 
 void iu_quit(void)
 {
     for (int i = 0; i < IUTEX_END; i++)
         texture2_destroy(_iu.textures[i]);
+    glDeleteVertexArrays(1, &_iu.data.vertex_array);
     glDeleteBuffers(1, &_iu.data.vertex_buffer);
     glDeleteProgram(_iu.data.iu_program);
 }
