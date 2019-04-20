@@ -7,16 +7,16 @@
 
 #include "headers.h"
 
-void material_fun_grass_world(void)
+void material_fun_grass_world(dmat4 mvp)
 {
-    glUseProgram(_demo->shader[SHADER_WORLD]);
+    shader_set(SHADER_WORLD, mvp);
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, _demo->tex[TEX_GRASS]->id);
 }
 
-void material_fun_grass_entity(void)
+void material_fun_grass_entity(dmat4 mvp)
 {
-    glUseProgram(_demo->shader[SHADER_WORLD]);
+    shader_set(SHADER_WORLD, mvp);
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, _demo->tex[TEX_GRASS]->id);
 }

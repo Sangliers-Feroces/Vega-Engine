@@ -11,7 +11,7 @@
 #define WORLD_LOD_MAX (WORLD_LOD_COUNT - 1)
 #define CHUNK_SIZE 1024.0f
 #define CHUNK_GEN_ITER 6
-#define CHUNK_LOAD_DISTANCE 4
+#define CHUNK_LOAD_DISTANCE 1
 
 typedef struct {
     size_t lod;
@@ -28,9 +28,12 @@ typedef struct {
 } chunk_border_t;
 
 typedef struct {
+    int is_static;
     dvec3 pos;
     dvec3 scale;
     dvec3 rot;
+    dmat4 model;
+    dmat4 world;
 } transform_t;
 
 typedef struct {
@@ -65,7 +68,6 @@ typedef struct {
 
 typedef struct {
     mesh_t *mesh;
-    transform_t last_transform;
     vec_rtx_triangle_ref ref;
 } col_ref_t;
 

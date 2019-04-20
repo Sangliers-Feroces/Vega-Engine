@@ -10,11 +10,11 @@ layout(location = 1) out vec3 normal_out;
 layout(location = 2) out vec2 uv_albedo_out;
 layout(location = 3) out vec2 uv_lightmap_out;
 
-uniform mat4 vp;
+uniform mat4 mvp;
 
 void main(void)
 {
-    gl_Position = vp * vec4(pos, 1.0);
+    gl_Position = mvp * vec4(pos, 1.0);
 
     pos_out = pos;
     normal_out = normal;

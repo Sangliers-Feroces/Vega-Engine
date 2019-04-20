@@ -54,3 +54,4 @@
 #include "world.h"
 #include "material.h"
 #include "mesh.h"
+#include "entity.h"

@@ -36,3 +36,11 @@ dvec3 dmat4_mul_dvec3(dmat4 mat, dvec3 vec)
 
     return (dvec3){res.x, res.y, res.z};
 }
+
+dvec3 dmat4_mul_vec3(dmat4 mat, vec3 vec)
+{
+    dvec4 used = {vec.x, vec.y, vec.z, 1.0};
+    dvec4 res = dmat4_mul_vec4(mat, used);
+
+    return (dvec3){res.x, res.y, res.z};
+}

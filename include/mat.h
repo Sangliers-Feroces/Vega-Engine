@@ -112,6 +112,7 @@ dvec3 dvec3_interpolate(dvec3 a, dvec3 b, long double ratio);
 
 void dmat4_rot_xy(dvec3 rot, dmat4 res);
 dvec3 dmat4_mul_dvec3(dmat4 mat, dvec3 vec);
+dvec3 dmat4_mul_vec3(dmat4 mat, vec3 vec);
 
 ssize2 ssize2_add(ssize2 a, ssize2 b);
 ssize2 ssize2_sub(ssize2 a, ssize2 b);

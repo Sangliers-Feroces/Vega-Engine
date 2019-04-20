@@ -36,9 +36,12 @@ transform_t transform_get_default(void)
 {
     transform_t res;
 
+    res.is_static = 1;
     res.pos = dvec3_init(0.0, 0.0, 0.0);
     res.scale = dvec3_init(1.0, 1.0, 1.0);
     res.rot = dvec3_init(0.0, 0.0, 0.0);
+    dmat4_identity(res.model);
+    dmat4_identity(res.world);
     return res;
 }
 
@@ -47,7 +50,6 @@ col_ref_t col_ref_get_default(void)
     col_ref_t res;
 
     res.mesh = NULL;
-    res.last_transform = transform_get_default();
     res.ref = vec_rtx_triangle_ref_get_void();
     return res;
 }
@@ -95,11 +97,13 @@ void vec_entity3_destroy(vec_entity3_t vec)
     free(vec.ent);
 }
 
-entity3* entity3_create(entity3 *parent)
+entity3* entity3_create_pos(entity3 *parent, dvec3 pos)
 {
     entity3 *res = (entity3*)malloc_safe(sizeof(entity3));
 
     res->trans = transform_get_default();
+    res->trans.pos = pos;
+    entity_trans_update_model(res);
     res->col = col_ref_get_default();
     for (size_t i = 0; i < WORLD_LOD_COUNT; i++)
         res->render[i] = render_obj_get_default();
@@ -109,6 +113,11 @@ entity3* entity3_create(entity3 *parent)
     if (parent != NULL)
         res->root_ndx = vec_entity3_add(&parent->sub, res);
     return res;
+}
+
+entity3* entity3_create(entity3 *parent)
+{
+    return entity3_create_pos(parent, dvec3_init(0.0, 0.0, 0.0));
 }
 
 void entity3_destroy(entity3 *entity)
@@ -145,7 +154,8 @@ void entity_set_col(entity3 *entity, mesh_t *collision_mesh)
     vec_rtx_triangle_ref_create(collision_mesh->vertex_count / 3);
     for (size_t i = 0; i < collision_mesh->vertex_count / 3; i++) {
         for (size_t j = 0; j < 3; j++)
-            p[j] = vec3_dvec3(collision_mesh->vertex[i * 3 + j].pos);
+            p[j] = dmat4_mul_vec3(entity->trans.world,
+            collision_mesh->vertex[i * 3 + j].pos);
         entity->col.ref.triangle[i] =
         octree_insert_triangle(&_demo->world.tree, rtx_triangle_create(p));
         entity->col.ref.triangle[i]->indirect = &entity->col.ref.triangle[i];

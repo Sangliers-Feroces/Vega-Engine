@@ -41,6 +41,7 @@ static void chunk_set_terrain(chunk_t *chunk)
 {
     chunk->terrain = chunk_entity_add(chunk);
     chunk_gen_terrain(chunk);
+    entity3_update(chunk->ents);
     entity_set_col(chunk->terrain, chunk->mesh_lod[WORLD_LOD_MAX]->mesh);
     for (size_t i = 0; i < 3; i++) {
         chunk->terrain->render[i].mesh = chunk->mesh_lod[i];
@@ -63,7 +64,8 @@ chunk_t* chunk_create(ssize2 pos)
     for (size_t i = 0; i < res->lod_count; i++)
         res->lod[i] = chunk_lod_create(i);
     res->world_ndx = ~0ULL;
-    res->ents = entity3_create(NULL);
+    res->ents = entity3_create_pos(NULL,
+    dvec3_init(pos.x * CHUNK_SIZE, 0.0, pos.y * CHUNK_SIZE));
     for (size_t i = 0; i < WORLD_LOD_COUNT + 1; i++)
         res->mesh_lod[i] = mesh_full_create(0, 1, 0);
     chunk_set_terrain(res);

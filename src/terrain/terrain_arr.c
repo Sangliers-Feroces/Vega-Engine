@@ -130,8 +130,7 @@ void chunk_gen_terrain(chunk_t *chunk)
 {
     arr2d_dvec3_t arr = arr2d_dvec3_create(2, 2);
     double stren = get_strength(chunk->pos);
-    dvec3 base = {chunk->pos.x * CHUNK_SIZE, (stren - 0.25) * 384.0,
-    chunk->pos.y * CHUNK_SIZE};
+    dvec3 base = {0.0, (stren - 0.25) * 384.0, 0.0};
     chunk_border_t border = chunk_border_fetch(chunk->pos);
 
     arr.dvec3[0] = base;
@@ -155,4 +154,5 @@ void chunk_gen_terrain(chunk_t *chunk)
         }
     }
     arr2d_dvec3_destroy(arr);
+    chunk_border_destroy(border);
 }

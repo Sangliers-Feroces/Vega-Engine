@@ -26,6 +26,17 @@ static void send_uniform(void)
     }
 }
 
+void shader_set(shader_t shader, dmat4 value)
+{
+    mat4 actual;
+    gluint u;
+
+    dmat4_mat4(value, actual);
+    glUseProgram(_demo->shader[shader]);
+    u = glGetUniformLocation(_demo->shader[shader], "mvp");
+    glUniformMatrix4fv(u, 1, GL_FALSE, (void*)actual);
+}
+
 void refresh_vp(demo_t *demo)
 {
     proj_t proj_struct = {0.3f, 4094.0f * 4, 90.0f, 16.0f / 9.0f};
