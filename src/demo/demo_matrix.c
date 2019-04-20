@@ -26,15 +26,19 @@ static void send_uniform(void)
     }
 }
 
-void shader_set(shader_t shader, dmat4 value)
+void shader_set(shader_t shader, dmat4 mvp, dmat4 world)
 {
-    mat4 actual;
+    mat4 mvp_actual;
+    mat4 world_actual;
     gluint u;
 
-    dmat4_mat4(value, actual);
+    dmat4_mat4(mvp, mvp_actual);
+    dmat4_mat4(world, world_actual);
     glUseProgram(_demo->shader[shader]);
     u = glGetUniformLocation(_demo->shader[shader], "mvp");
-    glUniformMatrix4fv(u, 1, GL_FALSE, (void*)actual);
+    glUniformMatrix4fv(u, 1, GL_FALSE, (void*)mvp_actual);
+    u = glGetUniformLocation(_demo->shader[shader], "world");
+    glUniformMatrix4fv(u, 1, GL_FALSE, (void*)world_actual);
 }
 
 void refresh_vp(demo_t *demo)

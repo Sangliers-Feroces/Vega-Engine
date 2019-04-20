@@ -7,16 +7,16 @@
 
 #include "headers.h"
 
-void material_fun_grass_world(dmat4 mvp)
+void material_fun_grass_world(dmat4 mvp, dmat4 world)
 {
-    shader_set(SHADER_WORLD, mvp);
+    shader_set(SHADER_WORLD, mvp, world);
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, _demo->tex[TEX_GRASS]->id);
 }
 
-void material_fun_grass_entity(dmat4 mvp)
+void material_fun_grass_entity(dmat4 mvp, dmat4 world)
 {
-    shader_set(SHADER_WORLD, mvp);
+    shader_set(SHADER_WORLD, mvp, world);
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, _demo->tex[TEX_GRASS]->id);
 }

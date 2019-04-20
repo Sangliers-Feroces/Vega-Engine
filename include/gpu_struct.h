@@ -21,8 +21,8 @@ typedef enum {
 } material_t;
 
 typedef struct {
-    void (*world)(dmat4 mvp);
-    void (*entity)(dmat4 mvp);
+    void (*world)(dmat4 mvp, dmat4 world);
+    void (*entity)(dmat4 mvp, dmat4 world);
 } material_full_t;
 
 typedef struct {
@@ -33,6 +33,6 @@ typedef struct {
 
 typedef struct {
     material_t material;
-    void (*world)(dmat4 mvp);
-    void (*entity)(dmat4 mvp);
+    void (*world)(dmat4 mvp, dmat4 world);
+    void (*entity)(dmat4 mvp, dmat4 world);
 } material_desc_t;

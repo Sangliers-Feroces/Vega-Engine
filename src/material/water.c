@@ -7,16 +7,16 @@
 
 #include "headers.h"
 
-void material_fun_water_world(dmat4 mvp)
+void material_fun_water_world(dmat4 mvp, dmat4 world)
 {
-    shader_set(SHADER_WATER, mvp);
+    shader_set(SHADER_WATER, mvp, world);
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, _demo->tex[TEX_WATER]->id);
 }
 
-void material_fun_water_entity(dmat4 mvp)
+void material_fun_water_entity(dmat4 mvp, dmat4 world)
 {
-    shader_set(SHADER_WATER, mvp);
+    shader_set(SHADER_WATER, mvp, world);
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, _demo->tex[TEX_WATER]->id);
 }
