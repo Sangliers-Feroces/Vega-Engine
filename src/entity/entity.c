@@ -103,7 +103,7 @@ entity3* entity3_create_pos(entity3 *parent, dvec3 pos)
 
     res->trans = transform_get_default();
     res->trans.pos = pos;
-    entity_trans_update_model(res);
+    entity3_trans_update_model(res);
     res->col = col_ref_get_default();
     for (size_t i = 0; i < WORLD_LOD_COUNT; i++)
         res->render[i] = render_obj_get_default();
@@ -134,14 +134,14 @@ void entity3_destroy(entity3 *entity)
     free(entity);
 }
 
-entity3* chunk_entity_add(chunk_t *chunk)
+entity3* chunk_add_entity(chunk_t *chunk)
 {
     entity3 *res = entity3_create(chunk->ents);
 
     return res;
 }
 
-void entity_set_col(entity3 *entity, mesh_t *collision_mesh)
+void entity3_set_col(entity3 *entity, mesh_t *collision_mesh)
 {
     dvec3 p[3];
 
@@ -160,4 +160,15 @@ void entity_set_col(entity3 *entity, mesh_t *collision_mesh)
         octree_insert_triangle(&_demo->world.tree, rtx_triangle_create(p));
         entity->col.ref.triangle[i]->indirect = &entity->col.ref.triangle[i];
     }
+}
+
+void entity3_set_render(entity3 *ent, size_t lod, mesh_full_t *mesh,
+material_t material)
+{
+    if (!(lod < (size_t)WORLD_LOD_COUNT)) {
+        printf("Error: oob lod (got %zu).\n", lod);
+        exit(84);
+    }
+    ent->render[lod].mesh = mesh;
+    ent->render[lod].material = material;
 }

@@ -35,7 +35,7 @@ vec_chunk_dvertex_t vec_chunk_dvertex_create(size_t count);
 void vec_chunk_dvertex_destroy(vec_chunk_dvertex_t vec);
 void chunk_lod_reupload_buf(chunk_lod_t *lod);
 
-void chunk_gen_terrain(chunk_t *chunk);
+void chunk_gen_terrain(chunk_t *chunk, entity3 *ent);
 
 chunk_border_t chunk_border_fetch(ssize2 pos);
 

@@ -19,10 +19,12 @@ void vec_entity3_destroy(vec_entity3_t vec);
 entity3* entity3_create_pos(entity3 *parent, dvec3 pos);
 entity3* entity3_create(entity3 *parent);
 void entity3_destroy(entity3 *entity);
-entity3* chunk_entity_add(chunk_t *chunk);
-void entity_set_col(entity3 *entity, mesh_t *collision_mesh);
+entity3* chunk_add_entity(chunk_t *chunk);
+void entity3_set_col(entity3 *entity, mesh_t *collision_mesh);
+void entity3_set_render(entity3 *ent, size_t lod, mesh_full_t *mesh,
+material_t material);
 
 void entity3_render(entity3 *ent, dmat4 vp);
 
-void entity_trans_update_model(entity3 *ent);
+void entity3_trans_update_model(entity3 *ent);
 void entity3_update(entity3 *ent);

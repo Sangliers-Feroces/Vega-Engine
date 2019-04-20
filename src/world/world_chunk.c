@@ -39,14 +39,18 @@ chunk_t** world_chunk2d_get(demo_t *demo, ssize2 pos)
 
 static void chunk_set_terrain(chunk_t *chunk)
 {
-    chunk->terrain = chunk_entity_add(chunk);
-    chunk_gen_terrain(chunk);
-    entity3_update(chunk->ents);
-    entity_set_col(chunk->terrain, chunk->mesh_lod[WORLD_LOD_MAX]->mesh);
-    for (size_t i = 0; i < 3; i++) {
-        chunk->terrain->render[i].mesh = chunk->mesh_lod[i];
-        chunk->terrain->render[i].material = MATERIAL_GRASS;
+    mesh_full_t *mesh;
+
+    chunk->terrain = chunk_add_entity(chunk);
+    for (size_t i = 0; i < WORLD_LOD_COUNT ; i++) {
+        mesh = mesh_full_create(1, 0);
+        chunk_add_mesh(chunk, mesh);
+        entity3_set_render(chunk->terrain, i, mesh, MATERIAL_GRASS);
     }
+    chunk_gen_terrain(chunk, chunk->terrain);
+    entity3_update(chunk->ents);
+    entity3_set_col(chunk->terrain,
+    chunk->terrain->render[WORLD_LOD_MAX].mesh->mesh);
 }
 
 chunk_t* chunk_create(ssize2 pos)
@@ -66,8 +70,7 @@ chunk_t* chunk_create(ssize2 pos)
     res->world_ndx = ~0ULL;
     res->ents = entity3_create_pos(NULL,
     dvec3_init(pos.x * CHUNK_SIZE, 0.0, pos.y * CHUNK_SIZE));
-    for (size_t i = 0; i < WORLD_LOD_COUNT + 1; i++)
-        res->mesh_lod[i] = mesh_full_create(0, 1, 0);
+    res->meshes = vec_mesh_full_init();
     chunk_set_terrain(res);
     world_chunk2d_insert(_demo, res);
     world_chunk_add(_demo, res);
@@ -92,8 +95,7 @@ void chunk_destroy(chunk_t *chunk)
     for (size_t i = 0; i < chunk->lod_count; i++)
         chunk_lod_destroy(&chunk->lod[i]);
     entity3_destroy(chunk->ents);
-    for (size_t i = 0; i < WORLD_LOD_COUNT + 1; i++)
-        mesh_full_destroy(chunk->mesh_lod[i]);
+    vec_mesh_full_destroy(chunk->meshes);
     free(chunk);
 }
 

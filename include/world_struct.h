@@ -67,6 +67,12 @@ typedef struct {
 } mesh_full_t;
 
 typedef struct {
+    size_t count;
+    size_t allocated;
+    mesh_full_t **mesh;
+} vec_mesh_full_t;
+
+typedef struct {
     mesh_t *mesh;
     vec_rtx_triangle_ref ref;
 } col_ref_t;
@@ -100,7 +106,7 @@ typedef struct {
     size_t world_ndx;
     chunk_border_t border;
     entity3 *ents;
-    mesh_full_t *mesh_lod[WORLD_LOD_COUNT + 1];
+    vec_mesh_full_t meshes;
     entity3 *terrain;
 } chunk_t;
 

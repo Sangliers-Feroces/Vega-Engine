@@ -80,14 +80,13 @@ static void mesh_gpu_destroy(mesh_gpu_t gpu)
     }
 }
 
-mesh_t* mesh_create(size_t vertex_count, int gpu_do_upload)
+mesh_t* mesh_create(int gpu_do_upload)
 {
     mesh_t *res = (mesh_t*)malloc_safe(sizeof(mesh_t));
 
-    res->vertex_count = vertex_count;
-    res->vertex_allocated = vertex_count;
-    res->vertex =
-    (vertex_t*)malloc_safe(res->vertex_allocated * sizeof(vertex_t));
+    res->vertex_count = 0;
+    res->vertex_allocated = 0;
+    res->vertex = NULL;
     if (gpu_do_upload)
         mesh_gpu_init(res);
     else
@@ -135,18 +134,16 @@ void mesh_add_triangle_pos_uv(mesh_t *mesh, vec3 *pos, vec2 *uv)
         mesh_add_vertex(mesh, vertex_init(pos[i], normal, uv[i]));
 }
 
-mesh_full_t* mesh_full_create(size_t vertex_count, int gpu_do_upload,
-int has_ext)
+mesh_full_t* mesh_full_create(int gpu_do_upload, int has_ext)
 {
     mesh_full_t *res = (mesh_full_t*)malloc_safe(sizeof(mesh_full_t));
 
-    res->mesh = mesh_create(vertex_count, gpu_do_upload);
+    res->mesh = mesh_create(gpu_do_upload);
     res->has_ext = has_ext;
     if (has_ext) {
-        res->ext_count = vertex_count;
-        res->ext_allocated = vertex_count;
-        res->ext =
-        (vertex_ext_t*)malloc_safe(vertex_count * sizeof(vertex_ext_t));
+        res->ext_count = 0;
+        res->ext_allocated = 0;
+        res->ext = NULL;
         mesh_ext_gpu_init(res);
     } else {
         res->ext_count = 0;

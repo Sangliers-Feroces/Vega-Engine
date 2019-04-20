@@ -52,35 +52,36 @@ static void split_ter(arr2d_dvec3_t *arr, double stren)
     *arr = new_arr;
 }
 
-static void send_ter_to_chunk_lod(chunk_t *chunk, size_t lod, arr2d_dvec3_t arr)
+static void send_ter_to_chunk_lod(chunk_t *chunk, entity3 *ent, size_t lod,
+arr2d_dvec3_t arr)
 {
-    //vec3 base = {chunk->pos.x * CHUNK_SIZE, -42.0f, chunk->pos.y * CHUNK_SIZE};
-    //vec3 sq[4];
-    //rtx_triangle *got;
+    vec3 base = {0.0, -42.0f, 0.0};
+    vec3 sq[4];
     vec3 pos[3];
     vec2 uv[3] = {{0.0f, 0.0f}, {1.0f, 0.0f}, {0.0f, 1.0f}};
 
-    /*sq[0] = base;
+    sq[0] = base;
     sq[1] = vec3_add(base, (vec3){CHUNK_SIZE, 0.0f, 0.0f});
     sq[2] = vec3_add(base, (vec3){0.0f, 0.0f, CHUNK_SIZE});
-    sq[3] = vec3_add(base, (vec3){CHUNK_SIZE, 0.0f, CHUNK_SIZE});*/
+    sq[3] = vec3_add(base, (vec3){CHUNK_SIZE, 0.0f, CHUNK_SIZE});
     for (size_t i = 0; i < arr.h - 1; i++)
         for (size_t j = 0; j < arr.w - 1; j++) {
             pos[0] = dvec3_vec3(arr.dvec3[i * arr.w + j]);
             pos[1] = dvec3_vec3(arr.dvec3[(i + 1) * arr.w + j]);
             pos[2] = dvec3_vec3(arr.dvec3[i * arr.w + j + 1]);
-            mesh_add_triangle_pos_uv(chunk->mesh_lod[lod]->mesh, pos, uv);
+            mesh_add_triangle_pos_uv(ent->render[lod].mesh->mesh, pos, uv);
             pos[0] = dvec3_vec3(arr.dvec3[(i + 1) * arr.w + (j + 1)]);
             pos[1] = dvec3_vec3(arr.dvec3[i * arr.w + j + 1]);
             pos[2] = dvec3_vec3(arr.dvec3[(i + 1) * arr.w + j]);
-            mesh_add_triangle_pos_uv(chunk->mesh_lod[lod]->mesh, pos, uv);
+            mesh_add_triangle_pos_uv(ent->render[lod].mesh->mesh, pos, uv);
         }
-    /*got = rtx_triangle_create_discrete(sq[0], sq[2], sq[1]);
-    got->material = MATERIAL_WATER;
-    chunk_insert_rtx_triangle_lod(chunk, lod, got);
-    got = rtx_triangle_create_discrete(sq[3], sq[1], sq[2]);
-    got->material = MATERIAL_WATER;
-    chunk_insert_rtx_triangle_lod(chunk, lod, got);*/
+    mesh_full_t *mesh = mesh_full_create(1, 0);
+    entity3 *water = chunk_add_entity(chunk);
+
+    chunk_add_mesh(chunk, mesh);
+    mesh_add_triangle_pos_uv(mesh->mesh, (vec3[]){sq[0], sq[2], sq[1]}, uv);
+    mesh_add_triangle_pos_uv(mesh->mesh, (vec3[]){sq[3], sq[1], sq[2]}, uv);
+    entity3_set_render(water, 0, mesh, MATERIAL_WATER);
 }
 
 static void send_iter_to_border(chunk_t *chunk, arr2d_dvec3_t arr, size_t ndx)
@@ -126,7 +127,7 @@ static double get_strength(ssize2 pos)
     return (cos_der(pos.x) * cos_der(pos.y)) / 2.0;
 }
 
-void chunk_gen_terrain(chunk_t *chunk)
+void chunk_gen_terrain(chunk_t *chunk, entity3 *ent)
 {
     arr2d_dvec3_t arr = arr2d_dvec3_create(2, 2);
     double stren = get_strength(chunk->pos);
@@ -143,13 +144,13 @@ void chunk_gen_terrain(chunk_t *chunk)
         send_iter_to_border(chunk, arr, i);
         switch (i) {
         case 3:
-            send_ter_to_chunk_lod(chunk, 0, arr);
+            send_ter_to_chunk_lod(chunk, ent, 0, arr);
             break;
         case 4:
-            send_ter_to_chunk_lod(chunk, 1, arr);
+            send_ter_to_chunk_lod(chunk, ent, 1, arr);
             break;
         case 5:
-            send_ter_to_chunk_lod(chunk, 2, arr);
+            send_ter_to_chunk_lod(chunk, ent, 2, arr);
             break;
         }
     }
