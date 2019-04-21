@@ -67,6 +67,9 @@ typedef struct {
     gluint lightmap_shader;
     gluint world_shader;
     dvec3 l;
+    gluint hdr_framebuffer;
+    gluint hdr_depthbuffer;
+    gluint hdr_render_texture;
 } buf_t;
 
 typedef enum {

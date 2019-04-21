@@ -12,14 +12,16 @@ layout(location = 3) out vec2 uv_lightmap_out;
 
 uniform mat4 mvp;
 uniform mat4 world;
+uniform mat4 rot;
 
 void main(void)
 {
     vec4 p = vec4(pos, 1.0);
+    vec4 n = vec4(normal, 1.0);
     gl_Position = mvp * p;
 
-    pos_out = vec3((world * p).xyz);
-    normal_out = normal;
+    pos_out = (world * p).xyz;
+    normal_out = (rot * n).xyz;
     uv_albedo_out = uv_albedo;
     uv_lightmap_out = uv_lightmap;
 }

@@ -41,7 +41,9 @@ transform_t transform_get_default(void)
     res.scale = dvec3_init(1.0, 1.0, 1.0);
     res.rot = dvec3_init(0.0, 0.0, 0.0);
     dmat4_identity(res.model);
+    dmat4_identity(res.model_rot);
     dmat4_identity(res.world);
+    dmat4_identity(res.world_rot);
     return res;
 }
 

@@ -26,15 +26,15 @@ static void mesh_full_refresh(mesh_full_t *mesh)
     }
 }
 
-static void render_obj_draw(render_obj_t render, dmat4 mvp, dmat4 world)
+static void render_obj_draw(render_obj_t render, dmat4 mvp, dmat4 world, dmat4 rot)
 {
     mesh_full_refresh(render.mesh);
     if (render.mesh->has_ext) {
-        _demo->material[render.material].world(mvp, world);
+        _demo->material[render.material].world(mvp, world, rot);
         glBindVertexArray(render.mesh->gpu.vertex_array);
         glDrawArrays(GL_TRIANGLES, 0, render.mesh->ext_count);
     } else {
-        _demo->material[render.material].entity(mvp, world);
+        _demo->material[render.material].entity(mvp, world, rot);
         glBindVertexArray(render.mesh->mesh->gpu.vertex_array);
         glDrawArrays(GL_TRIANGLES, 0, render.mesh->mesh->vertex_count);
     }
@@ -56,5 +56,6 @@ void entity3_render(entity3 *ent, dmat4 vp)
     }
     if (!do_draw)
         return;
-    render_obj_draw(ent->render[chosen], mvp, ent->trans.world);
+    render_obj_draw(ent->render[chosen],
+    mvp, ent->trans.world, ent->trans.world_rot);
 }

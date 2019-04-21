@@ -60,12 +60,14 @@ void dmat4_rot(dvec3 rot, dmat4 res)
     dmat4_mul(rot_z, res, res);
 }
 
-void dmat4_model(dvec3 pos, dvec3 scale, dvec3 rot, dmat4 res)
+void dmat4_model(transform_t *t, dmat4 res, dmat4 rot)
 {
     dmat4 scale_trans;
 
-    dmat4_rot(rot, res);
-    dmat4_scale_trans(pos, scale, scale_trans);
+    dmat4_rot(t->rot, res);
+    if (rot != NULL)
+        dmat4_copy(res, rot);
+    dmat4_scale_trans(t->pos, t->scale, scale_trans);
     dmat4_mul(scale_trans, res, res);
 }
 
