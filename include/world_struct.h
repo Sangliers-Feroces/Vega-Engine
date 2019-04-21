@@ -122,8 +122,8 @@ struct entity3 {
 
 typedef struct {
     ssize2 pos;
-    size_t world_ndx;
     chunk_border_t border;
+    size_t world_ndx;
     entity3 *ents;
     entity3 *terrain;
     entity3 *inserting;

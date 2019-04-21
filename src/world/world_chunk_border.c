@@ -12,6 +12,7 @@ static void fetch_hor(chunk_border_t *res, ssize2 pos)
     dvec3 v = dvec3_init(CHUNK_SIZE, 0.0, 0.0);
     chunk_t **adj;
 
+    chunk_try_load(ssize2_add(pos, (ssize2){-1, 0}), NULL);
     adj = world_chunk2d_get(_demo, ssize2_add(pos, (ssize2){-1, 0}));
     if ((adj != NULL) && (*adj != NULL))
         for (size_t i = 0; i < CHUNK_GEN_ITER; i++) {
@@ -20,6 +21,7 @@ static void fetch_hor(chunk_border_t *res, ssize2 pos)
                 res->hor[i][0].dvec3[j] =
                 dvec3_sub((*adj)->border.hor[i][1].dvec3[j], v);
         }
+    chunk_try_load(ssize2_add(pos, (ssize2){1, 0}), NULL);
     adj = world_chunk2d_get(_demo, ssize2_add(pos, (ssize2){1, 0}));
     if ((adj != NULL) && (*adj != NULL))
         for (size_t i = 0; i < CHUNK_GEN_ITER; i++) {
@@ -35,6 +37,7 @@ static void fetch_ver(chunk_border_t *res, ssize2 pos)
     dvec3 v = dvec3_init(0.0, 0.0, CHUNK_SIZE);
     chunk_t **adj;
 
+    chunk_try_load(ssize2_add(pos, (ssize2){0, -1}), NULL);
     adj = world_chunk2d_get(_demo, ssize2_add(pos, (ssize2){0, -1}));
     if ((adj != NULL) && (*adj != NULL))
         for (size_t i = 0; i < CHUNK_GEN_ITER; i++) {
@@ -43,6 +46,7 @@ static void fetch_ver(chunk_border_t *res, ssize2 pos)
                 res->ver[i][0].dvec3[j] =
                 dvec3_sub((*adj)->border.ver[i][1].dvec3[j], v);
         }
+    chunk_try_load(ssize2_add(pos, (ssize2){0, 1}), NULL);
     adj = world_chunk2d_get(_demo, ssize2_add(pos, (ssize2){0, 1}));
     if ((adj != NULL) && (*adj != NULL))
         for (size_t i = 0; i < CHUNK_GEN_ITER; i++) {

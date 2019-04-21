@@ -46,6 +46,26 @@ static void chunk_set_terrain(chunk_t *chunk)
     entity3_get_lod_ref(chunk->terrain, WORLD_LOD_MAX));
 }
 
+chunk_t* chunk_create_detached(ssize2 pos)
+{
+    chunk_t *res;
+
+    res = (chunk_t*)malloc_safe(sizeof(chunk_t));
+    res->pos = pos;
+    res->world_ndx = ~0ULL;
+    res->ents = entity3_create_pos(NULL,
+    dvec3_init(pos.x * CHUNK_SIZE, 0.0, pos.y * CHUNK_SIZE));
+    res->inserting = NULL;
+    res->terrain = NULL;
+    return res;
+}
+
+void chunk_attach(chunk_t *chunk)
+{
+    world_chunk2d_insert(_demo, chunk);
+    world_chunk_add(_demo, chunk);
+}
+
 chunk_t* chunk_create(ssize2 pos)
 {
     chunk_t *res;
@@ -55,15 +75,9 @@ chunk_t* chunk_create(ssize2 pos)
     if (pexist != NULL)
         if (*pexist != NULL)
             return *pexist;
-    res = (chunk_t*)malloc_safe(sizeof(chunk_t));
-    res->pos = pos;
-    res->world_ndx = ~0ULL;
-    res->ents = entity3_create_pos(NULL,
-    dvec3_init(pos.x * CHUNK_SIZE, 0.0, pos.y * CHUNK_SIZE));
+    res = chunk_create_detached(pos);
     chunk_set_terrain(res);
-    res->inserting = NULL;
-    world_chunk2d_insert(_demo, res);
-    world_chunk_add(_demo, res);
+    chunk_attach(res);
     return res;
 }
 
@@ -71,12 +85,9 @@ void chunk_destroy(chunk_t *chunk)
 {
     chunk_t **lookup;
 
-    file_write_t write = file_write_create();
-    file_write_entity3(&write, chunk->ents);
-    entity3_destroy(file_read_entity3(&(file_read_t){0, write.size, write.data}, NULL));
-    file_write_flush(&write, NULL);
     if (chunk == NULL)
         return;
+    chunk_save(chunk);
     lookup = world_chunk2d_get(_demo, chunk->pos);
     if (lookup != NULL)
         *lookup = NULL;
@@ -93,10 +104,13 @@ void chunk_destroy(chunk_t *chunk)
 chunk_t* world_chunk_get(demo_t *demo, ssize2 pos)
 {
     chunk_t **pexist = world_chunk2d_get(demo, pos);
+    chunk_t *res;
 
     if (pexist != NULL)
         if (*pexist != NULL)
             return *pexist;
+    if (chunk_try_load(pos, &res))
+        return res;
     return chunk_create(pos);
 }
 

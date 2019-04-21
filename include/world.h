@@ -22,6 +22,8 @@ ssize2 chunk_get_pos(dvec3 pos);
 chunk_t* world_chunk_get_by_pos(dvec3 pos);
 void chunk_update(chunk_t *chunk);
 
+chunk_t* chunk_create_detached(ssize2 pos);
+void chunk_attach(chunk_t *chunk);
 chunk_t* chunk_create(ssize2 pos);
 void chunk_destroy(chunk_t *chunk);
 
