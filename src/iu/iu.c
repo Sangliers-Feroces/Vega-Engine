@@ -91,10 +91,10 @@ static void iu_set_texture(void)
 void iu_init(demo_t *demo)
 {
     _iu.data.ratiowh = demo->cam.ratiowh;
+    iu_set_gl();
     iu_set_texture();
     set_entities();
     iu_text_init();
-    iu_set_gl();
     iu_set_font();
 }
 

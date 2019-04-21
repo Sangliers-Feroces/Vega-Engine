@@ -27,6 +27,5 @@ void iu_display_grp(text_grp_ind_t index);
 
 void iu_set_font(void);
 
-void display_str_temp(char *str, rect_t start, font_list_t font);
-
-void iu_display_char(char c, rect_t pos, font_list_t index);
+void iu_display_str(char *str, rect_t start, font_list_t font,
+float canvas_size);

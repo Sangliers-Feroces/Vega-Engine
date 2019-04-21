@@ -55,4 +55,5 @@
 #include "material.h"
 #include "mesh.h"
 #include "entity.h"
+#include "vg_text.h"
 #include "file.h"
