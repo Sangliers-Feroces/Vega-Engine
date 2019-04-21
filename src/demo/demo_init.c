@@ -90,5 +90,6 @@ void demo_quit(demo_t *demo)
     quit();
     sfRenderWindow_destroy(demo->win.window);
     sfClock_destroy(demo->win.frametime);
+    clocks_quit(demo);
     free(demo);
 }

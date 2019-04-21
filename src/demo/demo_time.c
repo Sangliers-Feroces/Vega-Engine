@@ -18,3 +18,8 @@ void clocks_init(demo_t *demo)
 {
     demo->clocks.game_clock = sfClock_create();
 }
+
+void clocks_quit(demo_t *demo)
+{
+    sfClock_destroy(demo->clocks.game_clock);
+}
