@@ -9,6 +9,7 @@
 
 void world_insert_start(void);
 void world_insert_end(size_t lod_collision);
+void world_insert_mesh(mesh_full_t *mesh, material_t material, size_t lod);
 void world_insert_arr_dvec3(arr_dvec3_t arr, material_t material, size_t lod);
 
 void world_init(demo_t *demo);
