@@ -37,6 +37,7 @@ typedef enum {
 
 typedef enum {
     IUBUTTON_ELON,
+    IUBUTTON_CADRE,
     IUBUTTON_END
 } iubutton_t;
 

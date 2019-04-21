@@ -10,7 +10,5 @@ uniform vec2 tex_size;
 
 void main()
 {
-    vec2 new_pos = {8.0, 1.0};
-
-    color = texture(tex, new_pos + vec2(uv.x, -uv.y) * tex_size);
+    color = texture(tex, tex_pos + vec2(uv.x, -uv.y) * tex_size);
 }

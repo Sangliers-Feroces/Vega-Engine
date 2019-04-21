@@ -32,6 +32,7 @@ void clocks_init(demo_t *demo);
 void quit(void);
 void gl_gen(demo_t *demo);
 void gl_delete(demo_t *demo);
+void clocks_quit(demo_t *demo);
 
 void reset_matrix(demo_t *demo);
 void refresh_vp(demo_t *demo);

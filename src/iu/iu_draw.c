@@ -39,11 +39,12 @@ void display_dialogues(void)
 void iu_display(void)
 {
     glUseProgram(_iu.data.iu_program);
-    for (int i = 0; i < IUBUTTON_END; i++)
-        iu_entity_draw(_iu.buttons[i]);
     if (_iu.data.is_invent)
         for (int i = 0; i < IUINVENT_END; i++)
             iu_entity_draw(_iu.invent[i]);
-    iu_display_str("test", (rect_t){{0.0f, 0.0f}, {0.5f, 0.5f}}, FONT_MINECRAFT);
-    //display_dialogues();
+    //commenter de ici
+    for (int i = 0; i < IUBUTTON_END; i++)
+        iu_entity_draw(_iu.buttons[i]);
+    display_str_temp("Pourquoi la premiere lettre est degueu .?!", (rect_t){{-0.45f, -0.80f}, {0.03f, 0.04f}}, FONT_MINECRAFT);
+    // a ici
 }
