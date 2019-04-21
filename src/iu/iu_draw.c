@@ -45,6 +45,6 @@ void iu_display(void)
     //commenter de ici
     for (int i = 0; i < IUBUTTON_END; i++)
         iu_entity_draw(_iu.buttons[i]);
-    display_str_temp("Pourquoi la premiere lettre est degueu .?!", (rect_t){{-0.45f, -0.80f}, {0.03f, 0.04f}}, FONT_MINECRAFT);
+    //display_str_temp("Pourquoi la premiere lettre est degueu .?!", (rect_t){{-0.45f, -0.80f}, {0.03f, 0.04f}}, FONT_MINECRAFT);
     // a ici
 }
