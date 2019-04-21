@@ -11,7 +11,7 @@
 #define WORLD_LOD_MAX (WORLD_LOD_COUNT - 1)
 #define CHUNK_SIZE 1024.0f
 #define CHUNK_GEN_ITER 6
-#define CHUNK_LOAD_DISTANCE 4
+#define CHUNK_LOAD_DISTANCE 1
 
 typedef struct {
     size_t lod;
@@ -66,6 +66,7 @@ typedef struct {
     size_t ext_allocated;
     vertex_ext_t *ext;
     mesh_gpu_t gpu;
+    int is_linked;
 } mesh_full_t;
 
 typedef struct {
@@ -103,13 +104,12 @@ struct entity3 {
 
 typedef struct {
     ssize2 pos;
-    size_t lod_count;
-    chunk_lod_t lod[WORLD_LOD_COUNT];
     size_t world_ndx;
     chunk_border_t border;
     entity3 *ents;
     vec_mesh_full_t meshes;
     entity3 *terrain;
+    entity3 *inserting;
 } chunk_t;
 
 typedef struct {

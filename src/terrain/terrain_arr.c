@@ -55,6 +55,7 @@ static void split_ter(arr2d_dvec3_t *arr, double stren)
 static void send_ter_to_chunk_lod(chunk_t *chunk, entity3 *ent, size_t lod,
 arr2d_dvec3_t arr)
 {
+    mesh_full_t *mesh;
     vec3 base = {0.0, -42.0f, 0.0};
     vec3 sq[4];
     vec3 pos[3];
@@ -64,24 +65,23 @@ arr2d_dvec3_t arr)
     sq[1] = vec3_add(base, (vec3){CHUNK_SIZE, 0.0f, 0.0f});
     sq[2] = vec3_add(base, (vec3){0.0f, 0.0f, CHUNK_SIZE});
     sq[3] = vec3_add(base, (vec3){CHUNK_SIZE, 0.0f, CHUNK_SIZE});
+    mesh = entity3_create_render(ent, lod, MATERIAL_GRASS, 0);
     for (size_t i = 0; i < arr.h - 1; i++)
         for (size_t j = 0; j < arr.w - 1; j++) {
             pos[0] = dvec3_vec3(arr.dvec3[i * arr.w + j]);
             pos[1] = dvec3_vec3(arr.dvec3[(i + 1) * arr.w + j]);
             pos[2] = dvec3_vec3(arr.dvec3[i * arr.w + j + 1]);
-            mesh_add_triangle_pos_uv(ent->render[lod].mesh->mesh, pos, uv);
+            mesh_add_triangle_pos_uv(mesh->mesh, pos, uv);
             pos[0] = dvec3_vec3(arr.dvec3[(i + 1) * arr.w + (j + 1)]);
             pos[1] = dvec3_vec3(arr.dvec3[i * arr.w + j + 1]);
             pos[2] = dvec3_vec3(arr.dvec3[(i + 1) * arr.w + j]);
-            mesh_add_triangle_pos_uv(ent->render[lod].mesh->mesh, pos, uv);
+            mesh_add_triangle_pos_uv(mesh->mesh, pos, uv);
         }
-    mesh_full_t *mesh = mesh_full_create(1, 0);
     entity3 *water = chunk_add_entity(chunk);
+    mesh = entity3_create_render(water, 0, MATERIAL_WATER, 0);
 
-    chunk_add_mesh(chunk, mesh);
     mesh_add_triangle_pos_uv(mesh->mesh, (vec3[]){sq[0], sq[2], sq[1]}, uv);
     mesh_add_triangle_pos_uv(mesh->mesh, (vec3[]){sq[3], sq[1], sq[2]}, uv);
-    entity3_set_render(water, 0, mesh, MATERIAL_WATER);
 }
 
 static void send_iter_to_border(chunk_t *chunk, arr2d_dvec3_t arr, size_t ndx)

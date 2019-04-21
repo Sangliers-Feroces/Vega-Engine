@@ -28,7 +28,7 @@ vec_rtx_triangle_ref vec_rtx_triangle_ref_get_void(void)
 void vec_rtx_triangle_ref_destroy(vec_rtx_triangle_ref vec)
 {
     for (size_t i = 0; i < vec.count; i++)
-        rtx_triangle_destroy(*vec.triangle[vec.count - 1 - i]);
+        rtx_triangle_destroy(vec.triangle[vec.count - 1 - i]);
     free(vec.triangle);
 }
 
@@ -63,6 +63,14 @@ render_obj_t render_obj_get_default(void)
     res.mesh = NULL;
     res.material = MATERIAL_MAX;
     return res;
+}
+
+void render_obj_destroy(render_obj_t render)
+{
+    if (render.mesh == NULL)
+        return;
+    if (render.mesh->is_linked)
+        mesh_full_destroy(render.mesh);
 }
 
 vec_entity3_t vec_entity3_create(void)
@@ -112,8 +120,10 @@ entity3* entity3_create_pos(entity3 *parent, dvec3 pos)
     res->root = parent;
     res->root_ndx = ~0ULL;
     res->sub = vec_entity3_create();
-    if (parent != NULL)
+    if (parent != NULL) {
         res->root_ndx = vec_entity3_add(&parent->sub, res);
+        entity3_update_solo(res, parent->trans.world, parent->trans.world_rot);
+    }
     return res;
 }
 
@@ -128,6 +138,8 @@ void entity3_destroy(entity3 *entity)
         entity3_destroy(entity->sub.ent[0]);
     vec_entity3_destroy(entity->sub);
     vec_rtx_triangle_ref_destroy(entity->col.ref);
+    for (size_t i = 0; i < WORLD_LOD_COUNT; i++)
+        render_obj_destroy(entity->render[i]);
     if (entity->root != NULL) {
         entity->root->sub.ent[entity->root_ndx] =
         entity->root->sub.ent[-- entity->root->sub.count];
@@ -160,7 +172,6 @@ void entity3_set_col(entity3 *entity, mesh_t *collision_mesh)
             collision_mesh->vertex[i * 3 + j].pos);
         entity->col.ref.triangle[i] =
         octree_insert_triangle(&_demo->world.tree, rtx_triangle_create(p));
-        entity->col.ref.triangle[i]->indirect = &entity->col.ref.triangle[i];
     }
 }
 
@@ -173,4 +184,21 @@ material_t material)
     }
     ent->render[lod].mesh = mesh;
     ent->render[lod].material = material;
+}
+
+mesh_full_t* entity3_create_render(entity3 *ent, size_t lod,
+material_t material, int has_ext)
+{
+    mesh_full_t *mesh;
+
+    if (!(lod < (size_t)WORLD_LOD_COUNT)) {
+        printf("Error: oob lod (got %zu).\n", lod);
+        exit(84);
+    }
+    render_obj_destroy(ent->render[lod]);
+    mesh = mesh_full_create(1, has_ext);
+    mesh->is_linked = 1;
+    ent->render[lod].mesh = mesh;
+    ent->render[lod].material = material;
+    return mesh;
 }

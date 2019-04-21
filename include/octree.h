@@ -9,7 +9,7 @@
 
 #include "octree_mem.h"
 
-rtx_triangle* octree_insert_triangle(octree **tree, rtx_triangle triangle);
+rtx_triangle* octree_insert_triangle(octree **tree, rtx_triangle *triangle);
 
 void octree_enlarge(octree **tree, rtx_triangle *triangle);
 

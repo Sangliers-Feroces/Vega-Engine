@@ -39,14 +39,7 @@ chunk_t** world_chunk2d_get(demo_t *demo, ssize2 pos)
 
 static void chunk_set_terrain(chunk_t *chunk)
 {
-    mesh_full_t *mesh;
-
     chunk->terrain = chunk_add_entity(chunk);
-    for (size_t i = 0; i < WORLD_LOD_COUNT ; i++) {
-        mesh = mesh_full_create(1, 0);
-        chunk_add_mesh(chunk, mesh);
-        entity3_set_render(chunk->terrain, i, mesh, MATERIAL_GRASS);
-    }
     chunk_gen_terrain(chunk, chunk->terrain);
     entity3_update(chunk->ents);
     entity3_set_col(chunk->terrain,
@@ -64,14 +57,12 @@ chunk_t* chunk_create(ssize2 pos)
             return *pexist;
     res = (chunk_t*)malloc_safe(sizeof(chunk_t));
     res->pos = pos;
-    res->lod_count = WORLD_LOD_COUNT;
-    for (size_t i = 0; i < res->lod_count; i++)
-        res->lod[i] = chunk_lod_create(i);
     res->world_ndx = ~0ULL;
     res->ents = entity3_create_pos(NULL,
     dvec3_init(pos.x * CHUNK_SIZE, 0.0, pos.y * CHUNK_SIZE));
     res->meshes = vec_mesh_full_init();
     chunk_set_terrain(res);
+    res->inserting = NULL;
     world_chunk2d_insert(_demo, res);
     world_chunk_add(_demo, res);
     return res;
@@ -92,8 +83,6 @@ void chunk_destroy(chunk_t *chunk)
         _demo->world.chunk[chunk->world_ndx]->world_ndx = chunk->world_ndx;
     }
     chunk_border_destroy(chunk->border);
-    for (size_t i = 0; i < chunk->lod_count; i++)
-        chunk_lod_destroy(&chunk->lod[i]);
     entity3_destroy(chunk->ents);
     vec_mesh_full_destroy(chunk->meshes);
     free(chunk);
@@ -109,20 +98,21 @@ chunk_t* world_chunk_get(demo_t *demo, ssize2 pos)
     return chunk_create(pos);
 }
 
-chunk_t* world_chunk_get_by_pos(demo_t *demo, dvec3 pos)
+ssize2 chunk_get_pos(dvec3 pos)
 {
-    return world_chunk_get(demo,
-    (ssize2){pos.x / CHUNK_SIZE, pos.z / CHUNK_SIZE});
+    ssize2 res;
+
+    res.x = pos.x / CHUNK_SIZE - (pos.x < 0.0 ? 1 : 0);
+    res.y = pos.z / CHUNK_SIZE - (pos.z < 0.0 ? 1 : 0);
+    return res;
 }
 
-void chunk_insert_rtx_triangle(chunk_t *chunk, rtx_triangle *triangle)
+chunk_t* world_chunk_get_by_pos(dvec3 pos)
 {
-    chunk_lod_insert_rtx_triangle(&chunk->lod[0], triangle);
+    return world_chunk_get(_demo, chunk_get_pos(pos));
 }
 
-void chunk_insert_rtx_triangle_lod(chunk_t *chunk, size_t lod,
-rtx_triangle *triangle)
+void chunk_update(chunk_t *chunk)
 {
-    chunk_lod_insert_rtx_triangle(&chunk->lod[lod], triangle);
+    entity3_update(chunk->ents);
 }
-

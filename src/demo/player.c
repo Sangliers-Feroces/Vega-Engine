@@ -32,7 +32,7 @@ dvec3 pos, dvec3 *speed, dvec3 *avg_norm)
     if (inter.triangle == NULL)
         return 0;
     *speed = dvec3_add(*speed, dvec3_muls(dvec3_sub(inter.p, p_in), 1.0));
-    *avg_norm = normal;
+    *avg_norm = dvec3_add(*avg_norm, normal);
     return 1;
 }
 

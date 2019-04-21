@@ -134,6 +134,14 @@ void mesh_add_triangle_pos_uv(mesh_t *mesh, vec3 *pos, vec2 *uv)
         mesh_add_vertex(mesh, vertex_init(pos[i], normal, uv[i]));
 }
 
+void mesh_full_add_triangle_pos_uv(mesh_full_t *mesh, vec3 *pos, vec2 *uv)
+{
+    vec3 normal = normal3(pos[0], pos[1], pos[2]);
+
+    for (size_t i = 0; i < 3; i++)
+        mesh_add_vertex(mesh->mesh, vertex_init(pos[i], normal, uv[i]));
+}
+
 mesh_full_t* mesh_full_create(int gpu_do_upload, int has_ext)
 {
     mesh_full_t *res = (mesh_full_t*)malloc_safe(sizeof(mesh_full_t));
@@ -151,6 +159,7 @@ mesh_full_t* mesh_full_create(int gpu_do_upload, int has_ext)
         res->ext = NULL;
         res->gpu = (mesh_gpu_t){0, 0, 0, 0};
     }
+    res->is_linked = 0;
     return res;
 }
 

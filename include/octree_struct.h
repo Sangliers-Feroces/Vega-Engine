@@ -15,7 +15,6 @@ struct rtx_triangle {
     dvec3 normal;
     vec_rtx_triangle *root;
     size_t root_ndx;
-    rtx_triangle **indirect;
 };
 
 typedef struct {
@@ -28,7 +27,7 @@ typedef struct octree octree;
 struct vec_rtx_triangle {
     size_t count;
     size_t allocated;
-    rtx_triangle *triangle;
+    rtx_triangle **triangle;
     octree *node;
 };
 

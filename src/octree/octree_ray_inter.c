@@ -48,7 +48,7 @@ static void tree_intersect_ray(octree *tree, ray3 ray, inter_ray3 *inter)
     for (size_t i = 0; i < 8; i++)
         tree_intersect_ray(tree->sub[i], ray, inter);
     for (size_t i = 0; i < tree->triangles->count; i++)
-        intersect_ray(&tree->triangles->triangle[i], ray, inter);
+        intersect_ray(tree->triangles->triangle[i], ray, inter);
 }
 
 inter_ray3 octree_intersect_ray(octree *tree, ray3 ray)

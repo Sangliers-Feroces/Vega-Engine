@@ -23,8 +23,7 @@ static void check_node_presence(octree **node, octree *root, bounds3 bounds)
         *node = octree_create_node(root, bounds);
 }
 
-static int try_insert_sub(octree **tree, rtx_triangle *triangle,
-rtx_triangle **ref)
+static int try_insert_sub(octree **tree, rtx_triangle *triangle)
 {
     bounds3 sub_b;
 
@@ -32,38 +31,36 @@ rtx_triangle **ref)
         sub_b = octree_get_sub_bounds(*tree, i);
         if (is_triangle_in_bounds(triangle->vertex, sub_b)) {
             check_node_presence(&((*tree)->sub[i]), *tree, sub_b);
-            *ref = octree_insert_triangle(&((*tree)->sub[i]), *triangle);
+            octree_insert_triangle(&((*tree)->sub[i]), triangle);
             return 1;
         }
     }
     return 0;
 }
 
-static int try_insert_cur(octree **tree, rtx_triangle *triangle,
-rtx_triangle **ref)
+static int try_insert_cur(octree **tree, rtx_triangle *triangle)
 {
     if (is_triangle_in_bounds(triangle->vertex, (*tree)->bounds)) {
-        *ref = vec_rtx_triangle_add((*tree)->triangles, *triangle);
+        vec_rtx_triangle_add((*tree)->triangles, triangle);
         return 1;
     } else
         return 0;
 }
 
-static rtx_triangle* octree_insert_triangle_actual(octree **tree,
+static void octree_insert_triangle_actual(octree **tree,
 rtx_triangle *triangle)
 {
-    rtx_triangle *ref;
-
     while (1) {
-        if (try_insert_sub(tree, triangle, &ref))
-            return ref;
-        else if (try_insert_cur(tree, triangle, &ref))
-            return ref;
+        if (try_insert_sub(tree, triangle))
+            return;
+        else if (try_insert_cur(tree, triangle))
+            return;
         octree_enlarge(tree, triangle);
     }
 }
 
-rtx_triangle* octree_insert_triangle(octree **tree, rtx_triangle triangle)
+rtx_triangle* octree_insert_triangle(octree **tree, rtx_triangle *triangle)
 {
-    return octree_insert_triangle_actual(tree, &triangle);
+    octree_insert_triangle_actual(tree, triangle);
+    return triangle;
 }
