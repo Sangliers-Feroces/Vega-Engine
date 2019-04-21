@@ -81,14 +81,17 @@ static void iu_set_texture(void)
     for (int i = 0; iutex_path[i].path != NULL; i++)
         _iu.textures[iutex_path[i].index] =
         texture2_load(iutex_path[i].path);
+    if (!iu_check_texture_array())
+        exit(84);
+    glBindTexture(GL_TEXTURE_2D, _iu.textures[IUTEX_FONT_MINECRAFT]->id);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 }
 
 void iu_init(demo_t *demo)
 {
     _iu.data.ratiowh = demo->cam.ratiowh;
     iu_set_texture();
-    if (!iu_check_texture_array())
-        exit(84);
     set_entities();
     iu_text_init();
     iu_set_gl();
