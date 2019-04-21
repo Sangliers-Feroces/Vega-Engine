@@ -11,7 +11,7 @@
 #define WORLD_LOD_MAX (WORLD_LOD_COUNT - 1)
 #define CHUNK_SIZE 1024.0f
 #define CHUNK_GEN_ITER 6
-#define CHUNK_LOAD_DISTANCE 1
+#define CHUNK_LOAD_DISTANCE 4
 
 typedef struct {
     size_t lod;
@@ -66,8 +66,21 @@ typedef struct {
     size_t ext_allocated;
     vertex_ext_t *ext;
     mesh_gpu_t gpu;
-    int is_linked;
+    char *path;
 } mesh_full_t;
+
+typedef enum {
+    MESH_FULL_REF_RENDER_LOD0,
+    MESH_FULL_REF_RENDER_LOD1,
+    MESH_FULL_REF_RENDER_LOD2,
+    MESH_FULL_REF_STANDALONE,
+    MESH_FULL_REF_BANK
+} mesh_full_ref_type_t;
+
+typedef struct {
+    mesh_full_ref_type_t ref_type;
+    mesh_full_t *m;
+} mesh_full_ref_t;
 
 typedef struct {
     size_t count;
@@ -76,12 +89,12 @@ typedef struct {
 } vec_mesh_full_t;
 
 typedef struct {
-    mesh_t *mesh;
+    mesh_full_ref_t mesh;
     vec_rtx_triangle_ref ref;
 } col_ref_t;
 
 typedef struct {
-    mesh_full_t *mesh;
+    mesh_full_ref_t mesh;
     material_t material;
 } render_obj_t;
 

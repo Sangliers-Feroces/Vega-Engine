@@ -24,7 +24,7 @@ void world_insert_end(size_t lod_collision)
         for (size_t i = 0; i < _demo->world.chunk_count; i++)
             if (_demo->world.chunk[i]->inserting != NULL) {
                 entity3_set_col(_demo->world.chunk[i]->inserting,
-                _demo->world.chunk[i]->inserting->render[lod_collision].mesh->mesh);
+                _demo->world.chunk[i]->inserting->render[lod_collision].mesh);
             }
     world_chunk_flush_inserting();
 }
@@ -60,7 +60,7 @@ material_t material, size_t lod)
         chunk->inserting = chunk_add_entity(chunk);
         entity3_create_render(chunk->inserting, lod, material, 0);
     }
-    insert_data(mesh, chunk->inserting->render[lod].mesh, pos, i);
+    insert_data(mesh, chunk->inserting->render[lod].mesh.m, pos, i);
 }
 
 void world_insert_mesh(mesh_full_t *mesh, material_t material, size_t lod)

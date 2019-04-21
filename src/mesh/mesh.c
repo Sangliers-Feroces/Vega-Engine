@@ -159,7 +159,7 @@ mesh_full_t* mesh_full_create(int gpu_do_upload, int has_ext)
         res->ext = NULL;
         res->gpu = (mesh_gpu_t){0, 0, 0, 0};
     }
-    res->is_linked = 0;
+    res->path = NULL;
     return res;
 }
 
@@ -209,4 +209,25 @@ vertex_ext_t ext)
         mesh->gpu.do_reupload = 1;
     mesh_full_add_vertex(mesh, vertex);
     mesh_full_ensure_coherence(mesh);
+}
+
+mesh_full_ref_t mesh_full_ref_init(mesh_full_ref_type_t ref_type,
+mesh_full_t *m)
+{
+    mesh_full_ref_t res;
+
+    res.ref_type = ref_type;
+    res.m = m;
+    return res;
+}
+
+mesh_full_ref_t mesh_full_ref_get_null(void)
+{
+    return mesh_full_ref_init(MESH_FULL_REF_STANDALONE, NULL);
+}
+
+mesh_full_ref_t entity3_get_lod_ref(entity3 *ent, size_t lod)
+{
+    return mesh_full_ref_init(MESH_FULL_REF_RENDER_LOD0 + lod,
+    ent->render[lod].mesh.m);
 }
