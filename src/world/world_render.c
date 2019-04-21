@@ -26,48 +26,10 @@ static void gl_reset_stuff(void)
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
-static void render_geom(material_t material, size_t first, size_t i)
-{
-    if (material != ~0U) {
-        _demo->material[material].world();
-        glDrawArrays(GL_TRIANGLES, first * 3, (i - first) * 3);
-    }
-}
-
-static void chunk_lod_render(chunk_lod_t *lod)
-{
-    material_t material = ~0U;
-    material_t cur;
-    size_t first = 0;
-
-    if (lod->do_reupload_buf)
-        chunk_lod_reupload_buf(lod);
-    glBindVertexArray(lod->vertex_array);
-    glBindBuffer(GL_ARRAY_BUFFER, lod->vertex_buffer);
-    for (size_t i = 0; i < lod->geom->count; i++) {
-        cur = lod->geom->triangle[i]->material;
-        if (cur != material) {
-            render_geom(material, first, i);
-            material = cur;
-            first = i;
-        }
-    }
-    render_geom(material, first, lod->geom->count);
-}
-
 static void chunk_render(chunk_t *chunk)
 {
-    double dist = vec2_dist(
-    (vec2){chunk->pos.x * CHUNK_SIZE + CHUNK_SIZE / 2.0,
-    chunk->pos.y * CHUNK_SIZE + CHUNK_SIZE / 2.0},
-    (vec2){_demo->cam.pos.x, _demo->cam.pos.z});
-
-    if (dist < 1500.0)
-        chunk_lod_render(&chunk->lod[2]);
-    else if (dist < 3000.0)
-        chunk_lod_render(&chunk->lod[1]);
-    else
-        chunk_lod_render(&chunk->lod[0]);
+    entity3_update(chunk->ents);
+    entity3_render(chunk->ents, _demo->cam.mvp.vp);
 }
 
 void world_render(demo_t *demo)

@@ -7,18 +7,6 @@
 
 #include "headers.h"
 
-void check_mouse_move(demo_t *demo)
-{
-    float sensi = 0.0015f;
-
-    if (_iu.data.is_invent)
-        return;
-    demo->cam.rot.y -=
-    (float)(demo->mouse.mouse_pos.x - demo->mouse.last_pos.x) * sensi;
-    demo->cam.rot.x -=
-    (float)(demo->mouse.mouse_pos.y - demo->mouse.last_pos.y) * sensi;
-}
-
 static void send_uniform(void)
 {
     gluint u;
@@ -27,13 +15,30 @@ static void send_uniform(void)
 
     for (size_t i = 0; i < SHADER_MAX; i++) {
         glUseProgram(_demo->shader[i]);
-        u = glGetUniformLocation(_demo->shader[i], "vp");
-        glUniformMatrix4fv(u, 1, GL_FALSE, (void*)_demo->cam.mvp.vp);
         u = glGetUniformLocation(_demo->shader[i], "l_dir");
         glUniform3fv(u, 1, (void*)&l);
         u = glGetUniformLocation(_demo->shader[i], "p_cam");
         glUniform3fv(u, 1, (void*)&p);
     }
+}
+
+void shader_set(shader_t shader, dmat4 mvp, dmat4 world, dmat4 rot)
+{
+    mat4 mvp_actual;
+    mat4 world_actual;
+    mat4 rot_actual;
+    gluint u;
+
+    dmat4_mat4(mvp, mvp_actual);
+    dmat4_mat4(world, world_actual);
+    dmat4_mat4(rot, rot_actual);
+    glUseProgram(_demo->shader[shader]);
+    u = glGetUniformLocation(_demo->shader[shader], "mvp");
+    glUniformMatrix4fv(u, 1, GL_FALSE, (void*)mvp_actual);
+    u = glGetUniformLocation(_demo->shader[shader], "world");
+    glUniformMatrix4fv(u, 1, GL_FALSE, (void*)world_actual);
+    u = glGetUniformLocation(_demo->shader[shader], "rot");
+    glUniformMatrix4fv(u, 1, GL_FALSE, (void*)rot_actual);
 }
 
 void refresh_vp(demo_t *demo)
@@ -43,11 +48,11 @@ void refresh_vp(demo_t *demo)
 
     ortho_struct.fov_w = 10.0f;
     if (demo->cam.proj == PROJ_TYPE_PERSPECTIVE)
-        mat4_perspective(proj_struct, demo->cam.mvp.proj);
+        dmat4_perspective(proj_struct, demo->cam.mvp.proj);
     else
-        mat4_ortho(ortho_struct, demo->cam.mvp.proj);
-    mat4_rot(demo->cam.rot, demo->cam.mvp.rot);
-    mat4_view(demo->cam.pos, demo->cam.rot, demo->cam.mvp.view);
-    mat4_mul(demo->cam.mvp.proj, demo->cam.mvp.view, demo->cam.mvp.vp);
+        dmat4_ortho(ortho_struct, demo->cam.mvp.proj);
+    dmat4_rot(demo->cam.rot, demo->cam.mvp.rot);
+    dmat4_view(demo->cam.pos, demo->cam.rot, demo->cam.mvp.view);
+    dmat4_mul(demo->cam.mvp.proj, demo->cam.mvp.view, demo->cam.mvp.vp);
     send_uniform();
 }

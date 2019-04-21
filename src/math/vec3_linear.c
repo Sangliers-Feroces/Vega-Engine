@@ -7,32 +7,32 @@
 
 #include "headers.h"
 
-double dvec3_dot(dvec3 a, dvec3 b)
+float vec3_dot(vec3 a, vec3 b)
 {
     return a.x * b.x + a.y * b.y + a.z * b.z;
 }
 
-double dvec3_norm(dvec3 vec)
+float vec3_norm(vec3 vec)
 {
     return sqrtf((vec.x * vec.x) + (vec.y * vec.y) + (vec.z * vec.z));
 }
 
-double dvec3_dist(dvec3 a, dvec3 b)
+float vec3_dist(vec3 a, vec3 b)
 {
-    return dvec3_norm(dvec3_sub(a, b));
+    return vec3_norm(vec3_sub(a, b));
 }
 
-dvec3 dvec3_cross(dvec3 a, dvec3 b)
+vec3 vec3_cross(vec3 a, vec3 b)
 {
-    return (dvec3){a.y * b.z - a.z * b.y, -(a.x * b.z - a.z * b.x),
+    return (vec3){a.y * b.z - a.z * b.y, -(a.x * b.z - a.z * b.x),
     a.x * b.y - a.y * b.x};
 }
 
-dvec3 dvec3_normalize(dvec3 vec)
+vec3 vec3_normalize(vec3 vec)
 {
-    double dist = dvec3_norm(vec);
+    float dist = vec3_norm(vec);
 
-    if (dist == 0.0)
-        return (dvec3){0.0, 0.0, 0.0};
-    return (dvec3){vec.x / dist, vec.y / dist, vec.z / dist};
+    if (dist == 0.0f)
+        return (vec3){0.0f, 0.0f, 0.0f};
+    return (vec3){vec.x / dist, vec.y / dist, vec.z / dist};
 }

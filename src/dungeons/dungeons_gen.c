@@ -59,41 +59,41 @@ static dvec3 dungeon_point_scaling(dvec3 point, int scaling_x, int scaling_y, in
     return res;
 }
 
-static void dungeon_insert_in_world(demo_t *demo, vec_rtx_triangle **rooms, int nb_rooms)
+static void dungeon_insert_in_world(arr_dvec3_t *rooms, int nb_rooms)
 {
-    for (int i = 0; i < nb_rooms; i++) {
-        world_insert_vec_rtx_triangle(demo, rooms[i]);
-    }
+    world_insert_start();
+    for (int i = 0; i < nb_rooms; i++)
+        world_insert_arr_dvec3(rooms[i], MATERIAL_GRASS, 0);
+    world_insert_end(0);
 }
 
-static vec_rtx_triangle* dungeons_gen_room(void)
+static arr_dvec3_t dungeons_gen_room(void)
 {
-    vec_rtx_triangle *room = vec_rtx_triangle_create();
-    dvec3 cur_triangle[3];
+    arr_dvec3_t room = arr_dvec3_create(12 * 3);
 
     dungeons_set_next_origin();
     for (int i = 0; i < 12; i++) {
-        cur_triangle[1] = dungeon_point_scaling(g_vertex_buffer_data[i][0], 5, 2, 3);
-        cur_triangle[0] = dungeon_point_scaling(g_vertex_buffer_data[i][1], 5, 2, 3);
-        cur_triangle[2] = dungeon_point_scaling(g_vertex_buffer_data[i][2], 5, 2, 3);
-        vec_rtx_triangle_add(room, rtx_triangle_create(cur_triangle));
+        room.dvec3[i * 3 + 1] = dungeon_point_scaling(g_vertex_buffer_data[i][0], 5, 2, 3);
+        room.dvec3[i * 3] = dungeon_point_scaling(g_vertex_buffer_data[i][1], 5, 2, 3);
+        room.dvec3[i * 3 + 2] = dungeon_point_scaling(g_vertex_buffer_data[i][2], 5, 2, 3);
     }
     return room;
 }
 
 void dungeons_gen_all(demo_t *demo, size_t rooms_limit)
 {
-    vec_rtx_triangle **rooms;
+    arr_dvec3_t *rooms;
     int generated_rooms = get_random_int(1, rooms_limit);
 
+    (void)demo;
     printf("generated rooms : %d\n", generated_rooms);
-    rooms = (vec_rtx_triangle**)malloc_safe(sizeof(vec_rtx_triangle*) *
+    rooms = (arr_dvec3_t*)malloc_safe(sizeof(arr_dvec3_t) *
     generated_rooms);
     for (int i = 0; i < generated_rooms; i++)
         rooms[i] = dungeons_gen_room();
-    dungeon_insert_in_world(demo, rooms, generated_rooms);
+    dungeon_insert_in_world(rooms, generated_rooms);
     for (int i = 0; i < generated_rooms; i++)
-        vec_rtx_triangle_free(rooms[i]);
+        arr_dvec3_destroy(rooms[i]);
     free(rooms);
     return;
 }

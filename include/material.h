@@ -7,8 +7,8 @@
 
 #pragma once
 
-void material_fun_grass_world(void);
-void material_fun_grass_entity(void);
+void material_fun_grass_world(dmat4 mvp, dmat4 world, dmat4 rot);
+void material_fun_grass_entity(dmat4 mvp, dmat4 world, dmat4 rot);
 
-void material_fun_water_world(void);
-void material_fun_water_entity(void);
+void material_fun_water_world(dmat4 mvp, dmat4 world, dmat4 rot);
+void material_fun_water_entity(dmat4 mvp, dmat4 world, dmat4 rot);

@@ -47,7 +47,8 @@ static int try_insert_cur(octree **tree, rtx_triangle *triangle)
         return 0;
 }
 
-void octree_insert_triangle(octree **tree, rtx_triangle *triangle)
+static void octree_insert_triangle_actual(octree **tree,
+rtx_triangle *triangle)
 {
     while (1) {
         if (try_insert_sub(tree, triangle))
@@ -56,4 +57,10 @@ void octree_insert_triangle(octree **tree, rtx_triangle *triangle)
             return;
         octree_enlarge(tree, triangle);
     }
+}
+
+rtx_triangle* octree_insert_triangle(octree **tree, rtx_triangle *triangle)
+{
+    octree_insert_triangle_actual(tree, triangle);
+    return triangle;
 }

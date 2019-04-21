@@ -12,3 +12,5 @@ gluint shader_load_compute(const char *path);
 
 gluint shader_load_vert_frag(const char *vertex_filepath,
 const char *fragment_filepath);
+
+void shader_set(shader_t shader, dmat4 mvp, dmat4 world, dmat4 rot);

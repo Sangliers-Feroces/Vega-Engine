@@ -11,7 +11,7 @@
 #define WORLD_LOD_MAX (WORLD_LOD_COUNT - 1)
 #define CHUNK_SIZE 1024.0f
 #define CHUNK_GEN_ITER 6
-#define CHUNK_LOAD_DISTANCE 4
+#define CHUNK_LOAD_DISTANCE 1
 
 typedef struct {
     size_t lod;
@@ -28,11 +28,88 @@ typedef struct {
 } chunk_border_t;
 
 typedef struct {
+    int is_static;
+    dvec3 pos;
+    dvec3 scale;
+    dvec3 rot;
+    dmat4 model;
+    dmat4 model_rot;
+    dmat4 world;
+    dmat4 world_rot;
+} transform_t;
+
+typedef struct {
+    int do_upload;
+    int do_reupload;
+    gluint vertex_buffer;
+    gluint vertex_array;
+} mesh_gpu_t;
+
+typedef struct {
+    size_t vertex_count;
+    size_t vertex_allocated;
+    vertex_t *vertex;
+    mesh_gpu_t gpu;
+} mesh_t;
+
+typedef struct {
+    vec2 uv_ext;
+    float tex_a;
+    float tex_b;
+    float ratio;
+} vertex_ext_t;
+
+typedef struct {
+    mesh_t *mesh;
+    int has_ext;
+    size_t ext_count;
+    size_t ext_allocated;
+    vertex_ext_t *ext;
+    mesh_gpu_t gpu;
+    int is_linked;
+} mesh_full_t;
+
+typedef struct {
+    size_t count;
+    size_t allocated;
+    mesh_full_t **mesh;
+} vec_mesh_full_t;
+
+typedef struct {
+    mesh_t *mesh;
+    vec_rtx_triangle_ref ref;
+} col_ref_t;
+
+typedef struct {
+    mesh_full_t *mesh;
+    material_t material;
+} render_obj_t;
+
+typedef struct entity3 entity3;
+
+typedef struct {
+    size_t count;
+    size_t allocated;
+    entity3 **ent;
+} vec_entity3_t;
+
+struct entity3 {
+    transform_t trans;
+    col_ref_t col;
+    render_obj_t render[WORLD_LOD_COUNT];
+    entity3 *root;
+    size_t root_ndx;
+    vec_entity3_t sub;
+};
+
+typedef struct {
     ssize2 pos;
-    size_t lod_count;
-    chunk_lod_t lod[WORLD_LOD_COUNT];
     size_t world_ndx;
     chunk_border_t border;
+    entity3 *ents;
+    vec_mesh_full_t meshes;
+    entity3 *terrain;
+    entity3 *inserting;
 } chunk_t;
 
 typedef struct {

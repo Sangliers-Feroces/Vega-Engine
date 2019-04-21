@@ -25,14 +25,14 @@ void demo_refresh_viewport(demo_t *demo)
 {
     ray_viewport_t fin;
     dvec3 res = {-demo->cam.ratiowh, 1.0f, 1.0f};
-    mat4 rot;
+    dmat4 rot;
 
     fin.tl = res;
     fin.tr = (dvec3){-res.x, res.y, res.z};
     fin.bl = (dvec3){res.x, -res.y, res.z};
     fin.br = (dvec3){-res.x, -res.y, res.z};
-    mat4_rot_xy(demo->cam.rot, rot);
+    dmat4_rot_xy(demo->cam.rot, rot);
     for (size_t i = 0; i < 4; i++)
-        (&fin.tl)[i] = mat4_mul_dvec3(rot, (&fin.tl)[i]);
+        (&fin.tl)[i] = dmat4_mul_dvec3(rot, (&fin.tl)[i]);
     demo->cam.viewport = fin;
 }

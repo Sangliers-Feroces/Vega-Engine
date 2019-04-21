@@ -9,20 +9,17 @@
 
 #include "octree_mem.h"
 
-void octree_insert_triangle(octree **tree, rtx_triangle *triangle);
+rtx_triangle* octree_insert_triangle(octree **tree, rtx_triangle *triangle);
 
 void octree_enlarge(octree **tree, rtx_triangle *triangle);
 
 octree* octree_create(octree *root);
 octree* octree_create_node(octree *root, bounds3 bounds);
-void octree_rtx_triangle_detach(octree *tree, rtx_triangle *triangle);
 void rtx_triangle_replace(demo_t *demo, octree *node, rtx_triangle *triangle);
 
 void octree_destroy(octree **root);
 
 void rtx_triangle_update(rtx_triangle *triangle);
-void rtx_triangle_update_tangent(rtx_triangle *triangle);
-rtx_triangle* rtx_triangle_create_no_lightmap(dvec3 *triangle);
 
 bounds3 octree_get_sub_bounds(octree *tree, size_t ndx);
 

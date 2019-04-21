@@ -30,18 +30,9 @@ static void try_load_chunk(demo_t *demo, ssize2 pos)
         world_chunk_get(demo, pos);
 }
 
-static ssize2 get_chunk_cam(dvec3 pos)
-{
-    ssize2 res;
-
-    res.x = pos.x / CHUNK_SIZE - (pos.x < 0.0 ? 1 : 0);
-    res.y = pos.z / CHUNK_SIZE - (pos.z < 0.0 ? 1 : 0);
-    return res;
-}
-
 void world_chunk_god(demo_t *demo)
 {
-    ssize2 cam = get_chunk_cam(demo->cam.pos);
+    ssize2 cam = chunk_get_pos(demo->cam.pos);
 
     for (size_t i = 0; i < demo->world.chunk_count; i++)
         if (try_unload_chunk(demo->world.chunk[i], cam))

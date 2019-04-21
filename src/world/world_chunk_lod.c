@@ -51,8 +51,9 @@ void chunk_lod_destroy(chunk_lod_t *lod)
 
 void chunk_lod_insert_rtx_triangle(chunk_lod_t *lod, rtx_triangle *triangle)
 {
-    if (lod->lod == WORLD_LOD_MAX)
-        octree_insert_triangle(&_demo->world.tree, triangle);
-    vec_rtx_triangle_add_detached(lod->geom, triangle);
+    (void)triangle;
+    //if (lod->lod == WORLD_LOD_MAX)
+    //    octree_insert_triangle(&_demo->world.tree, triangle);
+    //vec_rtx_triangle_add_detached(lod->geom, triangle);
     lod->do_reupload_buf = 1;
 }

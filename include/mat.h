@@ -9,7 +9,8 @@
 
 /* math-related prototypes */
 
-dvec3 normal3(dvec3 a, dvec3 b, dvec3 c);
+vec3 normal3(vec3 a, vec3 b, vec3 c);
+dvec3 dnormal3(dvec3 a, dvec3 b, dvec3 c);
 
 vec2 vec2_add(vec2 a, vec2 b);
 vec2 vec2_adds(vec2 vec, float value);
@@ -29,6 +30,18 @@ int vec2_eq(vec2 a, vec2 b);
 
 int dvec3_is_in_bounds(dvec3 p, bounds3 bounds);
 int is_triangle_in_bounds(dvec3 *triangle, bounds3 bounds);
+
+vec3 vec3_add(vec3 a, vec3 b);
+vec3 vec3_sub(vec3 a, vec3 b);
+vec3 vec3_muls(vec3 vec, float value);
+vec3 vec3_divs(vec3 vec, float value);
+int vec3_eq(vec3 a, vec3 b);
+
+float vec3_dot(vec3 a, vec3 b);
+float vec3_norm(vec3 vec);
+float vec3_dist(vec3 a, vec3 b);
+vec3 vec3_cross(vec3 a, vec3 b);
+vec3 vec3_normalize(vec3 vec);
 
 double dvec3_dot(dvec3 a, dvec3 b);
 double dvec3_norm(dvec3 vec);
@@ -63,6 +76,21 @@ vec4 mat4_mul_vec(mat4 a, vec4 b);
 void mat4_perspective(proj_t proj, mat4 res);
 void mat4_ortho(proj_t proj, mat4 res);
 
+void dmat4_identity(dmat4 dst);
+void dmat4_copy(dmat4 src, dmat4 dst);
+void dmat4_mul(dmat4 a, dmat4 b, dmat4 res);
+
+void dmat4_scale_trans(dvec3 pos, dvec3 scale, dmat4 res);
+void dmat4_rot(dvec3 rot, dmat4 res);
+void dmat4_model(transform_t *t, dmat4 res, dmat4 rot);
+void dmat4_view(dvec3 pos, dvec3 rot, dmat4 res);
+dvec4 dmat4_mul_vec4(dmat4 a, dvec4 b);
+
+void dmat4_perspective(proj_t proj, dmat4 res);
+void dmat4_ortho(proj_t proj, dmat4 res);
+
+void dmat4_mat4(dmat4 src, mat4 dst);
+
 vec2 barycentric2_get_point(vec2 *triangle, dvec3 bar);
 
 dvec3 barycentric3(dvec3 p, dvec3 *triangle);
@@ -82,8 +110,9 @@ int rect_is_vec2_inside(rect_t rect, vec2 vec);
 
 dvec3 dvec3_interpolate(dvec3 a, dvec3 b, long double ratio);
 
-void mat4_rot_xy(dvec3 rot, mat4 res);
-dvec3 mat4_mul_dvec3(mat4 mat, dvec3 vec);
+void dmat4_rot_xy(dvec3 rot, dmat4 res);
+dvec3 dmat4_mul_dvec3(dmat4 mat, dvec3 vec);
+dvec3 dmat4_mul_vec3(dmat4 mat, vec3 vec);
 
 ssize2 ssize2_add(ssize2 a, ssize2 b);
 ssize2 ssize2_sub(ssize2 a, ssize2 b);
@@ -97,4 +126,5 @@ void arr_dvec3_destroy(arr_dvec3_t arr);
 void chunk_border_destroy(chunk_border_t border);
 
 vec3 dvec3_vec3(dvec3 value);
+dvec3 vec3_dvec3(vec3 value);
 dvec3 dvec3_init(double x, double y, double z);

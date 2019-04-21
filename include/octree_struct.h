@@ -7,24 +7,20 @@
 
 #pragma once
 
-typedef struct vec_rtx_triangle vec_rtx_triangle;
-typedef struct {
-    struct vec_rtx_triangle *vec;
-    size_t ndx;
-} vec_rtx_triangle_ref;
-
 /* type used for raytracing structure */
-typedef struct {
+typedef struct rtx_triangle rtx_triangle;
+typedef struct vec_rtx_triangle vec_rtx_triangle;
+struct rtx_triangle {
     dvec3 vertex[3];
-    texture2f_binding lightmap;
-    texture2_binding albelo;
-    dvec3 normal;               /* normal + tangent + bitangent         */
-    dvec3 tangent;              /* are very key to create tangent space */
-    dvec3 bitangent;            /* and then to make lights rays bounce  */
-    material_t material;
-    vec_rtx_triangle_ref ref;
-    int data;
-} rtx_triangle;
+    dvec3 normal;
+    vec_rtx_triangle *root;
+    size_t root_ndx;
+};
+
+typedef struct {
+    size_t count;
+    rtx_triangle **triangle;
+} vec_rtx_triangle_ref;
 
 /* another std::vector */
 typedef struct octree octree;

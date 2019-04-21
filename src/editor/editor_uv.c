@@ -7,7 +7,7 @@
 
 #include "headers.h"
 
-static void uv_vec2(vec2 *to_flip)
+/*static void uv_vec2(vec2 *to_flip)
 {
     vec2 origin = {0.0f, 0.0f};
 
@@ -20,11 +20,11 @@ static void uv_vec2(vec2 *to_flip)
         to_flip[1] = (vec2){1.0f, 0.0f};
         to_flip[2] = (vec2){0.0f, 1.0f};
     }
-}
+}*/
 
 void rtx_triangle_uv(rtx_triangle *triangle)
 {
-    uv_vec2(triangle->albelo.uv);
+    (void)triangle;
 }
 
 void editor_uv(demo_t *demo)

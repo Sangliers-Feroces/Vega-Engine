@@ -9,17 +9,19 @@
 
 void terrain_apply_texture(octree *tree, texture2 *texture)
 {
-    if (tree == NULL)
+    (void)tree;
+    (void)texture;
+    /*if (tree == NULL)
         return;
     for (size_t i = 0; i < 8; i++)
         terrain_apply_texture(tree->sub[i], texture);
     for (size_t i = 0; i < tree->triangles->count; i++) {
         tree->triangles->triangle[i]->albelo.texture = texture;
         rtx_triangle_update(tree->triangles->triangle[i]);
-    }
+    }*/
 }
 
-static void sub_other(rtx_triangle *candidate, octree **dst,
+/*static void sub_other(rtx_triangle *candidate, octree **dst,
 terrain_search_t search)
 {
     if (candidate->data)
@@ -43,7 +45,7 @@ terrain_search_t search)
         terrain_search_other(tree->sub[i], dst, search);
     for (size_t i = 0; i < tree->triangles->count; i++)
         sub_other(tree->triangles->triangle[i], dst, search);
-}
+}*/
 
 void terrain_sub_triangle2(rtx_triangle *triangle, octree *root, octree **dst,
 float strengh)
@@ -51,7 +53,13 @@ float strengh)
     dvec3 mid;
     float dist;
 
-    if (triangle->data)
+    (void)mid;
+    (void)dist;
+    (void)triangle;
+    (void)root;
+    (void)dst;
+    (void)strengh;
+    /*if (triangle->data)
         return;
     mid = dvec3_add(triangle->vertex[1], triangle->vertex[2]);
     mid = dvec3_divs(mid, 2.0f);
@@ -64,5 +72,5 @@ float strengh)
     (dvec3[]){mid, triangle->vertex[2], triangle->vertex[0]});
     triangle->data = 1;
     terrain_search_other(root, dst,
-    (terrain_search_t){triangle->vertex, mid});
+    (terrain_search_t){triangle->vertex, mid});*/
 }

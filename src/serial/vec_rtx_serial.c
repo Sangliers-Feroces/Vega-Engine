@@ -11,12 +11,12 @@ static void serialize_triangle(rtx_triangle *triangle, gpu_serial_t *serial)
 {
     for (size_t i = 0; i < 3; i++)
         gpu_serial_write_dvec3(serial, triangle->vertex[i]);
-    for (size_t i = 0; i < 3; i++)
-        gpu_serial_write_vec2(serial, triangle->lightmap.uv[i]);
+    //for (size_t i = 0; i < 3; i++)
+    //    gpu_serial_write_vec2(serial, triangle->lightmap.uv[i]);
     gpu_serial_write(serial, 0);
     gpu_serial_write_dvec3(serial, triangle->normal);
-    gpu_serial_write_dvec3(serial, triangle->tangent);
-    gpu_serial_write_dvec3(serial, triangle->bitangent);
+    //gpu_serial_write_dvec3(serial, triangle->tangent);
+    //gpu_serial_write_dvec3(serial, triangle->bitangent);
 }
 
 int32_t vec_rtx_triangle_serialize(vec_rtx_triangle *vec, gpu_serial_t *serial)

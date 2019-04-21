@@ -47,7 +47,7 @@ entity_t* entity_create(model_t *model)
     res->rot = (dvec3){0.0f, 0.0f, 0.0f};
     res->scale = (dvec3){1.0f, 1.0f, 1.0f};
     res->model = model;
-    mat4_identity(res->trans);
+    //mat4_identity(res->trans);
     res->vertex =
     (vertex_t*)malloc_safe(model->vertex_count * sizeof(vertex_t));
     return res;
