@@ -11,7 +11,7 @@
 #define WORLD_LOD_MAX (WORLD_LOD_COUNT - 1)
 #define CHUNK_SIZE 1024.0f
 #define CHUNK_GEN_ITER 6
-#define CHUNK_LOAD_DISTANCE 4
+#define CHUNK_LOAD_DISTANCE 1
 
 typedef struct {
     size_t lod;
@@ -66,7 +66,6 @@ typedef struct {
     size_t ext_allocated;
     vertex_ext_t *ext;
     mesh_gpu_t gpu;
-    char *path;
 } mesh_full_t;
 
 typedef enum {
@@ -106,10 +105,16 @@ typedef struct {
     entity3 **ent;
 } vec_entity3_t;
 
+typedef enum  {
+    ENTITY3_TAG_NONE,
+    ENTITY3_TAG_TERRAIN
+} entity3_tag_t;
+
 struct entity3 {
     transform_t trans;
-    col_ref_t col;
     render_obj_t render[WORLD_LOD_COUNT];
+    col_ref_t col;
+    entity3_tag_t tag;
     entity3 *root;
     size_t root_ndx;
     vec_entity3_t sub;
@@ -120,7 +125,6 @@ typedef struct {
     size_t world_ndx;
     chunk_border_t border;
     entity3 *ents;
-    vec_mesh_full_t meshes;
     entity3 *terrain;
     entity3 *inserting;
 } chunk_t;

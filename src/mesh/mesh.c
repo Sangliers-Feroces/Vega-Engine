@@ -159,7 +159,6 @@ mesh_full_t* mesh_full_create(int gpu_do_upload, int has_ext)
         res->ext = NULL;
         res->gpu = (mesh_gpu_t){0, 0, 0, 0};
     }
-    res->path = NULL;
     return res;
 }
 

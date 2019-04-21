@@ -125,6 +125,7 @@ entity3* entity3_create_pos(entity3 *parent, dvec3 pos)
         res->root_ndx = vec_entity3_add(&parent->sub, res);
         entity3_update_solo(res, parent->trans.world, parent->trans.world_rot);
     }
+    res->tag = ENTITY3_TAG_NONE;
     return res;
 }
 
@@ -198,7 +199,6 @@ material_t material, int has_ext)
     }
     render_obj_destroy(ent->render[lod]);
     mesh = mesh_full_create(1, has_ext);
-    mesh->path = NULL;
     ent->render[lod].mesh = mesh_full_ref_init(MESH_FULL_REF_STANDALONE, mesh);
     ent->render[lod].material = material;
     return mesh;

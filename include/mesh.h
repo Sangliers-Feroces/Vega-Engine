@@ -27,6 +27,5 @@ mesh_full_ref_t entity3_get_lod_ref(entity3 *ent, size_t lod);
 vec_mesh_full_t vec_mesh_full_init(void);
 void vec_mesh_full_add(vec_mesh_full_t *vec, mesh_full_t *to_add);
 void vec_mesh_full_destroy(vec_mesh_full_t vec);
-void chunk_add_mesh(chunk_t *chunk, mesh_full_t *mesh);
 
 vertex_t vertex_init(vec3 pos, vec3 normal, vec2 uv);
