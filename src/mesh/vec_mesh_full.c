@@ -35,8 +35,3 @@ void vec_mesh_full_destroy(vec_mesh_full_t vec)
         mesh_full_destroy(vec.mesh[i]);
     free(vec.mesh);
 }
-
-void chunk_add_mesh(chunk_t *chunk, mesh_full_t *mesh)
-{
-    vec_mesh_full_add(&chunk->meshes, mesh);
-}

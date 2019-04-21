@@ -10,6 +10,7 @@
 #include "matgl_struct.h"
 #include "mat_struct.h"
 
+#include "file_struct.h"
 #include "texture_struct.h"
 #include "gpu_struct.h"
 #include "octree_struct.h"

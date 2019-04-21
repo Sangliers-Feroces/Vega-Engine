@@ -60,7 +60,6 @@ chunk_t* chunk_create(ssize2 pos)
     res->world_ndx = ~0ULL;
     res->ents = entity3_create_pos(NULL,
     dvec3_init(pos.x * CHUNK_SIZE, 0.0, pos.y * CHUNK_SIZE));
-    res->meshes = vec_mesh_full_init();
     chunk_set_terrain(res);
     res->inserting = NULL;
     world_chunk2d_insert(_demo, res);
@@ -72,6 +71,9 @@ void chunk_destroy(chunk_t *chunk)
 {
     chunk_t **lookup;
 
+    file_write_t write = file_write_create();
+    file_write_entity3(&write, chunk->ents);
+    file_write_flush(&write, NULL);
     if (chunk == NULL)
         return;
     lookup = world_chunk2d_get(_demo, chunk->pos);
@@ -84,7 +86,6 @@ void chunk_destroy(chunk_t *chunk)
     }
     chunk_border_destroy(chunk->border);
     entity3_destroy(chunk->ents);
-    vec_mesh_full_destroy(chunk->meshes);
     free(chunk);
 }
 
