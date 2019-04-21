@@ -2,10 +2,22 @@
 ** EPITECH PROJECT, 2019
 ** MUL_my_rpg_2018
 ** File description:
-** iu_text_struct
+** vg_text_struct
 */
 
 #pragma once
+
+typedef enum {
+    FONT_MINECRAFT,
+    FONT_END
+} font_list_t;
+
+typedef struct {
+    char *str;
+    char *value;
+    font_list_t font_index;
+    rect_t pos_size;
+} vg_text;
 
 typedef enum {
     TEXT_TEST,

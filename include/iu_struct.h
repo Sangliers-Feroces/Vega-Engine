@@ -60,11 +60,6 @@ typedef enum {
     PATTERN_END
 } pattern_t;
 
-typedef enum {
-    FONT_MINECRAFT,
-    FONT_END
-} font_list_t;
-
 typedef struct {
     iutex_t index;
     int cols;
@@ -112,4 +107,5 @@ typedef struct {
     font_t fonts[FONT_END];
     char *text[TEXT_END];
     text_grp_t text_grp[TEXT_IND_END];
+    vg_text test;
 } iu_t;
