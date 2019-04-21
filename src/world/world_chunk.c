@@ -43,7 +43,7 @@ static void chunk_set_terrain(chunk_t *chunk)
     chunk_gen_terrain(chunk, chunk->terrain);
     entity3_update(chunk->ents);
     entity3_set_col(chunk->terrain,
-    chunk->terrain->render[WORLD_LOD_MAX].mesh->mesh);
+    entity3_get_lod_ref(chunk->terrain, WORLD_LOD_MAX));
 }
 
 chunk_t* chunk_create(ssize2 pos)

@@ -19,6 +19,10 @@ void mesh_full_ensure_coherence(mesh_full_t *mesh);
 void mesh_full_add_vertex(mesh_full_t *mesh, vertex_t vertex);
 void mesh_full_add_vertex_ext(mesh_full_t *mesh, vertex_t vertex,
 vertex_ext_t ext);
+mesh_full_ref_t mesh_full_ref_init(mesh_full_ref_type_t ref_type,
+mesh_full_t *m);
+mesh_full_ref_t mesh_full_ref_get_null(void);
+mesh_full_ref_t entity3_get_lod_ref(entity3 *ent, size_t lod);
 
 vec_mesh_full_t vec_mesh_full_init(void);
 void vec_mesh_full_add(vec_mesh_full_t *vec, mesh_full_t *to_add);

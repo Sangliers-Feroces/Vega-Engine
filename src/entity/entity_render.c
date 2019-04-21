@@ -28,15 +28,15 @@ static void mesh_full_refresh(mesh_full_t *mesh)
 
 static void render_obj_draw(render_obj_t render, dmat4 mvp, dmat4 world, dmat4 rot)
 {
-    mesh_full_refresh(render.mesh);
-    if (render.mesh->has_ext) {
+    mesh_full_refresh(render.mesh.m);
+    if (render.mesh.m->has_ext) {
         _demo->material[render.material].world(mvp, world, rot);
-        glBindVertexArray(render.mesh->gpu.vertex_array);
-        glDrawArrays(GL_TRIANGLES, 0, render.mesh->ext_count);
+        glBindVertexArray(render.mesh.m->gpu.vertex_array);
+        glDrawArrays(GL_TRIANGLES, 0, render.mesh.m->ext_count);
     } else {
         _demo->material[render.material].entity(mvp, world, rot);
-        glBindVertexArray(render.mesh->mesh->gpu.vertex_array);
-        glDrawArrays(GL_TRIANGLES, 0, render.mesh->mesh->vertex_count);
+        glBindVertexArray(render.mesh.m->mesh->gpu.vertex_array);
+        glDrawArrays(GL_TRIANGLES, 0, render.mesh.m->mesh->vertex_count);
     }
 }
 
@@ -50,8 +50,8 @@ void entity3_render(entity3 *ent, dmat4 vp)
     for (size_t i = 0; i < ent->sub.count; i++)
         entity3_render(ent->sub.ent[i], vp);
     for (size_t i = 0; i < 3; i++) {
-        do_draw |= ent->render[i].mesh != NULL;
-        if (ent->render[i].mesh != NULL)
+        do_draw |= ent->render[i].mesh.m != NULL;
+        if (ent->render[i].mesh.m != NULL)
             chosen = i;
     }
     if (!do_draw)
