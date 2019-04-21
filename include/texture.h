@@ -38,7 +38,7 @@ void texture2f_refresh_cpu(texture2f *texture);
 texture2f_binding texture2f_binding_create(dvec3 *triangle);
 void texture2f_binding_destroy(texture2f_binding binding);
 
-void gl_set_texture_parameters(void);
+void gl_set_texture_parameters(gluint texture);
 
 texture_cluster texture_cluster_create(void);
 void texture_cluster_destroy(texture_cluster cluster);

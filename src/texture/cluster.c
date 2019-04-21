@@ -7,8 +7,9 @@
 
 #include "headers.h"
 
-void gl_set_texture_parameters(void)
+void gl_set_texture_parameters(gluint texture)
 {
+    glBindTexture(GL_TEXTURE_2D, texture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -47,8 +48,7 @@ static texture2f* texture2f_create_cluster(int32_t w, int32_t h)
         printf("Can't create texture cluster. (GL returns 0)\n");
         return NULL;
     }
-    glBindTexture(GL_TEXTURE_2D, res->id);
-    gl_set_texture_parameters();
+    gl_set_texture_parameters(res->id);
     if (!allocate_texture(&size))
         return NULL;
     glBindTexture(GL_TEXTURE_2D, 0);

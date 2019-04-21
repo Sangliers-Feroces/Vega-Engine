@@ -77,8 +77,7 @@ void gpu_compute_lightmap(octree *tree, size_t rays)
     print_group_size();
     glUseProgram(shader);
     glGenTextures(1, &mem);
-    glBindTexture(GL_TEXTURE_2D, mem);
-    gl_set_texture_parameters();
+    gl_set_texture_parameters(mem);
     set_params_for_compute(serial, mem);
     dispatch_work();
     glDeleteProgram(shader);
