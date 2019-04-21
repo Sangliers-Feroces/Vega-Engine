@@ -73,6 +73,7 @@ void chunk_destroy(chunk_t *chunk)
 
     file_write_t write = file_write_create();
     file_write_entity3(&write, chunk->ents);
+    entity3_destroy(file_read_entity3(&(file_read_t){0, write.size, write.data}, NULL));
     file_write_flush(&write, NULL);
     if (chunk == NULL)
         return;

@@ -56,7 +56,7 @@ gluint vertex_buffer, gluint vertex_ext_buffer)
 static void mesh_gpu_init(mesh_t *mesh)
 {
     mesh->gpu.do_upload = 1;
-    mesh->gpu.do_reupload = 0;
+    mesh->gpu.do_reupload = 1;
     glGenVertexArrays(1, &mesh->gpu.vertex_array);
     glGenBuffers(1, &mesh->gpu.vertex_buffer);
     set_vertex_attrib(mesh->gpu.vertex_array, mesh->gpu.vertex_buffer);
@@ -65,7 +65,7 @@ static void mesh_gpu_init(mesh_t *mesh)
 static void mesh_ext_gpu_init(mesh_full_t *mesh)
 {
     mesh->gpu.do_upload = 1;
-    mesh->gpu.do_reupload = 0;
+    mesh->gpu.do_reupload = 1;
     glGenVertexArrays(1, &mesh->gpu.vertex_array);
     glGenBuffers(1, &mesh->gpu.vertex_buffer);
     set_vertex_ext_attrib(mesh->gpu.vertex_array, mesh->mesh->gpu.vertex_buffer,
@@ -142,11 +142,15 @@ void mesh_full_add_triangle_pos_uv(mesh_full_t *mesh, vec3 *pos, vec2 *uv)
         mesh_add_vertex(mesh->mesh, vertex_init(pos[i], normal, uv[i]));
 }
 
-mesh_full_t* mesh_full_create(int gpu_do_upload, int has_ext)
+mesh_full_t* mesh_full_create_adv(int gpu_do_upload, int has_ext,
+int do_create_sub)
 {
     mesh_full_t *res = (mesh_full_t*)malloc_safe(sizeof(mesh_full_t));
 
-    res->mesh = mesh_create(gpu_do_upload);
+    if (do_create_sub)
+        res->mesh = mesh_create(gpu_do_upload);
+    else
+        res->mesh = NULL;
     res->has_ext = has_ext;
     if (has_ext) {
         res->ext_count = 0;
@@ -160,6 +164,11 @@ mesh_full_t* mesh_full_create(int gpu_do_upload, int has_ext)
         res->gpu = (mesh_gpu_t){0, 0, 0, 0};
     }
     return res;
+}
+
+mesh_full_t* mesh_full_create(int gpu_do_upload, int has_ext)
+{
+    return mesh_full_create_adv(gpu_do_upload, has_ext, 1);
 }
 
 void mesh_full_destroy(mesh_full_t *mesh)

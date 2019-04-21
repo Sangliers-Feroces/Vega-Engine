@@ -14,18 +14,18 @@ void file_write_mesh_gpu(file_write_t *file, mesh_gpu_t gpu)
 
 void file_write_mesh(file_write_t *file, mesh_t *mesh)
 {
+    file_write_mesh_gpu(file, mesh->gpu);
     file_write_size_t(file, mesh->vertex_count);
     file_write(file, mesh->vertex, mesh->vertex_count * sizeof(vertex_t));
-    file_write_mesh_gpu(file, mesh->gpu);
 }
 
 void file_write_mesh_full(file_write_t *file, mesh_full_t *mesh)
 {
+    file_write_mesh_gpu(file, mesh->gpu);
+    file_write_int(file, mesh->has_ext);
     file_write_mesh(file, mesh->mesh);
-    file_write(file, &mesh->has_ext, sizeof(int));
     file_write_size_t(file, mesh->ext_count);
     file_write(file, mesh->ext, mesh->ext_count * sizeof(vertex_ext_t));
-    file_write_mesh_gpu(file, mesh->gpu);
 }
 
 void file_write_mesh_full_ref(file_write_t *file, mesh_full_ref_t mesh)
