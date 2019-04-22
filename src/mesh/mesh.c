@@ -62,7 +62,7 @@ static void mesh_gpu_init(mesh_t *mesh)
     set_vertex_attrib(mesh->gpu.vertex_array, mesh->gpu.vertex_buffer);
 }
 
-static void mesh_ext_gpu_init(mesh_full_t *mesh)
+void mesh_full_ext_gpu_init(mesh_full_t *mesh)
 {
     mesh->gpu.do_upload = 1;
     mesh->gpu.do_reupload = 1;
@@ -156,7 +156,8 @@ int do_create_sub)
         res->ext_count = 0;
         res->ext_allocated = 0;
         res->ext = NULL;
-        mesh_ext_gpu_init(res);
+        if (do_create_sub)
+            mesh_full_ext_gpu_init(res);
     } else {
         res->ext_count = 0;
         res->ext_allocated = 0;

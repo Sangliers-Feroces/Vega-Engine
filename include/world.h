@@ -17,13 +17,16 @@ void world_quit(demo_t *demo);
 
 chunk_t** world_chunk2d_get(demo_t *demo, ssize2 pos);
 void world_chunk2d_insert(demo_t *demo, chunk_t *chunk);
+chunk_t* world_chunk_get_adv(demo_t *demo, ssize2 pos, int do_load, int do_gen);
 chunk_t* world_chunk_get(demo_t *demo, ssize2 pos);
 ssize2 chunk_get_pos(dvec3 pos);
+ssize2 chunk_get_terrain_pos(ssize2 chunk_pos);
 chunk_t* world_chunk_get_by_pos(dvec3 pos);
 void chunk_update(chunk_t *chunk);
 
 chunk_t* chunk_create_detached(ssize2 pos);
 void chunk_attach(chunk_t *chunk);
+chunk_t* chunk_create_adv(ssize2 pos, int do_gen);
 chunk_t* chunk_create(ssize2 pos);
 void chunk_destroy(chunk_t *chunk);
 
@@ -39,8 +42,9 @@ vec_chunk_dvertex_t vec_chunk_dvertex_create(size_t count);
 void vec_chunk_dvertex_destroy(vec_chunk_dvertex_t vec);
 void chunk_lod_reupload_buf(chunk_lod_t *lod);
 
-void chunk_gen_terrain(chunk_t *chunk, entity3 *ent);
+void chunk_gen_terrain(ssize2 pos);
 
 chunk_border_t chunk_border_fetch(ssize2 pos);
+chunk_border_t chunk_border_init(void);
 
 void world_chunk_god(demo_t *demo);

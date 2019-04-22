@@ -22,8 +22,9 @@ void file_write_actual(file_write_t *file, const void *src, size_t size)
     size_t cur = file->size + size;
 
     if (cur > file->allocated) {
-        file->allocated += (1ULL << 20ULL);
+        file->allocated += MAX(1ULL << 16ULL, size);
         file->data = (void*)realloc(file->data, file->allocated);
+        memset(file->data + file->size, 0, file->allocated - file->size);
     }
     memcpy(file->data + file->size, src, size);
     file->size = cur;

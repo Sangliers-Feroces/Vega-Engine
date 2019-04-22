@@ -66,7 +66,19 @@ chunk_border_t chunk_border_fetch(ssize2 pos)
             res.hor[i][j] = (arr_dvec3_t){0, NULL};
             res.ver[i][j] = (arr_dvec3_t){0, NULL};
         }
-    fetch_hor(&res, pos);
-    fetch_ver(&res, pos);
+    //fetch_hor(&res, pos);
+    //fetch_ver(&res, pos);
+    return res;
+}
+
+chunk_border_t chunk_border_init(void)
+{
+    chunk_border_t res;
+
+    for (size_t i = 0; i < CHUNK_GEN_ITER; i++)
+        for (size_t j = 0; j < 2; j++) {
+            res.hor[i][j] = (arr_dvec3_t){0, NULL};
+            res.ver[i][j] = (arr_dvec3_t){0, NULL};
+        }
     return res;
 }

@@ -40,8 +40,26 @@ static void render_obj_draw(render_obj_t render, dmat4 mvp, dmat4 world, dmat4 r
     }
 }
 
+static size_t get_max_lod(double dist)
+{
+    if (dist < 512.0)
+        return 2;
+    else if (dist < 1024.0)
+        return 1;
+    else
+        return 0;
+}
+
+static double get_ent_dist(entity3 *ent)
+{
+    dvec3 p = dmat4_mul_dvec3(ent->trans.world, dvec3_init(0.0, 0.0, 0.0));
+
+    return dvec3_dist(p, _demo->cam.pos);
+}
+
 void entity3_render(entity3 *ent, dmat4 vp)
 {
+    size_t max_lod = get_max_lod(get_ent_dist(ent));
     size_t chosen;
     int do_draw = 0;
     dmat4 mvp;
@@ -49,7 +67,7 @@ void entity3_render(entity3 *ent, dmat4 vp)
     dmat4_mul(vp, ent->trans.world, mvp);
     for (size_t i = 0; i < ent->sub.count; i++)
         entity3_render(ent->sub.ent[i], vp);
-    for (size_t i = 0; i < 3; i++) {
+    for (size_t i = 0; i <= max_lod; i++) {
         do_draw |= ent->render[i].mesh.m != NULL;
         if (ent->render[i].mesh.m != NULL)
             chosen = i;

@@ -9,9 +9,11 @@
 
 #define WORLD_LOD_COUNT 3
 #define WORLD_LOD_MAX (WORLD_LOD_COUNT - 1)
-#define CHUNK_SIZE 1024.0f
+#define CHUNK_SIZE_TERRAIN 1024.0
+#define CHUNK_SIZE 256.0
+#define CHUNK_TERRAIN_SUB_SIZE ((ssize_t)(CHUNK_SIZE_TERRAIN / CHUNK_SIZE))
 #define CHUNK_GEN_ITER 6
-#define CHUNK_LOAD_DISTANCE 1
+#define CHUNK_LOAD_DISTANCE 8
 
 typedef struct {
     size_t lod;
@@ -90,6 +92,7 @@ typedef struct {
 typedef struct {
     mesh_full_ref_t mesh;
     vec_rtx_triangle_ref ref;
+    int is_on;
 } col_ref_t;
 
 typedef struct {

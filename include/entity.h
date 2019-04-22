@@ -19,9 +19,10 @@ size_t vec_entity3_add(vec_entity3_t *vec, entity3 *entity);
 void vec_entity3_destroy(vec_entity3_t vec);
 entity3* entity3_create_pos(entity3 *parent, dvec3 pos);
 entity3* entity3_create(entity3 *parent);
+void entity3_set_col(entity3 *ent, int is_on);
+void entity3_bind_col(entity3 *entity, mesh_full_ref_t collision_mesh);
 void entity3_destroy(entity3 *entity);
 entity3* chunk_add_entity(chunk_t *chunk);
-void entity3_set_col(entity3 *entity, mesh_full_ref_t collision_mesh);
 void entity3_set_render(entity3 *ent, size_t lod, mesh_full_ref_t mesh,
 material_t material);
 mesh_full_t* entity3_create_render(entity3 *ent, size_t lod,

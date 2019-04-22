@@ -53,6 +53,7 @@ col_ref_t col_ref_get_default(void)
 
     res.mesh = mesh_full_ref_get_null();
     res.ref = vec_rtx_triangle_ref_get_void();
+    res.is_on = 0;
     return res;
 }
 
@@ -134,12 +135,37 @@ entity3* entity3_create(entity3 *parent)
     return entity3_create_pos(parent, dvec3_init(0.0, 0.0, 0.0));
 }
 
+void entity3_set_col(entity3 *ent, int is_on)
+{
+    dvec3 p[3];
+
+    if (!is_on) {
+        if (!ent->col.is_on)
+            return;
+        ent->col.is_on = is_on;
+        vec_rtx_triangle_ref_destroy(ent->col.ref);
+        return;
+    }
+    if ((ent->col.is_on) || (ent->col.mesh.m == NULL))
+        return;
+    ent->col.is_on = is_on;
+    ent->col.ref =
+    vec_rtx_triangle_ref_create(ent->col.mesh.m->mesh->vertex_count / 3);
+    for (size_t i = 0; i < ent->col.mesh.m->mesh->vertex_count / 3; i++) {
+        for (size_t j = 0; j < 3; j++)
+            p[j] = dmat4_mul_vec3(ent->trans.world,
+            ent->col.mesh.m->mesh->vertex[i * 3 + j].pos);
+        ent->col.ref.triangle[i] =
+        octree_insert_triangle(&_demo->world.tree, rtx_triangle_create(p));
+    }
+}
+
 void entity3_destroy(entity3 *entity)
 {
     while (entity->sub.count > 0)
         entity3_destroy(entity->sub.ent[0]);
     vec_entity3_destroy(entity->sub);
-    vec_rtx_triangle_ref_destroy(entity->col.ref);
+    entity3_set_col(entity, 0);
     for (size_t i = 0; i < WORLD_LOD_COUNT; i++)
         render_obj_destroy(entity->render[i]);
     if (entity->root != NULL) {
@@ -157,24 +183,18 @@ entity3* chunk_add_entity(chunk_t *chunk)
     return res;
 }
 
-void entity3_set_col(entity3 *entity, mesh_full_ref_t collision_mesh)
+void entity3_bind_col(entity3 *entity, mesh_full_ref_t collision_mesh)
 {
-    dvec3 p[3];
-
+    if (collision_mesh.m == NULL) {
+        printf("Warning: set null collisions.\n");
+        return;
+    }
     if (entity->col.mesh.m != NULL) {
         printf("Error: trying to overwrite collision geometry.\n");
         exit(84);
     }
     entity->col.mesh = collision_mesh;
-    entity->col.ref =
-    vec_rtx_triangle_ref_create(collision_mesh.m->mesh->vertex_count / 3);
-    for (size_t i = 0; i < collision_mesh.m->mesh->vertex_count / 3; i++) {
-        for (size_t j = 0; j < 3; j++)
-            p[j] = dmat4_mul_vec3(entity->trans.world,
-            collision_mesh.m->mesh->vertex[i * 3 + j].pos);
-        entity->col.ref.triangle[i] =
-        octree_insert_triangle(&_demo->world.tree, rtx_triangle_create(p));
-    }
+    entity3_set_col(entity, 1);
 }
 
 void entity3_set_render(entity3 *ent, size_t lod, mesh_full_ref_t mesh,

@@ -38,6 +38,8 @@ mesh_full_t* file_read_mesh_full(file_read_t *file)
     res->ext_allocated = res->ext_count;
     res->ext = (vertex_ext_t*)malloc_safe(res->ext_count * sizeof(vertex_ext_t));
     file_read(file, res->ext, res->ext_count * sizeof(vertex_ext_t));
+    if (has_ext)
+        mesh_full_ext_gpu_init(res);
     return res;
 }
 

@@ -85,4 +85,7 @@ void player_physics(demo_t *demo)
     demo->player.is_grounded = old_speed.y < speed_frame.y;
     demo->player.speed = dvec3_divs(speed_frame, demo->win.framelen);
     demo->cam.pos = dvec3_add(demo->player.pos, (dvec3){0.0, 1.75, 0.0});
+    /*for (size_t i = 0; i < 1000; i++)
+        world_inter(demo, (ray3){dvec3_init(0.0, 100.0, 0.0),
+        dvec3_init(randf(), -1.0, randf())});*/
 }

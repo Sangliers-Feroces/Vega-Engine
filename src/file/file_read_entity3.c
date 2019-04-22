@@ -44,6 +44,6 @@ entity3* file_read_entity3(file_read_t *file, entity3 *parent)
     for (size_t i = 0; i < sub_count; i++)
         file_read_entity3(file, res);
     if (col_mesh.m != NULL)
-        entity3_set_col(res, col_mesh);
+        entity3_bind_col(res, col_mesh);
     return res;
 }

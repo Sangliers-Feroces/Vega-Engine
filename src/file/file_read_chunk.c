@@ -36,6 +36,20 @@ chunk_border_t file_read_chunk_border(file_read_t *file)
     return res;
 }
 
+static entity3* chunk_seek_tag(entity3 *ent, entity3_tag_t tag)
+{
+    entity3 *got;
+
+    if (ent->tag == tag)
+        return ent;
+    for (size_t i = 0; i < ent->sub.count; i++) {
+        got = chunk_seek_tag(ent->sub.ent[i], tag);
+        if (got != NULL)
+            return got;
+    }
+    return NULL;
+}
+
 chunk_t* file_read_chunk(file_read_t *file)
 {
     chunk_t *res = chunk_create_detached(file_read_ssize2(file));
@@ -43,5 +57,6 @@ chunk_t* file_read_chunk(file_read_t *file)
     res->border = file_read_chunk_border(file);
     entity3_destroy(res->ents);
     res->ents = file_read_entity3(file, NULL);
+    res->terrain = chunk_seek_tag(res->ents, ENTITY3_TAG_TERRAIN);
     return res;
 }

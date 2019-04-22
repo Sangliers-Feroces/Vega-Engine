@@ -39,11 +39,9 @@ chunk_t** world_chunk2d_get(demo_t *demo, ssize2 pos)
 
 static void chunk_set_terrain(chunk_t *chunk)
 {
-    chunk->terrain = chunk_add_entity(chunk);
-    chunk_gen_terrain(chunk, chunk->terrain);
-    entity3_update(chunk->ents);
-    entity3_set_col(chunk->terrain,
-    entity3_get_lod_ref(chunk->terrain, WORLD_LOD_MAX));
+    if (chunk->terrain != NULL)
+        return;
+    chunk_gen_terrain(chunk->pos);
 }
 
 chunk_t* chunk_create_detached(ssize2 pos)
@@ -52,6 +50,7 @@ chunk_t* chunk_create_detached(ssize2 pos)
 
     res = (chunk_t*)malloc_safe(sizeof(chunk_t));
     res->pos = pos;
+    res->border = chunk_border_init();
     res->world_ndx = ~0ULL;
     res->ents = entity3_create_pos(NULL,
     dvec3_init(pos.x * CHUNK_SIZE, 0.0, pos.y * CHUNK_SIZE));
@@ -66,7 +65,7 @@ void chunk_attach(chunk_t *chunk)
     world_chunk_add(_demo, chunk);
 }
 
-chunk_t* chunk_create(ssize2 pos)
+chunk_t* chunk_create_adv(ssize2 pos, int do_gen)
 {
     chunk_t *res;
     chunk_t **pexist;
@@ -76,9 +75,15 @@ chunk_t* chunk_create(ssize2 pos)
         if (*pexist != NULL)
             return *pexist;
     res = chunk_create_detached(pos);
-    chunk_set_terrain(res);
     chunk_attach(res);
+    if (do_gen)
+        chunk_set_terrain(res);
     return res;
+}
+
+chunk_t* chunk_create(ssize2 pos)
+{
+    return chunk_create_adv(pos, 1);
 }
 
 void chunk_destroy(chunk_t *chunk)
@@ -101,7 +106,7 @@ void chunk_destroy(chunk_t *chunk)
     free(chunk);
 }
 
-chunk_t* world_chunk_get(demo_t *demo, ssize2 pos)
+chunk_t* world_chunk_get_adv(demo_t *demo, ssize2 pos, int do_load, int do_gen)
 {
     chunk_t **pexist = world_chunk2d_get(demo, pos);
     chunk_t *res;
@@ -109,9 +114,15 @@ chunk_t* world_chunk_get(demo_t *demo, ssize2 pos)
     if (pexist != NULL)
         if (*pexist != NULL)
             return *pexist;
-    if (chunk_try_load(pos, &res))
-        return res;
-    return chunk_create(pos);
+    if (do_load)
+        if (chunk_try_load(pos, &res))
+            return res;
+    return chunk_create_adv(pos, do_gen);
+}
+
+chunk_t* world_chunk_get(demo_t *demo, ssize2 pos)
+{
+    return world_chunk_get_adv(demo, pos, 1, 1);
 }
 
 ssize2 chunk_get_pos(dvec3 pos)
@@ -120,6 +131,21 @@ ssize2 chunk_get_pos(dvec3 pos)
 
     res.x = pos.x / CHUNK_SIZE - (pos.x < 0.0 ? 1 : 0);
     res.y = pos.z / CHUNK_SIZE - (pos.z < 0.0 ? 1 : 0);
+    return res;
+}
+
+ssize2 chunk_get_terrain_pos(ssize2 chunk_pos)
+{
+    ssize2 res;
+
+    if (chunk_pos.x >= 0)
+        res.x = chunk_pos.x / CHUNK_TERRAIN_SUB_SIZE;
+    else
+        res.x = (chunk_pos.x + 1) / CHUNK_TERRAIN_SUB_SIZE - 1;
+    if (chunk_pos.y >= 0)
+        res.y = chunk_pos.y / CHUNK_TERRAIN_SUB_SIZE;
+    else
+        res.y = (chunk_pos.y + 1) / CHUNK_TERRAIN_SUB_SIZE - 1;
     return res;
 }
 

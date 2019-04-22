@@ -12,10 +12,20 @@ void entity3_trans_update_model(entity3 *ent)
     dmat4_model(&ent->trans, ent->trans.model, ent->trans.model_rot);
 }
 
+static void update_col(entity3 *ent)
+{
+    dvec3 p = dmat4_mul_dvec3(ent->trans.world, dvec3_init(0.0, 0.0, 0.0));
+    double dist = dvec3_dist(dvec3_init(p.x, 0.0, p.z),
+    dvec3_init(_demo->cam.pos.x, 0.0, _demo->cam.pos.z));
+
+    entity3_set_col(ent, dist < CHUNK_SIZE * 2.0);
+}
+
 void entity3_update_solo(entity3 *ent, dmat4 par_world, dmat4 par_rot)
 {
     if (!ent->trans.is_static)
         entity3_trans_update_model(ent);
+    update_col(ent);
     if (par_world != NULL)
         dmat4_mul(par_world, ent->trans.model, ent->trans.world);
     else

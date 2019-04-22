@@ -17,6 +17,11 @@ ssize2 ssize2_sub(ssize2 a, ssize2 b)
     return (ssize2){a.x - b.x, a.y - b.y};
 }
 
+ssize2 ssize2_muls(ssize2 value, ssize_t mul)
+{
+    return (ssize2){value.x * mul, value.y * mul};
+}
+
 ssize2 ssize2_abs(ssize2 value)
 {
     ssize2 res = {value.x < 0 ? -value.x : value.x,

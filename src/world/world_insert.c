@@ -23,7 +23,7 @@ void world_insert_end(size_t lod_collision)
     if (lod_collision != ~0ULL)
         for (size_t i = 0; i < _demo->world.chunk_count; i++)
             if (_demo->world.chunk[i]->inserting != NULL) {
-                entity3_set_col(_demo->world.chunk[i]->inserting,
+                entity3_bind_col(_demo->world.chunk[i]->inserting,
                 mesh_full_ref_init(MESH_FULL_REF_RENDER_LOD0 + lod_collision,
                 _demo->world.chunk[i]->inserting->render[lod_collision].mesh.m));
             }
