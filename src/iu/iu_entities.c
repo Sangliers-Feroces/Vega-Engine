@@ -14,6 +14,6 @@ void set_entities(void)
     -1.0f, IUREL_FULL};*/
     entity_constructor(&_iu.invent[IUINVENT_BG], (entity2_param_t){
     IUTEX_INVENT_BG, (rect_t){{-1.0f, -1.0f},{2.0f, 2.0f}}, -0.997});
-    entity_constructor(&_iu.buttons[IUBUTTON_CADRE], (entity2_param_t){
+    entity_constructor(&_iu.cadre[IUCADRE_BLACK], (entity2_param_t){
     IUTEX_TEXT_CADRE, (rect_t){{-0.5f, -1.0f},{1.0f, 0.3f}}, -0.998});
 }

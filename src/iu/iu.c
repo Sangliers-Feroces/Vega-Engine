@@ -96,10 +96,12 @@ void iu_init(demo_t *demo)
     set_entities();
     iu_text_init();
     iu_set_font();
+    iu_set_dialogue();
 }
 
 void iu_quit(void)
 {
+    vg_dialogue_quit();
     for (int i = 0; i < IUTEX_END; i++)
         texture2_destroy(_iu.textures[i]);
     glDeleteVertexArrays(1, &_iu.data.vertex_array);

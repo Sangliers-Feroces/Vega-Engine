@@ -60,6 +60,11 @@ typedef enum {
     PATTERN_END
 } pattern_t;
 
+typedef enum {
+    DIALOGUE_WELCOME,
+    DIALOGUE_END
+} dialogues_list_t;
+
 typedef struct {
     iutex_t index;
     int cols;
@@ -103,9 +108,10 @@ typedef struct {
     texture2 *textures[IUTEX_END];
     entity2_t buttons[IUBUTTON_END];
     entity2_t invent[IUINVENT_END];
+    entity2_t cadre[IUCADRE_END];
     //texts
     font_t fonts[FONT_END];
-    char *text[TEXT_END];
-    text_grp_t text_grp[TEXT_IND_END];
-    vg_text test;
+    char *text_src[TEXT_END];
+    dialogues_list_t current_dialogue;
+    vg_dialogue dialogue_list[DIALOGUE_END];
 } iu_t;

@@ -7,6 +7,7 @@
 
 #pragma once
 
+//vg_text
 vg_text vg_text_create(char *str, char *optional_value);
 
 void vg_text_set_position(vg_text *src, vec2 pos);
@@ -15,3 +16,17 @@ void vg_text_reset_str(vg_text *src, char *str, char *optional_value);
 void vg_text_set_font(vg_text *src, font_list_t font_index);
 
 void vg_text_draw(vg_text src);
+
+//vg_dialogue
+vg_dialogue vg_dialogue_create(int nb_text, text_index_t start);
+
+void vg_dialogue_set_position(vg_dialogue *src, vec2 pos);
+void vg_dialogue_set_size(vg_dialogue *src, vec2 size);
+void vg_dialogue_set_cadre(vg_dialogue *src, iucadre_t cadre_index);
+void vg_dialogue_set_font(vg_dialogue *src, font_list_t font_index);
+
+void vg_dialogue_draw(vg_dialogue *src);
+
+void vg_dialogue_quit(void);
+
+void iu_set_dialogue(void);

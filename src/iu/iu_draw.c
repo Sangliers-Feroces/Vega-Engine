@@ -28,17 +28,21 @@ void iu_entity_draw(entity2_t entity)
     iu_draw_full_rel(entity.index, entity_get_size(entity), entity.depth);
 }
 
-void display_dialogues(void)
+static void draw_current_dialogue(void)
 {
-    printf("time elpased : %f\n", _demo->game_time);
-    if (_demo->game_time >= 1.0f && _demo->game_time <= 3.0f)
-        iu_display_grp(TEXT_GRP_IND_WELCOME);
+    if (_iu.current_dialogue == DIALOGUE_END)
+        return;
+    vg_dialogue_draw(&_iu.dialogue_list[_iu.current_dialogue]);
 }
 
-/*static float get_canvas_size(rect_t target)
+static void temp_dialogue_test(void)
 {
-    return (target.p.x + target.s.x);
-}*/
+    if ((_demo->game_time >= 1.0f && _demo->game_time <= 1.5f)
+    && !_iu.dialogue_list[DIALOGUE_WELCOME].read) {
+        _iu.dialogue_list[DIALOGUE_WELCOME].read = 1;
+        _iu.current_dialogue = DIALOGUE_WELCOME;
+    }
+}
 
 void iu_display(void)
 {
@@ -46,6 +50,6 @@ void iu_display(void)
     if (_iu.data.is_invent)
         for (int i = 0; i < IUINVENT_END; i++)
             iu_entity_draw(_iu.invent[i]);
-    /*for (int i = 0; i < IUBUTTON_END; i++)
-        iu_entity_draw(_iu.buttons[i]);*/
+    temp_dialogue_test();
+    draw_current_dialogue();
 }
