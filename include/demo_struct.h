@@ -119,7 +119,7 @@ typedef struct {
     player_t player;
     buf_t buf;
     editor_t editor;
-    gluint shader[SHADER_MAX];
+    shader_cache_t shader[SHADER_MAX];
     material_full_t material[MATERIAL_MAX];
     texture2 *tex[TEX_MAX];
     float game_time;

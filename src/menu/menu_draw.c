@@ -49,7 +49,7 @@ int menu_loop(demo_t *demo, menu_t *menu)
         menu->link[MENU_LINK_LOAD].index = IUTEX_MENU_LOAD;
     do {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glUseProgram(_iu.data.iu_program);
+        glUseProgram(_demo->shader[SHADER_IU].program);
         menu_draw(menu);
         sfRenderWindow_display(demo->win.window);
         reset_cursor(menu);

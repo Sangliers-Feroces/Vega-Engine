@@ -52,7 +52,7 @@ void menu_setting_loop(demo_t *demo, menu_t *menu)
     while (menu_poll_events(demo, menu)) {
         menu->setting[SETTING_RES_CHOICE].index = list_resolutions[menu->choosen_res].index;
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glUseProgram(_iu.data.iu_program);
+        glUseProgram(_demo->shader[SHADER_IU].program);
         menu_draw(menu);
         setting_draw(menu);
         sfRenderWindow_display(demo->win.window);

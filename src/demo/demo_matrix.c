@@ -14,10 +14,10 @@ static void send_uniform(void)
     vec3 p = dvec3_vec3(_demo->cam.pos);
 
     for (size_t i = 0; i < SHADER_MAX; i++) {
-        glUseProgram(_demo->shader[i]);
-        u = glGetUniformLocation(_demo->shader[i], "l_dir");
+        glUseProgram(_demo->shader[i].program);
+        u = glGetUniformLocation(_demo->shader[i].program, "l_dir");
         glUniform3fv(u, 1, (void*)&l);
-        u = glGetUniformLocation(_demo->shader[i], "p_cam");
+        u = glGetUniformLocation(_demo->shader[i].program, "p_cam");
         glUniform3fv(u, 1, (void*)&p);
     }
 }
@@ -27,18 +27,17 @@ void shader_set(shader_t shader, dmat4 mvp, dmat4 world, dmat4 rot)
     mat4 mvp_actual;
     mat4 world_actual;
     mat4 rot_actual;
-    gluint u;
 
     dmat4_mat4(mvp, mvp_actual);
     dmat4_mat4(world, world_actual);
     dmat4_mat4(rot, rot_actual);
-    glUseProgram(_demo->shader[shader]);
-    u = glGetUniformLocation(_demo->shader[shader], "mvp");
-    glUniformMatrix4fv(u, 1, GL_FALSE, (void*)mvp_actual);
-    u = glGetUniformLocation(_demo->shader[shader], "world");
-    glUniformMatrix4fv(u, 1, GL_FALSE, (void*)world_actual);
-    u = glGetUniformLocation(_demo->shader[shader], "rot");
-    glUniformMatrix4fv(u, 1, GL_FALSE, (void*)rot_actual);
+    glUseProgram(_demo->shader[shader].program);
+    glUniformMatrix4fv(_demo->shader[shader].uniform[0],
+    1, GL_FALSE, (void*)mvp_actual);
+    glUniformMatrix4fv(_demo->shader[shader].uniform[1],
+    1, GL_FALSE, (void*)world_actual);
+    glUniformMatrix4fv(_demo->shader[shader].uniform[2],
+    1, GL_FALSE, (void*)rot_actual);
 }
 
 void refresh_vp(demo_t *demo)

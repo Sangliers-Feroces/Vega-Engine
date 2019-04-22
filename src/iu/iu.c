@@ -43,12 +43,6 @@ static void iu_set_gl(void)
     {{0.0f, 0.0f}, {0.0f, 1.0f}, {1.0f, 0.0f},
     {0.0f, 1.0f}, {1.0f, 1.0f}, {1.0f, 0.0f}};
 
-    _iu.data.iu_program = shader_load_vert_frag("src/gpu/shader/ui_vertex.glsl"
-    ,"src/gpu/shader/ui_fragment.glsl");
-    if (_iu.data.iu_program == 0) {
-        printf("Can't load ui shader.\n");
-        exit(84);
-    }
     glGenVertexArrays(1, &_iu.data.vertex_array);
     glBindVertexArray(_iu.data.vertex_array);
     glGenBuffers(1, &_iu.data.vertex_buffer);
@@ -106,5 +100,4 @@ void iu_quit(void)
         texture2_destroy(_iu.textures[i]);
     glDeleteVertexArrays(1, &_iu.data.vertex_array);
     glDeleteBuffers(1, &_iu.data.vertex_buffer);
-    glDeleteProgram(_iu.data.iu_program);
 }

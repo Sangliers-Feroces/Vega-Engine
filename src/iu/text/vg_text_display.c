@@ -9,17 +9,16 @@
 
 static void iu_draw_font(entity2_param_t canvas, vec2 tex_pos, vec2 tex_size)
 {
-    gluint pos = glGetUniformLocation(_demo->shader[SHADER_FONT], "tex_pos");
-    gluint size = glGetUniformLocation(_demo->shader[SHADER_FONT], "tex_size");
-    gluint pos_id = glGetUniformLocation(_demo->shader[SHADER_FONT], "pos");
-    gluint size_id = glGetUniformLocation(_demo->shader[SHADER_FONT], "size");
-    gluint depth_id = glGetUniformLocation(_demo->shader[SHADER_FONT], "depth");
-
-    glUniform1f(depth_id, canvas.depth);
-    glUniform2fv(pos_id, 1, (glfloat *)&canvas.rect.p);
-    glUniform2fv(size_id, 1, (glfloat *)&canvas.rect.s);
-    glUniform2fv(pos, 1, (glfloat *)&tex_pos);
-    glUniform2fv(size, 1, (glfloat *)&tex_size);
+    glUniform2fv(_demo->shader[SHADER_FONT].uniform[0],
+    1, (glfloat *)&tex_pos);
+    glUniform2fv(_demo->shader[SHADER_FONT].uniform[1],
+    1, (glfloat *)&tex_size);
+    glUniform2fv(_demo->shader[SHADER_FONT].uniform[2],
+    1, (glfloat *)&canvas.rect.p);
+    glUniform2fv(_demo->shader[SHADER_FONT].uniform[3],
+    1, (glfloat *)&canvas.rect.s);
+    glUniform1f(_demo->shader[SHADER_FONT].uniform[4],
+    canvas.depth);
     glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
@@ -41,7 +40,7 @@ float canvas_size)
 {
     float save_x = start.p.x;
 
-    glUseProgram(_demo->shader[SHADER_FONT]);
+    glUseProgram(_demo->shader[SHADER_FONT].program);
     glBindVertexArray(_iu.data.vertex_array);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, _iu.textures[_iu.fonts[font].index]->id);

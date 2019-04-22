@@ -50,7 +50,7 @@ int wait_confirmation(demo_t *demo, menu_t *menu)
 
     do {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glUseProgram(_iu.data.iu_program);
+        glUseProgram(_demo->shader[SHADER_IU].program);
         menu_draw(menu);
         setting_draw(menu);
         iu_entity_draw(menu->confirmation);

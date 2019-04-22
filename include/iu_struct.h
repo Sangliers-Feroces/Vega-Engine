@@ -97,7 +97,6 @@ typedef struct entity2 entity2_t;
 typedef struct {
     int expect_dialogue_input;
     int ratiowh;
-    gluint iu_program;
     gluint vertex_array;
     gluint vertex_buffer;
     int is_invent;

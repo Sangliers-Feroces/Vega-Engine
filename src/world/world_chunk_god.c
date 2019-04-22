@@ -40,8 +40,10 @@ void world_chunk_god(demo_t *demo)
     ssize2 cam = chunk_get_pos(demo->cam.pos);
 
     for (size_t i = 0; i < demo->world.chunk_count; i++)
-        try_unload_chunk(demo->world.chunk[i], cam);
+        if (try_unload_chunk(demo->world.chunk[i], cam))
+            return;
     for (ssize_t i = -CHUNK_LOAD_DISTANCE; i <= CHUNK_LOAD_DISTANCE; i++)
         for (ssize_t j = -CHUNK_LOAD_DISTANCE; j <= CHUNK_LOAD_DISTANCE; j++)
-            try_load_chunk(demo, ssize2_add(cam, (ssize2){j, i}));
+            if (try_load_chunk(demo, ssize2_add(cam, (ssize2){j, i})))
+                return;
 }
