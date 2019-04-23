@@ -33,21 +33,21 @@ int chunk_is_loaded(ssize2 pos)
 
 int chunk_try_load(ssize2 pos, chunk_t **pres)
 {
-    char *path = get_path(pos, "maps/world");
-    file_read_t file = file_read_create(path);
+    char *path;
+    file_read_t file;
     chunk_t *res;
 
     if (chunk_is_loaded(pos))
         return 1;
-    if (file.data == NULL) {
-        free(path);
+    path = get_path(pos, "maps/world");
+    file = file_read_create(path);
+    free(path);
+    if (file.data == NULL)
         return 0;
-    }
     res = file_read_chunk(&file);
     if (pres != NULL)
         *pres = res;
     file_read_flush(&file);
-    free(path);
     chunk_attach(res);
     return 1;
 }

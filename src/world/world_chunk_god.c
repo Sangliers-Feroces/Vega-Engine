@@ -51,7 +51,7 @@ void world_chunk_god(demo_t *demo)
 
     for (ssize_t i = -1; i <= 1; i++)
         for (ssize_t j = -1; j <= 1; j++)
-                ensure_lod_chunk(ssize2_add(cam, (ssize2){j, i}));
+            ensure_lod_chunk(ssize2_add(cam, (ssize2){j, i}));
     for (size_t i = 0; i < demo->world.chunk_count; i++)
         if (try_unload_chunk(demo->world.chunk[i], cam))
             return;
