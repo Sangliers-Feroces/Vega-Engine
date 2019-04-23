@@ -35,6 +35,14 @@ static void iu_display_char(char c, rect_t pos, font_list_t index)
     (vec2){offset_x, offset_y});
 }
 
+static float get_word_size(char *src, rect_t start)
+{
+    int len = 0;
+
+    for (; src[len] != ' ' && src[len] != '\0'; len++);
+    return (start.p.x + (start.s.x * len));
+}
+
 void iu_display_str(char *str, rect_t start, font_list_t font,
 float canvas_size)
 {
@@ -45,7 +53,8 @@ float canvas_size)
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, _iu.textures[_iu.fonts[font].index]->id);
     for (int i = 0; str[i] != '\0'; i++) {
-        if (start.p.x + start.s.x >= canvas_size) {
+        if (str[i] == ' ' && get_word_size(&str[i + 1], start) >= canvas_size) {
+            i++;
             start.p.x = save_x;
             start.p.y -= start.s.y + 0.02;
         }

@@ -16,4 +16,6 @@ void set_entities(void)
     IUTEX_INVENT_BG, (rect_t){{-1.0f, -1.0f},{2.0f, 2.0f}}, -0.997});
     entity_constructor(&_iu.cadre[IUCADRE_BLACK], (entity2_param_t){
     IUTEX_TEXT_CADRE, (rect_t){{-0.5f, -1.0f},{1.0f, 0.3f}}, -0.998});
+    entity_constructor(&_iu.cadre[IUCADRE_CHOICES], (entity2_param_t){
+    IUTEX_CHOICES_CADRE, (rect_t){{-0.5f, -1.0f},{1.0f, 0.3f}}, -0.998});
 }

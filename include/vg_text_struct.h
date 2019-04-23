@@ -8,12 +8,19 @@
 #pragma once
 
 typedef enum {
+    DIAL_FUNC_QUIT,
+    DIAL_FUCN_NO_EFFECT
+} dialogue_linked_func_t;
+
+typedef enum {
     IUCADRE_BLACK,
+    IUCADRE_CHOICES,
     IUCADRE_END
 } iucadre_t;
 
 typedef enum {
     TEXT_TEST,
+    TEXT_TEST_1,
     TEXT_TEST_2,
     TEXT_END
 } text_index_t;
@@ -42,11 +49,11 @@ typedef struct {
 
 typedef struct {
     char *str;
-    //ptr function
+    void (*ptr)(void);
 } dialogue_text;
 
 typedef struct {
-    int read;
+    int read; 
     int read_head;
     int nb_texts;
     font_list_t font_index;
@@ -55,6 +62,5 @@ typedef struct {
     iucadre_t cadre;
     //choices
     int choices;
-    iucadre_t cadre_choice;
     dialogue_text choices_display[2];
 } vg_dialogue;

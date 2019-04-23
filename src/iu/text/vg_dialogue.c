@@ -21,6 +21,7 @@ vg_dialogue vg_dialogue_create(int nb_text, text_index_t start)
     res.choices = 0;
     res.read_head = 0;
     res.read = 0;
+    res.cadre = IUCADRE_BLACK;
     return res;
 }
 
@@ -36,12 +37,16 @@ void vg_dialogue_set_size(vg_dialogue *src, vec2 size)
     src->pos_size.s.y = size.y;
 }
 
-void vg_dialogue_set_cadre(vg_dialogue *src, iucadre_t cadre_index)
-{
-    src->cadre = cadre_index;
-}
-
 void vg_dialogue_set_font(vg_dialogue *src, font_list_t font_index)
 {
     src->font_index = font_index;
+}
+
+void vg_dialogue_set_choices(vg_dialogue *src, char *choice1, char *choice2, 
+void (*ptr)(void), void (*ptr2)(void))
+{
+    src->choices_display[0].str = choice1;
+    src->choices_display[1].str = choice2;
+    src->choices_display[0].ptr = ptr;
+    src->choices_display[1].ptr = ptr2;
 }

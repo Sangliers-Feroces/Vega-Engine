@@ -25,7 +25,7 @@ static void editor_shortcut(demo_t *demo)
         demo->player.state = !demo->player.state;
         demo->player.pos = demo->cam.pos;
     }
-    if (demo->input.key_press['E']) {
+    if (demo->input.key_press[KEY_TAB]) {
         _iu.data.is_invent = !_iu.data.is_invent;
         if (_iu.data.is_invent)
             demo_center_cursor(demo);
