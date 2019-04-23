@@ -24,6 +24,15 @@ arr_dvec3_t file_read_arr_dvec3(file_read_t *file)
     return res;
 }
 
+arr2d_dvec3_t file_read_arr2d_dvec3(file_read_t *file)
+{
+    arr2d_dvec3_t res =
+    arr2d_dvec3_create(file_read_size_t(file), file_read_size_t(file));
+
+    file_read(file, res.dvec3, res.w * res.h * sizeof(dvec3));
+    return res;
+}
+
 chunk_border_t file_read_chunk_border(file_read_t *file)
 {
     chunk_border_t res;
@@ -55,6 +64,7 @@ chunk_t* file_read_chunk(file_read_t *file)
 
     res->border = file_read_chunk_border(file);
     res->border_ter = file_read_chunk_border(file);
+    res->terrain_base = file_read_arr2d_dvec3(file);
     entity3_destroy(res->ents);
     res->ents = file_read_entity3(file, NULL);
     res->terrain = chunk_seek_tag(res->ents, ENTITY3_TAG_TERRAIN);

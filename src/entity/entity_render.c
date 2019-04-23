@@ -52,9 +52,9 @@ dmat4 rot)
 
 static size_t get_max_lod(double dist)
 {
-    if (dist < 512.0)
+    if (dist < 384.0)
         return 2;
-    else if (dist < 1024.0)
+    else if (dist < 768.0)
         return 1;
     else
         return 0;

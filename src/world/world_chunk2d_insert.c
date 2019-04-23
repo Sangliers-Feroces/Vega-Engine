@@ -83,21 +83,21 @@ static void world_chunk2d_realloc_y_pos(demo_t *demo, size_t offset)
     demo->world.chunk2d = new_chunk2d;
 }
 
-void world_chunk2d_insert(demo_t *demo, chunk_t *chunk)
+void world_chunk2d_insert(chunk_t *chunk)
 {
     ssize_t border;
 
-    border = demo->world.chunk2d_area.p.x;
+    border = _demo->world.chunk2d_area.p.x;
     if (chunk->pos.x < border)
-        world_chunk2d_realloc_x_neg(demo, border - chunk->pos.x);
-    border = demo->world.chunk2d_area.p.x + demo->world.chunk2d_area.s.x;
+        world_chunk2d_realloc_x_neg(_demo, border - chunk->pos.x);
+    border = _demo->world.chunk2d_area.p.x + _demo->world.chunk2d_area.s.x;
     if (chunk->pos.x >= border)
-        world_chunk2d_realloc_x_pos(demo, chunk->pos.x - border + 1);
-    border = demo->world.chunk2d_area.p.y;
+        world_chunk2d_realloc_x_pos(_demo, chunk->pos.x - border + 1);
+    border = _demo->world.chunk2d_area.p.y;
     if (chunk->pos.y < border)
-        world_chunk2d_realloc_y_neg(demo, border - chunk->pos.y);
-    border = demo->world.chunk2d_area.p.y + demo->world.chunk2d_area.s.y;
+        world_chunk2d_realloc_y_neg(_demo, border - chunk->pos.y);
+    border = _demo->world.chunk2d_area.p.y + _demo->world.chunk2d_area.s.y;
     if (chunk->pos.y >= border)
-        world_chunk2d_realloc_y_pos(demo, chunk->pos.y - border + 1);
-    *world_chunk2d_get(demo, chunk->pos) = chunk;
+        world_chunk2d_realloc_y_pos(_demo, chunk->pos.y - border + 1);
+    *world_chunk2d_get(chunk->pos) = chunk;
 }

@@ -126,6 +126,7 @@ typedef struct {
     ssize2 pos;
     chunk_border_t border;
     chunk_border_t border_ter;
+    arr2d_dvec3_t terrain_base;
     size_t world_ndx;
     entity3 *ents;
     entity3 *terrain;

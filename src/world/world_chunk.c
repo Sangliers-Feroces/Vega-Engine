@@ -7,34 +7,34 @@
 
 #include "headers.h"
 
-void world_chunk_add(demo_t *demo, chunk_t *chunk)
+void world_chunk_add(chunk_t *chunk)
 {
-    size_t cur = demo->world.chunk_count++;
+    size_t cur = _demo->world.chunk_count++;
     chunk_t **new_chunk;
 
-    if (demo->world.chunk_count > demo->world.chunk_allocated) {
-        demo->world.chunk_allocated += 16;
+    if (_demo->world.chunk_count > _demo->world.chunk_allocated) {
+        _demo->world.chunk_allocated += 16;
         new_chunk =
-        (chunk_t**)malloc_safe(demo->world.chunk_allocated * sizeof(chunk_t*));
+        (chunk_t**)malloc_safe(_demo->world.chunk_allocated * sizeof(chunk_t*));
         for (size_t i = 0; i < cur; i++)
-            new_chunk[i] = demo->world.chunk[i];
-        free(demo->world.chunk);
-        demo->world.chunk = new_chunk;
+            new_chunk[i] = _demo->world.chunk[i];
+        free(_demo->world.chunk);
+        _demo->world.chunk = new_chunk;
     }
-    demo->world.chunk[cur] = chunk;
+    _demo->world.chunk[cur] = chunk;
     chunk->world_ndx = cur;
 }
 
-chunk_t** world_chunk2d_get(demo_t *demo, ssize2 pos)
+chunk_t** world_chunk2d_get(ssize2 pos)
 {
-    ssize2 ndx = ssize2_sub(pos, demo->world.chunk2d_area.p);
+    ssize2 ndx = ssize2_sub(pos, _demo->world.chunk2d_area.p);
 
-    if (!((ndx.x >= 0) && (ndx.x < demo->world.chunk2d_area.s.x) &&
-    (ndx.y >= 0) && (ndx.y < demo->world.chunk2d_area.s.y)))
+    if (!((ndx.x >= 0) && (ndx.x < _demo->world.chunk2d_area.s.x) &&
+    (ndx.y >= 0) && (ndx.y < _demo->world.chunk2d_area.s.y)))
         return NULL;
     else
         return
-        &demo->world.chunk2d[ndx.y * demo->world.chunk2d_area.s.x + ndx.x];
+        &_demo->world.chunk2d[ndx.y * _demo->world.chunk2d_area.s.x + ndx.x];
 }
 
 static void chunk_set_terrain(chunk_t *chunk)
@@ -52,6 +52,7 @@ chunk_t* chunk_create_detached(ssize2 pos)
     res->pos = pos;
     res->border = chunk_border_init();
     res->border_ter = chunk_border_init();
+    res->terrain_base = (arr2d_dvec3_t){0, 0, NULL};
     res->world_ndx = ~0ULL;
     res->ents = entity3_create_pos(NULL,
     dvec3_init(pos.x * CHUNK_SIZE, 0.0, pos.y * CHUNK_SIZE));
@@ -62,8 +63,8 @@ chunk_t* chunk_create_detached(ssize2 pos)
 
 void chunk_attach(chunk_t *chunk)
 {
-    world_chunk2d_insert(_demo, chunk);
-    world_chunk_add(_demo, chunk);
+    world_chunk2d_insert(chunk);
+    world_chunk_add(chunk);
 }
 
 chunk_t* chunk_create_adv(ssize2 pos, int do_gen)
@@ -71,7 +72,7 @@ chunk_t* chunk_create_adv(ssize2 pos, int do_gen)
     chunk_t *res;
     chunk_t **pexist;
 
-    pexist = world_chunk2d_get(_demo, pos);
+    pexist = world_chunk2d_get(pos);
     if (pexist != NULL)
         if (*pexist != NULL)
             return *pexist;
@@ -94,7 +95,7 @@ void chunk_destroy(chunk_t *chunk)
     if (chunk == NULL)
         return;
     chunk_save(chunk);
-    lookup = world_chunk2d_get(_demo, chunk->pos);
+    lookup = world_chunk2d_get(chunk->pos);
     if (lookup != NULL)
         *lookup = NULL;
     if (chunk->world_ndx != ~0ULL) {
@@ -104,13 +105,14 @@ void chunk_destroy(chunk_t *chunk)
     }
     chunk_border_destroy(chunk->border);
     chunk_border_destroy(chunk->border_ter);
+    arr2d_dvec3_destroy(chunk->terrain_base);
     entity3_destroy(chunk->ents);
     free(chunk);
 }
 
-chunk_t* world_chunk_get_adv(demo_t *demo, ssize2 pos, int do_load, int do_gen)
+chunk_t* world_chunk_get_adv(ssize2 pos, int do_load, int do_gen)
 {
-    chunk_t **pexist = world_chunk2d_get(demo, pos);
+    chunk_t **pexist = world_chunk2d_get(pos);
     chunk_t *res;
 
     if (pexist != NULL)
@@ -122,9 +124,9 @@ chunk_t* world_chunk_get_adv(demo_t *demo, ssize2 pos, int do_load, int do_gen)
     return chunk_create_adv(pos, do_gen);
 }
 
-chunk_t* world_chunk_get(demo_t *demo, ssize2 pos)
+chunk_t* world_chunk_get(ssize2 pos)
 {
-    return world_chunk_get_adv(demo, pos, 1, 1);
+    return world_chunk_get_adv(pos, 1, 1);
 }
 
 ssize2 chunk_get_pos(dvec3 pos)
@@ -153,7 +155,7 @@ ssize2 chunk_get_terrain_pos(ssize2 chunk_pos)
 
 chunk_t* world_chunk_get_by_pos(dvec3 pos)
 {
-    return world_chunk_get(_demo, chunk_get_pos(pos));
+    return world_chunk_get(chunk_get_pos(pos));
 }
 
 void chunk_update(chunk_t *chunk)

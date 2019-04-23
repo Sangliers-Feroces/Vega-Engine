@@ -31,6 +31,7 @@ void file_write_mesh_full_ref(file_write_t *file, mesh_full_ref_t mesh);
 
 void file_write_ssize2(file_write_t *file, ssize2 value);
 void file_write_arr_dvec3(file_write_t *file, arr_dvec3_t arr);
+void file_write_arr2d_dvec3(file_write_t *file, arr2d_dvec3_t arr);
 void file_write_chunk_border(file_write_t *file, chunk_border_t *border);
 void file_write_chunk(file_write_t *file, chunk_t *chunk);
 
@@ -46,6 +47,7 @@ mesh_full_ref_t file_read_mesh_full_ref(file_read_t *file, entity3 *ent);
 
 ssize2 file_read_ssize2(file_read_t *file);
 arr_dvec3_t file_read_arr_dvec3(file_read_t *file);
+arr2d_dvec3_t file_read_arr2d_dvec3(file_read_t *file);
 chunk_border_t file_read_chunk_border(file_read_t *file);
 chunk_t* file_read_chunk(file_read_t *file);
 

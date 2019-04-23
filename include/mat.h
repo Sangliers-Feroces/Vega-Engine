@@ -124,8 +124,10 @@ ssize_t ssize2_dist_sq_man(ssize2 a, ssize2 b);
 arr2d_dvec3_t arr2d_dvec3_create(size_t w, size_t h);
 void arr2d_dvec3_destroy(arr2d_dvec3_t arr);
 arr_dvec3_t arr_dvec3_create(size_t count);
+arr2d_dvec3_t arr2d_dvec3_copy(arr2d_dvec3_t to_copy);
+arr2d_dvec3_t arr2d_dvec3_copy_rect(arr2d_dvec3_t to_copy, srect area);
+void arr2d_dvec3_sub(arr2d_dvec3_t arr, dvec3 value);
 void arr_dvec3_destroy(arr_dvec3_t arr);
-void chunk_border_destroy(chunk_border_t border);
 
 vec3 dvec3_vec3(dvec3 value);
 dvec3 vec3_dvec3(vec3 value);

@@ -52,16 +52,13 @@ static void split_ter(arr2d_dvec3_t *arr, double stren)
     *arr = new_arr;
 }
 
-static void send_ter_to_chunk_lod(size_t lod, arr2d_dvec3_t arr,
-srect area, ssize2 chunk_pos, ssize2 iter)
+static void send_ter_to_chunk_lod_gen(chunk_t *chunk, size_t lod, arr2d_dvec3_t arr, dvec3 chunk_rel, srect area)
 {
-    chunk_t *chunk = world_chunk_get_adv(_demo, chunk_pos, 0, 0);
     mesh_full_t *mesh;
     vec2 uv[3] = {{0.0f, 0.0f}, {1.0f, 0.0f}, {0.0f, 1.0f}};
     vec3 base = {0.0, -42.0f, 0.0};
     vec3 sq[4];
     vec3 pos[3];
-    dvec3 chunk_rel = dvec3_init(iter.x * CHUNK_SIZE, 0.0, iter.y * CHUNK_SIZE);
 
     if (chunk->terrain == NULL) {
         chunk->terrain = chunk_add_entity(chunk);
@@ -79,6 +76,10 @@ srect area, ssize2 chunk_pos, ssize2 iter)
             pos[2] = dvec3_vec3(dvec3_sub(arr.dvec3[(area.p.y + i + 1) * arr.w + area.p.x + j], chunk_rel));
             mesh_add_triangle_pos_uv(mesh->mesh, pos, uv);
         }
+    if (lod == 1) {
+        chunk->terrain_base = arr2d_dvec3_copy_rect(arr, area);
+        arr2d_dvec3_sub(chunk->terrain_base, chunk_rel);
+    }
     if ((lod == 1) && (chunk->terrain->col.mesh.m == NULL)) {
         entity3_update(chunk->ents);
         entity3_bind_col(chunk->terrain,
@@ -96,6 +97,15 @@ srect area, ssize2 chunk_pos, ssize2 iter)
     mesh_add_triangle_pos_uv(mesh->mesh, (vec3[]){sq[3], sq[1], sq[2]}, uv);
 }
 
+static void send_ter_to_chunk_lod(size_t lod, arr2d_dvec3_t arr,
+srect area, ssize2 chunk_pos, ssize2 iter)
+{
+    chunk_t *chunk = world_chunk_get_adv(chunk_pos, 0, 0);
+    dvec3 chunk_rel = dvec3_init(iter.x * CHUNK_SIZE, 0.0, iter.y * CHUNK_SIZE);
+
+    send_ter_to_chunk_lod_gen(chunk, lod, arr, chunk_rel, area);
+}
+
 static void send_ter_to_chunks_lod(size_t lod, arr2d_dvec3_t arr, ssize2 pos)
 {
     ssize2 pos_first_chunk = ssize2_muls(pos, CHUNK_TERRAIN_SUB_SIZE);
@@ -107,9 +117,9 @@ static void send_ter_to_chunks_lod(size_t lod, arr2d_dvec3_t arr, ssize2 pos)
             ssize2_add(pos_first_chunk, (ssize2){j, i}), (ssize2){j, i});
 }
 
-/*static void send_iter_to_border(arr2d_dvec3_t arr, size_t ndx, srect area, ssize2 pos)
+static void send_iter_to_border(arr2d_dvec3_t arr, size_t ndx, srect area, ssize2 pos)
 {
-    chunk_t *chunk = world_chunk_get_adv(_demo, pos, 0, 0);
+    chunk_t *chunk = world_chunk_get_adv(pos, 0, 0);
 
     if (ndx == 0) {
         chunk->terrain = chunk_add_entity(chunk);
@@ -138,12 +148,12 @@ static void send_iter_to_borders(arr2d_dvec3_t arr, size_t ndx, ssize2 pos)
         for (size_t j = 0; j < CHUNK_TERRAIN_SUB_SIZE; j++)
             send_iter_to_border(arr, ndx, (srect){{j * step, i * step}, {step + 1, step + 1}},
             ssize2_add(pos_first_chunk, (ssize2){j, i}));
-}*/
+}
 
 static void send_iter_to_ter_border(arr2d_dvec3_t arr, size_t ndx, ssize2 pos)
 {
     ssize2 pos_first_chunk = ssize2_muls(pos, CHUNK_TERRAIN_SUB_SIZE);
-    chunk_t *chunk = world_chunk_get_adv(_demo, pos_first_chunk, 0, 0);
+    chunk_t *chunk = world_chunk_get_adv(pos_first_chunk, 0, 0);
 
     for (size_t i = 0; i < 2; i++) {
         chunk->border_ter.data[1][i][ndx] = arr_dvec3_create(arr.w);
@@ -192,7 +202,7 @@ void chunk_gen_terrain(ssize2 pos)
     arr2d_dvec3_t arr = arr2d_dvec3_create(2, 2);
     double stren = get_strength(ter_pos);
     dvec3 base = {0.0, (stren - 0.25) * 384.0, 0.0};
-    chunk_border_t border = chunk_border_fetch(ter_pos);
+    chunk_border_t border = chunk_border_ter_fetch(ter_pos);
 
     arr.dvec3[0] = base;
     arr.dvec3[1] = dvec3_add(base, (dvec3){CHUNK_SIZE_TERRAIN, 0.0, 0.0});
@@ -203,6 +213,7 @@ void chunk_gen_terrain(ssize2 pos)
         split_ter(&arr, stren);
         apply_constraints(arr, border, i);
         send_iter_to_ter_border(arr, i, ter_pos);
+        send_iter_to_borders(arr, i, ter_pos);
         switch (i) {
         case 4:
             send_ter_to_chunks_lod(0, arr, ter_pos);
@@ -214,4 +225,21 @@ void chunk_gen_terrain(ssize2 pos)
     }
     arr2d_dvec3_destroy(arr);
     chunk_border_destroy(border);
+}
+
+void chunk_detail_terrain(chunk_t *chunk)
+{
+    arr2d_dvec3_t arr = arr2d_dvec3_copy(chunk->terrain_base);
+    dvec3 chunk_rel = dvec3_init(0.0, 0.0, 0.0);
+
+    for (size_t i = 0; i < 2; i++) {
+        split_ter(&arr, 0.1 / (i + 1));
+        switch (i) {
+        case 1:
+            send_ter_to_chunk_lod_gen(chunk, WORLD_LOD_MAX, arr, chunk_rel, (srect){{0, 0}, {arr.w, arr.h}});
+            break;
+        }
+    }
+    arr2d_dvec3_destroy(arr);
+    entity3_bind_col(chunk->terrain, chunk->terrain->render[WORLD_LOD_MAX].mesh);
 }

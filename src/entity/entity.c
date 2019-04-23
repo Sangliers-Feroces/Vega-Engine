@@ -189,10 +189,8 @@ void entity3_bind_col(entity3 *entity, mesh_full_ref_t collision_mesh)
         printf("Warning: set null collisions.\n");
         return;
     }
-    if (entity->col.mesh.m != NULL) {
-        printf("Error: trying to overwrite collision geometry.\n");
-        exit(84);
-    }
+    if (entity->col.mesh.m != NULL)
+        entity3_set_col(entity, 0);
     entity->col.mesh = collision_mesh;
     entity3_set_col(entity, 1);
 }
