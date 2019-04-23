@@ -64,7 +64,7 @@ ssize2 pos, size_t dim, size_t is_pos)
     adj = world_chunk2d_get(off_chunk);
     if ((adj == NULL) || (*adj == NULL))
         return;
-    for (size_t i = 0; i < CHUNK_GEN_ITER; i++) {
+    for (size_t i = 0; i < CHUNK_GEN_EXT_ITER; i++) {
         copy_arr = &(*adj)->border.data[dim][!is_pos][i];
         res->data[dim][is_pos][i] = arr_dvec3_create(copy_arr->count);
         for (size_t j = 0; j < copy_arr->count; j++)
