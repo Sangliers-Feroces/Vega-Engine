@@ -99,5 +99,10 @@ void world_chunk2d_insert(chunk_t *chunk)
     border = _demo->world.chunk2d_area.p.y + _demo->world.chunk2d_area.s.y;
     if (chunk->pos.y >= border)
         world_chunk2d_realloc_y_pos(_demo, chunk->pos.y - border + 1);
+    if (*world_chunk2d_get(chunk->pos)) {
+        printf("Warning: chunk overwritten at %zd, %zd.\n",
+        chunk->pos.x, chunk->pos.y);
+        exit(84);
+    }
     *world_chunk2d_get(chunk->pos) = chunk;
 }

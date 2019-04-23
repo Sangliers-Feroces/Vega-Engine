@@ -61,5 +61,5 @@ int is_ray_in_bounds_seg(ray3 ray, bounds3 bounds)
         ((double*)&bounds.min)[i], ((double*)&bounds.max)[i], &t))
             return 0;
     }
-    return ((t.x <= t.y) && (t.y >= 0.0f) && (t.x <= 1.0f));
+    return ((t.x <= t.y) && (t.y >= 0.0) && (t.x <= 1.0));
 }

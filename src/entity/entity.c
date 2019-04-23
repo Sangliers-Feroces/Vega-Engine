@@ -215,6 +215,9 @@ material_t material, int has_ext)
         printf("Error: oob lod (got %zu).\n", lod);
         exit(84);
     }
+    if ((ent->render[lod].mesh.m != NULL) &&
+    (ent->render[lod].mesh.ref_type == MESH_FULL_REF_STANDALONE))
+        printf("Warning: overwriting standalone rendering geometry.\n");
     render_obj_destroy(ent->render[lod]);
     mesh = mesh_full_create(1, has_ext);
     ent->render[lod].mesh = mesh_full_ref_init(MESH_FULL_REF_STANDALONE, mesh);
