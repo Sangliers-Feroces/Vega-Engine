@@ -28,11 +28,10 @@ chunk_border_t file_read_chunk_border(file_read_t *file)
 {
     chunk_border_t res;
 
-    for (size_t i = 0; i < CHUNK_GEN_ITER; i++)
-        for (size_t j = 0; j < 2; j++) {
-            res.hor[i][j] = file_read_arr_dvec3(file);
-            res.ver[i][j] = file_read_arr_dvec3(file);
-        }
+    for (size_t i = 0; i < 2; i++)
+        for (size_t j = 0; j < 2; j++)
+            for (size_t k = 0; k < CHUNK_GEN_ITER; k++)
+                res.data[i][j][k] = file_read_arr_dvec3(file);
     return res;
 }
 

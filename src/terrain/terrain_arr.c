@@ -112,16 +112,16 @@ static void send_iter_to_border(arr2d_dvec3_t arr, size_t ndx, srect area, ssize
         chunk->terrain->tag = ENTITY3_TAG_TERRAIN;
     }
     for (size_t i = 0; i < 2; i++) {
-        chunk->border.hor[ndx][i] = arr_dvec3_create(area.s.y);
-        chunk->border.ver[ndx][i] = arr_dvec3_create(area.s.x);
+        chunk->border.data[0][i][ndx] = arr_dvec3_create(area.s.y);
+        chunk->border.data[1][i][ndx] = arr_dvec3_create(area.s.x);
     }
     for (ssize_t i = 0; i < area.s.y; i++) {
-        chunk->border.hor[ndx][0].dvec3[i] = arr.dvec3[(area.p.y + i) * arr.w + area.p.x];
-        chunk->border.hor[ndx][1].dvec3[i] = arr.dvec3[(area.p.y + i) * arr.w + area.p.x + area.s.x - 1];
+        chunk->border.data[0][0][ndx].dvec3[i] = arr.dvec3[(area.p.y + i) * arr.w + area.p.x];
+        chunk->border.data[0][1][ndx].dvec3[i] = arr.dvec3[(area.p.y + i) * arr.w + area.p.x + area.s.x - 1];
     }
     for (ssize_t i = 0; i < area.s.x; i++) {
-        chunk->border.ver[ndx][0].dvec3[i] = arr.dvec3[area.p.y * arr.w + area.p.x + i];
-        chunk->border.ver[ndx][1].dvec3[i] = arr.dvec3[(area.p.y + area.s.y - 1) * arr.w + area.p.x + i];
+        chunk->border.data[1][0][ndx].dvec3[i] = arr.dvec3[area.p.y * arr.w + area.p.x + i];
+        chunk->border.data[1][1][ndx].dvec3[i] = arr.dvec3[(area.p.y + area.s.y - 1) * arr.w + area.p.x + i];
     }
 }
 
@@ -139,18 +139,18 @@ static void send_iter_to_borders(arr2d_dvec3_t arr, size_t ndx, ssize2 pos)
 static void apply_constraints(arr2d_dvec3_t arr, chunk_border_t border,
 size_t ndx)
 {
-    for (size_t i = 0; i < arr.h; i++) {
-        if (border.hor[ndx][0].dvec3 != NULL)
-            arr.dvec3[i * arr.w] = border.hor[ndx][0].dvec3[i];
-        if (border.hor[ndx][1].dvec3 != NULL)
-            arr.dvec3[i * arr.w + arr.w - 1] = border.hor[ndx][1].dvec3[i];
-    }
-    for (size_t i = 0; i < arr.w; i++) {
-        if (border.ver[ndx][0].dvec3 != NULL)
-            arr.dvec3[i] = border.ver[ndx][0].dvec3[i];
-        if (border.ver[ndx][1].dvec3 != NULL)
-            arr.dvec3[(arr.h - 1) * arr.w + i] = border.ver[ndx][1].dvec3[i];
-    }
+    if (border.data[0][0][ndx].dvec3 != NULL)
+        for (size_t i = 0; i < arr.h; i++)
+            arr.dvec3[i * arr.w] = border.data[0][0][ndx].dvec3[i];
+    if (border.data[0][1][ndx].dvec3 != NULL)
+        for (size_t i = 0; i < arr.h; i++)
+            arr.dvec3[i * arr.w + arr.w - 1] = border.data[0][1][ndx].dvec3[i];
+    if (border.data[1][0][ndx].dvec3 != NULL)
+        for (size_t i = 0; i < arr.w; i++)
+            arr.dvec3[i] = border.data[1][0][ndx].dvec3[i];
+    if (border.data[1][1][ndx].dvec3 != NULL)
+        for (size_t i = 0; i < arr.w; i++)
+            arr.dvec3[(arr.h - 1) * arr.w + i] = border.data[1][1][ndx].dvec3[i];
 }
 
 double cos_der(double value)

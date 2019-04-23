@@ -25,8 +25,7 @@ typedef struct {
 } chunk_lod_t;
 
 typedef struct {
-    arr_dvec3_t hor[CHUNK_GEN_ITER][2];  // negative x, then positive
-    arr_dvec3_t ver[CHUNK_GEN_ITER][2];  // negative z, then positive
+    arr_dvec3_t data[2][2][CHUNK_GEN_ITER];  // x, then z, negative, positive
 } chunk_border_t;
 
 typedef struct {

@@ -20,11 +20,10 @@ void file_write_arr_dvec3(file_write_t *file, arr_dvec3_t arr)
 
 void file_write_chunk_border(file_write_t *file, chunk_border_t *border)
 {
-    for (size_t i = 0; i < CHUNK_GEN_ITER; i++)
-        for (size_t j = 0; j < 2; j++) {
-            file_write_arr_dvec3(file, border->hor[i][j]);
-            file_write_arr_dvec3(file, border->ver[i][j]);
-        }
+    for (size_t i = 0; i < 2; i++)
+        for (size_t j = 0; j < 2; j++)
+            for (size_t k = 0; k < CHUNK_GEN_ITER; k++)
+                file_write_arr_dvec3(file, border->data[i][j][k]);
 }
 
 void file_write_chunk(file_write_t *file, chunk_t *chunk)

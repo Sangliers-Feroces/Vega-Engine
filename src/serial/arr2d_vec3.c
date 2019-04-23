@@ -38,9 +38,8 @@ void arr_dvec3_destroy(arr_dvec3_t arr)
 
 void chunk_border_destroy(chunk_border_t border)
 {
-    for (size_t i = 0; i < CHUNK_GEN_ITER; i++)
-        for (size_t j = 0; j < 2; j++) {
-            arr_dvec3_destroy(border.hor[i][j]);
-            arr_dvec3_destroy(border.ver[i][j]);
-        }
+    for (size_t i = 0; i < 2; i++)
+        for (size_t j = 0; j < 2; j++)
+            for (size_t k = 0; k < CHUNK_GEN_ITER; k++)
+                arr_dvec3_destroy(border.data[i][j][k]);
 }
