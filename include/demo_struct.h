@@ -14,6 +14,7 @@ typedef enum {
 
 typedef enum {
     KEY_DEL = 127,
+    KEY_TAB = 9,
     KEY_ENTER = 10
 } keycode_t;
 

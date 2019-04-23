@@ -33,7 +33,8 @@ static void draw_current_dialogue(void)
 
 static void temp_dialogue_test(void)
 {
-    if ((_demo->game_time >= 1.0f && _demo->game_time <= 1.5f)
+    //printf("%f\n", _demo->game_time);
+    if ((_demo->game_time >= 1.0f && _demo->game_time <= 3.5f)
     && !_iu.dialogue_list[DIALOGUE_WELCOME].read) {
         _iu.dialogue_list[DIALOGUE_WELCOME].read = 1;
         _iu.current_dialogue = DIALOGUE_WELCOME;

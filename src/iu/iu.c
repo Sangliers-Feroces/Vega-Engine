@@ -34,6 +34,7 @@ static const iutex_path_t iutex_path [] = {
     {IUTEX_INVENT_BG, "res/ui/invent/invent.png"},
     {IUTEX_TEXT_CADRE, "res/ui/dialogue_cadre.png"},
     {IUTEX_FONT_MINECRAFT, "res/ui/font/minecraft.png"},
+    {IUTEX_CHOICES_CADRE, "res/ui/choices_cadre_black.png"},
     {0, NULL}
 };
 
