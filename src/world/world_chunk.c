@@ -51,6 +51,7 @@ chunk_t* chunk_create_detached(ssize2 pos)
     res = (chunk_t*)malloc_safe(sizeof(chunk_t));
     res->pos = pos;
     res->border = chunk_border_init();
+    res->border_ter = chunk_border_init();
     res->world_ndx = ~0ULL;
     res->ents = entity3_create_pos(NULL,
     dvec3_init(pos.x * CHUNK_SIZE, 0.0, pos.y * CHUNK_SIZE));
@@ -102,6 +103,7 @@ void chunk_destroy(chunk_t *chunk)
         _demo->world.chunk[chunk->world_ndx]->world_ndx = chunk->world_ndx;
     }
     chunk_border_destroy(chunk->border);
+    chunk_border_destroy(chunk->border_ter);
     entity3_destroy(chunk->ents);
     free(chunk);
 }

@@ -63,6 +63,10 @@ srect area, ssize2 chunk_pos, ssize2 iter)
     vec3 pos[3];
     dvec3 chunk_rel = dvec3_init(iter.x * CHUNK_SIZE, 0.0, iter.y * CHUNK_SIZE);
 
+    if (chunk->terrain == NULL) {
+        chunk->terrain = chunk_add_entity(chunk);
+        chunk->terrain->tag = ENTITY3_TAG_TERRAIN;
+    }
     mesh = entity3_create_render(chunk->terrain, lod, MATERIAL_GRASS, 0);
     for (ssize_t i = 0; i < area.s.y - 1; i++)
         for (ssize_t j = 0; j < area.s.x - 1; j++) {
@@ -103,7 +107,7 @@ static void send_ter_to_chunks_lod(size_t lod, arr2d_dvec3_t arr, ssize2 pos)
             ssize2_add(pos_first_chunk, (ssize2){j, i}), (ssize2){j, i});
 }
 
-static void send_iter_to_border(arr2d_dvec3_t arr, size_t ndx, srect area, ssize2 pos)
+/*static void send_iter_to_border(arr2d_dvec3_t arr, size_t ndx, srect area, ssize2 pos)
 {
     chunk_t *chunk = world_chunk_get_adv(_demo, pos, 0, 0);
 
@@ -134,21 +138,40 @@ static void send_iter_to_borders(arr2d_dvec3_t arr, size_t ndx, ssize2 pos)
         for (size_t j = 0; j < CHUNK_TERRAIN_SUB_SIZE; j++)
             send_iter_to_border(arr, ndx, (srect){{j * step, i * step}, {step + 1, step + 1}},
             ssize2_add(pos_first_chunk, (ssize2){j, i}));
+}*/
+
+static void send_iter_to_ter_border(arr2d_dvec3_t arr, size_t ndx, ssize2 pos)
+{
+    ssize2 pos_first_chunk = ssize2_muls(pos, CHUNK_TERRAIN_SUB_SIZE);
+    chunk_t *chunk = world_chunk_get_adv(_demo, pos_first_chunk, 0, 0);
+
+    for (size_t i = 0; i < 2; i++) {
+        chunk->border_ter.data[1][i][ndx] = arr_dvec3_create(arr.w);
+        chunk->border_ter.data[0][i][ndx] = arr_dvec3_create(arr.h);
+    }
+    for (size_t i = 0; i < arr.h; i++) {
+        chunk->border_ter.data[0][0][ndx].dvec3[i] = arr.dvec3[i * arr.w];
+        chunk->border_ter.data[0][1][ndx].dvec3[i] = arr.dvec3[i * arr.w + arr.w - 1];
+    }
+    for (size_t i = 0; i < arr.w; i++) {
+        chunk->border_ter.data[1][0][ndx].dvec3[i] = arr.dvec3[i];
+        chunk->border_ter.data[1][1][ndx].dvec3[i] = arr.dvec3[(arr.h - 1) * arr.w + i];
+    }
 }
 
 static void apply_constraints(arr2d_dvec3_t arr, chunk_border_t border,
 size_t ndx)
 {
-    if (border.data[0][0][ndx].dvec3 != NULL)
+    if (border.data[0][0][ndx].count > 0)
         for (size_t i = 0; i < arr.h; i++)
             arr.dvec3[i * arr.w] = border.data[0][0][ndx].dvec3[i];
-    if (border.data[0][1][ndx].dvec3 != NULL)
+    if (border.data[0][1][ndx].count > 0)
         for (size_t i = 0; i < arr.h; i++)
             arr.dvec3[i * arr.w + arr.w - 1] = border.data[0][1][ndx].dvec3[i];
-    if (border.data[1][0][ndx].dvec3 != NULL)
+    if (border.data[1][0][ndx].count > 0)
         for (size_t i = 0; i < arr.w; i++)
             arr.dvec3[i] = border.data[1][0][ndx].dvec3[i];
-    if (border.data[1][1][ndx].dvec3 != NULL)
+    if (border.data[1][1][ndx].count > 0)
         for (size_t i = 0; i < arr.w; i++)
             arr.dvec3[(arr.h - 1) * arr.w + i] = border.data[1][1][ndx].dvec3[i];
 }
@@ -179,7 +202,7 @@ void chunk_gen_terrain(ssize2 pos)
     for (size_t i = 0; i < CHUNK_GEN_ITER; i++) {
         split_ter(&arr, stren);
         apply_constraints(arr, border, i);
-        send_iter_to_borders(arr, i, ter_pos);
+        send_iter_to_ter_border(arr, i, ter_pos);
         switch (i) {
         case 4:
             send_ter_to_chunks_lod(0, arr, ter_pos);

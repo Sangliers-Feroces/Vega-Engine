@@ -30,5 +30,6 @@ void file_write_chunk(file_write_t *file, chunk_t *chunk)
 {
     file_write_ssize2(file, chunk->pos);
     file_write_chunk_border(file, &chunk->border);
+    file_write_chunk_border(file, &chunk->border_ter);
     file_write_entity3(file, chunk->ents);
 }
