@@ -90,6 +90,7 @@ void dmat4_perspective(proj_t proj, dmat4 res);
 void dmat4_ortho(proj_t proj, dmat4 res);
 
 void dmat4_mat4(dmat4 src, mat4 dst);
+dmat4_w dmat4_dmat4_w(dmat4 src);
 
 vec2 barycentric2_get_point(vec2 *triangle, dvec3 bar);
 

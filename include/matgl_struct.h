@@ -63,6 +63,10 @@ typedef float mat4[4][4];
 typedef double dmat4[4][4];
 
 typedef struct {
+    dmat4 data;
+} dmat4_w;
+
+typedef struct {
     size_t w;
     size_t h;
     dvec3 *dvec3;

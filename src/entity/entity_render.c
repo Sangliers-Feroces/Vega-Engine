@@ -26,14 +26,24 @@ static void mesh_full_refresh(mesh_full_t *mesh)
     }
 }
 
-static void render_obj_draw(render_obj_t render, dmat4 mvp, dmat4 world, dmat4 rot)
+static void render_obj_draw(render_obj_t render, dmat4 mvp, dmat4 world,
+dmat4 rot)
 {
     mesh_full_refresh(render.mesh.m);
     if (render.mesh.m->has_ext) {
+        if (_demo->material[render.material].is_transparent)
+            return render_delay_call((render_call_t){render.material,
+            dmat4_dmat4_w(mvp), dmat4_dmat4_w(world), dmat4_dmat4_w(rot),
+            render.mesh.m->gpu.vertex_array, render.mesh.m->ext_count});
         _demo->material[render.material].world(mvp, world, rot);
         glBindVertexArray(render.mesh.m->gpu.vertex_array);
         glDrawArrays(GL_TRIANGLES, 0, render.mesh.m->ext_count);
     } else {
+        if (_demo->material[render.material].is_transparent)
+            return render_delay_call((render_call_t){render.material,
+            dmat4_dmat4_w(mvp), dmat4_dmat4_w(world), dmat4_dmat4_w(rot),
+            render.mesh.m->mesh->gpu.vertex_array,
+            render.mesh.m->mesh->vertex_count});
         _demo->material[render.material].entity(mvp, world, rot);
         glBindVertexArray(render.mesh.m->mesh->gpu.vertex_array);
         glDrawArrays(GL_TRIANGLES, 0, render.mesh.m->mesh->vertex_count);

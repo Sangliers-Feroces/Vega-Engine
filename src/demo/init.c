@@ -47,6 +47,7 @@ void gl_gen(demo_t *demo)
         exit(84);
     }
     glGenVertexArrays(1, &demo->buf.world_vertex_array);
+    demo->buf.to_draw = vec_render_call_init();
 }
 
 void gl_delete(demo_t *demo)
@@ -57,4 +58,5 @@ void gl_delete(demo_t *demo)
     glDeleteVertexArrays(1, &demo->buf.vertex_array_id);
     glDeleteVertexArrays(1, &demo->buf.world_vertex_array);
     free(demo->buf.vertex_struct.v_array);
+    vec_render_call_destroy(demo->buf.to_draw);
 }
