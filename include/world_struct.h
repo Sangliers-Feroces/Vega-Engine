@@ -13,7 +13,7 @@
 #define CHUNK_SIZE 256.0
 #define CHUNK_TERRAIN_SUB_SIZE ((ssize_t)(CHUNK_SIZE_TERRAIN / CHUNK_SIZE))
 #define CHUNK_GEN_ITER 6
-#define CHUNK_LOAD_DISTANCE 16
+#define CHUNK_LOAD_DISTANCE 8
 
 typedef struct {
     size_t lod;
