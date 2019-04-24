@@ -10,8 +10,9 @@
 static void send_uniform(void)
 {
     gluint u;
-    vec3 l = dvec3_vec3(dvec3_muls(_demo->buf.l, -1.0));
-    vec3 p = dvec3_vec3(_demo->cam.pos);
+    vec3 l = dvec3_vec3(dvec3_muls(_demo->world.light_dir, -1.0));
+    vec3 p = dvec3_vec3(dmat4_mul_dvec3(_demo->world.camera->trans.world,
+    dvec3_init(0.0, 0.0, 0.0)));
 
     for (size_t i = 0; i < SHADER_MAX; i++) {
         glUseProgram(_demo->shader[i].program);
@@ -50,6 +51,10 @@ void refresh_vp(demo_t *demo)
         dmat4_perspective(proj_struct, demo->cam.mvp.proj);
     else
         dmat4_ortho(ortho_struct, demo->cam.mvp.proj);
+    demo->cam.rot = dvec3_init(demo->world.camera->trans.rot.x,
+    demo->world.player->trans.rot.y, 0.0);
+    demo->cam.pos = dmat4_mul_dvec3(demo->world.camera->trans.world,
+    dvec3_init(0.0, 0.0, 0.0));
     dmat4_rot(demo->cam.rot, demo->cam.mvp.rot);
     dmat4_view(demo->cam.pos, demo->cam.rot, demo->cam.mvp.view);
     dmat4_mul(demo->cam.mvp.proj, demo->cam.mvp.view, demo->cam.mvp.vp);

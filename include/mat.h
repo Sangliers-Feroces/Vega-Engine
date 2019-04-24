@@ -46,6 +46,7 @@ vec3 vec3_normalize(vec3 vec);
 double dvec3_dot(dvec3 a, dvec3 b);
 double dvec3_norm(dvec3 vec);
 double dvec3_dist(dvec3 a, dvec3 b);
+double dvec3_dist_sq(dvec3 a, dvec3 b);
 dvec3 dvec3_cross(dvec3 a, dvec3 b);
 dvec3 dvec3_normalize(dvec3 vec);
 
@@ -82,6 +83,7 @@ void dmat4_mul(dmat4 a, dmat4 b, dmat4 res);
 
 void dmat4_scale_trans(dvec3 pos, dvec3 scale, dmat4 res);
 void dmat4_rot(dvec3 rot, dmat4 res);
+void dmat4_model_inv(transform_t *t, dmat4 res, dmat4 rot);
 void dmat4_model(transform_t *t, dmat4 res, dmat4 rot);
 void dmat4_view(dvec3 pos, dvec3 rot, dmat4 res);
 dvec4 dmat4_mul_vec4(dmat4 a, dvec4 b);
@@ -114,6 +116,8 @@ dvec3 dvec3_interpolate(dvec3 a, dvec3 b, long double ratio);
 void dmat4_rot_xy(dvec3 rot, dmat4 res);
 dvec3 dmat4_mul_dvec3(dmat4 mat, dvec3 vec);
 dvec3 dmat4_mul_vec3(dmat4 mat, vec3 vec);
+
+void dmat4_inv(dmat4 src, dmat4 res);
 
 ssize2 ssize2_add(ssize2 a, ssize2 b);
 ssize2 ssize2_sub(ssize2 a, ssize2 b);

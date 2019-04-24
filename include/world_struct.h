@@ -31,9 +31,12 @@ typedef struct {
 
 typedef struct {
     int is_static;
+    int is_physics;
+    int is_grounded;
     dvec3 pos;
     dvec3 scale;
     dvec3 rot;
+    dvec3 speed;
     dmat4 model;
     dmat4 model_rot;
     dmat4 world;
@@ -122,7 +125,9 @@ typedef struct {
 
 typedef enum  {
     ENTITY3_TAG_NONE,
-    ENTITY3_TAG_TERRAIN
+    ENTITY3_TAG_TERRAIN,
+    ENTITY3_TAG_PLAYER,
+    ENTITY3_TAG_CAMERA
 } entity3_tag_t;
 
 struct entity3 {
@@ -145,6 +150,7 @@ typedef struct {
     entity3 *ents;
     entity3 *terrain;
     entity3 *inserting;
+    int is_stalled;
 } chunk_t;
 
 typedef struct {
@@ -153,6 +159,9 @@ typedef struct {
     size_t chunk_allocated;
     chunk_t **chunk;        // used for rendering / world intersection
     entity3 *ents;
+    entity3 *player;
+    entity3 *camera;
+    dvec3 light_dir;
     vec_trigger_t triggers; // loaded triggers
     srect chunk2d_area;
     chunk_t **chunk2d;      // 2d array for fast lookup

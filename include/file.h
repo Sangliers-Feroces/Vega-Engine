@@ -12,12 +12,14 @@ void file_write(file_write_t *file, const void *src, size_t size);
 void file_write_flush(file_write_t *file, const char *path);
 void file_write_data_ref(file_write_t *file, file_data_ref_t ref_type);
 void file_write_int(file_write_t *file, int value);
+void file_write_string(file_write_t *file, const char *value);
 
 file_read_t file_read_create(const char *path);
 void file_read(file_read_t *file, void *dst, size_t size);
 void file_read_flush(file_read_t *file);
 file_data_ref_t file_read_data_ref(file_read_t *file);
 int file_read_int(file_read_t *file);
+char* file_read_string(file_read_t *file);
 
 void file_write_size_t(file_write_t *file, size_t value);
 void file_write_transform(file_write_t *file, transform_t *transform);
@@ -51,7 +53,7 @@ arr2d_dvec3_t file_read_arr2d_dvec3(file_read_t *file);
 chunk_border_t file_read_chunk_border(file_read_t *file);
 chunk_t* file_read_chunk(file_read_t *file);
 
-char* chunk_get_path(const char *dir, const char *file);
+char* map_get_path(const char *file);
 int chunk_is_loaded(ssize2 pos);
 int chunk_try_load(ssize2 pos, chunk_t **pres);
 void chunk_save(chunk_t *chunk);

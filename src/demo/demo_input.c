@@ -13,46 +13,44 @@ void check_mouse_move(demo_t *demo)
 
     if (_iu.data.is_invent)
         return;
-    demo->cam.rot.y -=
+    demo->world.player->trans.rot.y -=
     (float)(demo->mouse.mouse_pos.x - demo->mouse.last_pos.x) * sensi;
-    demo->cam.rot.x -=
+    demo->world.camera->trans.rot.x -=
     (float)(demo->mouse.mouse_pos.y - demo->mouse.last_pos.y) * sensi;
-    demo->cam.rot.x = CLAMP(demo->cam.rot.x, -M_PI / 2.0, M_PI / 2.0);
+    demo->world.camera->trans.rot.x =
+    CLAMP(demo->world.camera->trans.rot.x, -M_PI / 2.0, M_PI / 2.0);
 }
 
 static void poll_editor(demo_t *demo, dvec3 cam_x, dvec3 cam_z)
 {
+    dvec3 *p = &demo->world.player->trans.pos;
+
     if (sfKeyboard_isKeyPressed(sfKeyZ))
-        demo->cam.pos =
-        dvec3_add(demo->cam.pos, dvec3_muls(cam_z, CAM_MOVE));
+       *p = dvec3_add(*p, dvec3_muls(cam_z, CAM_MOVE));
     if (sfKeyboard_isKeyPressed(sfKeyS))
-        demo->cam.pos =
-        dvec3_sub(demo->cam.pos, dvec3_muls(cam_z, CAM_MOVE));
+        *p = dvec3_sub(*p, dvec3_muls(cam_z, CAM_MOVE));
     if (sfKeyboard_isKeyPressed(sfKeyD))
-        demo->cam.pos =
-        dvec3_add(demo->cam.pos, dvec3_muls(cam_x, CAM_MOVE));
+        *p = dvec3_add(*p, dvec3_muls(cam_x, CAM_MOVE));
     if (sfKeyboard_isKeyPressed(sfKeyQ))
-        demo->cam.pos =
-        dvec3_sub(demo->cam.pos, dvec3_muls(cam_x, CAM_MOVE));
+        *p = dvec3_sub(*p, dvec3_muls(cam_x, CAM_MOVE));
 }
 
 static void poll_playing(demo_t *demo, dvec3 cam_x, dvec3 cam_z)
 {
+    dvec3 *s = &demo->world.player->trans.speed;
+
     cam_z.y = 0.0;
     if (sfKeyboard_isKeyPressed(sfKeyZ))
-        demo->player.speed =
-        dvec3_add(demo->player.speed, dvec3_muls(cam_z, PLAYER_MOVE));
+        *s = dvec3_add(*s, dvec3_muls(cam_z, PLAYER_MOVE));
     if (sfKeyboard_isKeyPressed(sfKeyS))
-        demo->player.speed =
-        dvec3_sub(demo->player.speed, dvec3_muls(cam_z, PLAYER_MOVE));
+        *s = dvec3_sub(*s, dvec3_muls(cam_z, PLAYER_MOVE));
     if (sfKeyboard_isKeyPressed(sfKeyD))
-        demo->player.speed =
-        dvec3_add(demo->player.speed, dvec3_muls(cam_x, PLAYER_MOVE));
+        *s = dvec3_add(*s, dvec3_muls(cam_x, PLAYER_MOVE));
     if (sfKeyboard_isKeyPressed(sfKeyQ))
-        demo->player.speed =
-        dvec3_sub(demo->player.speed, dvec3_muls(cam_x, PLAYER_MOVE));
-    if (sfKeyboard_isKeyPressed(sfKeySpace) && demo->player.is_grounded)
-        demo->player.speed.y = 3.0f;
+        *s = dvec3_sub(*s, dvec3_muls(cam_x, PLAYER_MOVE));
+    if (sfKeyboard_isKeyPressed(sfKeySpace) &&
+    _demo->world.player->trans.is_grounded)
+        s->y = 3.0;
     player_physics(demo);
 }
 
@@ -78,9 +76,9 @@ void demo_poll_input(demo_t *demo)
     demo_update_framerate(demo);
     cam_x = dvec3_muls(cam_x, demo->win.framelen);
     cam_z = dvec3_muls(cam_z, demo->win.framelen);
-    if (demo->player.state == GAME_EDITOR)
-        poll_editor(demo, cam_x, cam_z);
-    else
+    if (demo->world.player->trans.is_physics)
         poll_playing(demo, cam_x, cam_z);
+    else
+        poll_editor(demo, cam_x, cam_z);
     poll_general(demo);
 }

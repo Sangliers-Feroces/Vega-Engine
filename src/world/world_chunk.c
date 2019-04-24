@@ -58,6 +58,7 @@ chunk_t* chunk_create_detached(ssize2 pos)
     dvec3_init(pos.x * CHUNK_SIZE, 0.0, pos.y * CHUNK_SIZE));
     res->inserting = NULL;
     res->terrain = NULL;
+    res->is_stalled = 1;
     return res;
 }
 
@@ -156,9 +157,4 @@ ssize2 chunk_get_terrain_pos(ssize2 chunk_pos)
 chunk_t* world_chunk_get_by_pos(dvec3 pos)
 {
     return world_chunk_get(chunk_get_pos(pos));
-}
-
-void chunk_update(chunk_t *chunk)
-{
-    entity3_update(chunk->ents);
 }

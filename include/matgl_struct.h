@@ -61,6 +61,7 @@ typedef struct {
 
 typedef float mat4[4][4];
 typedef double dmat4[4][4];
+typedef double dmat4_ext[8][4];
 
 typedef struct {
     dmat4 data;

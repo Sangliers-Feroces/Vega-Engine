@@ -27,7 +27,9 @@ static int init_mouse(demo_t *demo)
     demo->mouse.button_state = 0;
     demo->mouse.button_release = 0;
     demo->mouse.button_click = 0;
-    demo->mouse.mouse_pos = (sfVector2i){0, 0};
+    for (size_t i = 0; i < 2; i++)
+        demo_refresh_mouse_pos();
+    demo_update_cursor_visibility(demo);
     for (size_t i = 0; i < 256; i++) {
         demo->input.key_state[i] = 0;
         demo->input.key_last[i] = 0;
@@ -54,7 +56,7 @@ static void init_win(demo_t *demo)
     sfWindow_setVerticalSyncEnabled((sfWindow*)demo->win.window, sfTrue);
     if (!init_mouse(demo))
         exit_full_custom();
-    demo_update_cursor_visibility(demo);
+        
 }
 
 demo_t* demo_init(void)
@@ -75,6 +77,7 @@ demo_t* demo_init(void)
     shader_init(res);
     material_init(res);
     world_init(res);
+    world_load_map();
     demo_update_cursor_visibility(res);
     return (res);
 }

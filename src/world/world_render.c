@@ -7,9 +7,8 @@
 
 #include "headers.h"
 
-static void gl_set_stuff(demo_t *demo)
+static void gl_set_stuff(void)
 {
-    refresh_vp(demo);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, _lightmaps.base->id);
     glEnable(GL_CULL_FACE);
@@ -28,16 +27,14 @@ static void gl_reset_stuff(void)
 
 static void chunk_render(chunk_t *chunk)
 {
-    entity3_update(chunk->ents);
     entity3_render(chunk->ents, _demo->cam.mvp.vp);
 }
 
-void world_render(demo_t *demo)
+void world_render(void)
 {
-    world_chunk_god(demo);
-    gl_set_stuff(demo);
-    for (size_t i = 0; i < demo->world.chunk_count; i++)
-        chunk_render(demo->world.chunk[i]);
+    gl_set_stuff();
+    for (size_t i = 0; i < _demo->world.chunk_count; i++)
+        chunk_render(_demo->world.chunk[i]);
     render_delay_exec();
     gl_reset_stuff();
 }

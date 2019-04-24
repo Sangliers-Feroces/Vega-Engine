@@ -42,7 +42,8 @@ void vec_trigger_add(vec_trigger_t *vec, trigger_t *trigger)
     trigger->ndx = cur;
 }
 
-void vec_trigger_destroy(vec_trigger_t vec)
+void vec_trigger_destroy(vec_trigger_t *vec)
 {
-    free(vec.trigger);
+    free(vec->trigger);
+    vec->count = 0;
 }

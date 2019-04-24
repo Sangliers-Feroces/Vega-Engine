@@ -22,6 +22,13 @@ double dvec3_dist(dvec3 a, dvec3 b)
     return dvec3_norm(dvec3_sub(a, b));
 }
 
+double dvec3_dist_sq(dvec3 a, dvec3 b)
+{
+    dvec3 diff = dvec3_sub(a, b);
+
+    return dvec3_dot(diff, diff);
+}
+
 dvec3 dvec3_cross(dvec3 a, dvec3 b)
 {
     return (dvec3){a.y * b.z - a.z * b.y, -(a.x * b.z - a.z * b.x),

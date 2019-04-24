@@ -45,14 +45,19 @@ static void poll_click(demo_t *demo)
         (((demo->mouse.button_last >> i) & 1) == 1)) << i;
 }
 
+void demo_refresh_mouse_pos(void)
+{
+    _demo->mouse.last_pos = _demo->mouse.mouse_pos;
+    _demo->mouse.mouse_pos = sfMouse_getPositionRenderWindow(_demo->win.window);
+}
+
 static void poll_mouse_pos(demo_t *demo)
 {
     int do_tp = 0;
 
     if (!demo->win.has_focus)
         return;
-    demo->mouse.last_pos = demo->mouse.mouse_pos;
-    demo->mouse.mouse_pos = sfMouse_getPositionRenderWindow(demo->win.window);
+    demo_refresh_mouse_pos();
     if (_iu.data.is_focus)
         return;
     if ((ssize_t)demo->mouse.mouse_pos.x < (ssize_t)(demo->win.w / 4)) {
@@ -106,7 +111,8 @@ void demo_loop(demo_t *demo)
         demo->game_time = get_eleapsed_time_second(demo->clocks.game_clock);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         editor(demo);
-        world_render(demo);
+        world_update();
+        world_render();
         iu_display();
         sfRenderWindow_display(demo->win.window);
     }

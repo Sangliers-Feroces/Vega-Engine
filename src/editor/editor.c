@@ -21,10 +21,9 @@ void demo_center_cursor(demo_t *demo)
 
 static void editor_shortcut(demo_t *demo)
 {
-    if (demo->input.key_press['N']) {
-        demo->player.state = !demo->player.state;
-        demo->player.pos = demo->cam.pos;
-    }
+    if (demo->input.key_press['N'])
+        demo->world.player->trans.is_physics =
+        !demo->world.player->trans.is_physics;
     if (demo->input.key_press[KEY_TAB]) {
         _iu.data.is_invent = !_iu.data.is_invent;
         if (_iu.data.is_invent)

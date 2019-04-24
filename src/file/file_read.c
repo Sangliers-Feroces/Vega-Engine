@@ -43,7 +43,6 @@ void file_read(file_read_t *file, void *dst, size_t size)
     file_read_actual(file, &got, sizeof(ssize_t));
     if (got != size) {
         printf("Chain destroyed here.\n");
-        *((int*)NULL) = 0;
         exit(84);
     }
     file_read_actual(file, dst, size);
@@ -67,5 +66,21 @@ int file_read_int(file_read_t *file)
     int res;
 
     file_read(file, &res, sizeof(int));
+    return res;
+}
+
+char* file_read_string(file_read_t *file)
+{
+    size_t size;
+    char *res;
+
+    file_read_actual(file, &size, sizeof(size_t));
+    file->i -= sizeof(size_t);
+    res = (char*)malloc_safe(size);
+    file_read(file, res, size);
+    if ((size == 0) || (res[size - 1] != '\0')) {
+        printf("Corrupted string.\n");
+        exit(84);
+    }
     return res;
 }

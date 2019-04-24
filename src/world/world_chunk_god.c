@@ -56,13 +56,15 @@ static void terrain_last_lod(ssize2 pos)
                 return;
 }
 
-void world_chunk_god(demo_t *demo)
+void world_chunk_god(void)
 {
-    ssize2 cam = chunk_get_pos(demo->cam.pos);
+    ssize2 cam = chunk_get_pos(_demo->cam.pos);
 
+    world_chunk_get(cam);
     terrain_last_lod(cam);
-    for (size_t i = 0; i < demo->world.chunk_count; i++)
-        if (try_unload_chunk(demo->world.chunk[i], cam))
+    world_chunk_god_stalled();
+    for (size_t i = 0; i < _demo->world.chunk_count; i++)
+        if (try_unload_chunk(_demo->world.chunk[i], cam))
             return;
     for (ssize_t i = -CHUNK_LOAD_DISTANCE; i <= CHUNK_LOAD_DISTANCE; i++)
         for (ssize_t j = -CHUNK_LOAD_DISTANCE; j <= CHUNK_LOAD_DISTANCE; j++)
