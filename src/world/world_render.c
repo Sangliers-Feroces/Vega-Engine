@@ -38,5 +38,6 @@ void world_render(demo_t *demo)
     gl_set_stuff(demo);
     for (size_t i = 0; i < demo->world.chunk_count; i++)
         chunk_render(demo->world.chunk[i]);
+    render_delay_exec();
     gl_reset_stuff();
 }

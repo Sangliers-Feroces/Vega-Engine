@@ -29,6 +29,7 @@ typedef enum {
 typedef struct {
     void (*world)(dmat4 mvp, dmat4 world, dmat4 rot);
     void (*entity)(dmat4 mvp, dmat4 world, dmat4 rot);
+    int is_transparent;
 } material_full_t;
 
 typedef struct {
@@ -42,4 +43,20 @@ typedef struct {
     material_t material;
     void (*world)(dmat4 mvp, dmat4 world, dmat4 rot);
     void (*entity)(dmat4 mvp, dmat4 world, dmat4 rot);
+    int is_transparent;
 } material_desc_t;
+
+typedef struct {
+    material_t material;
+    dmat4_w mvp;
+    dmat4_w world;
+    dmat4_w rot;
+    gluint vertex_array;
+    size_t count;
+} render_call_t;
+
+typedef struct {
+    size_t count;
+    size_t allocated;
+    render_call_t *call;
+} vec_render_call_t;

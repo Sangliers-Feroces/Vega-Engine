@@ -8,7 +8,7 @@
 #pragma once
 
 int is_ray_in_bounds(ray3 ray, bounds3 bounds);
-int is_ray_in_bounds_seg(ray3 ray, bounds3 bounds);
+int is_ray_in_bounds_seg(ray3 ray, bounds3 bounds, float min_t);
 
 rtx_triangle* rtx_triangle_create(dvec3 *triangle);
 void rtx_triangle_destroy(rtx_triangle *triangle);

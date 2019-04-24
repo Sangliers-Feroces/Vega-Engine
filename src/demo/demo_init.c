@@ -42,7 +42,7 @@ static void init_win(demo_t *demo)
     demo->win.h = 900;
     demo->win.window = sfRenderWindow_create((sfVideoMode){demo->win.w,
     demo->win.h, 32}, "rtx on !", sfClose,
-    &(sfContextSettings){24, 8, 4, 4, 3, 0, 1});
+    &(sfContextSettings){24, 8, 2, 4, 3, 0, 1});
     if (demo->win.window == NULL)
         exit_full_custom();
     demo->win.frametime = sfClock_create();

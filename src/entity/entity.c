@@ -189,10 +189,8 @@ void entity3_bind_col(entity3 *entity, mesh_full_ref_t collision_mesh)
         printf("Warning: set null collisions.\n");
         return;
     }
-    if (entity->col.mesh.m != NULL) {
-        printf("Error: trying to overwrite collision geometry.\n");
-        exit(84);
-    }
+    if (entity->col.mesh.m != NULL)
+        entity3_set_col(entity, 0);
     entity->col.mesh = collision_mesh;
     entity3_set_col(entity, 1);
 }
@@ -217,6 +215,9 @@ material_t material, int has_ext)
         printf("Error: oob lod (got %zu).\n", lod);
         exit(84);
     }
+    if ((ent->render[lod].mesh.m != NULL) &&
+    (ent->render[lod].mesh.ref_type == MESH_FULL_REF_STANDALONE))
+        printf("Warning: overwriting standalone rendering geometry.\n");
     render_obj_destroy(ent->render[lod]);
     mesh = mesh_full_create(1, has_ext);
     ent->render[lod].mesh = mesh_full_ref_init(MESH_FULL_REF_STANDALONE, mesh);

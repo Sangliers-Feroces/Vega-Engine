@@ -20,30 +20,43 @@ static int try_unload_chunk(chunk_t *chunk, ssize2 cam)
         return 0;
 }
 
-static int try_load_chunk(demo_t *demo, ssize2 pos)
+static int try_load_chunk(ssize2 pos)
 {
-    chunk_t **chunk = world_chunk2d_get(demo, pos);
+    chunk_t **chunk = world_chunk2d_get(pos);
 
     if (chunk == NULL) {
-        world_chunk_get(demo, pos);
+        world_chunk_get(pos);
         return 1;
     }
     else if (*chunk == NULL) {
-        world_chunk_get(demo, pos);
+        world_chunk_get(pos);
         return 1;
     } else
         return 0;
+}
+
+static void ensure_lod_chunk(ssize2 pos)
+{
+    chunk_t **chunk = world_chunk2d_get(pos);
+
+    if ((chunk == NULL) || (*chunk == NULL))
+        return;
+    if ((*chunk)->terrain->render[WORLD_LOD_MAX].mesh.m == NULL)
+        chunk_detail_terrain(*chunk);
 }
 
 void world_chunk_god(demo_t *demo)
 {
     ssize2 cam = chunk_get_pos(demo->cam.pos);
 
+    for (ssize_t i = -1; i <= 1; i++)
+        for (ssize_t j = -1; j <= 1; j++)
+            ensure_lod_chunk(ssize2_add(cam, (ssize2){j, i}));
     for (size_t i = 0; i < demo->world.chunk_count; i++)
         if (try_unload_chunk(demo->world.chunk[i], cam))
             return;
     for (ssize_t i = -CHUNK_LOAD_DISTANCE; i <= CHUNK_LOAD_DISTANCE; i++)
         for (ssize_t j = -CHUNK_LOAD_DISTANCE; j <= CHUNK_LOAD_DISTANCE; j++)
-            if (try_load_chunk(demo, ssize2_add(cam, (ssize2){j, i})))
+            if (try_load_chunk(ssize2_add(cam, (ssize2){j, i})))
                 return;
 }

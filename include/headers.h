@@ -21,6 +21,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <fcntl.h>
+#include <malloc.h>
 
 #include <SFML/Window.h>
 #include <SFML/Graphics.h>

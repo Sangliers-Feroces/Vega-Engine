@@ -44,7 +44,7 @@ void octree_intersect_ray_laxist_iter(octree *tree, ray3 ray, inter_ray3 *inter)
 {
     if (tree == NULL)
         return;
-    if (!is_ray_in_bounds_seg(ray, tree->bounds))
+    if (!is_ray_in_bounds_seg(ray, tree->bounds, inter->min_t))
         return;
     for (size_t i = 0; i < 8; i++)
         octree_intersect_ray_laxist_iter(tree->sub[i], ray, inter);
@@ -54,7 +54,7 @@ void octree_intersect_ray_laxist_iter(octree *tree, ray3 ray, inter_ray3 *inter)
 
 inter_ray3 octree_intersect_ray_laxist(octree *tree, ray3 ray)
 {
-    inter_ray3 inter = {NULL, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}, 0.0f};
+    inter_ray3 inter = {NULL, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, 1.0};
 
     octree_intersect_ray_laxist_iter(tree, ray, &inter);
     return inter;

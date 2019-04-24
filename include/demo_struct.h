@@ -71,6 +71,7 @@ typedef struct {
     gluint hdr_framebuffer;
     gluint hdr_depthbuffer;
     gluint hdr_render_texture;
+    vec_render_call_t to_draw;
 } buf_t;
 
 typedef enum {

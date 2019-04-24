@@ -19,21 +19,35 @@ static char *get_path(ssize2 pos, const char *dir)
     return res;
 }
 
+int chunk_is_loaded(ssize2 pos)
+{
+    chunk_t **pexist;
+
+    pexist = world_chunk2d_get(pos);
+    if (pexist == NULL)
+        return 0;
+    if ((*pexist) == NULL)
+        return 0;
+    return 1;
+}
+
 int chunk_try_load(ssize2 pos, chunk_t **pres)
 {
-    char *path = get_path(pos, "maps/world");
-    file_read_t file = file_read_create(path);
+    char *path;
+    file_read_t file;
     chunk_t *res;
 
-    if (file.data == NULL) {
-        free(path);
+    if (chunk_is_loaded(pos))
+        return 1;
+    path = get_path(pos, "maps/world");
+    file = file_read_create(path);
+    free(path);
+    if (file.data == NULL)
         return 0;
-    }
     res = file_read_chunk(&file);
     if (pres != NULL)
         *pres = res;
     file_read_flush(&file);
-    free(path);
     chunk_attach(res);
     return 1;
 }

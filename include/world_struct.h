@@ -13,7 +13,8 @@
 #define CHUNK_SIZE 256.0
 #define CHUNK_TERRAIN_SUB_SIZE ((ssize_t)(CHUNK_SIZE_TERRAIN / CHUNK_SIZE))
 #define CHUNK_GEN_ITER 6
-#define CHUNK_LOAD_DISTANCE 16
+#define CHUNK_GEN_EXT_ITER 2
+#define CHUNK_LOAD_DISTANCE 8
 
 typedef struct {
     size_t lod;
@@ -126,6 +127,7 @@ typedef struct {
     ssize2 pos;
     chunk_border_t border;
     chunk_border_t border_ter;
+    arr2d_dvec3_t terrain_base;
     size_t world_ndx;
     entity3 *ents;
     entity3 *terrain;

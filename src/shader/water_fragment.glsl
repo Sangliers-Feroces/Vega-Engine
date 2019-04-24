@@ -26,11 +26,12 @@ float shlick(float cosnv)
 
 void main(void)
 {
+    vec3 n = normalize(normal);
     vec3 v = normalize(p_cam - pos);
-    vec3 r = 2 * dot(normal, l_dir) * normal - l_dir;
+    vec3 r = 2 * dot(n, l_dir) * n - l_dir;
 	vec3 blue = vec3(94.0, 155.0, 255.0) / 255.0;
 	vec3 light = texture(tex_lightmap, uv_lightmap).xyz + blue;
 
-    float fresnel = shlick(dot(normal, v));
+    float fresnel = shlick(dot(n, v));
 	color = vec4(light * texture(tex_albedo, uv_albedo).xyz * 0.2, (1.0 - fresnel) * 0.5) + vec4(vec3(fresnel * 0.5), fresnel) + max(0, pow(dot(r, v), 64.0));
 }

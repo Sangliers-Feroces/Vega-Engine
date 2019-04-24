@@ -52,16 +52,75 @@ static void split_ter(arr2d_dvec3_t *arr, double stren)
     *arr = new_arr;
 }
 
-static void send_ter_to_chunk_lod(size_t lod, arr2d_dvec3_t arr,
-srect area, ssize2 chunk_pos, ssize2 iter)
+static int get_point(arr2d_dvec3_t arr, ssize2 p, dvec3 *res)
 {
-    chunk_t *chunk = world_chunk_get_adv(_demo, chunk_pos, 0, 0);
+    if ((p.x >= 0) && (p.x < (ssize_t)arr.w) &&
+    (p.y >= 0) && (p.y < (ssize_t)arr.h)) {
+        *res = arr.dvec3[p.y * arr.w + p.x];
+        return 1;
+    } else
+        return 0;
+}
+
+static dvec3 get_normal(arr2d_dvec3_t arr, ssize2 p)
+{
+    dvec3 acc = {0.0, 0.0, 0.0};
+    size_t count = 0;
+    ssize2 around[4][3] = {{{0, 0}, {0, 1}, {1, 0}},
+    {{0, 0}, {0, -1}, {-1, 0}}, {{0, 0}, {1, 0}, {0, -1}},
+    {{0, 0}, {0, -1}, {1, 0}}};
+    dvec3 t[3] = {acc, acc, acc};
+    int do_continue;
+
+    for (size_t i = 0; i < 4; i++) {
+        do_continue = 0;
+        for (size_t j = 0; j < 3; j++)
+            if (!get_point(arr, ssize2_add(p, around[i][j]), &t[j]))
+                do_continue = 1;
+        if (do_continue)
+            continue;
+        acc = dvec3_add(acc, dnormal3(t[0], t[1], t[2]));
+        count++;
+    }
+    if (count == 0)
+        return dvec3_init(FLT64_INF, FLT64_INF, FLT64_INF);
+    else
+        return dvec3_normalize(acc);
+}
+
+static arr2d_dvec3_t gen_normals(arr2d_dvec3_t arr)
+{
+    arr2d_dvec3_t res = arr2d_dvec3_create(arr.w, arr.h);
+
+    for (size_t i = 0; i < res.h; i++)
+        for (size_t j = 0; j < res.w; j++)
+            res.dvec3[i * res.w + j] = get_normal(arr, (ssize2){j, i});
+    return res;
+}
+
+static dvec3 get_normal_from_triangle(arr2d_dvec3_t arr, ssize2 base, ssize2 *off)
+{
+    dvec3 p[3];
+    ssize2 ndx;
+
+    for (size_t i = 0; i < 3; i++) {
+        ndx = ssize2_add(base, off[i]);
+        p[i] = arr.dvec3[ndx.y * arr.w + ndx.x];
+    }
+    return dnormal3(p[0], p[1], p[2]);
+}
+
+static void send_ter_to_chunk_lod_gen(chunk_t *chunk, size_t lod, arr2d_dvec3_t arr, arr2d_dvec3_t normals, dvec3 chunk_rel, srect area)
+{
     mesh_full_t *mesh;
     vec2 uv[3] = {{0.0f, 0.0f}, {1.0f, 0.0f}, {0.0f, 1.0f}};
+    ssize2 off[2][3] = {{{0, 0}, {0, 1}, {1, 0}}, {{1, 1}, {1, 0}, {0, 1}}};
+    ssize2 ndx;
+    ssize2 ndx_off;
     vec3 base = {0.0, -42.0f, 0.0};
     vec3 sq[4];
-    vec3 pos[3];
-    dvec3 chunk_rel = dvec3_init(iter.x * CHUNK_SIZE, 0.0, iter.y * CHUNK_SIZE);
+    vec3 pos;
+    vec3 norm;
 
     if (chunk->terrain == NULL) {
         chunk->terrain = chunk_add_entity(chunk);
@@ -70,15 +129,22 @@ srect area, ssize2 chunk_pos, ssize2 iter)
     mesh = entity3_create_render(chunk->terrain, lod, MATERIAL_GRASS, 0);
     for (ssize_t i = 0; i < area.s.y - 1; i++)
         for (ssize_t j = 0; j < area.s.x - 1; j++) {
-            pos[0] = dvec3_vec3(dvec3_sub(arr.dvec3[(area.p.y + i) * arr.w + area.p.x + j], chunk_rel));
-            pos[1] = dvec3_vec3(dvec3_sub(arr.dvec3[(area.p.y + i + 1) * arr.w + area.p.x + j], chunk_rel));
-            pos[2] = dvec3_vec3(dvec3_sub(arr.dvec3[(area.p.y + i) * arr.w + area.p.x + j + 1], chunk_rel));
-            mesh_add_triangle_pos_uv(mesh->mesh, pos, uv);
-            pos[0] = dvec3_vec3(dvec3_sub(arr.dvec3[(area.p.y + i + 1) * arr.w + (area.p.x + j + 1)], chunk_rel));
-            pos[1] = dvec3_vec3(dvec3_sub(arr.dvec3[(area.p.y + i) * arr.w + area.p.x + j + 1], chunk_rel));
-            pos[2] = dvec3_vec3(dvec3_sub(arr.dvec3[(area.p.y + i + 1) * arr.w + area.p.x + j], chunk_rel));
-            mesh_add_triangle_pos_uv(mesh->mesh, pos, uv);
+            for (size_t k = 0; k < 2; k++) {
+                for (size_t l = 0; l < 3; l++) {
+                    ndx = ssize2_add(area.p, (ssize2){j, i});
+                    ndx_off = ssize2_add(ndx, off[k][l]);
+                    pos = dvec3_vec3(dvec3_sub(arr.dvec3[ndx_off.y * arr.w + ndx_off.x], chunk_rel));
+                    norm = dvec3_vec3(normals.dvec3[ndx_off.y * normals.w + ndx_off.x]);
+                    if (norm.x == FLT64_INF)
+                        norm = dvec3_vec3(get_normal_from_triangle(arr, ndx, off[k]));
+                    mesh_add_vertex(mesh->mesh, vertex_init(pos, norm, uv[l]));
+                }
+            }
         }
+    if (lod == 1) {
+        chunk->terrain_base = arr2d_dvec3_copy_rect(arr, area);
+        arr2d_dvec3_sub(chunk->terrain_base, chunk_rel);
+    }
     if ((lod == 1) && (chunk->terrain->col.mesh.m == NULL)) {
         entity3_update(chunk->ents);
         entity3_bind_col(chunk->terrain,
@@ -96,54 +162,30 @@ srect area, ssize2 chunk_pos, ssize2 iter)
     mesh_add_triangle_pos_uv(mesh->mesh, (vec3[]){sq[3], sq[1], sq[2]}, uv);
 }
 
-static void send_ter_to_chunks_lod(size_t lod, arr2d_dvec3_t arr, ssize2 pos)
+static void send_ter_to_chunk_lod(size_t lod, arr2d_dvec3_t arr, arr2d_dvec3_t normals,
+srect area, ssize2 chunk_pos, ssize2 iter)
+{
+    chunk_t *chunk = world_chunk_get_adv(chunk_pos, 0, 0);
+    dvec3 chunk_rel = dvec3_init(iter.x * CHUNK_SIZE, 0.0, iter.y * CHUNK_SIZE);
+
+    send_ter_to_chunk_lod_gen(chunk, lod, arr, normals, chunk_rel, area);
+}
+
+static void send_ter_to_chunks_lod(size_t lod, arr2d_dvec3_t arr, arr2d_dvec3_t normals, ssize2 pos)
 {
     ssize2 pos_first_chunk = ssize2_muls(pos, CHUNK_TERRAIN_SUB_SIZE);
     ssize_t step = (arr.w - 1) / CHUNK_TERRAIN_SUB_SIZE;
 
     for (size_t i = 0; i < CHUNK_TERRAIN_SUB_SIZE; i++)
         for (size_t j = 0; j < CHUNK_TERRAIN_SUB_SIZE; j++)
-            send_ter_to_chunk_lod(lod, arr, (srect){{j * step, i * step}, {step + 1, step + 1}},
+            send_ter_to_chunk_lod(lod, arr, normals, (srect){{j * step, i * step}, {step + 1, step + 1}},
             ssize2_add(pos_first_chunk, (ssize2){j, i}), (ssize2){j, i});
 }
-
-/*static void send_iter_to_border(arr2d_dvec3_t arr, size_t ndx, srect area, ssize2 pos)
-{
-    chunk_t *chunk = world_chunk_get_adv(_demo, pos, 0, 0);
-
-    if (ndx == 0) {
-        chunk->terrain = chunk_add_entity(chunk);
-        chunk->terrain->tag = ENTITY3_TAG_TERRAIN;
-    }
-    for (size_t i = 0; i < 2; i++) {
-        chunk->border.data[0][i][ndx] = arr_dvec3_create(area.s.y);
-        chunk->border.data[1][i][ndx] = arr_dvec3_create(area.s.x);
-    }
-    for (ssize_t i = 0; i < area.s.y; i++) {
-        chunk->border.data[0][0][ndx].dvec3[i] = arr.dvec3[(area.p.y + i) * arr.w + area.p.x];
-        chunk->border.data[0][1][ndx].dvec3[i] = arr.dvec3[(area.p.y + i) * arr.w + area.p.x + area.s.x - 1];
-    }
-    for (ssize_t i = 0; i < area.s.x; i++) {
-        chunk->border.data[1][0][ndx].dvec3[i] = arr.dvec3[area.p.y * arr.w + area.p.x + i];
-        chunk->border.data[1][1][ndx].dvec3[i] = arr.dvec3[(area.p.y + area.s.y - 1) * arr.w + area.p.x + i];
-    }
-}
-
-static void send_iter_to_borders(arr2d_dvec3_t arr, size_t ndx, ssize2 pos)
-{
-    ssize2 pos_first_chunk = ssize2_muls(pos, CHUNK_TERRAIN_SUB_SIZE);
-    ssize_t step = (arr.w - 1) / CHUNK_TERRAIN_SUB_SIZE;
-
-    for (size_t i = 0; i < CHUNK_TERRAIN_SUB_SIZE; i++)
-        for (size_t j = 0; j < CHUNK_TERRAIN_SUB_SIZE; j++)
-            send_iter_to_border(arr, ndx, (srect){{j * step, i * step}, {step + 1, step + 1}},
-            ssize2_add(pos_first_chunk, (ssize2){j, i}));
-}*/
 
 static void send_iter_to_ter_border(arr2d_dvec3_t arr, size_t ndx, ssize2 pos)
 {
     ssize2 pos_first_chunk = ssize2_muls(pos, CHUNK_TERRAIN_SUB_SIZE);
-    chunk_t *chunk = world_chunk_get_adv(_demo, pos_first_chunk, 0, 0);
+    chunk_t *chunk = world_chunk_get_adv(pos_first_chunk, 0, 0);
 
     for (size_t i = 0; i < 2; i++) {
         chunk->border_ter.data[1][i][ndx] = arr_dvec3_create(arr.w);
@@ -156,6 +198,22 @@ static void send_iter_to_ter_border(arr2d_dvec3_t arr, size_t ndx, ssize2 pos)
     for (size_t i = 0; i < arr.w; i++) {
         chunk->border_ter.data[1][0][ndx].dvec3[i] = arr.dvec3[i];
         chunk->border_ter.data[1][1][ndx].dvec3[i] = arr.dvec3[(arr.h - 1) * arr.w + i];
+    }
+}
+
+static void send_iter_to_chunk_border(chunk_t *chunk, arr2d_dvec3_t arr, size_t ndx)
+{
+    for (size_t i = 0; i < 2; i++) {
+        chunk->border.data[1][i][ndx] = arr_dvec3_create(arr.w);
+        chunk->border.data[0][i][ndx] = arr_dvec3_create(arr.h);
+    }
+    for (size_t i = 0; i < arr.h; i++) {
+        chunk->border.data[0][0][ndx].dvec3[i] = arr.dvec3[i * arr.w];
+        chunk->border.data[0][1][ndx].dvec3[i] = arr.dvec3[i * arr.w + arr.w - 1];
+    }
+    for (size_t i = 0; i < arr.w; i++) {
+        chunk->border.data[1][0][ndx].dvec3[i] = arr.dvec3[i];
+        chunk->border.data[1][1][ndx].dvec3[i] = arr.dvec3[(arr.h - 1) * arr.w + i];
     }
 }
 
@@ -192,7 +250,8 @@ void chunk_gen_terrain(ssize2 pos)
     arr2d_dvec3_t arr = arr2d_dvec3_create(2, 2);
     double stren = get_strength(ter_pos);
     dvec3 base = {0.0, (stren - 0.25) * 384.0, 0.0};
-    chunk_border_t border = chunk_border_fetch(ter_pos);
+    chunk_border_t border = chunk_border_ter_fetch(ter_pos);
+    arr2d_dvec3_t n;
 
     arr.dvec3[0] = base;
     arr.dvec3[1] = dvec3_add(base, (dvec3){CHUNK_SIZE_TERRAIN, 0.0, 0.0});
@@ -205,13 +264,41 @@ void chunk_gen_terrain(ssize2 pos)
         send_iter_to_ter_border(arr, i, ter_pos);
         switch (i) {
         case 4:
-            send_ter_to_chunks_lod(0, arr, ter_pos);
+            n = gen_normals(arr);
+            send_ter_to_chunks_lod(0, arr, n, ter_pos);
+            arr2d_dvec3_destroy(n);
             break;
         case 5:
-            send_ter_to_chunks_lod(1, arr, ter_pos);
+            n = gen_normals(arr);
+            send_ter_to_chunks_lod(1, arr, n, ter_pos);
+            arr2d_dvec3_destroy(n);
             break;
         }
     }
     arr2d_dvec3_destroy(arr);
     chunk_border_destroy(border);
+}
+
+void chunk_detail_terrain(chunk_t *chunk)
+{
+    arr2d_dvec3_t arr = arr2d_dvec3_copy(chunk->terrain_base);
+    dvec3 chunk_rel = dvec3_init(0.0, 0.0, 0.0);
+    chunk_border_t border = chunk_border_fetch(chunk->pos);
+    arr2d_dvec3_t n;
+
+    for (size_t i = 0; i < CHUNK_GEN_EXT_ITER; i++) {
+        split_ter(&arr, 0.05 / (i + 1));
+        apply_constraints(arr, border, i);
+        send_iter_to_chunk_border(chunk, arr, i);
+        switch (i) {
+        case 1:
+            n = gen_normals(arr);
+            send_ter_to_chunk_lod_gen(chunk, WORLD_LOD_MAX, arr, n, chunk_rel, (srect){{0, 0}, {arr.w, arr.h}});
+            arr2d_dvec3_destroy(n);
+            break;
+        }
+    }
+    arr2d_dvec3_destroy(arr);
+    chunk_border_destroy(border);
+    entity3_bind_col(chunk->terrain, chunk->terrain->render[WORLD_LOD_MAX].mesh);
 }
