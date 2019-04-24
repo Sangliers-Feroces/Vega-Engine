@@ -100,6 +100,8 @@ typedef struct {
     gluint vertex_buffer;
     int is_invent;
     int is_focus;
+    vg_text fps_display;
+    vg_text error_message;
 } iu_data_t;
 
 typedef struct {

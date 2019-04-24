@@ -37,6 +37,7 @@ typedef struct {
     double framelen;
     sfClock *frametime;
     int has_focus;
+    int fps_to_display;
 } win_t;
 
 typedef struct {

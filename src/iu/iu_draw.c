@@ -33,8 +33,20 @@ static void draw_current_dialogue(void)
 
 static void temp_dialogue_test(void)
 {
-    _iu.dialogue_list[DIALOGUE_WELCOME].read = 1;
-    _iu.current_dialogue = DIALOGUE_WELCOME;
+    if (_iu.dialogue_list[DIALOGUE_WELCOME].read == 0) {
+        _iu.dialogue_list[DIALOGUE_WELCOME].read = 1;
+        _iu.current_dialogue = DIALOGUE_WELCOME;
+    }
+}
+
+static void refresh_fps(void)
+{
+    char *buff = (char *)malloc_safe(sizeof(char) * 10);
+
+    sprintf(buff, "%d FPS", _demo->win.fps_to_display);
+    vg_text_reset_str(&_iu.data.fps_display, buff, NULL);
+    vg_text_draw(_iu.data.fps_display);
+    free(buff);
 }
 
 void iu_display(void)
@@ -45,6 +57,7 @@ void iu_display(void)
             iu_entity_draw(_iu.invent[i]);
     temp_dialogue_test();
     draw_current_dialogue();
+    refresh_fps();
     if (_iu.data.is_invent)
         _iu.data.is_focus = 1;
     else
