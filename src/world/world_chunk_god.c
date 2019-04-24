@@ -35,23 +35,32 @@ static int try_load_chunk(ssize2 pos)
         return 0;
 }
 
-static void ensure_lod_chunk(ssize2 pos)
+static int ensure_lod_chunk(ssize2 pos)
 {
     chunk_t **chunk = world_chunk2d_get(pos);
 
     if ((chunk == NULL) || (*chunk == NULL))
-        return;
-    if ((*chunk)->terrain->render[WORLD_LOD_MAX].mesh.m == NULL)
+        return 0;
+    if ((*chunk)->terrain->render[WORLD_LOD_MAX].mesh.m == NULL) {
         chunk_detail_terrain(*chunk);
+        return 1;
+    }
+    return 0;
+}
+
+static void terrain_last_lod(ssize2 pos)
+{
+    for (ssize_t i = -CHUNK_LOAD_DISTANCE; i <= CHUNK_LOAD_DISTANCE; i++)
+        for (ssize_t j = -CHUNK_LOAD_DISTANCE; j <= CHUNK_LOAD_DISTANCE; j++)
+            if (ensure_lod_chunk(ssize2_add(pos, (ssize2){j, i})))
+                return;
 }
 
 void world_chunk_god(demo_t *demo)
 {
     ssize2 cam = chunk_get_pos(demo->cam.pos);
 
-    for (ssize_t i = -1; i <= 1; i++)
-        for (ssize_t j = -1; j <= 1; j++)
-            ensure_lod_chunk(ssize2_add(cam, (ssize2){j, i}));
+    terrain_last_lod(cam);
     for (size_t i = 0; i < demo->world.chunk_count; i++)
         if (try_unload_chunk(demo->world.chunk[i], cam))
             return;

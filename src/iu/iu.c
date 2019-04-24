@@ -91,6 +91,7 @@ void iu_init(demo_t *demo)
     iu_text_init();
     iu_set_font();
     iu_set_dialogue();
+    iu_set_vg_text();
 }
 
 void iu_quit(void)

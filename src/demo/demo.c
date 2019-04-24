@@ -49,6 +49,8 @@ static void poll_mouse_pos(demo_t *demo)
 {
     int do_tp = 0;
 
+    if (!demo->win.has_focus)
+        return;
     demo->mouse.last_pos = demo->mouse.mouse_pos;
     demo->mouse.mouse_pos = sfMouse_getPositionRenderWindow(demo->win.window);
     if (_iu.data.is_focus)
@@ -82,16 +84,16 @@ int poll_events(demo_t *demo)
 {
     sfEvent event;
 
-    demo->mouse.button_last = demo->mouse.button_state;
-    poll_mouse_pos(demo);
     if (!sfRenderWindow_isOpen(demo->win.window))
         return (0);
     while (sfRenderWindow_pollEvent(demo->win.window, &event))
         if (!do_stuff_event(demo, event))
             return (0);
-    poll_click(demo);
     if (!demo->win.has_focus)
         return (1);
+    demo->mouse.button_last = demo->mouse.button_state;
+    poll_mouse_pos(demo);
+    poll_click(demo);
     check_mouse_move(demo);
     demo_poll_input(demo);
     return (1);

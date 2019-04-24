@@ -132,3 +132,11 @@ void arr_dvec3_destroy(arr_dvec3_t arr);
 vec3 dvec3_vec3(dvec3 value);
 dvec3 vec3_dvec3(vec3 value);
 dvec3 dvec3_init(double x, double y, double z);
+
+vec_vec3_t vec_vec3_init(void);
+void vec_vec3_add(vec_vec3_t *vec, vec3 to_add);
+void vec_vec3_destroy(vec_vec3_t vec);
+
+vec_vec2_t vec_vec2_init(void);
+void vec_vec2_add(vec_vec2_t *vec, vec2 to_add);
+void vec_vec2_destroy(vec_vec2_t vec);
