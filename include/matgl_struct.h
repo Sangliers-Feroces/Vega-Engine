@@ -76,3 +76,15 @@ typedef struct {
     size_t count;
     dvec3 *dvec3;
 } arr_dvec3_t;
+
+typedef struct {
+    size_t count;
+    size_t allocated;
+    vec2 *vec2;
+} vec_vec2_t;
+
+typedef struct {
+    size_t count;
+    size_t allocated;
+    vec3 *vec3;
+} vec_vec3_t;
