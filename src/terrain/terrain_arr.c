@@ -126,6 +126,8 @@ static void send_ter_to_chunk_lod_gen(chunk_t *chunk, size_t lod, arr2d_dvec3_t 
         chunk->terrain = chunk_add_entity(chunk);
         chunk->terrain->tag = ENTITY3_TAG_TERRAIN;
     }
+    if (chunk->terrain->render[lod].mesh.m != NULL)
+        return;
     mesh = entity3_create_render(chunk->terrain, lod, MATERIAL_GRASS, 0);
     for (ssize_t i = 0; i < area.s.y - 1; i++)
         for (ssize_t j = 0; j < area.s.x - 1; j++) {
