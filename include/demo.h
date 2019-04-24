@@ -54,5 +54,6 @@ int get_random_int(int borne_min, int borne_max);
 
 void demo_update_cursor_visibility(demo_t *demo);
 void demo_center_cursor(demo_t *demo);
+void demo_refresh_cursor(void);
 
 float get_eleapsed_time_second(sfClock *clock_);

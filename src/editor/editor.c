@@ -10,7 +10,7 @@
 void demo_update_cursor_visibility(demo_t *demo)
 {
     sfWindow_setMouseCursorVisible((sfWindow*)demo->win.window,
-    _iu.data.is_invent);
+    _iu.data.is_focus);
 }
 
 void demo_center_cursor(demo_t *demo)
