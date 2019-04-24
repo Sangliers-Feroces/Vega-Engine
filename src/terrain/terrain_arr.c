@@ -65,17 +65,27 @@ static int get_point(arr2d_dvec3_t arr, ssize2 p, dvec3 *res)
 static dvec3 get_normal(arr2d_dvec3_t arr, ssize2 p)
 {
     dvec3 acc = {0.0, 0.0, 0.0};
-    ssize2 around[2][3] = {{{0, 0}, {0, 1}, {1, 0}},
-    {{0, 0}, {0, -1}, {-1, 0}}};
+    size_t count = 0;
+    ssize2 around[4][3] = {{{0, 0}, {0, 1}, {1, 0}},
+    {{0, 0}, {0, -1}, {-1, 0}}, {{0, 0}, {1, 0}, {0, -1}},
+    {{0, 0}, {0, -1}, {1, 0}}};
     dvec3 t[3] = {acc, acc, acc};
+    int do_continue;
 
-    for (size_t i = 0; i < 2; i++) {
+    for (size_t i = 0; i < 4; i++) {
+        do_continue = 0;
         for (size_t j = 0; j < 3; j++)
             if (!get_point(arr, ssize2_add(p, around[i][j]), &t[j]))
-                return dvec3_init(FLT64_INF, FLT64_INF, FLT64_INF);
+                do_continue = 1;
+        if (do_continue)
+            continue;
         acc = dvec3_add(acc, dnormal3(t[0], t[1], t[2]));
+        count++;
     }
-    return dvec3_normalize(acc);
+    if (count == 0)
+        return dvec3_init(FLT64_INF, FLT64_INF, FLT64_INF);
+    else
+        return dvec3_normalize(acc);
 }
 
 static arr2d_dvec3_t gen_normals(arr2d_dvec3_t arr)
