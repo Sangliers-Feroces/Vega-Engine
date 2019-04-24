@@ -51,7 +51,7 @@ static void poll_mouse_pos(demo_t *demo)
 
     demo->mouse.last_pos = demo->mouse.mouse_pos;
     demo->mouse.mouse_pos = sfMouse_getPositionRenderWindow(demo->win.window);
-    if (_iu.data.is_invent)
+    if (_iu.data.is_focus)
         return;
     if ((ssize_t)demo->mouse.mouse_pos.x < (ssize_t)(demo->win.w / 4)) {
         demo->mouse.mouse_pos.x += demo->win.w / 2;
@@ -99,12 +99,8 @@ int poll_events(demo_t *demo)
 
 void demo_loop(demo_t *demo)
 {
-    sfMusic *music = sfMusic_createFromFile("res/musics/main_music.ogg");
-
-    sfMusic_play(music);
-    sfMusic_setLoop(music, sfTrue);
-    //dungeons_gen_all(demo, 2);
     while (poll_events(demo)) {
+        demo_update_cursor_visibility(demo);
         demo->game_time = get_eleapsed_time_second(demo->clocks.game_clock);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         editor(demo);
@@ -113,8 +109,6 @@ void demo_loop(demo_t *demo)
         iu_display();
         sfRenderWindow_display(demo->win.window);
     }
-    sfMusic_stop(music);
-    sfMusic_destroy(music);
 }
 
 int demo(arg_t args)
