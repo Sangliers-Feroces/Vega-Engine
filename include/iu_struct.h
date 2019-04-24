@@ -95,11 +95,11 @@ struct entity2 {
 typedef struct entity2 entity2_t;
 
 typedef struct {
-    int expect_dialogue_input;
     int ratiowh;
     gluint vertex_array;
     gluint vertex_buffer;
     int is_invent;
+    int is_focus;
 } iu_data_t;
 
 typedef struct {

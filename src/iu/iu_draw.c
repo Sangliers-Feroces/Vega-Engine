@@ -33,12 +33,8 @@ static void draw_current_dialogue(void)
 
 static void temp_dialogue_test(void)
 {
-    //printf("%f\n", _demo->game_time);
-    if ((_demo->game_time >= 1.0f && _demo->game_time <= 3.5f)
-    && !_iu.dialogue_list[DIALOGUE_WELCOME].read) {
-        _iu.dialogue_list[DIALOGUE_WELCOME].read = 1;
-        _iu.current_dialogue = DIALOGUE_WELCOME;
-    }
+    _iu.dialogue_list[DIALOGUE_WELCOME].read = 1;
+    _iu.current_dialogue = DIALOGUE_WELCOME;
 }
 
 void iu_display(void)
@@ -49,4 +45,8 @@ void iu_display(void)
             iu_entity_draw(_iu.invent[i]);
     temp_dialogue_test();
     draw_current_dialogue();
+    if (_iu.data.is_invent)
+        _iu.data.is_focus = 1;
+    else
+        _iu.data.is_focus = 0;
 }
