@@ -40,6 +40,7 @@ void render_delay_exec(void);
 void entity3_trans_update_model(entity3 *ent);
 void entity3_update_solo(entity3 *ent, dmat4 par_world, dmat4 par_rot);
 void entity3_update(entity3 *ent);
+void entity3_global_update(entity3 *ent);
 entity3* entity3_seek_tag(entity3 *ent, entity3_tag_t tag);
 
 void entity3_physics(entity3 *ent);

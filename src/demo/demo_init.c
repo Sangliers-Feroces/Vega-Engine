@@ -56,7 +56,6 @@ static void init_win(demo_t *demo)
     sfWindow_setVerticalSyncEnabled((sfWindow*)demo->win.window, sfTrue);
     if (!init_mouse(demo))
         exit_full_custom();
-        
 }
 
 demo_t* demo_init(void)
