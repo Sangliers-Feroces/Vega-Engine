@@ -40,3 +40,9 @@ void render_delay_exec(void);
 void entity3_trans_update_model(entity3 *ent);
 void entity3_update_solo(entity3 *ent, dmat4 par_world, dmat4 par_rot);
 void entity3_update(entity3 *ent);
+
+trigger_t* trigger_create(dvec3 size,
+void (*on_hit)(entity3 *ent, entity3 *other));
+vec_trigger_t vec_trigger_init(void);
+void vec_trigger_add(vec_trigger_t *vec, trigger_t *trigger);
+void vec_trigger_destroy(vec_trigger_t vec);

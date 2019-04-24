@@ -108,6 +108,18 @@ typedef struct {
     entity3 **ent;
 } vec_entity3_t;
 
+typedef struct {
+    dvec3 size;
+    void (*on_hit)(entity3 *ent, entity3 *other);
+    size_t ndx;
+} trigger_t;
+
+typedef struct {
+    size_t count;
+    size_t allocated;
+    trigger_t **trigger;
+} vec_trigger_t;
+
 typedef enum  {
     ENTITY3_TAG_NONE,
     ENTITY3_TAG_TERRAIN
@@ -117,6 +129,7 @@ struct entity3 {
     transform_t trans;
     render_obj_t render[WORLD_LOD_COUNT];
     col_ref_t col;
+    trigger_t *trigger;
     entity3_tag_t tag;
     entity3 *root;
     size_t root_ndx;
@@ -135,9 +148,12 @@ typedef struct {
 } chunk_t;
 
 typedef struct {
+    char *map_path;
     size_t chunk_count;
     size_t chunk_allocated;
     chunk_t **chunk;        // used for rendering / world intersection
+    entity3 *ents;
+    vec_trigger_t triggers; // loaded triggers
     srect chunk2d_area;
     chunk_t **chunk2d;      // 2d array for fast lookup
     octree *tree;           // collision data is exclusively stored here

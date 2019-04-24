@@ -49,6 +49,7 @@ static void init_win(demo_t *demo)
     if (demo->win.frametime == NULL)
         exit_full_custom();
     demo->win.framelen = 1.0f / 60.0f;
+    demo->win.fps_to_display = 60;
     demo->win.has_focus = 1;
     sfWindow_setVerticalSyncEnabled((sfWindow*)demo->win.window, sfTrue);
     if (!init_mouse(demo))

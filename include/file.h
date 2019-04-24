@@ -51,6 +51,7 @@ arr2d_dvec3_t file_read_arr2d_dvec3(file_read_t *file);
 chunk_border_t file_read_chunk_border(file_read_t *file);
 chunk_t* file_read_chunk(file_read_t *file);
 
+char* chunk_get_path(const char *dir, const char *file);
 int chunk_is_loaded(ssize2 pos);
 int chunk_try_load(ssize2 pos, chunk_t **pres);
 void chunk_save(chunk_t *chunk);
