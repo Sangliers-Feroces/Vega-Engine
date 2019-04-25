@@ -10,13 +10,15 @@
 static entity3* create_default_ents(void)
 {
     entity3 *res = entity3_create(NULL);
+    entity3 *player;
     entity3 *cam;
 
-    res->tag = ENTITY3_TAG_PLAYER;
-    res->trans.is_static = 0;
-    res->trans.is_physics = 1;
-    res->trans.pos = dvec3_init(0.0, 64.0, 0.0);
-    cam = entity3_create(res);
+    player = entity3_create(res);
+    player->tag = ENTITY3_TAG_PLAYER;
+    player->trans.is_static = 0;
+    player->trans.is_physics = 1;
+    player->trans.pos = dvec3_init(0.0, 64.0, 0.0);
+    cam = entity3_create(player);
     cam->tag = ENTITY3_TAG_CAMERA;
     cam->trans.is_static = 0;
     cam->trans.pos = dvec3_init(0.0, 1.75, 0.0);
@@ -131,15 +133,20 @@ void world_load_map(void)
     entity3_seek_tag(_demo->world.ents, ENTITY3_TAG_PLAYER);
     _demo->world.camera =
     entity3_seek_tag(_demo->world.ents, ENTITY3_TAG_CAMERA);
+    _demo->cam.rot = dvec3_init(_demo->world.camera->trans.rot.x,
+    _demo->world.player->trans.rot.y, 0.0);
+    _demo->cam.pos = dmat4_trans(_demo->world.camera->trans.world);
 }
 
 void world_unload_map(void)
 {
+    printf("Saving world at '%s'.. Please wait.\n", _demo->world.map_path);
     unload_global_ents();
     while (_demo->world.chunk_count > 0)
         chunk_destroy(_demo->world.chunk[0]);
     octree_destroy(&_demo->world.tree);
     vec_trigger_destroy(&_demo->world.triggers);
+    printf("Done.\n");
 }
 
 void world_init(demo_t *demo)
@@ -153,6 +160,7 @@ void world_init(demo_t *demo)
     demo->world.chunk2d = (chunk_t**)malloc_safe(sizeof(chunk_t*));
     demo->world.chunk2d[0] = NULL;
     demo->world.tree = octree_create(NULL);
+    entity3_update_tag_init();
 }
 
 void world_quit(demo_t *demo)

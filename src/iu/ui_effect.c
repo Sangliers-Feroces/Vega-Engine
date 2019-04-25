@@ -19,12 +19,3 @@ float width_screen, float height)
     relative_mouse_pos.y *= -1.0;
     return rect_is_vec2_inside(button.rect, relative_mouse_pos);
 }
-
-void demo_set_cam_to_origin(demo_t *demo)
-{
-    demo->cam.pos = (dvec3){-5.0f, 8.0f, -5.0f};
-    demo->cam.rot = (dvec3){-M_PI / 4.0f, -M_PI / 4.0f, 0.0f};
-    if (demo->player.state == GAME_PLAYING)
-        demo->player.pos = dvec3_sub(demo->cam.pos,
-        (dvec3){0.0f, 1.75f, 0.0f});
-}

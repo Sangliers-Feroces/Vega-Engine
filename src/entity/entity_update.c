@@ -23,6 +23,8 @@ static void update_col(entity3 *ent)
 
 void entity3_update_solo(entity3 *ent, dmat4 par_world, dmat4 par_rot)
 {
+    if (_demo->world.tag_update[ent->tag] != NULL)
+        _demo->world.tag_update[ent->tag](ent);
     if (!ent->trans.is_static) {
         if (ent->trans.is_physics)
             entity3_physics(ent);
@@ -59,9 +61,8 @@ static int is_root_child(entity3 *ent)
     return ent->root->root == NULL;
 }
 
-static int is_chunk_active(dvec3 p)
+static int is_chunk_active(ssize2 chunk_pos)
 {
-    ssize2 chunk_pos = chunk_get_pos(p);
     chunk_t **pexist = world_chunk2d_get(chunk_pos);
 
     if ((pexist == NULL) || (*pexist == NULL))
@@ -72,10 +73,16 @@ static int is_chunk_active(dvec3 p)
 static void entity3_global_update_actual(entity3 *ent, dmat4 par_world,
 dmat4 par_rot)
 {
-    if (is_root_child(ent))
-        if (!is_chunk_active(dmat4_mul_dvec3(ent->trans.world,
-        dvec3_init(0.0, 0.0, 0.0))))
+    ssize2 chunk_pos = chunk_get_pos(dmat4_trans(ent->trans.world));
+
+    if (is_root_child(ent)) {
+        if ((!chunk_is_loaded(chunk_pos)) && (ent->tag != ENTITY3_TAG_PLAYER)) {
+            world_chunk_send_global_ent(chunk_pos, ent);
             return;
+        }
+        if (!is_chunk_active(chunk_pos))
+            return;
+    }
     entity3_update_solo(ent, par_world, par_rot);
     for (size_t i = 0; i < ent->sub.count; i++)
         entity3_global_update_actual(ent->sub.ent[i],

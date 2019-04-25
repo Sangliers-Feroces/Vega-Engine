@@ -112,6 +112,12 @@ void vec_entity3_destroy(vec_entity3_t vec)
     free(vec.ent);
 }
 
+void entity3_set_child(entity3 *parent, entity3 *to_add)
+{
+    to_add->root_ndx = vec_entity3_add(&parent->sub, to_add);
+    entity3_update_solo(to_add, parent->trans.world, parent->trans.world_rot);
+}
+
 entity3* entity3_create_pos(entity3 *parent, dvec3 pos)
 {
     entity3 *res = (entity3*)malloc_safe(sizeof(entity3));
@@ -122,14 +128,13 @@ entity3* entity3_create_pos(entity3 *parent, dvec3 pos)
     res->col = col_ref_get_default();
     for (size_t i = 0; i < WORLD_LOD_COUNT; i++)
         res->render[i] = render_obj_get_default();
+    res->trigger = NULL;
+    res->tag = ENTITY3_TAG_NONE;
     res->root = parent;
     res->root_ndx = ~0ULL;
     res->sub = vec_entity3_create();
-    if (parent != NULL) {
-        res->root_ndx = vec_entity3_add(&parent->sub, res);
-        entity3_update_solo(res, parent->trans.world, parent->trans.world_rot);
-    }
-    res->tag = ENTITY3_TAG_NONE;
+    if (parent != NULL)
+        entity3_set_child(parent, res);
     return res;
 }
 
@@ -163,6 +168,17 @@ void entity3_set_col(entity3 *ent, int is_on)
     }
 }
 
+void entity3_remove_from_parent(entity3 *ent)
+{
+    if (ent->root != NULL) {
+        ent->root->sub.ent[ent->root_ndx] =
+        ent->root->sub.ent[-- ent->root->sub.count];
+        ent->root->sub.ent[ent->root_ndx]->root_ndx = ent->root_ndx;
+        ent->root = NULL;
+        ent->root_ndx = ~0ULL;
+    }
+}
+
 void entity3_destroy(entity3 *entity)
 {
     while (entity->sub.count > 0)
@@ -171,11 +187,7 @@ void entity3_destroy(entity3 *entity)
     entity3_set_col(entity, 0);
     for (size_t i = 0; i < WORLD_LOD_COUNT; i++)
         render_obj_destroy(entity->render[i]);
-    if (entity->root != NULL) {
-        entity->root->sub.ent[entity->root_ndx] =
-        entity->root->sub.ent[-- entity->root->sub.count];
-        entity->root->sub.ent[entity->root_ndx]->root_ndx = entity->root_ndx;
-    }
+    entity3_remove_from_parent(entity);
     free(entity);
 }
 

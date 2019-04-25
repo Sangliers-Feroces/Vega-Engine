@@ -40,4 +40,5 @@ void file_write_chunk(file_write_t *file, chunk_t *chunk)
     file_write_chunk_border(file, &chunk->border_ter);
     file_write_arr2d_dvec3(file, chunk->terrain_base);
     file_write_entity3(file, chunk->ents);
+    file_write_entity3(file, chunk->ents_global);
 }

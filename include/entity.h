@@ -17,16 +17,20 @@ void render_obj_destroy(render_obj_t render);
 vec_entity3_t vec_entity3_create(void);
 size_t vec_entity3_add(vec_entity3_t *vec, entity3 *entity);
 void vec_entity3_destroy(vec_entity3_t vec);
+void entity3_set_child(entity3 *parent, entity3 *to_add);
 entity3* entity3_create_pos(entity3 *parent, dvec3 pos);
 entity3* entity3_create(entity3 *parent);
 void entity3_set_col(entity3 *ent, int is_on);
 void entity3_bind_col(entity3 *entity, mesh_full_ref_t collision_mesh);
+void entity3_remove_from_parent(entity3 *ent);
 void entity3_destroy(entity3 *entity);
 entity3* chunk_add_entity(chunk_t *chunk);
 void entity3_set_render(entity3 *ent, size_t lod, mesh_full_ref_t mesh,
 material_t material);
 mesh_full_t* entity3_create_render(entity3 *ent, size_t lod,
 material_t material, int has_ext);
+
+void entity3_move(entity3 *ent, entity3 *dst_parent);
 
 void entity3_render(entity3 *ent, dmat4 vp);
 
@@ -50,3 +54,7 @@ void (*on_hit)(entity3 *ent, entity3 *other));
 vec_trigger_t vec_trigger_init(void);
 void vec_trigger_add(vec_trigger_t *vec, trigger_t *trigger);
 void vec_trigger_destroy(vec_trigger_t *vec);
+
+void entity3_update_tag_init(void);
+
+void entity3_tag_update_player(entity3 *ent);

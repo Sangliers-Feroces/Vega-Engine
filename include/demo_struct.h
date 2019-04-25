@@ -80,13 +80,6 @@ typedef enum {
 } game_state_t;
 
 typedef struct {
-    game_state_t state;
-    dvec3 pos;
-    dvec3 speed;
-    int is_grounded;
-} player_t;
-
-typedef struct {
     size_t count;
     size_t allocated;
     dvec3 *selection;
@@ -118,7 +111,6 @@ typedef struct {
     input_t input;
     world_t world;
     mouse_t mouse;
-    player_t player;
     buf_t buf;
     editor_t editor;
     shader_cache_t shader[SHADER_MAX];

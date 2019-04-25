@@ -36,23 +36,6 @@ dvec3 pos, dvec3 *speed, dvec3 *avg_norm)
     return 1;
 }
 
-static void slow_ent_down(entity3 *ent)
-{
-    ent->trans.speed.x *= 1.0 - _demo->win.framelen * 6.0;
-    ent->trans.speed.z *= 1.0 - _demo->win.framelen * 6.0;
-}
-
-static void cap_ent_speed(dvec3 *speed)
-{
-    vec2 xz = {speed->x, speed->z};
-    float dist = vec2_norm(xz);
-
-    if (dist > PLAYER_MAX_SPEED) {
-        xz = vec2_muls(xz, PLAYER_MAX_SPEED / dist);
-        *speed = (dvec3){xz.x, speed->y, xz.y};
-    }
-}
-
 static void apply_disp(dvec3 *p, dvec3 disp)
 {
     inter_ray3 inter = world_inter(_demo, (ray3){*p, disp});
@@ -70,11 +53,8 @@ void entity3_physics(entity3 *ent)
     dvec3 old_speed;
     dvec3 norm = {0.0, 0.0, 0.0};
 
-    if (ent->trans.is_grounded)
-        slow_ent_down(ent);
     ent->trans.speed = dvec3_add(ent->trans.speed,
     dvec3_muls((dvec3){0.0, -9.8, 0.0}, _demo->win.framelen));
-    cap_ent_speed(&ent->trans.speed);
     speed_frame = dvec3_muls(ent->trans.speed, _demo->win.framelen);
     old_speed = speed_frame;
     for (size_t i = 0; i < 4; i++)

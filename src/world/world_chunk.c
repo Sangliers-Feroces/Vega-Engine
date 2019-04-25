@@ -56,6 +56,7 @@ chunk_t* chunk_create_detached(ssize2 pos)
     res->world_ndx = ~0ULL;
     res->ents = entity3_create_pos(NULL,
     dvec3_init(pos.x * CHUNK_SIZE, 0.0, pos.y * CHUNK_SIZE));
+    res->ents_global = entity3_create_pos(NULL, dvec3_init(0.0, 0.0, 0.0));
     res->inserting = NULL;
     res->terrain = NULL;
     res->is_stalled = 1;
@@ -66,6 +67,8 @@ void chunk_attach(chunk_t *chunk)
 {
     world_chunk2d_insert(chunk);
     world_chunk_add(chunk);
+    while (chunk->ents_global->sub.count > 0)
+        entity3_move(chunk->ents_global->sub.ent[0], _demo->world.ents);
 }
 
 chunk_t* chunk_create_adv(ssize2 pos, int do_gen)

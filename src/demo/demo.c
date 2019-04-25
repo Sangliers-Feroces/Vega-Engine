@@ -99,7 +99,6 @@ int poll_events(demo_t *demo)
     demo->mouse.button_last = demo->mouse.button_state;
     poll_mouse_pos(demo);
     poll_click(demo);
-    check_mouse_move(demo);
     demo_poll_input(demo);
     return (1);
 }

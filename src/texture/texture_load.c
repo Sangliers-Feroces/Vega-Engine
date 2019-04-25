@@ -7,7 +7,7 @@
 
 #include "headers.h"
 
-const tex_desc_t desc[] = {
+static const tex_desc_t desc[] = {
     {TEX_GRASS, "res/texture/grass.png"},
     {TEX_WATER, "res/texture/water.jpg"},
     {0, NULL}

@@ -51,10 +51,6 @@ void refresh_vp(demo_t *demo)
         dmat4_perspective(proj_struct, demo->cam.mvp.proj);
     else
         dmat4_ortho(ortho_struct, demo->cam.mvp.proj);
-    demo->cam.rot = dvec3_init(demo->world.camera->trans.rot.x,
-    demo->world.player->trans.rot.y, 0.0);
-    demo->cam.pos = dmat4_mul_dvec3(demo->world.camera->trans.world,
-    dvec3_init(0.0, 0.0, 0.0));
     dmat4_rot(demo->cam.rot, demo->cam.mvp.rot);
     dmat4_view(demo->cam.pos, demo->cam.rot, demo->cam.mvp.view);
     dmat4_mul(demo->cam.mvp.proj, demo->cam.mvp.view, demo->cam.mvp.vp);

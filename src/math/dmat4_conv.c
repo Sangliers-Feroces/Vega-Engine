@@ -21,3 +21,8 @@ dmat4_w dmat4_dmat4_w(dmat4 src)
     memcpy(res.data, src, 16 * sizeof(double));
     return res;
 }
+
+dvec3 dmat4_trans(dmat4 src)
+{
+    return dvec3_init(src[3][0], src[3][1], src[3][2]);
+}

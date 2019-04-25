@@ -127,7 +127,8 @@ typedef enum  {
     ENTITY3_TAG_NONE,
     ENTITY3_TAG_TERRAIN,
     ENTITY3_TAG_PLAYER,
-    ENTITY3_TAG_CAMERA
+    ENTITY3_TAG_CAMERA,
+    ENTITY3_TAG_MAX
 } entity3_tag_t;
 
 struct entity3 {
@@ -148,10 +149,16 @@ typedef struct {
     arr2d_dvec3_t terrain_base;
     size_t world_ndx;
     entity3 *ents;
+    entity3 *ents_global;   // used on unloaded chunks for far entities
     entity3 *terrain;
     entity3 *inserting;
     int is_stalled;
 } chunk_t;
+
+typedef struct {
+    entity3_tag_t tag;
+    void (*fun)(entity3 *ent);
+} entity3_tag_update_desc_t;
 
 typedef struct {
     char *map_path;
@@ -159,6 +166,7 @@ typedef struct {
     size_t chunk_allocated;
     chunk_t **chunk;        // used for rendering / world intersection
     entity3 *ents;
+    entity3 *ents_global;   // used on unloaded chunks for far entities
     entity3 *player;
     entity3 *camera;
     dvec3 light_dir;
@@ -166,6 +174,7 @@ typedef struct {
     srect chunk2d_area;
     chunk_t **chunk2d;      // 2d array for fast lookup
     octree *tree;           // collision data is exclusively stored here
+    void (*tag_update[ENTITY3_TAG_MAX])(entity3 *ent);
 } world_t;
 
 typedef struct {
