@@ -52,7 +52,7 @@ static void unload_global_ents(void)
 
 static void create_folder(const char *path)
 {
-    if (mkdir(path, 777) < 0) {
+    if (mkdir(path, 0755) < 0) {
         printf("Error: can't create '%s' folder.\n", path);
         exit(84);
     }
