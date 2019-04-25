@@ -45,6 +45,7 @@ static void unload_global_ents(void)
     file_write_entity3(&file, _demo->world.ents);
     file_write_flush(&file, path);
     free(path);
+    entity3_destroy(_demo->world.ents);
 }
 
 static void create_folder(const char *path)

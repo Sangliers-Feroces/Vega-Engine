@@ -302,5 +302,6 @@ void chunk_detail_terrain(chunk_t *chunk)
     }
     arr2d_dvec3_destroy(arr);
     chunk_border_destroy(border);
-    entity3_bind_col(chunk->terrain, chunk->terrain->render[WORLD_LOD_MAX].mesh);
+    entity3_bind_col(chunk->terrain,
+    entity3_get_lod_ref(chunk->terrain, WORLD_LOD_MAX));
 }

@@ -52,6 +52,13 @@ void entity3_update(entity3 *ent)
     entity3_update_actual(ent, NULL, NULL);
 }
 
+static int is_root_child(entity3 *ent)
+{
+    if (ent->root == NULL)
+        return 0;
+    return ent->root->root == NULL;
+}
+
 static int is_chunk_active(dvec3 p)
 {
     ssize2 chunk_pos = chunk_get_pos(p);
@@ -65,9 +72,11 @@ static int is_chunk_active(dvec3 p)
 static void entity3_global_update_actual(entity3 *ent, dmat4 par_world,
 dmat4 par_rot)
 {
-    if (is_chunk_active(dmat4_mul_dvec3(ent->trans.world,
-    dvec3_init(0.0, 0.0, 0.0))))
-        entity3_update_solo(ent, par_world, par_rot);
+    if (is_root_child(ent))
+        if (!is_chunk_active(dmat4_mul_dvec3(ent->trans.world,
+        dvec3_init(0.0, 0.0, 0.0))))
+            return;
+    entity3_update_solo(ent, par_world, par_rot);
     for (size_t i = 0; i < ent->sub.count; i++)
         entity3_global_update_actual(ent->sub.ent[i],
         ent->trans.world, ent->trans.world_rot);
