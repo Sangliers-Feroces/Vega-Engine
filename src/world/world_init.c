@@ -161,6 +161,7 @@ void world_init(demo_t *demo)
     demo->world.chunk2d[0] = NULL;
     demo->world.tree = octree_create(NULL);
     entity3_update_tag_init();
+    world_trigger_init();
 }
 
 void world_quit(demo_t *demo)

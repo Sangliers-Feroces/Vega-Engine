@@ -51,9 +51,14 @@ void entity3_physics(entity3 *ent);
 
 trigger_t* trigger_create(dvec3 size,
 void (*on_hit)(entity3 *ent, entity3 *other));
+void trigger_destroy(trigger_t *trigger);
 vec_trigger_t vec_trigger_init(void);
 void vec_trigger_add(vec_trigger_t *vec, trigger_t *trigger);
 void vec_trigger_destroy(vec_trigger_t *vec);
+void entity3_add_trigger(entity3 *ent, dvec3 size,
+void (*on_hit)(entity3 *ent, entity3 *other));
+
+void world_trigger_init(void);
 
 void entity3_update_tag_init(void);
 

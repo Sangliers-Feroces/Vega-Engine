@@ -19,6 +19,18 @@ void (*on_hit)(entity3 *ent, entity3 *other))
     return res;
 }
 
+void trigger_destroy(trigger_t *trigger)
+{
+    if (trigger == NULL)
+        return;
+    if (trigger->ndx != ~0ULL) {
+        _demo->world.triggers.trigger[trigger->ndx] =
+        _demo->world.triggers.trigger[--_demo->world.triggers.count];
+        _demo->world.triggers.trigger[trigger->ndx]->ndx = trigger->ndx;
+    }
+    free(trigger);
+}
+
 vec_trigger_t vec_trigger_init(void)
 {
     vec_trigger_t res;
@@ -46,4 +58,18 @@ void vec_trigger_destroy(vec_trigger_t *vec)
 {
     free(vec->trigger);
     vec->count = 0;
+}
+
+void entity3_add_trigger(entity3 *ent, dvec3 size,
+void (*on_hit)(entity3 *ent, entity3 *other))
+{
+    trigger_t *trigger;
+
+    if (ent->trigger != NULL) {
+        printf("Error: this entity has already a trigger.\n");
+        exit(84);
+    }
+    trigger = trigger_create(size, on_hit);
+    vec_trigger_add(&_demo->world.triggers, trigger);
+    ent->trigger = trigger;
 }

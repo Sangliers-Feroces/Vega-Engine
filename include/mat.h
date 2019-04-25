@@ -81,9 +81,7 @@ void dmat4_identity(dmat4 dst);
 void dmat4_copy(dmat4 src, dmat4 dst);
 void dmat4_mul(dmat4 a, dmat4 b, dmat4 res);
 
-void dmat4_scale_trans(dvec3 pos, dvec3 scale, dmat4 res);
 void dmat4_rot(dvec3 rot, dmat4 res);
-void dmat4_model_inv(transform_t *t, dmat4 res, dmat4 rot);
 void dmat4_model(transform_t *t, dmat4 res, dmat4 rot);
 void dmat4_view(dvec3 pos, dvec3 rot, dmat4 res);
 dvec4 dmat4_mul_vec4(dmat4 a, dvec4 b);
