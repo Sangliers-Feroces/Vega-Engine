@@ -74,15 +74,3 @@ void dmat4_model(transform_t *t, dmat4 res, dmat4 rot)
     dmat4_mul(rot, scale, res);
     dmat4_mul(pos, res, res);
 }
-
-void dmat4_view(dvec3 pos, dvec3 rot, dmat4 res)
-{
-    dmat4 rot_mat;
-
-    dmat4_identity(res);
-    res[3][0] = -pos.x;
-    res[3][1] = -pos.y;
-    res[3][2] = -pos.z;
-    dmat4_rot((dvec3){-rot.x, -rot.y, -rot.z}, rot_mat);
-    dmat4_mul(rot_mat, res, res);
-}

@@ -51,7 +51,6 @@ int is_ray_in_bounds(ray3 ray, bounds3 bounds)
     return (t.x <= t.y);
 }
 
-
 int is_ray_in_bounds_seg(ray3 ray, bounds3 bounds, float min_t)
 {
     dvec2 t = {-FLT64_INF, FLT64_INF};
