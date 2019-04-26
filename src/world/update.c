@@ -13,7 +13,7 @@ static void chunk_update(chunk_t *chunk)
         entity3_update(chunk->ents);
 }
 
-static void misc(void)
+/*static void misc(void)
 {
     ssize2 p = {0, 0};
     chunk_t *chunk = world_chunk_get(p);
@@ -33,7 +33,7 @@ static void misc(void)
         ent->trans.pos = dvec3_init(16.0, 8.0, 0.0);
         ent->trans.scale = dvec3_init(0.1, 1.0, 0.15);
     }
-}
+}*/
 
 void world_update(void)
 {
