@@ -35,7 +35,7 @@ typedef struct {
     //if consumable
     int restored_hp;
     int restored_mana;
-} item_data_t; 
+} item_data_t;
 
 typedef struct {
     entity2_t item_image;

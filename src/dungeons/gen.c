@@ -8,45 +8,46 @@
 #include "headers.h"
 
 static dvec3 g_vertex_buffer_data[][3] = {
-    {{-1.0f,-1.0f,-1.0f},
-    {-1.0f,-1.0f, 1.0f},
+    {{-1.0f, -1.0f, -1.0f},
+    {-1.0f, -1.0f, 1.0f},
     {-1.0f, 1.0f, 1.0f}},
-    {{1.0f, 1.0f,-1.0f},
-    {-1.0f,-1.0f,-1.0f},
-    {-1.0f, 1.0f,-1.0f}},
-    {{1.0f,-1.0f, 1.0f},
-    {-1.0f,-1.0f,-1.0f},
-    {1.0f,-1.0f,-1.0f}},
-    {{1.0f, 1.0f,-1.0f},
-    {1.0f,-1.0f,-1.0f},
-    {-1.0f,-1.0f,-1.0f}},
-    {{-1.0f,-1.0f,-1.0f},
+    {{1.0f, 1.0f, -1.0f},
+    {-1.0f, -1.0f, -1.0f},
+    {-1.0f, 1.0f, -1.0f}},
+    {{1.0f, -1.0f, 1.0f},
+    {-1.0f, -1.0f, -1.0f},
+    {1.0f, -1.0f, -1.0f}},
+    {{1.0f, 1.0f, -1.0f},
+    {1.0f, -1.0f, -1.0f},
+    {-1.0f, -1.0f, -1.0f}},
+    {{-1.0f, -1.0f, -1.0f},
     {-1.0f, 1.0f, 1.0f},
-    {-1.0f, 1.0f,-1.0f}},
-    {{1.0f,-1.0f, 1.0f},
-    {-1.0f,-1.0f, 1.0f},
-    {-1.0f,-1.0f,-1.0f}},
+    {-1.0f, 1.0f, -1.0f}},
+    {{1.0f, -1.0f, 1.0f},
+    {-1.0f, -1.0f, 1.0f},
+    {-1.0f, -1.0f, -1.0f}},
     {{-1.0f, 1.0f, 1.0f},
-    {-1.0f,-1.0f, 1.0f},
-    {1.0f,-1.0f, 1.0f}},
+    {-1.0f, -1.0f, 1.0f},
+    {1.0f, -1.0f, 1.0f}},
     {{1.0f, 1.0f, 1.0f},
-    {1.0f,-1.0f,-1.0f},
-    {1.0f, 1.0f,-1.0f}},
-    {{1.0f,-1.0f,-1.0f},
+    {1.0f, -1.0f, -1.0f},
+    {1.0f, 1.0f, -1.0f}},
+    {{1.0f, -1.0f, - 1.0f},
     {1.0f, 1.0f, 1.0f},
-    {1.0f,-1.0f, 1.0f}},
+    {1.0f, -1.0f, 1.0f}},
     {{1.0f, 1.0f, 1.0f},
-    {1.0f, 1.0f,-1.0f},
-    {-1.0f, 1.0f,-1.0f}},
+    {1.0f, 1.0f, -1.0f},
+    {-1.0f, 1.0f, -1.0f}},
     {{1.0f, 1.0f, 1.0f},
-    {-1.0f, 1.0f,-1.0f},
+    {-1.0f, 1.0f, -1.0f},
     {-1.0f, 1.0f, 1.0f}},
     {{1.0f, 1.0f, 1.0f},
     {-1.0f, 1.0f, 1.0f},
-    {1.0f,-1.0f, 1.0f}}
+    {1.0f, -1.0f, 1.0f}}
 };
 
-static dvec3 dungeon_point_scaling(dvec3 point, int scaling_x, int scaling_y, int scaling_z)
+static dvec3 dungeon_point_scaling(dvec3 point,
+int scaling_x, int scaling_y, int scaling_z)
 {
     dvec3 res = (dvec3){point.x, point.y, point.z};
 
@@ -73,9 +74,12 @@ static arr_dvec3_t dungeons_gen_room(void)
 
     dungeons_set_next_origin();
     for (int i = 0; i < 12; i++) {
-        room.dvec3[i * 3 + 1] = dungeon_point_scaling(g_vertex_buffer_data[i][0], 5, 2, 3);
-        room.dvec3[i * 3] = dungeon_point_scaling(g_vertex_buffer_data[i][1], 5, 2, 3);
-        room.dvec3[i * 3 + 2] = dungeon_point_scaling(g_vertex_buffer_data[i][2], 5, 2, 3);
+        room.dvec3[i * 3 + 1] =
+        dungeon_point_scaling(g_vertex_buffer_data[i][0], 5, 2, 3);
+        room.dvec3[i * 3] =
+        dungeon_point_scaling(g_vertex_buffer_data[i][1], 5, 2, 3);
+        room.dvec3[i * 3 + 2] =
+        dungeon_point_scaling(g_vertex_buffer_data[i][2], 5, 2, 3);
     }
     return room;
 }

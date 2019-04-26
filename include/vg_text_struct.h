@@ -53,7 +53,7 @@ typedef struct {
 } dialogue_text;
 
 typedef struct {
-    int read; 
+    int read;
     int read_head;
     int nb_texts;
     font_list_t font_index;
