@@ -213,3 +213,9 @@ typedef struct {
     size_t count;
     chunk_dvertex_t *dvertex;
 } vec_chunk_dvertex_t;
+
+typedef struct {
+    arr2d_dvec3_t arr;
+    arr2d_dvec3_t normals;
+    srect area;
+} terrain_send_ter_arg;
