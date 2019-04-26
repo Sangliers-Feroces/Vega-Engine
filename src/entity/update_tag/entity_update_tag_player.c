@@ -73,11 +73,12 @@ void entity3_tag_update_player(entity3 *ent)
 {
     dvec3 cam_x;
     dvec3 cam_z;
+    entity3 *ref_move = ent->trans.is_physics ? ent : ent->sub.ent[0];
 
     poll_mouse_move(ent);
-    cam_x = dvec3_muls(dmat4_mul_dvec3(ent->sub.ent[0]->trans.world_rot,
+    cam_x = dvec3_muls(dmat4_mul_dvec3(ref_move->trans.world_rot,
     dvec3_init(1.0, 0.0, 0.0)), _demo->win.framelen);
-    cam_z = dvec3_muls(dmat4_mul_dvec3(ent->sub.ent[0]->trans.world_rot,
+    cam_z = dvec3_muls(dmat4_mul_dvec3(ref_move->trans.world_rot,
     dvec3_init(0.0, 0.0, 1.0)), _demo->win.framelen);
     if (ent->trans.is_physics)
         poll_playing(ent, cam_x, cam_z);
