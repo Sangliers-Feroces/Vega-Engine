@@ -9,7 +9,7 @@
 
 static int invent_poll_event(void)
 {
-    if (!poll_events(_demo))
+    if (!demo_poll_events(_demo))
         return 0;
     if (_demo->input.key_press[KEY_TAB] || _demo->input.key_press[KEY_ESC])
         return 0;

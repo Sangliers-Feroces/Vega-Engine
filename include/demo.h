@@ -23,8 +23,10 @@ arg_t get_data_from_arg(int ac, char **av);
 
 void demo_loop(demo_t *demo);
 
+int demo_poll_events(demo_t *demo);
+
 void demo_refresh_mouse_pos(void);
-int poll_events(demo_t *demo);
+void demo_poll_mouse_pos(demo_t *demo);
 
 void init(void);
 void clocks_init(demo_t *demo);

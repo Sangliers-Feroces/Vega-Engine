@@ -9,17 +9,6 @@
 
 uint32_t rtx(demo_t *demo, dvec3 ray)
 {
-    /*inter_ray3 inter = octree_intersect_ray(demo->tree, (ray3){demo->cam.pos,
-    ray});
-    vec2 uv;
-
-    if (inter.triangle != NULL) {
-        uv = barycentric2_get_point(inter.triangle->lightmap.uv, inter.bar);
-        return rgbaf32_to_uint32(texture2f_sample(
-        inter.triangle->lightmap.texture, uv), _lightmaps.aperture);
-    }
-    else
-        return 0xFF000000;*/
     (void)demo;
     (void)ray;
     return 0;

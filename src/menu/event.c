@@ -64,13 +64,13 @@ int wait_confirmation(demo_t *demo, menu_t *menu)
             state = 1;
             check_input++;
         }
-    } while (poll_events(demo) && !check_input);
+    } while (demo_poll_events(demo) && !check_input);
     return state;
 }
 
 int menu_poll_events(demo_t *demo, menu_t *menu)
 {
-    if (!poll_events(demo)) {
+    if (!demo_poll_events(demo)) {
         menu->edited_setting = 0;
         return 0;
     }
