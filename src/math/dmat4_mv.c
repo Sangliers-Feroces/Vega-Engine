@@ -7,19 +7,20 @@
 
 #include "headers.h"
 
-void dmat4_scale_trans(dvec3 pos, dvec3 scale, dmat4 res)
+void dmat4_scale(dvec3 scale, dmat4 res)
 {
-    dmat4 trans;
-
     dmat4_identity(res);
     res[0][0] = scale.x;
     res[1][1] = scale.y;
     res[2][2] = scale.z;
-    dmat4_identity(trans);
-    trans[3][0] = pos.x;
-    trans[3][1] = pos.y;
-    trans[3][2] = pos.z;
-    dmat4_mul(trans, res, res);
+}
+
+void dmat4_pos(dvec3 pos, dmat4 res)
+{
+    dmat4_identity(res);
+    res[3][0] = pos.x;
+    res[3][1] = pos.y;
+    res[3][2] = pos.z;
 }
 
 static void rot_yx(double x, double y, dmat4 res)
@@ -60,26 +61,18 @@ void dmat4_rot(dvec3 rot, dmat4 res)
     dmat4_mul(rot_z, res, res);
 }
 
-void dmat4_model_inv(transform_t *t, dmat4 res, dmat4 rot)
-{
-    dmat4 scale_trans;
-
-    dmat4_rot(dvec3_muls(t->rot, -1), res);
-    if (rot != NULL)
-        dmat4_copy(res, rot);
-    dmat4_scale_trans(dvec3_muls(t->pos, -1), t->scale, scale_trans);
-    dmat4_mul(scale_trans, res, res);
-}
-
 void dmat4_model(transform_t *t, dmat4 res, dmat4 rot)
 {
-    dmat4 scale_trans;
+    dmat4 scale;
+    dmat4 pos;
 
+    dmat4_pos(t->pos, pos);
+    dmat4_scale(t->scale, scale);
     dmat4_rot(t->rot, res);
     if (rot != NULL)
         dmat4_copy(res, rot);
-    dmat4_scale_trans(t->pos, t->scale, scale_trans);
-    dmat4_mul(scale_trans, res, res);
+    dmat4_mul(rot, scale, res);
+    dmat4_mul(pos, res, res);
 }
 
 void dmat4_view(dvec3 pos, dvec3 rot, dmat4 res)

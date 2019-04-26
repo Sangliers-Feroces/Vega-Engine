@@ -58,7 +58,7 @@ static void terrain_last_lod(ssize2 pos)
 
 void world_chunk_god(void)
 {
-    ssize2 cam = chunk_get_pos(_demo->cam.pos);
+    ssize2 cam = chunk_get_pos(dmat4_trans(_demo->world.camera->trans.world));
 
     world_chunk_get(cam);
     terrain_last_lod(cam);

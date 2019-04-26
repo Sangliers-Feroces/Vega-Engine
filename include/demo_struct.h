@@ -42,8 +42,6 @@ typedef struct {
 } win_t;
 
 typedef struct {
-    dvec3 pos;
-    dvec3 rot;
     long double fovw;
     long double ratiowh;
     long double near;

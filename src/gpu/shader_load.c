@@ -12,9 +12,9 @@ const shader_desc_t shader_desc[] = {
     "src/shader/world_fragment.glsl", 1},
     {SHADER_WATER, "src/shader/world_vertex.glsl",
     "src/shader/water_fragment.glsl", 1},
-    {SHADER_FONT, "src/gpu/shader/ui_vertex.glsl",
+    {SHADER_FONT, "src/shader/font_vertex.glsl",
     "src/shader/font_fragment.glsl", 0},
-    {SHADER_IU, "src/gpu/shader/ui_vertex.glsl",
+    {SHADER_IU, "src/shader/ui_vertex.glsl",
     "src/shader/ui_fragment.glsl", 0},
     {0, NULL, NULL, 0}
 };

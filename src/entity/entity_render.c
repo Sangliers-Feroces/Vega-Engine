@@ -62,10 +62,11 @@ static size_t get_max_lod(double dist)
 
 static double get_ent_dist(entity3 *ent)
 {
-    dvec3 p = dmat4_mul_dvec3(ent->trans.world, dvec3_init(0.0, 0.0, 0.0));
+    dvec3 p = dmat4_trans(ent->trans.world);
+    dvec3 c = dmat4_trans(_demo->world.camera->trans.world);
 
     return dvec3_dist_sq(dvec3_init(p.x, 0.0, p.z),
-    dvec3_init(_demo->cam.pos.x, 0.0, _demo->cam.pos.z));
+    dvec3_init(c.x, 0.0, c.z));
 }
 
 void entity3_render(entity3 *ent, dmat4 vp)

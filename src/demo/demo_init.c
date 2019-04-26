@@ -9,8 +9,6 @@
 
 static void init_cam(demo_t *demo)
 {
-    demo->cam.pos = (dvec3){0.0f, 0.0f, -5.0f};
-    demo->cam.rot = (dvec3){0.0f, 0.0f, 0.0f};
     demo->cam.ratiowh = (long double)demo->win.w / (long double)demo->win.h;
     demo->cam.fovw = M_PI / 2.0f;
     demo->cam.near = 1.0L;
