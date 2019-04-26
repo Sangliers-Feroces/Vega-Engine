@@ -111,9 +111,11 @@ typedef struct {
     entity3 **ent;
 } vec_entity3_t;
 
+typedef void (*trigger_on_hit_fun_t)(entity3 *ent, entity3 *other);
+
 typedef struct {
     dvec3 size;
-    void (*on_hit)(entity3 *ent, entity3 *other);
+    trigger_on_hit_fun_t on_hit;
     size_t ndx;
 } trigger_t;
 
@@ -124,7 +126,7 @@ typedef enum {
 
 typedef struct {
     trigger_on_hit_t trigger;
-    void (*fun)(entity3 *ent, entity3 *other);
+    trigger_on_hit_fun_t on_hit;
 } trigger_on_hit_desc_t;
 
 typedef struct {
@@ -185,7 +187,7 @@ typedef struct {
     chunk_t **chunk2d;      // 2d array for fast lookup
     octree *tree;           // collision data is exclusively stored here
     void (*tag_update[ENTITY3_TAG_MAX])(entity3 *ent);
-    void (*trigger_on_hit[TRIGGER_ON_HIT_MAX])(entity3 *ent, entity3 *other);
+    trigger_on_hit_fun_t trigger_on_hit[TRIGGER_ON_HIT_MAX];
 } world_t;
 
 typedef struct {

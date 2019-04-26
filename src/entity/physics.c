@@ -60,11 +60,9 @@ void entity3_physics(entity3 *ent)
     for (size_t i = 0; i < 4; i++)
         if (!check_col(i > 0, ent->trans.pos, &speed_frame, &norm))
             break;
-    dvec3 disp = dvec3_add(speed_frame, dvec3_muls(dvec3_normalize(norm), 0.005));
+    dvec3 disp = dvec3_add(speed_frame,
+    dvec3_muls(dvec3_normalize(norm), 0.005));
     apply_disp(&ent->trans.pos, disp);
     ent->trans.is_grounded = old_speed.y < speed_frame.y;
     ent->trans.speed = dvec3_divs(speed_frame, _demo->win.framelen);
-    /*for (size_t i = 0; i < 1000; i++)
-        world_inter(demo, (ray3){dvec3_init(0.0, 100.0, 0.0),
-        dvec3_init(randf(), -1.0, randf())});*/
 }

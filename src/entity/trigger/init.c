@@ -16,5 +16,5 @@ void world_trigger_init(void)
     for (size_t i = 0; i < TRIGGER_ON_HIT_MAX; i++)
         _demo->world.trigger_on_hit[i] = NULL;
     for (size_t i = 0; desc[i].trigger != TRIGGER_ON_HIT_NONE; i++)
-        _demo->world.trigger_on_hit[desc[i].trigger] = desc[i].fun;
+        _demo->world.trigger_on_hit[desc[i].trigger] = desc[i].on_hit;
 }

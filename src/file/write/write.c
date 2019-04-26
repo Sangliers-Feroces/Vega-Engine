@@ -58,16 +58,3 @@ void file_write_data_ref(file_write_t *file, file_data_ref_t ref_type)
 {
     file_write(file, &ref_type, sizeof(file_data_ref_t));
 }
-
-void file_write_int(file_write_t *file, int value)
-{
-    file_write(file, &value, sizeof(int));
-}
-
-void file_write_string(file_write_t *file, const char *value)
-{
-    size_t size = strlen(value) + 1;
-
-    file_write_actual(file, &size, sizeof(size_t));
-    file_write_actual(file, value, size);
-}

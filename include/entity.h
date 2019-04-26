@@ -55,11 +55,15 @@ void trigger_destroy(trigger_t *trigger);
 vec_trigger_t vec_trigger_init(void);
 void vec_trigger_add(vec_trigger_t *vec, trigger_t *trigger);
 void vec_trigger_destroy(vec_trigger_t *vec);
-void entity3_add_trigger(entity3 *ent, dvec3 size,
-void (*on_hit)(entity3 *ent, entity3 *other));
+void entity3_add_trigger(entity3 *ent, dvec3 size, trigger_on_hit_fun_t on_hit);
 
 void world_trigger_init(void);
 
 void entity3_update_tag_init(void);
 
 void entity3_tag_update_player(entity3 *ent);
+void entity3_tag_update_player_poll_mouse(entity3 *ent);
+void entity3_tag_update_player_poll_editor(
+entity3 *ent, dvec3 cam_x, dvec3 cam_z);
+void entity3_tag_update_player_poll_playing(
+entity3 *ent, dvec3 cam_x, dvec3 cam_z);
