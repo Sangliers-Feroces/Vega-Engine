@@ -85,20 +85,6 @@ typedef struct {
 } vec_selection_t;
 
 typedef struct {
-    vec_selection_t selections;
-    model_t *model[MODEL_EDITOR_MAX];
-    gluint shader;
-    glint mvp;
-    dvec3 grab;
-    dvec3 grab_first;
-    dvec3 grab_now;
-    dvec3 grab_delta;
-    model_editor_t grabbed;
-    entity_t *grabber_ent[3];
-    int is_wireframe;
-} editor_t;
-
-typedef struct {
     sfClock *game_clock;
 } clocks_t;
 
@@ -111,7 +97,6 @@ typedef struct {
     world_t world;
     mouse_t mouse;
     buf_t buf;
-    editor_t editor;
     shader_cache_t shader[SHADER_MAX];
     material_full_t material[MATERIAL_MAX];
     texture2 *tex[TEX_MAX];

@@ -25,7 +25,8 @@ const material_desc_t mat_desc[] = {
     {0, NULL, NULL, 0}
 };
 
-static void shader_load_nstandard_uniform(shader_desc_t desc, shader_cache_t *res)
+static void shader_load_nstandard_uniform(
+shader_desc_t desc, shader_cache_t *res)
 {
     switch (desc.shader) {
     case SHADER_FONT:

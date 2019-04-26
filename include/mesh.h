@@ -7,7 +7,14 @@
 
 #pragma once
 
+void mesh_gpu_init(mesh_t *mesh);
 void mesh_full_ext_gpu_init(mesh_full_t *mesh);
+void mesh_gpu_destroy(mesh_gpu_t gpu);
+
+void mesh_set_vertex_attrib(gluint vertex_array, gluint vertex_buffer);
+void mesh_ext_set_vertex_attrib(gluint vertex_array,
+gluint vertex_buffer, gluint vertex_ext_buffer);
+
 mesh_t* mesh_create(int gpu_do_upload);
 void mesh_destroy(mesh_t *mesh);
 void mesh_add_vertex(mesh_t *mesh, vertex_t vertex);

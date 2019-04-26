@@ -10,8 +10,9 @@
 static void setting_set_extern(menu_t *menu)
 {
     menu->setting[SETTING_VOL_MASTER].slider = malloc_safe(sizeof(entity2_t));
-    entity_constructor(menu->setting[SETTING_VOL_MASTER].slider, (entity2_param_t){
-    IUTEX_SLIDER, (rect_t){{-0.278750f, 0.262f},{0.05f, 0.05f}}, -0.999});
+    entity_constructor(menu->setting[SETTING_VOL_MASTER].slider,
+    (entity2_param_t){
+    IUTEX_SLIDER, (rect_t){{-0.278750f, 0.262f}, {0.05f, 0.05f}}, -0.999});
     menu->setting[SETTING_VOL_MASTER].x_min = -0.742500;
     menu->setting[SETTING_VOL_MASTER].x_max = -0.228750f;
 }
@@ -19,17 +20,18 @@ static void setting_set_extern(menu_t *menu)
 static void setting_set_entities(menu_t *menu)
 {
     entity_constructor(&menu->setting[SETTING_RES], (entity2_param_t){
-    IUTEX_SETTING_RES, (rect_t){{-0.80f, 0.50f},{0.15f, 0.1f}}, -0.999});
+    IUTEX_SETTING_RES, (rect_t){{-0.80f, 0.50f}, {0.15f, 0.1f}}, -0.999});
     entity_constructor(&menu->setting[SETTING_RES_CHOICE], (entity2_param_t){
-    IUTEX_SETTING_RES_1600_900, (rect_t){{-0.50f, 0.50f},{0.15f, 0.1f}}, -0.9});
+    IUTEX_SETTING_RES_1600_900,
+    (rect_t){{-0.50f, 0.50f}, {0.15f, 0.1f}}, -0.9});
     entity_constructor(&menu->setting[SETTING_RES_PLUS], (entity2_param_t){
-    IUTEX_PLUS, (rect_t){{-0.35f, 0.50f},{0.08f, 0.08f}}, -0.9});
+    IUTEX_PLUS, (rect_t){{-0.35f, 0.50f}, {0.08f, 0.08f}}, -0.9});
     entity_constructor(&menu->setting[SETTING_RES_MINUS], (entity2_param_t){
-    IUTEX_MINUS, (rect_t){{-0.58f, 0.50f},{0.08f, 0.08f}}, -0.9});
+    IUTEX_MINUS, (rect_t){{-0.58f, 0.50f}, {0.08f, 0.08f}}, -0.9});
     entity_constructor(&menu->confirmation, (entity2_param_t){
-    IUTEX_SETTING_CONFIRM, (rect_t){{0.0f, 0.0f},{0.6f, 0.6f}}, -0.9});
+    IUTEX_SETTING_CONFIRM, (rect_t){{0.0f, 0.0f}, {0.6f, 0.6f}}, -0.9});
     entity_constructor(&menu->setting[SETTING_VOL_MASTER], (entity2_param_t){
-    IUTEX_SETTING_VOL_BACK, (rect_t){{-0.80f, 0.20f},{0.63f, 0.2f}}, -0.888});
+    IUTEX_SETTING_VOL_BACK, (rect_t){{-0.80f, 0.20f}, {0.63f, 0.2f}}, -0.888});
     menu->setting[SETTING_VOL_MASTER].pattern = PATTERN_SLIDE_BUTTON;
 }
 

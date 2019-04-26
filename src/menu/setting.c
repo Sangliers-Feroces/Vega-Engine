@@ -12,7 +12,7 @@ const resolutions_t list_resolutions[] = {
     {1920, 1080, IUTEX_SETTING_RES_1920_1080}
 };
 
-void setting_apply_changes(demo_t *demo,menu_t *menu)
+void setting_apply_changes(demo_t *demo, menu_t *menu)
 {
     if (list_resolutions[menu->choosen_res].w != demo->win.w
     || list_resolutions[menu->choosen_res].h != demo->win.h) {
@@ -50,7 +50,8 @@ void setting_draw(menu_t *menu)
 void menu_setting_loop(demo_t *demo, menu_t *menu)
 {
     while (menu_poll_events(demo, menu)) {
-        menu->setting[SETTING_RES_CHOICE].index = list_resolutions[menu->choosen_res].index;
+        menu->setting[SETTING_RES_CHOICE].index =
+        list_resolutions[menu->choosen_res].index;
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUseProgram(_demo->shader[SHADER_IU].program);
         menu_draw(menu);
