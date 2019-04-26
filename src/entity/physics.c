@@ -44,7 +44,7 @@ static void apply_disp(dvec3 *p, dvec3 disp)
         *p = dvec3_add(*p, disp);
         return;
     }
-    *p = dvec3_add(inter.p, dvec3_muls(dvec3_normalize(disp), -0.005));
+    *p = dvec3_add(inter.p, dvec3_muls(dvec3_normalize(disp), -0.001));
 }
 
 void entity3_physics(entity3 *ent)
@@ -61,7 +61,7 @@ void entity3_physics(entity3 *ent)
         if (!check_col(i > 0, ent->trans.pos, &speed_frame, &norm))
             break;
     dvec3 disp = dvec3_add(speed_frame,
-    dvec3_muls(dvec3_normalize(norm), 0.005));
+    dvec3_muls(dvec3_normalize(norm), 0.001));
     apply_disp(&ent->trans.pos, disp);
     ent->trans.is_grounded = old_speed.y < speed_frame.y;
     ent->trans.speed = dvec3_divs(speed_frame, _demo->win.framelen);
