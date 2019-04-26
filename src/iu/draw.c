@@ -41,20 +41,16 @@ static void temp_dialogue_test(void)
 
 static void refresh_fps(void)
 {
-    char *buff = (char *)malloc_safe(sizeof(char) * 10);
+    char buff[10];
 
     sprintf(buff, "%d FPS", _demo->win.fps_to_display);
     vg_text_reset_str(&_iu.data.fps_display, buff, NULL);
     vg_text_draw(_iu.data.fps_display);
-    free(buff);
 }
 
 void iu_display(void)
 {
     glUseProgram(_demo->shader[SHADER_IU].program);
-    if (_iu.data.is_invent)
-        for (int i = 0; i < IUINVENT_END; i++)
-            iu_entity_draw(_iu.invent[i]);
     temp_dialogue_test();
     draw_current_dialogue();
     refresh_fps();
