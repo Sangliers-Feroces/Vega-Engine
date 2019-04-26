@@ -133,9 +133,6 @@ void world_load_map(void)
     entity3_seek_tag(_demo->world.ents, ENTITY3_TAG_PLAYER);
     _demo->world.camera =
     entity3_seek_tag(_demo->world.ents, ENTITY3_TAG_CAMERA);
-    _demo->cam.rot = dvec3_init(_demo->world.camera->trans.rot.x,
-    _demo->world.player->trans.rot.y, 0.0);
-    _demo->cam.pos = dmat4_trans(_demo->world.camera->trans.world);
 }
 
 void world_unload_map(void)

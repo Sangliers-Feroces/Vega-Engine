@@ -37,7 +37,7 @@ static void misc(void)
 
 void world_update(void)
 {
-    misc();
+    //misc();
     for (size_t i = 0; i < _demo->world.chunk_count; i++)
         chunk_update(_demo->world.chunk[i]);
     entity3_global_update(_demo->world.ents);
