@@ -7,29 +7,6 @@
 
 #include "headers.h"
 
-static void world_chunk_flush_inserting(void)
-{
-    for (size_t i = 0; i < _demo->world.chunk_count; i++)
-        _demo->world.chunk[i]->inserting = NULL;
-}
-
-void world_insert_start(void)
-{
-    world_chunk_flush_inserting();
-}
-
-void world_insert_end(size_t lod_collision)
-{
-    if (lod_collision != ~0ULL)
-        for (size_t i = 0; i < _demo->world.chunk_count; i++)
-            if (_demo->world.chunk[i]->inserting != NULL) {
-                entity3_bind_col(_demo->world.chunk[i]->inserting,
-                mesh_full_ref_init(MESH_FULL_REF_RENDER_LOD0 + lod_collision,
-                _demo->world.chunk[i]->inserting->render[lod_collision].mesh.m));
-            }
-    world_chunk_flush_inserting();
-}
-
 static void insert_data(mesh_full_t *src, mesh_full_t *dst, vec3 *pos, size_t i)
 {
     if (!src->has_ext) {

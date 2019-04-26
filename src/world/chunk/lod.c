@@ -48,12 +48,3 @@ void chunk_lod_destroy(chunk_lod_t *lod)
     if (lod->vertex_buffer != 0)
         glDeleteBuffers(1, &lod->vertex_buffer);
 }
-
-void chunk_lod_insert_rtx_triangle(chunk_lod_t *lod, rtx_triangle *triangle)
-{
-    (void)triangle;
-    //if (lod->lod == WORLD_LOD_MAX)
-    //    octree_insert_triangle(&_demo->world.tree, triangle);
-    //vec_rtx_triangle_add_detached(lod->geom, triangle);
-    lod->do_reupload_buf = 1;
-}

@@ -17,6 +17,9 @@ void world_load_map(void);
 void world_unload_map(void);
 void world_quit(demo_t *demo);
 
+void world_ensure_current_map_folder(void);
+void world_load_meta_map(void);
+
 chunk_t** world_chunk2d_get(ssize2 pos);
 void world_chunk2d_insert(chunk_t *chunk);
 chunk_t* world_chunk_get_adv(ssize2 pos, int do_load, int do_gen);
@@ -33,7 +36,6 @@ void chunk_destroy(chunk_t *chunk);
 
 chunk_lod_t chunk_lod_create(size_t lod);
 void chunk_lod_destroy(chunk_lod_t *lod);
-void chunk_lod_insert_rtx_triangle(chunk_lod_t *lod, rtx_triangle *triangle);
 
 void world_render(void);
 
@@ -43,7 +45,6 @@ vec_chunk_vertex_t vec_chunk_vertex_create(size_t count);
 void vec_chunk_vertex_destroy(vec_chunk_vertex_t vec);
 vec_chunk_dvertex_t vec_chunk_dvertex_create(size_t count);
 void vec_chunk_dvertex_destroy(vec_chunk_dvertex_t vec);
-void chunk_lod_reupload_buf(chunk_lod_t *lod);
 
 void chunk_gen_terrain(ssize2 pos);
 void chunk_detail_terrain(chunk_t *chunk);
