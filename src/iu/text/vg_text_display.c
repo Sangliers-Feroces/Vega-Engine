@@ -61,6 +61,7 @@ float canvas_size)
         iu_display_char(str[i], start, font);
         start.p.x += start.s.x;
     }
+    glUseProgram(_demo->shader[SHADER_IU].program);
 }
 
 void vg_text_draw(vg_text src)

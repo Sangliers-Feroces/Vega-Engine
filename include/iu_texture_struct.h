@@ -7,6 +7,7 @@
 
 #pragma once
 
+//deprecated but needed to keep the programm running
 typedef struct {
     float width;
     float lenght;
@@ -132,3 +133,58 @@ typedef struct {
     display_nbr_array_t loading_pourcent;
     size_t ray_density;
 } ui_struct;
+// end of old version
+typedef enum {
+    IUTEX_ELON,
+    IUTEX_PLUS,
+    IUTEX_MINUS,
+    IUTEX_SLIDER,
+    IUTEX_MENU_MAIN,
+    IUTEX_MENU_CONTINUE,
+    IUTEX_MENU_LOAD,
+    IUTEX_MENU_LOAD_FADE,
+    IUTEX_MENU_NEW,
+    IUTEX_MENU_SETTINGS,
+    IUTEX_MENU_CREDITS,
+    IUTEX_MENU_QUIT,
+    IUTEX_MENU_CURSOR,
+    IUTEX_SETTING_BG,
+    IUTEX_EDITOR_GRAB,
+    IUTEX_EDITOR_SELECT,
+    IUTEX_SETTING_RES,
+    IUTEX_SETTING_CONFIRM,
+    IUTEX_SETTING_RES_1600_900,
+    IUTEX_SETTING_RES_1920_1080,
+    IUTEX_SETTING_VOL_BACK,
+    IUTEX_INVENT_BG,
+    IUTEX_TEXT_CADRE,
+    IUTEX_FONT_MINECRAFT,
+    IUTEX_EPEE,
+    IUTEX_END
+} iutex_t;
+
+typedef enum {
+    IUREL_X,
+    IUREL_Y,
+    IUREL_FULL
+} rel_t;
+
+typedef enum {
+    PATTERN_CLICK_BUTTON,
+    PATTERN_SLIDE_BUTTON,
+    PATTERN_DRAG_AND_DROP,
+    PATTERN_CLASSIC,
+    PATTERN_END
+} pattern_t;
+
+struct entity2 {
+    iutex_t index;
+    rect_t rect;
+    float depth;
+    rel_t rel;
+    pattern_t pattern;
+    struct entity2 *slider;
+    float x_min;
+    float x_max;
+};
+typedef struct entity2 entity2_t;

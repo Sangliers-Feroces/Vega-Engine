@@ -58,3 +58,4 @@
 #include "entity.h"
 #include "vg_text.h"
 #include "file.h"
+#include "invent.h"

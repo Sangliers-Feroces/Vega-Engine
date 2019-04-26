@@ -29,6 +29,7 @@ static void editor_shortcut(demo_t *demo)
         if (_iu.data.is_invent)
             demo_center_cursor(demo);
         demo_update_cursor_visibility(demo);
+        invent_loop();
     }
 }
 
