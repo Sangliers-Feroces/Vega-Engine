@@ -17,6 +17,7 @@ static entity3* create_default_ents(void)
     player->tag = ENTITY3_TAG_PLAYER;
     player->trans.is_static = 0;
     player->trans.is_physics = 1;
+    player->trans.slide_threshold = 0.8;
     player->trans.pos = dvec3_init(0.0, 64.0, 0.0);
     cam = entity3_create(player);
     cam->tag = ENTITY3_TAG_CAMERA;

@@ -35,6 +35,7 @@ void world_render(void)
     gl_set_stuff();
     for (size_t i = 0; i < _demo->world.chunk_count; i++)
         chunk_render(_demo->world.chunk[i]);
+    entity3_render(_demo->world.ents, _demo->cam.mvp.vp);
     render_delay_exec();
     gl_reset_stuff();
 }

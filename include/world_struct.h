@@ -33,14 +33,20 @@ typedef struct {
     int is_static;
     int is_physics;
     int is_grounded;
+    double slide_threshold;
     dvec3 pos;
     dvec3 scale;
     dvec3 rot;
     dvec3 speed;
     dmat4 model;
     dmat4 model_rot;
+    dvec3 pos_on_model;
+    dvec3 scale_on_model;
+    dvec3 rot_on_model;
     dmat4 world;
     dmat4 world_rot;
+    dmat4 world_inv;
+    dmat4 world_on_inv_calculated;
 } transform_t;
 
 typedef struct {

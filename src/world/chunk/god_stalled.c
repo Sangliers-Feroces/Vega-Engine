@@ -22,6 +22,8 @@ static int get_stalled(chunk_t *chunk)
     dvec3 p = dvec3_init(chunk->pos.x * CHUNK_SIZE + CHUNK_SIZE * 0.5, 0.0,
     chunk->pos.y * CHUNK_SIZE + CHUNK_SIZE * 0.5);
 
+    if ((chunk->terrain == NULL) || (chunk->terrain->render[2].mesh.m == NULL))
+        return 1;
     if (dvec3_dist_sq(c, p) > 190.0 * 190.0)
         return 1;
     for (ssize_t i = -1; i <= 1; i++)

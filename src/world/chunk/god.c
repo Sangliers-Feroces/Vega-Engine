@@ -41,6 +41,8 @@ static int ensure_lod_chunk(ssize2 pos)
 
     if ((chunk == NULL) || (*chunk == NULL))
         return 0;
+    if ((*chunk)->terrain == NULL)
+        return 0;
     if ((*chunk)->terrain->render[WORLD_LOD_MAX].mesh.m == NULL) {
         chunk_detail_terrain(*chunk);
         return 1;

@@ -48,6 +48,7 @@ chunk_t* file_read_chunk(file_read_t *file)
     res->border_ter = file_read_chunk_border(file);
     res->terrain_base = file_read_arr2d_dvec3(file);
     entity3_destroy(res->ents);
+    entity3_destroy(res->ents_global);
     res->ents = file_read_entity3(file, NULL);
     res->ents_global = file_read_entity3(file, NULL);
     res->terrain = entity3_seek_tag(res->ents, ENTITY3_TAG_TERRAIN);

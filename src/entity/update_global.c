@@ -23,26 +23,29 @@ static int is_chunk_active(ssize2 chunk_pos)
     return !(*pexist)->is_stalled;
 }
 
-static void entity3_global_update_actual(entity3 *ent, dmat4 par_world,
-dmat4 par_rot)
+int entity3_global_update_actual(entity3 *ent)
 {
     ssize2 chunk_pos = chunk_get_pos(dmat4_trans(ent->trans.world));
 
     if (is_root_child(ent)) {
         if ((!chunk_is_loaded(chunk_pos)) && (ent->tag != ENTITY3_TAG_PLAYER)) {
             world_chunk_send_global_ent(chunk_pos, ent);
-            return;
+            return 1;
         }
         if (!is_chunk_active(chunk_pos))
-            return;
+            return 0;
     }
-    entity3_update_solo(ent, par_world, par_rot);
+    entity3_update_solo(ent);
     for (size_t i = 0; i < ent->sub.count; i++)
-        entity3_global_update_actual(ent->sub.ent[i],
-        ent->trans.world, ent->trans.world_rot);
+        if (entity3_global_update_actual(ent->sub.ent[i]))
+            i--;
+    return 0;
 }
 
 void entity3_global_update(entity3 *ent)
 {
-    entity3_global_update_actual(ent, NULL, NULL);
+    entity3_update_solo(ent);
+    for (size_t i = 0; i < ent->sub.count; i++)
+        if (entity3_global_update_actual(ent->sub.ent[i]))
+            i--;
 }

@@ -25,6 +25,7 @@ void entity3_bind_col(entity3 *entity, mesh_full_ref_t collision_mesh);
 void entity3_remove_from_parent(entity3 *ent);
 void entity3_destroy(entity3 *entity);
 entity3* chunk_add_entity(chunk_t *chunk);
+entity3* world_add_entity(void);
 void entity3_set_render(entity3 *ent, size_t lod, mesh_full_ref_t mesh,
 material_t material);
 mesh_full_t* entity3_create_render(entity3 *ent, size_t lod,
@@ -41,8 +42,8 @@ void vec_render_call_destroy(vec_render_call_t vec);
 void render_delay_call(render_call_t to_draw);
 void render_delay_exec(void);
 
-void entity3_trans_update_model(entity3 *ent);
-void entity3_update_solo(entity3 *ent, dmat4 par_world, dmat4 par_rot);
+void entity3_trans_update(entity3 *ent);
+void entity3_update_solo(entity3 *ent);
 void entity3_update(entity3 *ent);
 void entity3_global_update(entity3 *ent);
 entity3* entity3_seek_tag(entity3 *ent, entity3_tag_t tag);
@@ -67,3 +68,5 @@ void entity3_tag_update_player_poll_editor(
 entity3 *ent, dvec3 cam_x, dvec3 cam_z);
 void entity3_tag_update_player_poll_playing(
 entity3 *ent, dvec3 cam_x, dvec3 cam_z);
+
+void entity3_update_trans_inv(entity3 *ent);

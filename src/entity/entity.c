@@ -13,13 +13,13 @@ entity3* entity3_create_pos(entity3 *parent, dvec3 pos)
 
     res->trans = transform_get_default();
     res->trans.pos = pos;
-    entity3_trans_update_model(res);
     res->col = col_ref_get_default();
     for (size_t i = 0; i < WORLD_LOD_COUNT; i++)
         res->render[i] = render_obj_get_default();
     res->trigger = NULL;
     res->tag = ENTITY3_TAG_NONE;
-    res->root = parent;
+    res->root = NULL;
+    entity3_trans_update(res);
     res->root_ndx = ~0ULL;
     res->sub = vec_entity3_create();
     if (parent != NULL)

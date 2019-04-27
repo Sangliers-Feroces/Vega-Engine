@@ -13,7 +13,7 @@ static inter_ray3 world_inter(demo_t *demo, ray3 ray)
 }
 
 static int check_col(int do_laxist,
-dvec3 pos, dvec3 *speed, dvec3 *avg_norm)
+dvec3 pos, dvec3 *speed, dvec3 *avg_norm, double slide)
 {
     inter_ray3 inter = world_inter(_demo, (ray3){pos, *speed});
     dvec3 p_in;
@@ -25,7 +25,7 @@ dvec3 pos, dvec3 *speed, dvec3 *avg_norm)
     if (inter.min_t > (do_laxist ? 0.999 : 1.0))
         return 0;
     p_in = dvec3_add(pos, *speed);
-    normal = dvec3_dot(inter.triangle->normal, up) > 0.8 ?
+    normal = dvec3_dot(inter.triangle->normal, up) > slide ?
     up : inter.triangle->normal;
     inter = rtx_triangle_intersect_ray_no_cull(inter.triangle,
     (ray3){p_in, normal});
@@ -52,17 +52,21 @@ void entity3_physics(entity3 *ent)
     dvec3 speed_frame;
     dvec3 old_speed;
     dvec3 norm = {0.0, 0.0, 0.0};
+    dvec3 p = dmat4_trans(ent->trans.world);
 
     ent->trans.speed = dvec3_add(ent->trans.speed,
     dvec3_muls((dvec3){0.0, -9.8, 0.0}, _demo->win.framelen));
     speed_frame = dvec3_muls(ent->trans.speed, _demo->win.framelen);
     old_speed = speed_frame;
     for (size_t i = 0; i < 4; i++)
-        if (!check_col(i > 0, ent->trans.pos, &speed_frame, &norm))
+        if (!check_col(i > 0, p, &speed_frame, &norm,
+        ent->trans.slide_threshold))
             break;
     dvec3 disp = dvec3_add(speed_frame,
     dvec3_muls(dvec3_normalize(norm), 0.001));
-    apply_disp(&ent->trans.pos, disp);
+    apply_disp(&p, disp);
+    entity3_update_trans_inv(ent->root);
+    ent->trans.pos = dmat4_mul_dvec3(ent->root->trans.world_inv, p);
     ent->trans.is_grounded = old_speed.y < speed_frame.y;
     ent->trans.speed = dvec3_divs(speed_frame, _demo->win.framelen);
 }

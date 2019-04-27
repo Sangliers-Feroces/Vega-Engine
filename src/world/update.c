@@ -9,8 +9,11 @@
 
 static void chunk_update(chunk_t *chunk)
 {
-    if (!chunk->is_stalled)
-        entity3_update(chunk->ents);
+    if (chunk->is_stalled)
+        return;
+    entity3_update(chunk->ents);
+    while (chunk->ents_global->sub.count > 0)
+        entity3_move(chunk->ents_global->sub.ent[0], _demo->world.ents);
 }
 
 void world_update(void)

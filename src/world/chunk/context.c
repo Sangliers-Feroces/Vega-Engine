@@ -48,6 +48,4 @@ void chunk_attach(chunk_t *chunk)
 {
     world_chunk2d_insert(chunk);
     world_chunk_add(chunk);
-    while (chunk->ents_global->sub.count > 0)
-        entity3_move(chunk->ents_global->sub.ent[0], _demo->world.ents);
 }
