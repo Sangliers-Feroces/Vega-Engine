@@ -40,22 +40,27 @@ static void intersect_ray(rtx_triangle *triangle, ray3 ray, inter_ray3 *inter)
     }
 }
 
-void octree_intersect_ray_laxist_iter(octree *tree, ray3 ray, inter_ray3 *inter)
+void octree_intersect_ray_laxist_iter(octree *base, ray3 ray, dvec3 b,
+inter_ray3 *inter)
 {
-    if (tree == NULL)
-        return;
-    if (!is_ray_in_bounds_seg(ray, tree->bounds, inter->min_t))
-        return;
-    for (size_t i = 0; i < 8; i++)
-        octree_intersect_ray_laxist_iter(tree->sub[i], ray, inter);
-    for (size_t i = 0; i < tree->triangles->count; i++)
-        intersect_ray(tree->triangles->triangle[i], ray, inter);
+    for (size_t i = 0; i < base->triangles->count; i++)
+        intersect_ray(base->triangles->triangle[i], ray, inter);
+    for (size_t i = 0; i < 8; i++) {
+        if (base->sub[i] == NULL)
+            continue;
+        if (dvec3_is_in_bounds(ray.p, base->sub[i]->bounds) &&
+        dvec3_is_in_bounds(b, base->sub[i]->bounds))
+            return octree_intersect_ray_laxist_iter(
+            base->sub[i], ray, b, inter);
+    }
 }
 
 inter_ray3 octree_intersect_ray_laxist(octree *tree, ray3 ray)
 {
     inter_ray3 inter = {NULL, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, 1.0};
 
-    octree_intersect_ray_laxist_iter(tree, ray, &inter);
+    if (tree != NULL)
+        octree_intersect_ray_laxist_iter(tree, ray, dvec3_add(ray.p, ray.v),
+        &inter);
     return inter;
 }

@@ -49,6 +49,8 @@ void entity3_set_col(entity3 *ent, int is_on)
 
 void entity3_bind_col(entity3 *entity, mesh_full_ref_t collision_mesh)
 {
+    int state = entity->col.is_on;
+
     if (collision_mesh.m == NULL) {
         printf("Warning: set null collisions.\n");
         return;
@@ -56,5 +58,5 @@ void entity3_bind_col(entity3 *entity, mesh_full_ref_t collision_mesh)
     if (entity->col.mesh.m != NULL)
         entity3_set_col(entity, 0);
     entity->col.mesh = collision_mesh;
-    entity3_set_col(entity, 1);
+    entity3_set_col(entity, state);
 }
