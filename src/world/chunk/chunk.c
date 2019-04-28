@@ -35,6 +35,8 @@ static void chunk_set_terrain(chunk_t *chunk)
     mesh_add_triangle_pos_uv(mesh->mesh, (vec3[]){sq[0], sq[2], sq[1]}, uv);
     mesh_add_triangle_pos_uv(mesh->mesh, (vec3[]){sq[3], sq[1], sq[2]}, uv);
     entity3_trans_update(ent);
+    entity3_add_trigger(ent,
+    trigger_create(dvec3_init(0, -42.0, 0), dvec3_init(256.0, -40.0, 256.0), TRIGGER_ON_HIT_NONE));
     }
 }
 

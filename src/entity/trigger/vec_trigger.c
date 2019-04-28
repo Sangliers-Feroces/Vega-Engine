@@ -36,15 +36,15 @@ void vec_trigger_destroy(vec_trigger_t *vec)
     vec->count = 0;
 }
 
-void entity3_add_trigger(entity3 *ent, dvec3 size, trigger_on_hit_fun_t on_hit)
+void entity3_add_trigger(entity3 *ent, trigger_t *trigger)
 {
-    trigger_t *trigger;
-
+    if (trigger == NULL)
+        return;
     if (ent->trigger != NULL) {
         printf("Error: this entity has already a trigger.\n");
         exit(84);
     }
-    trigger = trigger_create(size, on_hit);
     vec_trigger_add(&_demo->world.triggers, trigger);
     ent->trigger = trigger;
+    trigger->ent = ent;
 }

@@ -41,5 +41,6 @@ void entity3_destroy(entity3 *entity)
     for (size_t i = 0; i < WORLD_LOD_COUNT; i++)
         render_obj_destroy(entity->render[i]);
     entity3_remove_from_parent(entity);
+    trigger_destroy(entity->trigger);
     free(entity);
 }

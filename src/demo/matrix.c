@@ -50,7 +50,8 @@ void refresh_vp(demo_t *demo)
         dmat4_perspective(proj_struct, demo->cam.mvp.proj);
     else
         dmat4_ortho(ortho_struct, demo->cam.mvp.proj);
-    dmat4_inv(demo->world.camera->trans.world, demo->cam.mvp.view);
+    entity3_update_trans_inv(demo->world.camera);
+    dmat4_copy(demo->world.camera->trans.world_inv, demo->cam.mvp.view);
     dmat4_mul(demo->cam.mvp.proj, demo->cam.mvp.view, demo->cam.mvp.vp);
     send_uniform();
 }

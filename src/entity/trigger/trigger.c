@@ -7,13 +7,15 @@
 
 #include "headers.h"
 
-trigger_t* trigger_create(dvec3 size, trigger_on_hit_fun_t on_hit)
+trigger_t* trigger_create(dvec3 min, dvec3 max, trigger_on_hit_t on_hit)
 {
     trigger_t *res =
     (trigger_t*)malloc_safe(sizeof(trigger_t));
 
-    res->size = size;
+    res->min = min;
+    res->max = max;
     res->on_hit = on_hit;
+    res->ent = NULL;
     res->ndx = ~0ULL;
     return res;
 }

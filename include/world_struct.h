@@ -117,18 +117,21 @@ typedef struct {
     entity3 **ent;
 } vec_entity3_t;
 
+typedef enum {
+    TRIGGER_ON_HIT_NONE,
+    TRIGGER_ON_HIT_PLAYER,
+    TRIGGER_ON_HIT_MAX
+} trigger_on_hit_t;
+
 typedef void (*trigger_on_hit_fun_t)(entity3 *ent, entity3 *other);
 
 typedef struct {
-    dvec3 size;
-    trigger_on_hit_fun_t on_hit;
+    dvec3 min;
+    dvec3 max;
+    trigger_on_hit_t on_hit;
+    entity3 *ent;
     size_t ndx;
 } trigger_t;
-
-typedef enum {
-    TRIGGER_ON_HIT_NONE,
-    TRIGGER_ON_HIT_MAX
-} trigger_on_hit_t;
 
 typedef struct {
     trigger_on_hit_t trigger;

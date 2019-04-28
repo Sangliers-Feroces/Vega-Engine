@@ -50,15 +50,15 @@ entity3* entity3_seek_tag(entity3 *ent, entity3_tag_t tag);
 
 void entity3_physics(entity3 *ent);
 
-trigger_t* trigger_create(dvec3 size,
-void (*on_hit)(entity3 *ent, entity3 *other));
+trigger_t* trigger_create(dvec3 min, dvec3 max, trigger_on_hit_t on_hit);
 void trigger_destroy(trigger_t *trigger);
 vec_trigger_t vec_trigger_init(void);
 void vec_trigger_add(vec_trigger_t *vec, trigger_t *trigger);
 void vec_trigger_destroy(vec_trigger_t *vec);
-void entity3_add_trigger(entity3 *ent, dvec3 size, trigger_on_hit_fun_t on_hit);
-
+void entity3_add_trigger(entity3 *ent, trigger_t *trigger);
 void world_trigger_init(void);
+
+void world_update_triggers(void);
 
 void entity3_update_tag_init(void);
 
@@ -70,3 +70,5 @@ void entity3_tag_update_player_poll_playing(
 entity3 *ent, dvec3 cam_x, dvec3 cam_z);
 
 void entity3_update_trans_inv(entity3 *ent);
+
+void trigger_on_hit_player(entity3 *ent, entity3 *other);

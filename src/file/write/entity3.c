@@ -29,6 +29,7 @@ void file_write_entity3(file_write_t *file, entity3 *ent)
     for (size_t i = 0; i < WORLD_LOD_COUNT; i++)
         file_write_render_obj(file, &ent->render[i]);
     file_write_mesh_full_ref(file, ent->col.mesh);
+    file_write_trigger(file, ent->trigger);
     file_write(file, &ent->tag, sizeof(entity3_tag_t));
     file_write_size_t(file, ent->sub.count);
     for (size_t i = 0; i < ent->sub.count; i++)

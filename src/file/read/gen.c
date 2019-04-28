@@ -30,3 +30,11 @@ char* file_read_string(file_read_t *file)
     }
     return res;
 }
+
+dvec3 file_read_dvec3(file_read_t *file)
+{
+    dvec3 res;
+
+    file_read(file, &res, sizeof(dvec3));
+    return res;
+}

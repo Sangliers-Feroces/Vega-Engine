@@ -7,7 +7,7 @@
 
 #include "headers.h"
 
-static size_t get_1d_pos(double value)
+static ssize_t get_1d_pos(double value)
 {
     ssize_t ival = (ssize_t)value;
     ssize_t sign = value >= 0 ? 1 : -1;
@@ -28,14 +28,12 @@ int world_is_pos_col_oob(dvec3 p)
 
     if (!world_is_chunk_active(chunk_pos))
         return 1;
-    for (size_t i = 0; i < 3; i++) {
-        if (!world_is_chunk_active(ssize2_add(chunk_pos, (ssize2){inner.x, 0})))
-            return 1;
-        if (!world_is_chunk_active(ssize2_add(chunk_pos, (ssize2){0, inner.y})))
-            return 1;
-        if (!world_is_chunk_active(ssize2_add(chunk_pos,
-        (ssize2){inner.x, inner.y})))
-            return 1;
-    }
+    if (!world_is_chunk_active(ssize2_add(chunk_pos, (ssize2){inner.x, 0})))
+        return 1;
+    if (!world_is_chunk_active(ssize2_add(chunk_pos, (ssize2){0, inner.y})))
+        return 1;
+    if (!world_is_chunk_active(ssize2_add(chunk_pos,
+    (ssize2){inner.x, inner.y})))
+        return 1;
     return 0;
 }

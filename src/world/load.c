@@ -23,6 +23,8 @@ static entity3* create_default_ents(void)
     cam->tag = ENTITY3_TAG_CAMERA;
     cam->trans.is_static = 0;
     cam->trans.pos = dvec3_init(0.0, 1.75, 0.0);
+    entity3_add_trigger(cam, trigger_create(dvec3_init(-0.25, -0.5, 0.0),
+    dvec3_init(0.25, 0.5, 3.0), TRIGGER_ON_HIT_PLAYER));
     return res;
 }
 

@@ -43,7 +43,7 @@ static void tree_intersect_ray(octree *tree, ray3 ray, inter_ray3 *inter)
 {
     if (tree == NULL)
         return;
-    if (!is_ray_in_bounds(ray, tree->bounds))
+    if (!ray_is_in_bounds(ray, tree->bounds))
         return;
     for (size_t i = 0; i < 8; i++)
         tree_intersect_ray(tree->sub[i], ray, inter);
