@@ -7,14 +7,7 @@
 
 #include "headers.h"
 
-static int is_root_child(entity3 *ent)
-{
-    if (ent->root == NULL)
-        return 0;
-    return ent->root->root == NULL;
-}
-
-static int is_chunk_active(ssize2 chunk_pos)
+int world_is_chunk_active(ssize2 chunk_pos)
 {
     chunk_t **pexist = world_chunk2d_get(chunk_pos);
 
@@ -23,29 +16,25 @@ static int is_chunk_active(ssize2 chunk_pos)
     return !(*pexist)->is_stalled;
 }
 
-int entity3_global_update_actual(entity3 *ent)
+int try_unload_ent(entity3 *ent)
 {
     ssize2 chunk_pos = chunk_get_pos(dmat4_trans(ent->trans.world));
 
-    if (is_root_child(ent)) {
-        if ((!chunk_is_loaded(chunk_pos)) && (ent->tag != ENTITY3_TAG_PLAYER)) {
-            world_chunk_send_global_ent(chunk_pos, ent);
-            return 1;
-        }
-        if (!is_chunk_active(chunk_pos))
-            return 0;
+    if ((!chunk_is_loaded(chunk_pos)) && (ent->tag != ENTITY3_TAG_PLAYER)) {
+        world_chunk_send_global_ent(chunk_pos, ent);
+        return 1;
     }
-    entity3_update_solo(ent);
-    for (size_t i = 0; i < ent->sub.count; i++)
-        if (entity3_global_update_actual(ent->sub.ent[i]))
-            i--;
     return 0;
 }
 
 void entity3_global_update(entity3 *ent)
 {
     entity3_update_solo(ent);
-    for (size_t i = 0; i < ent->sub.count; i++)
-        if (entity3_global_update_actual(ent->sub.ent[i]))
-            i--;
+    for (size_t i = 0; i < ent->sub.count; i++) {
+        if (world_is_pos_col_oob(dmat4_trans(ent->sub.ent[i]->trans.world))) {
+            i -= try_unload_ent(ent->sub.ent[i]);
+            continue;
+        }
+        entity3_update(ent->sub.ent[i]);
+    }
 }

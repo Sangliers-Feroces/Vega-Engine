@@ -59,3 +59,6 @@ void world_chunk_god(void);
 void world_chunk_god_stalled(void);
 
 void world_chunk_send_global_ent(ssize2 chunk_pos, entity3 *ent);
+
+int world_is_chunk_active(ssize2 chunk_pos);
+int world_is_pos_col_oob(dvec3 p);

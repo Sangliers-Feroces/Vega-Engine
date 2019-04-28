@@ -24,7 +24,7 @@ static int get_stalled(chunk_t *chunk)
 
     if ((chunk->terrain == NULL) || (chunk->terrain->render[2].mesh.m == NULL))
         return 1;
-    if (dvec3_dist_sq(c, p) > 190.0 * 190.0)
+    if (dvec3_dist_sq(c, p) > 370.0 * 370.0)
         return 1;
     for (ssize_t i = -1; i <= 1; i++)
         for (ssize_t j = -1; j <= 1; j++)
