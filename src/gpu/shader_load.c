@@ -18,12 +18,16 @@ const shader_desc_t shader_desc[] = {
     "src/shader/ui_fragment.glsl", 0},
     {SHADER_HDR, "src/shader/hdr_vertex.glsl",
     "src/shader/hdr_fragment.glsl", 0},
+    {SHADER_SKYBOX, "src/shader/skybox_vertex.glsl",
+    "src/shader/skybox_fragment.glsl", 1},
     {0, NULL, NULL, 0}
 };
 
 const material_desc_t mat_desc[] = {
     {MATERIAL_GRASS, &material_fun_grass_world, &material_fun_grass_entity, 0},
     {MATERIAL_WATER, &material_fun_water_world, &material_fun_water_entity, 1},
+    {MATERIAL_SKYBOX, &material_fun_skybox_world,
+    &material_fun_skybox_entity, 1},
     {0, NULL, NULL, 0}
 };
 

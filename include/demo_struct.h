@@ -61,12 +61,6 @@ typedef struct {
 } mouse_t;
 
 typedef struct {
-    vertex_struct_t vertex_struct;
-    gluint vertex_array_id;
-    gluint world_vertex_array;
-    gluint vertex_buffer;
-    gluint lightmap_shader;
-    gluint world_shader;
     gluint hdr_framebuffer;
     gluint hdr_depthbuffer;
     gluint hdr_render_texture;
@@ -101,5 +95,6 @@ typedef struct {
     shader_cache_t shader[SHADER_MAX];
     material_full_t material[MATERIAL_MAX];
     texture2 *tex[TEX_MAX];
+    mesh_full_t *mesh_bank[MESH_BANK_MAX];
     float game_time;
 } demo_t;

@@ -67,6 +67,7 @@ demo_t* demo_init(void)
     gl_gen(res);
     shader_init(res);
     material_init(res);
+    mesh_bank_init();
     world_init(res);
     world_load_map();
     demo_update_cursor_visibility(res);
@@ -76,6 +77,7 @@ demo_t* demo_init(void)
 void demo_quit(demo_t *demo)
 {
     world_quit(demo);
+    mesh_bank_quit();
     shader_quit(demo);
     gl_delete(demo);
     iu_quit();

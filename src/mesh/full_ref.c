@@ -13,7 +13,18 @@ mesh_full_t *m)
     mesh_full_ref_t res;
 
     res.ref_type = ref_type;
+    res.bank = MESH_BANK_MAX;
     res.m = m;
+    return res;
+}
+
+mesh_full_ref_t mesh_full_ref_bank_init(mesh_bank_t bank)
+{
+    mesh_full_ref_t res;
+
+    res.ref_type = MESH_FULL_REF_BANK;
+    res.bank = bank;
+    res.m = _demo->mesh_bank[bank];
     return res;
 }
 

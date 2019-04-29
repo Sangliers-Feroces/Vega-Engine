@@ -32,21 +32,6 @@ void quit(void)
 
 void gl_gen(demo_t *demo)
 {
-    demo->buf.vertex_struct = (vertex_struct_t){0, 0, NULL};
-    glGenVertexArrays(1, &demo->buf.vertex_array_id);
-    glBindVertexArray(demo->buf.vertex_array_id);
-    glGenBuffers(1, &demo->buf.vertex_buffer);
-    demo->buf.lightmap_shader = shader_load_vert_frag(
-    "src/gpu/shader/lightmap_vertex.glsl",
-    "src/gpu/shader/lightmap_fragment.glsl");
-    demo->buf.world_shader = shader_load_vert_frag(
-    "src/gpu/shader/world_vertex.glsl",
-    "src/gpu/shader/world_fragment.glsl");
-    if ((demo->buf.lightmap_shader == 0) || (demo->buf.world_shader == 0)) {
-        printf("Can't open lightmap shader.\n");
-        exit(84);
-    }
-    glGenVertexArrays(1, &demo->buf.world_vertex_array);
     demo->buf.to_draw = vec_render_call_init();
     glGenFramebuffers(1, &_demo->buf.hdr_framebuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, _demo->buf.hdr_framebuffer);
@@ -78,11 +63,5 @@ void gl_gen(demo_t *demo)
 
 void gl_delete(demo_t *demo)
 {
-    glDeleteBuffers(1, &demo->buf.vertex_buffer);
-    glDeleteProgram(demo->buf.lightmap_shader);
-    glDeleteProgram(demo->buf.world_shader);
-    glDeleteVertexArrays(1, &demo->buf.vertex_array_id);
-    glDeleteVertexArrays(1, &demo->buf.world_vertex_array);
-    free(demo->buf.vertex_struct.v_array);
     vec_render_call_destroy(demo->buf.to_draw);
 }

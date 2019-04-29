@@ -16,11 +16,16 @@ int world_is_chunk_active(ssize2 chunk_pos)
     return !(*pexist)->is_stalled;
 }
 
+static int is_ent_unloadable(entity3 *ent)
+{
+    return (ent->tag != ENTITY3_TAG_PLAYER) && (ent->tag != ENTITY3_TAG_SKYBOX);
+}
+
 int try_unload_ent(entity3 *ent)
 {
     ssize2 chunk_pos = chunk_get_pos(dmat4_trans(ent->trans.world));
 
-    if ((!chunk_is_loaded(chunk_pos)) && (ent->tag != ENTITY3_TAG_PLAYER)) {
+    if ((!chunk_is_loaded(chunk_pos)) && is_ent_unloadable(ent)) {
         world_chunk_send_global_ent(chunk_pos, ent);
         return 1;
     }

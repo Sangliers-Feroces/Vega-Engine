@@ -31,6 +31,7 @@ void file_write_mesh_full(file_write_t *file, mesh_full_t *mesh)
 void file_write_mesh_full_ref(file_write_t *file, mesh_full_ref_t mesh)
 {
     file_write(file, &mesh.ref_type, sizeof(mesh_full_ref_type_t));
+    file_write(file, &mesh.bank, sizeof(mesh_bank_t));
     if (mesh.ref_type == MESH_FULL_REF_STANDALONE) {
         if (mesh.m == NULL)
             file_write_data_ref(file, FILE_DATA_NULL);

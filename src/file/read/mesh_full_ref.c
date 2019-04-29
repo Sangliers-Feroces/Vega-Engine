@@ -47,8 +47,10 @@ mesh_full_t* file_read_mesh_full(file_read_t *file)
 mesh_full_ref_t file_read_mesh_full_ref(file_read_t *file, entity3 *ent)
 {
     mesh_full_ref_t res;
+    mesh_bank_t bank;
 
     file_read(file, &res.ref_type, sizeof(mesh_full_ref_type_t));
+    file_read(file, &bank, sizeof(mesh_bank_t));
     res.m = NULL;
     if (res.ref_type == MESH_FULL_REF_STANDALONE) {
         if (file_read_data_ref(file) != FILE_DATA_NULL)
@@ -58,9 +60,7 @@ mesh_full_ref_t file_read_mesh_full_ref(file_read_t *file, entity3 *ent)
         if (ent != NULL)
             res.m =
             ent->render[res.ref_type - MESH_FULL_REF_RENDER_LOD0].mesh.m;
-    } else {
-        printf("Error: mesh bank not managed yet.\n");
-        exit(84);
-    }
+    } else
+        return mesh_full_ref_bank_init(bank);
     return res;
 }

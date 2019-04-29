@@ -9,7 +9,7 @@ out vec4 color;
 
 float fog_ratio(void)
 {
-    return 1.0 - 1.0 / exp(texture(dist, uv).x * 0.0003);
+    return 1.0 - 1.0 / exp(texture(dist, uv).x * 0.0002);
 }
 
 void main(void)
@@ -17,7 +17,7 @@ void main(void)
     float gamma = 1.1;
     float exposure = 1.0;
     vec3 hdr = texture(tex, uv).xyz;
-	vec3 blue = vec3(94.0 / 1.5, 155.0 / 1.5, 255.0) / 255.0;
+    vec3 blue = vec3(40, 90, 256) / 255;
     float fog = fog_ratio();
 
     hdr = hdr * (1.0 - fog) + blue * fog;

@@ -87,8 +87,14 @@ typedef enum {
     MESH_FULL_REF_BANK
 } mesh_full_ref_type_t;
 
+typedef enum {
+    MESH_BANK_SKYBOX,
+    MESH_BANK_MAX
+} mesh_bank_t;
+
 typedef struct {
     mesh_full_ref_type_t ref_type;
+    mesh_bank_t bank;
     mesh_full_t *m;
 } mesh_full_ref_t;
 
@@ -149,6 +155,7 @@ typedef enum  {
     ENTITY3_TAG_TERRAIN,
     ENTITY3_TAG_PLAYER,
     ENTITY3_TAG_CAMERA,
+    ENTITY3_TAG_SKYBOX,
     ENTITY3_TAG_MAX
 } entity3_tag_t;
 
@@ -190,6 +197,7 @@ typedef struct {
     entity3 *ents_global;   // used on unloaded chunks for far entities
     entity3 *player;
     entity3 *camera;
+    entity3 *skybox;
     dvec3 light_dir;
     vec_trigger_t triggers; // loaded triggers
     srect chunk2d_area;

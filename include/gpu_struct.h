@@ -13,6 +13,7 @@ typedef enum {
     SHADER_FONT,
     SHADER_IU,
     SHADER_HDR,
+    SHADER_SKYBOX,
     SHADER_MAX
 } shader_t;
 
@@ -24,6 +25,7 @@ typedef struct {
 typedef enum {
     MATERIAL_GRASS,
     MATERIAL_WATER,
+    MATERIAL_SKYBOX,
     MATERIAL_MAX
 } material_t;
 

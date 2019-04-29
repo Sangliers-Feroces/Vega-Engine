@@ -7,6 +7,15 @@
 
 #include "headers.h"
 
+static void create_skybox(entity3 *root)
+{
+    entity3 *sky = entity3_create(root);
+
+    entity3_set_render(sky, 0, mesh_full_ref_bank_init(MESH_BANK_SKYBOX),
+    MATERIAL_SKYBOX);
+    sky->tag = ENTITY3_TAG_SKYBOX;
+}
+
 static entity3* create_default_ents(void)
 {
     entity3 *res = entity3_create(NULL);
@@ -25,6 +34,7 @@ static entity3* create_default_ents(void)
     cam->trans.pos = dvec3_init(0.0, 1.75, 0.0);
     entity3_add_trigger(cam, trigger_create(dvec3_init(-0.25, -0.5, 0.0),
     dvec3_init(0.25, 0.5, 3.0), TRIGGER_ON_HIT_PLAYER));
+    create_skybox(res);
     return res;
 }
 
@@ -61,4 +71,6 @@ void world_load_map(void)
     entity3_seek_tag(_demo->world.ents, ENTITY3_TAG_PLAYER);
     _demo->world.camera =
     entity3_seek_tag(_demo->world.ents, ENTITY3_TAG_CAMERA);
+    _demo->world.skybox =
+    entity3_seek_tag(_demo->world.ents, ENTITY3_TAG_SKYBOX);
 }

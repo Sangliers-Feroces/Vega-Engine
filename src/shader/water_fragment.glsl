@@ -3,9 +3,7 @@
 layout (location = 0) in vec3 pos;
 layout (location = 1) in vec3 normal;
 layout (location = 2) in vec2 uv_albedo;
-layout (location = 3) in vec2 uv_lightmap;
 
-layout (binding = 0) uniform sampler2D tex_lightmap;
 layout (binding = 1) uniform sampler2D tex_albedo;
 
 layout (location = 0) out vec4 color;
@@ -31,9 +29,9 @@ void main(void)
     vec3 v = normalize(p_cam - pos);
     vec3 r = 2 * dot(n, l_dir) * n - l_dir;
 	vec3 blue = vec3(94.0, 155.0, 255.0) / 255.0;
-	vec3 light = texture(tex_lightmap, uv_lightmap).xyz + blue;
+	vec3 light = blue;
 
     float fresnel = shlick(dot(n, v));
-	color = vec4(vec3(light * texture(tex_albedo, uv_albedo).xyz), 0.0) + vec4(vec3(fresnel), fresnel / 2.0) + max(0, pow(dot(r, v), 128.0)) * 2.0;
+	color = vec4(vec3(light * texture(tex_albedo, uv_albedo).xyz), 0.05) + vec4(vec3(fresnel), fresnel / 2.0) + max(0, pow(dot(r, v), 128.0)) * 2.0;
     dist = vec4(vec3(length(p_cam - pos)), 1.0);
 }
