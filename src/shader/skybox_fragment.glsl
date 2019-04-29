@@ -31,6 +31,6 @@ void main(void)
 	vec3 blue = vec3(94.0, 155.0, 255.0) / 255.0;
     vec3 v = normalize(p_cam - pos);
 
-	color = vec4(get_sky_color(v), 1.0);
+	color = vec4(get_sky_color(v) + max(0, pow(dot(-l_dir, v), 128.0)) * 2.0, 1.0);
     dist = vec4(0.0);
 }
