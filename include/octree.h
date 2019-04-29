@@ -28,7 +28,7 @@ size_t get_triangle_upper_tree(dvec3 *triangle, bounds3 bounds);
 inter_ray3 octree_intersect_ray(octree *tree, ray3 ray);
 inter_ray3 rtx_triangle_intersect_ray_no_cull(rtx_triangle *triangle,
 ray3 ray);
-void octree_intersect_ray_laxist_iter(octree *base, ray3 ray, dvec3 b,
+void octree_intersect_ray_laxist_iter(octree *tree, ray3 ray,
 inter_ray3 *inter);
 inter_ray3 octree_intersect_ray_laxist(octree *tree, ray3 ray);
 
