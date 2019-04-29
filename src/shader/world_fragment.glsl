@@ -21,8 +21,8 @@ void main(void)
 	vec3 light = texture(tex_lightmap, uv_lightmap).xyz + blue;
     vec3 v = normalize(p_cam - pos);
 
-    dist = vec4(length(p_cam - pos));
     light = vec3(max(0.0, dot(normal, l_dir)));
     float ff = pos.y < -42.0 ? (1.0 - min(1.0, (-pos.y - 42.0) / 40.0)) * 0.6 + 0.1 : 1.0;
 	color = vec4(light * texture(tex_albedo, uv_albedo).xyz * vec3(ff, ff, 1.0), 1.0);
+    dist = vec4(vec3(length(p_cam - pos)), 1.0);
 }

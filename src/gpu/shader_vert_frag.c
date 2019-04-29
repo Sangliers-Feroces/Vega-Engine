@@ -10,23 +10,24 @@
 static int compile_shaders(gluint *vertex_shader_id, gluint *fragment_shader_id,
 const char *vertex_filepath, const char *fragment_filepath)
 {
-    char *vertex_shader_pointer = get_file_data(vertex_filepath);
-    char *fragment_shader_pointer = get_file_data(fragment_filepath);
-    int returned = 1;
+    char *vertex_shader_data = get_file_data(vertex_filepath);
+    char *fragment_shader_data = get_file_data(fragment_filepath);
 
+    if ((vertex_shader_data == NULL) || (fragment_shader_data == NULL))
+        return 0;
     glShaderSource(*vertex_shader_id, 1,
-    (const char **)&vertex_shader_pointer, NULL);
+    (const char **)&vertex_shader_data, NULL);
     glCompileShader(*vertex_shader_id);
     if (!shader_check(*vertex_shader_id, 0))
-        returned = 0;
+        return 0;
     glShaderSource(*fragment_shader_id, 1,
-    (const char **)&fragment_shader_pointer, NULL);
+    (const char **)&fragment_shader_data, NULL);
     glCompileShader(*fragment_shader_id);
     if (!shader_check(*fragment_shader_id, 0))
-        returned = 0;
-    free(vertex_shader_pointer);
-    free(fragment_shader_pointer);
-    return returned;
+        return 0;
+    free(vertex_shader_data);
+    free(fragment_shader_data);
+    return 1;
 }
 
 gluint shader_load_vert_frag(const char *vertex_filepath,
