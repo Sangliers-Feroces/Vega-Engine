@@ -92,6 +92,19 @@ const void (*p_glenablevertexarrayattrib)(gluint vaobj, gluint index);
 const void (*p_glgetintegerv)(glenum pname, glint *params);
 const void (*p_glgetintegeri_v)(glenum pname, gluint index, glint *params);
 
+const void (*p_glgenframebuffers)(glsizei n, gluint *ids);
+const void (*p_glbindframebuffer)(glenum target, gluint framebuffer);
+const void (*p_glgenrenderbuffers)(glsizei n, gluint *renderbuffers);
+const void (*p_glbindrenderbuffer)(glenum target, gluint renderbuffer);
+const void (*p_glrenderbufferstorage)(glenum target, glenum internalformat,
+glsizei width, glsizei height);
+const void (*p_glframebufferrenderbuffer)(glenum target, glenum attachment,
+glenum renderbuffertarget, gluint renderbuffer);
+const void (*p_glframebuffertexture)(glenum target, glenum attachment,
+gluint texture, glint level);
+const void (*p_gldrawbuffers)(glsizei n, const glenum *bufs);
+const void (*p_glviewport)(glint x, glint y, glsizei width, glsizei height);
+
 static void load_1(void)
 {
     p_glgeterror = glXGetProcAddressARB("glGetError");
@@ -165,6 +178,16 @@ static void load_4(void)
     p_glgetteximage = glXGetProcAddressARB("glGetTexImage");
     p_glenablevertexarrayattrib =
     glXGetProcAddressARB("glEnableVertexArrayAttrib");
+    p_glgenframebuffers = glXGetProcAddressARB("glGenFramebuffers");
+    p_glbindframebuffer = glXGetProcAddressARB("glBindFramebuffer");
+    p_glgenrenderbuffers = glXGetProcAddressARB("glGenRenderbuffers");
+    p_glbindrenderbuffer = glXGetProcAddressARB("glBindRenderbuffer");
+    p_glrenderbufferstorage = glXGetProcAddressARB("glRenderbufferStorage");
+    p_glframebufferrenderbuffer =
+    glXGetProcAddressARB("glFramebufferRenderbuffer");
+    p_glframebuffertexture = glXGetProcAddressARB("glFramebufferTexture");
+    p_gldrawbuffers = glXGetProcAddressARB("glDrawBuffers");
+    p_glviewport = glXGetProcAddressARB("glViewport");
 }
 
 void load_gl_fun(void)

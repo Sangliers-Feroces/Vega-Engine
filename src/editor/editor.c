@@ -9,7 +9,6 @@
 
 void demo_update_cursor_visibility(demo_t *demo)
 {
-    return;
     sfWindow_setMouseCursorVisible((sfWindow*)demo->win.window,
     _iu.data.is_focus);
 }

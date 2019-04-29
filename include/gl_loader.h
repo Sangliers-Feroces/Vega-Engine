@@ -98,6 +98,19 @@ extern void (*p_glenablevertexarrayattrib)(gluint vaobj, gluint index);
 extern void (*p_glgetintegerv)(glenum pname, glint *params);
 extern void (*p_glgetintegeri_v)(glenum pname, gluint index, glint *params);
 
+extern void (*p_glgenframebuffers)(glsizei n, gluint *ids);
+extern void (*p_glbindframebuffer)(glenum target, gluint framebuffer);
+extern void (*p_glgenrenderbuffers)(glsizei n, gluint *renderbuffers);
+extern void (*p_glbindrenderbuffer)(glenum target, gluint renderbuffer);
+extern void (*p_glrenderbufferstorage)(glenum target, glenum internalformat,
+glsizei width, glsizei height);
+extern void (*p_glframebufferrenderbuffer)(glenum target, glenum attachment,
+glenum renderbuffertarget, gluint renderbuffer);
+extern void (*p_glframebuffertexture)(glenum target, glenum attachment,
+gluint texture, glint level);
+extern void (*p_gldrawbuffers)(glsizei n, const glenum *bufs);
+extern void (*p_glviewport)(glint x, glint y, glsizei width, glsizei height);
+
 #define glGetError p_glgeterror
 #define glGenVertexArrays p_glgenvertexarrays
 #define glDeleteVertexArrays p_gldeletevertexarrays
@@ -159,5 +172,15 @@ extern void (*p_glgetintegeri_v)(glenum pname, gluint index, glint *params);
 
 #define glGetIntegerv p_glgetintegerv
 #define glGetIntegeri_v p_glgetintegeri_v
+
+#define glGenFramebuffers p_glgenframebuffers
+#define glBindFramebuffer p_glbindframebuffer
+#define glGenRenderbuffers p_glgenrenderbuffers
+#define glBindRenderbuffer p_glbindrenderbuffer
+#define glRenderbufferStorage p_glrenderbufferstorage
+#define glFramebufferRenderbuffer p_glframebufferrenderbuffer
+#define glFramebufferTexture p_glframebuffertexture
+#define glDrawBuffers p_gldrawbuffers
+#define glViewport p_glviewport
 
 #endif
