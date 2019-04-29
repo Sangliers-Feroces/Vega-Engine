@@ -12,6 +12,7 @@ typedef enum {
     SHADER_WATER,
     SHADER_FONT,
     SHADER_IU,
+    SHADER_HDR,
     SHADER_MAX
 } shader_t;
 

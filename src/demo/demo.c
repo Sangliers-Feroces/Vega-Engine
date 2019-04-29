@@ -7,15 +7,30 @@
 
 #include "headers.h"
 
+static void render_hdr_to_screen(void)
+{
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glBindVertexArray(_iu.data.vertex_array);
+    glUseProgram(_demo->shader[SHADER_HDR].program);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, _demo->buf.hdr_render_texture);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, _demo->buf.dist_texture);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+}
+
 void demo_loop(demo_t *demo)
 {
     while (demo_poll_events(demo)) {
         demo_update_cursor_visibility(demo);
         demo->game_time = get_eleapsed_time_second(demo->clocks.game_clock);
+        glBindFramebuffer(GL_FRAMEBUFFER, _demo->buf.hdr_framebuffer);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         editor(demo);
         world_update();
         world_render();
+        render_hdr_to_screen();
         iu_display();
         sfRenderWindow_display(demo->win.window);
     }

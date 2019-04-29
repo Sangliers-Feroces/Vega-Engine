@@ -16,6 +16,8 @@ const shader_desc_t shader_desc[] = {
     "src/shader/font_fragment.glsl", 0},
     {SHADER_IU, "src/shader/ui_vertex.glsl",
     "src/shader/ui_fragment.glsl", 0},
+    {SHADER_HDR, "src/shader/hdr_vertex.glsl",
+    "src/shader/hdr_fragment.glsl", 0},
     {0, NULL, NULL, 0}
 };
 
