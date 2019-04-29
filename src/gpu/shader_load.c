@@ -47,6 +47,10 @@ shader_desc_t desc, shader_cache_t *res)
         res->uniform[1] = glGetUniformLocation(res->program, "size");
         res->uniform[2] = glGetUniformLocation(res->program, "depth");
         break;
+    case SHADER_HDR:
+        res->uniform[0] = glGetUniformLocation(res->program, "p_cam");
+        res->uniform[1] = glGetUniformLocation(res->program, "t");
+        break;
     default:
         break;
     }

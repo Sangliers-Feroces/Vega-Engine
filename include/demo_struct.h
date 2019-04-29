@@ -81,6 +81,7 @@ typedef struct {
 
 typedef struct {
     sfClock *game_clock;
+    float t;
 } clocks_t;
 
 typedef struct {
@@ -96,5 +97,4 @@ typedef struct {
     material_full_t material[MATERIAL_MAX];
     texture2 *tex[TEX_MAX];
     mesh_full_t *mesh_bank[MESH_BANK_MAX];
-    float game_time;
 } demo_t;

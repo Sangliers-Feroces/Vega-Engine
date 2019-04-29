@@ -18,6 +18,7 @@ static void render_hdr_to_screen(void)
     glBindTexture(GL_TEXTURE_2D, _demo->buf.hdr_render_texture);
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, _demo->buf.dist_texture);
+    glUniform1f(_demo->shader[SHADER_HDR].uniform[1], _demo->clocks.t);
     glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
@@ -25,7 +26,7 @@ void demo_loop(demo_t *demo)
 {
     while (demo_poll_events(demo)) {
         demo_update_cursor_visibility(demo);
-        demo->game_time = get_eleapsed_time_second(demo->clocks.game_clock);
+        demo->clocks.t = get_eleapsed_time_second(demo->clocks.game_clock);
         glBindFramebuffer(GL_FRAMEBUFFER, _demo->buf.hdr_framebuffer);
         glDrawBuffers(2, (glenum[]){GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1});
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

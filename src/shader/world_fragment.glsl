@@ -23,5 +23,5 @@ void main(void)
     light = vec3(max(0.0, dot(normal, l_dir))) * yellow + blue * 0.2;
     float ff = pos.y < -42.0 ? (1.0 - min(1.0, (-pos.y - 42.0) / 40.0)) * 0.6 + 0.1 : 1.0;
 	color = vec4(light * texture(tex_albedo, uv_albedo).xyz * vec3(ff, ff, 1.0), 1.0);
-    dist = vec4(vec3(length(p_cam - pos)), 1.0);
+    dist = vec4(vec3(p_cam - pos), 1.0);
 }

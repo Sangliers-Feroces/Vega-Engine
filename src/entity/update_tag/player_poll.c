@@ -50,6 +50,7 @@ entity3 *ent, dvec3 cam_x, dvec3 cam_z)
         *s = dvec3_add(*s, dvec3_muls(cam_x, PLAYER_MOVE));
     if (sfKeyboard_isKeyPressed(sfKeyQ))
         *s = dvec3_sub(*s, dvec3_muls(cam_x, PLAYER_MOVE));
-    if (sfKeyboard_isKeyPressed(sfKeySpace) && ent->trans.is_grounded)
+    if (sfKeyboard_isKeyPressed(sfKeySpace) &&
+    (ent->trans.is_grounded || (dmat4_trans(ent->trans.world).y < -42.0)))
         s->y = 3.0;
 }

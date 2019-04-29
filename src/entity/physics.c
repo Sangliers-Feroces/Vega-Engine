@@ -47,15 +47,25 @@ static void apply_disp(dvec3 *p, dvec3 disp)
     *p = dvec3_add(inter.p, dvec3_muls(dvec3_normalize(disp), -0.001));
 }
 
+static void slow_ent_down(entity3 *ent)
+{
+    ent->trans.speed.x *= 1.0 - _demo->win.framelen * 2.0;
+    ent->trans.speed.z *= 1.0 - _demo->win.framelen * 2.0;
+}
+
 void entity3_physics(entity3 *ent)
 {
     dvec3 speed_frame;
     dvec3 old_speed;
     dvec3 norm = {0.0, 0.0, 0.0};
     dvec3 p = dmat4_trans(ent->trans.world);
+    int is_underwater = dmat4_trans(ent->trans.world).y < -42.0;
 
     ent->trans.speed = dvec3_add(ent->trans.speed,
-    dvec3_muls((dvec3){0.0, -9.8, 0.0}, _demo->win.framelen));
+    dvec3_muls((dvec3){0.0, !is_underwater ?
+    -9.8 : -1.0, 0.0}, _demo->win.framelen));
+    if (is_underwater)
+        slow_ent_down(ent);
     speed_frame = dvec3_muls(ent->trans.speed, _demo->win.framelen);
     old_speed = speed_frame;
     for (size_t i = 0; i < 4; i++)

@@ -33,5 +33,5 @@ void main(void)
 
     float fresnel = shlick(dot(n, v));
 	color = vec4(vec3(light * texture(tex_albedo, uv_albedo).xyz), 0.05) + vec4(vec3(fresnel), fresnel / 2.0) + max(0, pow(dot(r, v), 128.0)) * 2.0;
-    dist = vec4(vec3(length(p_cam - pos)), 1.0);
+    dist = vec4(vec3(p_cam - pos), 1.0);
 }

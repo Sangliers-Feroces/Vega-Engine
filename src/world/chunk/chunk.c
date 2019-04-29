@@ -12,7 +12,7 @@ static void chunk_set_terrain(chunk_t *chunk)
     if (chunk->terrain != NULL)
         return;
     chunk_gen_terrain(chunk->pos);
-    for (size_t i = 0; i < 1; i++) {
+    /*for (size_t i = 0; i < 1; i++) {
     entity3 *ent = world_add_entity();
     ent->trans.is_static = 0;
     ent->trans.is_physics = 1;
@@ -37,7 +37,7 @@ static void chunk_set_terrain(chunk_t *chunk)
     entity3_trans_update(ent);
     entity3_add_trigger(ent,
     trigger_create(dvec3_init(0, -42.0, 0), dvec3_init(256.0, -40.0, 256.0), TRIGGER_ON_HIT_NONE));
-    }
+    }*/
 }
 
 chunk_t* chunk_create_adv(ssize2 pos, int do_gen)

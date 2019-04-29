@@ -65,7 +65,6 @@ static void trigger_update(trigger_t *trigger)
 
 void world_update_triggers(void)
 {
-    printf("update trigger..\n");
     for (size_t i = 0; i < _demo->world.triggers.count; i++)
         if (_demo->world.triggers.trigger[i]->on_hit != TRIGGER_ON_HIT_NONE)
             trigger_update(_demo->world.triggers.trigger[i]);
