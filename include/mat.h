@@ -31,6 +31,8 @@ int vec2_eq(vec2 a, vec2 b);
 int dvec3_is_in_bounds(dvec3 p, bounds3 bounds);
 int is_triangle_in_bounds(dvec3 *triangle, bounds3 bounds);
 
+vec3 vec3_init(float x, float y, float z);
+
 vec3 vec3_add(vec3 a, vec3 b);
 vec3 vec3_sub(vec3 a, vec3 b);
 vec3 vec3_muls(vec3 vec, float value);

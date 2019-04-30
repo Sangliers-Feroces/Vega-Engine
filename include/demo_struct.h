@@ -66,6 +66,7 @@ typedef struct {
     gluint hdr_render_texture;
     gluint dist_texture;
     vec_render_call_t to_draw;
+    int cull_state;
 } buf_t;
 
 typedef enum {

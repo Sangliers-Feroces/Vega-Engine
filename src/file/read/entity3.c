@@ -38,6 +38,8 @@ entity3* file_read_entity3(file_read_t *file, entity3 *parent)
     file_read_transform(file, &res->trans);
     for (size_t i = 0; i < WORLD_LOD_COUNT; i++)
         res->render[i] = file_read_render_obj(file);
+    file_read(file, &res->lod_dist, sizeof(render_obj_lod_dist_t));
+    res->render_is_rec = file_read_int(file);
     col_mesh = file_read_mesh_full_ref(file, res);
     entity3_add_trigger(res, file_read_trigger(file));
     file_read(file, &res->tag, sizeof(entity3_tag_t));

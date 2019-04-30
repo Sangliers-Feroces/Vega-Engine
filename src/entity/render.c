@@ -50,11 +50,16 @@ dmat4 rot)
     }
 }
 
-static size_t get_max_lod(double dist)
+static size_t get_max_lod(render_obj_lod_dist_t lod, double dist)
 {
-    if (dist < (384.0 * 384.0))
+    float dist2[RENDER_OBJ_LOD_DIST_MAX] = {384.0, 64.0, CHUNK_SIZE * 1.7,
+    CHUNK_SIZE * 1.7 / 8.0};
+    float dist1[RENDER_OBJ_LOD_DIST_MAX] = {768.0, 128.0, CHUNK_SIZE * 1.7,
+    CHUNK_SIZE * 1.7 / 8.0};
+
+    if (dist < (dist2[lod] * dist2[lod]))
         return 2;
-    else if (dist < (768.0 * 768.0))
+    else if (dist < (dist1[lod] * dist1[lod]))
         return 1;
     else
         return 0;
@@ -65,17 +70,18 @@ static double get_ent_dist(entity3 *ent)
     dvec3 p = dmat4_trans(ent->trans.world);
     dvec3 c = dmat4_trans(_demo->world.camera->trans.world);
 
-    return dvec3_dist_sq(dvec3_init(p.x, 0.0, p.z),
-    dvec3_init(c.x, 0.0, c.z));
+    return dvec3_dist_sq((dvec3){p.x, 0.0, p.z},
+    (dvec3){c.x, 0.0, c.z});
 }
 
 void entity3_render(entity3 *ent, dmat4 vp)
 {
-    size_t max_lod = get_max_lod(get_ent_dist(ent));
+    size_t max_lod = get_max_lod(ent->lod_dist, get_ent_dist(ent));
     size_t chosen = ~0ULL;
     dmat4 mvp;
 
-    dmat4_mul(vp, ent->trans.world, mvp);
+    if ((max_lod == 0) && ent->render_is_rec)
+        return;
     for (size_t i = 0; i < ent->sub.count; i++)
         entity3_render(ent->sub.ent[i], vp);
     for (size_t i = 0; i <= max_lod; i++)
@@ -83,6 +89,7 @@ void entity3_render(entity3 *ent, dmat4 vp)
             chosen = i;
     if (chosen == ~0ULL)
         return;
+    dmat4_mul(vp, ent->trans.world, mvp);
     render_obj_draw(ent->render[chosen],
     mvp, ent->trans.world, ent->trans.world_rot);
 }

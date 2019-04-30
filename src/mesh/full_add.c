@@ -25,6 +25,21 @@ void mesh_full_add_triangle_pos(mesh_full_t *mesh, const vec3 *pos)
         mesh_add_vertex(mesh->mesh, vertex_init(pos[i], normal, uv));
 }
 
+void mesh_full_add_quad(mesh_full_t *mesh, const vec3 *pos)
+{
+    vec3 last;
+    vec3 normal = normal3(pos[0], pos[1], pos[2]);
+    vec2 uv[4] = {{0.0f, 1.0f}, {0.0f, 0.0f}, {1.0f, 1.0f}, {1.0f, 0.0f}};
+
+    last = vec3_muls(vec3_add(pos[1], pos[2]), 0.5f);
+    last = vec3_add(last, vec3_sub(last, pos[0]));
+    for (size_t i = 0; i < 3; i++)
+        mesh_add_vertex(mesh->mesh, vertex_init(pos[i], normal, uv[i]));
+    for (size_t i = 0; i < 2; i++)
+        mesh_add_vertex(mesh->mesh, vertex_init(pos[2 - i], normal, uv[2 - i]));
+    mesh_add_vertex(mesh->mesh, vertex_init(last, normal, uv[3]));
+}
+
 void mesh_full_add_vertex(mesh_full_t *mesh, vertex_t vertex)
 {
     mesh_add_vertex(mesh->mesh, vertex);

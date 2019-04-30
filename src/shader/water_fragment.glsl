@@ -4,7 +4,7 @@ layout (location = 0) in vec3 pos;
 layout (location = 1) in vec3 normal;
 layout (location = 2) in vec2 uv_albedo;
 
-layout (binding = 1) uniform sampler2D tex_albedo;
+layout (binding = 0) uniform sampler2D tex_albedo;
 
 layout (location = 0) out vec4 color;
 layout (location = 1) out vec4 dist;

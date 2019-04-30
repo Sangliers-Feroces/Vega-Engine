@@ -9,18 +9,20 @@
 
 const shader_desc_t shader_desc[] = {
     {SHADER_WORLD, "src/shader/world_vertex.glsl",
-    "src/shader/world_fragment.glsl", 1},
+    "src/shader/world_fragment.glsl", 1, 0},
     {SHADER_WATER, "src/shader/world_vertex.glsl",
-    "src/shader/water_fragment.glsl", 1},
+    "src/shader/water_fragment.glsl", 1, 0},
     {SHADER_FONT, "src/shader/font_vertex.glsl",
-    "src/shader/font_fragment.glsl", 0},
+    "src/shader/font_fragment.glsl", 0, 0},
     {SHADER_IU, "src/shader/ui_vertex.glsl",
-    "src/shader/ui_fragment.glsl", 0},
+    "src/shader/ui_fragment.glsl", 0, 0},
     {SHADER_HDR, "src/shader/hdr_vertex.glsl",
-    "src/shader/hdr_fragment.glsl", 0},
+    "src/shader/hdr_fragment.glsl", 0, 0},
     {SHADER_SKYBOX, "src/shader/skybox_vertex.glsl",
-    "src/shader/skybox_fragment.glsl", 1},
-    {0, NULL, NULL, 0}
+    "src/shader/skybox_fragment.glsl", 1, 0},
+    {SHADER_VEG, "src/shader/veg_vertex.glsl",
+    "src/shader/veg_fragment.glsl", 1, 1},
+    {0, NULL, NULL, 0, 0}
 };
 
 const material_desc_t mat_desc[] = {
@@ -28,6 +30,8 @@ const material_desc_t mat_desc[] = {
     {MATERIAL_WATER, &material_fun_water_world, &material_fun_water_entity, 1},
     {MATERIAL_SKYBOX, &material_fun_skybox_world,
     &material_fun_skybox_entity, 1},
+    {MATERIAL_VEG_GRASS1, &material_fun_veg_grass1_entity,
+    &material_fun_veg_grass1_entity, 0},
     {0, NULL, NULL, 0}
 };
 
@@ -56,17 +60,31 @@ shader_desc_t desc, shader_cache_t *res)
     }
 }
 
+static void shader_load_pstandard_uniform(
+shader_desc_t desc, shader_cache_t *res)
+{
+    switch (desc.shader) {
+    case SHADER_VEG:
+        res->uniform[3] = glGetUniformLocation(res->program, "off");
+        break;
+    default:
+        break;
+    }
+}
+
 static shader_cache_t get_shader(shader_desc_t desc)
 {
-    shader_cache_t res = {0, {0}};
+    shader_cache_t res = {0, 1, {0}};
 
     res.program = shader_load_vert_frag(desc.vertex, desc.fragment);
+    res.do_cull = desc.do_cull;
     if (desc.is_standard) {
         res.uniform[0] = glGetUniformLocation(res.program, "mvp");
         res.uniform[1] = glGetUniformLocation(res.program, "world");
         res.uniform[2] = glGetUniformLocation(res.program, "rot");
     } else
         shader_load_nstandard_uniform(desc, &res);
+    shader_load_pstandard_uniform(desc, &res);
     return res;
 }
 
@@ -98,7 +116,7 @@ void material_init(demo_t *demo)
         (material_full_t){mat_desc[i].world, mat_desc[i].entity,
         mat_desc[i].is_transparent};
     for (size_t i = 0; i < MATERIAL_MAX; i++)
-        if (demo->material[i].world == NULL) {
+        if (demo->material[i].entity == NULL) {
             printf("Error: can't load material #%zu.\n", i);
             exit(84);
         }
