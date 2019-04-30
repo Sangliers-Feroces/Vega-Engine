@@ -29,6 +29,7 @@ static void draw_invent(void)
 
 void invent_loop(void)
 {
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
     do {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         draw_invent();
