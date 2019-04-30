@@ -56,3 +56,4 @@ void demo_center_cursor(demo_t *demo);
 void demo_refresh_cursor(void);
 
 float get_eleapsed_time_second(sfClock *clock_);
+void player_init(demo_t *demo);

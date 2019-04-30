@@ -7,13 +7,49 @@
 
 #include "headers.h"
 
-static int invent_poll_event(void)
+static void reset_str_invent(int text_start)
 {
-    if (!demo_poll_events(_demo))
-        return 0;
-    if (_demo->input.key_press[KEY_TAB] || _demo->input.key_press[KEY_ESC])
-        return 0;
-    return 1;
+    for (int i = 0; i < 5; i++) {
+        if (_iu.invent.inventory[text_start + i] == NO_ITEM)
+            vg_text_reset_str(&_iu.invent.invent_items_name[i], "Empty", NULL);
+        else
+            vg_text_reset_str(&_iu.invent.invent_items_name[i],
+            _iu.invent.items_list[_iu.invent.inventory[text_start + i]].name,
+            NULL);
+    }
+}
+
+static void desc_set_default(void)
+{
+    vg_text_reset_str(&_iu.invent.desc_name, "NAME:Neant Distordu",
+    NULL);
+    vg_text_reset_str(&_iu.invent.desc_type, "TYPE:No Type",
+    NULL);
+    vg_text_reset_str(&_iu.invent.desc_value, "VALUE:Over 9000",
+    NULL);
+}
+
+static void invent_draw_desc(void)
+{
+    char buff_name[20];
+    char buff_type[20];
+    char buff_value[20];
+
+    if (_iu.invent.inventory[_iu.invent.focused_item] == NO_ITEM)
+        desc_set_default();
+    else {
+        sprintf(buff_name, "NAME:%s",
+        _iu.invent.items_list[_iu.invent.inventory[_iu.invent.focused_item]].name);
+        vg_text_reset_str(&_iu.invent.desc_name, buff_name, NULL);
+        sprintf(buff_type, "TYPE:%s", invent_get_item_type());
+        vg_text_reset_str(&_iu.invent.desc_type, buff_type, NULL);
+        sprintf(buff_value, "%s%d", invent_get_item_value(),
+        invent_get_item_data());
+        vg_text_reset_str(&_iu.invent.desc_value, buff_value, NULL);
+    }
+    vg_text_draw(_iu.invent.desc_name);
+    vg_text_draw(_iu.invent.desc_type);
+    vg_text_draw(_iu.invent.desc_value);
 }
 
 static void draw_invent(void)
@@ -21,16 +57,25 @@ static void draw_invent(void)
     world_render();
     glUseProgram(_demo->shader[SHADER_IU].program);
     for (int i = 0; i < IUINVENT_END; i++)
-            iu_entity_draw(_iu.invent_bg[i]);
-        iu_entity_draw(_iu.invent.item_image);
-        for (int i = 0; i < 5; i++)
-            vg_text_draw(_iu.invent.invent_items_name[i]);
+        iu_entity_draw(_iu.invent_bg[i]);
+    invent_display_icon();
+    iu_entity_draw(_iu.invent.buttons[INVENT_BUTTON_EQUIP]);
+    iu_entity_draw(_iu.invent.cursor);
+    for (int i = 0; i < 5; i++)
+        vg_text_draw(_iu.invent.invent_items_name[i]);
+    invent_draw_desc();
+    
 }
 
 void invent_loop(void)
 {
+    //temp
+    _iu.invent.inventory[1] = ITEM_SWORD_1;
+    _iu.invent.inventory[5] = ITEM_APPLE;
+    _iu.invent.inventory[9] = ITEM_BOAT;
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     do {
+        reset_str_invent(_iu.invent.text_start);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         draw_invent();
         sfRenderWindow_display(_demo->win.window);

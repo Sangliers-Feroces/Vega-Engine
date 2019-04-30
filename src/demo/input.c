@@ -17,6 +17,8 @@ static void poll_keys(demo_t *demo)
     demo->input.key_state[KEY_ENTER] = sfKeyboard_isKeyPressed(sfKeyEnter);
     demo->input.key_state[KEY_TAB] = sfKeyboard_isKeyPressed(sfKeyTab);
     demo->input.key_state[KEY_ESC] = sfKeyboard_isKeyPressed(sfKeyEscape);
+    demo->input.key_state[KEY_ARROW_UP] = sfKeyboard_isKeyPressed(sfKeyUp);
+    demo->input.key_state[KEY_ARROW_DOWN] = sfKeyboard_isKeyPressed(sfKeyDown);
     for (size_t i = 0; i < 256; i++)
         demo->input.key_press[i] =
         (!demo->input.key_last[i]) && demo->input.key_state[i];

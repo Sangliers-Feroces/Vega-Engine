@@ -26,6 +26,12 @@ typedef enum {
     TYPE_VEHICULE
 } items_type_t;
 
+typedef enum {
+    INVENT_BUTTON_EQUIP,
+    INVENT_BUTTON_DROP,
+    INVENT_BUTTON_END
+} invent_buuttons_t;
+
 typedef struct {
     char *name;
     items_type_t type;
@@ -35,10 +41,24 @@ typedef struct {
     //if consumable
     int restored_hp;
     int restored_mana;
+    //if vheicule
+    int speed;
 } item_data_t;
 
 typedef struct {
+    int text_start;
+    int index_cursor;
+    int focused_item;
+    //
     entity2_t item_image;
+    entity2_t cursor;
     vg_text invent_items_name[5];
+    items_t *inventory;
     item_data_t items_list[ITEM_END];
+    //desc
+    vg_text desc_name;
+    vg_text desc_type;
+    vg_text desc_value;
+    //button's array
+    entity2_t buttons[INVENT_BUTTON_END];
 } invent_t;

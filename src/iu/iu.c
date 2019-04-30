@@ -34,7 +34,13 @@ static const iutex_path_t iutex_path [] = {
     {IUTEX_INVENT_BG, "res/ui/invent/invent_bg.png"},
     {IUTEX_TEXT_CADRE, "res/ui/dialogue_cadre.png"},
     {IUTEX_FONT_MINECRAFT, "res/ui/font/minecraft.png"},
-    {IUTEX_EPEE, "res/test.jpg"},
+    {IUTEX_ITEM_BOAT, "res/ui/invent/item_icons/boat.png"},
+    {IUTEX_ITEM_APPLE, "res/ui/invent/item_icons/apple.png"},
+    {IUTEX_ITEM_SWORD1, "res/ui/invent/item_icons/sword_1.png"},
+    {IUTEX_ITEM_SWORD3, "res/ui/invent/item_icons/test.jpg"},
+    {IUTEX_ITEM_SWORD2, "res/ui/invent/item_icons/sword_2.png"},
+    {IUTEX_ITEM_VOID, "res/ui/invent/item_icons/void.png"},
+    {IUTEX_INVENT_EQUIP, "res/ui/invent/equip.png"},
     {0, NULL}
 };
 
@@ -93,13 +99,13 @@ void iu_init(demo_t *demo)
     iu_set_font();
     iu_set_dialogue();
     iu_set_vg_text();
-    invent_set_items();
-    invent_set_display_item_name();
+    invent_init();
 }
 
 void iu_quit(void)
 {
     vg_dialogue_quit();
+    free(_iu.invent.inventory);
     for (int i = 0; i < IUTEX_END; i++)
         texture2_destroy(_iu.textures[i]);
     glDeleteVertexArrays(1, &_iu.data.vertex_array);

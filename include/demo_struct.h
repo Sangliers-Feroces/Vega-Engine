@@ -16,6 +16,8 @@ typedef enum {
     KEY_DEL = 127,
     KEY_TAB = 9,
     KEY_ESC = 0,
+    KEY_ARROW_UP = 1,
+    KEY_ARROW_DOWN = 2,
     KEY_ENTER = 10
 } keycode_t;
 
@@ -85,6 +87,20 @@ typedef struct {
 } clocks_t;
 
 typedef struct {
+    //stats
+    float hp;
+    float mana;
+    float defense;
+    float attack;
+    //
+    int lvl;
+    float xp;
+    float next_xp_step;
+    iutex_t pp;
+} player_t;
+
+typedef struct {
+    player_t player;
     clocks_t clocks;
     action_t action;
     win_t win;

@@ -7,8 +7,15 @@
 
 #pragma once
 
-void invent_set_items(void);
+void invent_init(void);
 
-void invent_set_display_item_name(void);
+int invent_poll_event(void);
 
 void invent_loop(void);
+
+char *invent_get_item_type(void);
+char *invent_get_item_value(void);
+int invent_get_item_data(void);
+void invent_display_icon(void);
+
+void invent_draw_button(void);
