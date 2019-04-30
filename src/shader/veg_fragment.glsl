@@ -32,7 +32,7 @@ void main(void)
     vec3 bonus = vec3(0.0);
     if (is_facing) {
         vec3 r = 2.0 * dot(n, l_dir) * n - l_dir;
-        bonus = vec3(max(0, pow(dot(r, v), 16))) * 2.0;
+        bonus = vec3(max(0, pow(dot(r, v), 64))) * 2.0;
     }
 	color = vec4(light * tex.xyz + bonus, 1.0);
     dist = vec4(vec3(p_cam - pos), 1.0);
