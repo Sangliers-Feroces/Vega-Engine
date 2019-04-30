@@ -15,19 +15,25 @@ uniform vec3 p_cam;
 
 void main(void)
 {
-    vec3 blue = vec3(0.0, 1.0, 0.0);
+    vec3 blue = vec3(0.3, 0.85, 0.05) * 0.8;
 	vec3 light;
     vec3 v = normalize(p_cam - pos);
-    vec3 yellow = vec3(0.7, 1.0, 0.3);
+    vec3 yellow = vec3(0.7, 1.0, 0.2);
     vec4 tex = texture(tex_albedo, uv_albedo);
     vec3 n = normal;
+    bool is_facing = dot(n, v) < 0.0;
 
-    if (dot(normal, v) < 0.0)
+    if (is_facing)
         n *= -1.0;
     float ill = max(0.0, dot(n, l_dir));
     light = vec3(ill) * yellow + (1.0 - ill) * blue;
     if (tex.w < 0.05)
         discard;
-	color = vec4(light * tex.xyz, tex.w);
+    vec3 bonus = vec3(0.0);
+    if (is_facing) {
+        vec3 r = 2.0 * dot(n, l_dir) * n - l_dir;
+        bonus = vec3(max(0, pow(dot(r, v), 16))) * 2.0;
+    }
+	color = vec4(light * tex.xyz + bonus, 1.0);
     dist = vec4(vec3(p_cam - pos), 1.0);
 }

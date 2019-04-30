@@ -14,6 +14,18 @@ static const tex_desc_t desc[] = {
     {0, NULL}
 };
 
+static void set_param_veg(gluint tex)
+{
+    glBindTexture(GL_TEXTURE_2D, tex);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+}
+
+static void add_param(void)
+{
+    set_param_veg(_demo->tex[TEX_VEG_GRASS1]->id);
+}
+
 void tex_init(demo_t *demo)
 {
     for (size_t i = 0; i < TEX_MAX; i++)
@@ -25,6 +37,7 @@ void tex_init(demo_t *demo)
             printf("Can't load texture #%zu.\n", i);
             exit(84);
         }
+    add_param();
 }
 
 void tex_quit(demo_t *demo)
