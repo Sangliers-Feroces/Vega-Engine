@@ -12,13 +12,15 @@ uniform mat4 mvp;
 uniform mat4 world;
 uniform mat4 rot;
 
+uniform vec3 off;
+
 void main(void)
 {
-    vec4 p = vec4(pos * 16000.0, 1.0);
+    vec3 p_a = pos + off * normalize(pos.y);
+    vec4 p = vec4(p_a, 1.0);
     vec4 n = vec4(normal, 1.0);
-    vec4 p_s = mvp * p;
+    gl_Position = mvp * p;
 
-    gl_Position = p_s;
     pos_out = (world * p).xyz;
     normal_out = (rot * n).xyz;
     uv_albedo_out = uv_albedo;

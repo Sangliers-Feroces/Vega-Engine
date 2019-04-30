@@ -15,6 +15,7 @@ void init(void)
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     glEnable(GL_CULL_FACE);
+    _demo->buf.cull_state = 1;
     glFrontFace(GL_CW);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glEnable(GL_MULTISAMPLE);

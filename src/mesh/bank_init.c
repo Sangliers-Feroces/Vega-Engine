@@ -8,61 +8,44 @@
 #include "headers.h"
 
 const vec3 skybox[] = {
-    {0.0f, 1.0f, 0.0f},
-    {0.0f, 0.0f, 0.0f},
-    {1.0f, 0.0f, 0.0f},
-
-    {1.0f, 1.0f, 0.0f},
-    {0.0f, 1.0f, 0.0f},
-    {1.0f, 0.0f, 0.0f},
-
-    {1.0f, 0.0f, 1.0f},
-    {0.0f, 0.0f, 1.0f},
-    {0.0f, 1.0f, 1.0f},
-
-    {0.0f, 1.0f, 1.0f},
-    {1.0f, 1.0f, 1.0f},
-    {1.0f, 0.0f, 1.0f},
-
-    {0.0f, 0.0f, 1.0f},
-    {0.0f, 0.0f, 0.0f},
-    {0.0f, 1.0f, 1.0f},
-
-    {0.0f, 1.0f, 1.0f},
-    {0.0f, 0.0f, 0.0f},
-    {0.0f, 1.0f, 0.0f},
-
-    {1.0f, 0.0f, 0.0f},
-    {1.0f, 0.0f, 1.0f},
-    {1.0f, 1.0f, 1.0f},
-
-    {1.0f, 0.0f, 0.0f},
-    {1.0f, 1.0f, 1.0f},
-    {1.0f, 1.0f, 0.0f},
-
-    {0.0f, 1.0f, 1.0f},
-    {0.0f, 1.0f, 0.0f},
-    {1.0f, 1.0f, 0.0f},
-
-    {0.0f, 1.0f, 1.0f},
-    {1.0f, 1.0f, 0.0f},
-    {1.0f, 1.0f, 1.0f},
-
-    {0.0f, 0.0f, 0.0f},
-    {0.0f, 0.0f, 1.0f},
-    {1.0f, 0.0f, 0.0f},
-
-    {1.0f, 0.0f, 0.0f},
-    {0.0f, 0.0f, 1.0f},
-    {1.0f, 0.0f, 1.0f}
+    {-10.0f, -10.0f, 1.0f},
+    {-10.0f, 10.0f, 1.0f},
+    {10.0f, -10.0f, 1.0f},
+    {-10.0f, 10.0f, 1.0f},
+    {10.0f, 10.0f, 1.0f},
+    {10.0f, -10.0f, 1.0f}
 };
 
 static mesh_full_t* load_skybox(void)
 {
     mesh_full_t *res = mesh_full_create(1, 0);
 
-    for (size_t i = 0; i < 36 / 3; i++)
+    for (size_t i = 0; i < 6 / 3; i++)
         mesh_full_add_triangle_pos(res, &skybox[i * 3]);
+    return res;
+}
+
+static mesh_full_t* load_grass(void)
+{
+    mesh_full_t *res = mesh_full_create(1, 0);
+    vec3 p_a[3];
+    vec3 a;
+    vec3 b;
+
+    for (size_t i = 0; i < 32; i++) {
+        a.x = (randf() - 0.5) * 2.0;
+        a.y = 0.0f;
+        a.z = (randf() - 0.5) * 2.0;
+        b.x = (randf() - 0.5) * 2.0;
+        b.y = 0.0f;
+        b.z = (randf() - 0.5) * 2.0;
+        p_a[0] = a;
+        p_a[2] = vec3_add(a, vec3_normalize(vec3_sub(a, b)));
+        p_a[1] = a;
+        p_a[1].y = 0.75f;
+        p_a[1].y += randf() * 0.5;
+        mesh_full_add_quad(res, p_a);
+    }
     return res;
 }
 
@@ -71,6 +54,7 @@ void mesh_bank_init(void)
     for (size_t i = 0; i < MESH_BANK_MAX; i++)
         _demo->mesh_bank[i] = NULL;
     _demo->mesh_bank[MESH_BANK_SKYBOX] = load_skybox();
+    _demo->mesh_bank[MESH_BANK_GRASS1] = load_grass();
     for (size_t i = 0; i < MESH_BANK_MAX; i++)
         if (_demo->mesh_bank[i] == NULL) {
             printf("Can't load mesh #%zu\n", i);

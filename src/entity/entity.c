@@ -16,6 +16,8 @@ entity3* entity3_create_pos(entity3 *parent, dvec3 pos)
     res->col = col_ref_get_default();
     for (size_t i = 0; i < WORLD_LOD_COUNT; i++)
         res->render[i] = render_obj_get_default();
+    res->lod_dist = RENDER_OBJ_LOD_DIST_NEAR;
+    res->render_is_rec = 0;
     res->trigger = NULL;
     res->tag = ENTITY3_TAG_NONE;
     res->root = NULL;

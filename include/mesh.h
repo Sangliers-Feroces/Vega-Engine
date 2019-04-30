@@ -23,6 +23,7 @@ void mesh_add_triangle_pos_uv(mesh_t *mesh, vec3 *pos, vec2 *uv);
 void mesh_full_add_triangle_pos_uv(mesh_full_t *mesh, const vec3 *pos,
 const vec2 *uv);
 void mesh_full_add_triangle_pos(mesh_full_t *mesh, const vec3 *pos);
+void mesh_full_add_quad(mesh_full_t *mesh, const vec3 *pos);
 mesh_full_t* mesh_full_create_adv(int gpu_do_upload, int has_ext,
 int do_create_sub);
 mesh_full_t* mesh_full_create(int gpu_do_upload, int has_ext);

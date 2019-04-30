@@ -14,11 +14,13 @@ typedef enum {
     SHADER_IU,
     SHADER_HDR,
     SHADER_SKYBOX,
+    SHADER_VEG,
     SHADER_MAX
 } shader_t;
 
 typedef struct {
     gluint program;
+    int do_cull;
     gluint uniform[16];
 } shader_cache_t;
 
@@ -26,6 +28,7 @@ typedef enum {
     MATERIAL_GRASS,
     MATERIAL_WATER,
     MATERIAL_SKYBOX,
+    MATERIAL_VEG_GRASS1,
     MATERIAL_MAX
 } material_t;
 
@@ -40,6 +43,7 @@ typedef struct {
     const char *vertex;
     const char *fragment;
     int is_standard;
+    int do_cull;
 } shader_desc_t;
 
 typedef struct {

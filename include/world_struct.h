@@ -89,6 +89,7 @@ typedef enum {
 
 typedef enum {
     MESH_BANK_SKYBOX,
+    MESH_BANK_GRASS1,
     MESH_BANK_MAX
 } mesh_bank_t;
 
@@ -109,6 +110,14 @@ typedef struct {
     vec_rtx_triangle_ref ref;
     int is_on;
 } col_ref_t;
+
+typedef enum {
+    RENDER_OBJ_LOD_DIST_FAR,
+    RENDER_OBJ_LOD_DIST_NEAR,
+    RENDER_OBJ_LOD_DIST_GRASS_CLUSTER1,
+    RENDER_OBJ_LOD_DIST_GRASS_CLUSTER2,
+    RENDER_OBJ_LOD_DIST_MAX
+} render_obj_lod_dist_t;
 
 typedef struct {
     mesh_full_ref_t mesh;
@@ -162,6 +171,8 @@ typedef enum  {
 struct entity3 {
     transform_t trans;
     render_obj_t render[WORLD_LOD_COUNT];
+    render_obj_lod_dist_t lod_dist;
+    int render_is_rec;
     col_ref_t col;
     trigger_t *trigger;
     entity3_tag_t tag;
