@@ -10,9 +10,7 @@ out vec4 color;
 uniform vec3 p_cam;
 uniform float t;
 
-vec3 d;
-
-float fog_ratio(void)
+float fog_ratio(vec3 d)
 {
     return 1.0 - 1.0 / exp(length(d) * 0.0002);
 }
@@ -22,7 +20,7 @@ float get_im(float h)
     return clamp(-(h + 42.01) / 100.0, 0.0, 1.0);
 }
 
-vec3 get_hdr_color(void)
+vec3 get_hdr_color(vec3 d)
 {
     vec2 off = vec2(0.0);
     vec2 size = vec2(1.0);
@@ -41,12 +39,12 @@ vec3 get_hdr_color(void)
 
 void main(void)
 {
-    d = texture(dist, uv).xyz;
+    vec3 d = texture(dist, uv).xyz;
     float gamma = 1.1;
     float exposure = 1.0;
-    vec3 hdr = get_hdr_color();
+    vec3 hdr = get_hdr_color(d);
     vec3 blue = vec3(40, 90, 256) / 255;
-    float fog = fog_ratio();
+    float fog = fog_ratio(d);
 
     hdr = hdr * (1.0 - fog) + blue * fog;
     vec3 mapped = vec3(1.0) - exp(-hdr * exposure);
