@@ -62,3 +62,8 @@ void world_chunk_send_global_ent(ssize2 chunk_pos, entity3 *ent);
 
 int world_is_chunk_active(ssize2 chunk_pos);
 int world_is_pos_col_oob(dvec3 p);
+
+void chunk_load_ext(chunk_t *chunk);
+void chunk_store_ext(chunk_t *chunk);
+int chunk_refresh_ext(chunk_t *chunk, ssize2 cam);
+entity3* chunk_add_entity_ext(chunk_t *chunk);

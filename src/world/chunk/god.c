@@ -52,8 +52,8 @@ static int ensure_lod_chunk(ssize2 pos)
 
 static void terrain_last_lod(ssize2 pos)
 {
-    for (ssize_t i = -CHUNK_LOAD_DISTANCE; i <= CHUNK_LOAD_DISTANCE; i++)
-        for (ssize_t j = -CHUNK_LOAD_DISTANCE; j <= CHUNK_LOAD_DISTANCE; j++)
+    for (ssize_t i = -2; i <= 2; i++)
+        for (ssize_t j = -2; j <= 2; j++)
             if (ensure_lod_chunk(ssize2_add(pos, (ssize2){j, i})))
                 return;
 }

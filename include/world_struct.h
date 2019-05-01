@@ -188,6 +188,7 @@ typedef struct {
     arr2d_dvec3_t terrain_base;
     size_t world_ndx;
     entity3 *ents;
+    entity3 *ents_ext;
     entity3 *ents_global;   // used on unloaded chunks for far entities
     entity3 *terrain;
     entity3 *inserting;

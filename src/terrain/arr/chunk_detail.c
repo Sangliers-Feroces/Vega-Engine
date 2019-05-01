@@ -63,7 +63,7 @@ static dvec3 arr2d_dvec3_sample_linear(arr2d_dvec3_t arr, vec2 uv)
 
 static void add_grass(chunk_t *chunk, arr2d_dvec3_t arr, arr2d_dvec3_t n)
 {
-    entity3 *ent = chunk_add_entity(chunk);
+    entity3 *ent = chunk_add_entity_ext(chunk);
     entity3 *cur;
     entity3 *sub;
     dvec3 off = dvec3_init(CHUNK_SIZE * 0.5, 0.0, CHUNK_SIZE * 0.5);
