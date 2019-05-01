@@ -7,11 +7,16 @@
 
 #include "headers.h"
 
-float get_eleapsed_time_second(sfClock *clock_)
+static double clocks_get_eleapsed_time_second(void)
 {
-    sfTime result = sfClock_getElapsedTime(clock_);
+    sfTime result = sfClock_getElapsedTime(_demo->clocks.game_clock);
 
     return (result.microseconds / 1000000.0);
+}
+
+void clocks_refresh_time(void)
+{
+    _demo->clocks.t = clocks_get_eleapsed_time_second();
 }
 
 void clocks_init(demo_t *demo)

@@ -25,7 +25,7 @@ void demo_loop(demo_t *demo)
 {
     while (demo_poll_events(demo)) {
         demo_update_cursor_visibility(demo);
-        demo->clocks.t = get_eleapsed_time_second(demo->clocks.game_clock);
+        clocks_refresh_time();
         glBindFramebuffer(GL_FRAMEBUFFER, _demo->buf.hdr_framebuffer);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         editor(demo);

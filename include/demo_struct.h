@@ -82,7 +82,7 @@ typedef struct {
 
 typedef struct {
     sfClock *game_clock;
-    float t;
+    double t;
 } clocks_t;
 
 typedef struct {
