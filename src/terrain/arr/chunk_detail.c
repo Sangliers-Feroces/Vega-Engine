@@ -67,16 +67,16 @@ static void add_grass(chunk_t *chunk, arr2d_dvec3_t arr, arr2d_dvec3_t n)
     entity3 *cur;
     entity3 *sub;
     dvec3 off = dvec3_init(CHUNK_SIZE * 0.5, 0.0, CHUNK_SIZE * 0.5);
-    double base_sub = CHUNK_SIZE / 8.0;
-    dvec3 off2 = dvec3_init(CHUNK_SIZE / 8.0 * 0.5, 0.0,
-    CHUNK_SIZE / 8.0 * 0.5);
+    double base_sub = CHUNK_SIZE / 16.0;
+    dvec3 off2 = dvec3_init(CHUNK_SIZE / 16.0 * 0.5, 0.0,
+    CHUNK_SIZE / 16.0 * 0.5);
 
     ent->trans.pos = off;
     ent->lod_dist = RENDER_OBJ_LOD_DIST_GRASS_CLUSTER1;
     ent->render_is_rec = 1;
     entity3_trans_update(ent);
-    for (size_t i = 0; i < 8; i++)
-        for (size_t j = 0; j < 8; j++) {
+    for (size_t i = 0; i < 16; i++)
+        for (size_t j = 0; j < 16; j++) {
             cur = entity3_create(ent);
             cur->trans.pos = dvec3_sub(dvec3_add(
             dvec3_init(base_sub * j, 0.0, base_sub * i), off2), ent->trans.pos);
@@ -90,7 +90,7 @@ static void add_grass(chunk_t *chunk, arr2d_dvec3_t arr, arr2d_dvec3_t n)
         dvec3 norm = arr2d_dvec3_sample_linear(n, uv);
         if ((p.y < -40.0) || (norm.y < 0.8))
             continue;
-        sub = ent->sub.ent[MIN((size_t)(uv.y * 8), 7) * 8 + MIN((size_t)(uv.x * 8), 7)];
+        sub = ent->sub.ent[MIN((size_t)(uv.y * 16), 15) * 16 + MIN((size_t)(uv.x * 16), 15)];
         cur = entity3_create(sub);
         cur->trans.pos = dvec3_sub(dvec3_sub(p, sub->trans.pos), off);
         cur->trans.pos.y -= fabs(norm.y) / 2.0;
