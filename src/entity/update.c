@@ -30,8 +30,8 @@ void entity3_trans_update(entity3 *ent)
 
 void entity3_update_solo(entity3 *ent)
 {
-    if (_demo->world.tag_update[ent->tag] != NULL)
-        _demo->world.tag_update[ent->tag](ent);
+    if (_demo->world.tag[ent->tag].update != NULL)
+        _demo->world.tag[ent->tag].update(ent);
     if (!ent->trans.is_static) {
         if (ent->trans.is_physics)
             entity3_physics(ent);

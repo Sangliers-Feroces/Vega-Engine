@@ -147,3 +147,8 @@ void vec_vec3_destroy(vec_vec3_t vec);
 vec_vec2_t vec_vec2_init(void);
 void vec_vec2_add(vec_vec2_t *vec, vec2 to_add);
 void vec_vec2_destroy(vec_vec2_t vec);
+
+vec_size3_t vec_size3_init(void);
+void vec_size3_add(vec_size3_t *vec, size3 to_add);
+void vec_size3_flush(vec_size3_t *vec);
+void vec_size3_destroy(vec_size3_t vec);

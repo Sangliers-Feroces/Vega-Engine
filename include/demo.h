@@ -8,8 +8,9 @@
 #pragma once
 
 #define CAM_MOVE 256.0f
-#define PLAYER_MOVE 7.0f
-#define PLAYER_MAX_SPEED 10.0f
+#define PLAYER_MOVE 12.0f
+#define PLAYER_MAX_SPEED_WALK 4.0f
+#define PLAYER_MAX_SPEED 8.0f
 
 void demo_poll_input(demo_t *demo);
 

@@ -7,6 +7,11 @@
 
 #include "headers.h"
 
+static const mesh_desc_t desc[] = {
+    {MESH_BANK_SWORD, "res/model/veget/arm_sword.obj"},
+    {MESH_BANK_MAX, NULL}
+};
+
 const vec3 skybox[] = {
     {-10.0f, -10.0f, 1.0f},
     {-10.0f, 10.0f, 1.0f},
@@ -55,6 +60,8 @@ void mesh_bank_init(void)
         _demo->mesh_bank[i] = NULL;
     _demo->mesh_bank[MESH_BANK_SKYBOX] = load_skybox();
     _demo->mesh_bank[MESH_BANK_GRASS1] = load_grass();
+    for (size_t i = 0; desc[i].bank != MESH_BANK_MAX; i++)
+        _demo->mesh_bank[desc[i].bank] = mesh_load_obj(desc[i].path);
     for (size_t i = 0; i < MESH_BANK_MAX; i++)
         if (_demo->mesh_bank[i] == NULL) {
             printf("Can't load mesh #%zu\n", i);

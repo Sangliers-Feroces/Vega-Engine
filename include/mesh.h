@@ -47,3 +47,5 @@ vertex_t vertex_init(vec3 pos, vec3 normal, vec2 uv);
 
 void mesh_bank_init(void);
 void mesh_bank_quit(void);
+
+mesh_full_t* mesh_load_obj(const char *filepath);

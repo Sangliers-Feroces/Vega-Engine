@@ -24,10 +24,6 @@ char* file_read_string(file_read_t *file)
     file->i -= sizeof(size_t);
     res = (char*)malloc_safe(size);
     file_read(file, res, size);
-    if ((size == 0) || (res[size - 1] != '\0')) {
-        printf("Corrupted string.\n");
-        exit(84);
-    }
     return res;
 }
 

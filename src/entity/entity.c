@@ -20,6 +20,7 @@ entity3* entity3_create_pos(entity3 *parent, dvec3 pos)
     res->render_is_rec = 0;
     res->trigger = NULL;
     res->tag = ENTITY3_TAG_NONE;
+    res->tag_data = NULL;
     res->root = NULL;
     entity3_trans_update(res);
     res->root_ndx = ~0ULL;
@@ -42,7 +43,8 @@ void entity3_destroy(entity3 *entity)
     entity3_set_col(entity, 0);
     for (size_t i = 0; i < WORLD_LOD_COUNT; i++)
         render_obj_destroy(entity->render[i]);
-    entity3_remove_from_parent(entity);
+    free(entity->tag_data);
     trigger_destroy(entity->trigger);
+    entity3_remove_from_parent(entity);
     free(entity);
 }

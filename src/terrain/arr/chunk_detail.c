@@ -88,7 +88,11 @@ static void add_grass(chunk_t *chunk, arr2d_dvec3_t arr, arr2d_dvec3_t n)
         vec2 uv = {randf(), randf()};
         dvec3 p = arr2d_dvec3_sample_linear(arr, uv);
         dvec3 norm = arr2d_dvec3_sample_linear(n, uv);
-        if ((p.y < -40.0) || (norm.y < 0.8))
+        if ((p.y < -40.0) || (norm.y < 0.8) || 
+        (arr2d_dvec3_sample_linear(n,
+        vec2_add(uv, (vec2){0.01f, 0.01f})).y < 0.8) ||
+        (arr2d_dvec3_sample_linear(n,
+        vec2_add(uv, (vec2){-0.01f, -0.01f})).y < 0.8))
             continue;
         sub = ent->sub.ent[MIN((size_t)(uv.y * 16), 15) * 16 + MIN((size_t)(uv.x * 16), 15)];
         cur = entity3_create(sub);

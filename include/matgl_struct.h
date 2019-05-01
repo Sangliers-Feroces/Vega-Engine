@@ -89,3 +89,15 @@ typedef struct {
     size_t allocated;
     vec3 *vec3;
 } vec_vec3_t;
+
+typedef struct {
+    size_t x;
+    size_t y;
+    size_t z;
+} size3;
+
+typedef struct {
+    size_t count;
+    size_t allocated;
+    size3 *size3;
+} vec_size3_t;
