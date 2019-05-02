@@ -7,7 +7,7 @@
 
 #include "headers.h"
 
-static double clocks_get_eleapsed_time_second(void)
+double clocks_get_eleapsed_time_second(void)
 {
     sfTime result = sfClock_getElapsedTime(_demo->clocks.game_clock);
 
@@ -16,12 +16,13 @@ static double clocks_get_eleapsed_time_second(void)
 
 void clocks_refresh_time(void)
 {
-    _demo->clocks.t = clocks_get_eleapsed_time_second();
+    _demo->clocks.t += _demo->win.framelen;
 }
 
 void clocks_init(demo_t *demo)
 {
     demo->clocks.game_clock = sfClock_create();
+    demo->clocks.t = 0.0;
 }
 
 void clocks_quit(demo_t *demo)

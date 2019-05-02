@@ -20,5 +20,7 @@ void demo_update_framerate(demo_t *demo)
         sfClock_restart(demo->win.frametime);
         frame = 0;
         demo->win.fps_to_display = 1.0f / demo->win.framelen;
+        if (sfKeyboard_isKeyPressed(sfKeyLControl))
+            demo->win.framelen *= 0.2;
     }
 }
