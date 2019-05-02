@@ -25,6 +25,21 @@ static void reset_scaling(void)
     }
 }
 
+void pause_refresh_str_scaling(void)
+{
+    _iu.pause.buttons[_iu.pause.state].rect.s =
+    vec2_muls(_iu.pause.buttons[_iu.pause.state].rect.s, 1.2f);
+    _iu.pause.buttons[_iu.pause.state].rect.p =
+    vec2_subs(_iu.pause.buttons[_iu.pause.state].rect.p, 0.02f);
+    if (_iu.pause.last_state && _iu.pause.last_state != _iu.pause.state) {
+        _iu.pause.buttons[_iu.pause.last_state].rect.s =
+        vec2_divs(_iu.pause.buttons[_iu.pause.last_state].rect.s, 1.2f);
+        _iu.pause.buttons[_iu.pause.last_state].rect.p =
+        vec2_adds(_iu.pause.buttons[_iu.pause.last_state].rect.p, 0.02f);
+    }
+    _iu.pause.last_state = _iu.pause.state;
+}
+
 static void analyse_statement(void)
 {
     switch (_iu.pause.state) {
@@ -46,8 +61,9 @@ static void analyse_statement(void)
 
 void pause_loop(void)
 {
-    _iu.pause.state = 0;
+    _iu.pause.state = 1;
     _iu.pause.last_state = 0;
+    pause_refresh_str_scaling();
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     do {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

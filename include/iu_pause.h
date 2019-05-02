@@ -10,3 +10,4 @@
 void pause_loop(void);
 int iu_pause_poll_event(void);
 void set_pause_entities(void);
+void pause_refresh_str_scaling(void);
