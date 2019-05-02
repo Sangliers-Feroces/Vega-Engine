@@ -68,12 +68,6 @@ static void draw_invent(void)
 
 void invent_loop(void)
 {
-    //temp
-    _iu.invent.inventory[1] = ITEM_SWORD_1;
-    _iu.invent.inventory[3] = ITEM_SWORD_2;
-    _iu.invent.inventory[5] = ITEM_APPLE;
-    _iu.invent.inventory[9] = ITEM_BOAT;
-    _iu.invent.inventory[10] = NO_ITEM;
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     do {
         reset_str_invent(_iu.invent.text_start);
@@ -82,4 +76,6 @@ void invent_loop(void)
         sfRenderWindow_display(_demo->win.window);
     } while (invent_poll_event());
     _iu.data.is_invent = !_iu.data.is_invent;
+    _iu.invent.index_cursor = 0;
+    _iu.invent.focused_item = 0;
 }

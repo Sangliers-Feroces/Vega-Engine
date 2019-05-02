@@ -18,6 +18,7 @@
 #include "model_struct.h"
 #include "world_struct.h"
 #include "iu_texture_struct.h"
+#include "iu_pause_struct.h"
 #include "demo_struct.h"
 #include "vg_text_struct.h"
 #include "invent_struct.h"

@@ -63,4 +63,6 @@ typedef struct {
     vg_dialogue dialogue_list[DIALOGUE_END];
     //invent
     invent_t invent;
+    //pause
+    pause_t pause;
 } iu_t;

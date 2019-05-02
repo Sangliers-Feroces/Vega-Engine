@@ -133,6 +133,7 @@ typedef struct {
     display_nbr_array_t loading_pourcent;
     size_t ray_density;
 } ui_struct;
+
 // end of old version
 typedef enum {
     IUTEX_ELON,
@@ -166,6 +167,11 @@ typedef enum {
     IUTEX_ITEM_SWORD3,
     IUTEX_ITEM_VOID,
     IUTEX_INVENT_EQUIP,
+    IUTEX_PAUSE_BG,
+    IUTEX_PAUSE_CONTINUE,
+    IUTEX_PAUSE_SETTING,
+    IUTEX_PAUSE_MENU,
+    IUTEX_PAUSE_QUIT,
     IUTEX_END
 } iutex_t;
 

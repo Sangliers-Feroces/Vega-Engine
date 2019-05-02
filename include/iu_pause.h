@@ -7,4 +7,6 @@
 
 #pragma once
 
-int iu_pause_poll_event(demo_t *demo);
+void pause_loop(void);
+int iu_pause_poll_event(void);
+void set_pause_entities(void);

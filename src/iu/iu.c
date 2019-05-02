@@ -41,6 +41,11 @@ static const iutex_path_t iutex_path [] = {
     {IUTEX_ITEM_SWORD2, "res/ui/invent/item_icons/sword_2.png"},
     {IUTEX_ITEM_VOID, "res/ui/invent/item_icons/void.png"},
     {IUTEX_INVENT_EQUIP, "res/ui/invent/equip.png"},
+    {IUTEX_PAUSE_BG, "res/ui/pause/pause_bg.png"},
+    {IUTEX_PAUSE_CONTINUE, "res/ui/pause/pause_continue.png"},
+    {IUTEX_PAUSE_SETTING, "res/ui/pause/pause_setting.png"},
+    {IUTEX_PAUSE_MENU, "res/ui/pause/pause_menu.png"},
+    {IUTEX_PAUSE_QUIT, "res/ui/pause/pause_quit.png"},
     {0, NULL}
 };
 
@@ -100,6 +105,12 @@ void iu_init(demo_t *demo)
     iu_set_dialogue();
     iu_set_vg_text();
     invent_init();
+    //temp
+    _iu.invent.inventory[1] = ITEM_SWORD_1;
+    _iu.invent.inventory[3] = ITEM_SWORD_2;
+    _iu.invent.inventory[5] = ITEM_APPLE;
+    _iu.invent.inventory[9] = ITEM_BOAT;
+    _iu.invent.inventory[10] = NO_ITEM;
 }
 
 void iu_quit(void)

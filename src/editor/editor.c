@@ -31,6 +31,8 @@ static void editor_shortcut(demo_t *demo)
         demo_update_cursor_visibility(demo);
         invent_loop();
     }
+    if (demo->input.key_press[KEY_ESC])
+        pause_loop();
 }
 
 void editor(demo_t *demo)

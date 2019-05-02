@@ -47,6 +47,7 @@
 #include "iu.h"
 #include "ui.h"
 #include "ui_lightmap.h"
+#include "iu_pause.h"
 #include "editor.h"
 #include "model.h"
 #include "terrain.h"

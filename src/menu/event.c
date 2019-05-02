@@ -74,9 +74,9 @@ int menu_poll_events(demo_t *demo, menu_t *menu)
         menu->edited_setting = 0;
         return 0;
     }
-    if (sfKeyboard_isKeyPressed(sfKeyEnter))
+    if (_demo->input.key_press[KEY_ENTER])
         menu->state = menu->menu_choice;
-    if (sfKeyboard_isKeyPressed(sfKeyEscape) &&
+    if (_demo->input.key_press[KEY_ESC] &&
     menu->branch == MENU_BRANCH_SETTING) {
         if (menu->edited_setting == 1)
             return wait_confirmation(demo, menu);
