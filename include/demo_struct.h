@@ -18,6 +18,8 @@ typedef enum {
     KEY_ESC = 0,
     KEY_ARROW_UP = 1,
     KEY_ARROW_DOWN = 2,
+    KEY_ARROW_LEFT = 3,
+    KEY_ARROW_RIGHT = 4,
     KEY_ENTER = 10
 } keycode_t;
 
@@ -95,6 +97,7 @@ typedef struct {
     float curr_mana;
     float defense;
     float attack;
+    float attack_add;
     //
     int lvl;
     float xp;

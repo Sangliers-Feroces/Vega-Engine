@@ -7,6 +7,8 @@
 
 #pragma once
 
+#define INVENTORY_SIZE 11
+
 typedef enum {
     ITEM_SWORD_1,
     ITEM_SWORD_2,
@@ -25,12 +27,6 @@ typedef enum {
     TYPE_DISTANCE,
     TYPE_VEHICULE
 } items_type_t;
-
-typedef enum {
-    INVENT_BUTTON_EQUIP,
-    INVENT_BUTTON_DROP,
-    INVENT_BUTTON_END
-} invent_buuttons_t;
 
 typedef enum {
     STAT_HP,
@@ -56,14 +52,17 @@ typedef struct {
 } item_data_t;
 
 typedef struct {
+    int equiped_state;
     int text_start;
     int index_cursor;
     int focused_item;
+    int save_focus;
     //
+    entity2_t equiped_img;
     entity2_t item_image;
     entity2_t cursor;
     vg_text invent_items_name[5];
-    items_t *inventory;
+    items_t inventory[11];
     item_data_t items_list[ITEM_END];
     //desc
     vg_text desc_name;
@@ -71,5 +70,4 @@ typedef struct {
     vg_text desc_value;
     //button's array
     vg_text stats[STAT_END];
-    entity2_t buttons[INVENT_BUTTON_END];
 } invent_t;

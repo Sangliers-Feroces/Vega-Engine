@@ -7,8 +7,24 @@
 
 #include "headers.h"
 
+static void check_move_lateral(void)
+{
+    if (_demo->input.key_press[KEY_ARROW_LEFT]) {
+        _iu.invent.save_focus = _iu.invent.focused_item;
+        _iu.invent.focused_item = 10;
+        _iu.invent.equiped_state = 1;
+    }
+    if (_demo->input.key_press[KEY_ARROW_RIGHT]) {
+        _iu.invent.focused_item = _iu.invent.save_focus;
+        _iu.invent.equiped_state = 0;
+    }
+}
+
 static void invent_move_inventory(void)
 {
+    check_move_lateral();
+    if (_iu.invent.equiped_state)
+        return;
     if (_demo->input.key_press[KEY_ARROW_UP]) {
         if (_iu.invent.index_cursor == 0) {
             if (_iu.invent.text_start != 0)
@@ -34,5 +50,8 @@ int invent_poll_event(void)
     if (_demo->input.key_press[KEY_TAB] || _demo->input.key_press[KEY_ESC])
         return 0;
     invent_move_inventory();
+    if (_demo->input.key_press[KEY_ENTER])
+        invent_switch_action();
+    invent_refresh_attack_added();
     return 1;
 }

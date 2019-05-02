@@ -59,7 +59,6 @@ static void draw_invent(void)
     for (int i = 0; i < IUINVENT_END; i++)
         iu_entity_draw(_iu.invent_bg[i]);
     invent_display_icon();
-    iu_entity_draw(_iu.invent.buttons[INVENT_BUTTON_EQUIP]);
     iu_entity_draw(_iu.invent.cursor);
     for (int i = 0; i < 5; i++)
         vg_text_draw(_iu.invent.invent_items_name[i]);
@@ -71,8 +70,10 @@ void invent_loop(void)
 {
     //temp
     _iu.invent.inventory[1] = ITEM_SWORD_1;
+    _iu.invent.inventory[3] = ITEM_SWORD_2;
     _iu.invent.inventory[5] = ITEM_APPLE;
     _iu.invent.inventory[9] = ITEM_BOAT;
+    _iu.invent.inventory[10] = NO_ITEM;
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     do {
         reset_str_invent(_iu.invent.text_start);

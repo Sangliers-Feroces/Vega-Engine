@@ -67,10 +67,16 @@ int invent_get_item_data(void)
 
 void invent_display_icon(void)
 {
-    if ( _iu.invent.inventory[_iu.invent.focused_item] == NO_ITEM) {
+    if (_iu.invent.inventory[_iu.invent.focused_item] == NO_ITEM) {
         _iu.invent.item_image.index = IUTEX_ITEM_VOID;
     } else
         _iu.invent.item_image.index = _iu.invent.items_list[
         _iu.invent.inventory[_iu.invent.focused_item]].texture;
     iu_entity_draw(_iu.invent.item_image);
+    if (_iu.invent.inventory[10] == NO_ITEM)
+        _iu.invent.equiped_img.index = IUTEX_ITEM_VOID;
+    else
+        _iu.invent.equiped_img.index = _iu.invent.items_list[
+        _iu.invent.inventory[10]].texture;
+    iu_entity_draw(_iu.invent.equiped_img);
 }

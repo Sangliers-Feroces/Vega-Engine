@@ -23,3 +23,7 @@ void invent_draw_button(void);
 void invent_stat_display_init(void);
 
 void invent_draw_stat(void);
+
+void invent_switch_action(void);
+
+void invent_refresh_attack_added(void);
