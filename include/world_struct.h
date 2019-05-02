@@ -225,7 +225,6 @@ typedef struct {
     size_t chunk_allocated;
     chunk_t **chunk;        // used for rendering / world intersection
     entity3 *ents;
-    entity3 *ents_global;   // used on unloaded chunks for far entities
     entity3 *player;
     entity3 *camera;
     entity3 *skybox;

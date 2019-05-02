@@ -71,7 +71,10 @@ static void ensure_path(void)
 
 void world_load_map(void)
 {
+    if (_demo->world.map_path != NULL)
+        return;
     ensure_path();
+    _demo->world.tree = octree_create(NULL);
     _demo->world.light_dir =
     dvec3_normalize(dvec3_add(dvec3_init(-1.0, -1.0, -1.0),
     dvec3_init(0.0, 0.0, 0.2)));

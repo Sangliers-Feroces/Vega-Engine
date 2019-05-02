@@ -28,6 +28,8 @@ void world_unload_map(void)
         chunk_destroy(_demo->world.chunk[0]);
     octree_destroy(&_demo->world.tree);
     vec_trigger_destroy(&_demo->world.triggers);
+    free(_demo->world.map_path);
+    _demo->world.map_path = NULL;
     printf("Done.\n");
 }
 
@@ -41,7 +43,7 @@ void world_init(demo_t *demo)
     demo->world.chunk2d_area = (srect){{0, 0}, {1, 1}};
     demo->world.chunk2d = (chunk_t**)malloc_safe(sizeof(chunk_t*));
     demo->world.chunk2d[0] = NULL;
-    demo->world.tree = octree_create(NULL);
+    demo->world.tree = NULL;
     entity3_update_tag_init();
     world_trigger_init();
 }

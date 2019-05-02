@@ -22,7 +22,9 @@ void menu_draw(menu_t *menu)
 
 static void delete_maps(void)
 {
+    world_unload_map();
     system("rm -rf maps/");
+    world_load_map();
 }
 
 static int state_ananlyse(demo_t *demo, menu_t *menu)
