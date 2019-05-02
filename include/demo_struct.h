@@ -90,7 +90,9 @@ typedef struct {
 typedef struct {
     //stats
     float hp;
+    float curr_hp;
     float mana;
+    float curr_mana;
     float defense;
     float attack;
     //
