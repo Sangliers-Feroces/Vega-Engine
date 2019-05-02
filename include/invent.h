@@ -21,3 +21,5 @@ void invent_display_icon(void);
 void invent_draw_button(void);
 
 void invent_stat_display_init(void);
+
+void invent_draw_stat(void);
