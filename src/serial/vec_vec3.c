@@ -23,7 +23,7 @@ void vec_vec3_add(vec_vec3_t *vec, vec3 to_add)
 
     if (vec->count > vec->allocated) {
         vec->allocated += 256;
-        vec->vec3 = (vec3*)realloc(vec->vec3, vec->count * sizeof(vec3));
+        vec->vec3 = (vec3*)realloc(vec->vec3, vec->allocated * sizeof(vec3));
     }
     vec->vec3[cur] = to_add;
 }

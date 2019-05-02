@@ -32,6 +32,14 @@ typedef enum {
     INVENT_BUTTON_END
 } invent_buuttons_t;
 
+typedef enum {
+    STAT_HP,
+    STAT_MANA,
+    STAT_ATTACK,
+    STAT_DEFENSE,
+    STAT_END
+} stat_display_t;
+
 typedef struct {
     char *name;
     items_type_t type;
@@ -60,5 +68,6 @@ typedef struct {
     vg_text desc_type;
     vg_text desc_value;
     //button's array
+    vg_text stats[STAT_END];
     entity2_t buttons[INVENT_BUTTON_END];
 } invent_t;

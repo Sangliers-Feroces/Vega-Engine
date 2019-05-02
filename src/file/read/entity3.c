@@ -43,6 +43,7 @@ entity3* file_read_entity3(file_read_t *file, entity3 *parent)
     col_mesh = file_read_mesh_full_ref(file, res);
     entity3_add_trigger(res, file_read_trigger(file));
     file_read(file, &res->tag, sizeof(entity3_tag_t));
+    res->tag_data = file_read_string(file);
     sub_count = file_read_size_t(file);
     for (size_t i = 0; i < sub_count; i++)
         file_read_entity3(file, res);

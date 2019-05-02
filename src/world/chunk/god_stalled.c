@@ -37,6 +37,8 @@ static void switch_stalled(chunk_t *chunk, int new_state)
     if (chunk->is_stalled == new_state)
         return;
     entity3_switch_col(chunk->ents, !new_state);
+    if (chunk->ents_ext != NULL)
+        entity3_switch_col(chunk->ents_ext, !new_state);
     chunk->is_stalled = new_state;
 }
 
@@ -47,11 +49,11 @@ static void update_stalled(chunk_t *chunk)
 
 void world_chunk_god_stalled(void)
 {
+    ssize2 cam = chunk_get_pos(dmat4_trans(_demo->world.camera->trans.world));
+
     for (size_t i = 0; i < _demo->world.chunk_count; i++)
         update_stalled(_demo->world.chunk[i]);
-    /*size_t c = 0;
     for (size_t i = 0; i < _demo->world.chunk_count; i++)
-        if (_demo->world.chunk[i]->is_stalled)
-            c++;
-    printf("%zu stalled out of %zu\n", c, _demo->world.chunk_count);*/
+        if (chunk_refresh_ext(_demo->world.chunk[i], cam))
+            return;
 }

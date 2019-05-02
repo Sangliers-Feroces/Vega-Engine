@@ -8,8 +8,9 @@
 #pragma once
 
 #define CAM_MOVE 256.0f
-#define PLAYER_MOVE 7.0f
-#define PLAYER_MAX_SPEED 10.0f
+#define PLAYER_MOVE 12.0f
+#define PLAYER_MAX_SPEED_WALK 4.0f
+#define PLAYER_MAX_SPEED 8.0f
 
 void demo_poll_input(demo_t *demo);
 
@@ -28,13 +29,15 @@ int demo_poll_events(demo_t *demo);
 void demo_refresh_mouse_pos(void);
 void demo_poll_mouse_pos(demo_t *demo);
 
-void init(void);
+void clocks_refresh_time(void);
 void clocks_init(demo_t *demo);
+void clocks_quit(demo_t *demo);
 
+void init(void);
 void quit(void);
+
 void gl_gen(demo_t *demo);
 void gl_delete(demo_t *demo);
-void clocks_quit(demo_t *demo);
 
 void reset_matrix(demo_t *demo);
 void refresh_vp(demo_t *demo);
@@ -55,5 +58,4 @@ void demo_update_cursor_visibility(demo_t *demo);
 void demo_center_cursor(demo_t *demo);
 void demo_refresh_cursor(void);
 
-float get_eleapsed_time_second(sfClock *clock_);
 void player_init(demo_t *demo);

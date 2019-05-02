@@ -64,7 +64,8 @@ static void draw_invent(void)
     for (int i = 0; i < 5; i++)
         vg_text_draw(_iu.invent.invent_items_name[i]);
     invent_draw_desc();
-    
+    vg_text_draw(_iu.invent.stats[STAT_HP]);
+    vg_text_draw(_iu.invent.stats[STAT_MANA]);
 }
 
 void invent_loop(void)

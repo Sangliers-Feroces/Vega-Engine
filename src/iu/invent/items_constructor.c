@@ -54,4 +54,5 @@ void invent_init(void)
         vg_text_reset_str(&_iu.invent.invent_items_name[i], "Empty", NULL);
     }
     set_desc();
+    invent_stat_display_init();
 }

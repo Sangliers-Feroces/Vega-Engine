@@ -90,8 +90,14 @@ typedef enum {
 typedef enum {
     MESH_BANK_SKYBOX,
     MESH_BANK_GRASS1,
+    MESH_BANK_SWORD,
     MESH_BANK_MAX
 } mesh_bank_t;
+
+typedef struct {
+    mesh_bank_t bank;
+    const char *path;
+} mesh_desc_t;
 
 typedef struct {
     mesh_full_ref_type_t ref_type;
@@ -176,6 +182,7 @@ struct entity3 {
     col_ref_t col;
     trigger_t *trigger;
     entity3_tag_t tag;
+    void *tag_data;
     entity3 *root;
     size_t root_ndx;
     vec_entity3_t sub;
@@ -188,6 +195,7 @@ typedef struct {
     arr2d_dvec3_t terrain_base;
     size_t world_ndx;
     entity3 *ents;
+    entity3 *ents_ext;
     entity3 *ents_global;   // used on unloaded chunks for far entities
     entity3 *terrain;
     entity3 *inserting;
@@ -197,7 +205,15 @@ typedef struct {
 typedef struct {
     entity3_tag_t tag;
     void (*fun)(entity3 *ent);
+    size_t data_size;
+    void (*data_init)(void *data);
 } entity3_tag_update_desc_t;
+
+typedef struct {
+    void (*update)(entity3 *ent);
+    size_t data_size;
+    void (*data_init)(void *data);
+} entity3_tag_meta_t;
 
 typedef struct {
     char *map_path;
@@ -214,7 +230,7 @@ typedef struct {
     srect chunk2d_area;
     chunk_t **chunk2d;      // 2d array for fast lookup
     octree *tree;           // collision data is exclusively stored here
-    void (*tag_update[ENTITY3_TAG_MAX])(entity3 *ent);
+    entity3_tag_meta_t tag[ENTITY3_TAG_MAX];
     trigger_on_hit_fun_t trigger_on_hit[TRIGGER_ON_HIT_MAX];
 } world_t;
 
@@ -247,3 +263,16 @@ typedef struct {
     arr2d_dvec3_t normals;
     srect area;
 } terrain_send_ter_arg;
+
+typedef enum {
+    PLAYER_REG,
+    PLAYER_DEF,
+    PLAYER_BOOM,
+    PLAYER_ATK
+} player_state_t;
+
+typedef struct {
+    player_state_t state;
+    double anim_state;
+    int has_atk;
+} entity3_tag_player_data_t;

@@ -50,6 +50,10 @@ void file_read(file_read_t *file, void *dst, size_t size)
 
 void file_read_flush(file_read_t *file)
 {
+    if (file->i != file->size) {
+        printf("Error: file partly discarded.\n");
+        exit(84);
+    }
     free(file->data);
 }
 

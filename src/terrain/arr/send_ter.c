@@ -30,7 +30,7 @@ terrain_send_ter_arg arg, dvec3 chunk_rel)
 
     if (chunk->terrain == NULL) {
         chunk->terrain = chunk_add_entity(chunk);
-        chunk->terrain->tag = ENTITY3_TAG_TERRAIN;
+        entity3_set_tag(chunk->terrain, ENTITY3_TAG_TERRAIN);
         chunk->terrain->lod_dist = RENDER_OBJ_LOD_DIST_FAR;
     }
     if (chunk->terrain->render[lod].mesh.m != NULL)

@@ -37,7 +37,7 @@ terrain_send_ter_arg arg, dvec3 chunk_rel)
     ssize2 off[2][3] = {{{0, 0}, {0, 1}, {1, 0}}, {{1, 1}, {1, 0}, {0, 1}}};
     ssize2 ndx;
     ssize2 ndx_off;
-    vec2 uv[3] = {{0.0f, 0.0f}, {1.0f, 0.0f}, {0.0f, 1.0f}};
+    vec2 uv[3] = {{0.0f, 0.0f}, {2.0f, 0.0f}, {0.0f, 2.0f}};
     vec3 pos;
     vec3 norm;
 

@@ -22,6 +22,8 @@ static void gl_reset_stuff(void)
 static void chunk_render(chunk_t *chunk)
 {
     entity3_render(chunk->ents, _demo->cam.mvp.vp);
+    if (chunk->ents_ext != NULL)
+        entity3_render(chunk->ents_ext, _demo->cam.mvp.vp);
 }
 
 void world_render(void)

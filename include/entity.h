@@ -62,6 +62,7 @@ void world_update_triggers(void);
 
 void entity3_update_tag_init(void);
 
+void entity3_tag_init_player(void *pdata);
 void entity3_tag_update_player(entity3 *ent);
 void entity3_tag_update_player_poll_mouse(entity3 *ent);
 void entity3_tag_update_player_poll_editor(
@@ -72,3 +73,5 @@ entity3 *ent, dvec3 cam_x, dvec3 cam_z);
 void entity3_update_trans_inv(entity3 *ent);
 
 void trigger_on_hit_player(entity3 *ent, entity3 *other);
+
+void entity3_set_tag(entity3 *ent, entity3_tag_t tag);
