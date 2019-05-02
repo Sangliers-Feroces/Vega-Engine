@@ -23,6 +23,7 @@ static void render_hdr_to_screen(void)
 
 void demo_loop(demo_t *demo)
 {
+    world_load_map();
     while (demo_poll_events(demo)) {
         demo_update_cursor_visibility(demo);
         clocks_refresh_time();

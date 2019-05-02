@@ -79,7 +79,6 @@ demo_t* demo_init(void)
     material_init(res);
     mesh_bank_init();
     world_init(res);
-    world_load_map();
     demo_update_cursor_visibility(res);
     return (res);
 }

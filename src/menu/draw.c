@@ -20,11 +20,19 @@ void menu_draw(menu_t *menu)
         iu_entity_draw(menu->link[i]);
 }
 
+static void delete_maps(void)
+{
+    system("rm -rf maps/");
+}
+
 static int state_ananlyse(demo_t *demo, menu_t *menu)
 {
     switch (menu->state) {
         case -1:
             return 0;
+        case 1:
+            delete_maps();
+            return 1;
         case 5:
             return 0;
         case 3:
@@ -47,6 +55,7 @@ int menu_loop(demo_t *demo, menu_t *menu)
         menu->link[MENU_LINK_LOAD].index = IUTEX_MENU_LOAD_FADE;
     else
         menu->link[MENU_LINK_LOAD].index = IUTEX_MENU_LOAD;
+    reset_cursor(menu);
     do {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUseProgram(_demo->shader[SHADER_IU].program);

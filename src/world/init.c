@@ -20,6 +20,8 @@ static void unload_global_ents(void)
 
 void world_unload_map(void)
 {
+    if (_demo->world.map_path == NULL)
+        return;
     printf("Saving world at '%s'.. Please wait.\n", _demo->world.map_path);
     unload_global_ents();
     while (_demo->world.chunk_count > 0)
