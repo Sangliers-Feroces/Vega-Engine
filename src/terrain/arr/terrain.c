@@ -12,7 +12,7 @@ double cos_der(double value)
     return 0.2 + 0.8 * ((sin(value / 3.0) + 1.0) / 2.5);
 }
 
-static double get_strength(ssize2 pos)
+double chunk_get_strength(ssize2 pos)
 {
     return (cos_der(pos.x) * cos_der(pos.y)) / 2.0;
 }
@@ -45,7 +45,7 @@ void chunk_gen_terrain(ssize2 pos)
 {
     ssize2 ter_pos = chunk_get_terrain_pos(pos);
     arr2d_dvec3_t arr = arr2d_dvec3_create(2, 2);
-    double stren = get_strength(ter_pos);
+    double stren = chunk_get_strength(ter_pos);
     dvec3 base = {0.0, (stren - 0.25) * 384.0, 0.0};
     chunk_border_t border = chunk_border_ter_fetch(ter_pos);
 

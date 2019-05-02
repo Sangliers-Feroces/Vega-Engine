@@ -91,6 +91,7 @@ typedef enum {
     MESH_BANK_SKYBOX,
     MESH_BANK_GRASS1,
     MESH_BANK_SWORD,
+    MESH_BANK_ENEMY1,
     MESH_BANK_MAX
 } mesh_bank_t;
 
@@ -171,6 +172,7 @@ typedef enum  {
     ENTITY3_TAG_PLAYER,
     ENTITY3_TAG_CAMERA,
     ENTITY3_TAG_SKYBOX,
+    ENTITY3_TAG_ENEMY,
     ENTITY3_TAG_MAX
 } entity3_tag_t;
 
@@ -194,6 +196,8 @@ typedef struct {
     chunk_border_t border_ter;
     arr2d_dvec3_t terrain_base;
     size_t world_ndx;
+    size_t enemy_count;
+    size_t enemy_count_max;
     entity3 *ents;
     entity3 *ents_ext;
     entity3 *ents_global;   // used on unloaded chunks for far entities
@@ -276,3 +280,9 @@ typedef struct {
     double anim_state;
     int has_atk;
 } entity3_tag_player_data_t;
+
+typedef struct {
+    ssize2 chunk;
+    double max_speed;
+    dvec3 spawn;
+} entity3_tag_enemy_data_t;

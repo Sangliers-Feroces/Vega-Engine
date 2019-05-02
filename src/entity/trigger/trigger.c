@@ -20,14 +20,26 @@ trigger_t* trigger_create(dvec3 min, dvec3 max, trigger_on_hit_t on_hit)
     return res;
 }
 
+void trigger_attach(trigger_t *trigger)
+{
+    if (trigger->ndx != ~0ULL)
+        return;
+    vec_trigger_add(&_demo->world.triggers, trigger);
+}
+
+void trigger_detach(trigger_t *trigger)
+{
+    if (trigger->ndx == ~0ULL)
+        return;
+    _demo->world.triggers.trigger[trigger->ndx] =
+    _demo->world.triggers.trigger[--_demo->world.triggers.count];
+    _demo->world.triggers.trigger[trigger->ndx]->ndx = trigger->ndx;
+}
+
 void trigger_destroy(trigger_t *trigger)
 {
     if (trigger == NULL)
         return;
-    if (trigger->ndx != ~0ULL) {
-        _demo->world.triggers.trigger[trigger->ndx] =
-        _demo->world.triggers.trigger[--_demo->world.triggers.count];
-        _demo->world.triggers.trigger[trigger->ndx]->ndx = trigger->ndx;
-    }
+    trigger_detach(trigger);
     free(trigger);
 }

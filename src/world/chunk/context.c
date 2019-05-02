@@ -35,6 +35,8 @@ chunk_t* chunk_create_detached(ssize2 pos)
     res->border_ter = chunk_border_init();
     res->terrain_base = (arr2d_dvec3_t){0, 0, NULL};
     res->world_ndx = ~0ULL;
+    res->enemy_count = 0;
+    res->enemy_count_max = randf() * chunk_get_strength(pos) * 64.0;
     res->ents = entity3_create_pos(NULL,
     dvec3_init(pos.x * CHUNK_SIZE, 0.0, pos.y * CHUNK_SIZE));
     res->ents_ext = NULL;

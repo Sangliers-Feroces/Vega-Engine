@@ -47,6 +47,8 @@ chunk_t* file_read_chunk(file_read_t *file)
     res->border = file_read_chunk_border(file);
     res->border_ter = file_read_chunk_border(file);
     res->terrain_base = file_read_arr2d_dvec3(file);
+    res->enemy_count = file_read_size_t(file);
+    res->enemy_count_max = file_read_size_t(file);
     entity3_destroy(res->ents);
     entity3_destroy(res->ents_global);
     res->ents = file_read_entity3(file, NULL);

@@ -31,6 +31,7 @@ ray3 ray);
 void octree_intersect_ray_laxist_iter(octree *tree, ray3 ray,
 inter_ray3 *inter);
 inter_ray3 octree_intersect_ray_laxist(octree *tree, ray3 ray);
+inter_ray3 octree_intersect_ray_laxist_fast(octree *tree, ray3 ray);
 
 void octree_throw_ray(octree *tree, ray3_color ray);
 float octree_light_rtx(octree *tree, size_t density);

@@ -10,6 +10,12 @@
 static void entity3_switch_col(entity3 *ent, int new_state)
 {
     entity3_set_col(ent, new_state);
+    if (ent->trigger != NULL) {
+        if (new_state)
+            trigger_attach(ent->trigger);
+        else
+            trigger_detach(ent->trigger);
+    }
     for (size_t i = 0; i < ent->sub.count; i++)
         entity3_switch_col(ent->sub.ent[i], new_state);
 }

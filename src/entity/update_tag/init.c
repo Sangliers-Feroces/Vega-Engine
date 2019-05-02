@@ -10,6 +10,8 @@
 static const entity3_tag_update_desc_t desc[] = {
     {ENTITY3_TAG_PLAYER, &entity3_tag_update_player,
     sizeof(entity3_tag_player_data_t), &entity3_tag_init_player},
+    {ENTITY3_TAG_ENEMY, &entity3_tag_update_enemy,
+    sizeof(entity3_tag_enemy_data_t), &entity3_tag_init_enemy},
     {ENTITY3_TAG_NONE, NULL, 0, NULL}
 };
 

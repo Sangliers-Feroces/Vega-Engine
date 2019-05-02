@@ -21,17 +21,22 @@ static void slow_ent_down(entity3 *ent)
         ent->trans.speed, _demo->win.framelen * 6.0));
 }
 
-static void cap_ent_speed(dvec3 *speed)
+static void cap_ent_speed(dvec3 *speed, double max)
 {
     vec2 xz = {speed->x, speed->z};
     float dist = vec2_norm(xz);
-    double max = sfKeyboard_isKeyPressed(sfKeyLShift) ?
-    PLAYER_MAX_SPEED : PLAYER_MAX_SPEED_WALK;
 
     if (dist > max) {
         xz = vec2_muls(xz, max / dist);
         *speed = (dvec3){xz.x, speed->y, xz.y};
     }
+}
+
+void player_update(entity3 *ent, double max_speed)
+{
+    if (ent->trans.is_grounded)
+        slow_ent_down(ent);
+    cap_ent_speed(&ent->trans.speed, max_speed);
 }
 
 static void anim(entity3 *ent)
@@ -114,9 +119,8 @@ void entity3_tag_update_player(entity3 *ent)
         entity3_tag_update_player_poll_playing(ent, cam_x, cam_z);
     else
         entity3_tag_update_player_poll_editor(ent, cam_x, cam_z);
-    if (ent->trans.is_grounded)
-        slow_ent_down(ent);
-    cap_ent_speed(&ent->trans.speed);
+    player_update(ent, sfKeyboard_isKeyPressed(sfKeyLShift) ?
+    PLAYER_MAX_SPEED : PLAYER_MAX_SPEED_WALK);
     state(ent);
     anim(ent);
 }

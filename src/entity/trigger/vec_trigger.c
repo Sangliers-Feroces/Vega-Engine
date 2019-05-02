@@ -44,7 +44,6 @@ void entity3_add_trigger(entity3 *ent, trigger_t *trigger)
         printf("Error: this entity has already a trigger.\n");
         exit(84);
     }
-    vec_trigger_add(&_demo->world.triggers, trigger);
     ent->trigger = trigger;
     trigger->ent = ent;
 }

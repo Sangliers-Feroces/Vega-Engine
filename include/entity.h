@@ -51,6 +51,8 @@ entity3* entity3_seek_tag(entity3 *ent, entity3_tag_t tag);
 void entity3_physics(entity3 *ent);
 
 trigger_t* trigger_create(dvec3 min, dvec3 max, trigger_on_hit_t on_hit);
+void trigger_attach(trigger_t *trigger);
+void trigger_detach(trigger_t *trigger);
 void trigger_destroy(trigger_t *trigger);
 vec_trigger_t vec_trigger_init(void);
 void vec_trigger_add(vec_trigger_t *vec, trigger_t *trigger);
@@ -75,3 +77,10 @@ void entity3_update_trans_inv(entity3 *ent);
 void trigger_on_hit_player(entity3 *ent, entity3 *other);
 
 void entity3_set_tag(entity3 *ent, entity3_tag_t tag);
+
+void entity3_tag_update_enemy(entity3 *ent);
+void entity3_tag_init_enemy(void *pdata);
+
+void player_update(entity3 *ent, double max_speed);
+
+void entity3_set_on_ground(entity3 *ent);

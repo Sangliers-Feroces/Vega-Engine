@@ -25,7 +25,7 @@ int try_unload_ent(entity3 *ent)
 {
     ssize2 chunk_pos = chunk_get_pos(dmat4_trans(ent->trans.world));
 
-    if ((!chunk_is_loaded(chunk_pos)) && is_ent_unloadable(ent)) {
+    if (is_ent_unloadable(ent)) {
         world_chunk_send_global_ent(chunk_pos, ent);
         return 1;
     }
@@ -34,12 +34,19 @@ int try_unload_ent(entity3 *ent)
 
 void entity3_global_update(entity3 *ent)
 {
+    dvec3 player = dmat4_trans(_demo->world.player->trans.world);
+    dvec3 p;
+
     entity3_update_solo(ent);
     for (size_t i = 0; i < ent->sub.count; i++) {
-        if (world_is_pos_col_oob(dmat4_trans(ent->sub.ent[i]->trans.world))) {
+        p = dmat4_trans(ent->sub.ent[i]->trans.world);
+        if (world_is_pos_col_oob(p)) {
             i -= try_unload_ent(ent->sub.ent[i]);
             continue;
         }
+        if (dvec3_dist_sq(dvec3_init(player.x, 0.0, player.z),
+        dvec3_init(p.x, 0.0, p.z)) > (CHUNK_SIZE / 8.0) * (CHUNK_SIZE / 8.0))
+            continue;
         entity3_update(ent->sub.ent[i]);
     }
 }

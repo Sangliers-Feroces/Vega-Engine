@@ -7,15 +7,26 @@
 
 #include "headers.h"
 
-static inter_ray3 world_inter(demo_t *demo, ray3 ray)
+inter_ray3 world_inter(ray3 ray)
 {
-    return octree_intersect_ray_laxist(demo->world.tree, ray);
+    return octree_intersect_ray(_demo->world.tree, ray);
 }
 
-static int check_col(int do_laxist,
+inter_ray3 world_inter_laxist(ray3 ray)
+{
+    return octree_intersect_ray_laxist(_demo->world.tree, ray);
+}
+
+inter_ray3 world_inter_laxist_fast(ray3 ray)
+{
+    return octree_intersect_ray_laxist_fast(_demo->world.tree, ray);
+}
+
+static int check_col(int do_fast, int do_laxist,
 dvec3 pos, dvec3 *speed, dvec3 *avg_norm, double slide)
 {
-    inter_ray3 inter = world_inter(_demo, (ray3){pos, *speed});
+    inter_ray3 inter = do_fast ? world_inter_laxist_fast((ray3){pos, *speed}) :
+    world_inter_laxist((ray3){pos, *speed});
     dvec3 p_in;
     dvec3 up = {0.0, 1.0, 0.0};
     dvec3 normal;
@@ -36,9 +47,10 @@ dvec3 pos, dvec3 *speed, dvec3 *avg_norm, double slide)
     return 1;
 }
 
-static void apply_disp(dvec3 *p, dvec3 disp)
+static void apply_disp(int do_fast, dvec3 *p, dvec3 disp)
 {
-    inter_ray3 inter = world_inter(_demo, (ray3){*p, disp});
+    inter_ray3 inter = do_fast ? world_inter_laxist_fast((ray3){*p, disp}) :
+    world_inter_laxist((ray3){*p, disp});
 
     if ((inter.triangle == NULL) || (inter.min_t > 1.0)) {
         *p = dvec3_add(*p, disp);
@@ -60,6 +72,7 @@ void entity3_physics(entity3 *ent)
     dvec3 norm = {0.0, 0.0, 0.0};
     dvec3 p = dmat4_trans(ent->trans.world);
     int is_underwater = dmat4_trans(ent->trans.world).y < -42.0;
+    int do_fast = ent->tag != ENTITY3_TAG_PLAYER;
 
     ent->trans.speed = dvec3_add(ent->trans.speed,
     dvec3_muls((dvec3){0.0, !is_underwater ?
@@ -69,14 +82,16 @@ void entity3_physics(entity3 *ent)
     speed_frame = dvec3_muls(ent->trans.speed, _demo->win.framelen);
     old_speed = speed_frame;
     for (size_t i = 0; i < 4; i++)
-        if (!check_col(i > 0, p, &speed_frame, &norm,
+        if (!check_col(do_fast, i > 0, p, &speed_frame, &norm,
         ent->trans.slide_threshold))
             break;
     dvec3 disp = dvec3_add(speed_frame,
     dvec3_muls(dvec3_normalize(norm), 0.001));
-    apply_disp(&p, disp);
+    apply_disp(do_fast, &p, disp);
     entity3_update_trans_inv(ent->root);
     ent->trans.pos = dmat4_mul_dvec3(ent->root->trans.world_inv, p);
     ent->trans.is_grounded = old_speed.y < speed_frame.y;
     ent->trans.speed = dvec3_divs(speed_frame, _demo->win.framelen);
+    if (ent->trans.pos.y < -512.0)
+        entity3_set_on_ground(ent);
 }

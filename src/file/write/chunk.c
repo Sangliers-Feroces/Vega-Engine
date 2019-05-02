@@ -39,6 +39,8 @@ void file_write_chunk(file_write_t *file, chunk_t *chunk)
     file_write_chunk_border(file, &chunk->border);
     file_write_chunk_border(file, &chunk->border_ter);
     file_write_arr2d_dvec3(file, chunk->terrain_base);
+    file_write_size_t(file, chunk->enemy_count);
+    file_write_size_t(file, chunk->enemy_count_max);
     file_write_entity3(file, chunk->ents);
     file_write_entity3(file, chunk->ents_global);
     file_write_int(file, chunk->is_stalled);

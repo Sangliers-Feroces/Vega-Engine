@@ -46,6 +46,7 @@ void vec_chunk_vertex_destroy(vec_chunk_vertex_t vec);
 vec_chunk_dvertex_t vec_chunk_dvertex_create(size_t count);
 void vec_chunk_dvertex_destroy(vec_chunk_dvertex_t vec);
 
+double chunk_get_strength(ssize2 pos);
 void chunk_gen_terrain(ssize2 pos);
 void chunk_detail_terrain(chunk_t *chunk);
 
@@ -67,3 +68,7 @@ void chunk_load_ext(chunk_t *chunk);
 void chunk_store_ext(chunk_t *chunk);
 int chunk_refresh_ext(chunk_t *chunk, ssize2 cam);
 entity3* chunk_add_entity_ext(chunk_t *chunk);
+
+inter_ray3 world_inter(ray3 ray);
+inter_ray3 world_inter_laxist(ray3 ray);
+inter_ray3 world_inter_laxist_fast(ray3 ray);
