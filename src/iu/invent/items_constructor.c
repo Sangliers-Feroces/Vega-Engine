@@ -46,8 +46,10 @@ void invent_init(void)
     _iu.invent.focused_item = 0;
     _iu.invent.save_focus = 0;
     _iu.invent.equiped_state = 0;
-    for (int i = 0; i < INVENTORY_SIZE; i++)
-        _iu.invent.inventory[i] = NO_ITEM;
+    for (int i = 0; i < INVENTORY_SIZE; i++) {
+        _iu.invent.inventory[i].item = NO_ITEM;
+        _iu.invent.inventory[i].nb = 0;
+    }
     for (int i = 0; i < 5; i++) {
         _iu.invent.invent_items_name[i] = vg_text_create(NULL, NULL);
         vg_text_set_position(&_iu.invent.invent_items_name[i],

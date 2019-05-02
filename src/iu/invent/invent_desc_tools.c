@@ -11,7 +11,7 @@ char *invent_get_item_type(void)
 {
     switch (
     _iu.invent.items_list[
-    _iu.invent.inventory[_iu.invent.focused_item]].type) {
+    _iu.invent.inventory[_iu.invent.focused_item].item].type) {
         case TYPE_CAC:
             return "CaC";
         case TYPE_CONSUMABLE:
@@ -29,7 +29,7 @@ char *invent_get_item_value(void)
 {
     switch (
     _iu.invent.items_list[
-    _iu.invent.inventory[_iu.invent.focused_item]].type) {
+    _iu.invent.inventory[_iu.invent.focused_item].item].type) {
         case TYPE_CAC:
             return "ATTACK:";
         case TYPE_CONSUMABLE:
@@ -47,19 +47,19 @@ int invent_get_item_data(void)
 {
     switch (
     _iu.invent.items_list[
-    _iu.invent.inventory[_iu.invent.focused_item]].type) {
+    _iu.invent.inventory[_iu.invent.focused_item].item].type) {
         case TYPE_CAC:
             return _iu.invent.items_list[
-            _iu.invent.inventory[_iu.invent.focused_item]].attack;
+            _iu.invent.inventory[_iu.invent.focused_item].item].attack;
         case TYPE_CONSUMABLE:
             return _iu.invent.items_list[
-            _iu.invent.inventory[_iu.invent.focused_item]].restored_hp;
+            _iu.invent.inventory[_iu.invent.focused_item].item].restored_hp;
         case TYPE_DISTANCE:
             return _iu.invent.items_list[
-            _iu.invent.inventory[_iu.invent.focused_item]].attack;
+            _iu.invent.inventory[_iu.invent.focused_item].item].attack;
         case TYPE_VEHICULE:
             return _iu.invent.items_list[
-            _iu.invent.inventory[_iu.invent.focused_item]].speed;
+            _iu.invent.inventory[_iu.invent.focused_item].item].speed;
         default:
             return 0;
     }
@@ -67,16 +67,16 @@ int invent_get_item_data(void)
 
 void invent_display_icon(void)
 {
-    if (_iu.invent.inventory[_iu.invent.focused_item] == NO_ITEM) {
+    if (_iu.invent.inventory[_iu.invent.focused_item].item == NO_ITEM) {
         _iu.invent.item_image.index = IUTEX_ITEM_VOID;
     } else
         _iu.invent.item_image.index = _iu.invent.items_list[
-        _iu.invent.inventory[_iu.invent.focused_item]].texture;
+        _iu.invent.inventory[_iu.invent.focused_item].item].texture;
     iu_entity_draw(_iu.invent.item_image);
-    if (_iu.invent.inventory[10] == NO_ITEM)
+    if (_iu.invent.inventory[10].item == NO_ITEM)
         _iu.invent.equiped_img.index = IUTEX_ITEM_VOID;
     else
         _iu.invent.equiped_img.index = _iu.invent.items_list[
-        _iu.invent.inventory[10]].texture;
+        _iu.invent.inventory[10].item].texture;
     iu_entity_draw(_iu.invent.equiped_img);
 }

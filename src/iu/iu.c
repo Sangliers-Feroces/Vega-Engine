@@ -106,11 +106,15 @@ void iu_init(demo_t *demo)
     iu_set_vg_text();
     invent_init();
     //temp
-    _iu.invent.inventory[1] = ITEM_SWORD_1;
-    _iu.invent.inventory[3] = ITEM_SWORD_2;
-    _iu.invent.inventory[5] = ITEM_APPLE;
-    _iu.invent.inventory[9] = ITEM_BOAT;
-    _iu.invent.inventory[10] = NO_ITEM;
+    _iu.invent.inventory[1].item = ITEM_SWORD_1;
+    _iu.invent.inventory[1].nb = 1;
+    _iu.invent.inventory[3].item = ITEM_SWORD_2;
+    _iu.invent.inventory[3].nb = 1;
+    _iu.invent.inventory[5].item = ITEM_APPLE;
+    _iu.invent.inventory[5].nb = 5;
+    _iu.invent.inventory[9].item = ITEM_BOAT;
+    _iu.invent.inventory[9].nb = 1;
+    _iu.invent.inventory[10].item = NO_ITEM;
 }
 
 void iu_quit(void)

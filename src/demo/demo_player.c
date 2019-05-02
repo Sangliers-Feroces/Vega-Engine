@@ -9,7 +9,7 @@
 
 void player_init(demo_t *demo)
 {
-    demo->player.curr_hp = 596.0f;
+    demo->player.curr_hp = 296.0f;
     demo->player.hp = 500.0f;
     demo->player.curr_mana = 60.0f;
     demo->player.mana = 200.0f;

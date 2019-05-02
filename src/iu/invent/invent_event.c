@@ -53,7 +53,7 @@ int invent_poll_event(void)
     if (_demo->input.key_press[KEY_ENTER])
         invent_switch_action();
     if (_demo->input.key_press['X'])
-        _iu.invent.inventory[_iu.invent.focused_item] = NO_ITEM;
+        _iu.invent.inventory[_iu.invent.focused_item].item = NO_ITEM;
     invent_refresh_attack_added();
     return 1;
 }

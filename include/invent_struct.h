@@ -52,6 +52,11 @@ typedef struct {
 } item_data_t;
 
 typedef struct {
+    items_t item;
+    int nb;
+} inventory_t;
+
+typedef struct {
     int equiped_state;
     int text_start;
     int index_cursor;
@@ -62,7 +67,7 @@ typedef struct {
     entity2_t item_image;
     entity2_t cursor;
     vg_text invent_items_name[5];
-    items_t inventory[11];
+    inventory_t inventory[11];
     item_data_t items_list[ITEM_END];
     //desc
     vg_text desc_name;
