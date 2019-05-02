@@ -14,7 +14,7 @@ static void slow_ent_down(entity3 *ent)
     dvec3 f = dvec3_muls(d, _demo->win.framelen * 8.0);
     double norm = dvec3_norm(ent->trans.speed);
 
-    if (norm > 0.2)
+    if (norm > 1.0)
         ent->trans.speed = dvec3_sub(ent->trans.speed, f);
     else
         ent->trans.speed = dvec3_sub(ent->trans.speed, dvec3_muls(

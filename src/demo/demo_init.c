@@ -31,6 +31,14 @@ static int init_mouse(demo_t *demo)
     return (1);
 }
 
+static void refresh_win_size(void)
+{
+    sfVector2u s = sfWindow_getSize((sfWindow*)_demo->win.window);
+
+    _demo->win.w = s.x;
+    _demo->win.h = s.y;
+}
+
 static void init_win(demo_t *demo)
 {
     demo->win.w = 1920;
@@ -40,6 +48,7 @@ static void init_win(demo_t *demo)
     &(sfContextSettings){24, 8, 2, 4, 3, 0, 1});
     if (demo->win.window == NULL)
         exit_full_custom();
+    refresh_win_size();
     demo->win.frametime = sfClock_create();
     if (demo->win.frametime == NULL)
         exit_full_custom();
