@@ -37,6 +37,8 @@ typedef enum {
     STAT_MANA,
     STAT_ATTACK,
     STAT_DEFENSE,
+    STAT_LVL,
+    STAT_XP,
     STAT_END
 } stat_display_t;
 
