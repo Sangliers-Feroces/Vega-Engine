@@ -23,6 +23,11 @@ typedef enum {
     DIALOGUE_END
 } dialogues_list_t;
 
+typedef enum {
+    ERROR_INVENT_FULL,
+    ERROR_MSG_END
+} error_msg_t;
+
 typedef struct {
     iutex_t index;
     int cols;
@@ -47,7 +52,7 @@ typedef struct {
     int is_invent;
     int is_focus;
     vg_text fps_display;
-    vg_text error_message;
+    vg_text error_message[ERROR_MSG_END];
 } iu_data_t;
 
 typedef struct {

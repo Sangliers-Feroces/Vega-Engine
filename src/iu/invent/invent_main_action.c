@@ -25,18 +25,32 @@ static void invent_equip(void)
         if (_iu.invent.inventory[10].item != NO_ITEM)
             _iu.invent.inventory[_iu.invent.focused_item].item =
             _iu.invent.inventory[10].item;
-        else
+        else {
             _iu.invent.inventory[_iu.invent.focused_item].item = NO_ITEM;
+            _iu.invent.inventory[_iu.invent.focused_item].nb = 0;
+        }
         _iu.invent.inventory[10].item = save;
     }
 }
 
-static void invent_consume(void)
+static void invent_consume_hp(void)
 {
     _demo->player.curr_hp += _iu.invent.items_list[
     _iu.invent.inventory[_iu.invent.focused_item].item].restored_hp;
     if (_demo->player.curr_hp > _demo->player.hp)
         _demo->player.curr_hp -= (_demo->player.curr_hp - _demo->player.hp);
+    _iu.invent.inventory[_iu.invent.focused_item].nb--;
+    if (!_iu.invent.inventory[_iu.invent.focused_item].nb)
+        _iu.invent.inventory[_iu.invent.focused_item].item = NO_ITEM;
+    return;
+}
+
+static void invent_consume_mana(void)
+{
+    _demo->player.curr_mana += _iu.invent.items_list[
+    _iu.invent.inventory[_iu.invent.focused_item].item].restored_mana;
+    if (_demo->player.curr_mana > _demo->player.mana)
+        _demo->player.curr_mana -= (_demo->player.curr_mana - _demo->player.mana);
     _iu.invent.inventory[_iu.invent.focused_item].nb--;
     if (!_iu.invent.inventory[_iu.invent.focused_item].nb)
         _iu.invent.inventory[_iu.invent.focused_item].item = NO_ITEM;
@@ -55,8 +69,10 @@ void invent_switch_action(void)
             return invent_equip();
         case TYPE_DISTANCE:
             return;
-        case TYPE_CONSUMABLE:
-            return invent_consume();
+        case TYPE_REST_HP:
+            return invent_consume_hp();
+        case TYPE_REST_MANA:
+            return invent_consume_mana();
         case TYPE_VEHICULE:
             return;
         default:

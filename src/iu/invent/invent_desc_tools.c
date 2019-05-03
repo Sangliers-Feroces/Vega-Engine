@@ -14,8 +14,10 @@ char *invent_get_item_type(void)
     _iu.invent.inventory[_iu.invent.focused_item].item].type) {
         case TYPE_CAC:
             return "CaC";
-        case TYPE_CONSUMABLE:
-            return "Consumable";
+        case TYPE_REST_HP:
+            return "Healing";
+        case TYPE_REST_MANA:
+            return "Mana";
         case TYPE_DISTANCE:
             return "Distance";
         case TYPE_VEHICULE:
@@ -32,8 +34,10 @@ char *invent_get_item_value(void)
     _iu.invent.inventory[_iu.invent.focused_item].item].type) {
         case TYPE_CAC:
             return "ATTACK:";
-        case TYPE_CONSUMABLE:
-            return  "RESTORATION:";
+        case TYPE_REST_HP:
+            return "RESTORATION:";
+        case TYPE_REST_MANA:
+            return "RESTORATION";
         case TYPE_DISTANCE:
             return "ATTACK:";
         case TYPE_VEHICULE:
@@ -51,9 +55,12 @@ int invent_get_item_data(void)
         case TYPE_CAC:
             return _iu.invent.items_list[
             _iu.invent.inventory[_iu.invent.focused_item].item].attack;
-        case TYPE_CONSUMABLE:
+        case TYPE_REST_HP:
             return _iu.invent.items_list[
             _iu.invent.inventory[_iu.invent.focused_item].item].restored_hp;
+        case TYPE_REST_MANA:
+            return _iu.invent.items_list[
+            _iu.invent.inventory[_iu.invent.focused_item].item].restored_mana;
         case TYPE_DISTANCE:
             return _iu.invent.items_list[
             _iu.invent.inventory[_iu.invent.focused_item].item].attack;

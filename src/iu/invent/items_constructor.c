@@ -16,7 +16,7 @@ static void invent_set_items(void)
     _iu.invent.items_list[ITEM_SWORD_3] = (item_data_t){
     "Dard du Penitus Oculatus", TYPE_CAC, IUTEX_ITEM_SWORD3, 40, 0, 0, 0};
     _iu.invent.items_list[ITEM_APPLE] = (item_data_t){"Mac Crunch",
-    TYPE_CONSUMABLE, IUTEX_ITEM_APPLE, 0, 5, 0, 0};
+    TYPE_REST_HP, IUTEX_ITEM_APPLE, 0, 5, 0, 0};
     _iu.invent.items_list[ITEM_BOAT] = (item_data_t){"Shit Stormer",
     TYPE_VEHICULE, IUTEX_ITEM_BOAT, 0, 0, 0, 90};
     _iu.invent.items_list[ITEM_BOW] = (item_data_t){"L'ocean atlantique"

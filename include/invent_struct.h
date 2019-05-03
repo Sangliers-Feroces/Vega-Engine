@@ -22,7 +22,8 @@ typedef enum {
 } items_t;
 
 typedef enum {
-    TYPE_CONSUMABLE,
+    TYPE_REST_MANA,
+    TYPE_REST_HP,
     TYPE_CAC,
     TYPE_DISTANCE,
     TYPE_VEHICULE

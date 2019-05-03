@@ -11,7 +11,11 @@ int iu_pause_poll_event(void)
 {
     if (!demo_poll_events(_demo))
         return 0;
-    if (_demo->input.key_press[KEY_ESC] || _demo->input.key_press[KEY_ENTER])
+    if (_demo->input.key_press[KEY_ESC]) {
+        _iu.pause.state = 0;
+        return 0;
+    }
+    if ( _demo->input.key_press[KEY_ENTER])
         return 0;
     if (_demo->input.key_press[KEY_ARROW_DOWN] && _iu.pause.state < 4) {
         _iu.pause.state++;

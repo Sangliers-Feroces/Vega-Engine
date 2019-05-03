@@ -105,6 +105,7 @@ void iu_init(demo_t *demo)
     iu_set_dialogue();
     iu_set_vg_text();
     invent_init();
+    iu_error_msg_init();
     //temp
     _iu.invent.inventory[1].item = ITEM_SWORD_1;
     _iu.invent.inventory[1].nb = 1;

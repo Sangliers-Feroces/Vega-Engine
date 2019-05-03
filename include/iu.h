@@ -31,3 +31,5 @@ void iu_display_str(char *str, rect_t start, font_list_t font,
 float canvas_size);
 
 void iu_set_vg_text(void);
+
+void iu_error_msg_init(void);

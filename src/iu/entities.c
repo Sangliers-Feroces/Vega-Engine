@@ -7,6 +7,12 @@
 
 #include "headers.h"
 
+void iu_error_msg_init(void)
+{
+    _iu.data.error_message[ERROR_INVENT_FULL] = vg_text_create("Inventory Full !!", NULL);
+    vg_text_set_position(&_iu.data.error_message[ERROR_INVENT_FULL], (vec2){-0.10, -0.05f});
+}
+
 void set_entities(void)
 {
     /*_iu.buttons[IUBUTTON_ELON] =

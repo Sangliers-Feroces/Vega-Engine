@@ -51,6 +51,7 @@
 #include "editor.h"
 #include "model.h"
 #include "terrain.h"
+#include "iu_settings.h"
 #include "menu.h"
 #include "dungeons.h"
 #include "world.h"

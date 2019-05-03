@@ -27,3 +27,5 @@ void invent_draw_stat(void);
 void invent_switch_action(void);
 
 void invent_refresh_attack_added(void);
+
+int invent_add_item(items_t item);

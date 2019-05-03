@@ -22,6 +22,7 @@
 #include "demo_struct.h"
 #include "vg_text_struct.h"
 #include "invent_struct.h"
+#include "iu_setting_struct.h"
 #include "iu_struct.h"
 #include "menu_struct.h"
 #include "dungeons_struct.h"
