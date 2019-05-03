@@ -283,5 +283,14 @@ typedef struct {
 typedef struct {
     ssize2 chunk;
     double max_speed;
+    double a_vel;
     dvec3 spawn;
+    dvec3 target;
+    int is_moving;
+    int is_furious;
+    double max_state;
+    double t;
+    double min_furious;
+    double hp;
+    double last_damage;
 } entity3_tag_enemy_data_t;

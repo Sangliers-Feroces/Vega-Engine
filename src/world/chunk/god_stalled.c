@@ -7,7 +7,7 @@
 
 #include "headers.h"
 
-static void entity3_switch_col(entity3 *ent, int new_state)
+void entity3_switch_col(entity3 *ent, int new_state)
 {
     entity3_set_col(ent, new_state);
     if (ent->trigger != NULL) {

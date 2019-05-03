@@ -7,29 +7,64 @@
 
 #include "headers.h"
 
+static void walk_around(entity3 *ent, double a_dif)
+{
+    dvec3 d;
+    entity3_tag_enemy_data_t *data = ent->tag_data;
+
+    ent->trans.rot.y += a_dif *
+    _demo->win.framelen * data->a_vel * ent->trans.is_grounded;
+    d = dvec3_muls(dmat4_mul_dvec3(ent->trans.world_rot,
+    dvec3_init(1.0, 0.0, 0.0)), _demo->win.framelen * 10.0);
+    ent->trans.speed = dvec3_add(ent->trans.speed, d);
+}
+
 void entity3_tag_update_enemy(entity3 *ent)
 {
     entity3_tag_enemy_data_t *data = ent->tag_data;
     dvec3 p = dmat4_trans(_demo->world.player->trans.world);
     dvec3 e = dmat4_trans(ent->trans.world);
-    dvec3 v = dvec3_sub(p, e);
+    dvec3 v;
     double dist = dvec3_dist_sq(dmat4_trans(ent->trans.world), p);
-    dvec3 d;
-    double a_dif = atan2(v.z, v.x) - ent->trans.rot.y;
+    double a_dif;
 
-    if (dist < (32.0 * 32.0)) {
-        ent->trans.rot.y += a_dif *
-        _demo->win.framelen * 4.0 * ent->trans.is_grounded;
-        d = dvec3_muls(dmat4_mul_dvec3(ent->trans.world_rot,
-        dvec3_init(1.0, 0.0, 0.0)), _demo->win.framelen * 10.0);
-        ent->trans.speed = dvec3_add(ent->trans.speed, d);
+    data->t += _demo->win.framelen;
+    if (dist < (data->min_furious * data->min_furious))
+        data->is_furious = 1;
+    if (data->is_furious)
+        data->target = p;
+    else {
+        if (data->t > data->max_state) {
+            data->target = dvec3_add(data->spawn,
+            dvec3_init((randf() - 0.5) * 64.0, 0.0, (randf() - 0.5) * 64.0));
+            data->max_state = data->t + 1.0 + randf() * 5.0;
+            data->is_moving = rand() % 2;
+        }
     }
+    v = dvec3_sub(data->target, e);
+    a_dif = atan2(v.z, v.x) - ent->trans.rot.y;
+    if (data->is_moving || data->is_furious)
+        walk_around(ent, a_dif);
     if ((dist < (4.0 * 4.0)) && ent->trans.is_grounded && (fabs(a_dif) < 0.5))
         ent->trans.speed.y = 5.0;
-    player_update(ent, data->max_speed);
+    player_update(ent, data->is_furious ? data->max_speed :
+    data->max_speed / 4.0);
 }
 
 void entity3_tag_init_enemy(void *pdata)
 {
-    (void)pdata;
+    entity3_tag_enemy_data_t *data = pdata;
+
+    data->chunk = (ssize2){0, 0};
+    data->max_speed = 0.0;
+    data->a_vel = 4.0;
+    data->spawn = dvec3_init(0.0, 0.0, 0.0);
+    data->target = data->spawn;
+    data->is_moving = 0;
+    data->is_furious = 0;
+    data->max_state = 0.0;
+    data->t = 0.0;
+    data->min_furious = 4.0;
+    data->hp = 100.0;
+    data->last_damage = 0.0;
 }

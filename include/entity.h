@@ -83,4 +83,6 @@ void entity3_tag_init_enemy(void *pdata);
 
 void player_update(entity3 *ent, double max_speed);
 
-void entity3_set_on_ground(entity3 *ent);
+double world_get_ground_level(dvec3 p, double bias);
+
+void entity3_switch_col(entity3 *ent, int new_state);

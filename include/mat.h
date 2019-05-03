@@ -58,6 +58,8 @@ dvec3 dvec3_muls(dvec3 vec, double value);
 dvec3 dvec3_divs(dvec3 vec, double value);
 int dvec3_eq(dvec3 a, dvec3 b);
 
+dvec3 dvec3_mul(dvec3 a, dvec3 b);
+
 dvec3 dvec3_adds(dvec3 vec, double value);
 
 dvec3 ray3_compute(ray3 ray, double t);

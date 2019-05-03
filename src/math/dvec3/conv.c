@@ -21,3 +21,8 @@ dvec3 dvec3_init(double x, double y, double z)
 {
     return (dvec3){x, y, z};
 }
+
+dvec3 dvec3_mul(dvec3 a, dvec3 b)
+{
+    return (dvec3){a.x * b.x, a.y * b.y, a.z * b.z};
+}

@@ -45,7 +45,7 @@ void entity3_global_update(entity3 *ent)
             continue;
         }
         if (dvec3_dist_sq(dvec3_init(player.x, 0.0, player.z),
-        dvec3_init(p.x, 0.0, p.z)) > (CHUNK_SIZE / 8.0) * (CHUNK_SIZE / 8.0))
+        dvec3_init(p.x, 0.0, p.z)) > (CHUNK_SIZE / 4.0) * (CHUNK_SIZE / 4.0))
             continue;
         entity3_update(ent->sub.ent[i]);
     }

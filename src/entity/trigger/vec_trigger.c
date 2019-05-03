@@ -33,7 +33,9 @@ void vec_trigger_add(vec_trigger_t *vec, trigger_t *trigger)
 void vec_trigger_destroy(vec_trigger_t *vec)
 {
     free(vec->trigger);
+    vec->trigger = NULL;
     vec->count = 0;
+    vec->allocated = 0;
 }
 
 void entity3_add_trigger(entity3 *ent, trigger_t *trigger)
@@ -46,4 +48,5 @@ void entity3_add_trigger(entity3 *ent, trigger_t *trigger)
     }
     ent->trigger = trigger;
     trigger->ent = ent;
+    trigger_attach(ent->trigger);
 }

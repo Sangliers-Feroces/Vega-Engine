@@ -28,13 +28,13 @@ static entity3* create_default_ents(void)
     player->trans.is_static = 0;
     player->trans.is_physics = 1;
     player->trans.slide_threshold = 0.8;
-    player->trans.pos = dvec3_init(0.0, 64.0, 0.0);
+    player->trans.pos = dvec3_init(100.0, 64.0, 100.0);
+    entity3_trans_update(player);
     cam = entity3_create(player);
     entity3_set_tag(cam, ENTITY3_TAG_CAMERA);
     cam->trans.is_static = 0;
     cam->trans.pos = dvec3_init(0.0, 1.75, 0.0);
-    entity3_add_trigger(cam, trigger_create(dvec3_init(-0.25, -0.5, 0.0),
-    dvec3_init(0.25, 0.5, 3.0), TRIGGER_ON_HIT_PLAYER));
+    entity3_trans_update(cam);
     sword = entity3_create(cam);
     sword->trans.pos = dvec3_init(0.3, -1.5, 0.5);
     sword->trans.rot = dvec3_init(0.0, 0.5, 0.2);
@@ -43,6 +43,9 @@ static entity3* create_default_ents(void)
     sword = entity3_create(sword);
     entity3_set_render(sword, 0, mesh_full_ref_bank_init(MESH_BANK_SWORD), MATERIAL_GRASS);
     sword->trans.is_static = 0;
+    entity3_add_trigger(sword, trigger_create(dvec3_init(0.5, -0.5, 0.0),
+    dvec3_init(-0.5, 2.0, 2.0), TRIGGER_ON_HIT_PLAYER));
+    entity3_trans_update(sword);
     create_skybox(res);
     return res;
 }

@@ -93,5 +93,5 @@ void entity3_physics(entity3 *ent)
     ent->trans.is_grounded = old_speed.y < speed_frame.y;
     ent->trans.speed = dvec3_divs(speed_frame, _demo->win.framelen);
     if (ent->trans.pos.y < -512.0)
-        entity3_set_on_ground(ent);
+        ent->trans.pos.y = world_get_ground_level(ent->trans.pos, 2.0);
 }
