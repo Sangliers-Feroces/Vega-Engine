@@ -9,6 +9,7 @@
 
 typedef enum {
     SHADER_WORLD,
+    SHADER_WORLD_NOCULL,
     SHADER_WATER,
     SHADER_FONT,
     SHADER_IU,
@@ -29,6 +30,7 @@ typedef enum {
     MATERIAL_WATER,
     MATERIAL_SKYBOX,
     MATERIAL_VEG_GRASS1,
+    MATERIAL_BLOOD,
     MATERIAL_MAX
 } material_t;
 

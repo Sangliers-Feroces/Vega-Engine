@@ -13,8 +13,11 @@ transform_t transform_get_default(void)
 
     res.is_static = 1;
     res.is_physics = 0;
+    res.is_collision = 0;
     res.is_grounded = 0;
     res.slide_threshold = 1.0;
+    res.t = 0.0;
+    res.life = FLT64_INF;
     res.pos = dvec3_init(0.0, 0.0, 0.0);
     res.scale = dvec3_init(1.0, 1.0, 1.0);
     res.rot = dvec3_init(0.0, 0.0, 0.0);

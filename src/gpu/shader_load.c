@@ -10,6 +10,8 @@
 const shader_desc_t shader_desc[] = {
     {SHADER_WORLD, "src/shader/world_vertex.glsl",
     "src/shader/world_fragment.glsl", 1, 0},
+    {SHADER_WORLD_NOCULL, "src/shader/world_vertex.glsl",
+    "src/shader/world_fragment.glsl", 1, 1},
     {SHADER_WATER, "src/shader/world_vertex.glsl",
     "src/shader/water_fragment.glsl", 1, 0},
     {SHADER_FONT, "src/shader/font_vertex.glsl",
@@ -32,6 +34,8 @@ const material_desc_t mat_desc[] = {
     &material_fun_skybox_entity, 1},
     {MATERIAL_VEG_GRASS1, &material_fun_veg_grass1_entity,
     &material_fun_veg_grass1_entity, 0},
+    {MATERIAL_BLOOD, &material_fun_blood_entity,
+    &material_fun_blood_entity, 0},
     {0, NULL, NULL, 0}
 };
 

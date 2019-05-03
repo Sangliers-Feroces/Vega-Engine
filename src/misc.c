@@ -26,9 +26,14 @@ void* malloc_safe(size_t size)
     return (res);
 }
 
-float randf(void)
+double randf(void)
 {
-    return ((float)rand() / (float)RAND_MAX);
+    return ((double)rand() / (double)RAND_MAX);
+}
+
+double randfn(void)
+{
+    return (randf() - 0.5) * 2.0;
 }
 
 uint32_t swap32(uint32_t base)

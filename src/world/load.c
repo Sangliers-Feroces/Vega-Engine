@@ -27,8 +27,11 @@ static entity3* create_default_ents(void)
     entity3_set_tag(player, ENTITY3_TAG_PLAYER);
     player->trans.is_static = 0;
     player->trans.is_physics = 1;
+    player->trans.is_collision = 1;
     player->trans.slide_threshold = 0.8;
     player->trans.pos = dvec3_init(100.0, 64.0, 100.0);
+    entity3_add_trigger(player, trigger_create(dvec3_init(-0.5, 0.0,-0.5),
+    dvec3_init(0.5, 1.75, 0.5), TRIGGER_ON_HIT_PLAYER));
     entity3_trans_update(player);
     cam = entity3_create(player);
     entity3_set_tag(cam, ENTITY3_TAG_CAMERA);
@@ -44,23 +47,27 @@ static entity3* create_default_ents(void)
     entity3_set_render(sword, 0, mesh_full_ref_bank_init(MESH_BANK_SWORD), MATERIAL_GRASS);
     sword->trans.is_static = 0;
     entity3_add_trigger(sword, trigger_create(dvec3_init(0.5, -0.5, 0.0),
-    dvec3_init(-0.5, 2.0, 2.0), TRIGGER_ON_HIT_PLAYER));
+    dvec3_init(-0.5, 2.0, 2.0), TRIGGER_ON_HIT_SWORD));
+    entity3_set_tag(sword, ENTITY3_TAG_SWORD);
     entity3_trans_update(sword);
     create_skybox(res);
     return res;
 }
 
-static entity3* load_global_ents(void)
+static entity3* load_global_ents(int *has_created)
 {
     char *path = map_get_path("ents");
     file_read_t file = file_read_create(path);
     entity3 *res;
 
     free(path);
-    if (file.data == NULL)
+    if (file.data == NULL) {
+        *has_created = 1;
         return create_default_ents();
+    }
     res = file_read_entity3(&file, NULL);
     file_read_flush(&file);
+    *has_created = 0;
     return res;
 }
 
@@ -74,6 +81,8 @@ static void ensure_path(void)
 
 void world_load_map(void)
 {
+    int do_respawn;
+
     if (_demo->world.map_path != NULL)
         return;
     ensure_path();
@@ -81,11 +90,13 @@ void world_load_map(void)
     _demo->world.light_dir =
     dvec3_normalize(dvec3_add(dvec3_init(-1.0, -1.0, -1.0),
     dvec3_init(0.0, 0.0, 0.2)));
-    _demo->world.ents = load_global_ents();
+    _demo->world.ents = load_global_ents(&do_respawn);
     _demo->world.player =
     entity3_seek_tag(_demo->world.ents, ENTITY3_TAG_PLAYER);
     _demo->world.camera =
     entity3_seek_tag(_demo->world.ents, ENTITY3_TAG_CAMERA);
     _demo->world.skybox =
     entity3_seek_tag(_demo->world.ents, ENTITY3_TAG_SKYBOX);
+    if (do_respawn)
+        player_respawn(_demo->world.player);
 }

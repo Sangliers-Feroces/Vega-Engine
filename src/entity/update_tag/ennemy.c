@@ -28,16 +28,15 @@ void entity3_tag_update_enemy(entity3 *ent)
     double dist = dvec3_dist_sq(dmat4_trans(ent->trans.world), p);
     double a_dif;
 
-    data->t += _demo->win.framelen;
     if (dist < (data->min_furious * data->min_furious))
         data->is_furious = 1;
     if (data->is_furious)
         data->target = p;
     else {
-        if (data->t > data->max_state) {
+        if (ent->trans.t > data->max_state) {
             data->target = dvec3_add(data->spawn,
             dvec3_init((randf() - 0.5) * 64.0, 0.0, (randf() - 0.5) * 64.0));
-            data->max_state = data->t + 1.0 + randf() * 5.0;
+            data->max_state = ent->trans.t + 1.0 + randf() * 5.0;
             data->is_moving = rand() % 2;
         }
     }
@@ -47,6 +46,8 @@ void entity3_tag_update_enemy(entity3 *ent)
         walk_around(ent, a_dif);
     if ((dist < (4.0 * 4.0)) && ent->trans.is_grounded && (fabs(a_dif) < 0.5))
         ent->trans.speed.y = 5.0;
+    if (ent->trans.life < FLT64_INF)
+        ent->trans.rot.z += _demo->win.framelen * 2.0;
     player_update(ent, data->is_furious ? data->max_speed :
     data->max_speed / 4.0);
 }
@@ -63,8 +64,8 @@ void entity3_tag_init_enemy(void *pdata)
     data->is_moving = 0;
     data->is_furious = 0;
     data->max_state = 0.0;
-    data->t = 0.0;
     data->min_furious = 4.0;
     data->hp = 100.0;
     data->last_damage = 0.0;
+    data->atk = 5.0;
 }

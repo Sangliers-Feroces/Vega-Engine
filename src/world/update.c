@@ -26,6 +26,7 @@ static void spawn_at(chunk_t *chunk, dvec3 pos)
     ent = world_add_entity();
     ent->trans.is_physics = 1;
     ent->trans.is_static = 0;
+    ent->trans.is_collision = 1;
     ent->trans.slide_threshold = 0.85;
     ent->trans.pos = dvec3_add(dmat4_trans(chunk->ents->trans.world),
     dvec3_init(pos.x, 1024.0, pos.z));
@@ -48,6 +49,7 @@ static void spawn_at(chunk_t *chunk, dvec3 pos)
     entity3_trans_update(ent);
     ent->trans.is_static = 0;
     ent->lod_dist = RENDER_OBJ_LOD_DIST_FAR;
+    data->atk = chunk_get_strength(chunk->pos) * 30.0;
     chunk->enemy_count++;
 }
 
@@ -74,7 +76,7 @@ static void update_enemy_chunk(chunk_t *chunk)
     player.y = 0.0;
     while (chunk->enemy_count < chunk->enemy_count_max) {
         spawn_point = dvec3_init(randf() * CHUNK_SIZE, 0.0, randf() * CHUNK_SIZE);
-        if (dvec3_dist(player, spawn_point) < CHUNK_SIZE / 2.0)
+        if (dvec3_dist(player, spawn_point) < CHUNK_SIZE / 4.0)
             continue;
         if (!spawn_group(chunk, spawn_point))
             return;
