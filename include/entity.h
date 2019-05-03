@@ -74,6 +74,7 @@ entity3 *ent, dvec3 cam_x, dvec3 cam_z);
 
 void entity3_update_trans_inv(entity3 *ent);
 
+void trigger_on_hit_sword(entity3 *ent, entity3 *other);
 void trigger_on_hit_player(entity3 *ent, entity3 *other);
 
 void entity3_set_tag(entity3 *ent, entity3_tag_t tag);
@@ -86,3 +87,5 @@ void player_update(entity3 *ent, double max_speed);
 double world_get_ground_level(dvec3 p, double bias);
 
 void entity3_switch_col(entity3 *ent, int new_state);
+
+void player_respawn(entity3 *ent);

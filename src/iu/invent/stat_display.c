@@ -25,21 +25,22 @@ void invent_draw_stat(void)
     char buff_defense[64];
     char buff_lvl[64];
     char buff_xp[64];
+    entity3_tag_player_data_t *data = _demo->world.player->tag_data;
 
-    sprintf(buff_hp, "HP: %.f / %.f", _demo->player.curr_hp, _demo->player.hp);
+    sprintf(buff_hp, "HP: %.f / %.f", data->hp, data->max_hp);
     vg_text_reset_str(&_iu.invent.stats[STAT_HP], buff_hp, NULL);
     sprintf(buff_mana, "MANA: %.f / %.f",
-    _demo->player.curr_mana, _demo->player.mana);
+    data->mana, data->max_mana);
     vg_text_reset_str(&_iu.invent.stats[STAT_MANA], buff_mana, NULL);
     sprintf(buff_attack, "ATTACK: %.f + %.f", _demo->player.attack,
     _demo->player.attack_add);
     vg_text_reset_str(&_iu.invent.stats[STAT_ATTACK], buff_attack, NULL);
     sprintf(buff_defense, "DEFENSE: %.f", _demo->player.defense);
     vg_text_reset_str(&_iu.invent.stats[STAT_DEFENSE], buff_defense, NULL);
-    sprintf(buff_lvl, "LEVEL: %d", _demo->player.lvl);
+    sprintf(buff_lvl, "LEVEL: %.f", data->level);
     vg_text_reset_str(&_iu.invent.stats[STAT_LVL], buff_lvl, NULL);
     sprintf(buff_xp, "XP: %.f / %.f",
-    _demo->player.xp, _demo->player.next_xp_step);
+    data->xp, data->max_xp);
     vg_text_reset_str(&_iu.invent.stats[STAT_XP], buff_xp, NULL);
     for (int i = 0; i < STAT_END; i++)
         vg_text_draw(_iu.invent.stats[i]);

@@ -74,21 +74,27 @@ static void anim(entity3 *ent)
     default:
         break;
     }
+    if (data->hp == 0.0)
+        ent->trans.rot.x += _demo->win.framelen;
 }
 
 static void state(entity3 *ent)
 {
     entity3_tag_player_data_t *data = ent->tag_data;
 
+    data->mana += _demo->win.framelen;
+    if (data->mana > data->max_mana)
+        data->mana = data->max_mana;
     if (_demo->mouse.button_click & (1 << sfMouseLeft)) {
         data->state = PLAYER_ATK;
         data->anim_state = 0.0;
         data->has_atk = 0;
     }
-    if (_demo->mouse.button_click & (1 << sfMouseRight)) {
+    if ((_demo->mouse.button_click & (1 << sfMouseRight)) && (data->mana > 3.0)) {
         data->state = PLAYER_BOOM;
         data->anim_state = 0.0;
         data->has_atk = 0;
+        data->mana -= 3.0;
     }
     switch (data->state) {
     case PLAYER_BOOM:
@@ -109,19 +115,22 @@ void entity3_tag_update_player(entity3 *ent)
     dvec3 cam_x;
     dvec3 cam_z;
     entity3 *ref_move = ent->trans.is_physics ? ent : ent->sub.ent[0];
+    entity3_tag_player_data_t *data = ent->tag_data;
 
-    entity3_tag_update_player_poll_mouse(ent);
-    cam_x = dvec3_muls(dmat4_mul_dvec3(ref_move->trans.world_rot,
-    dvec3_init(1.0, 0.0, 0.0)), _demo->win.framelen);
-    cam_z = dvec3_muls(dmat4_mul_dvec3(ref_move->trans.world_rot,
-    dvec3_init(0.0, 0.0, 1.0)), _demo->win.framelen);
-    if (ent->trans.is_physics)
-        entity3_tag_update_player_poll_playing(ent, cam_x, cam_z);
-    else
-        entity3_tag_update_player_poll_editor(ent, cam_x, cam_z);
-    player_update(ent, sfKeyboard_isKeyPressed(sfKeyLShift) ?
-    PLAYER_MAX_SPEED : PLAYER_MAX_SPEED_WALK);
-    state(ent);
+    if (data->hp > 0.0) {
+        entity3_tag_update_player_poll_mouse(ent);
+        cam_x = dvec3_muls(dmat4_mul_dvec3(ref_move->trans.world_rot,
+        dvec3_init(1.0, 0.0, 0.0)), _demo->win.framelen);
+        cam_z = dvec3_muls(dmat4_mul_dvec3(ref_move->trans.world_rot,
+        dvec3_init(0.0, 0.0, 1.0)), _demo->win.framelen);
+        if (ent->trans.is_physics)
+            entity3_tag_update_player_poll_playing(ent, cam_x, cam_z);
+        else
+            entity3_tag_update_player_poll_editor(ent, cam_x, cam_z);
+        player_update(ent, sfKeyboard_isKeyPressed(sfKeyLShift) ?
+        PLAYER_MAX_SPEED : PLAYER_MAX_SPEED_WALK);
+        state(ent);
+    }
     anim(ent);
 }
 
@@ -131,4 +140,13 @@ void entity3_tag_init_player(void *pdata)
 
     data->state = PLAYER_REG;
     data->anim_state = 0.0;
+    data->has_atk = 0;
+    data->last_damage = 0.0;
+    data->hp = 0.0;
+    data->max_hp = 50.0;
+    data->level = 1.0;
+    data->xp = 0.0;
+    data->max_xp = 10.0;
+    data->mana = 0.0;
+    data->max_mana = 5.0;
 }

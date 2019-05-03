@@ -32,8 +32,11 @@ typedef struct {
 typedef struct {
     int is_static;
     int is_physics;
+    int is_collision;
     int is_grounded;
     double slide_threshold;
+    double t;
+    double life;
     dvec3 pos;
     dvec3 scale;
     dvec3 rot;
@@ -92,6 +95,7 @@ typedef enum {
     MESH_BANK_GRASS1,
     MESH_BANK_SWORD,
     MESH_BANK_ENEMY1,
+    MESH_BANK_PARTICLE1,
     MESH_BANK_MAX
 } mesh_bank_t;
 
@@ -142,6 +146,7 @@ typedef struct {
 typedef enum {
     TRIGGER_ON_HIT_NONE,
     TRIGGER_ON_HIT_PLAYER,
+    TRIGGER_ON_HIT_SWORD,
     TRIGGER_ON_HIT_MAX
 } trigger_on_hit_t;
 
@@ -171,6 +176,7 @@ typedef enum  {
     ENTITY3_TAG_TERRAIN,
     ENTITY3_TAG_PLAYER,
     ENTITY3_TAG_CAMERA,
+    ENTITY3_TAG_SWORD,
     ENTITY3_TAG_SKYBOX,
     ENTITY3_TAG_ENEMY,
     ENTITY3_TAG_MAX
@@ -278,6 +284,14 @@ typedef struct {
     player_state_t state;
     double anim_state;
     int has_atk;
+    double hp;
+    double max_hp;
+    double level;
+    double xp;
+    double max_xp;
+    double mana;
+    double max_mana;
+    double last_damage;
 } entity3_tag_player_data_t;
 
 typedef struct {
@@ -289,8 +303,8 @@ typedef struct {
     int is_moving;
     int is_furious;
     double max_state;
-    double t;
     double min_furious;
     double hp;
     double last_damage;
+    double atk;
 } entity3_tag_enemy_data_t;

@@ -9,6 +9,7 @@
 
 static const trigger_on_hit_desc_t desc[] = {
     {TRIGGER_ON_HIT_PLAYER, &trigger_on_hit_player},
+    {TRIGGER_ON_HIT_SWORD, &trigger_on_hit_sword},
     {TRIGGER_ON_HIT_NONE, NULL}
 };
 

@@ -33,10 +33,14 @@ static void invent_equip(void)
 
 static void invent_consume(void)
 {
-    _demo->player.curr_hp += _iu.invent.items_list[
+    entity3_tag_player_data_t *data = _demo->world.player->tag_data;
+
+    if (data->hp == data->max_hp)
+        return;
+    data->hp += _iu.invent.items_list[
     _iu.invent.inventory[_iu.invent.focused_item].item].restored_hp;
-    if (_demo->player.curr_hp > _demo->player.hp)
-        _demo->player.curr_hp -= (_demo->player.curr_hp - _demo->player.hp);
+    if (data->hp > data->max_hp)
+        data->hp = data->max_hp;
     _iu.invent.inventory[_iu.invent.focused_item].nb--;
     if (!_iu.invent.inventory[_iu.invent.focused_item].nb)
         _iu.invent.inventory[_iu.invent.focused_item].item = NO_ITEM;

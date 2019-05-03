@@ -31,6 +31,15 @@ static mesh_full_t* load_skybox(void)
     return res;
 }
 
+static mesh_full_t* load_particle1(void)
+{
+    mesh_full_t *res = mesh_full_create(1, 0);
+    vec3 p[3] = {{0.0, 0.0, 0.0}, {0.0, 0.3, 0.0}, {0.3, 0.0, 0.0}};
+
+    mesh_full_add_quad(res, p);
+    return res;
+}
+
 static mesh_full_t* load_grass(void)
 {
     mesh_full_t *res = mesh_full_create(1, 0);
@@ -61,6 +70,7 @@ void mesh_bank_init(void)
         _demo->mesh_bank[i] = NULL;
     _demo->mesh_bank[MESH_BANK_SKYBOX] = load_skybox();
     _demo->mesh_bank[MESH_BANK_GRASS1] = load_grass();
+    _demo->mesh_bank[MESH_BANK_PARTICLE1] = load_particle1();
     for (size_t i = 0; desc[i].bank != MESH_BANK_MAX; i++)
         _demo->mesh_bank[desc[i].bank] = mesh_load_obj(desc[i].path);
     for (size_t i = 0; i < MESH_BANK_MAX; i++)
