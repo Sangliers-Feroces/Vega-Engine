@@ -130,6 +130,44 @@ static void add_chalet(chunk_t *chunk, dvec3 p, dvec3 norm)
     entity3_trans_update(ent);
 }
 
+static void add_npc(chunk_t *chunk, dvec3 p)
+{
+    entity3 *ent;
+    entity3_tag_enemy_data_t *data;
+
+    if (!is_pos_valid(p))
+        return;
+    ent = world_add_entity();
+    ent->trans.is_physics = 1;
+    ent->trans.is_static = 0;
+    ent->trans.is_collision = 1;
+    ent->trans.slide_threshold = 0.85;
+    ent->trans.pos = dvec3_add(p, chunk->ents->trans.pos);
+    ent->trans.pos.y += 0.1;
+    ent->trans.speed = dvec3_init(0.0, -10.0, 0.0);
+    entity3_set_tag(ent, ENTITY3_TAG_ENEMY);
+    data = ent->tag_data;
+    data->chunk = chunk->pos;
+    data->max_speed = 2.0 + randf() * 2.0;
+    data->a_vel = 2.0 + randf() * 4.0;
+    entity3_trans_update(ent);
+    data->spawn = ent->trans.pos;
+    entity3_add_trigger(ent, trigger_create(dvec3_init(-1.0, 0.0, -1.0),
+    dvec3_init(1.0, 1.0, 1.0), TRIGGER_ON_HIT_NONE));
+    entity3_trans_update(ent);
+    ent = entity3_create(ent);
+    entity3_set_render(ent, 0, mesh_full_ref_bank_init(MESH_BANK_KNIGHT),
+    MATERIAL_WOOD);
+    ent->trans.scale = dvec3_init(12.0, 12.0, 12.0);
+    ent->trans.rot = dvec3_init(0.0, -M_PI / 2.0, 0.0);
+    ent->trans.pos = dvec3_init(0.0, 1.0, 0.0);
+    entity3_trans_update(ent);
+    ent->trans.is_static = 0;
+    ent->lod_dist = RENDER_OBJ_LOD_DIST_FAR;
+    data->atk = chunk_get_strength(chunk->pos) * 30.0;
+    data->is_npc = 1;
+}
+
 static void add_vill_ent_at(chunk_t *chunk, arr2d_dvec3_t arr, arr2d_dvec3_t n, vec2 uv)
 {
     size_t size = rand() % 8;
@@ -139,6 +177,8 @@ static void add_vill_ent_at(chunk_t *chunk, arr2d_dvec3_t arr, arr2d_dvec3_t n, 
         uv_a = vec2_add(uv, (vec2){randfn() / 10.0, (double)i / 30.0});
         add_chalet(chunk, arr2d_dvec3_sample_linear(arr, uv_a),
         arr2d_dvec3_sample_linear(n, uv_a));
+        uv_a = vec2_add(uv, (vec2){randfn() / 10.0, (double)i / 30.0});
+        add_npc(chunk, arr2d_dvec3_sample_linear(arr, uv_a));
     }
         
 }
