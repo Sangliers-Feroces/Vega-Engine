@@ -9,5 +9,7 @@
 
 void settings_init(void)
 {
+    _iu.settings.hints_state = WITH_HINT;
+    _iu.settings.screen_state = FULLSCREEN;
     setting_set_entities();
 }

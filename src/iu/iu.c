@@ -40,6 +40,8 @@ static const iutex_path_t iutex_path [] = {
     {IUTEX_PAUSE_QUIT, "res/ui/pause/pause_quit.png"},
     {IUTEX_SETTINGS_BG, "res/ui/settings/settings_bg.png"},
     {IUTEX_SETTINGS_VOLUME, "res/ui/settings/volume.png"},
+    {IUTEX_SETTINGS_CB_EMPTY, "res/ui/settings/cb_0.png"},
+    {IUTEX_SETTINGS_CB_FULL, "res/ui/settings/cb_1.png"},
     {0, NULL}
 };
 

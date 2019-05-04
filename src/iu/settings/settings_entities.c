@@ -32,6 +32,16 @@ static void set_slider(void)
     _iu.settings.entities[SETTINGS_VOL_SOUND].x_max = -0.325417f;
 }
 
+static void set_checkbox(void)
+{
+    entity_constructor(&_iu.settings.entities[SETTINGS_CB_SCREEN],
+    (entity2_param_t){ IUTEX_SETTINGS_CB_EMPTY,
+    (rect_t){{0.50f, 0.17f}, {0.1f, 0.15f}}, -0.998});
+    entity_constructor(&_iu.settings.entities[SETTINGS_CB_HINT],
+    (entity2_param_t){ IUTEX_SETTINGS_CB_EMPTY,
+    (rect_t){{0.50f, -0.13f}, {0.1f, 0.15f}}, -0.998});
+}
+
 void setting_set_entities(void)
 {
     entity_constructor(&_iu.settings.entities[SETTINGS_BG], (entity2_param_t){
@@ -46,6 +56,7 @@ void setting_set_entities(void)
     (entity2_param_t){IUTEX_SETTINGS_VOLUME,
     (rect_t){{-0.83f, -0.56f}, {0.6f, 0.2f}}, -0.998});
     set_slider();
+    set_checkbox();
 }
 
 void slider_free(void)

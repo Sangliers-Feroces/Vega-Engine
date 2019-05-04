@@ -7,6 +7,22 @@
 
 #include "headers.h"
 
+static void analyse_buttons_ext(settings_entitie_t i)
+{
+    switch (i) {
+        case SETTINGS_CB_HINT:
+            if (_demo->mouse.button_click)
+                _iu.settings.hints_state = !_iu.settings.hints_state;
+            break;
+        case SETTINGS_CB_SCREEN:
+            if (_demo->mouse.button_click)
+                _iu.settings.screen_state = !_iu.settings.screen_state;
+            break;
+        default:
+            return;
+    }
+}
+
 static void analyse_buttons(settings_entitie_t i)
 {
     switch (i) {
@@ -23,6 +39,7 @@ static void analyse_buttons(settings_entitie_t i)
                 setting_slider_move(&_iu.settings.entities[i]);
             break;
         default:
+            analyse_buttons_ext(i);
             return;
     }
 }

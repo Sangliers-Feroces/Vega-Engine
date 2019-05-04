@@ -19,8 +19,25 @@
     printf("x : %f || y : %f\n", relative_mouse_pos.x, relative_mouse_pos.y);
 }*/
 
+static void refresh_checkbox(void)
+{
+    if (_iu.settings.screen_state == FULLSCREEN)
+        _iu.settings.entities[SETTINGS_CB_SCREEN].index
+        = IUTEX_SETTINGS_CB_FULL;
+    else
+        _iu.settings.entities[SETTINGS_CB_SCREEN].index
+        = IUTEX_SETTINGS_CB_EMPTY;
+    if (_iu.settings.hints_state == WITH_HINT)
+        _iu.settings.entities[SETTINGS_CB_HINT].index
+        = IUTEX_SETTINGS_CB_FULL;
+    else
+        _iu.settings.entities[SETTINGS_CB_HINT].index
+        = IUTEX_SETTINGS_CB_EMPTY;
+}
+
 static void setting_draw(void)
 {
+    refresh_checkbox();
     for (int i = 0; i < SETTINGS_END; i++) {
         iu_entity_draw(_iu.settings.entities[i]);
         if (_iu.settings.entities[i].pattern == PATTERN_SLIDE_BUTTON)

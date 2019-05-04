@@ -12,6 +12,8 @@ typedef enum {
     SETTINGS_VOL_MAST,
     SETTINGS_VOL_MUSIC,
     SETTINGS_VOL_SOUND,
+    SETTINGS_CB_SCREEN,
+    SETTINGS_CB_HINT,
     SETTINGS_END
 } settings_entitie_t;
 
@@ -26,5 +28,7 @@ typedef enum {
 } s_hint_t;
 
 typedef struct {    
+    s_screen_t screen_state;
+    s_hint_t hints_state;
     entity2_t entities[SETTINGS_END];
 } settings_t;
