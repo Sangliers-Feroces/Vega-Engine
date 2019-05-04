@@ -57,8 +57,6 @@ void world_chunk_god_stalled(void)
 {
     ssize2 cam = chunk_get_pos(dmat4_trans(_demo->world.camera->trans.world));
 
-    if (world_chunk_get(cam)->terrain != NULL)
-        printf("is_on: %d\n", world_chunk_get(cam)->terrain->col.is_on);
     for (size_t i = 0; i < _demo->world.chunk_count; i++)
         update_stalled(_demo->world.chunk[i]);
     for (size_t i = 0; i < _demo->world.chunk_count; i++)
