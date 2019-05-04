@@ -52,19 +52,20 @@ static int is_collision(trigger_t *trigger, trigger_t *other)
     is_trigger_in_another(other, trigger);
 }
 
-static void trigger_update(trigger_t *trigger)
+void trigger_update(trigger_t *trigger)
 {
     for (size_t i = 0; i < _demo->world.triggers.count; i++) {
         if (_demo->world.triggers.trigger[i] == trigger)
             continue;
         if (is_collision(trigger, _demo->world.triggers.trigger[i]))
-            _demo->world.trigger_on_hit[trigger->on_hit](
-            trigger->ent, _demo->world.triggers.trigger[i]->ent);
+            _demo->world.trigger_on_hit[_demo->world.triggers.trigger[i]->on_hit](
+            _demo->world.triggers.trigger[i]->ent, trigger->ent);
     }
 }
 
 void world_update_triggers(void)
 {
+    return;
     for (size_t i = 0; i < _demo->world.triggers.count; i++)
         if (_demo->world.triggers.trigger[i]->on_hit != TRIGGER_ON_HIT_NONE)
             trigger_update(_demo->world.triggers.trigger[i]);

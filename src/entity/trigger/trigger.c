@@ -24,6 +24,8 @@ void trigger_attach(trigger_t *trigger)
 {
     if (trigger->ndx != ~0ULL)
         return;
+    if (trigger->on_hit == TRIGGER_ON_HIT_NONE)
+        return;
     vec_trigger_add(&_demo->world.triggers, trigger);
 }
 

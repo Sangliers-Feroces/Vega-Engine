@@ -12,6 +12,7 @@ static const tex_desc_t desc[] = {
     {TEX_WATER, "res/texture/water.jpg"},
     {TEX_VEG_GRASS1, "res/texture/veg/grass1.png"},
     {TEX_RED, "res/texture/red.png"},
+    {TEX_WOOD, "res/texture/bois.jpg"},
     {0, NULL}
 };
 

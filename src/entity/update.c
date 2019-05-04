@@ -38,6 +38,8 @@ void entity3_update_solo(entity3 *ent)
             entity3_physics(ent);
         entity3_trans_update(ent);
     }
+    if (ent->trigger != NULL)
+        trigger_update(ent->trigger);
 }
 
 static void kill_ent(entity3 *ent)
@@ -47,7 +49,7 @@ static void kill_ent(entity3 *ent)
     if (ent->tag == ENTITY3_TAG_ENEMY) {
         data = _demo->world.player->tag_data;
         data->xp++;
-        if (data->xp == data->max_xp) {
+        if (data->xp >= data->max_xp) {
             data->max_hp *= 1.1;
             data->hp = data->max_hp;
             data->xp = 0.0;

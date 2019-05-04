@@ -60,6 +60,7 @@ void vec_trigger_destroy(vec_trigger_t *vec);
 void entity3_add_trigger(entity3 *ent, trigger_t *trigger);
 void world_trigger_init(void);
 
+void trigger_update(trigger_t *trigger);
 void world_update_triggers(void);
 
 void entity3_update_tag_init(void);

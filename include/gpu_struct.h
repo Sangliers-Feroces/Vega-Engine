@@ -31,6 +31,7 @@ typedef enum {
     MATERIAL_SKYBOX,
     MATERIAL_VEG_GRASS1,
     MATERIAL_BLOOD,
+    MATERIAL_WOOD,
     MATERIAL_MAX
 } material_t;
 

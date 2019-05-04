@@ -96,6 +96,10 @@ typedef enum {
     MESH_BANK_SWORD,
     MESH_BANK_ENEMY1,
     MESH_BANK_PARTICLE1,
+    MESH_BANK_KNIGHT,
+    MESH_BANK_CASA_L0,
+    MESH_BANK_CASA_L1,
+    MESH_BANK_CASA_L2,
     MESH_BANK_MAX
 } mesh_bank_t;
 
