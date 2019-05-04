@@ -7,16 +7,28 @@
 
 #include "headers.h"
 
-static void walk_around(entity3 *ent, double a_dif)
+static void walk_around(entity3 *ent, double a_dif, double y_dif)
 {
     dvec3 d;
     entity3_tag_enemy_data_t *data = ent->tag_data;
 
+    if (ent->trans.is_grounded || (data->enemy_type == ENEMY_FISH))
     ent->trans.rot.y += a_dif *
-    _demo->win.framelen * data->a_vel * ent->trans.is_grounded;
+    _demo->win.framelen * data->a_vel;
     d = dvec3_muls(dmat4_mul_dvec3(ent->trans.world_rot,
     dvec3_init(1.0, 0.0, 0.0)), _demo->win.framelen * 10.0);
+    if ((data->enemy_type == ENEMY_FISH) && data->is_furious)
+        d.y += y_dif * _demo->win.framelen * 0.2;
     ent->trans.speed = dvec3_add(ent->trans.speed, d);
+}
+
+static void update_furious(entity3_tag_enemy_data_t *data, double dist, double y_p)
+{
+    if (data->enemy_type == ENEMY_FISH)
+        if (y_p > -42.0)
+            return;
+    if (dist < (data->min_furious * data->min_furious) && (!data->is_npc))
+            data->is_furious = 1;
 }
 
 void entity3_tag_update_enemy(entity3 *ent)
@@ -28,8 +40,7 @@ void entity3_tag_update_enemy(entity3 *ent)
     double dist = dvec3_dist_sq(dmat4_trans(ent->trans.world), p);
     double a_dif;
 
-    if (dist < (data->min_furious * data->min_furious) && (!data->is_npc))
-        data->is_furious = 1;
+    update_furious(data, dist, p.y);
     if (data->is_furious && (!data->is_npc))
         data->target = p;
     else {
@@ -40,10 +51,13 @@ void entity3_tag_update_enemy(entity3 *ent)
             data->is_moving = rand() % 2;
         }
     }
+    if (data->enemy_type == ENEMY_FISH)
+        ent->trans.speed = dvec3_add(ent->trans.speed,
+        dvec3_muls((dvec3){0.0, 1.0, 0.0}, _demo->win.framelen));
     v = dvec3_sub(data->target, e);
     a_dif = atan2(v.z, v.x) - ent->trans.rot.y;
     if (data->is_moving || data->is_furious)
-        walk_around(ent, a_dif);
+        walk_around(ent, a_dif, p.y - e.y);
     if ((dist < (4.0 * 4.0)) && ent->trans.is_grounded && (fabs(a_dif) < 0.5))
         ent->trans.speed.y = 5.0;
     if (ent->trans.life < FLT64_INF)
@@ -69,4 +83,5 @@ void entity3_tag_init_enemy(void *pdata)
     data->last_damage = 0.0;
     data->atk = 5.0;
     data->is_npc = 0;
+    data->enemy_type = ENEMY_BASE;
 }

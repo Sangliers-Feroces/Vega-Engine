@@ -18,6 +18,51 @@ double world_get_ground_level(dvec3 p, double bias)
         return inter.p.y + bias;
 }
 
+static void spawn_base(chunk_t *chunk, entity3 *ent, entity3_tag_enemy_data_t *data)
+{
+    ent->trans.pos.y = world_get_ground_level(ent->trans.pos, 0.1);
+    data->spawn = ent->trans.pos;
+    entity3_add_trigger(ent, trigger_create(dvec3_init(-1.0, 0.0, -1.0),
+    dvec3_init(1.0, 1.0, 1.0), TRIGGER_ON_HIT_NONE));
+    entity3_trans_update(ent);
+    ent = entity3_create(ent);
+    entity3_set_render(ent, 0, mesh_full_ref_bank_init(MESH_BANK_ENEMY_BASE),
+    MATERIAL_GRASS);
+    ent->trans.scale = dvec3_init(0.04, 0.04, 0.04);
+    entity3_trans_update(ent);
+    ent->trans.is_static = 0;
+    ent->lod_dist = RENDER_OBJ_LOD_DIST_FAR;
+    data->atk = chunk_get_strength(chunk->pos) * 30.0;
+    data->enemy_type = ENEMY_BASE;
+}
+
+static double inter(double a, double b, double ratio)
+{
+    return a * (1.0 - ratio) + b * ratio;
+}
+
+static void spawn_fish(chunk_t *chunk, entity3 *ent, entity3_tag_enemy_data_t *data)
+{
+    ent->trans.speed = dvec3_init(0.0, 0.0, 0.0);
+    entity3_add_trigger(ent, trigger_create(dvec3_init(-1.0, -1.0, -1.0),
+    dvec3_init(1.0, 1.0, 1.0), TRIGGER_ON_HIT_NONE));
+    ent->trans.pos.y = MIN(inter(ent->trans.pos.y, -42.0, randf()), 0.0);
+    data->spawn = ent->trans.pos;
+    entity3_trans_update(ent);
+    ent = entity3_create(ent);
+    entity3_set_render(ent, 0, mesh_full_ref_bank_init(MESH_BANK_ENEMY_FISH),
+    MATERIAL_BLOOD);
+    ent->trans.scale = dvec3_init(4.0, 4.0, 4.0);
+    ent->trans.rot = dvec3_init(0.0, M_PI, 0.0);
+    ent->trans.is_static = 0;
+    ent->lod_dist = RENDER_OBJ_LOD_DIST_FAR;
+    data->atk = chunk_get_strength(chunk->pos) * 30.0;
+    data->enemy_type = ENEMY_FISH;
+    data->min_furious = 32.0;
+    data->max_speed = 8.0 + randf() * 8.0;
+    entity3_trans_update(ent);
+}
+
 static void spawn_at(chunk_t *chunk, dvec3 pos)
 {
     entity3 *ent;
@@ -36,20 +81,11 @@ static void spawn_at(chunk_t *chunk, dvec3 pos)
     data->chunk = chunk->pos;
     data->max_speed = 4.0 + randf() * 4.0;
     data->a_vel = 2.0 + randf() * 4.0;
-    entity3_trans_update(ent);
     ent->trans.pos.y = world_get_ground_level(ent->trans.pos, 0.1);
-    data->spawn = ent->trans.pos;
-    entity3_add_trigger(ent, trigger_create(dvec3_init(-1.0, 0.0, -1.0),
-    dvec3_init(1.0, 1.0, 1.0), TRIGGER_ON_HIT_NONE));
-    entity3_trans_update(ent);
-    ent = entity3_create(ent);
-    entity3_set_render(ent, 0, mesh_full_ref_bank_init(MESH_BANK_ENEMY1),
-    MATERIAL_GRASS);
-    ent->trans.scale = dvec3_init(0.04, 0.04, 0.04);
-    entity3_trans_update(ent);
-    ent->trans.is_static = 0;
-    ent->lod_dist = RENDER_OBJ_LOD_DIST_FAR;
-    data->atk = chunk_get_strength(chunk->pos) * 30.0;
+    if (ent->trans.pos.y > -42.0)
+        spawn_base(chunk, ent, data);
+    else
+        spawn_fish(chunk, ent, data);
     chunk->enemy_count++;
 }
 

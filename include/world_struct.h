@@ -94,7 +94,8 @@ typedef enum {
     MESH_BANK_SKYBOX,
     MESH_BANK_GRASS1,
     MESH_BANK_SWORD,
-    MESH_BANK_ENEMY1,
+    MESH_BANK_ENEMY_BASE,
+    MESH_BANK_ENEMY_FISH,
     MESH_BANK_PARTICLE1,
     MESH_BANK_KNIGHT,
     MESH_BANK_CASA_L0,
@@ -299,6 +300,12 @@ typedef struct {
     double last_damage;
 } entity3_tag_player_data_t;
 
+typedef enum {
+    ENEMY_BASE,
+    ENEMY_SLIME,
+    ENEMY_FISH
+} enemy_type_t;
+
 typedef struct {
     ssize2 chunk;
     double max_speed;
@@ -313,4 +320,5 @@ typedef struct {
     double last_damage;
     double atk;
     int is_npc;
+    enemy_type_t enemy_type;
 } entity3_tag_enemy_data_t;

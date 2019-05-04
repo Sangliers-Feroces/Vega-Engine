@@ -9,7 +9,8 @@
 
 static const mesh_desc_t desc[] = {
     {MESH_BANK_SWORD, "res/model/veget/arm_sword.obj"},
-    {MESH_BANK_ENEMY1, "res/model/veget/casa_2.obj"},
+    {MESH_BANK_ENEMY_BASE, "res/model/veget/casa_2.obj"},
+    {MESH_BANK_ENEMY_FISH, "res/model/veget/fish.obj"},
     {MESH_BANK_CASA_L0, "res/model/veget/casa_2.obj"},
     {MESH_BANK_CASA_L1, "res/model/veget/casa_2.obj"},
     {MESH_BANK_CASA_L2, "res/model/veget/casa_2.obj"},

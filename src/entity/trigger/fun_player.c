@@ -63,6 +63,8 @@ void make_damage_to_player(entity3 *ent, dvec3 dir, double hp)
 
     if ((data->last_damage + 1.0) > ent->trans.t)
         return;
+    if (data->hp <= 0.0)
+        return;
     ent->trans.speed = dvec3_add(ent->trans.speed, dir);
     ent->trans.speed.y += 2.0;
     data->hp -= hp;
