@@ -7,7 +7,8 @@
 
 #include "headers.h"
 
-static const char *fmt = "fullscreen: %d\ndisplay hints: %d\n";
+static const char *fmt = "fullscreen: %d\ndisplay hints: %d\n"
+"master volume: %f\nmusic volume: %f\nsound volume: %f\n";
 
 static void load_settings(settings_t *res)
 {
@@ -15,7 +16,9 @@ static void load_settings(settings_t *res)
 
     if (file == NULL)
         return;
-    fscanf(file, fmt, &res->screen_state, &res->hints_state);
+    fscanf(file, fmt, &res->screen_state, &res->hints_state,
+    &_demo->sounds.master_vol, &_demo->sounds.music_vol,
+    &_demo->sounds.sound_vol);
     fclose(file);
 }
 
@@ -25,7 +28,9 @@ static void store_settings(settings_t to_store)
 
     if (file == NULL)
         return;
-    fprintf(file, fmt, to_store.screen_state, to_store.hints_state);
+    fprintf(file, fmt, to_store.screen_state, to_store.hints_state,
+    _demo->sounds.master_vol, _demo->sounds.music_vol,
+    _demo->sounds.sound_vol);
     fclose(file);
 }
 
@@ -35,6 +40,9 @@ settings_t settings_load(void)
 
     res.hints_state = WITH_HINT;
     res.screen_state = FULLSCREEN;
+    _demo->sounds.master_vol = 1.0f;
+    _demo->sounds.music_vol = 1.0f;
+    _demo->sounds.sound_vol = 1.0f;
     load_settings(&res);
     return res;
 }

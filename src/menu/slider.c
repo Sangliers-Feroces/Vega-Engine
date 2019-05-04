@@ -19,28 +19,23 @@ static void move_slider(demo_t *demo, entity2_t *slider)
     slider->rect.p.x += (relative_mouse_pos.x - slider->rect.p.x);
 }
 
-static int check_slider_side(entity2_t slider)
+static int check_slider_side(entity2_t *slider)
 {
-    if (slider.slider->rect.p.x <= slider.x_min ||
-        slider.slider->rect.p.x + slider.slider->rect.s.x >= slider.x_max) {
-        return 1;
-    }
-    return 0;
+    slider->slider->rect.p.x = CLAMP(slider->slider->rect.p.x,
+    slider->x_min, slider->x_max);
+    return 1;
 }
 
 float setting_slider_move(entity2_t *slider)
 {
-    float save_x;
     float segment_len;
     float segment_len2;
 
-    save_x = slider->slider->rect.p.x;
     move_slider(_demo, slider->slider);
-    if (check_slider_side((*slider)))
-        slider->slider->rect.p.x = save_x;
+    check_slider_side(slider);
     segment_len = (slider->x_max - slider->x_min);
     segment_len2 = (slider->slider->rect.p.x - slider->x_min);
     segment_len *= 100;
     segment_len2 *= 100;
-    return (segment_len2 / segment_len) - 0.05;
+    return (segment_len2 / segment_len);
 }

@@ -3,3 +3,4 @@ libxdworld.so
 lightmaps/
 maps/
 *.conf
+*.mtl

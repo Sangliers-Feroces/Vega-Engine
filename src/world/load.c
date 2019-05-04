@@ -39,15 +39,15 @@ static entity3* create_default_ents(void)
     cam->trans.pos = dvec3_init(0.0, 1.75, 0.0);
     entity3_trans_update(cam);
     sword = entity3_create(cam);
-    sword->trans.pos = dvec3_init(0.3, -1.5, 0.5);
-    sword->trans.rot = dvec3_init(0.0, 0.5, 0.2);
+    sword->trans.pos = dvec3_init(0.7, -0.7, 0.7);
     sword->trans.scale.x = -1.0;
     sword->trans.is_static = 0;
+    entity3_trans_update(sword);
     sword = entity3_create(sword);
     entity3_set_render(sword, 0, mesh_full_ref_bank_init(MESH_BANK_SWORD), MATERIAL_GRASS);
     sword->trans.is_static = 0;
-    entity3_add_trigger(sword, trigger_create(dvec3_init(0.5, -0.5, 0.0),
-    dvec3_init(-0.5, 2.0, 2.0), TRIGGER_ON_HIT_SWORD));
+    entity3_add_trigger(sword, trigger_create(dvec3_init(-0.5, 0.0, 0.0),
+    dvec3_init(0.5, 3.0, 1.0), TRIGGER_ON_HIT_SWORD));
     entity3_set_tag(sword, ENTITY3_TAG_SWORD);
     entity3_trans_update(sword);
     create_skybox(res);

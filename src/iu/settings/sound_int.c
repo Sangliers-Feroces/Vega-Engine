@@ -70,9 +70,6 @@ void sounds_quit(void)
 
 void sounds_init(void)
 {
-    _demo->sounds.master_vol = 1.0f;
-    _demo->sounds.music_vol = 1.0f;
-    _demo->sounds.sound_vol = 1.0f;
     _demo->sounds.curr_music = NO_MUSIC;
     set_sound();
     set_musics();

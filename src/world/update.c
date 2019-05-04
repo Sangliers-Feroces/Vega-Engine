@@ -95,6 +95,19 @@ static void chunk_update(chunk_t *chunk)
         entity3_move(chunk->ents_global->sub.ent[0], _demo->world.ents);
 }
 
+static void update_sound(void)
+{
+    double water_ratio;
+    dvec3 c = dmat4_trans(_demo->world.camera->trans.world);
+
+    if (c.y > -30.0)
+        water_ratio = 0.0;
+    else
+        water_ratio = CLAMP(-(c.y + 30.0) / 12.0, 0.0, 1.0);
+    sound_refresh_gain(SOUNDS_FOREST, (1.0 - water_ratio) * 100.0);
+    sound_refresh_gain(SOUNDS_WATER, water_ratio * 100.0);
+}
+
 void world_update(void)
 {
     world_chunk_god();
@@ -103,4 +116,5 @@ void world_update(void)
     entity3_global_update(_demo->world.ents);
     world_update_triggers();
     refresh_vp(_demo);
+    update_sound();
 }
