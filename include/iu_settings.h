@@ -7,3 +7,9 @@
 
 #pragma once
 
+void settings_init(void);
+void setting_set_entities(void);
+
+void setting_loop(void);
+
+int setting_poll_event(void);

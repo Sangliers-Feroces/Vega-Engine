@@ -22,14 +22,6 @@ static const iutex_path_t iutex_path [] = {
     {IUTEX_MENU_CURSOR, "res/ui/menu/new/cursor.png"},
     {IUTEX_EDITOR_GRAB, "res/model/editor/grab.png"},
     {IUTEX_EDITOR_SELECT, "res/model/editor/select.png"},
-    {IUTEX_SETTING_BG, "res/ui/menu/new/setting_bg.png"},
-    {IUTEX_SETTING_RES, "res/ui/menu/new/settings/setting_resolution.png"},
-    {IUTEX_SETTING_RES_1920_1080,
-    "res/ui/menu/new/settings/setting_res_1920x1080.png"},
-    {IUTEX_SETTING_RES_1600_900,
-    "res/ui/menu/new/settings/setting_res_1600x900.png"},
-    {IUTEX_SETTING_CONFIRM, "res/ui/menu/new/settings/confirmation.png"},
-    {IUTEX_SETTING_VOL_BACK, "res/ui/menu/new/settings/volume.png"},
     {IUTEX_SLIDER, "res/ui/menu/new/settings/slider.png"},
     {IUTEX_INVENT_BG, "res/ui/invent/invent_bg.png"},
     {IUTEX_TEXT_CADRE, "res/ui/dialogue_cadre.png"},
@@ -46,6 +38,7 @@ static const iutex_path_t iutex_path [] = {
     {IUTEX_PAUSE_SETTING, "res/ui/pause/pause_setting.png"},
     {IUTEX_PAUSE_MENU, "res/ui/pause/pause_menu.png"},
     {IUTEX_PAUSE_QUIT, "res/ui/pause/pause_quit.png"},
+    {IUTEX_SETTINGS_BG, "res/ui/settings/settings_bg.png"},
     {0, NULL}
 };
 
@@ -106,6 +99,7 @@ void iu_init(demo_t *demo)
     iu_set_vg_text();
     invent_init();
     iu_error_msg_init();
+    settings_init();
     //temp
     _iu.invent.inventory[1].item = ITEM_SWORD_1;
     _iu.invent.inventory[1].nb = 1;

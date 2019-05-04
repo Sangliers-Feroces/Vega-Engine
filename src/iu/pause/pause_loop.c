@@ -44,7 +44,7 @@ static void analyse_statement(void)
 {
     switch (_iu.pause.state) {
         case 2:
-            //call setting
+            setting_loop();
             reset_scaling();
             pause_loop();
             return;

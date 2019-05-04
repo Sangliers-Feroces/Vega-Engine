@@ -70,4 +70,6 @@ typedef struct {
     invent_t invent;
     //pause
     pause_t pause;
+    //settings
+    settings_t settings;
 } iu_t;

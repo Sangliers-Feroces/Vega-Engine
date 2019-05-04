@@ -14,4 +14,4 @@ typedef enum {
 
 typedef struct {
     entity2_t entities[SETTINGS_BG];
-} set_t;
+} settings_t;

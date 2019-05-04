@@ -14,7 +14,9 @@ static void invent_inventory_list_draw(void)
     for (int i = 0; i < 5; i++) {
         if (_iu.invent.inventory[_iu.invent.text_start + i].item == NO_ITEM)
             vg_text_reset_str(&_iu.invent.invent_items_name[i], "Empty", "");
-        else if (_iu.invent.inventory[_iu.invent.text_start + i].nb == 1)
+        else if (_iu.invent.inventory[_iu.invent.text_start + i].nb == 1
+        || _iu.invent.items_list[_iu.invent.inventory[
+        _iu.invent.text_start + i].item].type == TYPE_CAC)
             vg_text_reset_str(&_iu.invent.invent_items_name[i],
             _iu.invent.items_list[_iu.invent.inventory[
             _iu.invent.text_start + i].item].name, NULL);
