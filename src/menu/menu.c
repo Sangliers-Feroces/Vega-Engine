@@ -21,6 +21,7 @@ void menu_init(menu_t *menu)
 
 void menu_quit(menu_t *menu)
 {
+    (void)menu;
     _iu.data.is_focus = 0;
 }
 
