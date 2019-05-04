@@ -2,3 +2,4 @@ my_rpg
 libxdworld.so
 lightmaps/
 maps/
+*.conf

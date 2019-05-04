@@ -24,7 +24,7 @@ static void render_hdr_to_screen(void)
 void demo_loop(demo_t *demo)
 {
     world_load_map();
-    while (demo_poll_events(demo)) {
+    while (demo_poll_events(demo) && (!demo->win.do_reboot)) {
         demo_update_cursor_visibility(demo);
         clocks_refresh_time();
         glBindFramebuffer(GL_FRAMEBUFFER, _demo->buf.hdr_framebuffer);
@@ -47,7 +47,14 @@ int demo(arg_t args)
         demo_quit(demo);
         return 0;
     }
-    demo_loop(demo);
+    while (1) {
+        demo_loop(demo);
+        if (demo->win.do_reboot) {
+            demo_quit(demo);
+            demo = demo_init();
+        } else
+            break;
+    }
     demo_quit(demo);
     return (0);
 }
