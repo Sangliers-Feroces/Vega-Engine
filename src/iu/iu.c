@@ -22,7 +22,7 @@ static const iutex_path_t iutex_path [] = {
     {IUTEX_MENU_CURSOR, "res/ui/menu/new/cursor.png"},
     {IUTEX_EDITOR_GRAB, "res/model/editor/grab.png"},
     {IUTEX_EDITOR_SELECT, "res/model/editor/select.png"},
-    {IUTEX_SLIDER, "res/ui/menu/new/settings/slider.png"},
+    {IUTEX_SLIDER, "res/ui/settings/slider.png"},
     {IUTEX_INVENT_BG, "res/ui/invent/invent_bg.png"},
     {IUTEX_TEXT_CADRE, "res/ui/dialogue_cadre.png"},
     {IUTEX_FONT_MINECRAFT, "res/ui/font/minecraft.png"},
@@ -39,6 +39,7 @@ static const iutex_path_t iutex_path [] = {
     {IUTEX_PAUSE_MENU, "res/ui/pause/pause_menu.png"},
     {IUTEX_PAUSE_QUIT, "res/ui/pause/pause_quit.png"},
     {IUTEX_SETTINGS_BG, "res/ui/settings/settings_bg.png"},
+    {IUTEX_SETTINGS_VOLUME, "res/ui/settings/volume.png"},
     {0, NULL}
 };
 

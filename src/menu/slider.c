@@ -28,14 +28,14 @@ static int check_slider_side(entity2_t slider)
     return 0;
 }
 
-float menu_slider_move(demo_t *demo, entity2_t *slider)
+float setting_slider_move(entity2_t *slider)
 {
     float save_x;
     float segment_len;
     float segment_len2;
 
     save_x = slider->slider->rect.p.x;
-    move_slider(demo, slider->slider);
+    move_slider(_demo, slider->slider);
     if (check_slider_side((*slider)))
         slider->slider->rect.p.x = save_x;
     segment_len = (slider->x_max - slider->x_min);

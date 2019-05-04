@@ -95,5 +95,6 @@ void demo_quit(demo_t *demo)
     sfRenderWindow_destroy(demo->win.window);
     sfClock_destroy(demo->win.frametime);
     clocks_quit(demo);
+    slider_free();
     free(demo);
 }

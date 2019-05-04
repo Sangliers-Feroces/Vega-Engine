@@ -13,3 +13,9 @@ void setting_set_entities(void);
 void setting_loop(void);
 
 int setting_poll_event(void);
+
+void display_x(demo_t *demo);
+
+void slider_free(void);
+
+float setting_slider_move(entity2_t *slider);
