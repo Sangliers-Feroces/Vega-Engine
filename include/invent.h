@@ -8,6 +8,7 @@
 #pragma once
 
 void invent_init(void);
+void invent_quit(void);
 
 int invent_poll_event(void);
 

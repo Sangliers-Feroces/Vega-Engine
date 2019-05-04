@@ -38,6 +38,24 @@ static void set_desc(void)
     vg_text_set_size(&_iu.invent.desc_value, (vec2){0.02f, 0.03f});
 }
 
+static void invent_load(void)
+{
+    file_read_t file = file_read_create("maps/inv");
+
+    if (file.data == NULL)
+        return;
+    file_read(&file, &_iu.invent.inventory, 11 * sizeof(inventory_t));
+    file_read_flush(&file);
+}
+
+static void invent_store(void)
+{
+    file_write_t file = file_write_create();
+
+    file_write(&file, &_iu.invent.inventory, 11 * sizeof(inventory_t));
+    file_write_flush(&file, "maps/inv");
+}
+
 void invent_init(void)
 {
     invent_set_items();
@@ -50,6 +68,7 @@ void invent_init(void)
         _iu.invent.inventory[i].item = NO_ITEM;
         _iu.invent.inventory[i].nb = 0;
     }
+    invent_load();
     for (int i = 0; i < 5; i++) {
         _iu.invent.invent_items_name[i] = vg_text_create(NULL, NULL);
         vg_text_set_position(&_iu.invent.invent_items_name[i],
@@ -58,4 +77,9 @@ void invent_init(void)
     }
     set_desc();
     invent_stat_display_init();
+}
+
+void invent_quit(void)
+{
+    invent_store();
 }
