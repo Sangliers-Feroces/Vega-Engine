@@ -18,8 +18,8 @@ typedef enum {
 } settings_entitie_t;
 
 typedef enum {
-    FULLSCREEN,
-    WINDOWED
+    WINDOWED,
+    FULLSCREEN
 } s_screen_t;
 
 typedef enum {
