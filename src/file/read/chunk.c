@@ -54,6 +54,5 @@ chunk_t* file_read_chunk(file_read_t *file)
     res->ents = file_read_entity3(file, NULL);
     res->ents_global = file_read_entity3(file, NULL);
     res->terrain = entity3_seek_tag(res->ents, ENTITY3_TAG_TERRAIN);
-    res->is_stalled = file_read_int(file);
     return res;
 }

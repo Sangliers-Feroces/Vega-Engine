@@ -36,6 +36,7 @@ void entity3_global_update(entity3 *ent)
 {
     dvec3 player = dmat4_trans(_demo->world.player->trans.world);
     dvec3 p;
+    int is_far;
 
     entity3_update_solo(ent);
     for (size_t i = 0; i < ent->sub.count; i++) {
@@ -44,8 +45,9 @@ void entity3_global_update(entity3 *ent)
             i -= try_unload_ent(ent->sub.ent[i]);
             continue;
         }
-        if (dvec3_dist_sq(dvec3_init(player.x, 0.0, player.z),
-        dvec3_init(p.x, 0.0, p.z)) > (CHUNK_SIZE / 2.0) * (CHUNK_SIZE / 4.0))
+        is_far = dvec3_dist_sq(dvec3_init(player.x, 0.0, player.z),
+        dvec3_init(p.x, 0.0, p.z)) > (CHUNK_SIZE / 4.0) * (CHUNK_SIZE / 4.0);
+        if (is_far)
             continue;
         entity3_update(ent->sub.ent[i]);
     }

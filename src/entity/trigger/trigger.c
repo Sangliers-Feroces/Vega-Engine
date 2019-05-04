@@ -34,6 +34,7 @@ void trigger_detach(trigger_t *trigger)
     _demo->world.triggers.trigger[trigger->ndx] =
     _demo->world.triggers.trigger[--_demo->world.triggers.count];
     _demo->world.triggers.trigger[trigger->ndx]->ndx = trigger->ndx;
+    trigger->ndx = ~0ULL;
 }
 
 void trigger_destroy(trigger_t *trigger)
