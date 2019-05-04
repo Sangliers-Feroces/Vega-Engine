@@ -15,6 +15,16 @@ typedef enum {
     SETTINGS_END
 } settings_entitie_t;
 
-typedef struct {
+typedef enum {
+    FULLSCREEN,
+    WINDOWED
+} s_screen_t;
+
+typedef enum {
+    NO_HINT,
+    WITH_HINT
+} s_hint_t;
+
+typedef struct {    
     entity2_t entities[SETTINGS_END];
 } settings_t;

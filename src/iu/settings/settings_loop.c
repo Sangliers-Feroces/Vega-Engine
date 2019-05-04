@@ -30,10 +30,12 @@ static void setting_draw(void)
 
 void setting_loop(void)
 {
+    _iu.data.is_focus = 1;
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     do {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         setting_draw();
         sfRenderWindow_display(_demo->win.window);
     } while (setting_poll_event());
+    _iu.data.is_focus = 0;
 }
