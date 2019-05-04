@@ -13,6 +13,7 @@ typedef enum {
     TEX_VEG_GRASS1,
     TEX_RED,
     TEX_WOOD,
+    TEX_NPC1,
     TEX_MAX
 } tex_t;
 

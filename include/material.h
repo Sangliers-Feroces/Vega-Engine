@@ -21,3 +21,4 @@ void material_fun_veg_grass1_entity(dmat4 mvp, dmat4 world, dmat4 rot);
 void material_fun_blood_entity(dmat4 mvp, dmat4 world, dmat4 rot);
 
 void material_fun_wood_entity(dmat4 mvp, dmat4 world, dmat4 rot);
+void material_fun_npc1_entity(dmat4 mvp, dmat4 world, dmat4 rot);

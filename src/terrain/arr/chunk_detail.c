@@ -156,11 +156,17 @@ static void add_npc(chunk_t *chunk, dvec3 p)
     dvec3_init(1.0, 1.0, 1.0), TRIGGER_ON_HIT_NONE));
     entity3_trans_update(ent);
     ent = entity3_create(ent);
-    entity3_set_render(ent, 0, mesh_full_ref_bank_init(MESH_BANK_KNIGHT),
-    MATERIAL_WOOD);
-    ent->trans.scale = dvec3_init(12.0, 12.0, 12.0);
-    ent->trans.rot = dvec3_init(0.0, -M_PI / 2.0, 0.0);
-    ent->trans.pos = dvec3_init(0.0, 1.0, 0.0);
+    if ((rand() % 2) == 0) {
+        entity3_set_render(ent, 0, mesh_full_ref_bank_init(MESH_BANK_KNIGHT),
+        MATERIAL_WOOD);
+        ent->trans.scale = dvec3_init(1.5, 1.5, 1.5);
+        ent->trans.rot = dvec3_init(0.0, -M_PI / 2.0, 0.0);
+    } else {
+        entity3_set_render(ent, 0, mesh_full_ref_bank_init(MESH_BANK_NPC1),
+        MATERIAL_NPC1);
+        ent->trans.scale = dvec3_init(1.5, 1.5, 1.5);
+        ent->trans.rot = dvec3_init(0.0, -M_PI / 2.0, 0.0);
+    }
     entity3_trans_update(ent);
     ent->trans.is_static = 0;
     ent->lod_dist = RENDER_OBJ_LOD_DIST_FAR;
