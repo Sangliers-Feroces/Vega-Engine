@@ -119,4 +119,5 @@ typedef struct {
     material_full_t material[MATERIAL_MAX];
     texture2 *tex[TEX_MAX];
     mesh_full_t *mesh_bank[MESH_BANK_MAX];
+    sound_t sounds;
 } demo_t;

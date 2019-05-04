@@ -28,15 +28,19 @@ static void analyse_buttons(settings_entitie_t i)
     switch (i) {
         case SETTINGS_VOL_MAST:
             if (!_demo->mouse.button_release)
+                _demo->sounds.master_vol =
                 setting_slider_move(&_iu.settings.entities[i]);
             break;
         case SETTINGS_VOL_MUSIC:
             if (!_demo->mouse.button_release)
-                setting_slider_move(&_iu.settings.entities[i]);
+                _demo->sounds.music_vol =
+                setting_slider_move(&_iu.settings.entities[i]) * 100;
             break;
         case SETTINGS_VOL_SOUND:
             if (!_demo->mouse.button_release)
-                setting_slider_move(&_iu.settings.entities[i]);
+                _demo->sounds.sound_vol =
+                setting_slider_move(&_iu.settings.entities[i]) * 100;
+            play_new_sound(SOUNDS_SELECT);
             break;
         default:
             analyse_buttons_ext(i);

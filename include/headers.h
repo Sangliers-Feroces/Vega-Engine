@@ -61,3 +61,4 @@
 #include "vg_text.h"
 #include "file.h"
 #include "invent.h"
+#include "sound.h"

@@ -11,8 +11,6 @@ void menu_init(menu_t *menu)
 {
     _iu.data.is_focus = 1;
     demo_update_cursor_visibility(_demo);
-    menu->music = sfMusic_createFromFile("res/musics/main_music.ogg");
-    sfMusic_play(menu->music);
     menu->edited_setting = 0;
     menu->first_save = 0;
     menu->state = -1;
@@ -23,7 +21,6 @@ void menu_init(menu_t *menu)
 
 void menu_quit(menu_t *menu)
 {
-    sfMusic_destroy(menu->music);
     _iu.data.is_focus = 0;
 }
 

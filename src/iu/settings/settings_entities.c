@@ -22,14 +22,14 @@ static void set_slider(void)
     (entity2_param_t){
     IUTEX_SLIDER, (rect_t){{-0.325417f, -0.17f}, {0.05f, 0.05f}}, -0.999});
     _iu.settings.entities[SETTINGS_VOL_MUSIC].x_min = -0.797083f;
-    _iu.settings.entities[SETTINGS_VOL_MUSIC].x_max = -0.325417f;
+    _iu.settings.entities[SETTINGS_VOL_MUSIC].x_max = -0.285417f;
     _iu.settings.entities[SETTINGS_VOL_SOUND].slider =
     malloc_safe(sizeof(entity2_t));
     entity_constructor(_iu.settings.entities[SETTINGS_VOL_SOUND].slider,
     (entity2_param_t){
     IUTEX_SLIDER, (rect_t){{-0.325417f, -0.505f}, {0.05f, 0.05f}}, -0.999});
     _iu.settings.entities[SETTINGS_VOL_SOUND].x_min = -0.797083f;
-    _iu.settings.entities[SETTINGS_VOL_SOUND].x_max = -0.325417f;
+    _iu.settings.entities[SETTINGS_VOL_SOUND].x_max = -0.285417f;
 }
 
 static void set_checkbox(void)
@@ -61,6 +61,6 @@ void setting_set_entities(void)
 
 void slider_free(void)
 {
-    for (int i = SETTINGS_VOL_MAST; i < SETTINGS_VOL_SOUND; i++)
+    for (int i = SETTINGS_VOL_MAST; i < SETTINGS_VOL_SOUND + 1; i++)
         free(_iu.settings.entities[i].slider);
 }

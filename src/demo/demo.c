@@ -43,6 +43,7 @@ int demo(arg_t args)
     demo_t *demo = demo_init();
 
     (void)args;
+    play_new_music(MUSICS_METRO);
     if (!start(demo)) {
         demo_quit(demo);
         return 0;

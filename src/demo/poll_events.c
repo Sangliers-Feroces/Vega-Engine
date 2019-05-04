@@ -60,5 +60,6 @@ int demo_poll_events(demo_t *demo)
     demo_poll_mouse_pos(demo);
     poll_click(demo);
     demo_poll_input(demo);
+    refresh_sound_volume();
     return (1);
 }

@@ -80,6 +80,7 @@ demo_t* demo_init(void)
     mesh_bank_init();
     world_init(res);
     demo_update_cursor_visibility(res);
+    sounds_init();
     return (res);
 }
 
@@ -96,5 +97,6 @@ void demo_quit(demo_t *demo)
     sfClock_destroy(demo->win.frametime);
     clocks_quit(demo);
     slider_free();
+    sounds_quit();
     free(demo);
 }

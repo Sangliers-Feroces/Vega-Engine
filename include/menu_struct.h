@@ -7,8 +7,6 @@
 
 #pragma once
 
-#include "menu_setting_struct.h"
-
 typedef enum {
     MENU_BG_MAIN,
     MENU_BG_SETTING,
