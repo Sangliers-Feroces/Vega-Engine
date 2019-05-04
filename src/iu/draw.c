@@ -31,14 +31,6 @@ static void draw_current_dialogue(void)
     vg_dialogue_draw(&_iu.dialogue_list[_iu.current_dialogue]);
 }
 
-static void temp_dialogue_test(void)
-{
-    if (_iu.dialogue_list[DIALOGUE_WELCOME].read == 0) {
-        _iu.dialogue_list[DIALOGUE_WELCOME].read = 1;
-        _iu.current_dialogue = DIALOGUE_WELCOME;
-    }
-}
-
 static void refresh_fps(void)
 {
     char buff[10];
@@ -50,8 +42,8 @@ static void refresh_fps(void)
 
 void iu_display(void)
 {
+    quest_check_success(_demo->quest.curr_main_quest);
     glUseProgram(_demo->shader[SHADER_IU].program);
-    temp_dialogue_test();
     draw_current_dialogue();
     refresh_fps();
     if (_iu.data.is_invent)

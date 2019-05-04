@@ -33,5 +33,7 @@ void vg_dialogue_quit(void);
 void iu_set_dialogue(void);
 
 //effects
-void vg_effect_no_effect(void);
+void vg_next_mq(void);
+void vg_no_effect(void);
 void vg_effect_quit(void);
+void vg_end_storie(void);

@@ -98,21 +98,11 @@ void iu_init(demo_t *demo)
     set_entities();
     iu_text_init();
     iu_set_font();
-    iu_set_dialogue();
     iu_set_vg_text();
     invent_init();
     iu_error_msg_init();
     settings_init();
-    //temp
-    _iu.invent.inventory[1].item = ITEM_SWORD_1;
-    _iu.invent.inventory[1].nb = 1;
-    _iu.invent.inventory[3].item = ITEM_SWORD_2;
-    _iu.invent.inventory[3].nb = 1;
-    _iu.invent.inventory[5].item = ITEM_APPLE;
-    _iu.invent.inventory[5].nb = 5;
-    _iu.invent.inventory[9].item = ITEM_BOAT;
-    _iu.invent.inventory[9].nb = 1;
-    _iu.invent.inventory[10].item = NO_ITEM;
+    quest_init();
 }
 
 void iu_quit(void)

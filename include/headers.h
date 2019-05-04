@@ -62,3 +62,4 @@
 #include "file.h"
 #include "invent.h"
 #include "sound.h"
+#include "quests.h"

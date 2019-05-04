@@ -19,11 +19,6 @@ typedef enum {
 } iuinvent_t;
 
 typedef enum {
-    DIALOGUE_WELCOME,
-    DIALOGUE_END
-} dialogues_list_t;
-
-typedef enum {
     ERROR_INVENT_FULL,
     WARNING_SCREEN_MODIF,
     ERROR_MSG_END

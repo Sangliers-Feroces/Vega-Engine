@@ -7,7 +7,7 @@
 
 #include "headers.h"
 
-void vg_effect_no_effect(void)
+void vg_no_effect(void)
 {
     return;
 }
@@ -15,4 +15,16 @@ void vg_effect_no_effect(void)
 void vg_effect_quit(void)
 {
     sfRenderWindow_close(_demo->win.window);
+}
+
+void vg_next_mq(void)
+{
+    _demo->quest.curr_main_quest++;
+    main_quest_start();
+}
+
+void vg_end_storie(void)
+{
+    _demo->quest.curr_main_quest = NO_QUEST;
+    _iu.current_dialogue = DIALOGUE_END_STORIE;
 }

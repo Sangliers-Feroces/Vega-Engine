@@ -19,5 +19,6 @@ int setting_poll_event(void);
 void display_x(demo_t *demo);
 
 void slider_free(void);
+void setting_set_slider(void);
 
 float setting_slider_move(entity2_t *slider);

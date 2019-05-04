@@ -19,9 +19,25 @@ typedef enum {
 } iucadre_t;
 
 typedef enum {
+    DIALOGUE_WELCOME,
+    DIALOGUE_MAIN1_START,
+    DIALOGUE_MAIN2_START,
+    DIALOGUE_END_STORIE,
+    DIALOGUE_END
+} dialogues_list_t;
+
+typedef enum {
     TEXT_TEST,
     TEXT_TEST_1,
     TEXT_TEST_2,
+    TEXT_MAIN1_START1,
+    TEXT_MAIN1_START2,
+    TEXT_MAIN1_START3,
+    TEXT_MAIN1_SCHOICE,
+    TEXT_MAIN2_START1,
+    TEXT_END_1,
+    TEXT_END_2,
+    TEXT_END_CHOICE,
     TEXT_INVENT_FULL,
     TEXT_WARNING_SCREEN,
     TEXT_END
