@@ -22,6 +22,7 @@ void menu_init(menu_t *menu)
 void menu_quit(menu_t *menu)
 {
     (void)menu;
+    stop_current_music();
     _iu.data.is_focus = 0;
 }
 
@@ -29,6 +30,7 @@ int start(demo_t *demo)
 {
     menu_t menu;
 
+    play_new_music(MUSICS_MENU, 1, 50);
     menu_init(&menu);
     /*if (demo->skip_intro)
         if (!intro(demo))

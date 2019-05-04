@@ -38,16 +38,27 @@ void demo_loop(demo_t *demo)
     }
 }
 
+static void jukebox(int start)
+{
+    if (start) {
+        play_new_sound(SOUNDS_FOREST, 1, 80);
+        play_new_sound(SOUNDS_WATER, 1, 50);
+    } else {
+        stop_sound(SOUNDS_FOREST);
+        stop_sound(SOUNDS_WATER);
+    }
+}
+
 int demo(arg_t args)
 {
     demo_t *demo = demo_init();
 
     (void)args;
-    play_new_music(MUSICS_METRO);
     if (!start(demo)) {
         demo_quit(demo);
         return 0;
     }
+    jukebox(1);
     while (1) {
         demo_loop(demo);
         if (demo->win.do_reboot) {
@@ -56,6 +67,7 @@ int demo(arg_t args)
         } else
             break;
     }
+    jukebox(0);
     demo_quit(demo);
     return (0);
 }

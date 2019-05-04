@@ -35,7 +35,7 @@ static void refresh_checkbox(void)
         = IUTEX_SETTINGS_CB_EMPTY;
 }
 
-static void setting_draw(void)
+static void setting_draw(s_screen_t warning)
 {
     refresh_checkbox();
     for (int i = 0; i < SETTINGS_END; i++) {
@@ -43,6 +43,8 @@ static void setting_draw(void)
         if (_iu.settings.entities[i].pattern == PATTERN_SLIDE_BUTTON)
             iu_entity_draw((*_iu.settings.entities[i].slider));
     }
+    if (_iu.settings.screen_state != warning)
+        vg_text_draw(_iu.data.error_message[WARNING_SCREEN_MODIF]);
 }
 
 void setting_loop(void)
@@ -54,7 +56,7 @@ void setting_loop(void)
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     do {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        setting_draw();
+        setting_draw(before.screen_state);
         sfRenderWindow_display(_demo->win.window);
     } while (setting_poll_event());
     _iu.data.is_focus = 0;

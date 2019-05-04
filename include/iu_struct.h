@@ -25,6 +25,7 @@ typedef enum {
 
 typedef enum {
     ERROR_INVENT_FULL,
+    WARNING_SCREEN_MODIF,
     ERROR_MSG_END
 } error_msg_t;
 

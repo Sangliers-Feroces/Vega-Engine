@@ -11,6 +11,8 @@ const text_src_t text_array[] = {
     {TEXT_TEST, "Welcome in the Vega World ! Here the world is a bit strange"},
     {TEXT_TEST_1, "You can't fight, you cant leave you're cuck ! GLHF to understand the equations behind these world"},
     {TEXT_TEST_2, "Do you want to kys ?"},
+    {TEXT_INVENT_FULL, "Inventory Full !!"},
+    {TEXT_WARNING_SCREEN, "Modifications will be applied once returned in the game"},
     {0, NULL}
 };
 

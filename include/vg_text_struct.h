@@ -22,6 +22,8 @@ typedef enum {
     TEXT_TEST,
     TEXT_TEST_1,
     TEXT_TEST_2,
+    TEXT_INVENT_FULL,
+    TEXT_WARNING_SCREEN,
     TEXT_END
 } text_index_t;
 

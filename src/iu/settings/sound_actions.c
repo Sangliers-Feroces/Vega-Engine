@@ -7,30 +7,34 @@
 
 #include "headers.h"
 
-void play_new_music(musics_t index)
+void play_new_music(musics_t index, int loop, float alt_gain)
 {
+    _demo->sounds.musics[index].gain = alt_gain;
     if (_demo->sounds.curr_music != NO_MUSIC)
-        sfMusic_stop(_demo->sounds.musics[_demo->sounds.curr_music]);
-    sfMusic_play(_demo->sounds.musics[index]);
+        sfMusic_stop(_demo->sounds.musics[_demo->sounds.curr_music].sample);
+    sfMusic_setVolume(_demo->sounds.musics[index].sample,
+    _demo->sounds.musics[index].gain);
+    sfMusic_play(_demo->sounds.musics[index].sample);
+    sfMusic_setLoop(_demo->sounds.musics[index].sample, loop);
+    _demo->sounds.curr_music = index;
 }
 
 void stop_current_music(void)
 {
     if (_demo->sounds.curr_music != NO_MUSIC)
-        sfMusic_stop(_demo->sounds.musics[_demo->sounds.curr_music]);
+        sfMusic_stop(_demo->sounds.musics[_demo->sounds.curr_music].sample);
 }   
 
-void refresh_sound_volume(void)
+void stop_sound(sounds_t index)
 {
-    for (int i = 0; i < MUSICS_END; i++)
-        sfMusic_setVolume(_demo->sounds.musics[i],
-        (_demo->sounds.music_vol * _demo->sounds.master_vol));
-    for (int i = 0; i < SOUNDS_END; i++)
-        sfSound_setVolume(_demo->sounds.sounds[i],
-        (_demo->sounds.sound_vol * _demo->sounds.master_vol));
+    sfSound_stop(_demo->sounds.sounds[index].sample);
 }
 
-void play_new_sound(sounds_t index)
+void play_new_sound(sounds_t index, int loop, float alt_gain)
 {
-    sfSound_play(_demo->sounds.sounds[index]);
+    _demo->sounds.sounds[index].gain = alt_gain;
+    sfSound_setVolume(_demo->sounds.sounds[index].sample,
+    _demo->sounds.sounds[index].gain);
+    sfSound_play(_demo->sounds.sounds[index].sample);
+    sfSound_setLoop(_demo->sounds.sounds[index].sample, loop);
 }

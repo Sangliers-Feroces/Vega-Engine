@@ -9,9 +9,16 @@
 
 void iu_error_msg_init(void)
 {
-    _iu.data.error_message[ERROR_INVENT_FULL] = vg_text_create("Inventory Full !!", NULL);
-    vg_text_set_position(&_iu.data.error_message[ERROR_INVENT_FULL], (vec2){-0.10, -0.05f});
+    _iu.data.error_message[ERROR_INVENT_FULL] =
+    vg_text_create(_iu.text_src[TEXT_INVENT_FULL], NULL);
+    vg_text_set_position(&_iu.data.error_message[ERROR_INVENT_FULL],
+    (vec2){-0.10, -0.05f});
+    _iu.data.error_message[WARNING_SCREEN_MODIF] =
+    vg_text_create(_iu.text_src[TEXT_WARNING_SCREEN], NULL);
+    vg_text_set_position(&_iu.data.error_message[WARNING_SCREEN_MODIF],
+    (vec2){0.03f, 0.10f});
 }
+
 
 void set_entities(void)
 {

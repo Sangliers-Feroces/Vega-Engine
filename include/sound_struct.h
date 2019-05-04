@@ -9,7 +9,7 @@
 
 typedef enum {
     MUSICS_METRO,
-    MUSICS_HL2,
+    MUSICS_MENU,
     MUSICS_END,
     NO_MUSIC
 } musics_t;
@@ -17,6 +17,8 @@ typedef enum {
 typedef enum {
     SOUNDS_SELECT,
     SOUNDS_MOVE_MENU,
+    SOUNDS_WATER,
+    SOUNDS_FOREST,
     SOUNDS_END
 } sounds_t;
 
@@ -31,11 +33,21 @@ typedef struct {
 }  musics_decs_t;
 
 typedef struct {
+    sfMusic *sample;
+    float gain;
+} music_track_t;
+
+typedef struct {
+    sfSound *sample;
+    float gain;
+} sound_strack_t;
+
+typedef struct {
     musics_t curr_music;
     float master_vol;
     float music_vol;
     float sound_vol;
-    sfMusic *musics[MUSICS_END];
     sfSoundBuffer *sb[SOUNDS_END];
-    sfSound *sounds[SOUNDS_END];
+    music_track_t musics[MUSICS_END];
+    sound_strack_t sounds[SOUNDS_END];
 } sound_t;
