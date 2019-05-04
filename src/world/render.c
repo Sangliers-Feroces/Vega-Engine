@@ -7,12 +7,6 @@
 
 #include "headers.h"
 
-static void gl_set_stuff(void)
-{
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, _lightmaps.base->id);
-}
-
 static void gl_reset_stuff(void)
 {
     glBindVertexArray(0);
@@ -28,7 +22,6 @@ static void chunk_render(chunk_t *chunk)
 
 void world_render(void)
 {
-    gl_set_stuff();
     dmat4_copy(_demo->world.camera->trans.world,
     _demo->world.skybox->trans.world);
     for (size_t i = 0; i < _demo->world.chunk_count; i++)

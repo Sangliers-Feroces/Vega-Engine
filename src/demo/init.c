@@ -22,13 +22,11 @@ void init(void)
     glEnable(GL_BLEND);
     glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
     glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
-    lightmap_init();
 }
 
 void quit(void)
 {
     thread_quit();
-    lightmap_quit();
 }
 
 void gl_gen(demo_t *demo)
