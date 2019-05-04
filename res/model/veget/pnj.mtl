@@ -1,0 +1,26 @@
+# Blender MTL File: 'None'
+# Material Count: 2
+
+newmtl 14052PirateShipmateMuscular_body
+Ns 9.803922
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd /home/maxime/Downloads/Pirate_Shipmate_Muscular_v1_L3.123cbc1848bb-675f-417f-a7d6-7ab15ad2acaf/14052PirateShipmateMuscular_body_diffuse.jpg
+map_Ka /home/maxime/Downloads/Pirate_Shipmate_Muscular_v1_L3.123cbc1848bb-675f-417f-a7d6-7ab15ad2acaf/14052PirateShipmateMuscular_body_diffuse.jpg
+
+newmtl 14052PirateShipmateMuscular_cloth
+Ns 9.803922
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd /home/maxime/Downloads/Pirate_Shipmate_Muscular_v1_L3.123cbc1848bb-675f-417f-a7d6-7ab15ad2acaf/14052PirateShipmateMuscular_cloth_diffuse.jpg
+map_Ka /home/maxime/Downloads/Pirate_Shipmate_Muscular_v1_L3.123cbc1848bb-675f-417f-a7d6-7ab15ad2acaf/14052PirateShipmateMuscular_cloth_diffuse.jpg
