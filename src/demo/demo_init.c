@@ -41,10 +41,14 @@ static void refresh_win_size(void)
 
 static void init_win(demo_t *demo)
 {
+    sfUint32 style = sfClose;
+
+    if (settings_load().screen_state == FULLSCREEN)
+        style |= sfFullscreen;
     demo->win.w = 1920;
     demo->win.h = 1080;
     demo->win.window = sfRenderWindow_create((sfVideoMode){demo->win.w,
-    demo->win.h, 32}, "rtx on !", sfClose | sfFullscreen,
+    demo->win.h, 32}, "rtx on !", style,
     &(sfContextSettings){24, 8, 2, 4, 3, 0, 1});
     if (demo->win.window == NULL)
         exit_full_custom();
@@ -55,6 +59,7 @@ static void init_win(demo_t *demo)
     demo->win.framelen = 1.0f / 60.0f;
     demo->win.fps_to_display = 60;
     demo->win.has_focus = 1;
+    demo->win.do_reboot = 0;
     sfWindow_setVerticalSyncEnabled((sfWindow*)demo->win.window, sfTrue);
     if (!init_mouse(demo))
         exit_full_custom();

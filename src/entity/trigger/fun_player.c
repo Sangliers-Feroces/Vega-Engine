@@ -40,6 +40,8 @@ void make_damage_to_enemy(entity3 *ent, dvec3 dir, double hp)
 
     if ((data->last_damage + 1.0) > ent->trans.t)
         return;
+    if (data->is_npc)
+        return;
     ent->trans.speed = dvec3_add(ent->trans.speed, dir);
     ent->trans.speed.y += 3.0;
     data->hp -= hp;
@@ -102,7 +104,7 @@ void trigger_on_hit_player(entity3 *ent, entity3 *other)
         return;
     if (enemy != NULL && (enemy->tag == ENTITY3_TAG_ENEMY)) {
         enemy_data = enemy->tag_data;
-        if (!enemy_data->is_furious)
+        if ((!enemy_data->is_furious) || enemy_data->is_npc)
             return;
         make_damage_to_player(ent, dvec3_add(dvec3_muls(dvec3_mul(dmat4_mul_dvec3(
         enemy->trans.world_rot,

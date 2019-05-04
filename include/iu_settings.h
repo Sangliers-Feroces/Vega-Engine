@@ -8,6 +8,8 @@
 #pragma once
 
 void settings_init(void);
+void settings_quit(void);
+settings_t settings_load(void);
 void setting_set_entities(void);
 
 void setting_loop(void);

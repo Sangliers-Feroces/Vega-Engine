@@ -47,6 +47,8 @@ static void setting_draw(void)
 
 void setting_loop(void)
 {
+    settings_t before = _iu.settings;
+
     _iu.data.is_focus = 1;
     demo_update_cursor_visibility(_demo);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -57,4 +59,6 @@ void setting_loop(void)
     } while (setting_poll_event());
     _iu.data.is_focus = 0;
     demo_update_cursor_visibility(_demo);
+    if (_iu.settings.screen_state != before.screen_state)
+        _demo->win.do_reboot = 1;
 }

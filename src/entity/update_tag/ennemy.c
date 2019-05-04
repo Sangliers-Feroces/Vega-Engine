@@ -28,9 +28,9 @@ void entity3_tag_update_enemy(entity3 *ent)
     double dist = dvec3_dist_sq(dmat4_trans(ent->trans.world), p);
     double a_dif;
 
-    if (dist < (data->min_furious * data->min_furious))
+    if (dist < (data->min_furious * data->min_furious) && (!data->is_npc))
         data->is_furious = 1;
-    if (data->is_furious)
+    if (data->is_furious && (!data->is_npc))
         data->target = p;
     else {
         if (ent->trans.t > data->max_state) {
@@ -68,4 +68,5 @@ void entity3_tag_init_enemy(void *pdata)
     data->hp = 100.0;
     data->last_damage = 0.0;
     data->atk = 5.0;
+    data->is_npc = 0;
 }

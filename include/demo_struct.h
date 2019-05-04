@@ -43,6 +43,7 @@ typedef struct {
     sfClock *frametime;
     int has_focus;
     int fps_to_display;
+    int do_reboot;
 } win_t;
 
 typedef struct {
