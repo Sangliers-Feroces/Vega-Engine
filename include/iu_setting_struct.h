@@ -9,9 +9,12 @@
 
 typedef enum {
     SETTINGS_BG,
+    SETTINGS_VOL_MAST,
+    SETTINGS_VOL_MUSIC,
+    SETTINGS_VOL_SOUND,
     SETTINGS_END
 } settings_entitie_t;
 
 typedef struct {
-    entity2_t entities[SETTINGS_BG];
+    entity2_t entities[SETTINGS_END];
 } settings_t;

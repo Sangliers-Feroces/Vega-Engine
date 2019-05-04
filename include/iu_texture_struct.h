@@ -167,6 +167,7 @@ typedef enum {
     IUTEX_PAUSE_MENU,
     IUTEX_PAUSE_QUIT,
     IUTEX_SETTINGS_BG,
+    IUTEX_SETTINGS_VOLUME,
     IUTEX_END
 } iutex_t;
 
