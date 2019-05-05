@@ -27,7 +27,7 @@ void iu_display_char(char c, rect_t pos, font_list_t index)
     float offset_x = 1.0f / _iu.fonts[index].cols;
     float offset_y = 1.0f / _iu.fonts[index].lines;
     float char_x_pos = c % _iu.fonts[index].cols;
-    float char_y_pos = (c / _iu.fonts[index].lines) + 1.0f;
+    float char_y_pos = c / _iu.fonts[index].cols + 1.0f;
 
     iu_draw_font((entity2_param_t){_iu.fonts[index].index,
     (rect_t){{pos.p.x, pos.p.y}, {pos.s.x, pos.s.y}}, -0.999},

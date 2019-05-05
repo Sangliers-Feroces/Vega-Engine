@@ -49,6 +49,7 @@ static const iutex_path_t iutex_path [] = {
     {IUTEX_INTRO_DEV, "res/ui/intro/dev.png"},
     {IUTEX_INTRO_ENG, "res/ui/intro/eng.png"},
     {IUTEX_INTRO_VM, "res/ui/intro/sheet.jpg"},
+    {IUTEX_BLACK, "res/ui/black.png"},
     {0, NULL}
 };
 
