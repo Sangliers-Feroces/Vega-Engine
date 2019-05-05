@@ -30,13 +30,16 @@ static void delete_maps(void)
 static int state_ananlyse(demo_t *demo, menu_t *menu)
 {
     switch (menu->state) {
-        case 1:
+        case MENU_LINK_NEW:
             delete_maps();
             return 1;
-        case 5:
+        case MENU_LINK_QUIT:
             return 0;
-        case 3:
+        case MENU_LINK_SETTING:
             setting_loop();
+            return menu_loop(demo, menu);
+        case MENU_LINK_CREDITS:
+            menu_display_help();
             return menu_loop(demo, menu);
         default:
             return 1;

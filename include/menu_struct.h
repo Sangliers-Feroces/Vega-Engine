@@ -10,13 +10,13 @@
 typedef enum {
     MENU_BG_MAIN,
     MENU_BG_SETTING,
+    MENU_BG_HELP,
     MENU_BG_END
 } menu_bg_t;
 
 typedef enum {
     MENU_LINK_CONTINUE,
     MENU_LINK_NEW,
-    MENU_LINK_LOAD,
     MENU_LINK_SETTING,
     MENU_LINK_CREDITS,
     MENU_LINK_QUIT,

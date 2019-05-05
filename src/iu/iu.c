@@ -17,7 +17,7 @@ static const iutex_path_t iutex_path [] = {
     {IUTEX_MENU_LOAD_FADE, "res/ui/menu/new/menu_load_fade.png"},
     {IUTEX_MENU_NEW, "res/ui/menu/new/menu_new.png"},
     {IUTEX_MENU_SETTINGS, "res/ui/menu/new/menu_setting.png"},
-    {IUTEX_MENU_CREDITS, "res/ui/menu/new/menu_credits.png"},
+    {IUTEX_MENU_HELP, "res/ui/menu/new/menu_help.png"},
     {IUTEX_MENU_QUIT, "res/ui/menu/new/menu_quit.png"},
     {IUTEX_MENU_CURSOR, "res/ui/menu/new/cursor.png"},
     {IUTEX_EDITOR_GRAB, "res/model/editor/grab.png"},
@@ -50,6 +50,8 @@ static const iutex_path_t iutex_path [] = {
     {IUTEX_INTRO_ENG, "res/ui/intro/eng.png"},
     {IUTEX_INTRO_VM, "res/ui/intro/sheet.jpg"},
     {IUTEX_BLACK, "res/ui/black.png"},
+    {IUTEX_HELP, "res/ui/menu/new/help.png"},
+    {IUTEX_INVENT_HELP, "res/ui/invent/invent_bg_h.png"},
     {0, NULL}
 };
 
@@ -112,6 +114,7 @@ void iu_init(demo_t *demo)
     settings_init();
     quest_init();
     _iu.data.iu_is_display = 1;
+    //_iu.data.skip_intro = 0;
 }
 
 void iu_quit(void)
