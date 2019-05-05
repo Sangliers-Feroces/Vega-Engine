@@ -16,7 +16,10 @@ typedef enum {
     ITEM_APPLE,
     ITEM_BOAT,
     ITEM_PLANE,
-    ITEM_BOW,
+    ITEM_PLANK,
+    ITEM_TILE,
+    ITEM_SCALE,
+    ITEM_FISHTOOTH,
     ITEM_END,
     NO_ITEM
 } items_t;
@@ -25,7 +28,7 @@ typedef enum {
     TYPE_REST_MANA,
     TYPE_REST_HP,
     TYPE_CAC,
-    TYPE_DISTANCE,
+    TYPE_BAZAR,
     TYPE_VEHICULE
 } items_type_t;
 

@@ -18,8 +18,8 @@ char *invent_get_item_type(void)
             return "Healing";
         case TYPE_REST_MANA:
             return "Mana";
-        case TYPE_DISTANCE:
-            return "Distance";
+        case TYPE_BAZAR:
+            return "BAZAR";
         case TYPE_VEHICULE:
             return "Vehicule";
         default:
@@ -38,8 +38,8 @@ char *invent_get_item_value(void)
             return "RESTORATION:";
         case TYPE_REST_MANA:
             return "RESTORATION";
-        case TYPE_DISTANCE:
-            return "ATTACK:";
+        case TYPE_BAZAR:
+            return "NO VALUE:";
         case TYPE_VEHICULE:
             return "SPEED:";
         default:
@@ -61,9 +61,6 @@ int invent_get_item_data(void)
         case TYPE_REST_MANA:
             return _iu.invent.items_list[
             _iu.invent.inventory[_iu.invent.focused_item].item].restored_mana;
-        case TYPE_DISTANCE:
-            return _iu.invent.items_list[
-            _iu.invent.inventory[_iu.invent.focused_item].item].attack;
         case TYPE_VEHICULE:
             return _iu.invent.items_list[
             _iu.invent.inventory[_iu.invent.focused_item].item].speed;
