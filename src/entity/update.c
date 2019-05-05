@@ -49,7 +49,7 @@ static void loot_xp(double xp)
 
     data->xp += xp;
     sprintf(buf, "You got %.f xp.", xp);
-    msg_add(buf, 2.0);
+    msg_add(buf, 4.0);
 }
 
 static void check_level(void)
@@ -77,17 +77,19 @@ static void loot_enemy(entity3 *ent)
     switch (enemy_data->enemy_type) {
     case ENEMY_FISH:
         sprintf(buf, "Killed L.%.f %s", enemy_data->level, "Saumin");
-        msg_add(buf, 3.0);
+        msg_add(buf, 5.0);
         loot_xp(enemy_data->level * 1.5);
         if ((rand() % 30) == 0)
             invent_add_item(ITEM_SWORD_3);
+        invent_add_items(ITEM_FISHTOOTH, 1 + rand() % 3);
         break;
     case ENEMY_BASE:
         sprintf(buf, "Killed L.%.f %s", enemy_data->level, "Pykax");
-        msg_add(buf, 3.0);
+        msg_add(buf, 5.0);
         loot_xp(enemy_data->level);
         if ((rand() % 15) == 0)
             invent_add_item(ITEM_SWORD_2);
+        invent_add_items(ITEM_PLANK, 1 + rand() % 3);
         break;
     default:
         loot_xp(1.0);

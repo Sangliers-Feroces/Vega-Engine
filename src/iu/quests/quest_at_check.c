@@ -57,7 +57,10 @@ static int check_at_loot(vg_quest *src)
 
     for (int i = 0; i < INVENTORY_SIZE; i++) {
         if (_iu.invent.inventory[i].item == src->item_to_loot
-        &&  _iu.invent.inventory[i].nb == src->nb) {
+        &&  _iu.invent.inventory[i].nb >= src->nb) {
+            _iu.invent.inventory[i].nb -= src->nb;
+            if (_iu.invent.inventory[i].nb == 0)
+                _iu.invent.inventory[i].item = NO_ITEM;
             for (int i = 0; i < src->nb_loot; i++)
                 invent_add_item(src->loot);
             data->xp += src->xp_looted;
