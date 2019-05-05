@@ -21,9 +21,12 @@ static int do_stuff_event(demo_t *demo, sfEvent event)
         break;
     case sfEvtGainedFocus:
         demo->win.has_focus = 1;
+        _demo->mouse.mouse_pos =
+        sfMouse_getPositionRenderWindow(_demo->win.window);
         break;
     case sfEvtLostFocus:
         demo->win.has_focus = 0;
+        _demo->mouse.last_pos = _demo->mouse.mouse_pos;
         break;
     default:
         break;
@@ -55,8 +58,6 @@ int demo_poll_events(demo_t *demo)
     while (sfRenderWindow_pollEvent(demo->win.window, &event))
         if (!do_stuff_event(demo, event))
             return (0);
-    if (!demo->win.has_focus)
-        return (1);
     demo_poll_mouse_pos(demo);
     poll_click(demo);
     demo_poll_input(demo);
