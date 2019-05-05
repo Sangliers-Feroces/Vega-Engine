@@ -42,16 +42,6 @@ void entity3_update_solo(entity3 *ent)
         trigger_update(ent->trigger);
 }
 
-static void loot_xp(double xp)
-{
-    entity3_tag_player_data_t *data = _demo->world.player->tag_data;
-    char buf[512];
-
-    data->xp += xp;
-    sprintf(buf, "You got %.f xp.", xp);
-    msg_add(buf, 4.0);
-}
-
 static void check_level(void)
 {
     entity3_tag_player_data_t *data = _demo->world.player->tag_data;
@@ -69,6 +59,17 @@ static void check_level(void)
     }
 }
 
+void player_loot_xp(double xp)
+{
+    entity3_tag_player_data_t *data = _demo->world.player->tag_data;
+    char buf[512];
+
+    data->xp += xp;
+    sprintf(buf, "You got %.f xp.", xp);
+    msg_add(buf, 4.0);
+    check_level();
+}
+
 static void loot_enemy(entity3 *ent)
 {
     entity3_tag_enemy_data_t *enemy_data = ent->tag_data;
@@ -79,7 +80,7 @@ static void loot_enemy(entity3 *ent)
     case ENEMY_FISH_BOSS:
         sprintf(buf, "Killed L.%.f %s", enemy_data->level, "Saumin");
         msg_add(buf, 5.0);
-        loot_xp(enemy_data->level * 1.5);
+        player_loot_xp(enemy_data->level * 1.5);
         if ((rand() % 30) == 0)
             invent_add_item(ITEM_SWORD_3);
         invent_add_items(ITEM_FISHTOOTH, 1 + (enemy_data->enemy_type ==
@@ -88,13 +89,13 @@ static void loot_enemy(entity3 *ent)
     case ENEMY_BASE:
         sprintf(buf, "Killed L.%.f %s", enemy_data->level, "Pykax");
         msg_add(buf, 5.0);
-        loot_xp(enemy_data->level);
+        player_loot_xp(enemy_data->level);
         if ((rand() % 15) == 0)
             invent_add_item(ITEM_SWORD_2);
         invent_add_items(ITEM_PLANK, 1 + rand() % 3);
         break;
     default:
-        loot_xp(1.0);
+        player_loot_xp(1.0);
     }
     check_level();
     if ((rand() % 3) == 0)

@@ -22,21 +22,17 @@ static int check_at_lvl(vg_quest *src)
 
 static int check_at_kill(vg_quest *src)
 {
-    entity3_tag_player_data_t  *data = _demo->world.player->tag_data;
-
     if (_demo->quest.enemy_killed[src->enemy_to_kill] >=
     (size_t)src->nb_to_kill)
         _demo->quest.enemy_killed[src->enemy_to_kill] = 0;
     invent_add_items(src->loot, src->nb_loot);
-    data->xp += src->xp_looted;
+    player_loot_xp(src->xp_looted);
     src->next_step();
     return 1;
 }
 
 static int check_at_loot(vg_quest *src)
 {
-    entity3_tag_player_data_t  *data = _demo->world.player->tag_data;
-
     for (int i = 0; i < INVENTORY_SIZE; i++) {
         if (_iu.invent.inventory[i].item == src->item_to_loot
         &&  _iu.invent.inventory[i].nb >= src->nb) {
@@ -45,7 +41,7 @@ static int check_at_loot(vg_quest *src)
                 _iu.invent.inventory[i].item = NO_ITEM;
             for (int i = 0; i < src->nb_loot; i++)
                 invent_add_item(src->loot);
-            data->xp += src->xp_looted;
+            player_loot_xp(src->xp_looted);
             src->next_step();
             return 1;
         }

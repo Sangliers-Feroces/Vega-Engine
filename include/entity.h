@@ -95,3 +95,4 @@ void player_update_weapon(void);
 void world_spawn_boss(void);
 
 int entity3_is_fish(entity3 *ent);
+void player_loot_xp(double xp);
