@@ -23,11 +23,12 @@ static int check_at_lvl(vg_quest *src)
 static int check_at_kill(vg_quest *src)
 {
     if (_demo->quest.enemy_killed[src->enemy_to_kill] >=
-    (size_t)src->nb_to_kill)
+    (size_t)src->nb_to_kill) {
         _demo->quest.enemy_killed[src->enemy_to_kill] = 0;
-    invent_add_items(src->loot, src->nb_loot);
-    player_loot_xp(src->xp_looted);
-    src->next_step();
+        invent_add_items(src->loot, src->nb_loot);
+        player_loot_xp(src->xp_looted);
+        src->next_step();
+    }
     return 1;
 }
 

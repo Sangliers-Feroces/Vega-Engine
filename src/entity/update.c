@@ -81,8 +81,6 @@ static void loot_enemy(entity3 *ent)
         sprintf(buf, "Killed L.%.f %s", enemy_data->level, "Saumin");
         msg_add(buf, 5.0);
         player_loot_xp(enemy_data->level * 1.5);
-        if ((rand() % 30) == 0)
-            invent_add_item(ITEM_SWORD_3);
         invent_add_items(ITEM_FISHTOOTH, 1 + (enemy_data->enemy_type ==
         ENEMY_FISH ? rand() % 3 : 74));
         break;
@@ -90,8 +88,6 @@ static void loot_enemy(entity3 *ent)
         sprintf(buf, "Killed L.%.f %s", enemy_data->level, "Pykax");
         msg_add(buf, 5.0);
         player_loot_xp(enemy_data->level);
-        if ((rand() % 15) == 0)
-            invent_add_item(ITEM_SWORD_2);
         invent_add_items(ITEM_PLANK, 1 + rand() % 3);
         break;
     default:

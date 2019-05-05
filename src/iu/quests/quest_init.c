@@ -30,8 +30,8 @@ static void set_quest(void)
     ITEM_SWORD_3, 1, 20);
 
     _demo->quest.quest[MAIN_QUEST_BOSS] = vg_quest_create(DIALOGUE_MAINBOSS
-    , AT_BOSS, &vg_end_storie);
-    vg_quest_set_params_kill(&_demo->quest.quest[MAIN_QUEST_3], ENEMY_FISH_BOSS, 1);
+    , AT_KILL, &vg_end_storie);
+    vg_quest_set_params_kill(&_demo->quest.quest[MAIN_QUEST_BOSS], ENEMY_FISH_BOSS, 1);
     vg_quest_set_loot(&_demo->quest.quest[MAIN_QUEST_BOSS],
     ITEM_PLANE, 1, 100);
 }
