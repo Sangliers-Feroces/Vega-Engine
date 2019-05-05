@@ -79,6 +79,21 @@ static void draw_invent(void)
     invent_draw_stat();
 }
 
+static void update_world_weapon(void)
+{
+    entity3 *sword = _demo->world.player->sub.ent[0]->sub.ent[0]->sub.ent[0];
+    switch (_iu.invent.inventory[10].item) {
+    case ITEM_SWORD_1:
+        entity3_set_render(sword, 0, mesh_full_ref_bank_init(MESH_BANK_SWORD),
+        MATERIAL_GRASS);
+        break;
+    default:
+        entity3_set_render(sword, 0, mesh_full_ref_get_null(),
+        MATERIAL_GRASS);
+        break;
+    }
+}
+
 void invent_loop(void)
 {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -90,4 +105,5 @@ void invent_loop(void)
     _iu.data.is_invent = !_iu.data.is_invent;
     _iu.invent.index_cursor = 0;
     _iu.invent.focused_item = 0;
+    update_world_weapon();
 }
