@@ -17,7 +17,10 @@ You've access to a inventory but take care you have 10 slots
 and not 1 more ! So be sure to make space in this one before finish a quest
 It would be sad to loose the loot...
 Open It with TAB and follow the hints inside
-With J you'll bbe able to hide iu ! A good way to post screenshot on reddit !
+With J you'll be able to hide ui ! A good way to post screenshot on reddit !
+
+Some weapons have special abilities you'll discover with right click.
+It's said you can reach unexplored heights with some of those..
 
 You've access to 3 settings :
 1) Sound system;
