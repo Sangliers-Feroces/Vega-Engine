@@ -34,7 +34,7 @@ static void spawn_base(chunk_t *chunk, entity3 *ent, entity3_tag_enemy_data_t *d
     ent->lod_dist = RENDER_OBJ_LOD_DIST_FAR;
     data->enemy_type = ENEMY_BASE;
     data->level = MAX(1.0, chunk_get_strength(chunk->pos) * 20.0 - 1.0);
-    data->atk = 5.0 * pow(1.1, data->level);
+    data->atk = 4.0 * pow(1.1, data->level);
     data->hp = data->atk * 10.0;
 }
 
@@ -63,7 +63,7 @@ static void spawn_fish(chunk_t *chunk, entity3 *ent, entity3_tag_enemy_data_t *d
     data->max_speed = 32.0 + randf() * 32.0;
     entity3_trans_update(ent);
     data->level = MAX(1.0, chunk_get_strength(chunk->pos) * 20.0 - 1.0);
-    data->atk = 2.0 * pow(1.1, data->level);
+    data->atk = 7.0 * pow(1.1, data->level);
     data->hp = data->atk * 1.2;
 }
 

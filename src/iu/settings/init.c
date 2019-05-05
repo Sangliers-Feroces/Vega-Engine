@@ -41,7 +41,7 @@ settings_t settings_load(void)
     res.hints_state = WITH_HINT;
     res.screen_state = FULLSCREEN;
     _demo->sounds.master_vol = 1.0f;
-    _demo->sounds.music_vol = 1.0f;
+    _demo->sounds.music_vol = 0.5f;
     _demo->sounds.sound_vol = 1.0f;
     load_settings(&res);
     return res;
