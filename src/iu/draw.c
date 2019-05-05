@@ -26,6 +26,8 @@ void iu_entity_draw(entity2_t entity)
 
 static void draw_current_dialogue(void)
 {
+    if (_demo->quest.curr_main_quest == NO_QUEST)
+        _iu.current_dialogue = DIALOGUE_END;
     if (_iu.current_dialogue == DIALOGUE_END)
         return;
     vg_dialogue_draw(&_iu.dialogue_list[_iu.current_dialogue]);

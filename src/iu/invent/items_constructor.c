@@ -20,15 +20,15 @@ static void invent_set_items(void)
     _iu.invent.items_list[ITEM_BOAT] = (item_data_t){"Shit Stormer",
     TYPE_VEHICULE, IUTEX_ITEM_BOAT, 0, 0, 0, 90};
     _iu.invent.items_list[ITEM_PLANE] = (item_data_t){"Highflyer", TYPE_CAC,
-    IUTEX_ELON, 0, 0, 0, 200};
+    IUTEX_ITEM_PLANE, 0, 0, 0, 200};
     _iu.invent.items_list[ITEM_PLANK] = (item_data_t){"Cursed Plank",
-    TYPE_BAZAR, IUTEX_ELON, 0, 0, 0, 0};
+    TYPE_BAZAR, IUTEX_ITEM_PLANK, 0, 0, 0, 0};
     _iu.invent.items_list[ITEM_TILE] = (item_data_t){"Tile of DOOM",
     TYPE_BAZAR, IUTEX_ELON, 0, 0, 0, 0};
     _iu.invent.items_list[ITEM_SCALE] = (item_data_t){"Basic Scale",
     TYPE_BAZAR, IUTEX_ELON, 0, 0, 0, 0};
     _iu.invent.items_list[ITEM_FISHTOOTH] = (item_data_t){"Fish tooth",
-    TYPE_BAZAR, IUTEX_ELON, 0, 0, 0, 0};
+    TYPE_BAZAR, IUTEX_ITEM_FISHTOOTH, 0, 0, 0, 0};
 }
 
 static void set_desc(void)
