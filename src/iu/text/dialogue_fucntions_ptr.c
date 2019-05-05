@@ -19,12 +19,14 @@ void vg_effect_quit(void)
 
 void vg_next_mq(void)
 {
+    if (_demo->quest.curr_main_quest == QUEST_END)
+        return;
     _demo->quest.curr_main_quest++;
     main_quest_start();
 }
 
 void vg_end_storie(void)
 {
-    _demo->quest.curr_main_quest = NO_QUEST;
+    _demo->quest.curr_main_quest = QUEST_END;
     _iu.current_dialogue = DIALOGUE_END_STORIE;
 }

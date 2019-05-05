@@ -44,7 +44,8 @@ static void refresh_fps(void)
 
 void iu_display(void)
 {
-    quest_check_success(_demo->quest.curr_main_quest);
+    if (_demo->quest.curr_main_quest != QUEST_END)
+        quest_check_success(_demo->quest.curr_main_quest);
     glUseProgram(_demo->shader[SHADER_IU].program);
     vec_msg_display(&_demo->buf.msgs);
     draw_current_dialogue();
@@ -57,6 +58,7 @@ void iu_display(void)
         iu_refresh_bar();
         for (int i = 0; i < IUENT_END; i++)
             iu_entity_draw(_iu.entities[i]);
-        quest_display_current();
+        if (_demo->quest.curr_main_quest != QUEST_END)
+            quest_display_current();
     }
 }
