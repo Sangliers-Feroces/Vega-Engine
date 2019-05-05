@@ -47,7 +47,8 @@ void make_damage_to_enemy(entity3 *ent, dvec3 dir, double hp)
     data->hp -= hp;
     data->last_damage = ent->trans.t;
     data->is_furious = 1;
-    bleed(dmat4_trans(ent->trans.world));
+    if (hp > 0.0)
+        bleed(dmat4_trans(ent->trans.world));
     if (data->hp <= 0.0) {
         ent->trans.life = ent->trans.t + 1.0;
         dvec3_add(ent->trans.speed, dir);
@@ -93,7 +94,7 @@ void trigger_on_hit_sword(entity3 *ent, entity3 *other)
         _demo->world.camera->trans.world_rot,
         dvec3_init(0.0, 0.0, 1.0)), dvec3_init(1.0, 0.0, 1.0)), 16.0),
         _demo->world.player->trans.speed),
-        20.0);
+        player_data->atk);
     }
 }
 

@@ -88,6 +88,8 @@ void world_load_map(void)
     if (_demo->world.map_path != NULL)
         return;
     ensure_path();
+    invent_load();
+    quest_load();
     _demo->world.tree = octree_create(NULL);
     _demo->world.light_dir =
     dvec3_normalize(dvec3_add(dvec3_init(-1.0, -1.0, -1.0),

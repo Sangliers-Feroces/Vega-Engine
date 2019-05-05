@@ -93,7 +93,10 @@ typedef enum {
 typedef enum {
     MESH_BANK_SKYBOX,
     MESH_BANK_GRASS1,
-    MESH_BANK_SWORD,
+    MESH_BANK_ARM,
+    MESH_BANK_SWORD_1,
+    MESH_BANK_SWORD_2,
+    MESH_BANK_SWORD_3,
     MESH_BANK_ENEMY_BASE,
     MESH_BANK_ENEMY_FISH,
     MESH_BANK_PARTICLE1,
@@ -290,6 +293,8 @@ typedef struct {
     player_state_t state;
     double anim_state;
     int has_atk;
+    double atk;
+    int has_boom;
     double hp;
     double max_hp;
     double level;

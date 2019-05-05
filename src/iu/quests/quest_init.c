@@ -23,27 +23,28 @@ static void set_quest(void)
     ITEM_BOAT, 1, 10);
 }
 
-static void quest_load(void)
+void quest_load(void)
 {
     file_read_t file = file_read_create("maps/qst");
 
+    _demo->quest.curr_main_quest = MAIN_QUEST_1;
     if (file.data == NULL)
         return;
     file_read(&file, &_demo->quest.curr_main_quest, sizeof(quests_list_t));
     file_read_flush(&file);
 }
 
-static void quest_store(void)
+void quest_store(void)
 {
     file_write_t file = file_write_create();
 
     file_write(&file, &_demo->quest.curr_main_quest, sizeof(quests_list_t));
     file_write_flush(&file, "maps/qst");
+    _demo->quest.curr_main_quest = MAIN_QUEST_1;
 }
 
 void quest_init(void)
 {
-    _demo->quest.curr_main_quest = MAIN_QUEST_1;
     quest_load();
     set_quest_dialogues();
     set_quest();
@@ -51,5 +52,4 @@ void quest_init(void)
 
 void quest_quit(void)
 {
-    quest_store();
 }

@@ -30,6 +30,8 @@ void world_unload_map(void)
     vec_trigger_destroy(&_demo->world.triggers);
     free(_demo->world.map_path);
     _demo->world.map_path = NULL;
+    invent_store();
+    quest_store();
     printf("Done.\n");
 }
 

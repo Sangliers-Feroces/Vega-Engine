@@ -90,7 +90,8 @@ static void state(entity3 *ent)
         data->anim_state = 0.0;
         data->has_atk = 0;
     }
-    if ((_demo->mouse.button_click & (1 << sfMouseRight)) && (data->mana > 3.0)) {
+    if ((_demo->mouse.button_click & (1 << sfMouseRight)) &&
+    (data->mana > 3.0) && (data->has_boom)) {
         data->state = PLAYER_BOOM;
         data->anim_state = 0.0;
         data->has_atk = 0;
@@ -141,6 +142,8 @@ void entity3_tag_init_player(void *pdata)
     data->state = PLAYER_REG;
     data->anim_state = 0.0;
     data->has_atk = 0;
+    data->atk = 0.0;
+    data->has_boom = 0;
     data->last_damage = 0.0;
     data->hp = 0.0;
     data->max_hp = 50.0;

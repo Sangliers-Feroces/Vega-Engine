@@ -15,6 +15,8 @@ items_t loot, int nb_loot, float xp);
 void vg_quest_set_at_params(vg_quest *src, float time_to_kill,
 int nb_item_to_loot, items_t item_to_loot, int lvl);
 
+void quest_load(void);
+void quest_store(void);
 void quest_init(void);
 void quest_quit(void);
 void set_quest_dialogues(void);

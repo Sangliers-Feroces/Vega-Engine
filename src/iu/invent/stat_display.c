@@ -32,8 +32,7 @@ void invent_draw_stat(void)
     sprintf(buff_mana, "MANA: %.f / %.f",
     data->mana, data->max_mana);
     vg_text_reset_str(&_iu.invent.stats[STAT_MANA], buff_mana, NULL);
-    sprintf(buff_attack, "ATTACK: %.f + %.f", _demo->player.attack,
-    _demo->player.attack_add);
+    sprintf(buff_attack, "ATTACK: %.f", _demo->player.attack_add);
     vg_text_reset_str(&_iu.invent.stats[STAT_ATTACK], buff_attack, NULL);
     sprintf(buff_defense, "DEFENSE: %.f", _demo->player.defense);
     vg_text_reset_str(&_iu.invent.stats[STAT_DEFENSE], buff_defense, NULL);

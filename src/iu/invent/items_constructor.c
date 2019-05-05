@@ -10,7 +10,7 @@
 static void invent_set_items(void)
 {
     _iu.invent.items_list[ITEM_SWORD_1] = (item_data_t){"l'epee batarde",
-    TYPE_CAC, IUTEX_ITEM_SWORD1, 20, 0, 0, 0};
+    TYPE_CAC, IUTEX_ITEM_SWORD1, 15, 0, 0, 0};
     _iu.invent.items_list[ITEM_SWORD_2] = (item_data_t){"l'epee Gauldur",
     TYPE_CAC, IUTEX_ITEM_SWORD2, 30, 0, 0, 0};
     _iu.invent.items_list[ITEM_SWORD_3] = (item_data_t){
@@ -38,22 +38,30 @@ static void set_desc(void)
     vg_text_set_size(&_iu.invent.desc_value, (vec2){0.02f, 0.03f});
 }
 
-static void invent_load(void)
+void invent_load(void)
 {
     file_read_t file = file_read_create("maps/inv");
 
+    for (int i = 0; i < INVENTORY_SIZE; i++) {
+        _iu.invent.inventory[i].item = NO_ITEM;
+        _iu.invent.inventory[i].nb = 0;
+    }
     if (file.data == NULL)
         return;
     file_read(&file, &_iu.invent.inventory, 11 * sizeof(inventory_t));
     file_read_flush(&file);
 }
 
-static void invent_store(void)
+void invent_store(void)
 {
     file_write_t file = file_write_create();
 
     file_write(&file, &_iu.invent.inventory, 11 * sizeof(inventory_t));
     file_write_flush(&file, "maps/inv");
+    for (int i = 0; i < INVENTORY_SIZE; i++) {
+        _iu.invent.inventory[i].item = NO_ITEM;
+        _iu.invent.inventory[i].nb = 0;
+    }
 }
 
 void invent_init(void)
@@ -68,7 +76,6 @@ void invent_init(void)
         _iu.invent.inventory[i].item = NO_ITEM;
         _iu.invent.inventory[i].nb = 0;
     }
-    invent_load();
     for (int i = 0; i < 5; i++) {
         _iu.invent.invent_items_name[i] = vg_text_create(NULL, NULL);
         vg_text_set_position(&_iu.invent.invent_items_name[i],
@@ -81,5 +88,4 @@ void invent_init(void)
 
 void invent_quit(void)
 {
-    invent_store();
 }

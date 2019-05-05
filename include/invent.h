@@ -7,6 +7,8 @@
 
 #pragma once
 
+void invent_load(void);
+void invent_store(void);
 void invent_init(void);
 void invent_quit(void);
 
