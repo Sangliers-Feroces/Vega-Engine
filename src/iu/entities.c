@@ -7,6 +7,17 @@
 
 #include "headers.h"
 
+void iu_refresh_bar(void)
+{
+    entity3_tag_player_data_t *data = _demo->world.player->tag_data;
+    float hp_coef = data->hp / data->max_hp;
+    float xp_coef = data->xp / data->max_xp;
+
+    _iu.entities[IUENT_HP].rect.s.x = 0.753f * hp_coef;
+    _iu.entities[IUENT_XP].rect.s.x = 0.753f * xp_coef;
+    return;
+}
+
 void iu_error_msg_init(void)
 {
     _iu.data.error_message[ERROR_INVENT_FULL] =
@@ -22,9 +33,6 @@ void iu_error_msg_init(void)
 
 void set_entities(void)
 {
-    /*_iu.buttons[IUBUTTON_ELON] =
-    (entity2_t){IUTEX_ELON, (rect_t){{-0.30f, 0.0f}, {0.1f, 0.1f}},
-    -1.0f, IUREL_FULL};*/
     entity_constructor(&_iu.invent_bg[IUINVENT_BG], (entity2_param_t){
     IUTEX_INVENT_BG, (rect_t){{-1.0f, -1.0f},{2.0f, 2.0f}}, -0.997});
     entity_constructor(&_iu.cadre[IUCADRE_BLACK], (entity2_param_t){
@@ -35,5 +43,11 @@ void set_entities(void)
     IUTEX_MENU_CURSOR, (rect_t){{-0.15f, -0.25f}, {0.03f, 0.04f}}, -0.998});
     entity_constructor(&_iu.invent.equiped_img, (entity2_param_t){
     IUTEX_ITEM_VOID, (rect_t){{-0.425f, 0.143f},{0.141f, 0.236f}}, -0.998});
+    entity_constructor(&_iu.entities[IUENT_MAIN], (entity2_param_t){
+    IUTEX_UI, (rect_t){{-1.0f, -1.0f}, {2.0f, 2.0f}}, -0.997});
+    entity_constructor(&_iu.entities[IUENT_XP], (entity2_param_t){
+    IUTEX_XP_BAR, (rect_t){{-0.3875f, 0.847f}, {0.745f, 0.017f}}, -0.998});
+    entity_constructor(&_iu.entities[IUENT_HP], (entity2_param_t){
+    IUTEX_HP_BAR, (rect_t){{-0.395f, 0.895f}, {0.753f, 0.05f}}, -0.998});
     set_pause_entities();
 }

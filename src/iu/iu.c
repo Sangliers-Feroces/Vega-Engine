@@ -42,6 +42,9 @@ static const iutex_path_t iutex_path [] = {
     {IUTEX_SETTINGS_VOLUME, "res/ui/settings/volume.png"},
     {IUTEX_SETTINGS_CB_EMPTY, "res/ui/settings/cb_0.png"},
     {IUTEX_SETTINGS_CB_FULL, "res/ui/settings/cb_1.png"},
+    {IUTEX_UI, "res/ui/main_ui.png"},
+    {IUTEX_HP_BAR, "res/ui/hp_bar.png"},
+    {IUTEX_XP_BAR, "res/ui/xp_bar.png"},
     {0, NULL}
 };
 
@@ -103,7 +106,7 @@ void iu_init(demo_t *demo)
     iu_error_msg_init();
     settings_init();
     quest_init();
-    invent_add_item(ITEM_PLANK);
+    _iu.data.iu_is_display = 1;
 }
 
 void iu_quit(void)

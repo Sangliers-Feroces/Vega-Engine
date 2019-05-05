@@ -170,6 +170,9 @@ typedef enum {
     IUTEX_SETTINGS_VOLUME,
     IUTEX_SETTINGS_CB_EMPTY,
     IUTEX_SETTINGS_CB_FULL,
+    IUTEX_UI,
+    IUTEX_XP_BAR,
+    IUTEX_HP_BAR,
     IUTEX_END
 } iutex_t;
 

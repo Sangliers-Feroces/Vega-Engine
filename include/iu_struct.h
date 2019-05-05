@@ -41,7 +41,15 @@ typedef struct {
     float depth;
 } entity2_param_t;
 
+typedef enum {
+    IUENT_MAIN,
+    IUENT_HP,
+    IUENT_XP,
+    IUENT_END
+} iu_entities_t;
+
 typedef struct {
+    int iu_is_display;
     int ratiowh;
     gluint vertex_array;
     gluint vertex_buffer;
@@ -54,6 +62,7 @@ typedef struct {
 typedef struct {
     iu_data_t data;
     texture2 *textures[IUTEX_END];
+    entity2_t entities[IUENT_END];
     entity2_t buttons[IUBUTTON_END];
     entity2_t invent_bg[IUINVENT_END];
     entity2_t cadre[IUCADRE_END];
