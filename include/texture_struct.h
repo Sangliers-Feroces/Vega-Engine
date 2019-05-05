@@ -14,6 +14,8 @@ typedef enum {
     TEX_RED,
     TEX_WOOD,
     TEX_NPC1,
+    TEX_METAL_RUST,
+    TEX_METAL_BARE,
     TEX_MAX
 } tex_t;
 

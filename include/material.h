@@ -22,3 +22,5 @@ void material_fun_blood_entity(dmat4 mvp, dmat4 world, dmat4 rot);
 
 void material_fun_wood_entity(dmat4 mvp, dmat4 world, dmat4 rot);
 void material_fun_npc1_entity(dmat4 mvp, dmat4 world, dmat4 rot);
+void material_fun_metal_rust_entity(dmat4 mvp, dmat4 world, dmat4 rot);
+void material_fun_metal_bare_entity(dmat4 mvp, dmat4 world, dmat4 rot);

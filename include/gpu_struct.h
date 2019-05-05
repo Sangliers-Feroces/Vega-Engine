@@ -33,6 +33,8 @@ typedef enum {
     MATERIAL_BLOOD,
     MATERIAL_WOOD,
     MATERIAL_NPC1,
+    MATERIAL_METAL_RUST,
+    MATERIAL_METAL_BARE,
     MATERIAL_MAX
 } material_t;
 

@@ -42,15 +42,30 @@ void entity3_update_solo(entity3 *ent)
         trigger_update(ent->trigger);
 }
 
+static void loot_xp(double xp)
+{
+    entity3_tag_player_data_t *data = _demo->world.player->tag_data;
+    char buf[512];
+
+    data->xp += xp;
+    sprintf(buf, "You got %.f xp.", xp);
+    msg_add(buf, 2.0);
+}
+
+static void check_level(void)
+{
+
+}
+
 static void loot_enemy(entity3 *ent)
 {
     entity3_tag_player_data_t *data = _demo->world.player->tag_data;
     entity3_tag_enemy_data_t *enemy_data = ent->tag_data;
 
     if (enemy_data->enemy_type == ENEMY_FISH)
-        data->xp += 2;
+        loot_xp(2.0);
     else
-        data->xp++;
+        loot_xp(1.0);
     if (data->xp >= data->max_xp) {
         data->max_hp *= 1.1;
         data->hp = data->max_hp;

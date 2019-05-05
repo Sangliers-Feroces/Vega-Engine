@@ -87,25 +87,25 @@ void player_update_weapon(void)
     switch (_iu.invent.inventory[10].item) {
     case ITEM_SWORD_1:
         entity3_set_render(sword, 0, mesh_full_ref_bank_init(MESH_BANK_SWORD_1),
-        MATERIAL_GRASS);
+        MATERIAL_METAL_RUST);
         data->atk = _iu.invent.items_list[_iu.invent.inventory[10].item].attack;
         data->has_boom = 0;
         break;
     case ITEM_SWORD_2:
         entity3_set_render(sword, 0, mesh_full_ref_bank_init(MESH_BANK_SWORD_2),
-        MATERIAL_GRASS);
+        MATERIAL_METAL_BARE);
         data->atk = _iu.invent.items_list[_iu.invent.inventory[10].item].attack;
         data->has_boom = 1;
         break;
     case ITEM_SWORD_3:
         entity3_set_render(sword, 0, mesh_full_ref_bank_init(MESH_BANK_SWORD_3),
-        MATERIAL_GRASS);
+        MATERIAL_METAL_BARE);
         data->atk = _iu.invent.items_list[_iu.invent.inventory[10].item].attack;
         data->has_boom = 1;
         break;
     default:
         entity3_set_render(sword, 0, mesh_full_ref_bank_init(MESH_BANK_ARM),
-        MATERIAL_GRASS);
+        MATERIAL_METAL_RUST);
         data->atk = 0.0;
         data->has_boom = 0;
         break;

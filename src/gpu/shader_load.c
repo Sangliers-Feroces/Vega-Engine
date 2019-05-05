@@ -40,6 +40,10 @@ const material_desc_t mat_desc[] = {
     &material_fun_wood_entity, 0},
     {MATERIAL_NPC1, &material_fun_npc1_entity,
     &material_fun_npc1_entity, 0},
+    {MATERIAL_METAL_RUST, &material_fun_metal_rust_entity,
+    &material_fun_metal_rust_entity, 0},
+    {MATERIAL_METAL_BARE, &material_fun_metal_bare_entity,
+    &material_fun_metal_bare_entity, 0},
     {0, NULL, NULL, 0}
 };
 

@@ -33,3 +33,13 @@ float canvas_size);
 void iu_set_vg_text(void);
 
 void iu_error_msg_init(void);
+
+vec_msg_entry_t vec_msg_entry_create(void);
+msg_entry_t msg_entry_create(char *buf, double life);
+void msg_entry_destroy(msg_entry_t to_destroy);
+void vec_msg_entry_add(vec_msg_entry_t *vec, msg_entry_t to_add);
+void vec_msg_entry_delete(vec_msg_entry_t *vec, size_t ndx);
+void vec_msg_entry_destroy(vec_msg_entry_t *vec);
+
+void vec_msg_display(vec_msg_entry_t *vec);
+void msg_add(char *msg, double duration);
