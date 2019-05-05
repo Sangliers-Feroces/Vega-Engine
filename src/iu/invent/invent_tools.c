@@ -14,7 +14,7 @@ static void player_updtate_weapon_ext2(void)
 
     entity3_set_render(sword, 0, mesh_full_ref_bank_init(MESH_BANK_ARM),
     MATERIAL_METAL_RUST);
-    data->atk = 0.0;
+    data->atk = 5.0;
     data->has_boom = 0;
 }
 
@@ -38,6 +38,7 @@ static void player_updtate_weapon_ext1(void)
         break;
     default:
         player_updtate_weapon_ext2();
+        break;
     }
 }
 

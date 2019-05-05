@@ -61,6 +61,8 @@ void world_chunk_god_stalled(void);
 
 void world_chunk_send_global_ent(ssize2 chunk_pos, entity3 *ent);
 
+entity3* world_create_default_ents(void);
+
 int world_is_chunk_active(ssize2 chunk_pos);
 int world_is_pos_col_oob(dvec3 p);
 
@@ -75,3 +77,5 @@ inter_ray3 world_inter_laxist_fast(ray3 ray);
 int physics_check_col(physics_param_t p, dvec3 pos, dvec3 *speed,
 dvec3 *avg_norm);
 void physics_apply_disp(int do_fast, dvec3 *p, dvec3 disp);
+
+void chunk_spawn_at(chunk_t *chunk, dvec3 pos);
