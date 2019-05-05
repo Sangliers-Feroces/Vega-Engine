@@ -45,8 +45,7 @@ typedef struct {
 } vg_quest;
 
 typedef struct {
-    int fish_killed;
-    int base_killed;
+    size_t enemy_killed[ENEMY_MAX];
     quests_list_t curr_main_quest;
     vg_quest quest[QUEST_END];
 } quests_t;

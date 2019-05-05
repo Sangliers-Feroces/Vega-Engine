@@ -309,7 +309,9 @@ typedef struct {
 typedef enum {
     ENEMY_BASE,
     ENEMY_SLIME,
-    ENEMY_FISH
+    ENEMY_FISH,
+    ENEMY_FISH_BOSS,
+    ENEMY_MAX
 } enemy_type_t;
 
 typedef struct {

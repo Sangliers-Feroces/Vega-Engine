@@ -19,18 +19,19 @@ static void set_quest(void)
     _demo->quest.quest[MAIN_QUEST_2] = vg_quest_create(DIALOGUE_MAIN2_START
     , AT_LOOT, &vg_next_mq);
     vg_quest_set_at_params(&_demo->quest.quest[MAIN_QUEST_2],
-    0, 50, ITEM_APPLE, 0);
+    0, 50, ITEM_PLANK, 0);
     vg_quest_set_loot(&_demo->quest.quest[MAIN_QUEST_2],
     ITEM_SWORD_2, 1, 10);
 
     _demo->quest.quest[MAIN_QUEST_3] = vg_quest_create(DIALOGUE_MAIN3_START
     , AT_KILL, &vg_next_mq);
-    vg_quest_set_params_kill(&_demo->quest.quest[MAIN_QUEST_3], ENEMY_FISH, 1);
+    vg_quest_set_params_kill(&_demo->quest.quest[MAIN_QUEST_3], ENEMY_FISH, 15);
     vg_quest_set_loot(&_demo->quest.quest[MAIN_QUEST_3],
     ITEM_SWORD_3, 1, 20);
 
     _demo->quest.quest[MAIN_QUEST_BOSS] = vg_quest_create(DIALOGUE_MAINBOSS
     , AT_BOSS, &vg_end_storie);
+    vg_quest_set_params_kill(&_demo->quest.quest[MAIN_QUEST_3], ENEMY_FISH_BOSS, 1);
     vg_quest_set_loot(&_demo->quest.quest[MAIN_QUEST_BOSS],
     ITEM_PLANE, 1, 100);
 }
@@ -53,11 +54,14 @@ void quest_store(void)
     file_write(&file, &_demo->quest.curr_main_quest, sizeof(quests_list_t));
     file_write_flush(&file, "maps/qst");
     _demo->quest.curr_main_quest = MAIN_QUEST_1;
-    _demo->quest.fish_killed = 0;
+    for (size_t i = 0; i < ENEMY_MAX; i++)
+        _demo->quest.enemy_killed[i] = 0;
 }
 
 void quest_init(void)
 {
+    for (size_t i = 0; i < ENEMY_MAX; i++)
+        _demo->quest.enemy_killed[i] = 0;
     quest_load();
     set_quest_dialogues();
     set_quest();

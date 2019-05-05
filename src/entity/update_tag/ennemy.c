@@ -7,24 +7,34 @@
 
 #include "headers.h"
 
+int entity3_is_fish(entity3 *ent)
+{
+    entity3_tag_enemy_data_t *data = ent->tag_data;
+
+    return (data->enemy_type == ENEMY_FISH) ||
+    (data->enemy_type == ENEMY_FISH_BOSS);
+}
+
 static void walk_around(entity3 *ent, double a_dif, double y_dif)
 {
     dvec3 d;
     entity3_tag_enemy_data_t *data = ent->tag_data;
 
-    if (ent->trans.is_grounded || (data->enemy_type == ENEMY_FISH))
+    if (ent->trans.is_grounded || entity3_is_fish(ent))
     ent->trans.rot.y += a_dif *
     _demo->win.framelen * data->a_vel;
     d = dvec3_muls(dmat4_mul_dvec3(ent->trans.world_rot,
     dvec3_init(1.0, 0.0, 0.0)), _demo->win.framelen * 10.0);
-    if ((data->enemy_type == ENEMY_FISH) && data->is_furious)
+    if (entity3_is_fish(ent) && data->is_furious)
         d.y += y_dif * _demo->win.framelen * 0.2;
     ent->trans.speed = dvec3_add(ent->trans.speed, d);
 }
 
-static void update_furious(entity3_tag_enemy_data_t *data, double dist, double y_p)
+static void update_furious(entity3 *ent, double dist, double y_p)
 {
-    if (data->enemy_type == ENEMY_FISH)
+    entity3_tag_enemy_data_t *data = ent->tag_data;
+
+    if (entity3_is_fish(ent))
         if (y_p > -42.0)
             return;
     if (dist < (data->min_furious * data->min_furious) && (!data->is_npc))
@@ -40,7 +50,7 @@ void entity3_tag_update_enemy(entity3 *ent)
     double dist = dvec3_dist_sq(dmat4_trans(ent->trans.world), p);
     double a_dif;
 
-    update_furious(data, dist, p.y);
+    update_furious(ent, dist, p.y);
     if (data->is_furious && (!data->is_npc))
         data->target = p;
     else {
@@ -51,7 +61,7 @@ void entity3_tag_update_enemy(entity3 *ent)
             data->is_moving = rand() % 2;
         }
     }
-    if (data->enemy_type == ENEMY_FISH)
+    if (entity3_is_fish(ent))
         ent->trans.speed = dvec3_add(ent->trans.speed,
         dvec3_muls((dvec3){0.0, 1.0, 0.0}, _demo->win.framelen));
     v = dvec3_sub(data->target, e);

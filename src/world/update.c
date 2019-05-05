@@ -56,7 +56,7 @@ entity3_tag_enemy_data_t *data, int is_boss)
     entity3_trans_update(ent);
     ent = entity3_create(ent);
     entity3_set_render(ent, 0, mesh_full_ref_bank_init(MESH_BANK_ENEMY_FISH),
-    is_boss ? MATERIAL_BLOOD : MATERIAL_METAL_RUST);
+    MATERIAL_BLOOD);
     ent->trans.scale = dvec3_init(4.0 * scale, 4.0 * scale, 4.0 * scale);
     ent->trans.rot = dvec3_init(0.0, M_PI, 0.0);
     ent->trans.is_static = 0;
@@ -66,7 +66,7 @@ entity3_tag_enemy_data_t *data, int is_boss)
     data->max_speed = 32.0 + randf() * 32.0;
     entity3_trans_update(ent);
     data->level = MAX(1.0, stren *
-    20.0 - 1.0 + is_boss ? 10.0 : 0.0);
+    20.0 - 1.0 + (is_boss ? 10.0 : 0.0));
     data->atk = 7.0 * pow(1.1, data->level);
     data->hp = data->atk * 1.2;
 }
@@ -112,14 +112,15 @@ void world_spawn_boss(void)
     data = ent->tag_data;
     data->max_speed = 4.0 + randf() * 4.0;
     data->a_vel = 2.0 + randf() * 4.0;
-    spawn_fish(1.0, ent, data, 1);
+    spawn_fish(0.0, ent, data, 1);
     ent->trans.pos = dvec3_add(dmat4_trans(_demo->world.player->trans.world),
     dvec3_mul(dvec3_muls(dmat4_mul_dvec3(_demo->world.player->trans.world_rot,
     dvec3_init(0.0, 0.0, 1.0)), 20.0), dvec3_init(1.0, 0.0, 1.0)));
     ent->trans.pos.y = dmat4_trans(_demo->world.player->trans.world).y + 10.0;
     entity3_trans_update(ent);
     data->is_furious = 1;
-    data->hp *= 10.0;
+    data->hp *= 5.0;
+    data->enemy_type = ENEMY_FISH_BOSS;
 }
 
 static int spawn_group(chunk_t *chunk, dvec3 pos)

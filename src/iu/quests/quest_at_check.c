@@ -13,8 +13,7 @@ static int check_at_lvl(vg_quest *src)
 
     if (data->level >= src->lvl) {
         src->did = 1;
-        for (int i = 0; i < src->nb_loot; i++)
-            invent_add_item(src->loot);
+        invent_add_items(src->loot, src->nb_loot);
         src->next_step();
         return 1;
     }
@@ -25,30 +24,13 @@ static int check_at_kill(vg_quest *src)
 {
     entity3_tag_player_data_t  *data = _demo->world.player->tag_data;
 
-    switch (src->enemy_to_kill) {
-    case ENEMY_FISH:
-        if (_demo->quest.fish_killed >= src->nb_to_kill) {
-            _demo->quest.fish_killed = 0;
-            for (int i = 0; i < src->nb_loot; i++)
-                invent_add_item(src->loot);
-            data->xp += src->xp_looted;
-            src->next_step();
-            return 1;
-        }
-        return 0;
-    case ENEMY_BASE:
-        if (_demo->quest.fish_killed >= src->nb_to_kill) {
-            _demo->quest.fish_killed = 0;
-            for (int i = 0; i < src->nb_loot; i++)
-                invent_add_item(src->loot);
-            data->xp += src->xp_looted;
-            src->next_step();
-            return 1;
-        }
-        return 0;
-    default:
-        return 0;
-    }
+    if (_demo->quest.enemy_killed[src->enemy_to_kill] >=
+    (size_t)src->nb_to_kill)
+        _demo->quest.enemy_killed[src->enemy_to_kill] = 0;
+    invent_add_items(src->loot, src->nb_loot);
+    data->xp += src->xp_looted;
+    src->next_step();
+    return 1;
 }
 
 static int check_at_loot(vg_quest *src)
