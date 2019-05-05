@@ -61,6 +61,8 @@ static void update_sound(void)
         water_ratio = CLAMP(-(c.y + 30.0) / 12.0, 0.0, 1.0);
     sound_refresh_gain(SOUNDS_FOREST, (1.0 - water_ratio) * 100.0);
     sound_refresh_gain(SOUNDS_WATER, water_ratio * 100.0);
+    if (_demo->quest.curr_main_quest == MAIN_QUEST_BOSS)
+        play_new_music_ensure(MUSICS_BOSS, 1, 100.0);
 }
 
 void world_update(void)

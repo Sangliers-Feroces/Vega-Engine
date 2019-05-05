@@ -22,11 +22,13 @@ void vg_next_mq(void)
     if (_demo->quest.curr_main_quest == QUEST_END)
         return;
     _demo->quest.curr_main_quest++;
+    stop_current_music();
     main_quest_start();
 }
 
 void vg_end_storie(void)
 {
+    stop_current_music();
     _demo->quest.curr_main_quest = QUEST_END;
     _iu.current_dialogue = DIALOGUE_END_STORIE;
 }

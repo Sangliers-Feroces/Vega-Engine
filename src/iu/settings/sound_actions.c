@@ -7,6 +7,21 @@
 
 #include "headers.h"
 
+void play_new_music_ensure(musics_t index, int loop, float alt_gain)
+{
+    _demo->sounds.musics[index].gain = alt_gain;
+    if (_demo->sounds.curr_music != NO_MUSIC) {
+        if (_demo->sounds.curr_music == index)
+            return;
+        sfMusic_stop(_demo->sounds.musics[_demo->sounds.curr_music].sample);
+    }
+    sfMusic_setVolume(_demo->sounds.musics[index].sample,
+    _demo->sounds.musics[index].gain);
+    sfMusic_play(_demo->sounds.musics[index].sample);
+    sfMusic_setLoop(_demo->sounds.musics[index].sample, loop);
+    _demo->sounds.curr_music = index;
+}
+
 void play_new_music(musics_t index, int loop, float alt_gain)
 {
     _demo->sounds.musics[index].gain = alt_gain;
