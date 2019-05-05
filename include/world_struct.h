@@ -331,3 +331,9 @@ typedef struct {
     double level;
     enemy_type_t enemy_type;
 } entity3_tag_enemy_data_t;
+
+typedef struct {
+    int do_fast;
+    int do_laxist;
+    double slide;
+} physics_param_t;

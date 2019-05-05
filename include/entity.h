@@ -92,7 +92,13 @@ void entity3_switch_col(entity3 *ent, int new_state);
 void player_respawn(entity3 *ent);
 void player_update_weapon(void);
 
+void player_anim(entity3 *ent);
+void player_state(entity3 *ent);
+
 void world_spawn_boss(void);
 
 int entity3_is_fish(entity3 *ent);
 void player_loot_xp(double xp);
+
+entity3* entity3_get_parent(entity3 *ent, size_t depth);
+void entity3_kill(entity3 *ent);

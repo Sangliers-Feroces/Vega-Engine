@@ -58,7 +58,8 @@ void trigger_update(trigger_t *trigger)
         if (_demo->world.triggers.trigger[i] == trigger)
             continue;
         if (is_collision(trigger, _demo->world.triggers.trigger[i]))
-            _demo->world.trigger_on_hit[_demo->world.triggers.trigger[i]->on_hit](
+            _demo->world.trigger_on_hit[
+            _demo->world.triggers.trigger[i]->on_hit](
             _demo->world.triggers.trigger[i]->ent, trigger->ent);
     }
 }

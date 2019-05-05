@@ -7,6 +7,16 @@
 
 #include "headers.h"
 
+static void set_mat(transform_t *res)
+{
+    dmat4_identity(res->model);
+    dmat4_identity(res->model_rot);
+    dmat4_identity(res->world);
+    dmat4_identity(res->world_rot);
+    dmat4_identity(res->world_inv);
+    dmat4_identity(res->world_on_inv_calculated);
+}
+
 transform_t transform_get_default(void)
 {
     transform_t res;
@@ -25,11 +35,6 @@ transform_t transform_get_default(void)
     res.pos_on_model = dvec3_init(0.0, 0.0, 0.0);
     res.scale_on_model = dvec3_init(1.0, 1.0, 1.0);
     res.rot_on_model = dvec3_init(0.0, 0.0, 0.0);
-    dmat4_identity(res.model);
-    dmat4_identity(res.model_rot);
-    dmat4_identity(res.world);
-    dmat4_identity(res.world_rot);
-    dmat4_identity(res.world_inv);
-    dmat4_identity(res.world_on_inv_calculated);
+    set_mat(&res);
     return res;
 }

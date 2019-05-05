@@ -41,14 +41,9 @@ static void update_furious(entity3 *ent, double dist, double y_p)
             data->is_furious = 1;
 }
 
-void entity3_tag_update_enemy(entity3 *ent)
+static void update_target(entity3 *ent, double dist, dvec3 p)
 {
     entity3_tag_enemy_data_t *data = ent->tag_data;
-    dvec3 p = dmat4_trans(_demo->world.player->trans.world);
-    dvec3 e = dmat4_trans(ent->trans.world);
-    dvec3 v;
-    double dist = dvec3_dist_sq(dmat4_trans(ent->trans.world), p);
-    double a_dif;
 
     update_furious(ent, dist, p.y);
     if (data->is_furious && (!data->is_npc))
@@ -64,6 +59,18 @@ void entity3_tag_update_enemy(entity3 *ent)
     if (entity3_is_fish(ent))
         ent->trans.speed = dvec3_add(ent->trans.speed,
         dvec3_muls((dvec3){0.0, 1.0, 0.0}, _demo->win.framelen));
+}
+
+void entity3_tag_update_enemy(entity3 *ent)
+{
+    entity3_tag_enemy_data_t *data = ent->tag_data;
+    dvec3 p = dmat4_trans(_demo->world.player->trans.world);
+    dvec3 e = dmat4_trans(ent->trans.world);
+    dvec3 v;
+    double dist = dvec3_dist_sq(dmat4_trans(ent->trans.world), p);
+    double a_dif;
+
+    update_target(ent, dist, p);
     v = dvec3_sub(data->target, e);
     a_dif = atan2(v.z, v.x) - ent->trans.rot.y;
     if (data->is_moving || data->is_furious)
@@ -74,24 +81,4 @@ void entity3_tag_update_enemy(entity3 *ent)
         ent->trans.rot.z += _demo->win.framelen * 2.0;
     player_update(ent, data->is_furious ? data->max_speed :
     data->max_speed / 4.0);
-}
-
-void entity3_tag_init_enemy(void *pdata)
-{
-    entity3_tag_enemy_data_t *data = pdata;
-
-    data->chunk = (ssize2){0, 0};
-    data->max_speed = 0.0;
-    data->a_vel = 4.0;
-    data->spawn = dvec3_init(0.0, 0.0, 0.0);
-    data->target = data->spawn;
-    data->is_moving = 0;
-    data->is_furious = 0;
-    data->max_state = 0.0;
-    data->min_furious = 4.0;
-    data->hp = 100.0;
-    data->last_damage = 0.0;
-    data->atk = 5.0;
-    data->is_npc = 0;
-    data->enemy_type = ENEMY_BASE;
 }
