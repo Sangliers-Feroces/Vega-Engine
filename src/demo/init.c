@@ -29,6 +29,23 @@ void quit(void)
     thread_quit();
 }
 
+static void gl_gen_ext(void)
+{
+    glGenRenderbuffers(1, &_demo->buf.hdr_depthbuffer);
+    glBindRenderbuffer(GL_RENDERBUFFER, _demo->buf.hdr_depthbuffer);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT,
+    _demo->win.w, _demo->win.h);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,
+    GL_RENDERBUFFER, _demo->buf.hdr_depthbuffer);
+    glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+    _demo->buf.hdr_render_texture, 0);
+    glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1,
+    _demo->buf.dist_texture, 0);
+    glDrawBuffers(2, (glenum[]){GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1});
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    _demo->buf.msgs = vec_msg_entry_create();
+}
+
 void gl_gen(demo_t *demo)
 {
     demo->buf.to_draw = vec_render_call_init();
@@ -46,19 +63,7 @@ void gl_gen(demo_t *demo)
     GL_RGBA, GL_FLOAT, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glGenRenderbuffers(1, &_demo->buf.hdr_depthbuffer);
-    glBindRenderbuffer(GL_RENDERBUFFER, _demo->buf.hdr_depthbuffer);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT,
-    _demo->win.w, _demo->win.h);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,
-    GL_RENDERBUFFER, _demo->buf.hdr_depthbuffer);
-    glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-    _demo->buf.hdr_render_texture, 0);
-    glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1,
-    _demo->buf.dist_texture, 0);
-    glDrawBuffers(2, (glenum[]){GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1});
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    _demo->buf.msgs = vec_msg_entry_create();
+    gl_gen_ext();
 }
 
 void gl_delete(demo_t *demo)

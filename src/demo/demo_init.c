@@ -15,63 +15,13 @@ static void init_cam(demo_t *demo)
     demo->cam.proj = PROJ_TYPE_PERSPECTIVE;
 }
 
-static int init_mouse(demo_t *demo)
-{
-    demo->mouse.button_state = 0;
-    demo->mouse.button_release = 0;
-    demo->mouse.button_click = 0;
-    for (size_t i = 0; i < 2; i++)
-        demo_refresh_mouse_pos();
-    demo_update_cursor_visibility(demo);
-    for (size_t i = 0; i < 256; i++) {
-        demo->input.key_state[i] = 0;
-        demo->input.key_last[i] = 0;
-        demo->input.key_press[i] = 0;
-    }
-    return (1);
-}
-
-static void refresh_win_size(void)
-{
-    sfVector2u s = sfWindow_getSize((sfWindow*)_demo->win.window);
-
-    _demo->win.w = s.x;
-    _demo->win.h = s.y;
-}
-
-static void init_win(demo_t *demo)
-{
-    sfUint32 style = sfClose;
-
-    if (settings_load().screen_state == FULLSCREEN)
-        style |= sfFullscreen;
-    demo->win.w = 1920;
-    demo->win.h = 1080;
-    demo->win.window = sfRenderWindow_create((sfVideoMode){demo->win.w,
-    demo->win.h, 32}, "rtx on !", style,
-    &(sfContextSettings){24, 8, 2, 4, 3, 0, 1});
-    if (demo->win.window == NULL)
-        exit_full_custom();
-    refresh_win_size();
-    demo->win.frametime = sfClock_create();
-    if (demo->win.frametime == NULL)
-        exit_full_custom();
-    demo->win.framelen = 1.0f / 60.0f;
-    demo->win.fps_to_display = 60;
-    demo->win.has_focus = 1;
-    demo->win.do_reboot = 0;
-    sfWindow_setVerticalSyncEnabled((sfWindow*)demo->win.window, sfTrue);
-    if (!init_mouse(demo))
-        exit_full_custom();
-}
-
 demo_t* demo_init(void)
 {
     demo_t *res;
 
     res = malloc_safe(sizeof(demo_t));
     _demo = res;
-    init_win(res);
+    demo_init_win(res);
     init_cam(res);
     init();
     clocks_init(res);

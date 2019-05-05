@@ -7,6 +7,24 @@
 
 #include "headers.h"
 
+static int do_stuff_event_ext(demo_t *demo, sfEvent event)
+{
+    switch (event.type) {
+    case sfEvtGainedFocus:
+        demo->win.has_focus = 1;
+        _demo->mouse.mouse_pos =
+        sfMouse_getPositionRenderWindow(_demo->win.window);
+        break;
+    case sfEvtLostFocus:
+        demo->win.has_focus = 0;
+        _demo->mouse.last_pos = _demo->mouse.mouse_pos;
+        break;
+    default:
+        break;
+    }
+    return 1;
+}
+
 static int do_stuff_event(demo_t *demo, sfEvent event)
 {
     switch (event.type) {
@@ -19,17 +37,8 @@ static int do_stuff_event(demo_t *demo, sfEvent event)
     case sfEvtMouseButtonReleased:
         demo->mouse.button_state &= ~(1 << event.mouseButton.button);
         break;
-    case sfEvtGainedFocus:
-        demo->win.has_focus = 1;
-        _demo->mouse.mouse_pos =
-        sfMouse_getPositionRenderWindow(_demo->win.window);
-        break;
-    case sfEvtLostFocus:
-        demo->win.has_focus = 0;
-        _demo->mouse.last_pos = _demo->mouse.mouse_pos;
-        break;
     default:
-        break;
+        return do_stuff_event_ext(demo, event);
     }
     return (1);
 }

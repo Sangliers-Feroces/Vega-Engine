@@ -26,6 +26,17 @@ static void send_uniform(void)
     glUniform3fv(_demo->shader[SHADER_VEG].uniform[3], 1, (void*)&off);
 }
 
+static void update_culling(shader_t shader)
+{
+    if (_demo->buf.cull_state != _demo->shader[shader].do_cull) {
+        if (_demo->buf.cull_state)
+            glEnable(GL_CULL_FACE);
+        else
+            glDisable(GL_CULL_FACE);
+        _demo->buf.cull_state = _demo->shader[shader].do_cull;
+    }
+}
+
 void shader_set(shader_t shader, dmat4 mvp, dmat4 world, dmat4 rot)
 {
     mat4 mvp_actual;
@@ -42,13 +53,7 @@ void shader_set(shader_t shader, dmat4 mvp, dmat4 world, dmat4 rot)
     1, GL_FALSE, (void*)world_actual);
     glUniformMatrix4fv(_demo->shader[shader].uniform[2],
     1, GL_FALSE, (void*)rot_actual);
-    if (_demo->buf.cull_state != _demo->shader[shader].do_cull) {
-        if (_demo->buf.cull_state)
-            glEnable(GL_CULL_FACE);
-        else
-            glDisable(GL_CULL_FACE);
-        _demo->buf.cull_state = _demo->shader[shader].do_cull;
-    }
+    update_culling(shader);
 }
 
 void refresh_vp(demo_t *demo)

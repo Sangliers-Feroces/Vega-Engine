@@ -16,6 +16,9 @@ void demo_poll_input(demo_t *demo);
 
 int demo(arg_t);
 demo_t* demo_init(void);
+
+void demo_init_win(demo_t *demo);
+
 void demo_quit(demo_t *demo);
 
 void demo_render_geom(demo_t *demo);
