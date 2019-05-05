@@ -7,16 +7,6 @@
 
 #include "headers.h"
 
-/*static void setting_set_extern(menu_t *menu)
-{
-    menu->setting[SETTING_VOL_MASTER].slider = malloc_safe(sizeof(entity2_t));
-    entity_constructor(menu->setting[SETTING_VOL_MASTER].slider,
-    (entity2_param_t){
-    IUTEX_SLIDER, (rect_t){{-0.278750f, 0.262f}, {0.05f, 0.05f}}, -0.999});
-    menu->setting[SETTING_VOL_MASTER].x_min = -0.742500;
-    menu->setting[SETTING_VOL_MASTER].x_max = -0.228750f;
-}*/
-
 static void menu_set_link_entities(menu_t *menu)
 {
     entity_constructor(&menu->link[MENU_LINK_CONTINUE], (entity2_param_t){
@@ -38,5 +28,4 @@ void menu_set_entities(menu_t *menu)
     entity_constructor(&menu->background[MENU_BG_MAIN], (entity2_param_t){
     IUTEX_MENU_MAIN, (rect_t){{-1.0f, -1.0f}, {2.0f, 2.0f}}, 0.0f});
     menu_set_link_entities(menu);
-    //setting_set_extern(menu);
 }
