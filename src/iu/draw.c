@@ -44,6 +44,7 @@ void iu_display(void)
 {
     quest_check_success(_demo->quest.curr_main_quest);
     glUseProgram(_demo->shader[SHADER_IU].program);
+    vec_msg_display(&_demo->buf.msgs);
     draw_current_dialogue();
     refresh_fps();
     if (_iu.data.is_invent)

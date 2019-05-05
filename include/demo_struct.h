@@ -66,12 +66,25 @@ typedef struct {
 } mouse_t;
 
 typedef struct {
+    char *to_display;
+    double start;
+    double life;
+} msg_entry_t;
+
+typedef struct {
+    size_t count;
+    size_t allocated;
+    msg_entry_t *msg;
+} vec_msg_entry_t;
+
+typedef struct {
     gluint hdr_framebuffer;
     gluint hdr_depthbuffer;
     gluint hdr_render_texture;
     gluint dist_texture;
     vec_render_call_t to_draw;
     int cull_state;
+    vec_msg_entry_t msgs;
 } buf_t;
 
 typedef enum {

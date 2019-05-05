@@ -42,15 +42,21 @@ void entity3_update_solo(entity3 *ent)
         trigger_update(ent->trigger);
 }
 
-static void loot_enemy(entity3 *ent)
+static void loot_xp(double xp)
 {
     entity3_tag_player_data_t *data = _demo->world.player->tag_data;
-    entity3_tag_enemy_data_t *enemy_data = ent->tag_data;
+    char buf[512];
 
-    if (enemy_data->enemy_type == ENEMY_FISH)
-        data->xp += 2;
-    else
-        data->xp++;
+    data->xp += xp;
+    sprintf(buf, "You got %.f xp.", xp);
+    msg_add(buf, 2.0);
+}
+
+static void check_level(void)
+{
+    entity3_tag_player_data_t *data = _demo->world.player->tag_data;
+    char buf[512];
+
     if (data->xp >= data->max_xp) {
         data->max_hp *= 1.1;
         data->hp = data->max_hp;
@@ -58,7 +64,20 @@ static void loot_enemy(entity3 *ent)
         data->max_xp *= 1.1;
         data->level++;
         data->max_mana += 0.4;
+        sprintf(buf, "Upgrade to level %.f !", data->level);
+        msg_add(buf, 10.0);
     }
+}
+
+static void loot_enemy(entity3 *ent)
+{
+    entity3_tag_enemy_data_t *enemy_data = ent->tag_data;
+
+    if (enemy_data->enemy_type == ENEMY_FISH)
+        loot_xp(2.0);
+    else
+        loot_xp(1.0);
+    check_level();
     if ((rand() % 3) == 0)
         invent_add_item(ITEM_APPLE);
 }

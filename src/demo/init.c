@@ -58,9 +58,11 @@ void gl_gen(demo_t *demo)
     _demo->buf.dist_texture, 0);
     glDrawBuffers(2, (glenum[]){GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1});
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    _demo->buf.msgs = vec_msg_entry_create();
 }
 
 void gl_delete(demo_t *demo)
 {
     vec_render_call_destroy(demo->buf.to_draw);
+    vec_msg_entry_destroy(&_demo->buf.msgs);
 }
