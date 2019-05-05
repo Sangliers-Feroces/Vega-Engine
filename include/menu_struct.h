@@ -16,7 +16,6 @@ typedef enum {
 typedef enum {
     MENU_LINK_CONTINUE,
     MENU_LINK_NEW,
-    MENU_LINK_LOAD,
     MENU_LINK_SETTING,
     MENU_LINK_CREDITS,
     MENU_LINK_QUIT,

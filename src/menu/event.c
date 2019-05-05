@@ -10,7 +10,7 @@
 void analyse_move_menu(menu_t *menu)
 {
     if (sfKeyboard_isKeyPressed(sfKeyDown)) {
-        if (menu->menu_choice == 5)
+        if (menu->menu_choice == 4)
             return;
         if (menu->first_save == 1 && menu->menu_choice + 1 == 2)
             menu->menu_choice++;

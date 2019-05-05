@@ -17,7 +17,7 @@ static const iutex_path_t iutex_path [] = {
     {IUTEX_MENU_LOAD_FADE, "res/ui/menu/new/menu_load_fade.png"},
     {IUTEX_MENU_NEW, "res/ui/menu/new/menu_new.png"},
     {IUTEX_MENU_SETTINGS, "res/ui/menu/new/menu_setting.png"},
-    {IUTEX_MENU_CREDITS, "res/ui/menu/new/menu_credits.png"},
+    {IUTEX_MENU_HELP, "res/ui/menu/new/menu_help.png"},
     {IUTEX_MENU_QUIT, "res/ui/menu/new/menu_quit.png"},
     {IUTEX_MENU_CURSOR, "res/ui/menu/new/cursor.png"},
     {IUTEX_EDITOR_GRAB, "res/model/editor/grab.png"},

@@ -9,14 +9,18 @@
 
 void menu_init(menu_t *menu)
 {
+    DIR *rep = opendir("./maps");
+
     _iu.data.is_focus = 1;
     demo_update_cursor_visibility(_demo);
     menu->edited_setting = 0;
     menu->first_save = 0;
     menu->state = -1;
     menu->branch = MENU_BRANCH_ROOT;
-    menu->menu_choice = menu->first_save;
     menu_set_entities(menu);
+    if (rep == NULL)
+        menu->first_save = 1;
+    menu->menu_choice = menu->first_save;
 }
 
 void menu_quit(menu_t *menu)

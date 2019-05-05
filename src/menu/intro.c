@@ -34,14 +34,14 @@ static void display_val_man(char *vm_step)
     glBindVertexArray(_iu.data.vertex_array);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, _iu.textures[IUTEX_INTRO_VM]->id);
-    iu_display_char((*vm_step)++, (rect_t){{-0.20f, -0.20f}, {0.5f, 0.7f}},
+    iu_display_char((*vm_step), (rect_t){{-0.20f, -0.20f}, {0.5f, 0.7f}},
     FONT_VM);
-    /*if (check_music_match_time((sfTime){100000}, MUSICS_VALVE))
-        (*vm_step) += 10;
-    if (check_music_match_time((sfTime){200000}, MUSICS_VALVE))
-        (*vm_step) += 10;
-    if (check_music_match_time((sfTime){300000}, MUSICS_VALVE))
-        (*vm_step) += 10;*/
+    if (check_music_match_time((sfTime){3000000}, MUSICS_VALVE))
+        (*vm_step)++;
+    else if (check_music_match_time((sfTime){2000000}, MUSICS_VALVE))
+        (*vm_step)++;
+    else if (check_music_match_time((sfTime){1000000}, MUSICS_VALVE))
+        (*vm_step)++;
 }
 
 static void draw_intro(int vm_d, char *vm_step)
