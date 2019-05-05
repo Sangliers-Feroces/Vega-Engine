@@ -35,7 +35,7 @@ static void editor_shortcut(demo_t *demo)
         pause_loop();
     if (_demo->input.key_press['J'])
         _iu.data.iu_is_display = !_iu.data.iu_is_display;
-    if (_demo->input.key_press['B'])
+    if (_demo->input.key_press['B'] && _iu.data.mode_dev)
         world_spawn_boss();
     if (_demo->input.key_press['M'] && _iu.data.mode_dev)
         vg_next_mq();
