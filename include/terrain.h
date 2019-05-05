@@ -32,3 +32,9 @@ arr2d_dvec3_t normals, ssize2 pos);
 
 void terrain_send_ter_chunk(chunk_t *chunk, size_t lod,
 terrain_send_ter_arg arg, dvec3 chunk_rel);
+
+void chunk_add_grass(chunk_t *chunk, arr2d_dvec3_t arr, arr2d_dvec3_t n);
+
+void chunk_add_village(chunk_t *chunk, arr2d_dvec3_t arr, arr2d_dvec3_t n);
+
+void chunk_add_npc(chunk_t *chunk, dvec3 p);
