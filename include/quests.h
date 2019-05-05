@@ -25,3 +25,8 @@ void main_quest_start(void);
 void quest_add_death_counter(entity3 *ent);
 void vg_quest_set_params_kill(vg_quest *src,
 enemy_type_t enemy, int nb);
+
+void quest_get_lvl_prog(void);
+void quest_get_loot_prog(void);
+void quest_get_kill_prog(void);
+void quest_display_current(void);
