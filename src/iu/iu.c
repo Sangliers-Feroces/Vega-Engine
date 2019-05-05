@@ -119,7 +119,6 @@ void iu_init(demo_t *demo)
 
 void iu_quit(void)
 {
-    quest_quit();
     invent_quit();
     settings_quit();
     vg_dialogue_quit();

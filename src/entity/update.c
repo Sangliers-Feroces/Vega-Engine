@@ -99,8 +99,10 @@ static void loot_enemy(entity3 *ent)
 
 static void kill_ent(entity3 *ent)
 {
-    if (ent->tag == ENTITY3_TAG_ENEMY)
+    if (ent->tag == ENTITY3_TAG_ENEMY) {
         loot_enemy(ent);
+        quest_add_death_counter(ent);
+    }
     entity3_destroy(ent);
 }
 

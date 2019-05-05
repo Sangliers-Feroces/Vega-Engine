@@ -16,6 +16,13 @@ int nb_item_to_loot, items_t item_to_loot, int lvl)
     src->lvl = lvl;
 }
 
+void vg_quest_set_params_kill(vg_quest *src,
+enemy_type_t enemy, int nb)
+{
+    src->enemy_to_kill = enemy;
+    src->nb_to_kill = nb;
+}
+
 static void vg_quest_enable_choices(vg_quest *src)
 {
     if (_iu.dialogue_list[src->first_dial].choices)
