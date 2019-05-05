@@ -55,6 +55,7 @@ typedef enum {
 } intro_t;
 
 typedef struct {
+    int skip_intro;
     int iu_is_display;
     int ratiowh;
     gluint vertex_array;
@@ -73,6 +74,7 @@ typedef struct {
     entity2_t invent_bg[IUINVENT_END];
     entity2_t cadre[IUCADRE_END];
     entity2_t intro[INTRO_END];
+    entity2_t help;
     //texts
     font_t fonts[FONT_END];
     char *text_src[TEXT_END];

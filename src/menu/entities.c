@@ -37,8 +37,6 @@ void menu_set_entities(menu_t *menu)
 {
     entity_constructor(&menu->background[MENU_BG_MAIN], (entity2_param_t){
     IUTEX_MENU_MAIN, (rect_t){{-1.0f, -1.0f}, {2.0f, 2.0f}}, 0.0f});
-    entity_constructor(&menu->background[MENU_BG_HELP], (entity2_param_t){
-    IUTEX_HELP, (rect_t){{-1.0f, -1.0f}, {2.0f, 2.0f}}, 0.0f});
     menu_set_link_entities(menu);
     //setting_set_extern(menu);
 }

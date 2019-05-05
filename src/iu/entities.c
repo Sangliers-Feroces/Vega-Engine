@@ -34,6 +34,8 @@ static void set_intro_entities(void)
 {
     entity_constructor(&_iu.intro[BG], (entity2_param_t){
     IUTEX_INTRO_VM_BG, (rect_t){{-1.0f, -1.0f}, {2.0f, 2.0f}}, -0.997});
+    entity_constructor(&_iu.help, (entity2_param_t){
+    IUTEX_HELP, (rect_t){{-1.0f, -1.0f}, {2.0f, 2.0f}}, 0.0f});
 }
 
 void set_entities(void)

@@ -39,7 +39,7 @@ static int state_ananlyse(demo_t *demo, menu_t *menu)
             setting_loop();
             return menu_loop(demo, menu);
         case MENU_LINK_CREDITS:
-            menu_display_help(menu);
+            menu_display_help();
             return menu_loop(demo, menu);
         default:
             return 1;

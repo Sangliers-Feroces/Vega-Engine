@@ -53,7 +53,13 @@ static void analyse_statement(void)
                 sfRenderWindow_close(_demo->win.window);
             return;
         case 4:
+            menu_display_help();
+            reset_scaling();
+            pause_loop();
+            return;
+        case 5:
             sfRenderWindow_close(_demo->win.window);
+            return;
         default:
             return;
     }

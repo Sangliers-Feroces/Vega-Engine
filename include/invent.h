@@ -32,3 +32,5 @@ void invent_switch_action(void);
 void invent_refresh_attack_added(void);
 
 int invent_add_item(items_t item);
+
+void refresh_invent_help(void);

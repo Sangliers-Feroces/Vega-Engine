@@ -7,12 +7,12 @@
 
 #include "headers.h"
 
-void menu_display_help(menu_t *menu)
+void menu_display_help(void)
 {
     while (demo_poll_events(_demo) && !_demo->input.key_press[KEY_ESC]) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUseProgram(_demo->shader[SHADER_IU].program);
-        iu_entity_draw(menu->background[MENU_BG_HELP]);
+        iu_entity_draw(_iu.help);
         sfRenderWindow_display(_demo->win.window);
     }
 }
@@ -45,8 +45,10 @@ int start(demo_t *demo)
     menu_t menu;
 
     menu_init(&menu);
-    if (!intro())
-        return 0;
+    if (!_iu.data.skip_intro)
+        if (!intro())
+            return 0;
+    _iu.data.skip_intro = 1;
     play_new_music(MUSICS_MENU, 1, 100);
     if (!menu_loop(demo, &menu)) {
         menu_quit(&menu);
