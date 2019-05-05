@@ -17,11 +17,12 @@ vec_msg_entry_t vec_msg_entry_create(void)
     return res;
 }
 
-msg_entry_t msg_entry_create(char *buf, double life)
+msg_entry_t msg_entry_create(char *buf, double start, double life)
 {
     msg_entry_t res;
 
     res.to_display = strdup(buf);
+    res.start = start;
     res.life = life;
     return res;
 }
@@ -49,6 +50,13 @@ void vec_msg_entry_delete(vec_msg_entry_t *vec, size_t ndx)
     vec->count--;
     for (size_t i = ndx; i < vec->count; i++)
         vec->msg[i] = vec->msg[i + 1];
+}
+
+void vec_msg_entry_flush(vec_msg_entry_t *vec)
+{
+    for (size_t i = 0; i < vec->count; i++)
+        msg_entry_destroy(vec->msg[i]);
+    vec->count = 0;
 }
 
 void vec_msg_entry_destroy(vec_msg_entry_t *vec)

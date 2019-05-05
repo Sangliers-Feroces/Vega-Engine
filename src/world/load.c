@@ -104,5 +104,5 @@ void world_load_map(void)
     if (do_respawn)
         player_respawn(_demo->world.player);
     player_update_weapon();
-    _demo->buf.msgs.count = 0;
+    vec_msg_entry_flush(&_demo->buf.msgs);
 }

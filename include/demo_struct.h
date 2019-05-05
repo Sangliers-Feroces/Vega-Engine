@@ -67,6 +67,7 @@ typedef struct {
 
 typedef struct {
     char *to_display;
+    double start;
     double life;
 } msg_entry_t;
 

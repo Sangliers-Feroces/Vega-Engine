@@ -9,6 +9,10 @@
 
 int invent_add_item(items_t item)
 {
+    char buf[512];
+
+    sprintf(buf, "Loot: %s", _iu.invent.items_list[item].name);
+    msg_add(buf, 4.0);
     for (int i = 0; i < INVENTORY_SIZE; i++) {
         if (_iu.invent.inventory[i].item == item) {
             _iu.invent.inventory[i].nb++;
