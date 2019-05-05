@@ -31,6 +31,12 @@ void player_update_weapon(void)
         data->atk = _iu.invent.items_list[_iu.invent.inventory[10].item].attack;
         data->has_boom = 1;
         break;
+    case ITEM_PLANE:
+        entity3_set_render(sword, 0, mesh_full_ref_bank_init(MESH_BANK_PLANE),
+        MATERIAL_BLOOD);
+        data->atk = _iu.invent.items_list[_iu.invent.inventory[10].item].attack;
+        data->has_boom = 0;
+        break;
     default:
         entity3_set_render(sword, 0, mesh_full_ref_bank_init(MESH_BANK_ARM),
         MATERIAL_METAL_RUST);

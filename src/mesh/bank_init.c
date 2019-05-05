@@ -19,6 +19,7 @@ static const mesh_desc_t desc[] = {
     {MESH_BANK_CASA_L2, "res/model/veget/casa_2.obj"},
     {MESH_BANK_KNIGHT, "res/model/veget/Knight.obj"},
     {MESH_BANK_NPC1, "res/model/veget/pnj.obj"},
+    {MESH_BANK_PLANE, "res/model/veget/plane.obj"},
     {MESH_BANK_MAX, NULL}
 };
 

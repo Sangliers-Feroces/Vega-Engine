@@ -19,8 +19,8 @@ static void invent_set_items(void)
     TYPE_REST_HP, IUTEX_ITEM_APPLE, 0, 5, 0, 0};
     _iu.invent.items_list[ITEM_BOAT] = (item_data_t){"Shit Stormer",
     TYPE_VEHICULE, IUTEX_ITEM_BOAT, 0, 0, 0, 90};
-    _iu.invent.items_list[ITEM_PLANE] = (item_data_t){"Je prefere "
-    "pas faire de blague la", TYPE_VEHICULE, IUTEX_ELON, 0, 0, 0, 200};
+    _iu.invent.items_list[ITEM_PLANE] = (item_data_t){"Highflyer", TYPE_CAC,
+    IUTEX_ELON, 0, 0, 0, 200};
     _iu.invent.items_list[ITEM_PLANK] = (item_data_t){"Cursed Plank",
     TYPE_BAZAR, IUTEX_ELON, 0, 0, 0, 0};
     _iu.invent.items_list[ITEM_TILE] = (item_data_t){"Tile of DOOM",

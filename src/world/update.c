@@ -43,18 +43,21 @@ static double inter(double a, double b, double ratio)
     return a * (1.0 - ratio) + b * ratio;
 }
 
-static void spawn_fish(chunk_t *chunk, entity3 *ent, entity3_tag_enemy_data_t *data)
+static void spawn_fish(double stren, entity3 *ent,
+entity3_tag_enemy_data_t *data, int is_boss)
 {
+    double scale = is_boss ? 3.5 : 1.0;
+
     ent->trans.speed = dvec3_init(0.0, 0.0, 0.0);
-    entity3_add_trigger(ent, trigger_create(dvec3_init(-1.0, -1.0, -1.0),
-    dvec3_init(1.0, 1.0, 1.0), TRIGGER_ON_HIT_NONE));
+    entity3_add_trigger(ent, trigger_create(dvec3_init(-scale, -scale, -scale),
+    dvec3_init(scale, scale, scale), TRIGGER_ON_HIT_NONE));
     ent->trans.pos.y = MIN(inter(ent->trans.pos.y, -42.0, randf()), 0.0);
     data->spawn = ent->trans.pos;
     entity3_trans_update(ent);
     ent = entity3_create(ent);
     entity3_set_render(ent, 0, mesh_full_ref_bank_init(MESH_BANK_ENEMY_FISH),
-    MATERIAL_BLOOD);
-    ent->trans.scale = dvec3_init(4.0, 4.0, 4.0);
+    is_boss ? MATERIAL_BLOOD : MATERIAL_METAL_RUST);
+    ent->trans.scale = dvec3_init(4.0 * scale, 4.0 * scale, 4.0 * scale);
     ent->trans.rot = dvec3_init(0.0, M_PI, 0.0);
     ent->trans.is_static = 0;
     ent->lod_dist = RENDER_OBJ_LOD_DIST_FAR;
@@ -62,7 +65,8 @@ static void spawn_fish(chunk_t *chunk, entity3 *ent, entity3_tag_enemy_data_t *d
     data->min_furious = 32.0;
     data->max_speed = 32.0 + randf() * 32.0;
     entity3_trans_update(ent);
-    data->level = MAX(1.0, chunk_get_strength(chunk->pos) * 20.0 - 1.0);
+    data->level = MAX(1.0, stren *
+    20.0 - 1.0 + is_boss ? 10.0 : 0.0);
     data->atk = 7.0 * pow(1.1, data->level);
     data->hp = data->atk * 1.2;
 }
@@ -89,8 +93,33 @@ static void spawn_at(chunk_t *chunk, dvec3 pos)
     if (ent->trans.pos.y > -42.0)
         spawn_base(chunk, ent, data);
     else
-        spawn_fish(chunk, ent, data);
+        spawn_fish(chunk_get_strength(chunk->pos), ent, data, 0);
     chunk->enemy_count++;
+}
+
+void world_spawn_boss(void)
+{
+    entity3 *ent;
+    entity3_tag_enemy_data_t *data;
+
+    ent = world_add_entity();
+    ent->trans.is_physics = 1;
+    ent->trans.is_static = 0;
+    ent->trans.is_collision = 1;
+    ent->trans.slide_threshold = 0.85;
+    ent->trans.speed = dvec3_init(0.0, -10.0, 0.0);
+    entity3_set_tag(ent, ENTITY3_TAG_ENEMY);
+    data = ent->tag_data;
+    data->max_speed = 4.0 + randf() * 4.0;
+    data->a_vel = 2.0 + randf() * 4.0;
+    spawn_fish(1.0, ent, data, 1);
+    ent->trans.pos = dvec3_add(dmat4_trans(_demo->world.player->trans.world),
+    dvec3_mul(dvec3_muls(dmat4_mul_dvec3(_demo->world.player->trans.world_rot,
+    dvec3_init(0.0, 0.0, 1.0)), 20.0), dvec3_init(1.0, 0.0, 1.0)));
+    ent->trans.pos.y = dmat4_trans(_demo->world.player->trans.world).y + 10.0;
+    entity3_trans_update(ent);
+    data->is_furious = 1;
+    data->hp *= 10.0;
 }
 
 static int spawn_group(chunk_t *chunk, dvec3 pos)

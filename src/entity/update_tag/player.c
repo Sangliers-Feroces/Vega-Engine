@@ -36,7 +36,8 @@ void player_update(entity3 *ent, double max_speed)
 {
     if (ent->trans.is_grounded)
         slow_ent_down(ent);
-    cap_ent_speed(&ent->trans.speed, max_speed);
+    if (_iu.invent.inventory[10].item != ITEM_PLANE)
+        cap_ent_speed(&ent->trans.speed, max_speed);
 }
 
 static void anim(entity3 *ent)
@@ -90,6 +91,9 @@ static void state(entity3 *ent)
         data->anim_state = 0.0;
         data->has_atk = 0;
     }
+    if ((_demo->mouse.button_state & (1 << sfMouseRight)) &&
+    (_iu.invent.inventory[10].item == ITEM_PLANE))
+        ent->trans.speed.y += (9.0 - ent->trans.speed.y) * _demo->win.framelen; 
     if ((_demo->mouse.button_click & (1 << sfMouseRight)) &&
     (data->mana > 3.0) && (data->has_boom)) {
         data->state = PLAYER_BOOM;

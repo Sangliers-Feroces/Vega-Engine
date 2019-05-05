@@ -105,6 +105,7 @@ typedef enum {
     MESH_BANK_CASA_L1,
     MESH_BANK_CASA_L2,
     MESH_BANK_NPC1,
+    MESH_BANK_PLANE,
     MESH_BANK_MAX
 } mesh_bank_t;
 

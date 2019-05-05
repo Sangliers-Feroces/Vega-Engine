@@ -61,8 +61,8 @@ static void apply_disp(int do_fast, dvec3 *p, dvec3 disp)
 
 static void slow_ent_down(entity3 *ent)
 {
-    ent->trans.speed.x *= 1.0 - _demo->win.framelen * 2.0;
-    ent->trans.speed.z *= 1.0 - _demo->win.framelen * 2.0;
+    ent->trans.speed.x *= 1.0 - _demo->win.framelen * 1.0;
+    ent->trans.speed.z *= 1.0 - _demo->win.framelen * 1.0;
 }
 
 static void physics_collision(entity3 *ent, dvec3 p)
