@@ -25,7 +25,7 @@ static void set_quest(void)
 
     _demo->quest.quest[MAIN_QUEST_3] = vg_quest_create(DIALOGUE_MAIN3_START
     , AT_KILL, &vg_next_mq);
-    vg_quest_set_params_kill(&_demo->quest.quest[MAIN_QUEST_3], ENEMY_FISH, 1);
+    vg_quest_set_params_kill(&_demo->quest.quest[MAIN_QUEST_3], ENEMY_FISH, 15);
     vg_quest_set_loot(&_demo->quest.quest[MAIN_QUEST_3],
     ITEM_SWORD_3, 1, 20);
 
