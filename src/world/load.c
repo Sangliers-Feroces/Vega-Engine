@@ -51,8 +51,8 @@ static entity3* create_default_ents(void)
     entity3_trans_update(sword);
     create_skybox(res);
     invent_add_item(ITEM_SWORD_1);
-    invent_add_item(ITEM_SWORD_2);
-    invent_add_item(ITEM_SWORD_3);
+    //invent_add_item(ITEM_SWORD_2);
+    //invent_add_item(ITEM_SWORD_3);
     return res;
 }
 

@@ -325,5 +325,6 @@ typedef struct {
     double last_damage;
     double atk;
     int is_npc;
+    double level;
     enemy_type_t enemy_type;
 } entity3_tag_enemy_data_t;

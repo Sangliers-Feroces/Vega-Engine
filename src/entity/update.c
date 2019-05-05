@@ -72,11 +72,26 @@ static void check_level(void)
 static void loot_enemy(entity3 *ent)
 {
     entity3_tag_enemy_data_t *enemy_data = ent->tag_data;
+    char buf[512];
 
-    if (enemy_data->enemy_type == ENEMY_FISH)
+    switch (enemy_data->enemy_type) {
+    case ENEMY_FISH:
+        sprintf(buf, "Killed L.%.f %s", enemy_data->level, "Saumin");
+        msg_add(buf, 3.0);
         loot_xp(2.0);
-    else
+        if ((rand() % 30) == 0)
+            invent_add_item(ITEM_SWORD_3);
+        break;
+    case ENEMY_BASE:
+        sprintf(buf, "Killed L.%.f %s", enemy_data->level, "Pykax");
+        msg_add(buf, 3.0);
         loot_xp(1.0);
+        if ((rand() % 15) == 0)
+            invent_add_item(ITEM_SWORD_2);
+        break;
+    default:
+        loot_xp(1.0);
+    }
     check_level();
     if ((rand() % 3) == 0)
         invent_add_item(ITEM_APPLE);
