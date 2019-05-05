@@ -14,7 +14,7 @@ const text_src_t text_array[] = {
     {TEXT_MAIN1_START1, "Hey you're new here, meh actualy you're also the first visitor I've seen in a while"},
     {TEXT_MAIN1_START2, "I don't know why nobody want to live here, anyways you're here and you'll never leave this place"},
     {TEXT_MAIN1_START3, "You know what let's fill the time I give you a job !"},
-    {TEXT_MAIN1_SCHOICE, "Farm to level 5 ok ? and come back !"},
+    {TEXT_MAIN1_SCHOICE, "Farm to level 3 ok ? and come back !"},
     {TEXT_MAIN2_START1, "Congratulation I hope it wasn't to long, anyway I have another job for you"},
     {TEXT_MAIN2_START2, "For the next steps of our aventure you will need some planks ! Yeah 50 planks. What ? Dispapointed ?"},
     {TEXT_MAIN2_START3, "I don't care get me this planks ! You've nothing better to do anyways. Try to kill these strange moving house to get planks"},

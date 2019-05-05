@@ -12,7 +12,7 @@ static void set_quest(void)
     _demo->quest.quest[MAIN_QUEST_1] = vg_quest_create(DIALOGUE_MAIN1_START
     , AT_LVL, &vg_next_mq);
     vg_quest_set_at_params(&_demo->quest.quest[MAIN_QUEST_1],
-    0, 0, 0, 2);
+    0, 0, 0, 3);
     vg_quest_set_loot(&_demo->quest.quest[MAIN_QUEST_1],
     ITEM_APPLE, 5, 10);
 
