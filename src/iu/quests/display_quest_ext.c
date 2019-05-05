@@ -22,7 +22,9 @@ static char *get_enemy_to_kill(void)
     switch (_demo->quest.quest[
     _demo->quest.curr_main_quest].enemy_to_kill) {
     case ENEMY_FISH:
-        return "fish";
+        return "Fish";
+    case ENEMY_FISH_BOSS:
+        return "Fish boss";
     case ENEMY_BASE:
         return "Doomed House";
     default:
@@ -32,15 +34,8 @@ static char *get_enemy_to_kill(void)
 
 static int get_curr_kill(void)
 {
-    switch (_demo->quest.quest[
-    _demo->quest.curr_main_quest].enemy_to_kill) {
-    case ENEMY_FISH:
-        return _demo->quest.fish_killed;
-    case ENEMY_BASE:
-        return _demo->quest.base_killed;
-    default:
-        return 0;
-    }
+	return _demo->quest.enemy_killed[_demo->quest.quest[
+    _demo->quest.curr_main_quest].enemy_to_kill];
 }
 
 void quest_get_loot_prog(void)

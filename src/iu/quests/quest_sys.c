@@ -16,6 +16,8 @@ void quest_add_death_counter(entity3 *ent)
 
 void main_quest_start(void)
 {
+    if (_demo->quest.curr_main_quest == MAIN_QUEST_BOSS)
+        world_spawn_boss();
     _iu.current_dialogue =
     _demo->quest.quest[_demo->quest.curr_main_quest].first_dial;
 }
