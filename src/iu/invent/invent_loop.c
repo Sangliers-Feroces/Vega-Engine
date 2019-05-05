@@ -79,7 +79,7 @@ static void draw_invent(void)
     invent_draw_stat();
 }
 
-static void update_world_weapon(void)
+void player_update_weapon(void)
 {
     entity3 *sword = _demo->world.player->sub.ent[0]->sub.ent[0]->sub.ent[0];
     entity3_tag_player_data_t *data = _demo->world.player->tag_data;
@@ -123,5 +123,5 @@ void invent_loop(void)
     _iu.data.is_invent = !_iu.data.is_invent;
     _iu.invent.index_cursor = 0;
     _iu.invent.focused_item = 0;
-    update_world_weapon();
+    player_update_weapon();
 }

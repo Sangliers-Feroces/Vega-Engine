@@ -90,3 +90,4 @@ double world_get_ground_level(dvec3 p, double bias);
 void entity3_switch_col(entity3 *ent, int new_state);
 
 void player_respawn(entity3 *ent);
+void player_update_weapon(void);

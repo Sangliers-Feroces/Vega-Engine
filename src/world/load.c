@@ -103,4 +103,5 @@ void world_load_map(void)
     entity3_seek_tag(_demo->world.ents, ENTITY3_TAG_SKYBOX);
     if (do_respawn)
         player_respawn(_demo->world.player);
+    player_update_weapon();
 }
