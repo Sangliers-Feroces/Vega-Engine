@@ -39,7 +39,7 @@ double stren, int is_boss)
     data->level = MAX(1.0, stren *
     20.0 - 1.0 + (is_boss ? 10.0 : 0.0));
     data->atk = 7.0 * pow(1.1, data->level);
-    data->hp = data->atk * 1.2;
+    data->hp = data->atk * 2.0;
 }
 
 void entity3_spawn_fish(entity3 *ent, entity3_tag_enemy_data_t *data,

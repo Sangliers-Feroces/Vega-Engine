@@ -34,7 +34,7 @@ void world_spawn_boss(void)
     ent->trans.pos.y = dmat4_trans(_demo->world.player->trans.world).y + 10.0;
     entity3_trans_update(ent);
     data->is_furious = 1;
-    data->hp *= 5.0;
+    data->hp *= 10.0;
     data->enemy_type = ENEMY_FISH_BOSS;
 }
 
