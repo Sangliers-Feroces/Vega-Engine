@@ -12,8 +12,6 @@ typedef enum {
     MAIN_QUEST_2,
     MAIN_QUEST_3,
     MAIN_QUEST_BOSS,
-    /*SIDE_QUEST_LOOT_1,
-    SIDE_QUEST_TIME_1,*/
     QUEST_END,
     NO_QUEST
 } quests_list_t;
