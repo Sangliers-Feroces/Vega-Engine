@@ -163,6 +163,7 @@ static void load_3(void)
     p_gldeleteshader = glXGetProcAddressARB("glDeleteShader");
     p_gldeleteprogram = glXGetProcAddressARB("glDeleteProgram");
     p_glfinish = glXGetProcAddressARB("glFinish");
+    p_glviewport = glXGetProcAddressARB("glViewport");
 }
 
 static void load_4(void)
@@ -187,7 +188,6 @@ static void load_4(void)
     glXGetProcAddressARB("glFramebufferRenderbuffer");
     p_glframebuffertexture = glXGetProcAddressARB("glFramebufferTexture");
     p_gldrawbuffers = glXGetProcAddressARB("glDrawBuffers");
-    p_glviewport = glXGetProcAddressARB("glViewport");
 }
 
 void load_gl_fun(void)

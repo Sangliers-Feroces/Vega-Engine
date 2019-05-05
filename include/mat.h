@@ -138,6 +138,10 @@ arr2d_dvec3_t arr2d_dvec3_copy_rect(arr2d_dvec3_t to_copy, srect area);
 void arr2d_dvec3_sub(arr2d_dvec3_t arr, dvec3 value);
 void arr_dvec3_destroy(arr_dvec3_t arr);
 
+int arr2d_dvec3_is_coord_valid(arr2d_dvec3_t arr, ssize2 uv);
+dvec3 arr2d_dvec3_sample(arr2d_dvec3_t arr, ssize2 uv);
+dvec3 arr2d_dvec3_sample_linear(arr2d_dvec3_t arr, vec2 uv);
+
 vec3 dvec3_vec3(dvec3 value);
 dvec3 vec3_dvec3(vec3 value);
 dvec3 dvec3_init(double x, double y, double z);

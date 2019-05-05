@@ -7,15 +7,6 @@
 
 #include "headers.h"
 
-entity3* entity3_get_parent(entity3 *ent, size_t depth)
-{
-    entity3 *res = ent;
-
-    for (size_t i = 0; (i < depth) && (res != NULL); i++)
-        res = res->root;
-    return res;
-}
-
 static void bleed(dvec3 p)
 {
     size_t c = rand() % 50 + 10;
@@ -29,12 +20,13 @@ static void bleed(dvec3 p)
         ent->trans.speed = dvec3_init(randfn(), randfn() * 5.0, randfn());
         ent->trans.life = 10.0;
         ent->trans.rot.y = randf() * M_PI;
-        entity3_set_render(ent, 0, mesh_full_ref_bank_init(MESH_BANK_PARTICLE1), MATERIAL_BLOOD);
+        entity3_set_render(ent, 0, mesh_full_ref_bank_init(MESH_BANK_PARTICLE1),
+        MATERIAL_BLOOD);
         entity3_trans_update(ent);
     }
 }
 
-void make_damage_to_enemy(entity3 *ent, dvec3 dir, double hp)
+static void make_damage_to_enemy(entity3 *ent, dvec3 dir, double hp)
 {
     entity3_tag_enemy_data_t *data = ent->tag_data;
 
@@ -58,7 +50,7 @@ void make_damage_to_enemy(entity3 *ent, dvec3 dir, double hp)
     }
 }
 
-void make_damage_to_player(entity3 *ent, dvec3 dir, double hp)
+static void make_damage_to_player(entity3 *ent, dvec3 dir, double hp)
 {
     entity3_tag_player_data_t *data = ent->tag_data;
 
@@ -90,8 +82,8 @@ void trigger_on_hit_sword(entity3 *ent, entity3 *other)
     if (enemy != NULL && (enemy->tag == ENTITY3_TAG_ENEMY)) {
         if (player_data->has_atk != 1)
             return;
-        make_damage_to_enemy(enemy, dvec3_add(dvec3_muls(dvec3_mul(dmat4_mul_dvec3(
-        _demo->world.camera->trans.world_rot,
+        make_damage_to_enemy(enemy, dvec3_add(dvec3_muls(dvec3_mul(
+        dmat4_mul_dvec3(_demo->world.camera->trans.world_rot,
         dvec3_init(0.0, 0.0, 1.0)), dvec3_init(1.0, 0.0, 1.0)), 16.0),
         _demo->world.player->trans.speed),
         player_data->atk);
@@ -109,23 +101,10 @@ void trigger_on_hit_player(entity3 *ent, entity3 *other)
         enemy_data = enemy->tag_data;
         if ((!enemy_data->is_furious) || enemy_data->is_npc)
             return;
-        make_damage_to_player(ent, dvec3_add(dvec3_muls(dvec3_mul(dmat4_mul_dvec3(
-        enemy->trans.world_rot,
+        make_damage_to_player(ent, dvec3_add(dvec3_muls(dvec3_mul(
+        dmat4_mul_dvec3(enemy->trans.world_rot,
         dvec3_init(1.0, 0.0, 0.0)), dvec3_init(1.0, 0.0, 1.0)), 16.0),
         dvec3_muls(enemy->trans.speed, 1.5)),
         enemy_data->atk);
     }
-}
-
-void player_respawn(entity3 *ent)
-{
-    entity3_tag_player_data_t *data = ent->tag_data;
-
-    ent->trans.pos = dvec3_init(100.0, 64.0, 100.0); 
-    ent->trans.rot = dvec3_init(0.0, 0.0, 0.0); 
-    data->xp = 0.0;
-    data->hp = data->max_hp / 2.0;
-    ent->trans.life = FLT64_INF;
-    entity3_update_solo(ent);
-    entity3_trans_update(_demo->world.camera);
 }

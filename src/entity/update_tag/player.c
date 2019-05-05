@@ -40,81 +40,6 @@ void player_update(entity3 *ent, double max_speed)
         cap_ent_speed(&ent->trans.speed, max_speed);
 }
 
-static void anim(entity3 *ent)
-{
-    entity3_tag_player_data_t *data = ent->tag_data;
-    double d = dvec3_norm(ent->trans.speed);
-    entity3 *to_m = ent->sub.ent[0]->sub.ent[0]->sub.ent[0];
-
-    switch (data->state) {
-    case PLAYER_REG:
-        to_m->trans.rot = dvec3_init(0.0, 0.0, 0.0);
-        data->anim_state += _demo->win.framelen * CLAMP(d, 1.0, 15.0);
-        to_m->trans.pos.x = sin(data->anim_state / 3.14) / 10.0;
-        to_m->trans.pos.y = cos(data->anim_state) / 30.0;
-        to_m->trans.pos.z = 0.0;
-        break;
-    case PLAYER_ATK:
-        data->anim_state += _demo->win.framelen * 4.0;
-        d = sin(data->anim_state * M_PI);
-        if (d > 0.5)
-            data->has_atk += data->has_atk < 2;
-        to_m->trans.rot.x = -d * 6.0 * 0.2;
-        to_m->trans.rot.y = -d * 0.2;
-        to_m->trans.pos.y = d * 0.2;
-        to_m->trans.pos.z = d * 0.2;
-        break;
-    case PLAYER_BOOM:
-        data->has_atk = 1;
-        data->anim_state += _demo->win.framelen * 1.0;
-        to_m->trans.rot.x = -data->anim_state * 8.0;
-        to_m->trans.rot.y = data->anim_state * 4.0 * 8.0;
-        to_m->trans.pos.y = data->anim_state * 8.0;
-        to_m->trans.pos.z = data->anim_state * 8.0;
-        break;
-    default:
-        break;
-    }
-    if (data->hp == 0.0)
-        ent->trans.rot.x += _demo->win.framelen;
-}
-
-static void state(entity3 *ent)
-{
-    entity3_tag_player_data_t *data = ent->tag_data;
-
-    data->mana += _demo->win.framelen;
-    if (data->mana > data->max_mana)
-        data->mana = data->max_mana;
-    if (_demo->mouse.button_click & (1 << sfMouseLeft)) {
-        data->state = PLAYER_ATK;
-        data->anim_state = 0.0;
-        data->has_atk = 0;
-    }
-    if ((_demo->mouse.button_state & (1 << sfMouseRight)) &&
-    (_iu.invent.inventory[10].item == ITEM_PLANE))
-        ent->trans.speed.y += (9.0 - ent->trans.speed.y) * _demo->win.framelen; 
-    if ((_demo->mouse.button_click & (1 << sfMouseRight)) &&
-    (data->mana > 3.0) && (data->has_boom)) {
-        data->state = PLAYER_BOOM;
-        data->anim_state = 0.0;
-        data->has_atk = 0;
-        data->mana -= 3.0;
-    }
-    switch (data->state) {
-    case PLAYER_BOOM:
-    case PLAYER_ATK:
-        if (data->anim_state > 1.0) {
-            data->state = PLAYER_REG;
-            data->anim_state = 0.0;
-            data->has_atk = 0;
-        }
-        break;
-    default:
-        break;
-    }
-}
-
 void entity3_tag_update_player(entity3 *ent)
 {
     dvec3 cam_x;
@@ -134,26 +59,7 @@ void entity3_tag_update_player(entity3 *ent)
             entity3_tag_update_player_poll_editor(ent, cam_x, cam_z);
         player_update(ent, sfKeyboard_isKeyPressed(sfKeyLShift) ?
         PLAYER_MAX_SPEED : PLAYER_MAX_SPEED_WALK);
-        state(ent);
+        player_state(ent);
     }
-    anim(ent);
-}
-
-void entity3_tag_init_player(void *pdata)
-{
-    entity3_tag_player_data_t *data = pdata;
-
-    data->state = PLAYER_REG;
-    data->anim_state = 0.0;
-    data->has_atk = 0;
-    data->atk = 0.0;
-    data->has_boom = 0;
-    data->last_damage = 0.0;
-    data->hp = 0.0;
-    data->max_hp = 50.0;
-    data->level = 1.0;
-    data->xp = 0.0;
-    data->max_xp = 10.0;
-    data->mana = 0.0;
-    data->max_mana = 5.0;
+    player_anim(ent);
 }

@@ -23,16 +23,21 @@ static void add_water(chunk_t *chunk, vec2 *uv)
     mesh_add_triangle_pos_uv(mesh->mesh, (vec3[]){sq[3], sq[1], sq[2]}, uv);
 }
 
-void terrain_send_ter_to_chunk_lod_gen(chunk_t *chunk, size_t lod,
-terrain_send_ter_arg arg, dvec3 chunk_rel)
+static void ensure_terrain(chunk_t *chunk)
 {
-    vec2 uv[3] = {{0.0f, 0.0f}, {1.0f, 0.0f}, {0.0f, 1.0f}};
-
     if (chunk->terrain == NULL) {
         chunk->terrain = chunk_add_entity(chunk);
         entity3_set_tag(chunk->terrain, ENTITY3_TAG_TERRAIN);
         chunk->terrain->lod_dist = RENDER_OBJ_LOD_DIST_FAR;
     }
+}
+
+void terrain_send_ter_to_chunk_lod_gen(chunk_t *chunk, size_t lod,
+terrain_send_ter_arg arg, dvec3 chunk_rel)
+{
+    vec2 uv[3] = {{0.0f, 0.0f}, {1.0f, 0.0f}, {0.0f, 1.0f}};
+
+    ensure_terrain(chunk);
     if (chunk->terrain->render[lod].mesh.m != NULL)
         return;
     terrain_send_ter_chunk(chunk, lod, arg, chunk_rel);

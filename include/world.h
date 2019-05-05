@@ -72,3 +72,6 @@ entity3* chunk_add_entity_ext(chunk_t *chunk);
 inter_ray3 world_inter(ray3 ray);
 inter_ray3 world_inter_laxist(ray3 ray);
 inter_ray3 world_inter_laxist_fast(ray3 ray);
+int physics_check_col(physics_param_t p, dvec3 pos, dvec3 *speed,
+dvec3 *avg_norm);
+void physics_apply_disp(int do_fast, dvec3 *p, dvec3 disp);
