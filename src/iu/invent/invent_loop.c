@@ -7,6 +7,12 @@
 
 #include "headers.h"
 
+static void draw_5_elems(vg_text *to_draw)
+{
+    for (int i = 0; i < 5; i++)
+        vg_text_draw(to_draw[i]);
+}
+
 static void invent_inventory_list_draw(void)
 {
     char buff_nb[5][64];
@@ -28,18 +34,7 @@ static void invent_inventory_list_draw(void)
             _iu.invent.text_start + i].item].name, buff_nb[i]);
         }
     }
-    for (int i = 0; i < 5; i++)
-        vg_text_draw(_iu.invent.invent_items_name[i]);
-}
-
-static void desc_set_default(void)
-{
-    vg_text_reset_str(&_iu.invent.desc_name, "NAME:Neant Distordu",
-    NULL);
-    vg_text_reset_str(&_iu.invent.desc_type, "TYPE:No Type",
-    NULL);
-    vg_text_reset_str(&_iu.invent.desc_value, "VALUE:Over 9000",
-    NULL);
+    draw_5_elems(_iu.invent.invent_items_name);
 }
 
 static void invent_draw_desc(void)
@@ -49,7 +44,7 @@ static void invent_draw_desc(void)
     char buff_value[20];
 
     if (_iu.invent.inventory[_iu.invent.focused_item].item == NO_ITEM)
-        desc_set_default();
+        invent_desc_set_default();
     else {
         sprintf(buff_name, "NAME:%s",
         _iu.invent.items_list[_iu.invent.inventory

@@ -35,3 +35,5 @@ int invent_add_items(items_t item, size_t count);
 int invent_add_item(items_t item);
 
 void refresh_invent_help(void);
+
+void invent_desc_set_default(void);

@@ -84,3 +84,13 @@ void invent_display_icon(void)
         _iu.invent.inventory[10].item].texture;
     iu_entity_draw(_iu.invent.equiped_img);
 }
+
+void invent_desc_set_default(void)
+{
+    vg_text_reset_str(&_iu.invent.desc_name, "NAME:Neant Distordu",
+    NULL);
+    vg_text_reset_str(&_iu.invent.desc_type, "TYPE:No Type",
+    NULL);
+    vg_text_reset_str(&_iu.invent.desc_value, "VALUE:Over 9000",
+    NULL);
+}

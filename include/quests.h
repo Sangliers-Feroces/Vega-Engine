@@ -7,7 +7,7 @@
 
 #pragma once
 
-vg_quest vg_quest_create(dialogues_list_t start, archetype_t at, 
+vg_quest vg_quest_create(dialogues_list_t start, archetype_t at,
 void (*ptr)(void));
 
 void vg_quest_set_loot(vg_quest *src,

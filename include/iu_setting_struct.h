@@ -27,7 +27,7 @@ typedef enum {
     WITH_HINT
 } s_hint_t;
 
-typedef struct {    
+typedef struct {
     s_screen_t screen_state;
     s_hint_t hints_state;
     entity2_t entities[SETTINGS_END];

@@ -52,17 +52,14 @@ void chunk_add_npc(chunk_t *chunk, dvec3 p)
     ent = world_add_entity();
     set_stuff(chunk, ent, p);
     ent = entity3_create(ent);
-    if ((rand() % 2) == 0) {
+    if ((rand() % 2) == 0)
         entity3_set_render(ent, 0, mesh_full_ref_bank_init(MESH_BANK_KNIGHT),
         MATERIAL_WOOD);
-        ent->trans.scale = dvec3_init(1.5, 1.5, 1.5);
-        ent->trans.rot = dvec3_init(0.0, -M_PI / 2.0, 0.0);
-    } else {
+    else
         entity3_set_render(ent, 0, mesh_full_ref_bank_init(MESH_BANK_NPC1),
         MATERIAL_NPC1);
-        ent->trans.scale = dvec3_init(1.5, 1.5, 1.5);
-        ent->trans.rot = dvec3_init(0.0, -M_PI / 2.0, 0.0);
-    }
+    ent->trans.scale = dvec3_init(1.5, 1.5, 1.5);
+    ent->trans.rot = dvec3_init(0.0, -M_PI / 2.0, 0.0);
     entity3_trans_update(ent);
     ent->trans.is_static = 0;
     ent->lod_dist = RENDER_OBJ_LOD_DIST_FAR;
