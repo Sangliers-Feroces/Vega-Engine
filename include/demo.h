@@ -14,7 +14,7 @@
 
 void demo_poll_input(demo_t *demo);
 
-int demo(arg_t);
+int demo(arg_t, int mode_dev);
 demo_t* demo_init(void);
 
 void demo_init_win(demo_t *demo);

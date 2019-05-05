@@ -21,7 +21,7 @@ void demo_center_cursor(demo_t *demo)
 
 static void editor_shortcut(demo_t *demo)
 {
-    if (demo->input.key_press['N'])
+    if (demo->input.key_press['N'] && _iu.data.mode_dev)
         demo->world.player->trans.is_physics =
         !demo->world.player->trans.is_physics;
     if (demo->input.key_press[KEY_TAB]) {
@@ -37,7 +37,7 @@ static void editor_shortcut(demo_t *demo)
         _iu.data.iu_is_display = !_iu.data.iu_is_display;
     if (_demo->input.key_press['B'])
         world_spawn_boss();
-    if (_demo->input.key_press['M'])
+    if (_demo->input.key_press['M'] && _iu.data.mode_dev)
         vg_next_mq();
 }
 

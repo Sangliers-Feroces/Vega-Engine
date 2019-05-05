@@ -50,11 +50,12 @@ static void jukebox(int start)
     }
 }
 
-int demo(arg_t args)
+int demo(arg_t args, int mode_dev)
 {
     demo_t *demo = demo_init();
 
     (void)args;
+    _iu.data.mode_dev = mode_dev;
     if (!start(demo)) {
         demo_quit(demo);
         return 0;

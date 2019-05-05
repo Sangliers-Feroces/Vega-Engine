@@ -64,16 +64,17 @@ void load_model(octree **tree)
 int game(int argc, char **argv)
 {
     arg_t args = {32.0f, 8, 0.28f};
+    int mode_dev = 0;
 
     if (argc > 1) {
         if (strcmp(argv[1], "-h") == 0) {
             display_helper();
             return 0;
         }
-        else
-            args = get_data_from_arg(argc, argv);
+        else if (strcmp(argv[1], "-D") == 0)
+            mode_dev = 1;
     }
-    demo(args);
+    demo(args, mode_dev);
     return (EXIT_SUCCESS);
 }
 

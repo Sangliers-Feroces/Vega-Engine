@@ -55,6 +55,7 @@ typedef enum {
 } intro_t;
 
 typedef struct {
+    int mode_dev;
     int skip_intro;
     int iu_is_display;
     int ratiowh;
