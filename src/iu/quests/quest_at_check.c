@@ -40,8 +40,7 @@ static int check_at_loot(vg_quest *src)
             _iu.invent.inventory[i].nb -= src->nb;
             if (_iu.invent.inventory[i].nb == 0)
                 _iu.invent.inventory[i].item = NO_ITEM;
-            for (int i = 0; i < src->nb_loot; i++)
-                invent_add_item(src->loot);
+            invent_add_items(src->loot, src->nb_loot);
             player_loot_xp(src->xp_looted);
             src->next_step();
             return 1;
