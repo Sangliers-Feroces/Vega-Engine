@@ -22,7 +22,7 @@ static void iu_draw_font(entity2_param_t canvas, vec2 tex_pos, vec2 tex_size)
     glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
-static void iu_display_char(char c, rect_t pos, font_list_t index)
+void iu_display_char(char c, rect_t pos, font_list_t index)
 {
     float offset_x = 1.0f / _iu.fonts[index].cols;
     float offset_y = 1.0f / _iu.fonts[index].lines;

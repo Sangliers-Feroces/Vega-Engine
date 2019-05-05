@@ -30,11 +30,10 @@ int start(demo_t *demo)
 {
     menu_t menu;
 
-    play_new_music(MUSICS_MENU, 1, 50);
     menu_init(&menu);
-    /*if (demo->skip_intro)
-        if (!intro(demo))
-            return 0;*/
+    if (!intro())
+        return 0;
+    play_new_music(MUSICS_MENU, 1, 100);
     if (!menu_loop(demo, &menu)) {
         menu_quit(&menu);
         return 0;

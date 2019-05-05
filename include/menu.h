@@ -16,7 +16,7 @@ void menu_set_entities(menu_t *menu);
 int menu_loop(demo_t *demo, menu_t *menu);
 
 void menu_draw(menu_t *menu);
-
+int intro(void);
 
 int menu_poll_events(demo_t *demo, menu_t *menu);
 float menu_slider_move(demo_t *demo, entity2_t *slider);

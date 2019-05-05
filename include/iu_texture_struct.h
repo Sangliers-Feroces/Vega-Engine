@@ -173,6 +173,10 @@ typedef enum {
     IUTEX_UI,
     IUTEX_XP_BAR,
     IUTEX_HP_BAR,
+    IUTEX_INTRO_VM_BG,
+    IUTEX_INTRO_VM,
+    IUTEX_INTRO_ENG,
+    IUTEX_INTRO_DEV,
     IUTEX_END
 } iutex_t;
 
