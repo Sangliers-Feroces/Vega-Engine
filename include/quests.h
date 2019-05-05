@@ -22,3 +22,6 @@ void quest_quit(void);
 void set_quest_dialogues(void);
 int quest_check_success(quests_list_t index);
 void main_quest_start(void);
+void quest_add_death_counter(entity3 *ent);
+void vg_quest_set_params_kill(vg_quest *src,
+enemy_type_t enemy, int nb);

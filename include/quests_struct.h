@@ -10,6 +10,7 @@
 typedef enum {
     MAIN_QUEST_1,
     MAIN_QUEST_2,
+    MAIN_QUEST_3,
     MAIN_QUEST_BOSS,
     /*SIDE_QUEST_LOOT_1,
     SIDE_QUEST_TIME_1,*/
@@ -18,8 +19,9 @@ typedef enum {
 } quests_list_t;
 
 typedef enum {
-    AT_TIME,
+    AT_KILL,
     AT_LOOT,
+    AT_BOSS,
     AT_LVL
 } archetype_t;
 
@@ -32,6 +34,8 @@ typedef struct {
     int nb;
     float time_to_kill;
     int lvl;
+    enemy_type_t enemy_to_kill;
+    int nb_to_kill;
     int start_choice;
     void (*next_step)(void);
     //loot
@@ -41,6 +45,8 @@ typedef struct {
 } vg_quest;
 
 typedef struct {
+    int fish_killed;
+    int base_killed;
     quests_list_t curr_main_quest;
     vg_quest quest[QUEST_END];
 } quests_t;

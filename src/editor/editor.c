@@ -35,6 +35,8 @@ static void editor_shortcut(demo_t *demo)
         pause_loop();
     if (_demo->input.key_press['J'])
         _iu.data.iu_is_display = !_iu.data.iu_is_display;
+    if (_demo->input.key_press['M'])
+        vg_next_mq();
 }
 
 void editor(demo_t *demo)
