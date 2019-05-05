@@ -78,14 +78,14 @@ static void loot_enemy(entity3 *ent)
     case ENEMY_FISH:
         sprintf(buf, "Killed L.%.f %s", enemy_data->level, "Saumin");
         msg_add(buf, 3.0);
-        loot_xp(2.0);
+        loot_xp(enemy_data->level * 1.5);
         if ((rand() % 30) == 0)
             invent_add_item(ITEM_SWORD_3);
         break;
     case ENEMY_BASE:
         sprintf(buf, "Killed L.%.f %s", enemy_data->level, "Pykax");
         msg_add(buf, 3.0);
-        loot_xp(1.0);
+        loot_xp(enemy_data->level);
         if ((rand() % 15) == 0)
             invent_add_item(ITEM_SWORD_2);
         break;
