@@ -71,8 +71,6 @@ void invent_switch_action(void)
         _iu.invent.focused_item].item].type) {
         case TYPE_CAC:
             return invent_equip();
-        case TYPE_DISTANCE:
-            return;
         case TYPE_REST_HP:
             return invent_consume_hp();
         case TYPE_REST_MANA:

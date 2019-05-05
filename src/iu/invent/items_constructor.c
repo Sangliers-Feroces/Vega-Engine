@@ -9,20 +9,26 @@
 
 static void invent_set_items(void)
 {
-    _iu.invent.items_list[ITEM_SWORD_1] = (item_data_t){"l'epee batarde",
-    TYPE_CAC, IUTEX_ITEM_SWORD1, 20, 0, 0, 0};
-    _iu.invent.items_list[ITEM_SWORD_2] = (item_data_t){"l'epee Gauldur",
+    _iu.invent.items_list[ITEM_SWORD_1] = (item_data_t){"Steel sword",
+    TYPE_CAC, IUTEX_ITEM_SWORD1, 10, 0, 0, 0};
+    _iu.invent.items_list[ITEM_SWORD_2] = (item_data_t){"Valyrian Sword",
     TYPE_CAC, IUTEX_ITEM_SWORD2, 30, 0, 0, 0};
     _iu.invent.items_list[ITEM_SWORD_3] = (item_data_t){
-    "Dard du Penitus Oculatus", TYPE_CAC, IUTEX_ITEM_SWORD3, 40, 0, 0, 0};
+    "Reaper's hoax", TYPE_CAC, IUTEX_ITEM_SWORD3, 50, 0, 0, 0};
     _iu.invent.items_list[ITEM_APPLE] = (item_data_t){"Mac Crunch",
     TYPE_REST_HP, IUTEX_ITEM_APPLE, 0, 5, 0, 0};
     _iu.invent.items_list[ITEM_BOAT] = (item_data_t){"Shit Stormer",
     TYPE_VEHICULE, IUTEX_ITEM_BOAT, 0, 0, 0, 90};
-    _iu.invent.items_list[ITEM_BOW] = (item_data_t){"L'ocean atlantique"
-    "est un mythe", TYPE_DISTANCE, IUTEX_ELON, 1000, 0, 0, 0};
     _iu.invent.items_list[ITEM_PLANE] = (item_data_t){"Je prefere "
     "pas faire de blague la", TYPE_VEHICULE, IUTEX_ELON, 0, 0, 0, 200};
+    _iu.invent.items_list[ITEM_PLANK] = (item_data_t){"Cursed Plank",
+    TYPE_BAZAR, IUTEX_ELON, 0, 0, 0, 0};
+    _iu.invent.items_list[ITEM_TILE] = (item_data_t){"Tile of DOOM",
+    TYPE_BAZAR, IUTEX_ELON, 0, 0, 0, 0};
+    _iu.invent.items_list[ITEM_SCALE] = (item_data_t){"Basic Scale",
+    TYPE_BAZAR, IUTEX_ELON, 0, 0, 0, 0};
+    _iu.invent.items_list[ITEM_FISHTOOTH] = (item_data_t){"Fish tooth",
+    TYPE_BAZAR, IUTEX_ELON, 0, 0, 0, 0};
 }
 
 static void set_desc(void)

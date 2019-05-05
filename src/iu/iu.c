@@ -103,6 +103,7 @@ void iu_init(demo_t *demo)
     iu_error_msg_init();
     settings_init();
     quest_init();
+    invent_add_item(ITEM_PLANK);
 }
 
 void iu_quit(void)
