@@ -51,4 +51,8 @@ void iu_display(void)
         _iu.data.is_focus = 1;
     else
         _iu.data.is_focus = 0;
+    if (_iu.data.iu_is_display)
+    iu_refresh_bar();
+        for (int i = 0; i < IUENT_END; i++)
+            iu_entity_draw(_iu.entities[i]);
 }
