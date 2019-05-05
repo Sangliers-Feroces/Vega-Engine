@@ -16,7 +16,6 @@ static const sounds_decs_t sounds_arr[] = {
 };
 
 static const musics_decs_t musics_arr[] = {
-    {MUSICS_METRO, "res/musics/main_music.ogg"},
     {MUSICS_MENU, "res/musics/menu_music.ogg"},
     {MUSICS_VALVE, "res/musics/intro.ogg"},
     {MUSICS_BOSS, "res/musics/Persona 5 - Blooming Villain.ogg"},
