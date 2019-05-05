@@ -7,7 +7,6 @@
 
 #include "headers.h"
 
-
 vg_dialogue vg_dialogue_create(int nb_text, text_index_t start)
 {
     vg_dialogue res;
@@ -42,12 +41,11 @@ void vg_dialogue_set_font(vg_dialogue *src, font_list_t font_index)
     src->font_index = font_index;
 }
 
-void vg_dialogue_set_choices(vg_dialogue *src, char *choice1, char *choice2, 
-void (*ptr)(void), void (*ptr2)(void))
+void vg_dialogue_set_choices(vg_dialogue *src, choices_arg_t arg)
 {
     src->choices = 1;
-    src->choices_display[0].str = choice1;
-    src->choices_display[1].str = choice2;
-    src->choices_display[0].ptr = ptr;
-    src->choices_display[1].ptr = ptr2;
+    src->choices_display[0].str = arg.c1;
+    src->choices_display[1].str = arg.c2;
+    src->choices_display[0].ptr = arg.ptr1;
+    src->choices_display[1].ptr = arg.ptr2;
 }

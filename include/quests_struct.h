@@ -24,6 +24,13 @@ typedef enum {
 } archetype_t;
 
 typedef struct {
+    float time;
+    int nb_item;
+    items_t item;
+    int lvl;
+} quest_arg_t;
+
+typedef struct {
     int did;
     dialogues_list_t first_dial;
     archetype_t at;

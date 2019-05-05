@@ -60,8 +60,6 @@ static void analyse_statement(void)
         case 5:
             sfRenderWindow_close(_demo->win.window);
             return;
-        default:
-            return;
     }
 }
 

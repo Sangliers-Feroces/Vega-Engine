@@ -28,7 +28,7 @@ static void set_sound(void)
         _demo->sounds.sounds[i].sample = NULL;
     for (int i = 0; sounds_arr[i].path != NULL; i++) {
         _demo->sounds.sounds[i].sample = sfSound_create();
-        _demo->sounds.sb[i] = 
+        _demo->sounds.sb[i] =
         sfSoundBuffer_createFromFile(sounds_arr[i].path);
         sfSound_setBuffer(_demo->sounds.sounds[i].sample, _demo->sounds.sb[i]);
     }

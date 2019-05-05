@@ -28,9 +28,7 @@ static int invent_add_item_adv(items_t item, int is_silent)
             return 1;
         }
     }
-    vg_text_draw(_iu.data.error_message[ERROR_INVENT_FULL]);
     return 0;
-    //display_error
 }
 
 int invent_add_items(items_t item, size_t count)

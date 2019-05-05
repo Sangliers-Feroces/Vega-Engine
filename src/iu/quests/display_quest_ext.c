@@ -34,7 +34,7 @@ static char *get_enemy_to_kill(void)
 
 static int get_curr_kill(void)
 {
-	return _demo->quest.enemy_killed[_demo->quest.quest[
+    return _demo->quest.enemy_killed[_demo->quest.quest[
     _demo->quest.curr_main_quest].enemy_to_kill];
 }
 

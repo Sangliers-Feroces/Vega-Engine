@@ -54,7 +54,8 @@ static void invent_consume_mana(void)
     _demo->player.curr_mana += _iu.invent.items_list[
     _iu.invent.inventory[_iu.invent.focused_item].item].restored_mana;
     if (_demo->player.curr_mana > _demo->player.mana)
-        _demo->player.curr_mana -= (_demo->player.curr_mana - _demo->player.mana);
+        _demo->player.curr_mana -=
+        (_demo->player.curr_mana - _demo->player.mana);
     _iu.invent.inventory[_iu.invent.focused_item].nb--;
     if (!_iu.invent.inventory[_iu.invent.focused_item].nb)
         _iu.invent.inventory[_iu.invent.focused_item].item = NO_ITEM;

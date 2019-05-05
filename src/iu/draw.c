@@ -7,7 +7,6 @@
 
 #include "headers.h"
 
-
 void iu_draw_full_rel(iutex_t index, rect_t rect, float depth)
 {
     glUniform2fv(_demo->shader[SHADER_IU].uniform[0], 1, (glfloat *)&rect.p);

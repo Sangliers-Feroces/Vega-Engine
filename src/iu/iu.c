@@ -117,12 +117,10 @@ void iu_init(demo_t *demo)
     settings_init();
     quest_init();
     _iu.data.iu_is_display = 1;
-    //_iu.data.skip_intro = 0;
 }
 
 void iu_quit(void)
 {
-    invent_quit();
     settings_quit();
     vg_dialogue_quit();
     for (int i = 0; i < IUTEX_END; i++)

@@ -23,7 +23,7 @@ void stop_current_music(void)
 {
     if (_demo->sounds.curr_music != NO_MUSIC)
         sfMusic_stop(_demo->sounds.musics[_demo->sounds.curr_music].sample);
-}   
+}
 
 void stop_sound(sounds_t index)
 {

@@ -91,7 +91,3 @@ void invent_init(void)
     set_desc();
     invent_stat_display_init();
 }
-
-void invent_quit(void)
-{
-}

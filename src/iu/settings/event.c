@@ -10,6 +10,12 @@
 static void analyse_buttons_ext(settings_entitie_t i)
 {
     switch (i) {
+        case SETTINGS_VOL_SOUND:
+            if (!_demo->mouse.button_release)
+                _demo->sounds.sound_vol =
+                setting_slider_move(&_iu.settings.entities[i]);
+            play_new_sound(SOUNDS_SELECT, 0, 100);
+            break;
         case SETTINGS_CB_HINT:
             if (_demo->mouse.button_click)
                 _iu.settings.hints_state = !_iu.settings.hints_state;
@@ -36,18 +42,11 @@ static void analyse_buttons(settings_entitie_t i)
                 _demo->sounds.music_vol =
                 setting_slider_move(&_iu.settings.entities[i]);
             break;
-        case SETTINGS_VOL_SOUND:
-            if (!_demo->mouse.button_release)
-                _demo->sounds.sound_vol =
-                setting_slider_move(&_iu.settings.entities[i]);
-            play_new_sound(SOUNDS_SELECT, 0, 100);
-            break;
         default:
             analyse_buttons_ext(i);
             return;
     }
 }
-
 
 static void check_buttons(void)
 {

@@ -70,7 +70,6 @@ void vg_text_draw(vg_text src)
 
     iu_display_str(src.str, src.pos_size, src.font_index, 1.0f);
     if (src.value != NULL) {
-        //printf("test\n");
         src.pos_size.p.x += (str_len * src.pos_size.s.x);
         iu_display_str(src.value, src.pos_size, src.font_index, 1.0f);
     }

@@ -80,6 +80,13 @@ typedef struct {
 } dialogue_text;
 
 typedef struct {
+    char *c1;
+    char *c2;
+    void (*ptr1)(void);
+    void (*ptr2)(void);
+} choices_arg_t;
+
+typedef struct {
     int read;
     int read_head;
     int nb_texts;
