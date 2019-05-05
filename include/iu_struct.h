@@ -48,6 +48,12 @@ typedef enum {
     IUENT_END
 } iu_entities_t;
 
+typedef enum {
+    VM,
+    BG,
+    INTRO_END,
+} intro_t;
+
 typedef struct {
     int iu_is_display;
     int ratiowh;
@@ -66,6 +72,7 @@ typedef struct {
     entity2_t buttons[IUBUTTON_END];
     entity2_t invent_bg[IUINVENT_END];
     entity2_t cadre[IUCADRE_END];
+    entity2_t intro[INTRO_END];
     //texts
     font_t fonts[FONT_END];
     char *text_src[TEXT_END];

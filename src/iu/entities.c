@@ -30,6 +30,11 @@ void iu_error_msg_init(void)
     (vec2){0.03f, 0.10f});
 }
 
+static void set_intro_entities(void)
+{
+    entity_constructor(&_iu.intro[BG], (entity2_param_t){
+    IUTEX_INTRO_VM_BG, (rect_t){{-1.0f, -1.0f}, {2.0f, 2.0f}}, -0.997});
+}
 
 void set_entities(void)
 {
@@ -50,4 +55,5 @@ void set_entities(void)
     entity_constructor(&_iu.entities[IUENT_HP], (entity2_param_t){
     IUTEX_HP_BAR, (rect_t){{-0.395f, 0.895f}, {0.753f, 0.05f}}, -0.998});
     set_pause_entities();
+    set_intro_entities();
 }

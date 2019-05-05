@@ -18,6 +18,7 @@ static const sounds_decs_t sounds_arr[] = {
 static const musics_decs_t musics_arr[] = {
     {MUSICS_METRO, "res/musics/main_music.ogg"},
     {MUSICS_MENU, "res/musics/menu_music.ogg"},
+    {MUSICS_VALVE, "res/musics/music_intro.ogg"},
     {0, NULL}
 };
 

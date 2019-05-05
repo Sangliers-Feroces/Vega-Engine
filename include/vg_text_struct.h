@@ -55,6 +55,7 @@ typedef enum {
 
 typedef enum {
     FONT_MINECRAFT,
+    FONT_VM,
     FONT_END
 } font_list_t;
 

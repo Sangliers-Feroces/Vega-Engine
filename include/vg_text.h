@@ -31,6 +31,7 @@ void vg_dialogue_draw(vg_dialogue *src);
 void vg_dialogue_quit(void);
 
 void iu_set_dialogue(void);
+void iu_display_char(char c, rect_t pos, font_list_t index);
 
 //effects
 void vg_next_mq(void);
