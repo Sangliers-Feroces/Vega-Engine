@@ -11,6 +11,7 @@ typedef enum {
     MUSICS_METRO,
     MUSICS_MENU,
     MUSICS_VALVE,
+    MUSICS_BOSS,
     MUSICS_END,
     NO_MUSIC
 } musics_t;

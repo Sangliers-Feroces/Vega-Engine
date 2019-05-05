@@ -10,6 +10,7 @@
 void sounds_init(void);
 
 void play_new_sound(sounds_t index, int loop, float gain);
+void play_new_music_ensure(musics_t index, int loop, float alt_gain);
 void play_new_music(musics_t index, int loop, float gain);
 void stop_current_music(void);
 void stop_sound(sounds_t index);

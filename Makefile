@@ -15,19 +15,14 @@ MAINOBJ = $(MAINSRC:.c=.o)
 OUTPUT = my_rpg
 LIBXD = libxdworld.so
 
-debug: CFLAGS += -g
-debug: all
-
-release: CFLAGS += -O3
-release: all
-
+all: CFLAGS += -O3
 all: $(OUTPUT)
 
 $(LIBXD): $(OBJ)
-	gcc -shared $(LDLIB) -Wl,-soname,$(LIBXD) -o $(LIBXD) $(OBJ)
+	gcc -shared -Wl,-soname,$(LIBXD) -o $(LIBXD) $(OBJ) $(LDLIB)
 
 $(OUTPUT): $(LIBXD)
-	gcc $(CFLAGS) $(CPPFLAGS) $(MAINSRC) $(LIBXD) -Wl,-rpath,. -o $(OUTPUT)
+	gcc $(CFLAGS) $(CPPFLAGS) $(MAINSRC) $(LIBXD) -Wl,-rpath,. -o $(OUTPUT) $(LDLIB)
 
 clean:
 	rm -f $(MAINOBJ) $(OBJ)
