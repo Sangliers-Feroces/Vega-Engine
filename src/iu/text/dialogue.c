@@ -26,8 +26,8 @@ const text_src_t text_array[] = {
     {TEXT_MAIN2_START3, "I don't care get me this planks ! You've nothing "
     "better to do anyways. Try to kill the house to get the planks"},
     {TEXT_MAIN3_START1, "You got the Planks ! Perfect ! you deserved the "
-    "sword you just received. And you'll need here for the next task"},
-    {TEXT_MAIN3_START2, "There is s starnge creature in my beautifull "
+    "sword you just received. And you'll need her for the next task"},
+    {TEXT_MAIN3_START2, "There is s strange creature in my beautifull "
     "world And i want her to die ! And you'll do it for me !"},
     {TEXT_MAIN3_START3, "To summons her you should kill fish she'll be "
     "very angry eheh"},
