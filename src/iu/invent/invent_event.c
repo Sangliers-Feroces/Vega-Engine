@@ -7,6 +7,20 @@
 
 #include "headers.h"
 
+static void drop_item(void)
+{
+    if (sfKeyboard_isKeyPressed(sfKeyLControl)) {
+        _iu.invent.inventory[_iu.invent.focused_item].item = NO_ITEM;
+        _iu.invent.inventory[_iu.invent.focused_item].nb = 0;
+        return;
+    }
+    _iu.invent.inventory[_iu.invent.focused_item].nb--;
+    if (!_iu.invent.inventory[_iu.invent.focused_item].nb) {
+        _iu.invent.inventory[_iu.invent.focused_item].item = NO_ITEM;
+        _iu.invent.inventory[_iu.invent.focused_item].nb = 0;
+    }
+}
+
 static void check_move_lateral(void)
 {
     if (_demo->input.key_press[KEY_ARROW_LEFT]) {
@@ -52,10 +66,8 @@ int invent_poll_event(void)
     invent_move_inventory();
     if (_demo->input.key_press[KEY_ENTER])
         invent_switch_action();
-    if (_demo->input.key_press['X']) {
-        _iu.invent.inventory[_iu.invent.focused_item].item = NO_ITEM;
-        _iu.invent.inventory[_iu.invent.focused_item].nb = 0;
-    }
+    if (_demo->input.key_press['X'])
+        drop_item();
     invent_refresh_attack_added();
     return 1;
 }

@@ -32,6 +32,10 @@ static int state_ananlyse(demo_t *demo, menu_t *menu)
     switch (menu->state) {
         case MENU_LINK_NEW:
             delete_maps();
+            _demo->quest.curr_main_quest = MAIN_QUEST_1;
+            main_quest_start();
+            _iu.dialogue_list[_demo->quest.quest[
+            _demo->quest.curr_main_quest].first_dial].read_head = 0;
             return 1;
         case MENU_LINK_QUIT:
             return 0;
