@@ -24,7 +24,9 @@ You've access to 3 settings :
 2) Fullscreen or not (care if you're on KDE)
 3) Show hints or not
 
-you can preset those setting in the .conf file at any time to start with yours favorites presets !!
+you can preset those setting in the .conf file at any time to start with
+yours favorites presets !!
 
 That's all ! All you need can be found in game !
-Have fun and for question send them to this adress : bethesda@fallout76_wasn't_so_bad.money
+Have fun and for question send them to this adress :
+bethesda@fallout76_wasn't_so_bad.money
