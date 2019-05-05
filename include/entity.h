@@ -102,3 +102,8 @@ void player_loot_xp(double xp);
 
 entity3* entity3_get_parent(entity3 *ent, size_t depth);
 void entity3_kill(entity3 *ent);
+
+void entity3_spawn_fish(entity3 *ent, entity3_tag_enemy_data_t *data,
+double stren, int is_boss);
+
+double double_inter(double a, double b, double ratio);
