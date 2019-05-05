@@ -177,6 +177,7 @@ typedef enum {
     IUTEX_INTRO_VM,
     IUTEX_INTRO_ENG,
     IUTEX_INTRO_DEV,
+    IUTEX_HELP,
     IUTEX_END
 } iutex_t;
 

@@ -7,6 +7,16 @@
 
 #include "headers.h"
 
+void menu_display_help(menu_t *menu)
+{
+    while (demo_poll_events(_demo) && !_demo->input.key_press[KEY_ESC]) {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glUseProgram(_demo->shader[SHADER_IU].program);
+        iu_entity_draw(menu->background[MENU_BG_HELP]);
+        sfRenderWindow_display(_demo->win.window);
+    }
+}
+
 void menu_init(menu_t *menu)
 {
     DIR *rep = opendir("./maps");

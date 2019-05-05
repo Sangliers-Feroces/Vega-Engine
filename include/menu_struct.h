@@ -10,6 +10,7 @@
 typedef enum {
     MENU_BG_MAIN,
     MENU_BG_SETTING,
+    MENU_BG_HELP,
     MENU_BG_END
 } menu_bg_t;
 
