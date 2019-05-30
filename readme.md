@@ -1,5 +1,5 @@
 
-
+```c
    _____ _  ____     _______  _____ __  __         _____ _________   __
   / ____| |/ /\ \   / /  __ \|_   _|  \/  |       |  __ \__   __\ \ / /
  | (___ | ' /  \ \_/ /| |__) | | | | \  / |       | |__) | | |   \ V / 
@@ -7,9 +7,12 @@
   ____) | . \    | |  | | \ \ _| |_| |  | |       | | \ \  | |   / . \ 
  |_____/|_|\_\   |_|  |_|  \_\_____|_|  |_|       |_|  \_\ |_|  /_/ \_\
                                                                        
-                                                                       
-Hello you ! Welcomme in Skyrim RTX !
-You'll be send in an incredible world full of mystery
+```
+
+![Demo screenshot](https://i.imgur.com/rG4E9Uy.png)
+
+Hello you ! Welcome in Skyrim RTX !
+You'll be sent in an incredible world full of mystery
 Here some advice you might need in your adventure
 
 First you can move with ZQSD and attack with Left Click
